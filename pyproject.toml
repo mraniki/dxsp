@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "definitely"
 version = "0.0.1"
 authors = [
-  { name="MrAniki", email="@MrAniki@mastodon.social" },
+  { name="MrAniki" },
 ]
 description = "A defi package"
 readme = "README.md"
