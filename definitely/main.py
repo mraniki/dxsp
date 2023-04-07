@@ -6,24 +6,18 @@ import many_abis as ma
 class UnknownToken(Exception):
     pass
 
+
 class DexSwap:
     base_url = 'https://api.1inch.exchange'
+    version = "v5.0"
 
-    version = {
-        "v5.0": "v5.0"
-    }
-
-    def __init__(self, address, chain=, version='v5.0'):
+    def __init__(self, address, chain_id, version=version):
         self.presets = None
         self.tokens = {}
         self.tokens_by_address = {}
-        self.protocols = []
         self.address = address
         self.version = version
-        self.chain_id = self.chains[chain]
-        self.chain = chain
-        self.tokens = self.get_tokens()
-        self.spender = self.get_spender()
+        self.chain_id = chain_id
 
     @staticmethod
     def _get(url, params=None, headers=None):
@@ -74,7 +68,6 @@ class DexSwap:
         else:
             result = self._get(url)
         return result
-
 
     def get_approve(self, from_token_symbol: str, amount=None, decimal=None):
         from_address = self._token_to_address(from_token_symbol)
