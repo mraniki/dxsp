@@ -54,7 +54,7 @@ class DexSwap:
 
         base_url = 'https://api.1inch.exchange'
         version = "v5.0"
-        url = f"{base_url}/{version}/{self.chain_id}"
+        dex_url = f"{base_url}/{version}/{self.chain_id}"
         logger.debug(msg=f"url {url}")
 
     @staticmethod
@@ -78,7 +78,8 @@ class DexSwap:
                 if (keyval['symbol'] == symbol and keyval['chainId'] == self.chain_id):
                     logger.debug(msg=f"keyval {keyval['address']}")
                     return keyval['address']
-        except Exception:
+        except Exception as e:
+            logger.debug(msg=f"error {e}")
             return
 
     async def get_quote(self, token):
@@ -88,12 +89,13 @@ class DexSwap:
             logger.debug(msg=f"asset_out_address {asset_out_address}")
             try:
                 asset_out_amount=1000000000000
-                quote_url = f"{url}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
+                quote_url = f"{self.dex_url}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
                 logger.debug(msg=f"quote_url {quote_url}")
                 quote = self._get(quote_url)
                 logger.debug(msg=f"quote {quote}")
                 return quote['toTokenAmount']
-            except Exception:
+            except Exception as e:
+                logger.debug(msg=f"error {e}")
                 return
 
     async def get_abi(addr):
