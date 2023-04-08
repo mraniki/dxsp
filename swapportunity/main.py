@@ -55,7 +55,7 @@ class DexSwap:
         base_url = 'https://api.1inch.exchange'
         version = "v5.0"
         dex_url = f"{base_url}/{version}/{self.chain_id}"
-        logger.debug(msg=f"url {url}")
+        logger.debug(msg=f"dex_url {dex_url}")
 
     @staticmethod
     def _get(url, params=None, headers=None):
