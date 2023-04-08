@@ -27,7 +27,7 @@ async def main():
 
 	#INPUT for QUOTE
 	quote = await dex.get_quote('ETH')
-	print(quote)
+	print("quote ", quote)
 
 	#INPUT for a NORMAL SWAP
 	# transaction_amount_out = 10
@@ -35,7 +35,7 @@ async def main():
 	# asset_in_symbol = "ETH"
 
 	# transaction = dex.get_swap(transaction_amount_out,asset_out_symbol,asset_in_symbol)
-	# print(transaction)
+	# print("transaction ", transaction)
 
 
 if __name__ == "__main__":
