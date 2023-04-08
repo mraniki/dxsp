@@ -45,7 +45,7 @@ class DexSwap:
                  block_explorer_api = None
                  ):
         self.w3 = w3
-        self.chain_id = chain_id
+        self.chain_id = int(chain_id)
         self.wallet_address = wallet_address
         self.private_key = private_key
         self.execution_mode = execution_mode
@@ -79,7 +79,7 @@ class DexSwap:
             token_search = token_list['tokens']
             for keyval in token_search:
                 if (keyval['symbol'] == symbol and keyval['chainId'] == self.chain_id):
-                    logger.debug(msg=f"keyval['address'] {keyval['address']}")
+                    logger.debug(msg=f"keyval {keyval['address']}")
                     return keyval['address']
         except Exception:
             return
