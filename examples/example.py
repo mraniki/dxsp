@@ -29,7 +29,8 @@ asset_out_symbol = "USDT"
 asset_in_symbol = "ETH"
 
 
-transaction = dex.get_swap(transaction_amount_out,asset_out_symbol,asset_in_symbol)
+# transaction = dex.get_swap(transaction_amount_out,asset_out_symbol,asset_in_symbol)
+quote = dex.get_quote('ETH')
 
 print(transaction)
 
