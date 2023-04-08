@@ -16,12 +16,12 @@ private_key = os.getenv("PRIVATE_KEY", "0x111111111117dc0aa78b770fa6a738034120c3
 #1 for 1inch and 2 for Uniswap V2
 execution_mode = os.getenv("EXECUTION_MODE", "1")
 
-#DERIVE DATA from MANY_ABIS FOR RPC and EXCHANGE
+#DATA from MANY_ABIS FOR RPC and EXCHANGE
 chain = ma.get_chain_by_id(chain_id=int(chain_id))
 network_provider_url = os.getenv("NETWORK_PROVIDER_URL", chain['rpc'][0])
 dex_exchange = os.getenv("DEX_EXCHANGE", chain['dex'][0])
 
-#Block explorer API
+#Block explorer API from ETHERSCAN TYPE EXPLORER
 block_explorer_api = os.getenv("BLOCK_EXPLORER_API", "1X23Q4ACZ5T3KXG67WIAH7X8C510F1972TM")
 
 #DEX CONNECTIVITY
@@ -43,7 +43,7 @@ async def main():
 	# transaction_amount_out = 10
 	# asset_out_symbol = "USDT"
 	# asset_in_symbol = "ETH"
-	
+
 	#SWAP EXECUTION
 	# transaction = dex.get_swap(transaction_amount_out,asset_out_symbol,asset_in_symbol)
 	# print("transaction ", transaction)
