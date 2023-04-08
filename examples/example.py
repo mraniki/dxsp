@@ -17,18 +17,26 @@ dex_exchange = os.getenv("DEX_EXCHANGE", CHAIN['dex'][0])
 #DEX CONNECTIVITY
 w3 = Web3(Web3.HTTPProvider(NETWORK_PROVIDER_URL))
 
+
 from swapportunity import DexSwap
-#SWAP HELPER
-dex = DexSwap(w3,chain_id,wallet_address,private_key,execution_mode,dex_exchange)
 
-#INPUT for QUOTE
-quote = asyncio.run(dex.get_quote('ETH'))
-print(quote)
 
-#INPUT for a NORMAL SWAP
-# transaction_amount_out = 10
-# asset_out_symbol = "USDT"
-# asset_in_symbol = "ETH"
+async def main():
+	#SWAP HELPER
+	dex = DexSwap(w3,chain_id,wallet_address,private_key,execution_mode,dex_exchange)
 
-# transaction = dex.get_swap(transaction_amount_out,asset_out_symbol,asset_in_symbol)
-# print(transaction)
+	#INPUT for QUOTE
+	quote = await dex.get_quote('ETH')
+	print(quote)
+
+	#INPUT for a NORMAL SWAP
+	# transaction_amount_out = 10
+	# asset_out_symbol = "USDT"
+	# asset_in_symbol = "ETH"
+
+	# transaction = dex.get_swap(transaction_amount_out,asset_out_symbol,asset_in_symbol)
+	# print(transaction)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())

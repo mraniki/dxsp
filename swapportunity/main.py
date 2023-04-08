@@ -49,6 +49,48 @@ class DexSwap:
         headers = { "User-Agent": "Mozilla/5.0" }
         response = requests.get(url,params =params,headers=headers)
         return response.json()
+
+    async def get_contract_address(self, symbol):
+        try:
+            alltokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json") #https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json
+            token_list = await self._get(alltokenlist)
+            print(token_list)
+            token_search = token_list['tokens']
+            for keyval in token_search:
+                if (keyval['symbol'] == symbol and keyval['chainId'] == int(chain_id)):
+                    print(keyval['address'])
+                    return keyval['address']
+        except Exception:
+            return
+
+    async def get_quote(self, token):
+            asset_in_address = await self.get_contract_address(token)
+            print(asset_in_address)
+            asset_out_address = await self.get_contract_address('usdc')
+            print(asset_out_address)
+            try:
+                asset_out_amount=1000000000000
+                quote_url = f"{url}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
+                print(quote_url)
+                quote = self._get(quote_url)
+                print(quote['toTokenAmount'])
+                return quote['toTokenAmount']
+            except Exception:
+                return
+
+    def get_abi():
+        return
+
+
+    # def get_approve(self, from_token_symbol: str, amount=None, decimal=None):
+    #     return
+        # approval_check_URL = f"{dex_1inch_api}/{chain_id}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={walletaddress}"
+        # approval_response = await retrieve_url_json(approval_check_URL)
+        # approval_check = approval_response['allowance']
+        # if (approval_check==0):
+        #     approval_URL = f"{dex_1inch_api}/{chain_id}/approve/transaction?tokenAddress={asset_out_address}"
+        #     approval_response = await retrieve_url_json(approval_URL)
+
     # def swap(self, 
     #         from_token_symbol: str, 
     #         to_token_symbol: str,
@@ -62,14 +104,7 @@ class DexSwap:
         #swap_TX = await retrieve_url_json(swap_url)
         #tx_token= await sign_transaction_dex(swap_TX)
         #return tx_token
-    # def get_approve(self, from_token_symbol: str, amount=None, decimal=None):
-    #     return
-        # approval_check_URL = f"{dex_1inch_api}/{chain_id}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={walletaddress}"
-        # approval_response = await retrieve_url_json(approval_check_URL)
-        # approval_check = approval_response['allowance']
-        # if (approval_check==0):
-        #     approval_URL = f"{dex_1inch_api}/{chain_id}/approve/transaction?tokenAddress={asset_out_address}"
-        #     approval_response = await retrieve_url_json(approval_URL)
+
     #def get_sign()
         # try:
         #     if dex_version in ['uni_v2']:
@@ -102,33 +137,6 @@ class DexSwap:
         #     logger.debug(msg=f"sign_transaction_dex contract {tx} error {e}")
         #     await handle_exception(e)
         #     return
-
-    async def get_contract_address(self, symbol):
-        try:
-            alltokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json") #https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json
-            token_list = await self._get(alltokenlist)
-            token_search = token_list['tokens']
-            for keyval in token_search:
-                if (keyval['symbol'] == symbol and keyval['chainId'] == int(chain_id)):
-                    return keyval['address']
-        except Exception:
-            return
-
-    async def get_quote(self, token):
-            asset_in_address = await self.get_contract_address(token)
-            asset_out_address = await self.get_contract_address('usdc')
-            try:
-                asset_out_amount=1000000000000
-                quote_url = f"{url}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
-                quote = self._get(quote_url)
-                return quote['toTokenAmount']
-            except Exception:
-                return
-
-    def get_abi():
-        return
-
-
 
 
 # class DexLimitSwap:
