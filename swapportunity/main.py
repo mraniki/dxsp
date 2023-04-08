@@ -42,7 +42,7 @@ class DexSwap:
 
         base_url = 'https://api.1inch.exchange/'
         version = "v5.0"
-        url = f"{base_url}/{version}/{chainId}"
+        url = f"{base_url}/{version}/{chain_id}"
 
     @staticmethod
     def _get(url, params=None, headers=None):
@@ -64,11 +64,11 @@ class DexSwap:
         #return tx_token
     # def get_approve(self, from_token_symbol: str, amount=None, decimal=None):
     #     return
-        # approval_check_URL = f"{dex_1inch_api}/{chainId}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={walletaddress}"
+        # approval_check_URL = f"{dex_1inch_api}/{chain_id}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={walletaddress}"
         # approval_response = await retrieve_url_json(approval_check_URL)
         # approval_check = approval_response['allowance']
         # if (approval_check==0):
-        #     approval_URL = f"{dex_1inch_api}/{chainId}/approve/transaction?tokenAddress={asset_out_address}"
+        #     approval_URL = f"{dex_1inch_api}/{chain_id}/approve/transaction?tokenAddress={asset_out_address}"
         #     approval_response = await retrieve_url_json(approval_URL)
     #def get_sign()
         # try:
@@ -122,7 +122,7 @@ class DexSwap:
             token_list = await retrieve_url_json(alltokenlist)
             token_search = token_list['tokens']
             for keyval in token_search:
-                if (keyval['symbol'] == symbol and keyval['chainId'] == int(chainId)):
+                if (keyval['symbol'] == symbol and keyval['chainId'] == int(chain_id)):
                     return keyval['address']
         except Exception:
             return
