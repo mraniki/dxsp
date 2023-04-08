@@ -74,6 +74,8 @@ class DexSwap:
             alltokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json") #https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json
             token_list = self._get(alltokenlist)
             logger.debug(msg=f"token_list {token_list}")
+            logger.debug(msg=f"symbol {symbol}")
+            logger.debug(msg=f"self.chain_id {self.chain_id}")
             token_search = token_list['tokens']
             for keyval in token_search:
                 if (keyval['symbol'] == symbol and keyval['chainId'] == self.chain_id):
