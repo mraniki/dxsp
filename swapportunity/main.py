@@ -76,7 +76,7 @@ class DexSwap:
             logger.debug(msg=f"token_list {token_list}")
             token_search = token_list['tokens']
             for keyval in token_search:
-                if (keyval['symbol'] == symbol and keyval['chainId'] == int(chain_id)):
+                if (keyval['symbol'] == symbol and keyval['chainId'] == self.chain_id):
                     logger.debug(msg=f"keyval['address'] {keyval['address']}")
                     return keyval['address']
         except Exception:

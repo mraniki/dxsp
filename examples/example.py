@@ -36,7 +36,7 @@ async def main():
 	dex = DexSwap(w3,chain_id,wallet_address,private_key,execution_mode,dex_exchange,block_explorer_api)
 
 	#INPUT for QUOTE
-	quote = await dex.get_quote('ETH')
+	quote = await dex.get_quote('wBTC')
 	print("quote ", quote)
 
 	#INPUT for a NORMAL SWAP
