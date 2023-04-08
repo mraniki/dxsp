@@ -106,17 +106,17 @@ class DexSwap:
     async def get_contract_address(self, symbol):
         try:
             alltokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json") #https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json
-            token_list = await retrieve_url_json(alltokenlist)
+            token_list = await self._get(alltokenlist)
             token_search = token_list['tokens']
             for keyval in token_search:
                 if (keyval['symbol'] == symbol and keyval['chainId'] == int(chain_id)):
                     return keyval['address']
         except Exception:
             return
-            
+
     async def get_quote(self, token):
-            asset_in_address = await get_contract_address(token)
-            asset_out_address = await get_contract_address('usdc')
+            asset_in_address = await self.get_contract_address(token)
+            asset_out_address = await self.get_contract_address('usdc')
             try:
                 asset_out_amount=1000000000000
                 quote_url = f"{url}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
