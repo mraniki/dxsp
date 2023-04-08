@@ -87,7 +87,7 @@ class DexSwap:
     async def get_quote(self, token):
             asset_in_address = await self.get_contract_address(token)
             logger.debug(msg=f"asset_in_address {asset_in_address}")
-            asset_out_address = await self.get_contract_address('usdc')
+            asset_out_address = await self.get_contract_address('USDC')
             logger.debug(msg=f"asset_out_address {asset_out_address}")
             try:
                 asset_out_amount=1000000000000
