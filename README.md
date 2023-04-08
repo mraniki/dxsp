@@ -1,4 +1,4 @@
-# swapportunity
+# dxsp
 DXSP (DeX SwaP), A defi swap helper package. 
 Easy peasy Swap.
 
@@ -50,20 +50,20 @@ w3 = Web3(Web3.HTTPProvider(network_provider_url))
 + from dxsp import DexSwap
 
 async def main():
-	#SWAP HELPER
-	+ dex = DexSwap(w3,chain_id,wallet_address,private_key,execution_mode,dex_exchange,block_explorer_api)
+	#SWAP HELPER 
++	dex = DexSwap(w3,chain_id,wallet_address,private_key,execution_mode,dex_exchange,block_explorer_api)
 
 
 	#get Contract Address
-	bitcoinaddress = await dex.get_contract_address('wBTC')
++	bitcoinaddress = await dex.get_contract_address('wBTC')
 	print("bitcoinaddress ", bitcoinaddress)
 
 	#getABI
-	bitcoinABI = await dex.get_abi(bitcoinaddress)
++	bitcoinABI = await dex.get_abi(bitcoinaddress)
 	print("bitcoinABI ", bitcoinABI)
 
 	#INPUT for QUOTE
-	quote = await dex.get_quote('wBTC')
++	quote = await dex.get_quote('wBTC')
 	print("quote ", quote)
 
 	#INPUT for a NORMAL SWAP
@@ -72,7 +72,7 @@ async def main():
 	# asset_in_symbol = "ETH"
 
 	#SWAP EXECUTION
-	+# transaction = dex.get_swap(transaction_amount_out,asset_out_symbol,asset_in_symbol)
++	# transaction = dex.get_swap(transaction_amount_out,asset_out_symbol,asset_in_symbol)
 	# print("transaction ", transaction)
 
 
