@@ -102,7 +102,7 @@ class DexSwap:
         logger.debug(msg=f"addr {addr}")
         logger.debug(msg=f"block_explorer_api {self.block_explorer_api}")
         logger.debug(msg=f"chain_id {self.chain_id}")
-        abi = ma.get_abi_from_address(addr,self.block_explorer_api,self.chain_id)
+        abi = ma.get_abi_from_address(addr,self.block_explorer_api,str(self.chain_id))
         logger.debug(msg=f"abi {abi}")
         return abi
 
