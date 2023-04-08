@@ -35,6 +35,15 @@ async def main():
 	#SWAP HELPER
 	dex = DexSwap(w3,chain_id,wallet_address,private_key,execution_mode,dex_exchange,block_explorer_api)
 
+
+	#get Contract Address
+	bitcoinaddress = await dex.get_contract_address('wBTC')
+	print("bitcoinaddress ", bitcoinaddress)
+
+	#getABI
+	bitcoinABI = await dex.get_abi(bitcoinaddress)
+	print("bitcoinABI ", bitcoinABI)
+
 	#INPUT for QUOTE
 	quote = await dex.get_quote('wBTC')
 	print("quote ", quote)

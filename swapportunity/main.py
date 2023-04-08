@@ -63,14 +63,14 @@ class DexSwap:
         headers = { "User-Agent": "Mozilla/5.0" }
         response = requests.get(url,params =params,headers=headers)
         logger.debug(msg=f"response {response}")
-        logger.debug(msg=f"response json {response.json()}")
+        #logger.debug(msg=f"response json {response.json()}")
         return response.json()
 
     async def get_contract_address(self, symbol):
         try:
             alltokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json") #https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json
             token_list = self._get(alltokenlist)
-            logger.debug(msg=f"token_list {token_list}")
+            #logger.debug(msg=f"token_list {token_list}")
             logger.debug(msg=f"symbol {symbol}")
             logger.debug(msg=f"self.chain_id {self.chain_id}")
             token_search = token_list['tokens']
@@ -98,7 +98,7 @@ class DexSwap:
                 logger.debug(msg=f"error {e}")
                 return
 
-    async def get_abi(addr):
+    async def get_abi(self, addr):
         logger.debug(msg=f"addr {addr}")
         logger.debug(msg=f"block_explorer_api {self.block_explorer_api}")
         logger.debug(msg=f"chain_id {self.chain_id}")
@@ -122,13 +122,13 @@ class DexSwap:
     #     except Exception as e:
     #         await handle_exception(e)
 
-    # def get_approve(self, asset_out_address: str, amount=None, decimal=None):
-    #     approval_check_URL = f"{url}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={self.wallet_address}"
-    #     approval_response = await self._get(approval_check_URL)
-    #     approval_check = approval_response['allowance']
-    #     if (approval_check==0):
-    #         approval_URL = f"{url}/approve/transaction?tokenAddress={asset_out_address}"
-    #         approval_response = await self._get(approval_URL)
+    async def get_approve(self, asset_out_address: str, amount=None, decimal=None):
+        approval_check_URL = f"{self.dex_url}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={self.wallet_address}"
+        approval_response =  self._get(approval_check_URL)
+        approval_check = approval_response['allowance']
+        if (approval_check==0):
+            approval_URL = f"{self.dex_url}/approve/transaction?tokenAddress={asset_out_address}"
+            approval_response =  self._get(approval_URL)
 
     # def get_sign()
     #     try:
