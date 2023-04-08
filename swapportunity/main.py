@@ -72,7 +72,7 @@ class DexSwap:
     async def get_contract_address(self, symbol):
         try:
             alltokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json") #https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json
-            token_list = await self._get(alltokenlist)
+            token_list = self._get(alltokenlist)
             logger.debug(msg=f"token_list {token_list}")
             token_search = token_list['tokens']
             for keyval in token_search:
@@ -91,7 +91,7 @@ class DexSwap:
                 asset_out_amount=1000000000000
                 quote_url = f"{url}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
                 logger.debug(msg=f"quote_url {quote_url}")
-                quote = await self._get(quote_url)
+                quote = self._get(quote_url)
                 logger.debug(msg=f"quote {quote}")
                 return quote['toTokenAmount']
             except Exception:
@@ -102,17 +102,18 @@ class DexSwap:
         logger.debug(msg=f"block_explorer_api {self.block_explorer_api}")
         logger.debug(msg=f"chain_id {self.chain_id}")
         abi = ma.get_abi_from_address(addr,self.block_explorer_api,self.chain_id)
+        logger.debug(msg=f"abi {abi}")
         return abi
 
     # async def get_abi(addr):
     #     try:
     #         url = abiurl
-    #         logger.debug(msg=f"fetch_abi_dex url {url}")
+    #         logger.debug(msg=f"get_abi url {url}")
     #         params = {
     #             "module": "contract",
     #             "action": "getabi",
     #             "address": addr,
-    #             "apikey": abiurltoken }
+    #             "apikey": block_explorer_api }
     #         resp = await self._get(url, params)
     #         abi = resp["result"]
     #         logger.debug(msg=f"abi {abi}")
