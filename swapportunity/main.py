@@ -27,7 +27,13 @@ class DexSwap:
           "6": "0x_limit"
         }
 
-    def __init__(self,chain_id, wallet_address,private_key, execution_mode=1, dex_exchange):
+    def __init__(self,
+                 web3: Web3 = None,
+                 chain_id, 
+                 wallet_address,
+                 private_key,
+                 execution_mode=1,
+                 dex_exchange):
         self.chain_id = chain_id
         self.address = wallet_address
         self.private_key = private_key
@@ -35,22 +41,22 @@ class DexSwap:
         self.dex_exchange = dex_exchange
 
         if execution_mode == 1
-            base_url = 'https://api.1inch.exchange'
+            base_url = 'https://api.1inch.exchange/'
             version = "v5.0"
+        url = f"{base_url}/{version}/{chainId}"
 
     @staticmethod
     def _get(url, params=None, headers=None):
         headers = { "User-Agent": "Mozilla/5.0" }
         response = requests.get(url,params =params,headers=headers)
-        logger.debug(msg=f"retrieve_url_json {response}")
         return response.json()
     def swap(self, from_token_symbol: str, to_token_symbol: str,
-                 amount: float, slippage=None, decimal=None, send_address=None, **kwargs):
-        await approve_asset_router(asset_out_address,asset_out_contract)
-        swap_url = f"{base_url}/{version}/{chainId}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
-        swap_TX = await retrieve_url_json(swap_url)
-        tx_token= await sign_transaction_dex(swap_TX)
-        return tx_token
+                 amount: float, slippage=None, decimal=None, send_address=None):
+        #await #approve_asset_router(asset_out_address,asset_out_contract)
+        swap_url = f"{url}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
+        #swap_TX = await retrieve_url_json(swap_url)
+        #tx_token= await sign_transaction_dex(swap_TX)
+        #return tx_token
     def get_approve(self, from_token_symbol: str, amount=None, decimal=None):
         return
         # approval_check_URL = f"{dex_1inch_api}/{chainId}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={walletaddress}"
@@ -59,7 +65,7 @@ class DexSwap:
         # if (approval_check==0):
         #     approval_URL = f"{dex_1inch_api}/{chainId}/approve/transaction?tokenAddress={asset_out_address}"
         #     approval_response = await retrieve_url_json(approval_URL)
-    def get_sign()
+    #def get_sign()
         # try:
         #     if dex_version in ['uni_v2']:
         #         tx_params = {
@@ -98,18 +104,18 @@ class DexSwap:
     def get_abi()
         return
 
-    async def search_json_contract(symbol):
-        try:
-            alltokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json") #https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json
-            token_list = await retrieve_url_json(alltokenlist)
-            logger.info(msg=f"token_list {token_list}")
-            token_search = token_list['tokens']
-            for keyval in token_search:
-                if (keyval['symbol'] == symbol and keyval['chainId'] == int(chainId)):
-                    logger.info(msg=f"address {keyval['address']}")
-                    return keyval['address']
-        except Exception as e:
-            logger.error(msg=f"search_json_contract error {symbol} {e}")
+    # async def search_json_contract(symbol):
+    #     try:
+    #         alltokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json") #https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json
+    #         token_list = await retrieve_url_json(alltokenlist)
+    #         logger.info(msg=f"token_list {token_list}")
+    #         token_search = token_list['tokens']
+    #         for keyval in token_search:
+    #             if (keyval['symbol'] == symbol and keyval['chainId'] == int(chainId)):
+    #                 logger.info(msg=f"address {keyval['address']}")
+    #                 return keyval['address']
+    #     except Exception as e:
+    #         logger.error(msg=f"search_json_contract error {symbol} {e}")
 
 # class DexLimitSwap:
     # dex_1inch_limit_api = "https://limit-orders.1inch.io/v3.0"
