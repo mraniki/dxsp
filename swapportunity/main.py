@@ -26,13 +26,14 @@ class DexSwap:
         }
 
     def __init__(self,
-                 web3: Web3 = None,
+                 w3: Web3 = None,
                  chain_id = 1, 
                  wallet_address = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE,
                  private_key = 0x111111111117dc0aa78b770fa6a738034120c302,
                  execution_mode=1,
                  dex_exchange = 'uniswap_v2'
                  ):
+        self.w3 = w3
         self.chain_id = chain_id
         self.address = wallet_address
         self.private_key = private_key
