@@ -52,13 +52,10 @@ class DexSwap:
         self.dex_exchange = dex_exchange
         self.block_explorer_api = block_explorer_api
 
-        if execution_mode == 1:
-            base_url = 'https://api.1inch.exchange/'
-            version = "v5.0"
-            url = f"{base_url}/{version}/{chain_id}"
-            logger.debug(msg=f"url {url}")
-        else:
-            return
+        base_url = 'https://api.1inch.exchange'
+        version = "v5.0"
+        url = f"{base_url}/{version}/{self.chain_id}"
+        logger.debug(msg=f"url {url}")
 
     @staticmethod
     def _get(url, params=None, headers=None):

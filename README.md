@@ -1,5 +1,5 @@
 # swapportunity
-a Defi Swap Helper package. Easy peasy swap.
+a Defi Swap Helper package. Easy peasy Swap.
 
 ![Pypi](https://img.shields.io/pypi/dm/swaportunity)
 
