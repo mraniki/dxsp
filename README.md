@@ -1,20 +1,21 @@
 # swapportunity
-DXSP (DeX SwaP), A defi swap helper package . 
+DXSP (DeX SwaP), A defi swap helper package. 
 Easy peasy Swap.
 
-![Pypi](https://img.shields.io/pypi/dm/swaportunity)
+![Pypi](https://img.shields.io/pypi/dm/dxsp)
 
 # Install
-`pip install swapportunity`
+`pip install dxsp`
 
 2 swap execution mode are supported:
- - Single SWAP via 1inch API v5 and Uniswap version 2 router
+ - Single SWAP via 1inch API v5 and Uniswap version 2 router DEX type
  - Limit SWAP via 1inch API v3
+
 
 # Example
 
 [example](examples/example.py)
-```
+```diff
 import os
 from dotenv import load_dotenv
 import asyncio
@@ -46,11 +47,11 @@ w3 = Web3(Web3.HTTPProvider(network_provider_url))
 
 
 
-from dxsp import DexSwap
++ from dxsp import DexSwap
 
 async def main():
 	#SWAP HELPER
-	dex = DexSwap(w3,chain_id,wallet_address,private_key,execution_mode,dex_exchange,block_explorer_api)
+	+ dex = DexSwap(w3,chain_id,wallet_address,private_key,execution_mode,dex_exchange,block_explorer_api)
 
 
 	#get Contract Address
@@ -71,7 +72,7 @@ async def main():
 	# asset_in_symbol = "ETH"
 
 	#SWAP EXECUTION
-	# transaction = dex.get_swap(transaction_amount_out,asset_out_symbol,asset_in_symbol)
+	+# transaction = dex.get_swap(transaction_amount_out,asset_out_symbol,asset_in_symbol)
 	# print("transaction ", transaction)
 
 
