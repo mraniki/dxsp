@@ -39,9 +39,8 @@ class DexSwap:
         self.execution_mode = execution_mode
         self.dex_exchange = dex_exchange
 
-        if self.execution_mode == 1:
-            base_url = 'https://api.1inch.exchange/'
-            version = "v5.0"
+        base_url = 'https://api.1inch.exchange/'
+        version = "v5.0"
         url = f"{base_url}/{version}/{chainId}"
 
     @staticmethod
@@ -49,16 +48,16 @@ class DexSwap:
         headers = { "User-Agent": "Mozilla/5.0" }
         response = requests.get(url,params =params,headers=headers)
         return response.json()
-    def swap(self, 
-            from_token_symbol: str, 
-            to_token_symbol: str,
-            amount: float, 
-            slippage=None, 
-            decimal=None, 
-            send_address=None
-            ):
-        #await #approve_asset_router(asset_out_address,asset_out_contract)
-        swap_url = f"{url}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
+    # def swap(self, 
+    #         from_token_symbol: str, 
+    #         to_token_symbol: str,
+    #         amount: float, 
+    #         slippage=None, 
+    #         decimal=None, 
+    #         send_address=None
+    #         ):
+    #     #await #approve_asset_router(asset_out_address,asset_out_contract)
+    #     swap_url = f"{url}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
         #swap_TX = await retrieve_url_json(swap_url)
         #tx_token= await sign_transaction_dex(swap_TX)
         #return tx_token
