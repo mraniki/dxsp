@@ -1,4 +1,4 @@
-# swaportunity
+# swapportunity
 a Defi Swap Helper package
 
 ![Pypi](https://img.shields.io/pypi/dm/swaportunity)
