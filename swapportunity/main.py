@@ -41,18 +41,24 @@ class DexSwap:
                  wallet_address = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE,
                  private_key = 0x111111111117dc0aa78b770fa6a738034120c302,
                  execution_mode=1,
-                 dex_exchange = 'uniswap_v2'
+                 dex_exchange = 'uniswap_v2',
+                 block_explorer_api = None
                  ):
-    self.w3 = w3
-    self.chain_id = chain_id
-    self.wallet_address = wallet_address
-    self.private_key = private_key
-    self.execution_mode = execution_mode
-    self.dex_exchange = dex_exchange
+        self.w3 = w3
+        self.chain_id = chain_id
+        self.wallet_address = wallet_address
+        self.private_key = private_key
+        self.execution_mode = execution_mode
+        self.dex_exchange = dex_exchange
+        self.block_explorer_api = block_explorer_api
 
-    base_url = 'https://api.1inch.exchange/'
-    version = "v5.0"
-    url = f"{base_url}/{version}/{chain_id}"
+        if execution_mode == 1:
+            base_url = 'https://api.1inch.exchange/'
+            version = "v5.0"
+            url = f"{base_url}/{version}/{chain_id}"
+            logger.debug(msg=f"url {url}")
+        else:
+            return
 
     @staticmethod
     def _get(url, params=None, headers=None):
@@ -89,6 +95,13 @@ class DexSwap:
             except Exception:
                 return
 
+    async def get_abi(addr):
+        logger.debug(msg=f"addr {addr}")
+        logger.debug(msg=f"block_explorer_api {self.block_explorer_api}")
+        logger.debug(msg=f"chain_id {self.chain_id}")
+        abi = ma.get_abi_from_address(addr,self.block_explorer_api,self.chain_id)
+        return abi
+        
     # async def get_abi(addr):
     #     try:
     #         url = abiurl
