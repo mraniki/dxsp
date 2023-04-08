@@ -8,7 +8,7 @@ from web3 import Web3
 import many_abis as ma
 
 #🧐LOGGING
-LOGLEVEL=os.getenv("LOGLEVEL", "DEBUG")
+LOGLEVEL=os.getenv("LOGLEVEL", "INFO")
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=LOGLEVEL)
 logger = logging.getLogger(__name__)
 logger.info(msg=f"LOGLEVEL {LOGLEVEL}")

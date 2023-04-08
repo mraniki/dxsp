@@ -1,5 +1,6 @@
 # swapportunity
-a Defi Swap Helper package. Easy peasy Swap.
+DXSP (DeX SwaP), A defi swap helper package . 
+Easy peasy Swap.
 
 ![Pypi](https://img.shields.io/pypi/dm/swaportunity)
 
@@ -45,7 +46,7 @@ w3 = Web3(Web3.HTTPProvider(network_provider_url))
 
 
 
-from swapportunity import DexSwap
+from dxsp import DexSwap
 
 async def main():
 	#SWAP HELPER

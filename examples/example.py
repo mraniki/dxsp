@@ -29,7 +29,7 @@ w3 = Web3(Web3.HTTPProvider(network_provider_url))
 
 
 
-from swapportunity import DexSwap
+from dxsp import DexSwap
 
 async def main():
 	#SWAP HELPER
