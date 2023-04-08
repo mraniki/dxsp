@@ -25,7 +25,7 @@ dex_exchange = os.getenv("DEX_EXCHANGE", chain['dex'][0])
 block_explorer_api = os.getenv("BLOCK_EXPLORER_API", "1X23Q4ACZ5T3KXG67WIAH7X8C510F1972TM")
 
 #DEX CONNECTIVITY
-w3 = Web3(Web3.HTTPProvider(NETWORK_PROVIDER_URL))
+w3 = Web3(Web3.HTTPProvider(network_provider_url))
 
 
 

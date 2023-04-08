@@ -62,9 +62,11 @@ class DexSwap:
 
     @staticmethod
     def _get(url, params=None, headers=None):
+        logger.debug(msg=f"url {url}")
         headers = { "User-Agent": "Mozilla/5.0" }
         response = requests.get(url,params =params,headers=headers)
         logger.debug(msg=f"response {response}")
+        logger.debug(msg=f"response json {response.json()}")
         return response.json()
 
     async def get_contract_address(self, symbol):
@@ -101,7 +103,7 @@ class DexSwap:
         logger.debug(msg=f"chain_id {self.chain_id}")
         abi = ma.get_abi_from_address(addr,self.block_explorer_api,self.chain_id)
         return abi
-        
+
     # async def get_abi(addr):
     #     try:
     #         url = abiurl
