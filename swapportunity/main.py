@@ -102,6 +102,18 @@ class DexSwap:
         #     logger.debug(msg=f"sign_transaction_dex contract {tx} error {e}")
         #     await handle_exception(e)
         #     return
+
+    async def get_contract_address(self, symbol):
+        try:
+            alltokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json") #https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json
+            token_list = await retrieve_url_json(alltokenlist)
+            token_search = token_list['tokens']
+            for keyval in token_search:
+                if (keyval['symbol'] == symbol and keyval['chainId'] == int(chain_id)):
+                    return keyval['address']
+        except Exception:
+            return
+            
     async def get_quote(self, token):
             asset_in_address = await get_contract_address(token)
             asset_out_address = await get_contract_address('usdc')
@@ -116,16 +128,7 @@ class DexSwap:
     def get_abi():
         return
 
-    async def get_contract_address(self, symbol):
-        try:
-            alltokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json") #https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json
-            token_list = await retrieve_url_json(alltokenlist)
-            token_search = token_list['tokens']
-            for keyval in token_search:
-                if (keyval['symbol'] == symbol and keyval['chainId'] == int(chain_id)):
-                    return keyval['address']
-        except Exception:
-            return
+
 
 
 # class DexLimitSwap:

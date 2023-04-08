@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+import asyncio
 from web3 import Web3
 import many_abis as ma
 
@@ -21,7 +22,7 @@ from swapportunity import DexSwap
 dex = DexSwap(w3,chain_id,wallet_address,private_key,execution_mode,dex_exchange)
 
 #INPUT for QUOTE
-quote = dex.get_quote('ETH')
+quote = asyncio.run(dex.get_quote('ETH'))
 print(quote)
 
 #INPUT for a NORMAL SWAP
