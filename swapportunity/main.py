@@ -35,7 +35,7 @@ class DexSwap:
                  ):
         self.w3 = w3
         self.chain_id = chain_id
-        self.address = wallet_address
+        self.wallet_address = wallet_address
         self.private_key = private_key
         self.execution_mode = execution_mode
         self.dex_exchange = dex_exchange
@@ -72,7 +72,7 @@ class DexSwap:
                 asset_out_amount=1000000000000
                 quote_url = f"{url}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
                 print(quote_url)
-                quote = self._get(quote_url)
+                quote = await self._get(quote_url)
                 print(quote['toTokenAmount'])
                 return quote['toTokenAmount']
             except Exception:
@@ -82,14 +82,13 @@ class DexSwap:
         return
 
 
-    # def get_approve(self, from_token_symbol: str, amount=None, decimal=None):
-    #     return
-        # approval_check_URL = f"{dex_1inch_api}/{chain_id}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={walletaddress}"
-        # approval_response = await retrieve_url_json(approval_check_URL)
-        # approval_check = approval_response['allowance']
-        # if (approval_check==0):
-        #     approval_URL = f"{dex_1inch_api}/{chain_id}/approve/transaction?tokenAddress={asset_out_address}"
-        #     approval_response = await retrieve_url_json(approval_URL)
+    # def get_approve(self, asset_out_address: str, amount=None, decimal=None):
+    #     approval_check_URL = f"{url}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={self.wallet_address}"
+    #     approval_response = await self._get(approval_check_URL)
+    #     approval_check = approval_response['allowance']
+    #     if (approval_check==0):
+    #         approval_URL = f"{url}/approve/transaction?tokenAddress={asset_out_address}"
+    #         approval_response = await self._get(approval_URL)
 
     # def swap(self, 
     #         from_token_symbol: str, 
@@ -99,11 +98,11 @@ class DexSwap:
     #         decimal=None, 
     #         send_address=None
     #         ):
-    #     #await #approve_asset_router(asset_out_address,asset_out_contract)
+    #     #await self.approve_asset_router(asset_out_address,asset_out_contract)
     #     swap_url = f"{url}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={walletaddress}&slippage={slippage}"
-        #swap_TX = await retrieve_url_json(swap_url)
-        #tx_token= await sign_transaction_dex(swap_TX)
-        #return tx_token
+    #     swap_TX = await retrieve_url_json(swap_url)
+    #     tx_token= await sign_transaction_dex(swap_TX)
+    #     return tx_token
 
     #def get_sign()
         # try:
