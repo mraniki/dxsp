@@ -232,7 +232,7 @@ class DexSwap:
         return checkTransactionRequest['status']
 
 
-    async def search_contract(token):
+    async def search_contract(self, token):
         try:
             token_contract = await get_contract_address(main_list,token)
             if token_contract is None:
