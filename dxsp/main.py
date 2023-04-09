@@ -5,6 +5,8 @@ import json
 import requests
 import asyncio
 from web3 import Web3
+
+from utils import *
 import many_abis as ma
 
 #🧐LOGGING
@@ -83,6 +85,10 @@ class DexSwap:
         except Exception as e:
             logger.debug(msg=f"error {e}")
             return
+
+    async def get_contract(self, symbol):
+        return await search_contract(symbol)
+
 
     async def get_quote(self, token):
             asset_in_address = await self.get_contract_address(token)
