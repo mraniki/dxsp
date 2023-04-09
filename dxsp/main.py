@@ -85,7 +85,7 @@ class DexSwap:
             logger.debug(msg=f"error {e}")
             return
 
-    async def get_contract(self, symbol):
+    async def get_address(self, symbol):
         logger.debug(msg=f"chain_id {self.chain_id}")
         return await search_contract(self.chain_id,symbol)
 
@@ -128,7 +128,7 @@ class DexSwap:
     #         logger.debug(msg=f"abi {abi}")
     #         return abi if (abi!="") else None
     #     except Exception as e:
-    #         await handle_exception(e)
+
 
     async def get_approve(self, asset_out_address: str, amount=None):
         if protocol in ["1"]:
@@ -179,8 +179,7 @@ class DexSwap:
             raw_tx = signed.rawTransaction
             return self.w3.eth.send_raw_transaction(raw_tx)
         except Exception as e:
-            logger.debug(msg=f"sign_transaction_dex contract {tx} error {e}")
-            await handle_exception(e)
+            logger.debug(msg=f"sign_transaction error {e}")
             return
 
     async def get_gas(tx):
@@ -221,8 +220,7 @@ class DexSwap:
             if(txResult == "1"):
                 return txHash
         except Exception as e:
-            logger.debug(msg=f"sign_transaction_dex contract {tx} error {e}")
-            await handle_exception(e)
+            logger.debug(msg=f"swap error {e}")
             return
 
     async def get_block_explorer_status (txHash):

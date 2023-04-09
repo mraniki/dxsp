@@ -40,9 +40,9 @@ async def main():
 	print("bitcoinaddress ", bitcoinaddress)
 	#
 
-	#get Contract Address
-	bitcoinaddress2 = await dex.get_contract('wBTC')
-	print("bitcoinaddress2 ", bitcoinaddress2)
+	# #get Contract Address
+	# bitcoinaddress2 = await dex.get_address('wBTC')
+	# print("bitcoinaddress2 ", bitcoinaddress2)
 	#
 
 	#getABI
@@ -61,8 +61,8 @@ async def main():
 	asset_in_symbol = "ETH"
 
 	#SWAP EXECUTION
-	#transaction = await dex.get_swap(transaction_amount_out,asset_out_symbol,asset_in_symbol)
-	#print("transaction ", transaction)
+	transaction = await dex.get_swap(transaction_amount_out,asset_out_symbol,asset_in_symbol)
+	print("transaction ", transaction)
 	# 
 
 if __name__ == "__main__":
