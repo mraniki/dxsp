@@ -41,19 +41,19 @@ async def main():
 	
 
 	#getABI
-	bitcoinABI = await dex.get_abi(bitcoinaddress)
-	print("bitcoinABI ", bitcoinABI)
-	# ABI
+	# bitcoinABI = await dex.get_abi(bitcoinaddress)
+	# print("bitcoinABI ", bitcoinABI)
+	# # ABI
 
-	#INPUT for QUOTE
-	quote = await dex.get_quote('wBTC')
-	print("quote ", quote)
-	#
+	# #INPUT for QUOTE
+	# quote = await dex.get_quote('wBTC')
+	# print("quote ", quote)
+	# #
 
-	#INPUT for a NORMAL SWAP
-	transaction_amount_out = 10
-	asset_out_symbol = "USDT"
-	asset_in_symbol = "ETH"
+	# #INPUT for a NORMAL SWAP
+	# transaction_amount_out = 10
+	# asset_out_symbol = "USDT"
+	# asset_in_symbol = "ETH"
 
 	#SWAP EXECUTION
 	#transaction = await dex.get_swap(transaction_amount_out,asset_out_symbol,asset_in_symbol)

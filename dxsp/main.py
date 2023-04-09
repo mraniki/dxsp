@@ -193,7 +193,7 @@ class DexSwap:
     #🦎GECKO
     gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup
 
-    async def search_gecko_contract(token):
+    async def search_gecko_contract(self,token):
         try:
             coin_info = await self.search_gecko(token)
             coin_contract = coin_info['platforms'][f'{coin_platform}']
@@ -202,7 +202,7 @@ class DexSwap:
         except Exception:
             return
 
-    async def search_gecko(token):
+    async def search_gecko(self,token):
         try:
             search_results = gecko_api.search(query=token)
             search_dict = search_results['coins']
@@ -220,7 +220,7 @@ class DexSwap:
             logger.error(msg=f"search_gecko error {e}")
             return
 
-    async def search_gecko_platform():
+    async def search_gecko_platform(self):
         try:
             assetplatform = gecko_api.get_asset_platforms()
             output_dict = [x for x in assetplatform if x['chain_identifier'] == int(self.chain_id)]
@@ -228,7 +228,7 @@ class DexSwap:
         except Exception as e:
             logger.debug(msg=f"search_gecko_platform error {e}")
 
-    async def get_contract_address(token_list_url, symbol):
+    async def get_contract_address(self,token_list_url, symbol):
         try: 
             token_list = self._get(token_list_url)
             logger.debug(msg=f"symbol {symbol}")
