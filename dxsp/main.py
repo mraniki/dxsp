@@ -189,7 +189,7 @@ class DexSwap:
             logger.debug(msg=f"asset_out_address {asset_out_address}")
             asset_in_address = await self.search_contract(toTokenAddress)
             logger.debug(msg=f"asset_in_address {asset_in_address}")
-            asset_out_amount_converted = amount
+            asset_out_amount_converted = int(amount)
             #asset_out_amount_converted = (self.w3.to_wei(amount,'ether'))
             #slippage=2# max 2% slippage
             transaction_amount = int((asset_out_amount_converted *(slippage/100)))

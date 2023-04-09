@@ -14,7 +14,7 @@ wallet_address = os.getenv("WALLET_ADDRESS", "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeee
 private_key = os.getenv("PRIVATE_KEY", "0x111111111117dc0aa78b770fa6a738034120c302")
 
 #1 for 1inch and 2 for Uniswap V2
-protocol = os.getenv("PROTOCOL", 2)
+protocol = os.getenv("PROTOCOL", 1)
 
 #DATA from MANY_ABIS FOR RPC and EXCHANGE
 chain = ma.get_chain_by_id(chain_id=int(chain_id))
@@ -34,8 +34,8 @@ async def main():
 	#SWAP HELPER
 	dex = DexSwap(w3,chain_id,wallet_address,private_key,protocol,dex_exchange,block_explorer_api)
 	#DEMO SWAP
-	# demo_tx = await dex.get_swap(10,'USDC','wBTC')
-	# print("demo_tx ", demo_tx)
+	demo_tx = await dex.get_swap(10,'USDC','wBTC')
+	print("demo_tx ", demo_tx)
 
 	#QUOTE
 	quote = await dex.get_quote('wBTC')
