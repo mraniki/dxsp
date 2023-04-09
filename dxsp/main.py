@@ -5,9 +5,10 @@ import json
 import requests
 import asyncio
 from web3 import Web3
-
-from utils import *
 import many_abis as ma
+
+from .utils import * 
+
 
 #🧐LOGGING
 LOGLEVEL=os.getenv("LOGLEVEL", "DEBUG")
