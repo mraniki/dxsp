@@ -190,24 +190,6 @@ class DexSwap:
         logger.debug(msg=f"checkTransactionRequest {checkTransactionRequest}")
         return checkTransactionRequest['status']
 
-    #📝tokenlist
-    main_list = 'https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json'
-    personal_list = os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json") 
-    test_token_list=os.getenv("TESTTOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json")
-
-    async def get_contract_address(token_list_url, symbol):
-        try: 
-            token_list = self._get(token_list_url)
-            logger.debug(msg=f"symbol {symbol}")
-            token_search = token_list['tokens']
-            for keyval in token_search:
-                if (keyval['symbol'] == symbol and keyval['chainId'] == self.chain_id):
-                    logger.debug(msg=f"keyval {keyval['address']}")
-                    return keyval['address']
-        except Exception as e:
-            logger.debug(msg=f"error {e}")
-            return
-
     #🦎GECKO
     gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup
 
@@ -246,7 +228,25 @@ class DexSwap:
         except Exception as e:
             logger.debug(msg=f"search_gecko_platform error {e}")
 
+    async def get_contract_address(token_list_url, symbol):
+        try: 
+            token_list = self._get(token_list_url)
+            logger.debug(msg=f"symbol {symbol}")
+            token_search = token_list['tokens']
+            for keyval in token_search:
+                if (keyval['symbol'] == symbol and keyval['chainId'] == self.chain_id):
+                    logger.debug(msg=f"keyval {keyval['address']}")
+                    return keyval['address']
+        except Exception as e:
+            logger.debug(msg=f"error {e}")
+            return
+
     async def search_contract(self, token):
+            #📝tokenlist
+        main_list = 'https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json'
+        personal_list = os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json") 
+        test_token_list=os.getenv("TESTTOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json")
+
         try:
             token_contract = await self.get_contract_address(main_list,token)
             if token_contract is None:
