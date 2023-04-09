@@ -39,7 +39,7 @@ class DexSwap:
           "6": "0x_limit"
         }
 
-    async def __init__(self,
+    def __init__(self,
                  w3: Web3 = None,
                  chain_id = 1, 
                  wallet_address = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE,
@@ -69,8 +69,6 @@ class DexSwap:
             logger.debug(msg=f"router_address {self.dex_info[router_address]}")
             logger.debug(msg=f"factory_address {self.dex_info[factory_address]}")
             self.router = self.dex_info[router_address]
-            self.router_abi = await self.get_abi(self.router)
-            self.router_instance = self.w3.eth.contract(address=self.w3.to_checksum_address(self.router), abi=self.router_abi)
         if self.protocol in ["3"]:
             base_url = 'https://limit-orders.1inch.io'
             version = "v3.0"
@@ -198,9 +196,11 @@ class DexSwap:
             if self.protocol == 2:
                 await self.get_approve(asset_out_address)
                 order_path_dex=[asset_out_address, asset_in_address]
+                router_abi = await self.get_abi(self.router)
+                router_instance = self.w3.eth.contract(address=self.w3.to_checksum_address(self.router), abi=self.router_abi)
                 deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
-                transaction_min_amount  = int(self.router_instance.functions.getAmountsOut(transaction_amount, order_path_dex).call()[1])
-                swap_TX = self.router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_min_amount,order_path_dex,self.wallet_address,deadline)
+                transaction_min_amount  = int(router_instance.functions.getAmountsOut(transaction_amount, order_path_dex).call()[1])
+                swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_min_amount,order_path_dex,self.wallet_address,deadline)
             if self.protocol == 3:
                  return
             if self.protocol == 4:

@@ -54,42 +54,37 @@ block_explorer_api = os.getenv("BLOCK_EXPLORER_API", "1X23Q4ACZ5T3KXG67WIAH7X8C5
 w3 = Web3(Web3.HTTPProvider(network_provider_url))
 
 
-from dxsp import DexSwap
++from dxsp import DexSwap
 
 async def main():
 	#SWAP HELPER
-	dex = DexSwap(w3,chain_id,wallet_address,private_key,protocol,dex_exchange,block_explorer_api)
++	dex = DexSwap(w3,chain_id,wallet_address,private_key,protocol,dex_exchange,block_explorer_api)
+	#DEMO SWAP
++	demo_tx = await dex.get_swap(10,'USDC','wBTC')
+	print("demo_tx ", demo_tx)
 
-
-	#get Contract Address
-	bitcoinaddress = await dex.get_contract_address('wBTC')
-	print("bitcoinaddress ", bitcoinaddress)
-	#
-
-	# #get Contract Address
-	bitcoinaddress2 = await dex.get_address('wBTC')
-	print("bitcoinaddress2 ", bitcoinaddress2)
-	#
-
-	#getABI
-	bitcoinABI = await dex.get_abi(bitcoinaddress)
-	print("bitcoinABI ", bitcoinABI)
-	# ABI
-
-	#INPUT for QUOTE
+	#QUOTE
 	quote = await dex.get_quote('wBTC')
 	print("quote ", quote)
-	#
 
-	#INPUT for a NORMAL SWAP
+	#NORMAL SWAP
 	transaction_amount_out = 10
 	asset_out_symbol = "USDT"
 	asset_in_symbol = "ETH"
-
 	#SWAP EXECUTION
 	transaction = await dex.get_swap(transaction_amount_out,asset_out_symbol,asset_in_symbol)
 	print("transaction ", transaction)
-	# 
+	
+	#get Contract Address
+	bitcoinaddress = await dex.search_contract('wBTC')
+	print("bitcoinaddress ", bitcoinaddress)
+	#bitcoinaddress  0x68f180fcCe6836688e9084f035309E29Bf0A2095
+	# check : https://optimistic.etherscan.io/token/0x68f180fcce6836688e9084f035309e29bf0a2095?a=0x5bb949b4938aaf1b2e97f4871a8968a4abea7c98
+
+	#getABI
+	# bitcoinABI = await dex.get_abi(bitcoinaddress)
+	# print("bitcoinABI ", bitcoinABI)
+
 
 if __name__ == "__main__":
     asyncio.run(main())
