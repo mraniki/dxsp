@@ -32,8 +32,7 @@ from dxsp import DexSwap
 
 async def main():
 	#SWAP HELPER
-	dex = DexSwap(w3,chain_id,wallet_address,private_key,protocol,dex_exchange,block_explorer_api)
-
+	dex = await DexSwap(w3,chain_id,wallet_address,private_key,protocol,dex_exchange,block_explorer_api)
 
 	#get Contract Address
 	bitcoinaddress = await dex.search_contract('wBTC')

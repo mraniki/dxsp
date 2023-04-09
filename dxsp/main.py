@@ -39,7 +39,7 @@ class DexSwap:
           "6": "0x_limit"
         }
 
-    def __init__(self,
+    async def __init__(self,
                  w3: Web3 = None,
                  chain_id = 1, 
                  wallet_address = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE,
@@ -69,7 +69,14 @@ class DexSwap:
             logger.debug(msg=f"router_address {self.dex_info[router_address]}")
             logger.debug(msg=f"factory_address {self.dex_info[factory_address]}")
             self.router = self.dex_info[router_address]
-
+            self.router_abi = await self.get_abi(self.router)
+            self.router_instance = self.w3.eth.contract(address=self.w3.to_checksum_address(self.router), abi=self.router_abi)
+        if self.protocol in ["3"]:
+            base_url = 'https://limit-orders.1inch.io'
+            version = "v3.0"
+            self.dex_url = f"{base_url}/{version}/{self.chain_id}"
+            logger.debug(msg=f"dex_url {self.dex_url}")
+        # dex_0x_api = "https://api.0x.org/orderbook/v1"
 
     @staticmethod
     def _get(url, params=None, headers=None):
@@ -112,7 +119,7 @@ class DexSwap:
             if (approval_check==0):
                 approval_URL = f"{self.dex_url}/approve/transaction?tokenAddress={asset_out_address}"
                 approval_response =  self._get(approval_URL)
-        if self.protocol in ["2", "4"]:
+        elif self.protocol in ["2", "4"]:
             asset_out_abi= await self.get_abi(asset_out_address)
             asset_out_contract = self.w3.eth.contract(address=asset_out_address, abi=asset_out_abi)           
             approval_check = asset_out_contract.functions.allowance(self.w3.to_checksum_address(self.wallet_address), self.w3.to_checksum_address(self.router)).call()
@@ -135,7 +142,7 @@ class DexSwap:
                 'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
                 }
                 tx = tx.build_transaction(tx_params)
-            if self.protocol in ['4']:
+            elif self.protocol in ['4']:
                 tx_params = {
                 'from': self.wallet_address,
                 'gas': await estimate_gas(tx),
@@ -174,25 +181,40 @@ class DexSwap:
             slippage=2, 
             decimal=18, 
         ):
+
+
         try:
             asset_out_address = await self.search_contract(fromTokenAddress)
             logger.debug(msg=f"asset_out_address {asset_out_address}")
             asset_in_address = await self.search_contract(toTokenAddress)
             logger.debug(msg=f"asset_in_address {asset_in_address}")
-            transaction_amount = amount
-            fromAddress = self.wallet_address
-            await self.get_approve(asset_out_address)
-            swap_url = f"{url}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={send_address}&slippage={slippage}"
-            swap_TX = self.get(swap_url)
-            signed_TX = await self.get_sign(swap_TX)
-            txHash = str(self.w3.to_hex(signed_TX))
-            logger.debug(msg=f"txHash {txHash}")
-            txResult = await self.get_block_explorer_status(txHash)
-            logger.debug(msg=f"txResult {txResult}")
-            txHashDetail= self.w3.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
-            logger.debug(msg=f"txHashDetail {txHashDetail}")
-            if(txResult == "1"):
-                return txHash
+            asset_out_amount_converted = (self.w3.to_wei(amount,'ether'))
+            #slippage=2# max 2% slippage
+            transaction_amount = int((asset_out_amount_converted *(slippage/100)))
+            if self.protocol == 1:
+                await self.get_approve(asset_out_address)
+                swap_url = f"{url}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={self.wallet_address}&slippage={slippage}"
+                swap_TX = self.get(swap_url)
+            if self.protocol == 2:
+                await self.get_approve(asset_out_address)
+                order_path_dex=[asset_out_address, asset_in_address]
+                deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
+                transaction_min_amount  = int(self.router_instance.functions.getAmountsOut(transaction_amount, order_path_dex).call()[1])
+                swap_TX = self.router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_min_amount,order_path_dex,self.wallet_address,deadline)
+            if self.protocol == 3:
+                 return
+            if self.protocol == 4:
+                return
+            if swap_TX:
+                signed_TX = await self.get_sign(swap_TX)
+                txHash = str(self.w3.to_hex(signed_TX))
+                logger.debug(msg=f"txHash {txHash}")
+                txResult = await self.get_block_explorer_status(txHash)
+                logger.debug(msg=f"txResult {txResult}")
+                txHashDetail= self.w3.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
+                logger.debug(msg=f"txHashDetail {txHashDetail}")
+                if(txResult == "1"):
+                    return txHash
         except Exception as e:
             logger.debug(msg=f"swap error {e}")
             raise ValueError("Swap error")
@@ -272,9 +294,8 @@ class DexSwap:
         except Exception as e:
             logger.error(msg=f"search_contract error {token} {e}")
 
-# class DexLimitSwap:
-    # dex_1inch_limit_api = "https://limit-orders.1inch.io/v3.0"
-    # dex_0x_api = "https://api.0x.org/orderbook/v1"
+
+
 
 if __name__ == '__main__':
     pass
