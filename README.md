@@ -67,13 +67,13 @@ async def main():
 	print("quote ", quote)
 
 	#INPUT for a NORMAL SWAP
-	# transaction_amount_out = 10
-	# asset_out_symbol = "USDT"
-	# asset_in_symbol = "ETH"
+	transaction_amount_out = 10
+	asset_out_symbol = "USDT"
+	asset_in_symbol = "ETH"
 
 	#SWAP EXECUTION
-+	# transaction = dex.get_swap(transaction_amount_out,asset_out_symbol,asset_in_symbol)
-	# print("transaction ", transaction)
++	transaction = dex.get_swap(transaction_amount_out,asset_out_symbol,asset_in_symbol)
+	print("transaction ", transaction)
 
 
 if __name__ == "__main__":
