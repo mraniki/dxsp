@@ -131,7 +131,7 @@ class DexSwap:
 
 
     async def get_approve(self, asset_out_address: str, amount=None):
-        if protocol in ["1"]:
+        if self.protocol in ["1"]:
             approval_check_URL = f"{self.dex_url}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={self.wallet_address}"
             approval_response =  self._get(approval_check_URL)
             approval_check = approval_response['allowance']
@@ -140,7 +140,7 @@ class DexSwap:
                 approval_response =  self._get(approval_URL)
 
     # async def get_contract_approve(self, asset_out_address: str, amount=None, decimal=None):
-    #     if protocol in ["2", "4"]:
+    #     if self.protocol in ["2", "4"]:
     #         approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(self.wallet_address), ex.to_checksum_address(router)).call()
     #         logger.debug(msg=f"approval_check {approval_check}")
     #         if (approval_check==0):
@@ -151,9 +151,9 @@ class DexSwap:
     #             approval_txHash = await sign_transaction_dex(approval_TX)
     #             approval_txHash_complete = ex.eth.wait_for_transaction_receipt(approval_txHash, timeout=120, poll_latency=0.1)
 
-    async def get_sign(tx):
+    async def get_sign(self, tx):
         try:
-            if protocol in ['2']:
+            if self.protocol in ['2']:
                 tx_params = {
                 'from': self.wallet_address,
                 'gas': await self.get_gas(tx),
@@ -161,7 +161,7 @@ class DexSwap:
                 'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
                 }
                 tx = tx.build_transaction(tx_params)
-            if protocol in ['4']:
+            if self.protocol in ['4']:
                 tx_params = {
                 'from': self.wallet_address,
                 'gas': await estimate_gas(tx),
@@ -169,7 +169,7 @@ class DexSwap:
                 'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
                 }
                 tx = tx.build_transaction(tx_params)
-            elif protocol == 1:
+            elif self.protocol == 1:
                 tx = tx['tx']
                 tx['gas'] = await estimate_gas(tx)
                 tx['nonce'] = self.w3.eth.get_transaction_count(self.wallet_address)
