@@ -1,2 +1,2 @@
-__version__ = "0.0.11"
-import main
+__version__ = "0.0.12"
+from .main import *
