@@ -16,6 +16,10 @@ logger.info(msg=f"LOGLEVEL {LOGLEVEL}")
 
 class DexSwap:
 
+
+    #🦎GECKO
+    gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup
+
     chain_id =  {
           "1": "ethereum",
           "10": "optimism",
@@ -53,11 +57,19 @@ class DexSwap:
         self.block_explorer_api = block_explorer_api
         chain = ma.get_chain_by_id(chain_id=int(self.chain_id))
         self.block_explorer_url = chain['explorer'][0]
+        if self.protocol in ["1"]:
+            base_url = 'https://api.1inch.exchange'
+            version = "v5.0"
+            self.dex_url = f"{base_url}/{version}/{self.chain_id}"
+            logger.debug(msg=f"dex_url {self.dex_url}")
+        if self.protocol in ["2","4"]:
+            self.dex_info = ma.get(int(self.chain_id), 'dex', self.dex_exchange)
+            logger.debug(msg=f"dex_info {self.dex_info}")
+            logger.debug(msg=f"name {self.dex_info[name]}")
+            logger.debug(msg=f"router_address {self.dex_info[router_address]}")
+            logger.debug(msg=f"factory_address {self.dex_info[factory_address]}")
+            self.router = self.dex_info[router_address]
 
-        base_url = 'https://api.1inch.exchange'
-        version = "v5.0"
-        self.dex_url = f"{base_url}/{version}/{self.chain_id}"
-        logger.debug(msg=f"dex_url {self.dex_url}")
 
     @staticmethod
     def _get(url, params=None, headers=None):
@@ -100,16 +112,18 @@ class DexSwap:
             if (approval_check==0):
                 approval_URL = f"{self.dex_url}/approve/transaction?tokenAddress={asset_out_address}"
                 approval_response =  self._get(approval_URL)
-    #     if self.protocol in ["2", "4"]:
-    #         approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(self.wallet_address), ex.to_checksum_address(router)).call()
-    #         logger.debug(msg=f"approval_check {approval_check}")
-    #         if (approval_check==0):
-    #             approved_amount = (ex.to_wei(2**64-1,'ether'))
-    #             asset_out_abi = await fetch_abi_dex(asset_out_address)
-    #             asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
-    #             approval_TX = asset_out_contract.functions.approve(ex.to_checksum_address(router), approved_amount)
-    #             approval_txHash = await sign_transaction_dex(approval_TX)
-    #             approval_txHash_complete = ex.eth.wait_for_transaction_receipt(approval_txHash, timeout=120, poll_latency=0.1)
+        if self.protocol in ["2", "4"]:
+            asset_out_abi= await self.get_abi(asset_out_address)
+            asset_out_contract = self.w3.eth.contract(address=asset_out_address, abi=asset_out_abi)           
+            approval_check = asset_out_contract.functions.allowance(self.w3.to_checksum_address(self.wallet_address), self.w3.to_checksum_address(self.router)).call()
+            logger.debug(msg=f"approval_check {approval_check}")
+            if (approval_check==0):
+                approved_amount = (self.w3.to_wei(2**64-1,'ether'))
+                asset_out_abi = await fetch_abi_dex(asset_out_address)
+                asset_out_contract = self.w3.eth.contract(address=asset_out_address, abi=asset_out_abi)
+                approval_TX = asset_out_contract.functions.approve(self.w3.to_checksum_address(self.router), approved_amount)
+                approval_txHash = await sign_transaction_dex(approval_TX)
+                approval_txHash_complete = self.w3.eth.wait_for_transaction_receipt(approval_txHash, timeout=120, poll_latency=0.1)
 
     async def get_sign(self, tx):
         try:
@@ -181,6 +195,7 @@ class DexSwap:
                 return txHash
         except Exception as e:
             logger.debug(msg=f"swap error {e}")
+            raise ValueError("Swap error")
             return
 
     async def get_block_explorer_status (txHash):
@@ -189,9 +204,6 @@ class DexSwap:
         checkTransactionRequest =  self.get(checkTransactionSuccessURL)
         logger.debug(msg=f"checkTransactionRequest {checkTransactionRequest}")
         return checkTransactionRequest['status']
-
-    #🦎GECKO
-    gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup
 
     async def search_gecko_contract(self,token):
         try:
@@ -242,7 +254,7 @@ class DexSwap:
             return
 
     async def search_contract(self, token):
-            #📝tokenlist
+        #📝tokenlist
         main_list = 'https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json'
         personal_list = os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json") 
         test_token_list=os.getenv("TESTTOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json")

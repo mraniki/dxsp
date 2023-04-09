@@ -12,6 +12,13 @@ Easy peasy Swap.
  - Single SWAP via 1inch API v5 and Uniswap version 2 router DEX type
  - Limit SWAP via 1inch API v3
 
+# .Env
+Mandatory
+ - None
+
+Optional
+ - TOKENLIST: URL of a standard token list following tokenlist.org format
+ - TESTTOKENLIST: URL of a standard testnet token list following tokenlist.org format
 
 # Example
 
