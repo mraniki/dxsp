@@ -10,7 +10,7 @@ from utils import *
 import many_abis as ma
 
 #🧐LOGGING
-LOGLEVEL=os.getenv("LOGLEVEL", "INFO")
+LOGLEVEL=os.getenv("LOGLEVEL", "DEBUG")
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=LOGLEVEL)
 logger = logging.getLogger(__name__)
 logger.info(msg=f"LOGLEVEL {LOGLEVEL}")
@@ -87,7 +87,8 @@ class DexSwap:
             return
 
     async def get_contract(self, symbol):
-        return await search_contract(symbol)
+        logger.debug(msg=f"self.chain_id {self.chain_id}")
+        return await search_contract(self.chain_id,symbol)
 
 
     async def get_quote(self, token):
