@@ -8,9 +8,19 @@ Easy peasy Swap.
 # Install
 `pip install dxsp`
 
-2 swap execution mode are supported:
- - Single SWAP via 1inch API v5 and Uniswap version 2 router DEX type
- - Limit SWAP via 1inch API v3
+# How to use it
+```
+from dxsp import DexSwap
+dex = DexSwap(w3,chain_id,wallet_address,private_key,protocol,dex_exchange,block_explorer_api)
+tx = await dex.get_swap(10,'USDC','wBTC')
+print(tx)
+```
+
+2 swap protocol mode are supported:
+ - 1inch API v5 (#1 default)
+ - Uniswap version 2 router DEX type (#2)
+
+Limit SWAP via 1inch API v3 and Uniswap version to be done
 
 # .Env
 Mandatory
@@ -93,8 +103,6 @@ if __name__ == "__main__":
 # Real case
 
 [TalkyTrader, submit trading order to CEX & DEX with messaging platform (Telegram, Matrix and Discord)](https://github.com/mraniki/tt)
-
-
 
 # Roadmap
 
