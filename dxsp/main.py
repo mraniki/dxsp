@@ -133,7 +133,7 @@ class DexSwap:
                 approval_URL = f"{self.dex_url}/approve/transaction?tokenAddress={asset_out_address}"
                 approval_response =  self._get(approval_URL)
         # if execution_mode in ["2", "4"]:
-        #     approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(walletaddress), ex.to_checksum_address(router)).call()
+        #     approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(self.wallet_address), ex.to_checksum_address(router)).call()
         #     logger.debug(msg=f"approval_check {approval_check}")
         #     if (approval_check==0):
         #         approved_amount = (ex.to_wei(2**64-1,'ether'))
@@ -143,14 +143,14 @@ class DexSwap:
         #         approval_txHash = await sign_transaction_dex(approval_TX)
         #         approval_txHash_complete = ex.eth.wait_for_transaction_receipt(approval_txHash, timeout=120, poll_latency=0.1)
 
-    async def get_sign(tx)
+    async def get_sign(tx):
         try:
             if execution_mode in ['2']:
                 tx_params = {
                 'from': self.wallet_address,
-                'gas': await self.get_gas(tx)
-                'gasPrice': await self.get_gasPrice(tx)
-                'nonce': self.w3.eth.get_transaction_count(walletaddress),
+                'gas': await self.get_gas(tx),
+                'gasPrice': await self.get_gasPrice(tx),
+                'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
                 }
                 tx = tx.build_transaction(tx_params)
             if dex_version in ['4']:
@@ -158,16 +158,16 @@ class DexSwap:
                 'from': self.wallet_address,
                 'gas': await estimate_gas(tx),
                 'gasPrice': self.w3.to_wei(gasPrice,'gwei'),
-                'nonce': self.w3.eth.get_transaction_count(walletaddress),
+                'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
                 }
                 tx = tx.build_transaction(tx_params)
             elif dex_version == 1:
                 tx = tx['tx']
                 tx['gas'] = await estimate_gas(tx)
-                tx['nonce'] = self.w3.eth.get_transaction_count(walletaddress)
+                tx['nonce'] = self.w3.eth.get_transaction_count(self.wallet_address)
                 tx['value'] = int(tx['value'])
                 tx['gasPrice'] = int(ex.to_wei(gasPrice,'gwei'))
-            signed = self.w3.eth.account.sign_transaction(tx, privatekey)
+            signed = self.w3.eth.account.sign_transaction(tx, self.private_key)
             raw_tx = signed.rawTransaction
             return self.w3.eth.send_raw_transaction(raw_tx)
         except Exception as e:
@@ -189,7 +189,7 @@ class DexSwap:
             fromTokenAddress: str, 
             toTokenAddress: str,
             amount: float, 
-            fromAddress=self.wallet_address,
+            fromAddress=0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE,
             slippage=2, 
             decimal=18, 
         ):
@@ -199,6 +199,7 @@ class DexSwap:
             asset_in_address = await self.get_contract_address(toTokenAddress)
             logger.debug(msg=f"asset_in_address {asset_in_address}")
             transaction_amount = amount
+            fromAddress = self.wallet_address
             await self.get_approve(asset_out_address,asset_out_contract)
             swap_url = f"{url}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={send_address}&slippage={slippage}"
             swap_TX = self.get(swap_url)

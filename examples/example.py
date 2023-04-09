@@ -38,15 +38,17 @@ async def main():
 	#get Contract Address
 	bitcoinaddress = await dex.get_contract_address('wBTC')
 	print("bitcoinaddress ", bitcoinaddress)
+	#
 
 	#getABI
-
 	bitcoinABI = await dex.get_abi(bitcoinaddress)
 	print("bitcoinABI ", bitcoinABI)
+	# ABI
 
 	#INPUT for QUOTE
 	quote = await dex.get_quote('wBTC')
 	print("quote ", quote)
+	#
 
 	#INPUT for a NORMAL SWAP
 	transaction_amount_out = 10
@@ -56,7 +58,7 @@ async def main():
 	#SWAP EXECUTION
 	transaction = dex.get_swap(transaction_amount_out,asset_out_symbol,asset_in_symbol)
 	print("transaction ", transaction)
-
+	# 
 
 if __name__ == "__main__":
     asyncio.run(main())
