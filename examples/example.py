@@ -36,14 +36,9 @@ async def main():
 
 
 	#get Contract Address
-	bitcoinaddress = await dex.get_contract_address('wBTC')
+	bitcoinaddress = await dex.search_contract('wBTC')
 	print("bitcoinaddress ", bitcoinaddress)
-	#
-
-	# #get Contract Address
-	bitcoinaddress2 = await dex.get_address('wBTC')
-	print("bitcoinaddress2 ", bitcoinaddress2)
-	#
+	
 
 	#getABI
 	bitcoinABI = await dex.get_abi(bitcoinaddress)

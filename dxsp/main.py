@@ -232,16 +232,15 @@ class DexSwap:
         return checkTransactionRequest['status']
 
 
-
-    async def search_contract(chain_id,token):
+    async def search_contract(token):
         try:
-            token_contract = await get_contract_address(main_list,chain_id,token)
+            token_contract = await get_contract_address(main_list,token)
             if token_contract is None:
-                token_contract = await get_contract_address(test_token_list,chain_id,token)
+                token_contract = await get_contract_address(test_token_list,token)
                 if token_contract is None:
-                    token_contract = await get_contract_address(personal_list,chain_id,token)
+                    token_contract = await get_contract_address(personal_list,token)
                     if token_contract is None:
-                        token_contract = await search_gecko_contract(chain_id,token)
+                        token_contract = await search_gecko_contract(token)
             if token_contract:
                 return token_contract
         except Exception as e:
@@ -262,14 +261,13 @@ class DexSwap:
         logger.debug(msg=f"response json {response.json()}")
         return response.json()
 
-    async def get_contract_address(token_list_url, chain_id, symbol):
+    async def get_contract_address(token_list_url, symbol):
         try: 
             token_list = get_list(token_list_url)
             logger.debug(msg=f"symbol {symbol}")
-            logger.debug(msg=f"chain_id {chain_id}")
             token_search = token_list['tokens']
             for keyval in token_search:
-                if (keyval['symbol'] == symbol and keyval['chainId'] == chain_id):
+                if (keyval['symbol'] == symbol and keyval['chainId'] == self.chain_id):
                     logger.debug(msg=f"keyval {keyval['address']}")
                     return keyval['address']
         except Exception as e:
@@ -279,16 +277,16 @@ class DexSwap:
     #🦎GECKO
     gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup
 
-    async def search_gecko_contract(chain_id,token):
+    async def search_gecko_contract(token):
         try:
-            coin_info = await search_gecko(chain_id,token)
+            coin_info = await search_gecko(token)
             coin_contract = coin_info['platforms'][f'{coin_platform}']
             logger.info(msg=f"🦎 contract {token} {coin_contract}")
             return ex.to_checksum_address(coin_contract)
         except Exception:
             return
 
-    async def search_gecko(chain_id,token):
+    async def search_gecko(token):
         try:
             search_results = gecko_api.search(query=token)
             search_dict = search_results['coins']
@@ -297,7 +295,7 @@ class DexSwap:
             for i in api_dict:
                 coin_dict = gecko_api.get_coin_by_id(i)
                 try:
-                    coin_platform = await search_gecko_platform(chain_id)
+                    coin_platform = await search_gecko_platform()
                     if coin_dict['platforms'][f'{coin_platform}'] is not None:
                         return coin_dict
                 except KeyError:
@@ -306,10 +304,10 @@ class DexSwap:
             logger.error(msg=f"search_gecko error {e}")
             return
 
-    async def search_gecko_platform(chain_id):
+    async def search_gecko_platform():
         try:
             assetplatform = gecko_api.get_asset_platforms()
-            output_dict = [x for x in assetplatform if x['chain_identifier'] == int(chain_id)]
+            output_dict = [x for x in assetplatform if x['chain_identifier'] == int(self.chain_id)]
             return output_dict[0]['id']
         except Exception as e:
             logger.debug(msg=f"search_gecko_platform error {e}")
