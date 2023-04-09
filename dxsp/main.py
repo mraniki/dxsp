@@ -8,13 +8,11 @@ from web3 import Web3
 import many_abis as ma
 from pycoingecko import CoinGeckoAPI
 
-
 #🧐LOGGING
 LOGLEVEL=os.getenv("LOGLEVEL", "DEBUG")
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=LOGLEVEL)
 logger = logging.getLogger(__name__)
 logger.info(msg=f"LOGLEVEL {LOGLEVEL}")
-
 
 class DexSwap:
 
@@ -53,7 +51,7 @@ class DexSwap:
         self.protocol = protocol
         self.dex_exchange = dex_exchange
         self.block_explorer_api = block_explorer_api
-        chain = ma.get_chain_by_id(chain_id=int(self.chain_id))
+        chain = ma.get_chain_by_id(chain_id=str(self.chain_id))
         self.block_explorer_url = chain['explorer'][0]
 
         base_url = 'https://api.1inch.exchange'
@@ -69,27 +67,6 @@ class DexSwap:
         logger.debug(msg=f"response {response}")
         #logger.debug(msg=f"response json {response.json()}")
         return response.json()
-
-    # async def get_contract_address(self, symbol):
-    #     try:
-    #         alltokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json") #https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json
-    #         token_list = self._get(alltokenlist)
-    #         #logger.debug(msg=f"token_list {token_list}")
-    #         logger.debug(msg=f"symbol {symbol}")
-    #         logger.debug(msg=f"self.chain_id {self.chain_id}")
-    #         token_search = token_list['tokens']
-    #         for keyval in token_search:
-    #             if (keyval['symbol'] == symbol and keyval['chainId'] == self.chain_id):
-    #                 logger.debug(msg=f"keyval {keyval['address']}")
-    #                 return keyval['address']
-    #     except Exception as e:
-    #         logger.debug(msg=f"error {e}")
-    #         return
-
-    # async def get_address(self, symbol):
-    #     logger.debug(msg=f"chain_id {self.chain_id}")
-    #     return await search_contract(self.chain_id,symbol)
-
 
     async def get_quote(self, token):
             asset_in_address = await self.get_contract_address(token)
@@ -115,22 +92,6 @@ class DexSwap:
         logger.debug(msg=f"abi {abi}")
         return abi
 
-    # async def get_abi(addr):
-    #     try:
-    #         url = abiurl
-    #         logger.debug(msg=f"get_abi url {url}")
-    #         params = {
-    #             "module": "contract",
-    #             "action": "getabi",
-    #             "address": addr,
-    #             "apikey": block_explorer_api }
-    #         resp = await self._get(url, params)
-    #         abi = resp["result"]
-    #         logger.debug(msg=f"abi {abi}")
-    #         return abi if (abi!="") else None
-    #     except Exception as e:
-
-
     async def get_approve(self, asset_out_address: str, amount=None):
         if self.protocol in ["1"]:
             approval_check_URL = f"{self.dex_url}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={self.wallet_address}"
@@ -139,8 +100,6 @@ class DexSwap:
             if (approval_check==0):
                 approval_URL = f"{self.dex_url}/approve/transaction?tokenAddress={asset_out_address}"
                 approval_response =  self._get(approval_URL)
-
-    # async def get_contract_approve(self, asset_out_address: str, amount=None, decimal=None):
     #     if self.protocol in ["2", "4"]:
     #         approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(self.wallet_address), ex.to_checksum_address(router)).call()
     #         logger.debug(msg=f"approval_check {approval_check}")
@@ -231,39 +190,14 @@ class DexSwap:
         logger.debug(msg=f"checkTransactionRequest {checkTransactionRequest}")
         return checkTransactionRequest['status']
 
-
-    async def search_contract(self, token):
-        try:
-            token_contract = await get_contract_address(main_list,token)
-            if token_contract is None:
-                token_contract = await get_contract_address(test_token_list,token)
-                if token_contract is None:
-                    token_contract = await get_contract_address(personal_list,token)
-                    if token_contract is None:
-                        token_contract = await search_gecko_contract(token)
-            if token_contract:
-                return token_contract
-        except Exception as e:
-            logger.error(msg=f"search_contract error {token} {e}")
-
-
     #📝tokenlist
     main_list = 'https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json'
     personal_list = os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json") 
     test_token_list=os.getenv("TESTTOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json")
 
-
-    def get_list(url, params=None, headers=None):
-        logger.debug(msg=f"url {url}")
-        headers = { "User-Agent": "Mozilla/5.0" }
-        response = requests.get(url,params =params,headers=headers)
-        logger.debug(msg=f"response {response}")
-        logger.debug(msg=f"response json {response.json()}")
-        return response.json()
-
     async def get_contract_address(token_list_url, symbol):
         try: 
-            token_list = self.get_list(token_list_url)
+            token_list = self._get(token_list_url)
             logger.debug(msg=f"symbol {symbol}")
             token_search = token_list['tokens']
             for keyval in token_search:
@@ -279,10 +213,10 @@ class DexSwap:
 
     async def search_gecko_contract(token):
         try:
-            coin_info = await search_gecko(token)
+            coin_info = await self.search_gecko(token)
             coin_contract = coin_info['platforms'][f'{coin_platform}']
             logger.info(msg=f"🦎 contract {token} {coin_contract}")
-            return ex.to_checksum_address(coin_contract)
+            return coin_contract
         except Exception:
             return
 
@@ -295,7 +229,7 @@ class DexSwap:
             for i in api_dict:
                 coin_dict = gecko_api.get_coin_by_id(i)
                 try:
-                    coin_platform = await search_gecko_platform()
+                    coin_platform = await self.search_gecko_platform()
                     if coin_dict['platforms'][f'{coin_platform}'] is not None:
                         return coin_dict
                 except KeyError:
@@ -312,7 +246,19 @@ class DexSwap:
         except Exception as e:
             logger.debug(msg=f"search_gecko_platform error {e}")
 
-
+    async def search_contract(self, token):
+        try:
+            token_contract = await self.get_contract_address(main_list,token)
+            if token_contract is None:
+                token_contract = await self.get_contract_address(test_token_list,token)
+                if token_contract is None:
+                    token_contract = await self.get_contract_address(personal_list,token)
+                    if token_contract is None:
+                        token_contract = await self.search_gecko_contract(token)
+            if token_contract:
+                return self.w3.to_checksum_address(token_contract)
+        except Exception as e:
+            logger.error(msg=f"search_contract error {token} {e}")
 
 # class DexLimitSwap:
     # dex_1inch_limit_api = "https://limit-orders.1inch.io/v3.0"
