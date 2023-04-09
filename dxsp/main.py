@@ -7,8 +7,7 @@ import asyncio
 from web3 import Web3
 import many_abis as ma
 
-from .utils import * 
-
+import utils
 
 #🧐LOGGING
 LOGLEVEL=os.getenv("LOGLEVEL", "DEBUG")
@@ -29,7 +28,7 @@ class DexSwap:
           "42220": "celo",
           "43114": "avalanche"
         }
-    execution_mode = {
+    protocol = {
           "1": "1inch",
           "2": "Uniswap_v2",
           "3": "1inch_limit",
@@ -43,7 +42,7 @@ class DexSwap:
                  chain_id = 1, 
                  wallet_address = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE,
                  private_key = 0x111111111117dc0aa78b770fa6a738034120c302,
-                 execution_mode=1,
+                 protocol=1,
                  dex_exchange = 'uniswap_v2',
                  block_explorer_api = None
                  ):
@@ -51,7 +50,7 @@ class DexSwap:
         self.chain_id = int(chain_id)
         self.wallet_address = wallet_address
         self.private_key = private_key
-        self.execution_mode = execution_mode
+        self.protocol = protocol
         self.dex_exchange = dex_exchange
         self.block_explorer_api = block_explorer_api
         chain = ma.get_chain_by_id(chain_id=int(self.chain_id))
@@ -88,7 +87,7 @@ class DexSwap:
             return
 
     async def get_contract(self, symbol):
-        logger.debug(msg=f"self.chain_id {self.chain_id}")
+        logger.debug(msg=f"chain_id {self.chain_id}")
         return await search_contract(self.chain_id,symbol)
 
 
@@ -132,28 +131,30 @@ class DexSwap:
     #     except Exception as e:
     #         await handle_exception(e)
 
-    async def get_approve(self, asset_out_address: str, amount=None, decimal=None):
-        if execution_mode in ["1"]:
+    async def get_approve(self, asset_out_address: str, amount=None):
+        if protocol in ["1"]:
             approval_check_URL = f"{self.dex_url}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={self.wallet_address}"
             approval_response =  self._get(approval_check_URL)
             approval_check = approval_response['allowance']
             if (approval_check==0):
                 approval_URL = f"{self.dex_url}/approve/transaction?tokenAddress={asset_out_address}"
                 approval_response =  self._get(approval_URL)
-        # if execution_mode in ["2", "4"]:
-        #     approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(self.wallet_address), ex.to_checksum_address(router)).call()
-        #     logger.debug(msg=f"approval_check {approval_check}")
-        #     if (approval_check==0):
-        #         approved_amount = (ex.to_wei(2**64-1,'ether'))
-        #         asset_out_abi = await fetch_abi_dex(asset_out_address)
-        #         asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
-        #         approval_TX = asset_out_contract.functions.approve(ex.to_checksum_address(router), approved_amount)
-        #         approval_txHash = await sign_transaction_dex(approval_TX)
-        #         approval_txHash_complete = ex.eth.wait_for_transaction_receipt(approval_txHash, timeout=120, poll_latency=0.1)
+
+    # async def get_contract_approve(self, asset_out_address: str, amount=None, decimal=None):
+    #     if protocol in ["2", "4"]:
+    #         approval_check = asset_out_contract.functions.allowance(ex.to_checksum_address(self.wallet_address), ex.to_checksum_address(router)).call()
+    #         logger.debug(msg=f"approval_check {approval_check}")
+    #         if (approval_check==0):
+    #             approved_amount = (ex.to_wei(2**64-1,'ether'))
+    #             asset_out_abi = await fetch_abi_dex(asset_out_address)
+    #             asset_out_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
+    #             approval_TX = asset_out_contract.functions.approve(ex.to_checksum_address(router), approved_amount)
+    #             approval_txHash = await sign_transaction_dex(approval_TX)
+    #             approval_txHash_complete = ex.eth.wait_for_transaction_receipt(approval_txHash, timeout=120, poll_latency=0.1)
 
     async def get_sign(tx):
         try:
-            if execution_mode in ['2']:
+            if protocol in ['2']:
                 tx_params = {
                 'from': self.wallet_address,
                 'gas': await self.get_gas(tx),
@@ -161,7 +162,7 @@ class DexSwap:
                 'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
                 }
                 tx = tx.build_transaction(tx_params)
-            if dex_version in ['4']:
+            if protocol in ['4']:
                 tx_params = {
                 'from': self.wallet_address,
                 'gas': await estimate_gas(tx),
@@ -169,7 +170,7 @@ class DexSwap:
                 'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
                 }
                 tx = tx.build_transaction(tx_params)
-            elif dex_version == 1:
+            elif protocol == 1:
                 tx = tx['tx']
                 tx['gas'] = await estimate_gas(tx)
                 tx['nonce'] = self.w3.eth.get_transaction_count(self.wallet_address)
@@ -208,7 +209,7 @@ class DexSwap:
             logger.debug(msg=f"asset_in_address {asset_in_address}")
             transaction_amount = amount
             fromAddress = self.wallet_address
-            await self.get_approve(asset_out_address,asset_out_contract)
+            await self.get_approve(asset_out_address)
             swap_url = f"{url}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={send_address}&slippage={slippage}"
             swap_TX = self.get(swap_url)
             signed_TX = await self.get_sign(swap_TX)
