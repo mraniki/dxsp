@@ -51,7 +51,7 @@ class DexSwap:
         self.protocol = protocol
         self.dex_exchange = dex_exchange
         self.block_explorer_api = block_explorer_api
-        chain = ma.get_chain_by_id(chain_id=str(self.chain_id))
+        chain = ma.get_chain_by_id(chain_id=int(self.chain_id))
         self.block_explorer_url = chain['explorer'][0]
 
         base_url = 'https://api.1inch.exchange'
