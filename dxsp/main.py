@@ -7,6 +7,7 @@ import asyncio
 from web3 import Web3
 import many_abis as ma
 
+from utils import search_contract
 
 #🧐LOGGING
 LOGLEVEL=os.getenv("LOGLEVEL", "DEBUG")
