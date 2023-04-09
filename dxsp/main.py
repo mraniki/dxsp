@@ -69,9 +69,9 @@ class DexSwap:
         return response.json()
 
     async def get_quote(self, token):
-            asset_in_address = await self.get_contract_address(token)
+            asset_in_address = await self.search_contract(token)
             logger.debug(msg=f"asset_in_address {asset_in_address}")
-            asset_out_address = await self.get_contract_address('USDC')
+            asset_out_address = await self.search_contract('USDC')
             logger.debug(msg=f"asset_out_address {asset_out_address}")
             try:
                 asset_out_amount=1000000000000
@@ -88,7 +88,7 @@ class DexSwap:
         logger.debug(msg=f"addr {addr}")
         logger.debug(msg=f"block_explorer_api {self.block_explorer_api}")
         logger.debug(msg=f"chain_id {self.chain_id}")
-        abi = ma.get_abi_from_address(addr,self.block_explorer_api,str(self.chain_id))
+        abi = ma.get_abi_from_address(addr,self.block_explorer_api,int(self.chain_id))
         logger.debug(msg=f"abi {abi}")
         return abi
 
@@ -161,9 +161,9 @@ class DexSwap:
             decimal=18, 
         ):
         try:
-            asset_out_address = await self.get_contract_address(fromTokenAddress)
+            asset_out_address = await self.search_contract(fromTokenAddress)
             logger.debug(msg=f"asset_out_address {asset_out_address}")
-            asset_in_address = await self.get_contract_address(toTokenAddress)
+            asset_in_address = await self.search_contract(toTokenAddress)
             logger.debug(msg=f"asset_in_address {asset_in_address}")
             transaction_amount = amount
             fromAddress = self.wallet_address

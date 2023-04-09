@@ -38,16 +38,16 @@ async def main():
 	#get Contract Address
 	bitcoinaddress = await dex.search_contract('wBTC')
 	print("bitcoinaddress ", bitcoinaddress)
+	#bitcoinaddress  0x68f180fcCe6836688e9084f035309E29Bf0A2095
 	
-
 	#getABI
-	# bitcoinABI = await dex.get_abi(bitcoinaddress)
-	# print("bitcoinABI ", bitcoinABI)
+	bitcoinABI = await dex.get_abi(bitcoinaddress)
+	print("bitcoinABI ", bitcoinABI)
 	# # ABI
 
 	# #INPUT for QUOTE
-	# quote = await dex.get_quote('wBTC')
-	# print("quote ", quote)
+	quote = await dex.get_quote('wBTC')
+	print("quote ", quote)
 	# #
 
 	# #INPUT for a NORMAL SWAP
