@@ -3,6 +3,7 @@ DXSP (DeX SwaP), A defi swap helper package.
 Easy peasy Swap.
 
 ![Pypi](https://img.shields.io/pypi/dm/dxsp)
+![Version]https://img.shields.io/pypi/v/dxsp
 
 # Install
 `pip install dxsp`
