@@ -70,25 +70,25 @@ class DexSwap:
         #logger.debug(msg=f"response json {response.json()}")
         return response.json()
 
-    async def get_contract_address(self, symbol):
-        try:
-            alltokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json") #https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json
-            token_list = self._get(alltokenlist)
-            #logger.debug(msg=f"token_list {token_list}")
-            logger.debug(msg=f"symbol {symbol}")
-            logger.debug(msg=f"self.chain_id {self.chain_id}")
-            token_search = token_list['tokens']
-            for keyval in token_search:
-                if (keyval['symbol'] == symbol and keyval['chainId'] == self.chain_id):
-                    logger.debug(msg=f"keyval {keyval['address']}")
-                    return keyval['address']
-        except Exception as e:
-            logger.debug(msg=f"error {e}")
-            return
+    # async def get_contract_address(self, symbol):
+    #     try:
+    #         alltokenlist=os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json") #https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json
+    #         token_list = self._get(alltokenlist)
+    #         #logger.debug(msg=f"token_list {token_list}")
+    #         logger.debug(msg=f"symbol {symbol}")
+    #         logger.debug(msg=f"self.chain_id {self.chain_id}")
+    #         token_search = token_list['tokens']
+    #         for keyval in token_search:
+    #             if (keyval['symbol'] == symbol and keyval['chainId'] == self.chain_id):
+    #                 logger.debug(msg=f"keyval {keyval['address']}")
+    #                 return keyval['address']
+    #     except Exception as e:
+    #         logger.debug(msg=f"error {e}")
+    #         return
 
-    async def get_address(self, symbol):
-        logger.debug(msg=f"chain_id {self.chain_id}")
-        return await search_contract(self.chain_id,symbol)
+    # async def get_address(self, symbol):
+    #     logger.debug(msg=f"chain_id {self.chain_id}")
+    #     return await search_contract(self.chain_id,symbol)
 
 
     async def get_quote(self, token):
@@ -263,7 +263,7 @@ class DexSwap:
 
     async def get_contract_address(token_list_url, symbol):
         try: 
-            token_list = get_list(token_list_url)
+            token_list = self.get_list(token_list_url)
             logger.debug(msg=f"symbol {symbol}")
             token_search = token_list['tokens']
             for keyval in token_search:

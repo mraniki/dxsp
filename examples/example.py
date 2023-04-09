@@ -56,8 +56,8 @@ async def main():
 	asset_in_symbol = "ETH"
 
 	#SWAP EXECUTION
-	transaction = await dex.get_swap(transaction_amount_out,asset_out_symbol,asset_in_symbol)
-	print("transaction ", transaction)
+	#transaction = await dex.get_swap(transaction_amount_out,asset_out_symbol,asset_in_symbol)
+	#print("transaction ", transaction)
 	# 
 
 if __name__ == "__main__":
