@@ -17,13 +17,13 @@ wallet_address = os.getenv("WALLET_ADDRESS", "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeee
 private_key = os.getenv("PRIVATE_KEY", "0x111111111117dc0aa78b770fa6a738034120c302")
 
 #1 for 1inch and 2 for Uniswap V2
-protocol = os.getenv("PROTOCOL", 1)
+protocol_type = os.getenv("protocol_type", 1)
 
 #DATA from MANY_ABIS FOR RPC and EXCHANGE
 chain = ma.get_chain_by_id(chain_id=int(chain_id))
 network_provider_url = os.getenv("NETWORK_PROVIDER_URL", chain['rpc'][0])
-dex_exchange = os.getenv("DEX_EXCHANGE", 'Uniswap V2')
-amount_trading_option = os.getenv("AMOUNT_TRADING_OPTION", 1)
+# dex_exchange = os.getenv("DEX_EXCHANGE", 'Uniswap V2')
+# amount_trading_option = os.getenv("AMOUNT_TRADING_OPTION", 1)
 
 #Block explorer API from ETHERSCAN TYPE EXPLORER
 block_explorer_api = os.getenv("BLOCK_EXPLORER_API", "1X23Q4ACZ5T3KXG67WIAH7X8C510F1972TM")
@@ -35,8 +35,7 @@ from dxsp import DexSwap
 
 async def main():
 	#SWAP HELPER
-	print(w3,chain_id,wallet_address,private_key,protocol,dex_exchange,amount_trading_option,block_explorer_api)
-	dex = DexSwap(w3,chain_id,wallet_address,private_key,protocol,dex_exchange,amount_trading_option,block_explorer_api=block_explorer_api)
+	dex = DexSwap(w3=w3,chain_id=chain_id,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
 
 	#get Contract Address
 	bitcoinaddress = await dex.search_contract('wBTC')

@@ -36,11 +36,11 @@ class DexSwap:
           "42220": "celo",
           "43114": "avalanche"
         }
-    protocol = {
+    protocol_type = {
           "1": "1inch",
-          "2": "Uniswap_v2",
+          "2": "uniswap_v2",
           "3": "1inch_limit",
-          "4": "Uniswap_v3",
+          "4": "uniswap_v3",
           "5": "0x",
           "6": "0x_limit"
         }
@@ -50,7 +50,7 @@ class DexSwap:
                  chain_id = 1, 
                  wallet_address = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE,
                  private_key = 0x111111111117dc0aa78b770fa6a738034120c302,
-                 protocol=1,
+                 protocol_type=1,
                  dex_exchange = 'uniswap_v2',
                  base_trading_symbol = 'USDC',
                  amount_trading_option = 1,
@@ -60,7 +60,7 @@ class DexSwap:
         self.chain_id = int(chain_id)
         self.wallet_address = wallet_address
         self.private_key = private_key
-        self.protocol = protocol
+        self.protocol_type = protocol_type
         self.dex_exchange = dex_exchange
         self.base_trading_symbol = base_trading_symbol
         self.amount_trading_option = amount_trading_option
@@ -70,12 +70,12 @@ class DexSwap:
         logger.debug(msg=f"block_explorer_url  {self.block_explorer_url }")
         self.block_explorer_api = block_explorer_api
         logger.debug(msg=f"block_explorer_api {block_explorer_api}")
-        if self.protocol in [1]:
+        if self.protocol_type in [1]:
             base_url = 'https://api.1inch.exchange'
             version = "v5.0"
             self.dex_url = f"{base_url}/{version}/{self.chain_id}"
             logger.debug(msg=f"dex_url {self.dex_url}")
-        if self.protocol in [2,4]:
+        if self.protocol_type in [2,4]:
             self.exchange = exchanges[self.chain_id]
             logger.debug(msg=f"exchange {exchange}")
             # self.dex_info = ma.get(int(self.chain_id), 'dex', self.dex_exchange)
@@ -84,7 +84,7 @@ class DexSwap:
             # logger.debug(msg=f"router_address {self.dex_info[router_address]}")
             # logger.debug(msg=f"factory_address {self.dex_info[factory_address]}")
             self.router = self.exchange[address]
-        if self.protocol in ["3"]:
+        if self.protocol_type in ["3"]:
             base_url = 'https://limit-orders.1inch.io'
             version = "v3.0"
             self.dex_url = f"{base_url}/{version}/{self.chain_id}"
@@ -106,14 +106,14 @@ class DexSwap:
             asset_out_address = await self.search_contract('USDC')
             logger.debug(msg=f"asset_out_address {asset_out_address}")
             try:
-                if self.protocol == 1:
+                if self.protocol_type == 1:
                     asset_out_amount=1000000000000
                     quote_url = f"{self.dex_url}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
                     logger.debug(msg=f"quote_url {quote_url}")
                     quote = self._get(quote_url)
                     logger.debug(msg=f"quote {quote}")
                     return quote['toTokenAmount']
-                if self.protocol in [2,4]:
+                if self.protocol_type in [2,4]:
                     return
             except Exception as e:
                 logger.debug(msg=f"error {e}")
@@ -152,14 +152,14 @@ class DexSwap:
             return
 
     async def get_approve(self, asset_out_address: str, amount=None):
-        if self.protocol in ["1"]:
+        if self.protocol_type in ["1"]:
             approval_check_URL = f"{self.dex_url}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={self.wallet_address}"
             approval_response =  self._get(approval_check_URL)
             approval_check = approval_response['allowance']
             if (approval_check==0):
                 approval_URL = f"{self.dex_url}/approve/transaction?tokenAddress={asset_out_address}"
                 approval_response =  self._get(approval_URL)
-        elif self.protocol in ["2", "4"]:
+        elif self.protocol_type in ["2", "4"]:
             asset_out_abi= await self.get_abi(asset_out_address)
             asset_out_contract = self.w3.eth.contract(address=asset_out_address, abi=asset_out_abi)           
             approval_check = asset_out_contract.functions.allowance(self.w3.to_checksum_address(self.wallet_address), self.w3.to_checksum_address(self.router)).call()
@@ -174,7 +174,7 @@ class DexSwap:
 
     async def get_sign(self, tx):
         try:
-            if self.protocol in ['2']:
+            if self.protocol_type in ['2']:
                 tx_params = {
                 'from': self.wallet_address,
                 'gas': await self.get_gas(tx),
@@ -182,7 +182,7 @@ class DexSwap:
                 'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
                 }
                 tx = tx.build_transaction(tx_params)
-            elif self.protocol in ['4']:
+            elif self.protocol_type in ['4']:
                 tx_params = {
                 'from': self.wallet_address,
                 'gas': await estimate_gas(tx),
@@ -190,7 +190,7 @@ class DexSwap:
                 'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
                 }
                 tx = tx.build_transaction(tx_params)
-            elif self.protocol == 1:
+            elif self.protocol_type == 1:
                 tx = tx['tx']
                 tx['gas'] = await estimate_gas(tx)
                 tx['nonce'] = self.w3.eth.get_transaction_count(self.wallet_address)
@@ -223,7 +223,7 @@ class DexSwap:
             asset_out_decimals = asset_out_contract.functions.decimals().call()
             asset_out_balance = await self.get_token_balance(asset_out_symbol)
             if amount_trading_option == 1:
-                asset_out_amount = ((asset_out_balance)/(10 ** asset_out_decimals))*(float(quantity)/100) #buy %p ercentage DEFAULT OPTION
+                asset_out_amount = ((asset_out_balance)/(10 ** asset_out_decimals))*(float(quantity)/100) #buy or sell %p percentage DEFAULT OPTION
             if amount_trading_option == 2:
                 asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals) #SELL all token in case of sell order for example
       
@@ -273,7 +273,7 @@ class DexSwap:
             await self.get_approve(asset_out_address)
 
             #1INCH
-            if self.protocol == 1:
+            if self.protocol_type == 1:
                 swap_url = f"{self.dex_url}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={self.wallet_address}&slippage={slippage}"
                 swap_TX = self._get(swap_url)
                 TX_status_code = swap_TX['statusCode']
@@ -282,7 +282,7 @@ class DexSwap:
                     logger.warning(msg=f"{swap_TX['description']}")
                     return
             #UNISWAP V2
-            if self.protocol == 2:
+            if self.protocol_type == 2:
                 order_path_dex=[asset_out_address, asset_in_address]
                 router_abi = await self.get_abi(self.router)
                 router_instance = self.w3.eth.contract(address=self.w3.to_checksum_address(self.router), abi=self.router_abi)
@@ -290,10 +290,10 @@ class DexSwap:
                 transaction_min_amount  = int(router_instance.functions.getAmountsOut(transaction_amount, order_path_dex).call()[1])
                 swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_min_amount,order_path_dex,self.wallet_address,deadline)
             #1INCH LIMIT
-            if self.protocol == 3:
+            if self.protocol_type == 3:
                  return
             #UNISWAP V3
-            if self.protocol == 4:
+            if self.protocol_type == 4:
                 return
             if swap_TX:
                 signed_TX = await self.get_sign(swap_TX)
@@ -365,7 +365,7 @@ class DexSwap:
 
     async def search_contract(self, token):
         #📝tokenlist
-        main_list = 'https://raw.githubusercontent.com/viaprotocol/tokenlists/main/all_tokens/all.json'
+        main_list = 'https://raw.githubusercontent.com/viaprotocol_type/tokenlists/main/all_tokens/all.json'
         personal_list = os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json") 
         test_token_list=os.getenv("TESTTOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json")
 
