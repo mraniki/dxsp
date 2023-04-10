@@ -39,7 +39,7 @@ class DexSwap:
           "6": "0x_limit"
         }
 
-    async def __init__(self,
+    def __init__(self,
                  w3: Web3 = None,
                  chain_id = 1, 
                  wallet_address = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE,
@@ -69,8 +69,6 @@ class DexSwap:
             logger.debug(msg=f"router_address {self.dex_info[router_address]}")
             logger.debug(msg=f"factory_address {self.dex_info[factory_address]}")
             self.router = self.dex_info[router_address]
-            self.router_abi = await self.get_abi(self.router)
-            self.router_instance = self.w3.eth.contract(address=self.w3.to_checksum_address(self.router), abi=self.router_abi)
         if self.protocol in ["3"]:
             base_url = 'https://limit-orders.1inch.io'
             version = "v3.0"
@@ -93,12 +91,15 @@ class DexSwap:
             asset_out_address = await self.search_contract('USDC')
             logger.debug(msg=f"asset_out_address {asset_out_address}")
             try:
-                asset_out_amount=1000000000000
-                quote_url = f"{self.dex_url}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
-                logger.debug(msg=f"quote_url {quote_url}")
-                quote = self._get(quote_url)
-                logger.debug(msg=f"quote {quote}")
-                return quote['toTokenAmount']
+                if self.protocol in ["1"]:
+                    asset_out_amount=1000000000000
+                    quote_url = f"{self.dex_url}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
+                    logger.debug(msg=f"quote_url {quote_url}")
+                    quote = self._get(quote_url)
+                    logger.debug(msg=f"quote {quote}")
+                    return quote['toTokenAmount']
+                if self.protocol in ["2","4"]:
+                    return
             except Exception as e:
                 logger.debug(msg=f"error {e}")
                 return
@@ -188,7 +189,8 @@ class DexSwap:
             logger.debug(msg=f"asset_out_address {asset_out_address}")
             asset_in_address = await self.search_contract(toTokenAddress)
             logger.debug(msg=f"asset_in_address {asset_in_address}")
-            asset_out_amount_converted = (self.w3.to_wei(amount,'ether'))
+            asset_out_amount_converted = int(amount)
+            #asset_out_amount_converted = (self.w3.to_wei(amount,'ether'))
             #slippage=2# max 2% slippage
             transaction_amount = int((asset_out_amount_converted *(slippage/100)))
             if self.protocol == 1:
@@ -198,9 +200,11 @@ class DexSwap:
             if self.protocol == 2:
                 await self.get_approve(asset_out_address)
                 order_path_dex=[asset_out_address, asset_in_address]
+                router_abi = await self.get_abi(self.router)
+                router_instance = self.w3.eth.contract(address=self.w3.to_checksum_address(self.router), abi=self.router_abi)
                 deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
-                transaction_min_amount  = int(self.router_instance.functions.getAmountsOut(transaction_amount, order_path_dex).call()[1])
-                swap_TX = self.router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_min_amount,order_path_dex,self.wallet_address,deadline)
+                transaction_min_amount  = int(router_instance.functions.getAmountsOut(transaction_amount, order_path_dex).call()[1])
+                swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_min_amount,order_path_dex,self.wallet_address,deadline)
             if self.protocol == 3:
                  return
             if self.protocol == 4:
@@ -216,7 +220,7 @@ class DexSwap:
                 if(txResult == "1"):
                     return txHash
         except Exception as e:
-            logger.debug(msg=f"swap error {e}")
+            logger.error(msg=f"swap error {e}")
             raise ValueError("Swap error")
             return
 
@@ -231,7 +235,7 @@ class DexSwap:
         try:
             coin_info = await self.search_gecko(token)
             coin_contract = coin_info['platforms'][f'{coin_platform}']
-            logger.info(msg=f"🦎 contract {token} {coin_contract}")
+            logger.debug(msg=f"🦎 contract {token} {coin_contract}")
             return coin_contract
         except Exception:
             return
@@ -293,7 +297,6 @@ class DexSwap:
                 return self.w3.to_checksum_address(token_contract)
         except Exception as e:
             logger.error(msg=f"search_contract error {token} {e}")
-
 
 
 
