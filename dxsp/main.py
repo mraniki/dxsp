@@ -69,7 +69,8 @@ class DexSwap:
         logger.debug(msg=f"block_explorer_url  {self.block_explorer_url }")
         self.block_explorer_api = block_explorer_api
         logger.debug(msg=f"block_explorer_api {block_explorer_api}")
-
+        # dex_info = exchanges[self.chain_id]
+        # logger.debug(msg=f"dex_info {self.dex_info}")
         if self.protocol in [1]:
             base_url = 'https://api.1inch.exchange'
             version = "v5.0"
