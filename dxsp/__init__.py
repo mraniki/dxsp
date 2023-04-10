@@ -1,2 +1,2 @@
-__version__ = "0.0.34"
-from .main import *
+__version__ = "0.0.35"
+from dxsp.main import *
