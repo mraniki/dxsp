@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../')
 import os
 from dotenv import load_dotenv
 import asyncio
