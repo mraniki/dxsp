@@ -391,7 +391,7 @@ class DexSwap:
 
     async def get_token_balance(self, token):
         try:
-            token_contract = self.get_token_contract(token)
+            token_contract = await self.get_token_contract(token)
             token_balance = token_contract.functions.balanceOf(self.wallet_address).call()
             logger.debug(msg=f"token {token} token_balance {token_balance}")
             return 0 if token_balance <=0 or token_balance is None else token_balance
