@@ -10,6 +10,7 @@ from pycoingecko import CoinGeckoAPI
 
 
 from dxsp.assets.blockchains import blockchains
+from dxsp.assets.exchanges import exchanges
 
 #🧐LOGGING
 LOGLEVEL=os.getenv("LOGLEVEL", "DEBUG")
@@ -69,20 +70,20 @@ class DexSwap:
         logger.debug(msg=f"block_explorer_url  {self.block_explorer_url }")
         self.block_explorer_api = block_explorer_api
         logger.debug(msg=f"block_explorer_api {block_explorer_api}")
-        # dex_info = exchanges[self.chain_id]
-        # logger.debug(msg=f"dex_info {self.dex_info}")
         if self.protocol in [1]:
             base_url = 'https://api.1inch.exchange'
             version = "v5.0"
             self.dex_url = f"{base_url}/{version}/{self.chain_id}"
             logger.debug(msg=f"dex_url {self.dex_url}")
         if self.protocol in [2,4]:
-            self.dex_info = ma.get(int(self.chain_id), 'dex', self.dex_exchange)
-            logger.debug(msg=f"dex_info {self.dex_info}")
-            logger.debug(msg=f"name {self.dex_info[name]}")
-            logger.debug(msg=f"router_address {self.dex_info[router_address]}")
-            logger.debug(msg=f"factory_address {self.dex_info[factory_address]}")
-            self.router = self.dex_info[router_address]
+            self.exchange = exchanges[self.chain_id]
+            logger.debug(msg=f"exchange {exchange}")
+            # self.dex_info = ma.get(int(self.chain_id), 'dex', self.dex_exchange)
+            # logger.debug(msg=f"dex_info {self.dex_info}")
+            # logger.debug(msg=f"name {self.dex_info[name]}")
+            # logger.debug(msg=f"router_address {self.dex_info[router_address]}")
+            # logger.debug(msg=f"factory_address {self.dex_info[factory_address]}")
+            self.router = self.exchange[address]
         if self.protocol in ["3"]:
             base_url = 'https://limit-orders.1inch.io'
             version = "v3.0"
