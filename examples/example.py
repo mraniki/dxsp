@@ -31,7 +31,7 @@ from dxsp import DexSwap
 async def main():
 	#SWAP HELPER
 	dex = DexSwap(chain_id=chain_id,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
-	print("dex ", dex)
+
 	#BUY 10 USDC to SWAP with BITCOIN
 	demo_tx = await dex.get_swap('USDT','wBTC',10)
 	print("demo_tx ", demo_tx)
@@ -45,12 +45,12 @@ async def main():
 	# print("demo_order ", demo_order)
 	
 	#QUOTE
-	quote = await dex.get_quote('wBTC')
-	print("quote ", quote)
+	# quote = await dex.get_quote('wBTC')
+	# print("quote ", quote)
 	
-	#get Contract Address
-	bitcoinaddress = await dex.search_contract('wBTC')
-	print("bitcoinaddress ", bitcoinaddress)
+	# #get Contract Address
+	# bitcoinaddress = await dex.search_contract('wBTC')
+	# print("bitcoinaddress ", bitcoinaddress)
 	#bitcoinaddress  0x68f180fcCe6836688e9084f035309E29Bf0A2095
 
 	#getABI

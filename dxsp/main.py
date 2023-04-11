@@ -92,14 +92,14 @@ class DexSwap:
             asset_out_address = await self.search_contract(self.base_trading_symbol)
             logger.debug(msg=f"asset_out_address {asset_out_address}")
             try:
-                if self.protocol_type == 1:
+                if self.protocol_type == "1inch":
                     asset_out_amount=1000000000000
                     quote_url = f"{self.dex_url}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
                     logger.debug(msg=f"quote_url {quote_url}")
                     quote = self._get(quote_url)
                     logger.debug(msg=f"quote {quote}")
                     return quote['toTokenAmount']
-                if self.protocol_type in [2,4]:
+                if self.protocol_type in ["uniswap_v2","uniswap_v3"]:
                     return
             except Exception as e:
                 logger.debug(msg=f"error {e}")
@@ -129,14 +129,14 @@ class DexSwap:
             return
 
     async def get_approve(self, asset_out_address: str, amount=None):
-        if self.protocol_type in ["1"]:
+        if self.protocol_type in ["1inch","1inch_limit"]:
             approval_check_URL = f"{self.dex_url}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={self.wallet_address}"
             approval_response =  self._get(approval_check_URL)
             approval_check = approval_response['allowance']
             if (approval_check==0):
                 approval_URL = f"{self.dex_url}/approve/transaction?tokenAddress={asset_out_address}"
                 approval_response =  self._get(approval_URL)
-        elif self.protocol_type in ["2", "4"]:
+        elif self.protocol_type in ["uniswap_v2","uniswap_v3"]:
             asset_out_abi= await self.get_abi(asset_out_address)
             asset_out_contract = self.w3.eth.contract(address=asset_out_address, abi=asset_out_abi)           
             approval_check = asset_out_contract.functions.allowance(self.w3.to_checksum_address(self.wallet_address), self.w3.to_checksum_address(self.router)).call()
@@ -151,7 +151,7 @@ class DexSwap:
 
     async def get_sign(self, tx):
         try:
-            if self.protocol_type in ['2']:
+            if self.protocol_type in ['uniswap_v2']:
                 tx_params = {
                 'from': self.wallet_address,
                 'gas': await self.get_gas(tx),
@@ -159,7 +159,7 @@ class DexSwap:
                 'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
                 }
                 tx = tx.build_transaction(tx_params)
-            elif self.protocol_type in ['4']:
+            elif self.protocol_type in ['uniswap_v3']:
                 tx_params = {
                 'from': self.wallet_address,
                 'gas': await estimate_gas(tx),
@@ -167,7 +167,7 @@ class DexSwap:
                 'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
                 }
                 tx = tx.build_transaction(tx_params)
-            elif self.protocol_type == 1:
+            elif self.protocol_type in ["1inch","1inch_limit"]:
                 tx = tx['tx']
                 tx['gas'] = await estimate_gas(tx)
                 tx['nonce'] = self.w3.eth.get_transaction_count(self.wallet_address)
@@ -229,7 +229,10 @@ class DexSwap:
             asset_out_decimals=asset_out_contract.functions.decimals().call()
             logger.debug(msg=f"asset_out_decimals {asset_out_decimals}")
             asset_out_balance = await self.get_token_balance(asset_out_symbol)
-
+            logger.debug(msg=f"asset_out_balance {asset_out_balance}")
+            if asset_out_balance == 0:
+                logger.warning(msg=f"No Money in {asset_out_symbol}")
+                return 
             #ASSETS IN 
             asset_in_address = await self.search_contract(asset_in_symbol)
             logger.debug(msg=f"asset_in_address {asset_in_address}")
@@ -249,7 +252,7 @@ class DexSwap:
             await self.get_approve(asset_out_address)
 
             #1INCH
-            if self.protocol_type == 1:
+            if self.protocol_type in ["1inch"]:
                 swap_url = f"{self.dex_url}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={self.wallet_address}&slippage={slippage}"
                 logger.debug(msg=f"swap_url {swap_url}")
                 swap_TX = self._get(swap_url)
@@ -260,7 +263,7 @@ class DexSwap:
                     logger.warning(msg=f"{swap_TX['description']}")
                     return
             #UNISWAP V2
-            if self.protocol_type == 2:
+            if self.protocol_type ['uniswap_v2']:
                 order_path_dex=[asset_out_address, asset_in_address]
                 router_abi = await self.get_abi(self.router)
                 router_instance = self.w3.eth.contract(address=self.w3.to_checksum_address(self.router), abi=self.router_abi)
@@ -268,10 +271,10 @@ class DexSwap:
                 transaction_min_amount  = int(router_instance.functions.getAmountsOut(transaction_amount, order_path_dex).call()[1])
                 swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_min_amount,order_path_dex,self.wallet_address,deadline)
             #1INCH LIMIT
-            if self.protocol_type == 3:
+            if self.protocol_type ["1inch_limit"]:
                  return
             #UNISWAP V3
-            if self.protocol_type == 4:
+            if self.protocol_type ['uniswap_v3']:
                 return
             if swap_TX:
                 signed_TX = await self.get_sign(swap_TX)

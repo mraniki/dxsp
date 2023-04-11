@@ -89,6 +89,26 @@ blockchains = {
         "1inch_limit": "",
         "0x": "https://mumbai.api.0x.org/"
         },
+    # Polygon zkEVM
+    1101: {
+        "url": "",
+        "rpc": "https://rpc.ankr.com/polygon_zkevm",
+        "uniswap_v2": "",
+        "uniswap_v3": "",
+        "1inch": "",
+        "1inch_limit": "h",
+        "0x": ""
+    },
+    # Polygon zkEVM testnet
+    1442: {
+        "url": "",
+        "rpc": "https://rpc.ankr.com/polygon_zkevm_testnet",
+        "uniswap_v2": "",
+        "uniswap_v3": "",
+        "1inch": "",
+        "1inch_limit": "h",
+        "0x": ""
+    },
     # Optimism
     10: {
         "block_explorer_url": "https://api-optimistic.etherscan.io/api?",
@@ -145,6 +165,56 @@ blockchains = {
         "rpc": "https://rpc.ankr.com/fantom_testnet",
         "uniswap_v2": "",
         "uniswap_v3": "0x1f98431c8ad98523631ae4a59f267346ea31f984",
+        "1inch": "",
+        "1inch_limit": "",
+        "0x": ""
+        },
+    # Gnosis
+    100: {
+        "block_explorer_url": "https://api.gnosisscan.io.com/api?",
+        "rpc": "https://rpc.ankr.com/gnosis",
+        "uniswap_v2": "",
+        "uniswap_v3": "",
+        "1inch": "https://api.1inch.exchange/v5.0/100",
+        "1inch_limit": "https://limit-orders.1inch.io/v3.0/250",
+        "0x": "https://fantom.api.0x.org/"
+        },
+    # Klaytn
+    8217: {
+        "block_explorer_url": "https://scope.klaytn.com",
+        "rpc": "https://rpc.ankr.com/klaytn",
+        "uniswap_v2": "",
+        "uniswap_v3": "",
+        "1inch": "https://api.1inch.exchange/v5.0/8217",
+        "1inch_limit": "https://limit-orders.1inch.io/v3.0/8217",
+        "0x": ""
+        },
+    # Klaytn testnet
+    1001: {
+        "block_explorer_url": "",
+        "rpc": "https://rpc.ankr.com/klaytn_testnet",
+        "uniswap_v2": "",
+        "uniswap_v3": "",
+        "1inch": "",
+        "1inch_limit": "",
+        "0x": ""
+        },
+    # Aurora
+    1313161554: {
+        "block_explorer_url": "https://explorer.aurora.dev/api/",
+        "rpc": "https://mainnet.aurora.dev",
+        "uniswap_v2": "0x2CB45Edb4517d5947aFdE3BEAbF95A582506858B", #trisolaris
+        "uniswap_v3": "0x2CB45Edb4517d5947aFdE3BEAbF95A582506858B", #trisolaris
+        "1inch": "https://api.1inch.exchange/v5.0/1313161554",
+        "1inch_limit": "https://limit-orders.1inch.io/v3.0/1313161554",
+        "0x": "h"
+        },
+    # Aurora
+    1313161555: {
+        "block_explorer_url": "https://explorer.testnet.aurora.dev/api/",
+        "rpc": "https://testnet.aurora.dev",
+        "uniswap_v2": "",
+        "uniswap_v3": "",
         "1inch": "",
         "1inch_limit": "",
         "0x": ""
