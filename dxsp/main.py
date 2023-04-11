@@ -50,13 +50,13 @@ class DexSwap:
         blockchain = blockchains[self.chain_id]
         logger.debug(msg=f"blockchain {blockchain}")
 
-        if self.block_explorer_url == None:
+        if self.block_explorer_url is None:
             self.block_explorer_url = blockchain["block_explorer_url"]
-        if self.rpc == None:
+        if self.rpc is None:
             self.rpc = blockchain["rpc"]
-        if self.w3 == None:
+        if self.w3 is None:
             self.w3 = Web3(Web3.HTTPProvider(self.rpc))
-        
+
         if self.protocol_type == "1inch":
             base_url = blockchain["1inch"]
             self.dex_url = f"{base_url}"
@@ -349,17 +349,17 @@ class DexSwap:
     async def search_contract(self, token):
         #📝tokenlist
         main_list = 'https://raw.githubusercontent.com/viaprotocol_type/tokenlists/main/all_tokens/all.json'
-        personal_list = os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json") 
+        personal_list = os.getenv("TOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json")
         test_token_list=os.getenv("TESTTOKENLIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json")
 
         try:
             token_contract = await self.get_contract_address(main_list,token)
             if token_contract is None:
                 token_contract = await self.get_contract_address(test_token_list,token)
-                if token_contract is None:
-                    token_contract = await self.get_contract_address(personal_list,token)
-                    if token_contract is None:
-                        token_contract = await self.search_gecko_contract(token)
+            if token_contract is None:
+                token_contract = await self.get_contract_address(personal_list,token)
+            if token_contract is None:
+                token_contract = await self.search_gecko_contract(token)
             logger.debug(msg=f"token_contract  {token_contract}")
             if len(token_contract)>1:
                 return self.w3.to_checksum_address(token_contract)
@@ -370,8 +370,7 @@ class DexSwap:
         try:
             token_address= await self.search_contract(token)
             token_abi= await self.get_abi(token_address)
-            token_contract = self.w3.eth.contract(address=token_address, abi=token_abi)
-            return token_contract
+            return self.w3.eth.contract(address=token_address, abi=token_abi)
         except Exception as e:
             logger.error(msg=f"get_token_contract error {token} {e}")
 
@@ -385,5 +384,3 @@ class DexSwap:
             logger.error(msg=f"{token} get_token_balance error: {e}")
             return 0
 
-if __name__ == '__main__':
-    pass
