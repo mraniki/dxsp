@@ -1,10 +1,11 @@
-# dxsp
-DXSP (DeX SwaP), A defi swap helper package. Easy peasy Swap.
+# DXSP (DeX SwaP), A python defi swap helper package. 
+<img width="200" alt="Screenshot 2023-04-11 at 17 19 42" src="https://user-images.githubusercontent.com/8766259/231213427-63ea2752-13d5-4993-aee2-90671b57fc6e.png">
+Easy peasy Swap.
 
-- 7 blockchains mainnet and testnet supported with default block explorer, RPC, Router (uniswap and pancakeswap) and protocol url (1inch and 0x). Other blockchains can be supported via function attributes
-- 2 swap protocol type supported:
-	- 1inch API v5
-	- Uniswap version 2 router protocol type
+	- 7 blockchains mainnet and testnet supported with default block explorer, RPC, Router (uniswap and pancakeswap) and protocol url (1inch and 0x). Other blockchains can be supported via function attributes
+	- 2 swap protocol type supported:
+		- 1inch API v5
+		- Uniswap version 2 router protocol type
 Other features:
 - Automatic translation of symbol to contract address via user defined tokenlist format or coingecko api 
 - Web3 connectivity supported if no web3 object given or no rpc
@@ -12,12 +13,9 @@ Other features:
 - Quote for a given token function available
 - Base symbol defaulted if not provided
 
-![Pypi](https://img.shields.io/pypi/dm/dxsp)
-![Version](https://img.shields.io/pypi/v/dxsp)
+![Pypi](https://img.shields.io/pypi/dm/dxsp) ![Version](https://img.shields.io/pypi/v/dxsp)
 
-[![Web3](https://badgen.net/badge/icon/web3/black?icon=libraries&label)](https://github.com/ethereum/web3.py)
-
-[![coingecko](https://badgen.net/badge/icon/coingecko/black?icon=libraries&label)](https://github.com/coingecko)
+[![Web3](https://badgen.net/badge/icon/web3/black?icon=libraries&label)](https://github.com/ethereum/web3.py) [![coingecko](https://badgen.net/badge/icon/coingecko/black?icon=libraries&label)](https://github.com/coingecko)
 
 # Install
 `pip install dxsp`
