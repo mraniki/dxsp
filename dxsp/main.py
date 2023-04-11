@@ -5,35 +5,30 @@ import json
 import requests
 import asyncio
 from web3 import Web3
-import many_abis as ma
 from pycoingecko import CoinGeckoAPI
 
-
 from dxsp.assets.blockchains import blockchains
-from dxsp.assets.exchanges import exchanges
 
 #🧐LOGGING
 LOGLEVEL=os.getenv("LOGLEVEL", "DEBUG")
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=LOGLEVEL)
-# logging.getLogger("urllib3").setLevel(logging.WARNING)
+logging.getLogger("urllib3").setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
 logger.info(msg=f"LOGLEVEL {LOGLEVEL}")
-
 
 class DexSwap:
 
 
     #🦎GECKO
-    gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup
+    gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup to be reviewed
 
     chain_id =  {
           "1": "ethereum",
-          "10": "optimism",
           "56": "binance",
-          "137": "polygon",
-          "250": "fantom",
           "42161": "arbitrum",
-          "42220": "celo",
+          "137": "polygon",
+          "10": "optimism",
+          "250": "fantom",
           "43114": "avalanche"
         }
     protocol_type = {
@@ -42,54 +37,59 @@ class DexSwap:
           "3": "1inch_limit",
           "4": "uniswap_v3",
           "5": "0x",
-          "6": "0x_limit"
         }
 
     def __init__(self,
-                 w3: Web3 = None,
                  chain_id = 1, 
                  wallet_address = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE,
                  private_key = 0x111111111117dc0aa78b770fa6a738034120c302,
-                 protocol_type=1,
+                 block_explorer_api: str = None,
+                 w3: Web3 = None,
+                 protocol_type= "1inch",
                  dex_exchange = 'uniswap_v2',
                  base_trading_symbol = 'USDC',
                  amount_trading_option = 1,
-                 block_explorer_api: str = None,
                  ):
-        self.w3 = w3
         self.chain_id = int(chain_id)
         self.wallet_address = wallet_address
         self.private_key = private_key
+        self.block_explorer_api = block_explorer_api
+
+        self.w3 = w3
         self.protocol_type = protocol_type
         self.dex_exchange = dex_exchange
         self.base_trading_symbol = base_trading_symbol
         self.amount_trading_option = amount_trading_option
+
         blockchain = blockchains[self.chain_id]
-        logger.debug(msg=f"blockchain  {blockchain}")
-        self.block_explorer_url = blockchain["url"]
-        logger.debug(msg=f"block_explorer_url  {self.block_explorer_url }")
-        self.block_explorer_api = block_explorer_api
-        logger.debug(msg=f"block_explorer_api {block_explorer_api}")
-        if self.protocol_type in [1]:
-            base_url = 'https://api.1inch.exchange'
-            version = "v5.0"
-            self.dex_url = f"{base_url}/{version}/{self.chain_id}"
+        logger.debug(msg=f"blockchain {blockchain}")
+
+        self.block_explorer_url = blockchain["block_explorer_url"]
+        self.rpc = blockchain["rpc"]
+
+        if self.protocol_type == "1inch":
+            base_url = self.block_explorer_url = blockchain["1inch"]
+            self.dex_url = f"{base_url}"
             logger.debug(msg=f"dex_url {self.dex_url}")
-        if self.protocol_type in [2,4]:
-            self.exchange = exchanges[self.chain_id]
-            logger.debug(msg=f"exchange {exchange}")
-            # self.dex_info = ma.get(int(self.chain_id), 'dex', self.dex_exchange)
-            # logger.debug(msg=f"dex_info {self.dex_info}")
-            # logger.debug(msg=f"name {self.dex_info[name]}")
-            # logger.debug(msg=f"router_address {self.dex_info[router_address]}")
-            # logger.debug(msg=f"factory_address {self.dex_info[factory_address]}")
-            self.router = self.exchange[address]
-        if self.protocol_type in ["3"]:
-            base_url = 'https://limit-orders.1inch.io'
-            version = "v3.0"
-            self.dex_url = f"{base_url}/{version}/{self.chain_id}"
+        if self.protocol_type == "1inch_limit":
+            base_url = self.block_explorer_url = blockchain["1inch_limit"]
+            self.dex_url = f"{base_url}"
             logger.debug(msg=f"dex_url {self.dex_url}")
-        # dex_0x_api = "https://api.0x.org/orderbook/v1"
+        if self.protocol_type == "0x":
+            base_url = self.block_explorer_url = blockchain["0x"]
+            self.dex_url = f"{base_url}"
+            logger.debug(msg=f"dex_url {self.dex_url}")
+
+        if self.w3 == "":
+            self.w3 = Web3(Web3.HTTPProvider(self.rpc))
+
+        if self.dex_exchange == "":
+            if self.protocol_type == "uniswap_v3":
+                self.dex_exchange = blockchain["uniswap_v3"]
+                self.router = blockchain["uniswap_v3"]
+            else:
+                self.dex_exchange = blockchain["uniswap_v2"]
+                self.router = blockchain["uniswap_v2"]
 
     @staticmethod
     def _get(url, params=None, headers=None):
@@ -100,8 +100,8 @@ class DexSwap:
         #logger.debug(msg=f"response json {response.json()}")
         return response.json()
 
-    async def get_quote(self, token):
-            asset_in_address = await self.search_contract(token)
+    async def get_quote(self, symbol):
+            asset_in_address = await self.search_contract(symbol)
             logger.debug(msg=f"asset_in_address {asset_in_address}")
             asset_out_address = await self.search_contract('USDC')
             logger.debug(msg=f"asset_out_address {asset_out_address}")
@@ -118,15 +118,6 @@ class DexSwap:
             except Exception as e:
                 logger.debug(msg=f"error {e}")
                 return
-
-    # async def get_abi(self, addr):
-    #     logger.debug(msg=f"addr {addr}")
-    #     logger.debug(msg=f"block_explorer_api {self.block_explorer_api}")
-    #     logger.debug(msg=f"chain_id {str(self.chain_id)}")
-    #     chain = ma.get_chain_by_id(chain_id=int(self.chain_id))
-    #     abi = ma.get_abi_from_address(addr,self.block_explorer_api,chain)
-    #     logger.debug(msg=f"abi {abi}")
-    #     return abi
 
     async def get_abi(self,addr):
         try:
