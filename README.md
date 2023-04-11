@@ -1,5 +1,5 @@
 # DXSP (DeX SwaP), A python defi swap helper package. 
-<img width="200" alt="Screenshot 2023-04-11 at 17 19 42" src="https://user-images.githubusercontent.com/8766259/231213427-63ea2752-13d5-4993-aee2-90671b57fc6e.png">
+<img width="200" alt="Logo" src="https://user-images.githubusercontent.com/8766259/231213427-63ea2752-13d5-4993-aee2-90671b57fc6e.png">
 Easy peasy Swap.
 
 - 7 blockchains mainnet and testnet supported with default block explorer, RPC, Router (uniswap and pancakeswap) and protocol url (1inch and 0x). Other blockchains can be supported via function attributes
