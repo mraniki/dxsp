@@ -50,6 +50,9 @@ class DexSwap:
         self.block_explorer_url = blockchain["block_explorer_url"]
         self.rpc = blockchain["rpc"]
 
+        if self.w3 == "":
+         self.w3 = Web3(Web3.HTTPProvider(self.rpc))
+        
         if self.protocol_type == "1inch":
             base_url = self.block_explorer_url = blockchain["1inch"]
             self.dex_url = f"{base_url}"
@@ -63,16 +66,12 @@ class DexSwap:
             self.dex_url = f"{base_url}"
             logger.debug(msg=f"dex_url {self.dex_url}")
 
-        if self.w3 == "":
-            self.w3 = Web3(Web3.HTTPProvider(self.rpc))
-
-        if self.dex_exchange == "":
-            if self.protocol_type == "uniswap_v3":
-                self.dex_exchange = blockchain["uniswap_v3"]
-                self.router = blockchain["uniswap_v3"]
-            else:
-                self.dex_exchange = blockchain["uniswap_v2"]
-                self.router = blockchain["uniswap_v2"]
+        if self.dex_exchange = blockchain["uniswap_v3"]
+            self.router = blockchain["uniswap_v3"]
+        else if self.dex_exchange = blockchain["uniswap_v2"]
+            self.router = blockchain["uniswap_v2"]
+        else:
+            self.router = self.dex_exchange
 
     @staticmethod
     def _get(url, params=None, headers=None):
@@ -187,7 +186,6 @@ class DexSwap:
         logger.debug(msg=f"gasprice {gasprice}")
         return self.w3.to_wei(gasPrice,'gwei')
 
-    
     async def execute_order(self,direction,symbol,stoploss,takeprofit,quantity,amount_trading_option=1):
 
         try:
