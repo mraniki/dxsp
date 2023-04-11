@@ -14,9 +14,10 @@ Other features:
 - Quote for a given token function available
 - Base symbol defaulted if not provided
 
+[![Pypi](https://badgen.net/badge/icon/dxsp?icon=pypi&label)](https://pypi.org/project/dxsp/)
 ![Pypi](https://img.shields.io/pypi/dm/dxsp) ![Version](https://img.shields.io/pypi/v/dxsp)
 
-[![Web3](https://badgen.net/badge/icon/web3/black?icon=libraries&label)](https://github.com/ethereum/web3.py) [![coingecko](https://badgen.net/badge/icon/coingecko/black?icon=libraries&label)](https://github.com/coingecko)
+[![Web3](https://badgen.net/badge/icon/web3/black?icon=libraries&label)](https://github.com/ethereum/web3.py) [![coingecko](https://badgen.net/badge/icon/coingecko/black?icon=libraries&label)](https://github.com/coingecko) 
 
 # Install
 `pip install dxsp`
@@ -44,7 +45,7 @@ from dxsp import DexSwap
 https://github.com/mraniki/dxsp/wiki
 
 # Example
-[example](examples/example.py)
+[example](https://github.com/mraniki/dxsp/blob/main/examples/example.py)
 
 # Real use case
 [TalkyTrader, submit trading order to CEX & DEX with messaging platform (Telegram, Matrix and Discord)](https://github.com/mraniki/tt)
