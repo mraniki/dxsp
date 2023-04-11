@@ -22,23 +22,6 @@ class DexSwap:
     #🦎GECKO
     gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup to be reviewed
 
-    chain_id =  {
-          "1": "ethereum",
-          "56": "binance",
-          "42161": "arbitrum",
-          "137": "polygon",
-          "10": "optimism",
-          "250": "fantom",
-          "43114": "avalanche"
-        }
-    protocol_type = {
-          "1": "1inch",
-          "2": "uniswap_v2",
-          "3": "1inch_limit",
-          "4": "uniswap_v3",
-          "5": "0x",
-        }
-
     def __init__(self,
                  chain_id = 1, 
                  wallet_address = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE,
