@@ -10,11 +10,11 @@ A python defi swap helper package. Easy peasy Swap.
 	- Uniswap version 2 router protocol type
 
 Other features:
-- Automatic translation of symbol to contract address via user defined tokenlist format or coingecko api 
-- Web3 connectivity supported if no web3 object given or no rpc
-- Token approval, signature capability out of the box
-- Quote for a given token function available
-- Base symbol defaulted if not provided
+- Translate token symbol to contract address via user defined tokenlist format or coingecko api 
+- Connect to web3  if no web3 object or no rpc provided
+- Able to approve contract and sign transaction
+- Quote for a given token
+- Use Base symbol like stablecoin
 
 [![Pypi](https://badgen.net/badge/icon/dxsp?icon=pypi&label)](https://pypi.org/project/dxsp/)
 ![Pypi](https://img.shields.io/pypi/dm/dxsp) ![Version](https://img.shields.io/pypi/v/dxsp)
