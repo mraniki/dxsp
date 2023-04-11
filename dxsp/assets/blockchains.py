@@ -27,7 +27,7 @@ blockchains = {
         "uniswap_v3": "0x1f98431c8ad98523631ae4a59f267346ea31f984",
         "1inch": "",
         "1inch_limit": "",
-        "0x": ""
+        "0x": "https://sepolia.api.0x.org/"
         },
     # Binance Smart Chain
     56: {
@@ -165,6 +165,26 @@ blockchains = {
         "rpc": "https://rpc.ankr.com/fantom_testnet",
         "uniswap_v2": "",
         "uniswap_v3": "0x1f98431c8ad98523631ae4a59f267346ea31f984",
+        "1inch": "",
+        "1inch_limit": "",
+        "0x": ""
+        },
+    # Celo
+    42220: {
+        "block_explorer_url": "http://explorer.celo.org/api?",
+        "rpc": "https://rpc.ankr.com/celo",
+        "uniswap_v2": "",
+        "uniswap_v3": "0xAfE208a311B21f13EF87E33A90049fC17A7acDEc",
+        "1inch": "",
+        "1inch_limit": "",
+        "0x": "https://celo.api.0x.org/"
+        },
+    # Celo Alfajores Testnet
+    44787: {
+        "block_explorer_url": "https://alfajores-blockscout.celo-testnet.org/api?",
+        "rpc": "https://alfajores-forno.celo-testnet.org",
+        "uniswap_v2": "",
+        "uniswap_v3": "0xAfE208a311B21f13EF87E33A90049fC17A7acDEc",
         "1inch": "",
         "1inch_limit": "",
         "0x": ""

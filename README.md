@@ -1,6 +1,16 @@
 # dxsp
-DXSP (DeX SwaP), A defi swap helper package. 
-Easy peasy Swap.
+DXSP (DeX SwaP), A defi swap helper package. Easy peasy Swap.
+
+- 7 blockchains mainnet and testnet supported with default block explorer, RPC, Router (uniswap and pancakeswap) and protocol url (1inch and 0x). Other blockchains can be supported via function attributes
+- 2 swap protocol type supported:
+	- 1inch API v5
+	- Uniswap version 2 router protocol type
+Other features:
+- Automatic translation of symbol to contract address via user defined tokenlist format or coingecko api 
+- Web3 connectivity supported if no web3 object given or no rpc
+- Token approval, signature capability out of the box
+- Quote for a given token function available
+- Base symbol defaulted if not provided
 
 ![Pypi](https://img.shields.io/pypi/dm/dxsp)
 ![Version](https://img.shields.io/pypi/v/dxsp)
@@ -8,7 +18,6 @@ Easy peasy Swap.
 [![Web3](https://badgen.net/badge/icon/web3/black?icon=libraries&label)](https://github.com/ethereum/web3.py)
 
 [![coingecko](https://badgen.net/badge/icon/coingecko/black?icon=libraries&label)](https://github.com/coingecko)
-
 
 # Install
 `pip install dxsp`
@@ -32,85 +41,15 @@ from dxsp import DexSwap
 	demo_order = await dex_sushi.execute_order(direction = 'BUY',symbol = 'wBTC')
 	print("demo_order ", demo_order)
 ```
-# Features
-
-	- 7 blockchains mainnet and testnet supported with default block explorer, RPC, Router (uniswap and pancakeswap) and protocol url (1inch and 0x)
-	- Other blockchain can be supported by provided attributes value such as block_explorer_url,web3 object or rpc url and contract outer
-	- 2 swap protocol type supported:
-		- 1inch API v5
-		- Uniswap version 2 router protocol type
-	- Automatic translation of symbol to contract address via user defined tokenlist format and/or coingecko api 
-	- Web3 connectivity supported if no object given
-
-# Attributes
-
-## chain_id
-	refers to [blockchains](assets/blockchains.py) for the list of supported chains for mainnet and testnet
-	High Level:
-	- "1": "ethereum",
-	- "56": "binance",
-	- "42161": "arbitrum",
-	- "137": "polygon",
-	- "10": "optimism",
-	- "250": "fantom",
-	- "43114": "avalanche"
-
-## wallet_address 
-	Your wallet public address. Mandatory. example: 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE,
-
-## private_key  
-	Your private key. Mandatory. example 0x111111111117dc0aa78b770fa6a738034120c302,
-
-## block_explorer_api
-	your API key for the chain explorer used to track the status of a swap. Mandatory. Refers to [blockchains](assets/blockchains.py) for the explorer url
-
-## w3
-	optional. a Web3 object
-
-## protocol_type
-	Protocol to interact with the DEX. optional and default value is "1inch". Other accepted values "uniswap_v2", "1inch_limit","uniswap_v3","0x"
-         
-## dex_exchange
-	optional. Contract of the router/factory of the dexexchnage to be used.
-	Default value refers to [blockchains](assets/blockchains.py) per chains
-	example: `sushi_router = '0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F'`
-
-## base_trading_symbol 
-	optional and default value is symbol 'USDC'
-
-## amount_trading_option
-	optional default value is 1. use for execute_order function.
-	- 1:buy or sell %p percentage DEFAULT OPTION
-	- 2:sell all token in case of sell order for example
-
-# .Env
-## Mandatory
-	- None
-
-## Optional
-	- TOKENLIST: URL of a standard token list following tokenlist.org format
-	- TESTTOKENLIST: URL of a standard testnet token list following tokenlist.org format
-
+# Wiki
+https://github.com/mraniki/dxsp/wiki
 
 # Example
-	[example](examples/example.py)
+[example](examples/example.py)
 
-
-# Real case
-
-	[TalkyTrader, submit trading order to CEX & DEX with messaging platform (Telegram, Matrix and Discord)](https://github.com/mraniki/tt)
-
-# Roadmap
-
-## V1
-	- 1inch API v5 (#1 default)
-	- Uniswap version 2 router DEX type (#2)
-	- Limit SWAP via 1inch API v3 (#3)
-
-## V2 
-	- Uniswap V3 Support
-	- Ox or other API based swap or orderbook platfrom
+# Real use case
+[TalkyTrader, submit trading order to CEX & DEX with messaging platform (Telegram, Matrix and Discord)](https://github.com/mraniki/tt)
 
 ## Questions? Want to help? 
-	[![discord](https://badgen.net/badge/icon/discord/purple?icon=discord&label)](https://discord.gg/vegJQGrRRa)
-	[![telegram](https://badgen.net/badge/icon/telegram?icon=telegram&label)](https://t.me/TTTalkyTraderChat/1)
+[![discord](https://badgen.net/badge/icon/discord/purple?icon=discord&label)](https://discord.gg/vegJQGrRRa)
+[![telegram](https://badgen.net/badge/icon/telegram?icon=telegram&label)](https://t.me/TTTalkyTraderChat/1)
