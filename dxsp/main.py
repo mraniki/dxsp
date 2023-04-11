@@ -19,9 +19,6 @@ logger.info(msg=f"LOGLEVEL {LOGLEVEL}")
 class DexSwap:
 
 
-    #🦎GECKO
-    gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup to be reviewed
-
     def __init__(self,
                  chain_id = 1, 
                  wallet_address = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE,
@@ -29,7 +26,9 @@ class DexSwap:
                  block_explorer_api: str = None,
                  w3: Web3 = None,
                  protocol_type= "1inch",
-                 dex_exchange = 'uniswap_v2',
+                 block_explorer_url: str = None,
+                 rpc: str = None,
+                 dex_exchange: str = None,
                  base_trading_symbol = 'USDC',
                  amount_trading_option = 1,
                  ):
@@ -37,38 +36,43 @@ class DexSwap:
         self.wallet_address = wallet_address
         self.private_key = private_key
         self.block_explorer_api = block_explorer_api
-
+        self.block_explorer_url = block_explorer_url
+        self.rpc = rpc
         self.w3 = w3
+        logger.debug(msg=f"self.w3 {self.w3}")
         self.protocol_type = protocol_type
         self.dex_exchange = dex_exchange
         self.base_trading_symbol = base_trading_symbol
         self.amount_trading_option = amount_trading_option
 
+        #🦎GECKO
+        self.gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup to be reviewed
         blockchain = blockchains[self.chain_id]
         logger.debug(msg=f"blockchain {blockchain}")
 
-        self.block_explorer_url = blockchain["block_explorer_url"]
-        self.rpc = blockchain["rpc"]
-
-        if self.w3 == "":
-         self.w3 = Web3(Web3.HTTPProvider(self.rpc))
+        if self.block_explorer_url == None:
+            self.block_explorer_url = blockchain["block_explorer_url"]
+        if self.rpc == None:
+            self.rpc = blockchain["rpc"]
+        if self.w3 == None:
+            self.w3 = Web3(Web3.HTTPProvider(self.rpc))
         
         if self.protocol_type == "1inch":
-            base_url = self.block_explorer_url = blockchain["1inch"]
+            base_url = blockchain["1inch"]
             self.dex_url = f"{base_url}"
             logger.debug(msg=f"dex_url {self.dex_url}")
         if self.protocol_type == "1inch_limit":
-            base_url = self.block_explorer_url = blockchain["1inch_limit"]
+            base_url = blockchain["1inch_limit"]
             self.dex_url = f"{base_url}"
             logger.debug(msg=f"dex_url {self.dex_url}")
         if self.protocol_type == "0x":
-            base_url = self.block_explorer_url = blockchain["0x"]
+            base_url = blockchain["0x"]
             self.dex_url = f"{base_url}"
             logger.debug(msg=f"dex_url {self.dex_url}")
 
-        if self.dex_exchange = blockchain["uniswap_v3"]
+        if self.dex_exchange == blockchain["uniswap_v3"]:
             self.router = blockchain["uniswap_v3"]
-        else if self.dex_exchange = blockchain["uniswap_v2"]
+        elif self.dex_exchange == blockchain["uniswap_v2"]:
             self.router = blockchain["uniswap_v2"]
         else:
             self.router = self.dex_exchange
@@ -85,7 +89,7 @@ class DexSwap:
     async def get_quote(self, symbol):
             asset_in_address = await self.search_contract(symbol)
             logger.debug(msg=f"asset_in_address {asset_in_address}")
-            asset_out_address = await self.search_contract('USDC')
+            asset_out_address = await self.search_contract(self.base_trading_symbol)
             logger.debug(msg=f"asset_out_address {asset_out_address}")
             try:
                 if self.protocol_type == 1:
@@ -186,7 +190,7 @@ class DexSwap:
         logger.debug(msg=f"gasprice {gasprice}")
         return self.w3.to_wei(gasPrice,'gwei')
 
-    async def execute_order(self,direction,symbol,stoploss,takeprofit,quantity,amount_trading_option=1):
+    async def execute_order(self,direction,symbol,stoploss=10000,takeprofit=10000,quantity=1,amount_trading_option=1):
 
         try:
             asset_out_symbol = self.base_trading_symbol if direction=="BUY" else symbol
@@ -247,7 +251,9 @@ class DexSwap:
             #1INCH
             if self.protocol_type == 1:
                 swap_url = f"{self.dex_url}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={self.wallet_address}&slippage={slippage}"
+                logger.debug(msg=f"swap_url {swap_url}")
                 swap_TX = self._get(swap_url)
+                logger.debug(msg=f"swap_TX {swap_TX}")
                 TX_status_code = swap_TX['statusCode']
                 if TX_status_code != 200:
                     logger.debug(msg=f"{TX_status_code}")
@@ -290,21 +296,23 @@ class DexSwap:
 
     async def search_gecko_contract(self,token):
         try:
+            logger.debug(msg=f"search_gecko_contract {token}")
             coin_info = await self.search_gecko(token)
             coin_contract = coin_info['platforms'][f'{coin_platform}']
             logger.debug(msg=f"🦎 contract {token} {coin_contract}")
             return coin_contract
-        except Exception:
+        except Exception as e:
+            logger.error(msg=f"search_gecko_contract error {e}")
             return
 
     async def search_gecko(self,token):
         try:
-            search_results = gecko_api.search(query=token)
+            search_results = self.gecko_api.search(query=token)
             search_dict = search_results['coins']
             filtered_dict = [x for x in search_dict if x['symbol'] == token.upper()]
             api_dict = [ sub['api_symbol'] for sub in filtered_dict ]
             for i in api_dict:
-                coin_dict = gecko_api.get_coin_by_id(i)
+                coin_dict = self.gecko_api.get_coin_by_id(i)
                 try:
                     coin_platform = await self.search_gecko_platform()
                     if coin_dict['platforms'][f'{coin_platform}'] is not None:
@@ -317,7 +325,7 @@ class DexSwap:
 
     async def search_gecko_platform(self):
         try:
-            assetplatform = gecko_api.get_asset_platforms()
+            assetplatform = self.gecko_api.get_asset_platforms()
             output_dict = [x for x in assetplatform if x['chain_identifier'] == int(self.chain_id)]
             return output_dict[0]['id']
         except Exception as e:
@@ -349,7 +357,8 @@ class DexSwap:
                     token_contract = await self.get_contract_address(personal_list,token)
                     if token_contract is None:
                         token_contract = await self.search_gecko_contract(token)
-            if token_contract:
+            logger.debug(msg=f"token_contract  {token_contract}")
+            if len(token_contract)>1:
                 return self.w3.to_checksum_address(token_contract)
         except Exception as e:
             logger.error(msg=f"search_contract error {token} {e}")

@@ -17,6 +17,7 @@ private_key = os.getenv("PRIVATE_KEY", "0x111111111117dc0aa78b770fa6a738034120c3
 #Block explorer API from ETHERSCAN TYPE EXPLORER
 block_explorer_api = os.getenv("BLOCK_EXPLORER_API", "1X23Q4ACZ5T3KXG67WIAH7X8C510F1972TM")
 
+#OPTIONAL PARAMETERS
 #network_provider_url = os.getenv("NETWORK_PROVIDER_URL")
 #DEX CONNECTIVITY
 #w3 = Web3(Web3.HTTPProvider(network_provider_url))
@@ -30,34 +31,22 @@ from dxsp import DexSwap
 async def main():
 	#SWAP HELPER
 	dex = DexSwap(chain_id=chain_id,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
-	
+	print("dex ", dex)
 	#BUY 10 USDC to SWAP with BITCOIN
-	demo_tx = await dex.get_swap('USDC','wBTC',10)
+	demo_tx = await dex.get_swap('USDT','wBTC',10)
 	print("demo_tx ", demo_tx)
 
-	#NORMAL SWAP
-	# transaction_amount_out = 10
-	# asset_out_symbol = "USDT"
-	# asset_in_symbol = "ETH"
-	#SWAP EXECUTION
-	# transaction = await dex.get_swap(transaction_amount_out,asset_out_symbol,asset_in_symbol)
-	# print("transaction ", transaction)
-	
-	#order
-	demo_order = dex.execute_order(
-				direction = BUY,
-				symbol = wBTC,
-				stoploss = 1000,
-				takeprofit = 1000, 
-				quantity =1,
-				amount_trading_option=1)
-	print("demo_order ", demo_order)
-	
+	#SWAP with your OWN defined exchange like Sushiswap on ARBITRUM 
+	# sushi_router = '0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F'
+	# dex_sushi = DexSwap(chain_id=42161,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api,dex_exchange=sushi_router,base_trading_symbol='USDT')
+	# print("dex_sushi ", dex_sushi)
+	# #Execute ORDER to buy 1% of your USDT balance on SUSHISWAP ARBITRUM and get BTC token
+	# demo_order = await dex_sushi.execute_order(direction = 'BUY',symbol = 'wBTC')
+	# print("demo_order ", demo_order)
 	
 	#QUOTE
 	quote = await dex.get_quote('wBTC')
 	print("quote ", quote)
-	
 	
 	#get Contract Address
 	bitcoinaddress = await dex.search_contract('wBTC')
@@ -65,8 +54,8 @@ async def main():
 	#bitcoinaddress  0x68f180fcCe6836688e9084f035309E29Bf0A2095
 
 	#getABI
-	bitcoinaddressABI = await dex.get_abi(bitcoinaddress)
-	print(bitcoinaddressABI)
+	# bitcoinaddressABI = await dex.get_abi(bitcoinaddress)
+	# print(bitcoinaddressABI)
 
 if __name__ == "__main__":
     asyncio.run(main())
