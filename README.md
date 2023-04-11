@@ -116,3 +116,8 @@ Optional
 ## V2 
 	- Uniswap V3 Support
 	- Ox or other API based swap or orderbook platfrom
+
+## Questions? Want to help? 
+
+[![discord](https://badgen.net/badge/icon/discord/purple?icon=discord&label)](https://discord.gg/vegJQGrRRa)
+[![telegram](https://badgen.net/badge/icon/telegram?icon=telegram&label)](https://t.me/TTTalkyTraderChat/1)
