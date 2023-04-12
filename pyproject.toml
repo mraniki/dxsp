@@ -25,7 +25,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.semantic_release]
 version_variable = [
-    "src_folder/__init__.py:__version__",
+    "dxsp/__init__.py:__version__",
     "pyproject.toml:version"
 ]
 branch = "main"
