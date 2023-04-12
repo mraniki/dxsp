@@ -11,11 +11,11 @@ from dxsp.assets.blockchains import blockchains
 
 
 #🧐LOGGING
-LOGLEVEL=os.getenv("LOGLEVEL", "INFO")
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=LOGLEVEL)
-logging.getLogger("urllib3").setLevel(logging.WARNING)
+LOGLEVEL_DXSP=os.getenv("DXDP_LOGLEVEL", "INFO")
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=LOGLEVEL_DXSP)
+#logging.getLogger("urllib3").setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
-logger.info(msg=f"LOGLEVEL {LOGLEVEL}")
+
 
 class DexSwap:
 
@@ -274,6 +274,17 @@ class DexSwap:
             #1INCH LIMIT
             if self.protocol_type ["1inch_limit"]:
                  return
+                # encoded_message = encode_structured_data(eip712_data)
+                # signed_message = await sign_transaction_dex(encoded_message)
+                # # this is the limit order that will be broadcast to the limit order API
+                # limit_order = {
+                #     "orderHash": signed_message.messageHash.hex(),
+                #     "signature": signed_message.signature.hex(),
+                #     "data": order_data,
+                # }
+                # limit_order_url = dex_1inch_limit_api + str(chain_id) +"/limit-order" # make sure to change the chain_id if you are not using ETH mainnet
+                # response = requests.post(url=limit_order_url,headers={"accept": "application/json, text/plain, */*", "content-type": "application/json"}, json=limit_order)
+
             #UNISWAP V3
             if self.protocol_type ['uniswap_v3']:
                 return
