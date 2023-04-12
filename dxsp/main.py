@@ -9,6 +9,7 @@ from pycoingecko import CoinGeckoAPI
 
 from dxsp.assets.blockchains import blockchains
 
+
 #🧐LOGGING
 LOGLEVEL=os.getenv("LOGLEVEL", "INFO")
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=LOGLEVEL)
