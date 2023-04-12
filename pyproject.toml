@@ -10,7 +10,7 @@ readme = "README.md"
 python = "^3.10"
 web3 = "^6.1.0"
 pycoingecko = "^3.1.0"
-python-doten = "^0.21.1"
+python-dotenv = "1.0.0"
 asyncio ="^3.4.3"
 python-semantic-release = "7.33.2"
 
@@ -25,7 +25,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.semantic_release]
 version_variable = [
-    "src_folder/__init__.py:__version__",
+    "dxsp/__init__.py:__version__",
     "pyproject.toml:version"
 ]
 branch = "main"
