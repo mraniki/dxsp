@@ -51,16 +51,16 @@ class DexSwap:
         if self.w3 is None:
             self.w3 = Web3(Web3.HTTPProvider(self.rpc))
 
-        if self.protocol_type == "1inch":
-            base_url = blockchain["1inch"]
-            self.dex_url = f"{base_url}"
-        if self.protocol_type == "1inch_limit":
-            base_url = blockchain["1inch_limit"]
-            self.dex_url = f"{base_url}"
         if self.protocol_type == "0x":
             base_url = blockchain["0x"]
             self.dex_url = f"{base_url}"
 
+        elif self.protocol_type == "1inch":
+            base_url = blockchain["1inch"]
+            self.dex_url = f"{base_url}"
+        elif self.protocol_type == "1inch_limit":
+            base_url = blockchain["1inch_limit"]
+            self.dex_url = f"{base_url}"
         if self.dex_exchange == blockchain["uniswap_v3"]:
             self.router = blockchain["uniswap_v3"]
         elif self.dex_exchange == blockchain["uniswap_v2"]:
@@ -265,8 +265,7 @@ class DexSwap:
     async def search_gecko_contract(self,token):
         try:
             coin_info = await self.search_gecko(token)
-            coin_contract = coin_info['platforms'][f'{coin_platform}']
-            return coin_contract
+            return coin_info['platforms'][f'{coin_platform}']
         except Exception:
             return
 
