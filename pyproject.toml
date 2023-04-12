@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dxsp"
-version = "0.1.1"
+version = "0.0.0"
 description = "DXSP (DeX SwaP), A defi swap helper package. Swap made easy."
 authors = ["mraniki <8766259+mraniki@users.noreply.github.com>"]
 license = "MIT License"
@@ -8,15 +8,15 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-web3 = "^6.1.0"
-pycoingecko = "^3.1.0"
-python-dotenv = "^1.0.0"
-asyncio ="^3.4.3"
-python-semantic-release = "7.33.2"
+web3 = ">=6.*"
+pycoingecko = "*"
+python-dotenv = "*"
+asyncio ="*"
+python-semantic-release = "*"
 
 [tool.poetry.dev-dependencies]
-python-semantic-release = "^7.33.2"
-python-dotenv = "^1.0.0"
+python-semantic-release = "*"
+python-dotenv = "*"
 
 
 [build-system]
@@ -24,10 +24,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.semantic_release]
-version_variable = [
-    "dxsp/__init__.py:__version__",
-    "pyproject.toml:version"
-]
+version_variable = ["pyproject.toml:version"]
 branch = "main"
 upload_to_pypi = false
 upload_to_release = true
