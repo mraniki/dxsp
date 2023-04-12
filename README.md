@@ -1,5 +1,5 @@
 # DXSP (DeX SwaP)
-A python defi swap helper package. Easy peasy Swap.
+A python defi swap helper package. Swap made easy.
 
 <img width="200" alt="Logo" src="https://user-images.githubusercontent.com/8766259/231213427-63ea2752-13d5-4993-aee2-90671b57fc6e.png">
 

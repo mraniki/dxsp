@@ -11,7 +11,6 @@ from dxsp.assets.blockchains import blockchains
 
 logging.getLogger('dxsp').addHandler(logging.NullHandler())
 
-
 class DexSwap:
 
 
