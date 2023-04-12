@@ -1,6 +1,6 @@
 
 
-name: 📦Build and Release to PyPi
+name: 📦Publish on PyPi
 
 on:
   push:
@@ -29,3 +29,15 @@ jobs:
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
+
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: Netail/webhook-notifier@v1
+      with:
+        discord-url: ${{ secrets.DISCORD_WEBHOOK }}
+        color: 'info'
+        title: '${{ github.event.pull_request.user.login }} opened PR-${{ github.event.number }} in ${{ github.event.repository.name }}'
+        text: ${{ github.event.pull_request.title }}
+        fields: '[{"name": "Repository", "value": "${{ github.event.repository.name }}"}, {"name": "Pull Request ID", "value": "${{ github.event.number }}"}]'
+        buttons: '[{"label": "View PR", "url": "${{ github.event.pull_request.html_url }}"}]'

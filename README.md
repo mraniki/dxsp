@@ -43,14 +43,19 @@ from dxsp import DexSwap
 	demo_order = await dex_sushi.execute_order(direction = 'BUY',symbol = 'wBTC')
 	print("demo_order ", demo_order)
 ```
-# Wiki
-https://github.com/mraniki/dxsp/wiki
-
-# Example
+## Example
 [example](https://github.com/mraniki/dxsp/blob/main/examples/example.py)
 
-# Real use case
+## Real use case
 [TalkyTrader, submit trading order to CEX & DEX with messaging platform (Telegram, Matrix and Discord)](https://github.com/mraniki/tt)
+
+
+# Documentation
+https://github.com/mraniki/dxsp/wiki
+
+## 🚧 Roadmap
+
+[🚧 Roadmap](https://github.com/mraniki/dxsp/milestones)
 
 ## Questions? Want to help? 
 [![discord](https://badgen.net/badge/icon/discord/purple?icon=discord&label)](https://discord.gg/vegJQGrRRa)
