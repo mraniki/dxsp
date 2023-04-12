@@ -23,10 +23,10 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Add emoji
-      uses: tiena2cva/action-emoji@v1
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+   # - name: Add emoji
+   #   uses: tiena2cva/action-emoji@v1
+   #   with:
+   #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Install dependencies
       run: |
