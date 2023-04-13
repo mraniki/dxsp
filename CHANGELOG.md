@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.8 (2023-04-13)
+### Fix
+* Debug mode ([`38a6027`](https://github.com/mraniki/dxsp/commit/38a6027abe2b5da01aabed9bb95fc96709abac4a))
+
 ## v1.0.7 (2023-04-13)
 ### Fix
 * Package logger setup as per standard ([`2c30ff6`](https://github.com/mraniki/dxsp/commit/2c30ff6b2d004de4c2f97d636eb32f39c969e94c))
