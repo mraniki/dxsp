@@ -68,7 +68,10 @@ class DexSwap:
                 base_url = blockchain["1inch_limit"]
             else:
                 base_url = blockchain["1inch"]
+                self.protocol_type = "1inch"
             self.dex_url = f"{base_url}"
+
+
         self.logger.debug(f"self.protocol_type {self.protocol_type}")
 
         self.dex_exchange = dex_exchange
@@ -91,7 +94,7 @@ class DexSwap:
         self.logger.debug(f"self.amount_trading_option {self.amount_trading_option}")
 
         #🦎GECKO
-        self.gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup to be reviewed
+        gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup to be reviewed
 
 
     @staticmethod
@@ -116,7 +119,7 @@ class DexSwap:
             if self.protocol_type in ["uniswap_v2","uniswap_v3"]:
                 return
         except Exception as e:
-            self.logger.debug(f"error {e}")
+            self.logger.debug(f"error get_quote {e}")
             return
 
     async def get_abi(self,addr):
@@ -134,7 +137,7 @@ class DexSwap:
             abi = response["result"]
             return abi if (abi!="") else None
         except Exception as e:
-            self.logger.debug(f"error {e}")
+            self.logger.debug(f"error get_abi {e}")
             return
 
     async def get_approve(self, asset_out_address: str, amount=None):
@@ -187,7 +190,7 @@ class DexSwap:
             raw_tx = signed.rawTransaction
             return self.w3.eth.send_raw_transaction(raw_tx)
         except Exception as e:
-            self.logger.debug(f"error {e}")
+            self.logger.debug(f"error get_sign {e}")
             return
 
     async def get_gas(self, tx):
@@ -216,7 +219,7 @@ class DexSwap:
             swap = self.get_swap(asset_out_symbol,asset_in_symbol,asset_out_amount)
 
         except Exception as e:
-            self.logger.debug(f"error {e}")
+            self.logger.debug(f"error execute_order {e}")
             return  
 
     async def get_swap(self, 
@@ -302,7 +305,7 @@ class DexSwap:
                 if(txResult == "1"):
                     return txHash
         except Exception as e:
-            self.logger.debug(f"error {e}")
+            self.logger.debug(f"error get_swap {e}")
             return
 
     async def get_block_explorer_status(self,txHash):
@@ -317,18 +320,18 @@ class DexSwap:
             coin_info = await self.search_gecko(token)
             return coin_info['platforms'][f'{coin_platform}']
         except Exception as e:
-            self.logger.debug(f"error {e}")
+            self.logger.debug(f"error search_gecko_contract {e}")
             return
 
     async def search_gecko(self,token):
         self.logger.debug(f"search_gecko {token}")
         try:
-            search_results = self.gecko_api.search(query=token)
+            search_results = gecko_api.search(query=token)
             search_dict = search_results['coins']
             filtered_dict = [x for x in search_dict if x['symbol'] == token.upper()]
             api_dict = [ sub['api_symbol'] for sub in filtered_dict ]
             for i in api_dict:
-                coin_dict = self.gecko_api.get_coin_by_id(i)
+                coin_dict = gecko_api.get_coin_by_id(i)
                 try:
                     coin_platform = await self.search_gecko_platform()
                     if coin_dict['platforms'][f'{coin_platform}'] is not None:
@@ -336,17 +339,17 @@ class DexSwap:
                 except KeyError:
                     pass
         except Exception as e:
-            self.logger.debug(f"error {e}")
+            self.logger.debug(f"error search_gecko {e}")
             return
 
     async def search_gecko_platform(self):
         self.logger.debug(f"search_gecko_platform")
         try:
-            assetplatform = self.gecko_api.get_asset_platforms()
+            assetplatform = gecko_api.get_asset_platforms()
             output_dict = [x for x in assetplatform if x['chain_identifier'] == int(self.chain_id)]
             return output_dict[0]['id']
         except Exception as e:
-            self.logger.debug(f"error {e}")
+            self.logger.debug(f"error search_gecko_platform {e}")
             return
 
     async def get_contract_address(self,token_list_url, symbol):
@@ -358,7 +361,7 @@ class DexSwap:
                 if (keyval['symbol'] == symbol and keyval['chainId'] == self.chain_id):
                     return keyval['address']
         except Exception as e:
-            self.logger.debug(f"error {e}")
+            self.logger.debug(f"error get_contract_address {e}")
             return
 
     async def search_contract(self, token):
@@ -380,7 +383,7 @@ class DexSwap:
                 self.logger.debug(f"token_contract {token_contract}")
                 return self.w3.to_checksum_address(token_contract)
         except Exception as e:
-            self.logger.debug(f"error {e}")
+            self.logger.debug(f"error search_contract {e} token {token} token_contract {token_contract}")
             return
 
     async def get_token_contract(self, token):
@@ -390,7 +393,7 @@ class DexSwap:
             token_abi= await self.get_abi(token_address)
             return self.w3.eth.contract(address=token_address, abi=token_abi)
         except Exception as e:
-            self.logger.debug(f"error {e}")
+            self.logger.debug(f"error  get_token_contract {e}")
             return
 
     async def get_token_balance(self, token):
@@ -400,6 +403,6 @@ class DexSwap:
             token_balance = token_contract.functions.balanceOf(self.wallet_address).call()
             return 0 if token_balance <=0 or token_balance is None else token_balance
         except Exception as e:
-            self.logger.debug(f"error {e}")
+            self.logger.debug(f"error get_token_balance {e}")
             return 0
 
