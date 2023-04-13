@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.18 (2023-04-13)
+### Fix
+* Additional troubleshoot ([`cdc622e`](https://github.com/mraniki/dxsp/commit/cdc622e23c3aaed160bb0a6f8add7cd3526f8206))
+
 ## v1.0.17 (2023-04-13)
 ### Fix
 * Debug variable for contract search ([`5bc4b0d`](https://github.com/mraniki/dxsp/commit/5bc4b0d568ac29f4597918a00cc2e8fbec118b3a))
