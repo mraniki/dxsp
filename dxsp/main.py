@@ -29,7 +29,7 @@ class DexSwap:
                  amount_trading_option: int = 1,
                  ):
         logger.debug("dxsp setup started")
-        self.chain_id = int(chain_id)
+        self.chain_id = chain_id
         blockchain = blockchains[self.chain_id ]
 
         self.wallet_address = wallet_address
