@@ -305,14 +305,14 @@ class DexSwap:
             self.logger.debug(f"error {e}")
             return
 
-    async def get_block_explorer_status (self,txHash):
+    async def get_block_explorer_status(self,txHash):
         self.logger.debug(f"get_block_explorer_status {txHash}")
         checkTransactionSuccessURL = f"{self.block_explorer_url}?module=transaction&action=gettxreceiptstatus&txhash={txHash}&apikey={self.block_explorer_api}"
         checkTransactionRequest =  self.get(checkTransactionSuccessURL)
         return checkTransactionRequest['status']
 
     async def search_gecko_contract(self,token):
-        self.logger.debug(f"get_block_explorer_status {txHash}")
+        self.logger.debug(f"get_block_explorer_status {token}")
         try:
             coin_info = await self.search_gecko(token)
             return coin_info['platforms'][f'{coin_platform}']
