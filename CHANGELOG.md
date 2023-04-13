@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.13 (2023-04-13)
+### Fix
+* Cleanup the logger, updated env var name, updated the example. ([`03a03b3`](https://github.com/mraniki/dxsp/commit/03a03b387da19975eb6e3c83476ab58b9a32c094))
+
 ## v1.0.12 (2023-04-13)
 ### Fix
 * Logger ([`65a1511`](https://github.com/mraniki/dxsp/commit/65a151163284ef0900effbccae138c46aca7ae10))
