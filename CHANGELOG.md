@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.12 (2023-04-13)
+### Fix
+* Logger ([`65a1511`](https://github.com/mraniki/dxsp/commit/65a151163284ef0900effbccae138c46aca7ae10))
+
 ## v1.0.11 (2023-04-13)
 ### Fix
 * Logger ([`c88914a`](https://github.com/mraniki/dxsp/commit/c88914ad1a35e16225838f91e4ed703d164812b4))
