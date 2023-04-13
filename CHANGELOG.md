@@ -2,6 +2,22 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.12 (2023-04-13)
+### Fix
+* Logger ([`65a1511`](https://github.com/mraniki/dxsp/commit/65a151163284ef0900effbccae138c46aca7ae10))
+
+## v1.0.11 (2023-04-13)
+### Fix
+* Logger ([`c88914a`](https://github.com/mraniki/dxsp/commit/c88914ad1a35e16225838f91e4ed703d164812b4))
+
+## v1.0.10 (2023-04-13)
+### Fix
+* Import error ([`86f9d0a`](https://github.com/mraniki/dxsp/commit/86f9d0a71c2272babcff42f9fd6166acbe2d15a1))
+
+## v1.0.9 (2023-04-13)
+### Fix
+* Comma in logger ([`5d4ccfa`](https://github.com/mraniki/dxsp/commit/5d4ccfa78d8e70255895764d48eb59da5d16ce72))
+
 ## v1.0.8 (2023-04-13)
 ### Fix
 * Debug mode ([`38a6027`](https://github.com/mraniki/dxsp/commit/38a6027abe2b5da01aabed9bb95fc96709abac4a))
