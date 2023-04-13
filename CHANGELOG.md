@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.11 (2023-04-13)
+### Fix
+* Logger ([`c88914a`](https://github.com/mraniki/dxsp/commit/c88914ad1a35e16225838f91e4ed703d164812b4))
+
 ## v1.0.10 (2023-04-13)
 ### Fix
 * Import error ([`86f9d0a`](https://github.com/mraniki/dxsp/commit/86f9d0a71c2272babcff42f9fd6166acbe2d15a1))
