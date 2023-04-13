@@ -7,7 +7,7 @@ import asyncio
 from web3 import Web3
 from pycoingecko import CoinGeckoAPI
 
-from assets.blockchains import blockchains
+from dxsp.assets.blockchains import blockchains
 
 
 
