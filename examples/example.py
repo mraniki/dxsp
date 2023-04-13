@@ -31,15 +31,16 @@ block_explorer_api = os.getenv("BLOCK_EXPLORER_API", "1X23Q4ACZ5T3KXG67WIAH7X8C5
 # amount_trading_option = os.getenv("AMOUNT_TRADING_OPTION", 1)
 
 from dxsp.main import DexSwap
-
-
 #DEBUG LEVEL for DXSP package
 logging.basicConfig(level=logging.DEBUG)
 logging.getLogger('dxsp.__main__').setLevel(logging.DEBUG)
-logging.getLogger('urllib3').setLevel(logging.WARNING)
+# logging.getLogger('urllib3').setLevel(logging.WARNING)
+
+
 
 
 async def main():
+
 	#SWAP HELPER
 	dex = DexSwap(chain_id=chain,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
 

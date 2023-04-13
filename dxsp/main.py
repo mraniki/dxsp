@@ -32,6 +32,7 @@ class DexSwap:
                  ):
 
         self.logger =  logging.getLogger(__name__)
+        self.logger.debug(f"DXSP Logger:  {self.logger} on {__name__}")
         self.logger.info(f"Initializing DexSwap object for {wallet_address} on {chain_id}")
 
         self.chain_id = int(chain_id)
