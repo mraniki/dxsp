@@ -33,8 +33,8 @@ from dxsp.main import DexSwap
 
 
 #DEBUG LEVEL for DXSP package
-logging.basicConfig(level=logging.WARNING)
-logging.getLogger('dxsp.__main__').setLevel(logging.DEBUG)
+# logging.basicConfig(level=logging.WARNING)
+# logging.getLogger('dxsp.__main__').setLevel(logging.DEBUG)
 
 
 

@@ -28,11 +28,12 @@ class DexSwap:
                  base_trading_symbol: str = None,
                  amount_trading_option: int = 1,
                  ):
-        logging.getLogger(__name__).addHandler(logging.NullHandler())
-        logging.debug(msg=f"DexSwap initiated for chain_id {chain_id}")
+
+        self.logger =  logging.getLogger(__name__)
+        self.logger.info("Starting")
+        
         self.chain_id = int(chain_id)
         blockchain = blockchains[self.chain_id ]
-        logging.debug(msg=f"blockchain details {blockchain}")
 
         self.wallet_address = wallet_address
         self.private_key = private_key
