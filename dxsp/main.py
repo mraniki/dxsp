@@ -31,7 +31,7 @@ class DexSwap:
 
         self.logger =  logging.getLogger(__name__)
         self.logger.info("Starting")
-        
+
         self.chain_id = int(chain_id)
         blockchain = blockchains[self.chain_id ]
 
@@ -50,7 +50,7 @@ class DexSwap:
         self.w3 = w3
         if self.w3 is None:
             self.w3 = Web3(Web3.HTTPProvider(self.rpc))
-        logger.debug(f"self.w3 {self.w3}")
+        self.logger.debug(f"self.w3 {self.w3}")
         self.protocol_type = protocol_type
         if self.protocol_type is None:
             if self.protocol_type == "0x":
@@ -86,7 +86,7 @@ class DexSwap:
 
     async def get_quote(self, symbol):
             asset_in_address = await self.search_contract(symbol)
-            logger.debug(f"asset_in_address {asset_in_address}")
+            self.logger.debug(f"asset_in_address {asset_in_address}")
             asset_out_address = await self.search_contract(self.base_trading_symbol)
             try:
                 if self.protocol_type == "1inch":
