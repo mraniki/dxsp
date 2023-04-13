@@ -94,7 +94,7 @@ class DexSwap:
         self.logger.debug(f"self.amount_trading_option {self.amount_trading_option}")
 
         #🦎GECKO
-        gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup to be reviewed
+        self.gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup to be reviewed
 
 
     @staticmethod
@@ -331,7 +331,7 @@ class DexSwap:
             filtered_dict = [x for x in search_dict if x['symbol'] == token.upper()]
             api_dict = [ sub['api_symbol'] for sub in filtered_dict ]
             for i in api_dict:
-                coin_dict = gecko_api.get_coin_by_id(i)
+                coin_dict = self.gecko_api.get_coin_by_id(i)
                 try:
                     coin_platform = await self.search_gecko_platform()
                     if coin_dict['platforms'][f'{coin_platform}'] is not None:
@@ -345,7 +345,7 @@ class DexSwap:
     async def search_gecko_platform(self):
         self.logger.debug(f"search_gecko_platform")
         try:
-            assetplatform = gecko_api.get_asset_platforms()
+            assetplatform = self.gecko_api.get_asset_platforms()
             output_dict = [x for x in assetplatform if x['chain_identifier'] == int(self.chain_id)]
             return output_dict[0]['id']
         except Exception as e:
