@@ -68,5 +68,5 @@ jobs:
 
       - name: 'Build Inventory Image'
         run: |
-          docker build ./examples/Dockerfile --tag ghcr.io/mraniki/dxsp:latest
+          docker build -f examples/Dockerfile --tag ghcr.io/mraniki/dxsp:latest
           docker push ghcr.io/mraniki/dxsp:latest 
