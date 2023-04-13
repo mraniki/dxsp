@@ -28,7 +28,6 @@ block_explorer_api = os.getenv("BLOCK_EXPLORER_API", "1X23Q4ACZ5T3KXG67WIAH7X8C5
 # amount_trading_option = os.getenv("AMOUNT_TRADING_OPTION", 1)
 
 from dxsp import DexSwap
-from dxsp.assets.blockchains import blockchains
 
 async def main():
 	#SWAP HELPER
