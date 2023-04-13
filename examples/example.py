@@ -31,11 +31,10 @@ block_explorer_api = os.getenv("BLOCK_EXPLORER_API", "1X23Q4ACZ5T3KXG67WIAH7X8C5
 from dxsp.main import DexSwap
 
 
-
 #DEBUG LEVEL for DXSP package
-# logging.basicConfig(level=logging.WARNING)
-# logging.getLogger('dxsp.__main__').setLevel(logging.DEBUG)
-
+logging.basicConfig(level=logging.DEBUG)
+logging.getLogger('dxsp.__main__').setLevel(logging.DEBUG)
+logging.getLogger('urllib3').setLevel(logging.WARNING)
 
 
 async def main():
