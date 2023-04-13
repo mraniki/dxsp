@@ -32,7 +32,7 @@ class DexSwap:
         self.logger =  logging.getLogger(__name__)
         self.logger.info(f"Initializing DexSwap object for {wallet_address} on {chain_id}")
 
-        self.chain_id = int(chain_id)
+        self.chain_id = chain_id
         self.logger.debug(f"self.chain_id {chain_id}")
         blockchain = blockchains[self.chain_id ]
         self.logger.debug(f"self.block_explorer_url {blockchain}")
