@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.14 (2023-04-13)
+### Fix
+* Logger update and workflow tweak ([`95ec4bc`](https://github.com/mraniki/dxsp/commit/95ec4bc9e80c45adda36ef35a44734418894fbef))
+
 ## v1.0.13 (2023-04-13)
 ### Fix
 * Cleanup the logger, updated env var name, updated the example. ([`03a03b3`](https://github.com/mraniki/dxsp/commit/03a03b387da19975eb6e3c83476ab58b9a32c094))
