@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.17 (2023-04-13)
+### Fix
+* Debug variable for contract search ([`5bc4b0d`](https://github.com/mraniki/dxsp/commit/5bc4b0d568ac29f4597918a00cc2e8fbec118b3a))
+
 ## v1.0.16 (2023-04-13)
 ### Fix
 * Git registry docker build command ([`65df590`](https://github.com/mraniki/dxsp/commit/65df590ed4f5e2afa1a24f7f1975dd68a013867d))
