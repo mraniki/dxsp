@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.4 (2023-04-13)
+### Fix
+* Version test ([`926d947`](https://github.com/mraniki/dxsp/commit/926d94785950ded9960ac306639cf19c96dac421))
+* Indentation error ([`c84f19a`](https://github.com/mraniki/dxsp/commit/c84f19ae2bd9bb99262b2578550f406bf5c99f31))
+
 ## v1.0.3 (2023-04-13)
 ### Fix
 * Dexswap initial arguments revised ([`6945396`](https://github.com/mraniki/dxsp/commit/6945396231160d82386995b597aa60362c9a317e))
