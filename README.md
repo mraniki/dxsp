@@ -3,7 +3,7 @@
 
 | <img width="200" alt="Logo" src="https://user-images.githubusercontent.com/8766259/231213427-63ea2752-13d5-4993-aee2-90671b57fc6e.png">  | A python defi swap helper package. Swap made easy.  |
 | ------------- | ------------- |
-| 7 blockchains supported (ETH, BSC, ARB, MATIC, OPT, AVAX, FANTOM) |   2 swap protocol type (1inch API, UniV2 contract router)
+| [![Pypi](https://badgen.net/badge/icon/dxsp?icon=pypi&label)](https://pypi.org/project/dxsp/) ![Version](https://img.shields.io/pypi/v/dxsp) ![Pypi](https://img.shields.io/pypi/dm/dxsp) [![🐍Build](https://github.com/mraniki/dxsp/actions/workflows/%F0%9F%90%8Dbuild.yml/badge.svg)](https://github.com/mraniki/dxsp/actions/workflows/%F0%9F%90%8Dbuild.yml) [![Web3](https://badgen.net/badge/icon/web3/black?icon=libraries&label)](https://github.com/ethereum/web3.py) [![coingecko](https://badgen.net/badge/icon/coingecko/black?icon=libraries&label)](https://github.com/coingecko)  |   7 blockchains (ETH, BSC, ARB, MATIC, OPT, AVAX, FANTOM) & 2 swap protocol (1inch API, UniV2 router)
 
 
 
@@ -21,12 +21,8 @@ Other features:
 - Quote for a given token
 - Use Base symbol like stablecoin
 
-[![Pypi](https://badgen.net/badge/icon/dxsp?icon=pypi&label)](https://pypi.org/project/dxsp/)
-![Pypi](https://img.shields.io/pypi/dm/dxsp) ![Version](https://img.shields.io/pypi/v/dxsp)
 
-[![Web3](https://badgen.net/badge/icon/web3/black?icon=libraries&label)](https://github.com/ethereum/web3.py) [![coingecko](https://badgen.net/badge/icon/coingecko/black?icon=libraries&label)](https://github.com/coingecko) 
 
-[![🐍Build](https://github.com/mraniki/dxsp/actions/workflows/%F0%9F%90%8Dbuild.yml/badge.svg)](https://github.com/mraniki/dxsp/actions/workflows/%F0%9F%90%8Dbuild.yml)
 
 # Install
 `pip install dxsp`
