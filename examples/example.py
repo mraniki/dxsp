@@ -28,7 +28,7 @@ block_explorer_api = os.getenv("BLOCK_EXPLORER_API", "1X23Q4ACZ5T3KXG67WIAH7X8C5
 # base_trading_symbol = os.getenv("BASE_TRADE_SYMBOL", 'USDT')
 # amount_trading_option = os.getenv("AMOUNT_TRADING_OPTION", 1)
 
-from dxsp import DexSwap
+from dxsp.main import DexSwap
 
 
 
