@@ -21,7 +21,7 @@ Other features:
 
 [![Web3](https://badgen.net/badge/icon/web3/black?icon=libraries&label)](https://github.com/ethereum/web3.py) [![coingecko](https://badgen.net/badge/icon/coingecko/black?icon=libraries&label)](https://github.com/coingecko) 
 
-[![🧼CodeCheck](https://github.com/mraniki/dxsp/actions/workflows/%F0%9F%A7%BCCodeCheck.yml/badge.svg)](https://github.com/mraniki/dxsp/actions/workflows/%F0%9F%A7%BCCodeCheck.yml)
+[![🐍Build](https://github.com/mraniki/dxsp/actions/workflows/%F0%9F%90%8Dbuild.yml/badge.svg)](https://github.com/mraniki/dxsp/actions/workflows/%F0%9F%90%8Dbuild.yml)
 
 # Install
 `pip install dxsp`

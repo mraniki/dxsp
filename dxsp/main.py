@@ -19,7 +19,6 @@ class DexSwap:
                  wallet_address: str = None,
                  private_key: str = None,
                  block_explorer_api: str = None,
-
                  block_explorer_url: str = None,
                  rpc: str = None,
                  w3: Web3 = None,
@@ -28,8 +27,8 @@ class DexSwap:
                  base_trading_symbol: str = None,
                  amount_trading_option: int = 1,
                  ):
-        self.chain_id = chain_id
-        blockchain = blockchains[self.chain_id]
+        self.chain_id = int(chain_id)
+        blockchain = blockchains[self.chain_id ]
 
         self.wallet_address = wallet_address
         self.private_key = private_key
