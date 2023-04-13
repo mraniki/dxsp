@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.5 (2023-04-13)
+### Fix
+* Chain import ([`d59a59b`](https://github.com/mraniki/dxsp/commit/d59a59b4caf8ebb1780973e0129be7df8d7dd2bb))
+
 ## v1.0.4 (2023-04-13)
 ### Fix
 * Version test ([`926d947`](https://github.com/mraniki/dxsp/commit/926d94785950ded9960ac306639cf19c96dac421))
