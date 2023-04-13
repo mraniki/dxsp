@@ -35,7 +35,7 @@ class DexSwap:
         self.logger.debug(f"DXSP Logger:  {self.logger} on {__name__}")
         self.logger.info(f"Initializing DexSwap object for {wallet_address} on {chain_id}")
 
-        self.chain_id = int(chain_id)
+        self.chain_id = chain_id
         self.logger.debug(f"self.chain_id {chain_id}")
         blockchain = blockchains[self.chain_id ]
         self.logger.debug(f"self.block_explorer_url {blockchain}")
@@ -340,7 +340,7 @@ class DexSwap:
             return
 
     async def search_gecko_platform(self):
-        self.logger.debug(f"search_gecko_platform")
+        self.logger.debug("search_gecko_platform")
         try:
             assetplatform = self.gecko_api.get_asset_platforms()
             output_dict = [x for x in assetplatform if x['chain_identifier'] == int(self.chain_id)]
