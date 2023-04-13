@@ -28,7 +28,7 @@ class DexSwap:
                  base_trading_symbol: str = None,
                  amount_trading_option: int = 1,
                  ):
-        self.chain_id = int(chain_id)
+        self.chain_id = chain_id
         blockchain = blockchains[self.chain_id]
 
         self.wallet_address = wallet_address
@@ -49,24 +49,21 @@ class DexSwap:
 
         self.protocol_type = protocol_type
         if self.protocol_type is None:
-            if self.protocol_type == "1inch_limit":
-                base_url = blockchain["1inch_limit"]
-                self.dex_url = f"{base_url}"
-            elif self.protocol_type == "0x":
+            if self.protocol_type == "0x":
                 base_url = blockchain["0x"]
-                self.dex_url = f"{base_url}"
+            elif self.protocol_type == "1inch_limit":
+                base_url = blockchain["1inch_limit"]
             else:
                 base_url = blockchain["1inch"]
-                self.dex_url = f"{base_url}"
-
+            self.dex_url = f"{base_url}"
         self.dex_exchange = dex_exchange
-        if self.dex_exchange is None:
+        if (
+            self.dex_exchange is None
+            or self.dex_exchange != blockchain["uniswap_v3"]
+        ):
             self.router = blockchain["uniswap_v2"]
-        elif self.dex_exchange == blockchain["uniswap_v3"]:
+        else:
             self.router = blockchain["uniswap_v3"]
-        else: 
-            self.router = blockchain["uniswap_v2"]
-
         self.base_trading_symbol = base_trading_symbol
         if self.base_trading_symbol is None:
             self.base_trading_symbol= 'USDC'
