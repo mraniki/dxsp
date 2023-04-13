@@ -61,12 +61,11 @@ class DexSwap:
 
         self.dex_exchange = dex_exchange
         if self.dex_exchange is None:
-        if self.dex_exchange == blockchain["uniswap_v3"]:
-            self.router = blockchain["uniswap_v3"]
-        elif self.dex_exchange == blockchain["uniswap_v2"]:
             self.router = blockchain["uniswap_v2"]
-        else:
-            self.router = self.dex_exchange
+        elif self.dex_exchange == blockchain["uniswap_v3"]:
+            self.router = blockchain["uniswap_v3"]
+        else: 
+            self.router = blockchain["uniswap_v2"]
 
         self.base_trading_symbol = base_trading_symbol
         if self.base_trading_symbol is None:

@@ -7,6 +7,7 @@ from web3 import Web3
 
 #YOUR VARIABLES
 load_dotenv()
+
 #chain ID being used refer to https://chainlist.org/
 chain_id = os.getenv("CHAIN_ID", 10)
 
@@ -26,6 +27,7 @@ block_explorer_api = os.getenv("BLOCK_EXPLORER_API", "1X23Q4ACZ5T3KXG67WIAH7X8C5
 # base_trading_symbol = os.getenv("BASE_TRADE_SYMBOL", 'USDT')
 # amount_trading_option = os.getenv("AMOUNT_TRADING_OPTION", 1)
 
+import dxsp
 from dxsp import DexSwap
 
 async def main():
@@ -45,12 +47,12 @@ async def main():
 	# print("demo_order ", demo_order)
 	
 	#QUOTE
-	# quote = await dex.get_quote('wBTC')
-	# print("quote ", quote)
+	quote = await dex.get_quote('wBTC')
+	print("quote ", quote)
 	
 	# #get Contract Address
-	# bitcoinaddress = await dex.search_contract('wBTC')
-	# print("bitcoinaddress ", bitcoinaddress)
+	bitcoinaddress = await dex.search_contract('wBTC')
+	print("bitcoinaddress ", bitcoinaddress)
 	#bitcoinaddress  0x68f180fcCe6836688e9084f035309E29Bf0A2095
 
 	#getABI
