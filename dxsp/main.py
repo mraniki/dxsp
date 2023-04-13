@@ -9,7 +9,7 @@ from pycoingecko import CoinGeckoAPI
 
 from dxsp.assets.blockchains import blockchains
 
-logger = logging.getLogger(__name__).addHandler(logging.NullHandler())
+
 
 
 class DexSwap:
@@ -28,9 +28,11 @@ class DexSwap:
                  base_trading_symbol: str = None,
                  amount_trading_option: int = 1,
                  ):
-        logger.debug("dxsp setup started")
+        logging.getLogger(__name__).addHandler(logging.NullHandler())
+        logging.debug(msg=f"DexSwap initiated for chain_id" {chain_id})
         self.chain_id = int(chain_id)
         blockchain = blockchains[self.chain_id ]
+        logging.debug(msg=f"blockchain details" {blockchain})
 
         self.wallet_address = wallet_address
         self.private_key = private_key
