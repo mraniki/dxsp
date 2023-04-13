@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.19 (2023-04-13)
+### Fix
+* Gecko ([`f8e88cd`](https://github.com/mraniki/dxsp/commit/f8e88cddef94f7e639032c27d25ef05815d9da9e))
+
 ## v1.0.18 (2023-04-13)
 ### Fix
 * Additional troubleshoot ([`cdc622e`](https://github.com/mraniki/dxsp/commit/cdc622e23c3aaed160bb0a6f8add7cd3526f8206))
