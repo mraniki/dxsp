@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.16 (2023-04-13)
+### Fix
+* Git registry docker build command ([`65df590`](https://github.com/mraniki/dxsp/commit/65df590ed4f5e2afa1a24f7f1975dd68a013867d))
+
 ## v1.0.15 (2023-04-13)
 ### Fix
 * Updated workflow for docker deployment ([`3e69f44`](https://github.com/mraniki/dxsp/commit/3e69f44df443b22742b2b9e766c54fb05e656847))
