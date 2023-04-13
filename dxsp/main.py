@@ -30,7 +30,7 @@ class DexSwap:
                  ):
         logging.getLogger(__name__).addHandler(logging.NullHandler())
         logging.debug(msg=f"DexSwap initiated for chain_id {chain_id}")
-        self.chain_id = int(chain_id)
+        self.chain_id = chain_id
         blockchain = blockchains[self.chain_id ]
         logging.debug(msg=f"blockchain details {blockchain}")
 
