@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.15 (2023-04-13)
+### Fix
+* Updated workflow for docker deployment ([`3e69f44`](https://github.com/mraniki/dxsp/commit/3e69f44df443b22742b2b9e766c54fb05e656847))
+* Add deploy workflow to GitHub Actions. ([`3ab1e0c`](https://github.com/mraniki/dxsp/commit/3ab1e0c76555e46704d7d073782c87b18a35b98b))
+
 ## v1.0.14 (2023-04-13)
 ### Fix
 * Logger update and workflow tweak ([`95ec4bc`](https://github.com/mraniki/dxsp/commit/95ec4bc9e80c45adda36ef35a44734418894fbef))
