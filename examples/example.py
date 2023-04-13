@@ -9,7 +9,7 @@ from web3 import Web3
 load_dotenv()
 
 #chain ID being used refer to https://chainlist.org/
-chain_id = os.getenv("CHAIN_ID", 10)
+chain = os.getenv("CHAIN_ID", 10)
 
 #your wallet details
 wallet_address = os.getenv("WALLET_ADDRESS", "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE")
@@ -27,12 +27,12 @@ block_explorer_api = os.getenv("BLOCK_EXPLORER_API", "1X23Q4ACZ5T3KXG67WIAH7X8C5
 # base_trading_symbol = os.getenv("BASE_TRADE_SYMBOL", 'USDT')
 # amount_trading_option = os.getenv("AMOUNT_TRADING_OPTION", 1)
 
-import dxsp
 from dxsp import DexSwap
+from dxsp.assets.blockchains import blockchains
 
 async def main():
 	#SWAP HELPER
-	dex = DexSwap(chain_id=chain_id,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
+	dex = DexSwap(chain_id=chain,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
 
 	#BUY 10 USDC to SWAP with BITCOIN
 	demo_tx = await dex.get_swap('USDT','wBTC',10)

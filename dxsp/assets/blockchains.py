@@ -19,6 +19,16 @@ blockchains = {
         "1inch_limit": "",
         "0x": "https://goerli.api.0x.org/"
     },
+    # Optimism
+    10: {
+        "block_explorer_url": "https://api-optimistic.etherscan.io/api?",
+        "rpc": "https://rpc.ankr.com/optimism",
+        "uniswap_v2": "0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f",
+        "uniswap_v3": "0x1f98431c8ad98523631ae4a59f267346ea31f984",
+        "1inch": "https://api.1inch.exchange/v5.0/10",
+        "1inch_limit": "https://limit-orders.1inch.io/v3.0/10",
+        "0x": "https://optimism.api.0x.org/"
+    },
     # ETHEREUM Sepolia
     11155111: {
         "block_explorer_url": "https://api-Sepolia.etherscan.io/api?",
@@ -109,16 +119,7 @@ blockchains = {
         "1inch_limit": "h",
         "0x": ""
     },
-    # Optimism
-    10: {
-        "block_explorer_url": "https://api-optimistic.etherscan.io/api?",
-        "rpc": "https://rpc.ankr.com/optimism",
-        "uniswap_v2": "0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f",
-        "uniswap_v3": "0x1f98431c8ad98523631ae4a59f267346ea31f984",
-        "1inch": "https://api.1inch.exchange/v5.0/10",
-        "1inch_limit": "https://limit-orders.1inch.io/v3.0/10",
-        "0x": "https://optimism.api.0x.org/"
-    },
+
     # Optimism goerli
     69: {
         "block_explorer_url": "https://api-Goerli.etherscan.io/api? ne",
