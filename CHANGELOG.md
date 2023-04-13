@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.7 (2023-04-13)
+### Fix
+* Package logger setup as per standard ([`2c30ff6`](https://github.com/mraniki/dxsp/commit/2c30ff6b2d004de4c2f97d636eb32f39c969e94c))
+
 ## v1.0.6 (2023-04-13)
 ### Fix
 * Import 1 ([`ccf0171`](https://github.com/mraniki/dxsp/commit/ccf0171bcf831770d9e653c8e71b1506bb5f7f01))
