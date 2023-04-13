@@ -12,12 +12,9 @@ web3 = ">=6.*"
 pycoingecko = "*"
 python-dotenv = "*"
 asyncio ="*"
-python-semantic-release = "*"
 
 [tool.poetry.dev-dependencies]
 python-semantic-release = "*"
-python-dotenv = "*"
-
 
 [build-system]
 requires = ["poetry-core"]
