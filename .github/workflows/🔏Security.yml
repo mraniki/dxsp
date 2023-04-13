@@ -10,12 +10,9 @@
 # https://github.com/marketplace/actions/bandit-scan is ISC licensed, by abirismyname
 # https://pypi.org/project/bandit/ is Apache v2.0 licensed, by PyCQA
 
-name: 🦠CodeScanning
+name: 🔏Security
 on:
   push:
-    branches: [ "dev" ]
-  pull_request:
-    # The branches below must be a subset of the branches above
     branches: [ "dev" ]
   schedule:
     - cron: '24 6 * * 5'
@@ -29,7 +26,7 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3.5.0
       - name: Bandit Scan
         uses: shundor/python-bandit-scan@9cc5aa4a006482b8a7f91134412df6772dbda22c
         with: # optional arguments

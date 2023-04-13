@@ -9,7 +9,7 @@ from pycoingecko import CoinGeckoAPI
 
 from dxsp.assets.blockchains import blockchains
 
-logging.getLogger('dxsp').addHandler(logging.NullHandler())
+logging.getLogger(__name__).addHandler(logging.NullHandler())
 
 class DexSwap:
 
@@ -19,53 +19,58 @@ class DexSwap:
                  wallet_address = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE,
                  private_key = 0x111111111117dc0aa78b770fa6a738034120c302,
                  block_explorer_api: str = None,
-                 w3: Web3 = None,
-                 protocol_type= "1inch",
                  block_explorer_url: str = None,
                  rpc: str = None,
+                 w3: Web3 = None,
+                 protocol_type: str = "1inch",
                  dex_exchange: str = None,
-                 base_trading_symbol = 'USDC',
+                 base_trading_symbol: str ='USDC',
                  amount_trading_option = 1,
                  ):
         self.chain_id = int(chain_id)
+        blockchain = blockchains[self.chain_id]
+
         self.wallet_address = wallet_address
         self.private_key = private_key
         self.block_explorer_api = block_explorer_api
+
         self.block_explorer_url = block_explorer_url
-        self.rpc = rpc
-        self.w3 = w3
-        self.protocol_type = protocol_type
-        self.dex_exchange = dex_exchange
-        self.base_trading_symbol = base_trading_symbol
-        self.amount_trading_option = amount_trading_option
-
-        #🦎GECKO
-        self.gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup to be reviewed
-        blockchain = blockchains[self.chain_id]
-
         if self.block_explorer_url is None:
             self.block_explorer_url = blockchain["block_explorer_url"]
+
+        self.rpc = rpc
         if self.rpc is None:
             self.rpc = blockchain["rpc"]
+
+        self.w3 = w3
         if self.w3 is None:
             self.w3 = Web3(Web3.HTTPProvider(self.rpc))
-
-        if self.protocol_type == "0x":
-            base_url = blockchain["0x"]
-            self.dex_url = f"{base_url}"
-
-        elif self.protocol_type == "1inch":
+        self.protocol_type = protocol_type
+        if self.protocol_type == "1inch":
             base_url = blockchain["1inch"]
             self.dex_url = f"{base_url}"
         elif self.protocol_type == "1inch_limit":
             base_url = blockchain["1inch_limit"]
             self.dex_url = f"{base_url}"
+        elif self.protocol_type == "0x":
+            base_url = blockchain["0x"]
+            self.dex_url = f"{base_url}"
+
+        self.dex_exchange = dex_exchange
         if self.dex_exchange == blockchain["uniswap_v3"]:
             self.router = blockchain["uniswap_v3"]
         elif self.dex_exchange == blockchain["uniswap_v2"]:
             self.router = blockchain["uniswap_v2"]
         else:
             self.router = self.dex_exchange
+
+        self.base_trading_symbol = base_trading_symbol
+
+        self.amount_trading_option = amount_trading_option
+
+        #🦎GECKO
+        self.gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup to be reviewed
+
 
     @staticmethod
     def _get(url, params=None, headers=None):
