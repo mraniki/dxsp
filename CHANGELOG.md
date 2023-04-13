@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.10 (2023-04-13)
+### Fix
+* Import error ([`86f9d0a`](https://github.com/mraniki/dxsp/commit/86f9d0a71c2272babcff42f9fd6166acbe2d15a1))
+
 ## v1.0.9 (2023-04-13)
 ### Fix
 * Comma in logger ([`5d4ccfa`](https://github.com/mraniki/dxsp/commit/5d4ccfa78d8e70255895764d48eb59da5d16ce72))
