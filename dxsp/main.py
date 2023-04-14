@@ -36,6 +36,9 @@ class DexSwap:
 
         self.chain_id = int(chain_id)
         self.logger.debug(f"self.chain_id {self.chain_id}")
+        if self.chain_id  is None:
+            self.logger.warning("self.chain_id not setup")
+            return
         blockchain = blockchains[self.chain_id ]
         self.logger.debug(f"self.block_explorer_url {blockchain}")
 
@@ -47,6 +50,9 @@ class DexSwap:
         self.block_explorer_url = block_explorer_url
         if self.block_explorer_url is None:
             self.block_explorer_url = blockchain["block_explorer_url"]
+        if self.block_explorer_url is None:
+            self.logger.warning("self.block_explorer_url not setup")
+            return
         self.logger.debug(f"self.block_explorer_url {self.block_explorer_url}")
 
         self.rpc = rpc
@@ -114,15 +120,18 @@ class DexSwap:
         # self.logger.debug(f"asset_out_decimals {asset_out_decimals}")
         try:
             if self.protocol_type == "1inch":
-                asset_out_amount = 100000000000000000 / (10 ** 18 ) #1USDC
+                asset_out_amount = self.w3.to_wei(1,'ether') #1USDC()
+                self.logger.debug(f"asset_out_amount {asset_out_amount}")
                 quote_url = f"{self.dex_url}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
                 quote = await self._get(quote_url)
                 self.logger.debug(f"quote {quote}")
                 raw_quote = quote['toTokenAmount']
                 self.logger.debug(f"raw_quote {raw_quote}")
-                quote_readable = raw_quote / (10 ** 18) #
+                asset_quote_decimals = quote['fromToken']['decimals']
+                self.logger.debug(f"asset_quote_decimals {asset_quote_decimals}")
+                quote_readable = self.w3.from_wei(int(raw_quote),'wei') /(10 ** asset_quote_decimals)
                 self.logger.debug(f"quote_readable {quote_readable}")
-                return quote_readable
+                return round(quote_readable,2)
             if self.protocol_type in ["uniswap_v2","uniswap_v3"]:
                 return
         except Exception as e:
@@ -137,10 +146,10 @@ class DexSwap:
                 "action": "getabi",
                 "address": addr,
                 "apikey": self.block_explorer_api }
-            # headers = { "User-Agent": "Mozilla/5.0" }
-            resp = self.get(url=self.block_explorer_url,params =params,headers=headers)
-            response = resp.json() 
-            abi = response["result"]
+            headers = { "User-Agent": "Mozilla/5.0" }
+            resp = await self._get(url=self.block_explorer_url,params=params,headers=headers)
+            self.logger.debug(f"resp {resp}")
+            abi = resp["result"]
             return abi if (abi!="") else None
         except Exception as e:
             self.logger.debug(f"error get_abi {e}")
