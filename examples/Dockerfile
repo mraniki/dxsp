@@ -7,6 +7,7 @@ WORKDIR /app
 
 # install dependencies
 RUN pip install dxsp
+RUN pip install healthchecks_io
 
 # copy the content of the local src directory to the working directory
 COPY ./examples .
