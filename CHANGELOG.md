@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.25 (2023-04-14)
+### Fix
+* Asset_out_contract ([`55a3135`](https://github.com/mraniki/dxsp/commit/55a3135b112ddfebf7bf75db3f6a61a7ab359ce3))
+
 ## v1.0.24 (2023-04-14)
 ### Fix
 * Redeployment ([`b056d1e`](https://github.com/mraniki/dxsp/commit/b056d1e63350179c9d222c63a3b639068126aaaa))
