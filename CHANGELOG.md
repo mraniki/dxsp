@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.24 (2023-04-14)
+### Fix
+* Redeployment ([`b056d1e`](https://github.com/mraniki/dxsp/commit/b056d1e63350179c9d222c63a3b639068126aaaa))
+
 ## v1.0.23 (2023-04-14)
 ### Fix
 * Example and build workflow ([`f72a3e8`](https://github.com/mraniki/dxsp/commit/f72a3e8a8435d4cc7e66791f41a19dca6381da5c))
