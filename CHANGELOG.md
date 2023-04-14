@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.30 (2023-04-14)
+### Fix
+* Refactor example.py to use default host and port. ([`bd1c5ba`](https://github.com/mraniki/dxsp/commit/bd1c5ba60b4cca805e71f7e7acbaa69b94bb0157))
+
 ## v1.0.29 (2023-04-14)
 ### Fix
 * Example ([`d28b6a4`](https://github.com/mraniki/dxsp/commit/d28b6a4ae87918eb86fb414f3e50152b93f5a56e))
