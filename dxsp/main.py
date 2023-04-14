@@ -97,8 +97,7 @@ class DexSwap:
         self.gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup to be reviewed
 
 
-    @staticmethod
-    def _get(url, params=None, headers=None):
+    async def _get(self, url, params=None, headers=None):
         headers = { "User-Agent": "Mozilla/5.0" }
         self.logger.debug(f"_get url {url}")
         response = requests.get(url,params =params,headers=headers)
@@ -114,7 +113,7 @@ class DexSwap:
             if self.protocol_type == "1inch":
                 asset_out_amount=1000000000000
                 quote_url = f"{self.dex_url}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
-                quote = self._get(quote_url)
+                quote = await self._get(quote_url)
                 return quote['toTokenAmount']
             if self.protocol_type in ["uniswap_v2","uniswap_v3"]:
                 return
@@ -144,11 +143,11 @@ class DexSwap:
         self.logger.debug(f"get_approve {asset_out_address}")
         if self.protocol_type in ["1inch","1inch_limit"]:
             approval_check_URL = f"{self.dex_url}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={self.wallet_address}"
-            approval_response =  self._get(approval_check_URL)
+            approval_response = await self._get(approval_check_URL)
             approval_check = approval_response['allowance']
             if (approval_check==0):
                 approval_URL = f"{self.dex_url}/approve/transaction?tokenAddress={asset_out_address}"
-                approval_response =  self._get(approval_URL)
+                approval_response = await self._get(approval_URL)
         elif self.protocol_type in ["uniswap_v2","uniswap_v3"]:
             asset_out_abi= await self.get_abi(asset_out_address)
             asset_out_contract = self.w3.eth.contract(address=asset_out_address, abi=asset_out_abi)           
@@ -267,7 +266,7 @@ class DexSwap:
             #1INCH
             if self.protocol_type in ["1inch"]:
                 swap_url = f"{self.dex_url}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={self.wallet_address}&slippage={slippage}"
-                swap_TX = self._get(swap_url)
+                swap_TX = await self._get(swap_url)
                 TX_status_code = swap_TX['statusCode']
                 if TX_status_code != 200:
                     return
@@ -318,9 +317,20 @@ class DexSwap:
         self.logger.debug(f"get_block_explorer_status {token}")
         try:
             coin_info = await self.search_gecko(token)
+            self.logger.debug(f"coin_info {coin_info}")
             return coin_info['platforms'][f'{coin_platform}']
         except Exception as e:
             self.logger.debug(f"error search_gecko_contract {e}")
+            return
+
+    async def search_gecko_platform(self):
+        self.logger.debug(f"search_gecko_platform")
+        try:
+            assetplatform = self.gecko_api.get_asset_platforms()
+            output_dict = [x for x in assetplatform if x['chain_identifier'] == int(self.chain_id)]
+            return output_dict[0]['id']
+        except Exception as e:
+            self.logger.debug(f"error search_gecko_platform {e}")
             return
 
     async def search_gecko(self,token):
@@ -342,20 +352,10 @@ class DexSwap:
             self.logger.debug(f"error search_gecko {e}")
             return
 
-    async def search_gecko_platform(self):
-        self.logger.debug(f"search_gecko_platform")
-        try:
-            assetplatform = self.gecko_api.get_asset_platforms()
-            output_dict = [x for x in assetplatform if x['chain_identifier'] == int(self.chain_id)]
-            return output_dict[0]['id']
-        except Exception as e:
-            self.logger.debug(f"error search_gecko_platform {e}")
-            return
-
     async def get_contract_address(self,token_list_url, symbol):
         self.logger.debug(f"get_contract_address {token_list_url} {symbol}")
         try: 
-            token_list = self._get(token_list_url)
+            token_list = await self._get(token_list_url)
             token_search = token_list['tokens']
             for keyval in token_search:
                 if (keyval['symbol'] == symbol and keyval['chainId'] == self.chain_id):
