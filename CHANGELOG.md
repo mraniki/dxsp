@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.20 (2023-04-14)
+### Fix
+* Gecko and contract ([`b9d2383`](https://github.com/mraniki/dxsp/commit/b9d23836c9b327fb2a9d0bcd35102e24888ae5e2))
+
 ## v1.0.19 (2023-04-13)
 ### Fix
 * Gecko ([`f8e88cd`](https://github.com/mraniki/dxsp/commit/f8e88cddef94f7e639032c27d25ef05815d9da9e))
