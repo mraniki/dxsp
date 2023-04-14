@@ -99,7 +99,10 @@ class DexSwap:
         self.logger.debug(f"self.amount_trading_option {self.amount_trading_option}")
 
         self.gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup to be reviewed
-        self.gecko_platform = self.search_gecko_platform()
+        assetplatform = self.gecko_api.get_asset_platforms()
+        output_dict = [x for x in assetplatform if x['chain_identifier'] == int(self.chain_id)]
+        self.gecko_platform = output_dict[0]['id']
+        self.logger.debug(f"self.gecko_platform {self.gecko_platform}")
 
     async def _get(self, url, params=None, headers=None):
         headers = { "User-Agent": "Mozilla/5.0" }
@@ -364,17 +367,16 @@ class DexSwap:
             self.logger.debug(f"error search_gecko_contract {e}")
             return
 
-    async def search_gecko_platform(self):
-        self.logger.debug("search_gecko_platform")
-        try:
-            assetplatform = self.gecko_api.get_asset_platforms()
-            output_dict = [x for x in assetplatform if x['chain_identifier'] == int(self.chain_id)]
-            self.logger.debug(f"search_gecko_platform search {output_dict}")
-            return output_dict[0]['id']
-        except Exception as e:
-            self.logger.debug(f"error search_gecko_platform {e}")
-            return
-
+    # async def search_gecko_platform(self):
+    #     self.logger.debug("search_gecko_platform")
+    #     try:
+    #         assetplatform = self.gecko_api.get_asset_platforms()
+    #         output_dict = [x for x in assetplatform if x['chain_identifier'] == int(self.chain_id)]
+    #         self.logger.debug(f"search_gecko_platform search {output_dict}")
+    #         return output_dict[0]['id']
+    #     except Exception as e:
+    #         self.logger.debug(f"error search_gecko_platform {e}")
+    #         return
 
 
     async def get_contract_address(self,token_list_url, symbol):
