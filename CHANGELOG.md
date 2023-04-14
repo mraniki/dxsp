@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.23 (2023-04-14)
+### Fix
+* Example and build workflow ([`f72a3e8`](https://github.com/mraniki/dxsp/commit/f72a3e8a8435d4cc7e66791f41a19dca6381da5c))
+
 ## v1.0.22 (2023-04-14)
 ### Fix
 * Healthcheck for example ([`0d6ef8e`](https://github.com/mraniki/dxsp/commit/0d6ef8ea01b84cd6964a036e340b1d1dd12a44d0))
