@@ -99,7 +99,7 @@ def read_root():
 
 @app.get("/health")
 def health_check():
-    return {f"DXSP is online"}
+    return {"DXSP is online"}
 
 
 if __name__ == "__main__":
