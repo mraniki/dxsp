@@ -6,6 +6,8 @@ from dotenv import load_dotenv
 import asyncio
 from web3 import Web3
 
+from healthchecks_io import AsyncClient, CheckCreate
+
 #YOUR VARIABLES
 load_dotenv()
 
@@ -34,13 +36,13 @@ from dxsp.main import DexSwap
 #DEBUG LEVEL for DXSP package
 logging.basicConfig(level=logging.DEBUG)
 logging.getLogger('dxsp.__main__').setLevel(logging.DEBUG)
-# logging.getLogger('urllib3').setLevel(logging.WARNING)
+logging.getLogger('urllib3').setLevel(logging.WARNING)
 
 
 
 
 async def main():
-
+from healthchecks_io import AsyncClient, CheckCreate
 	#SWAP HELPER
 	dex = DexSwap(chain_id=chain,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
 
