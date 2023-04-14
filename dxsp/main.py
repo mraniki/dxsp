@@ -110,17 +110,17 @@ class DexSwap:
         asset_out_address = await self.search_contract(asset_out_symbol)
         self.logger.debug(f"asset_out_address {asset_out_address}")
         asset_out_contract = await self.get_token_contract(asset_out_symbol)
-        asset_out_decimals = asset_out_contract.functions.decimals().call()
-        self.logger.debug(f"asset_out_decimals {asset_out_decimals}")
+        # asset_out_decimals = asset_out_contract.functions.decimals().call()
+        # self.logger.debug(f"asset_out_decimals {asset_out_decimals}")
         try:
             if self.protocol_type == "1inch":
-                asset_out_amount = 1 / (10 ** asset_out_decimals ) #1USDC
+                asset_out_amount = 100000000000000000 / (10 ** 18 ) #1USDC
                 quote_url = f"{self.dex_url}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
                 quote = await self._get(quote_url)
                 self.logger.debug(f"quote {quote}")
                 raw_quote = quote['toTokenAmount']
                 self.logger.debug(f"raw_quote {raw_quote}")
-                quote_readable = raw_quote / (10 ** asset_out_decimals) #8 decimales for USDC
+                quote_readable = raw_quote / (10 ** 18) #
                 self.logger.debug(f"quote_readable {quote_readable}")
                 return quote_readable
             if self.protocol_type in ["uniswap_v2","uniswap_v3"]:
