@@ -105,5 +105,5 @@ def health_check():
 if __name__ == "__main__":
     HOST=os.getenv("HOST", "0.0.0.0")
     PORT=os.getenv("PORT", "8080")
-    uvicorn.run("example:app", host=HOST, port=PORT, reload=True)
+    uvicorn.run(app, host=HOST, port=PORT, reload=True)
 
