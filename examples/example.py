@@ -6,6 +6,10 @@ import time
 import requests 
 import random
 
+from fastapi import FastAPI
+import uvicorn
+
+
 from dotenv import load_dotenv
 import asyncio
 from web3 import Web3
@@ -51,8 +55,8 @@ async def main():
 		healthcheck = requests.get(url= healthchecks_io_uuid, timeout=10)
 		#SWAP HELPER
 
-		# chain_lst = ['1','11155111','56','42161','137','10','43114','250','42220']
-		# chain = random.sample(chain_lst,1)[0]
+		chain_lst = ['1','11155111','56','42161','137','10','43114','250','42220']
+		chain = random.sample(chain_lst,1)[0]
 		print("chain ", chain)
 		dex = DexSwap(chain_id=chain,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
 
@@ -70,7 +74,7 @@ async def main():
 		
 		#QUOTE
 		#symbol = 'BNB'
-		symbol_lst = ['wBTC', 'BTC','ETH','wETH','MATIC','UNI','CAKE','USDT','DAI','TUSD','AAVE','SUSHI','CRV','UNCX']
+		symbol_lst = ['WBTC','BTC','ETH','WETH','MATIC','UNI','CAKE','USDT','DAI','AAVE','SUSHI','CRV','UNCX','BIFI']
 		symbol = random.sample(symbol_lst,1)[0]
 		print("symbol ", symbol)
 		# quote = await dex.get_quote(symbol)
@@ -86,7 +90,20 @@ async def main():
 		# print("ABI ", addressABI)
 		time.sleep(240)
 
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    loop = asyncio.get_event_loop()
+    loop.create_task(main())
+
+@app.get("/health")
+def health_check():
+    return {f"DXSP is online"}
+
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    HOST=os.getenv("HOST", "0.0.0.0")
+    PORT=os.getenv("PORT", "8080")
+    uvicorn.run("example:app", host=HOST, port=PORT, reload=True)
 

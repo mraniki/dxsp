@@ -107,8 +107,9 @@ class DexSwap:
 
     async def _get(self, url, params=None, headers=None):
         headers = { "User-Agent": "Mozilla/5.0" }
-        self.logger.debug(f"_get url {url}")
+        #self.logger.debug(f"_get url {url}")
         response = requests.get(url,params =params,headers=headers)
+        #self.logger.debug(f"response _get {response}")
         return response.json()
 
 
@@ -356,7 +357,7 @@ class DexSwap:
     async def search_contract(self, token):
         self.logger.debug(f"search_contract {token}")
         #📝tokenlist
-        main_list = 'https://raw.githubusercontent.com/viaprotocol_type/tokenlists/main/all_tokens/all.json'
+        main_list = 'https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json'
         personal_list = os.getenv("DXSP_TOKEN_LIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json")
         test_token_list=os.getenv("DXSP_TEST_TOKEN_LIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json")
 
@@ -386,7 +387,7 @@ class DexSwap:
         try:
             search_results = self.gecko_api.search(query=token)
             search_dict = search_results['coins']
-            self.logger.debug(f"search_dict {search_dict}")
+            #self.logger.debug(f"search_dict {search_dict}")
             filtered_dict = [x for x in search_dict if x['symbol'] == token.upper()]
             api_dict = [ sub['api_symbol'] for sub in filtered_dict ]
             self.logger.debug(f"api_dict {api_dict}")
@@ -420,6 +421,7 @@ class DexSwap:
         self.logger.debug(f"get_contract_address {token_list_url} {symbol}")
         try: 
             token_list = await self._get(token_list_url)
+            #self.logger.debug(f"token_list {token_list}")
             token_search = token_list['tokens']
             for keyval in token_search:
                 if (keyval['symbol'] == symbol and keyval['chainId'] == self.chain_id):
