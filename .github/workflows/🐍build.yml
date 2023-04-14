@@ -8,7 +8,6 @@ on:
    branches: [ "main","dev"]
    paths-ignore:
     - "docs/**"
-    - "examples/**"
     - "*.md"
 
 jobs:
