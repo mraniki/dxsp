@@ -48,6 +48,7 @@ class DexSwap:
         self.block_explorer_api = block_explorer_api
 
         self.block_explorer_url = block_explorer_url
+        self.logger.debug(f"self.block_explorer_url {self.block_explorer_url}")
         if self.block_explorer_url is None:
             self.block_explorer_url = blockchain["block_explorer_url"]
         if self.block_explorer_url is None:

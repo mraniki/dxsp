@@ -51,8 +51,8 @@ async def main():
 		healthcheck = requests.get(url= healthchecks_io_uuid, timeout=10)
 		#SWAP HELPER
 
-		# chain_lst = ['1','56','42161','137','10','43114','250','42220']
-		# chain = random.sample(chain_lst,1)[0]
+		chain_lst = ['1','11155111','56','42161','137','10','43114','250','42220']
+		chain = random.sample(chain_lst,1)[0]
 		# print("chain ", chain)
 		dex = DexSwap(chain_id=chain,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
 
@@ -69,22 +69,22 @@ async def main():
 		# print("demo_order ", demo_order)
 		
 		#QUOTE
-		symbol = 'BNB'
-		# symbol_lst = ['wBTC', 'ETH', 'MATIC', 'CAKE', 'XRP', 'OPT', 'USDT','DAI','BTC','DOGE','SOL','UNI','wETH']
-		#symbol = random.sample(symbol_lst,1)[0]
+		#symbol = 'BNB'
+		symbol_lst = ['wBTC', 'ETH', 'MATIC', 'CAKE', 'XRP', 'OPT', 'USDT','DAI','BTC','DOGE','SOL','UNI','wETH','BNB']
+		symbol = random.sample(symbol_lst,1)[0]
 		print("symbol ", symbol)
-		quote = await dex.get_quote(symbol)
-		print("quote ", quote)
+		# quote = await dex.get_quote(symbol)
+		# print("quote ", quote)
 		
 		# #get Contract Address
 		address = await dex.search_contract(symbol)
-		print("address ", address)
+		print("chain ",chain,"symbol ",symbol," address ", address)
 		#bitcoinaddress  0x68f180fcCe6836688e9084f035309E29Bf0A2095
 
 		#getABI
 		# addressABI = await dex.get_abi(address)
 		# print("ABI ", addressABI)
-		time.sleep(20)
+		time.sleep(60)
 
 
 if __name__ == "__main__":
