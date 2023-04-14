@@ -2,6 +2,8 @@ import sys
 sys.path.append('../')
 import logging
 import os
+import time
+
 from dotenv import load_dotenv
 import asyncio
 from web3 import Web3
@@ -42,36 +44,41 @@ logging.getLogger('dxsp.__main__').setLevel(logging.DEBUG)
 logging.getLogger('urllib3').setLevel(logging.WARNING)
 
 
-
 async def main():
+	while True:
+		client = AsyncClient(api_key=healthchecks_io_api)
+		check = await client.create_check(CheckCreate(name="dxsp test", tags="dxsp"))
+		print(check)
 
-	#SWAP HELPER
-	dex = DexSwap(chain_id=chain,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
+		#SWAP HELPER
+		dex = DexSwap(chain_id=chain,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
 
-	#BUY 10 USDC to SWAP with BITCOIN
-	#demo_tx = await dex.get_swap('USDT','wBTC',10)
-	#print("demo_tx ", demo_tx)
+		#BUY 10 USDC to SWAP with BITCOIN
+		#demo_tx = await dex.get_swap('USDT','wBTC',10)
+		#print("demo_tx ", demo_tx)
 
-	#SWAP with your OWN defined exchange like Sushiswap on ARBITRUM 
-	# sushi_router = '0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F'
-	# dex_sushi = DexSwap(chain_id=42161,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api,dex_exchange=sushi_router,base_trading_symbol='USDT')
-	# print("dex_sushi ", dex_sushi)
-	# #Execute ORDER to buy 1% of your USDT balance on SUSHISWAP ARBITRUM and get BTC token
-	# demo_order = await dex_sushi.execute_order(direction = 'BUY',symbol = 'wBTC')
-	# print("demo_order ", demo_order)
-	
-	#QUOTE
-	quote = await dex.get_quote('wBTC')
-	print("quote ", quote)
-	
-	# #get Contract Address
-	bitcoinaddress = await dex.search_contract('wBTC')
-	print("bitcoinaddress ", bitcoinaddress)
-	#bitcoinaddress  0x68f180fcCe6836688e9084f035309E29Bf0A2095
+		#SWAP with your OWN defined exchange like Sushiswap on ARBITRUM 
+		# sushi_router = '0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F'
+		# dex_sushi = DexSwap(chain_id=42161,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api,dex_exchange=sushi_router,base_trading_symbol='USDT')
+		# print("dex_sushi ", dex_sushi)
+		# #Execute ORDER to buy 1% of your USDT balance on SUSHISWAP ARBITRUM and get BTC token
+		# demo_order = await dex_sushi.execute_order(direction = 'BUY',symbol = 'wBTC')
+		# print("demo_order ", demo_order)
+		
+		#QUOTE
+		quote = await dex.get_quote('wBTC')
+		print("quote ", quote)
+		
+		# #get Contract Address
+		bitcoinaddress = await dex.search_contract('wBTC')
+		print("bitcoinaddress ", bitcoinaddress)
+		#bitcoinaddress  0x68f180fcCe6836688e9084f035309E29Bf0A2095
 
-	#getABI
-	# bitcoinaddressABI = await dex.get_abi(bitcoinaddress)
-	# print(bitcoinaddressABI)
+		#getABI
+		# bitcoinaddressABI = await dex.get_abi(bitcoinaddress)
+		# print(bitcoinaddressABI)
+		time.sleep(10)
 
 if __name__ == "__main__":
     asyncio.run(main())
+
