@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.27 (2023-04-14)
+### Fix
+* Example ([`5906033`](https://github.com/mraniki/dxsp/commit/5906033ca2c683ae568bc365cdde44149e2aed81))
+
 ## v1.0.26 (2023-04-14)
 ### Fix
 * Quote function ([`1ee3f51`](https://github.com/mraniki/dxsp/commit/1ee3f510b0edca76d0f01bd2f9471907f0f67bdd))
