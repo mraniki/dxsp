@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.26 (2023-04-14)
+### Fix
+* Quote function ([`1ee3f51`](https://github.com/mraniki/dxsp/commit/1ee3f510b0edca76d0f01bd2f9471907f0f67bdd))
+
 ## v1.0.25 (2023-04-14)
 ### Fix
 * Asset_out_contract ([`55a3135`](https://github.com/mraniki/dxsp/commit/55a3135b112ddfebf7bf75db3f6a61a7ab359ce3))
