@@ -9,7 +9,7 @@ WORKDIR /app
 RUN pip install dxsp
 RUN pip install healthchecks_io
 RUN pip install fastapi
-RUN pip uvicorn
+RUN pip install uvicorn
 
 # copy the content of the local src directory to the working directory
 COPY ./examples .
