@@ -93,7 +93,6 @@ class DexSwap:
         self.amount_trading_option = amount_trading_option
         self.logger.debug(f"self.amount_trading_option {self.amount_trading_option}")
 
-        #🦎GECKO
         self.gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup to be reviewed
 
 
@@ -107,14 +106,23 @@ class DexSwap:
         self.logger.debug(f"get_quote {symbol}")
         asset_in_address = await self.search_contract(symbol)
         self.logger.debug(f"asset_in_address {asset_in_address}")
-        asset_out_address = await self.search_contract(self.base_trading_symbol)
+        asset_out_symbol = self.base_trading_symbol
+        asset_out_address = await self.search_contract(asset_out_symbol)
         self.logger.debug(f"asset_out_address {asset_out_address}")
+        asset_out_contract = await self.get_token_contract(asset_out_symbol)
+        asset_out_decimals = asset_out_contract.functions.decimals().call()
+        self.logger.debug(f"asset_out_decimals {asset_out_decimals}")
         try:
             if self.protocol_type == "1inch":
-                asset_out_amount=1000000000000
+                asset_out_amount = 1 / (10 ** asset_out_decimals ) #1USDC
                 quote_url = f"{self.dex_url}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
                 quote = await self._get(quote_url)
-                return quote['toTokenAmount']
+                self.logger.debug(f"quote {quote}")
+                raw_quote = quote['toTokenAmount']
+                self.logger.debug(f"raw_quote {raw_quote}")
+                quote_readable = raw_quote / (10 ** asset_out_decimals) #8 decimales for USDC
+                self.logger.debug(f"quote_readable {quote_readable}")
+                return quote_readable
             if self.protocol_type in ["uniswap_v2","uniswap_v3"]:
                 return
         except Exception as e:
@@ -124,14 +132,13 @@ class DexSwap:
     async def get_abi(self,addr):
         self.logger.debug(f"get_abi {addr}")
         try:
-            url = self.block_explorer_url
             params = {
                 "module": "contract",
                 "action": "getabi",
                 "address": addr,
                 "apikey": self.block_explorer_api }
-            headers = { "User-Agent": "Mozilla/5.0" }
-            resp = requests.get(url=url,params =params,headers=headers)
+            # headers = { "User-Agent": "Mozilla/5.0" }
+            resp = self.get(url=self.block_explorer_url,params =params,headers=headers)
             response = resp.json() 
             abi = response["result"]
             return abi if (abi!="") else None
@@ -314,7 +321,7 @@ class DexSwap:
         return checkTransactionRequest['status']
 
     async def search_gecko_contract(self,token):
-        self.logger.debug(f"get_block_explorer_status {token}")
+        self.logger.debug(f"🦎search_gecko_contract {token}")
         try:
             coin_info = await self.search_gecko(token)
             self.logger.debug(f"coin_info {coin_info}")
@@ -364,6 +371,7 @@ class DexSwap:
             self.logger.debug(f"error get_contract_address {e}")
             return
 
+
     async def search_contract(self, token):
         self.logger.debug(f"search_contract {token}")
         #📝tokenlist
@@ -372,11 +380,11 @@ class DexSwap:
         test_token_list=os.getenv("DXSP_TEST_TOKEN_LIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json")
 
         try:
-            token_contract = await self.get_contract_address(main_list,token)
+            token_contract = await self.get_contract_address(personal_list,token)
             if token_contract is None:
                 token_contract = await self.get_contract_address(test_token_list,token)
             if token_contract is None:
-                token_contract = await self.get_contract_address(personal_list,token)
+                token_contract = await self.get_contract_address(main_list,token)
             if token_contract is None:
                 token_contract = await self.search_gecko_contract(token)
             if token_contract is not None:
