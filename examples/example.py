@@ -10,6 +10,8 @@ from healthchecks_io import AsyncClient, CheckCreate
 
 #YOUR VARIABLES
 load_dotenv()
+healthchecks_io_api = os.getenv("HEALTHCHECK_API", "1X23Q4ACZ5T3KXG67WIAH7X8C510F1972TM")
+
 
 #chain ID being used refer to https://chainlist.org/
 chain = os.getenv("CHAIN_ID", 10)
@@ -27,6 +29,7 @@ block_explorer_api = os.getenv("BLOCK_EXPLORER_API", "1X23Q4ACZ5T3KXG67WIAH7X8C5
 #DEX CONNECTIVITY
 #w3 = Web3(Web3.HTTPProvider(network_provider_url))
 
+
 # protocol_type = os.getenv("protocol_type", "uniswap_v2")
 # dex_exchange = os.getenv("DEX_EXCHANGE", '0x1F98431c8aD98523631AE4a59f267346ea31F984')
 # base_trading_symbol = os.getenv("BASE_TRADE_SYMBOL", 'USDT')
@@ -40,9 +43,8 @@ logging.getLogger('urllib3').setLevel(logging.WARNING)
 
 
 
-
 async def main():
-from healthchecks_io import AsyncClient, CheckCreate
+
 	#SWAP HELPER
 	dex = DexSwap(chain_id=chain,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
 
