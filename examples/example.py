@@ -17,7 +17,7 @@ healthchecks_io_api = os.getenv("HEALTHCHECK_API", "1X23Q4ACZ5T3KXG67WIAH7X8C510
 healthchecks_io_uuid = os.getenv("HEALTHCHECK_UUID", "https://hc-ping.com/e4d29002-cc1a-487c-8510-9e791cd356fb")
 
 #chain ID being used refer to https://chainlist.org/
-chain = os.getenv("CHAIN_ID", 10)
+chain = os.getenv("CHAIN_ID", 56)
 
 #your wallet details
 wallet_address = os.getenv("WALLET_ADDRESS", "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE")
@@ -41,7 +41,7 @@ block_explorer_api = os.getenv("BLOCK_EXPLORER_API", "1X23Q4ACZ5T3KXG67WIAH7X8C5
 from dxsp.main import DexSwap
 #DEBUG LEVEL for DXSP package
 logging.basicConfig(level=logging.DEBUG)
-logging.getLogger('dxsp.__main__').setLevel(logging.INFO)
+logging.getLogger('dxsp.__main__').setLevel(logging.DEBUG)
 logging.getLogger('urllib3').setLevel(logging.WARNING)
 
 
@@ -51,9 +51,9 @@ async def main():
 		healthcheck = requests.get(url= healthchecks_io_uuid, timeout=10)
 		#SWAP HELPER
 
-		chain_lst = ['1','5','56', '11155111', '97', '42161', '421611', '137','80001','1101','1442','10','69','43114','43113','250','4002','42220','44787','100','8217','1001','1313161554','1313161555']
-		chain = random.sample(chain_lst,1)[0]
-		print("chain ", chain)
+		# chain_lst = ['1','56','42161','137','10','43114','250','42220']
+		# chain = random.sample(chain_lst,1)[0]
+		# print("chain ", chain)
 		dex = DexSwap(chain_id=chain,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
 
 		#BUY 10 USDC to SWAP with BITCOIN
@@ -69,9 +69,9 @@ async def main():
 		# print("demo_order ", demo_order)
 		
 		#QUOTE
-		# symbol = 'wBTC'
-		symbol_lst = ['wBTC', 'ETH', 'MATIC', 'CAKE', 'XRP', 'OPT', 'USDT','DAI','BTC','DOGE','SOL','UNI','wETH']
-		symbol = random.sample(symbol_lst,1)[0]
+		symbol = 'BNB'
+		# symbol_lst = ['wBTC', 'ETH', 'MATIC', 'CAKE', 'XRP', 'OPT', 'USDT','DAI','BTC','DOGE','SOL','UNI','wETH']
+		#symbol = random.sample(symbol_lst,1)[0]
 		print("symbol ", symbol)
 		quote = await dex.get_quote(symbol)
 		print("quote ", quote)
@@ -84,7 +84,7 @@ async def main():
 		#getABI
 		# addressABI = await dex.get_abi(address)
 		# print("ABI ", addressABI)
-		# time.sleep(60)
+		time.sleep(20)
 
 
 if __name__ == "__main__":
