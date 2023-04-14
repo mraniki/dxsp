@@ -36,7 +36,7 @@ class DexSwap:
         self.logger.info(f"Initializing DexSwap object for {wallet_address} on {chain_id}")
 
         self.chain_id = int(chain_id)
-        self.logger.debug(f"self.chain_id {chain_id}")
+        self.logger.debug(f"self.chain_id {self.chain_id}")
         blockchain = blockchains[self.chain_id ]
         self.logger.debug(f"self.block_explorer_url {blockchain}")
 
@@ -71,7 +71,7 @@ class DexSwap:
                 self.protocol_type = "1inch"
             self.dex_url = f"{base_url}"
 
-
+        self.logger.debug(f"self.dex_url {self.dex_url}")
         self.logger.debug(f"self.protocol_type {self.protocol_type}")
 
         self.dex_exchange = dex_exchange
@@ -326,7 +326,7 @@ class DexSwap:
     async def search_gecko(self,token):
         self.logger.debug(f"search_gecko {token}")
         try:
-            search_results = gecko_api.search(query=token)
+            search_results = self.gecko_api.search(query=token)
             search_dict = search_results['coins']
             filtered_dict = [x for x in search_dict if x['symbol'] == token.upper()]
             api_dict = [ sub['api_symbol'] for sub in filtered_dict ]
@@ -379,9 +379,11 @@ class DexSwap:
                 token_contract = await self.get_contract_address(personal_list,token)
             if token_contract is None:
                 token_contract = await self.search_gecko_contract(token)
-            if len(token_contract)>1:
+            if token_contract is not None:
                 self.logger.debug(f"token_contract {token_contract}")
                 return self.w3.to_checksum_address(token_contract)
+            else:
+                self.logger.debug(f"no contract found for {token} on chain {self.chain_id}")
         except Exception as e:
             self.logger.debug(f"error search_contract {e} token {token} token_contract {token_contract}")
             return
