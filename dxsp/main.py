@@ -36,6 +36,9 @@ class DexSwap:
 
         self.chain_id = int(chain_id)
         self.logger.debug(f"self.chain_id {self.chain_id}")
+        if self.chain_id  is None:
+            self.logger.warning("self.chain_id not setup")
+            return
         blockchain = blockchains[self.chain_id ]
         self.logger.debug(f"self.block_explorer_url {blockchain}")
 
@@ -47,6 +50,9 @@ class DexSwap:
         self.block_explorer_url = block_explorer_url
         if self.block_explorer_url is None:
             self.block_explorer_url = blockchain["block_explorer_url"]
+        if self.block_explorer_url is None:
+            self.logger.warning("self.block_explorer_url not setup")
+            return
         self.logger.debug(f"self.block_explorer_url {self.block_explorer_url}")
 
         self.rpc = rpc
@@ -93,7 +99,7 @@ class DexSwap:
         self.logger.debug(f"self.amount_trading_option {self.amount_trading_option}")
 
         self.gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup to be reviewed
-
+        self.gecko_platform = self.search_gecko_platform()
 
     async def _get(self, url, params=None, headers=None):
         headers = { "User-Agent": "Mozilla/5.0" }
@@ -109,20 +115,26 @@ class DexSwap:
         asset_out_symbol = self.base_trading_symbol
         asset_out_address = await self.search_contract(asset_out_symbol)
         self.logger.debug(f"asset_out_address {asset_out_address}")
-        asset_out_contract = await self.get_token_contract(asset_out_symbol)
+        if asset_out_address is None:
+            self.logger.debug(f"No Valid Contract {symbol}")
+            return
+        # asset_out_contract = await self.get_token_contract(asset_out_symbol)
         # asset_out_decimals = asset_out_contract.functions.decimals().call()
         # self.logger.debug(f"asset_out_decimals {asset_out_decimals}")
         try:
             if self.protocol_type == "1inch":
-                asset_out_amount = 100000000000000000 / (10 ** 18 ) #1USDC
+                asset_out_amount = self.w3.to_wei(1,'ether') #1USDC()
+                self.logger.debug(f"asset_out_amount {asset_out_amount}")
                 quote_url = f"{self.dex_url}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
                 quote = await self._get(quote_url)
                 self.logger.debug(f"quote {quote}")
                 raw_quote = quote['toTokenAmount']
                 self.logger.debug(f"raw_quote {raw_quote}")
-                quote_readable = raw_quote / (10 ** 18) #
+                asset_quote_decimals = quote['fromToken']['decimals']
+                self.logger.debug(f"asset_quote_decimals {asset_quote_decimals}")
+                quote_readable = self.w3.from_wei(int(raw_quote),'wei') /(10 ** asset_quote_decimals)
                 self.logger.debug(f"quote_readable {quote_readable}")
-                return quote_readable
+                return round(quote_readable,2)
             if self.protocol_type in ["uniswap_v2","uniswap_v3"]:
                 return
         except Exception as e:
@@ -137,10 +149,10 @@ class DexSwap:
                 "action": "getabi",
                 "address": addr,
                 "apikey": self.block_explorer_api }
-            # headers = { "User-Agent": "Mozilla/5.0" }
-            resp = self.get(url=self.block_explorer_url,params =params,headers=headers)
-            response = resp.json() 
-            abi = response["result"]
+            headers = { "User-Agent": "Mozilla/5.0" }
+            resp = await self._get(url=self.block_explorer_url,params=params,headers=headers)
+            self.logger.debug(f"resp {resp}")
+            abi = resp["result"]
             return abi if (abi!="") else None
         except Exception as e:
             self.logger.debug(f"error get_abi {e}")
@@ -320,12 +332,34 @@ class DexSwap:
         checkTransactionRequest =  self.get(checkTransactionSuccessURL)
         return checkTransactionRequest['status']
 
+
+    async def search_gecko(self,token):
+        self.logger.debug(f"search_gecko {token}")
+        try:
+            search_results = self.gecko_api.search(query=token)
+            search_dict = search_results['coins']
+            self.logger.debug(f"search_dict {search_dict}")
+            filtered_dict = [x for x in search_dict if x['symbol'] == token.upper()]
+            api_dict = [ sub['api_symbol'] for sub in filtered_dict ]
+            for i in api_dict:
+                coin_dict = self.gecko_api.get_coin_by_id(i)
+                try:
+                    # coin_platform = await self.search_gecko_platform()
+                    if coin_dict['platforms'][f'{self.gecko_platform}'] is not None:
+                        return coin_dict
+                except KeyError:
+                    pass
+        except Exception as e:
+            self.logger.debug(f"error search_gecko {e}")
+            return
+
     async def search_gecko_contract(self,token):
         self.logger.debug(f"🦎search_gecko_contract {token}")
         try:
             coin_info = await self.search_gecko(token)
             self.logger.debug(f"coin_info {coin_info}")
-            return coin_info['platforms'][f'{coin_platform}']
+            if coin_info is not None:
+                return coin_info['platforms'][f'{self.gecko_platform}']
         except Exception as e:
             self.logger.debug(f"error search_gecko_contract {e}")
             return
@@ -335,29 +369,13 @@ class DexSwap:
         try:
             assetplatform = self.gecko_api.get_asset_platforms()
             output_dict = [x for x in assetplatform if x['chain_identifier'] == int(self.chain_id)]
+            self.logger.debug(f"search_gecko_platform search {output_dict}")
             return output_dict[0]['id']
         except Exception as e:
             self.logger.debug(f"error search_gecko_platform {e}")
             return
 
-    async def search_gecko(self,token):
-        self.logger.debug(f"search_gecko {token}")
-        try:
-            search_results = self.gecko_api.search(query=token)
-            search_dict = search_results['coins']
-            filtered_dict = [x for x in search_dict if x['symbol'] == token.upper()]
-            api_dict = [ sub['api_symbol'] for sub in filtered_dict ]
-            for i in api_dict:
-                coin_dict = self.gecko_api.get_coin_by_id(i)
-                try:
-                    coin_platform = await self.search_gecko_platform()
-                    if coin_dict['platforms'][f'{coin_platform}'] is not None:
-                        return coin_dict
-                except KeyError:
-                    pass
-        except Exception as e:
-            self.logger.debug(f"error search_gecko {e}")
-            return
+
 
     async def get_contract_address(self,token_list_url, symbol):
         self.logger.debug(f"get_contract_address {token_list_url} {symbol}")

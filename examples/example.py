@@ -4,6 +4,8 @@ import logging
 import os
 import time
 import requests 
+import random
+
 from dotenv import load_dotenv
 import asyncio
 from web3 import Web3
@@ -15,7 +17,7 @@ healthchecks_io_api = os.getenv("HEALTHCHECK_API", "1X23Q4ACZ5T3KXG67WIAH7X8C510
 healthchecks_io_uuid = os.getenv("HEALTHCHECK_UUID", "https://hc-ping.com/e4d29002-cc1a-487c-8510-9e791cd356fb")
 
 #chain ID being used refer to https://chainlist.org/
-chain = os.getenv("CHAIN_ID", 10)
+chain = os.getenv("CHAIN_ID", 56)
 
 #your wallet details
 wallet_address = os.getenv("WALLET_ADDRESS", "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE")
@@ -48,6 +50,10 @@ async def main():
 
 		healthcheck = requests.get(url= healthchecks_io_uuid, timeout=10)
 		#SWAP HELPER
+
+		# chain_lst = ['1','56','42161','137','10','43114','250','42220']
+		# chain = random.sample(chain_lst,1)[0]
+		# print("chain ", chain)
 		dex = DexSwap(chain_id=chain,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
 
 		#BUY 10 USDC to SWAP with BITCOIN
@@ -63,17 +69,21 @@ async def main():
 		# print("demo_order ", demo_order)
 		
 		#QUOTE
-		quote = await dex.get_quote('wBTC')
+		symbol = 'BNB'
+		# symbol_lst = ['wBTC', 'ETH', 'MATIC', 'CAKE', 'XRP', 'OPT', 'USDT','DAI','BTC','DOGE','SOL','UNI','wETH']
+		#symbol = random.sample(symbol_lst,1)[0]
+		print("symbol ", symbol)
+		quote = await dex.get_quote(symbol)
 		print("quote ", quote)
 		
 		# #get Contract Address
-		bitcoinaddress = await dex.search_contract('wBTC')
-		print("bitcoinaddress ", bitcoinaddress)
+		address = await dex.search_contract(symbol)
+		print("address ", address)
 		#bitcoinaddress  0x68f180fcCe6836688e9084f035309E29Bf0A2095
 
 		#getABI
-		# bitcoinaddressABI = await dex.get_abi(bitcoinaddress)
-		# print(bitcoinaddressABI)
+		# addressABI = await dex.get_abi(address)
+		# print("ABI ", addressABI)
 		time.sleep(20)
 
 
