@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.22 (2023-04-14)
+### Fix
+* Healthcheck for example ([`0d6ef8e`](https://github.com/mraniki/dxsp/commit/0d6ef8ea01b84cd6964a036e340b1d1dd12a44d0))
+
 ## v1.0.21 (2023-04-14)
 ### Fix
 * Change _get to async and added self ([`a38cb23`](https://github.com/mraniki/dxsp/commit/a38cb2389cb5f4c795c89862630587e2aa591bcd))
