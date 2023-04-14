@@ -107,8 +107,9 @@ class DexSwap:
 
     async def _get(self, url, params=None, headers=None):
         headers = { "User-Agent": "Mozilla/5.0" }
-        self.logger.debug(f"_get url {url}")
+        #self.logger.debug(f"_get url {url}")
         response = requests.get(url,params =params,headers=headers)
+        #self.logger.debug(f"response _get {response}")
         return response.json()
 
 
@@ -155,9 +156,13 @@ class DexSwap:
                 "apikey": self.block_explorer_api }
             headers = { "User-Agent": "Mozilla/5.0" }
             resp = await self._get(url=self.block_explorer_url,params=params,headers=headers)
-            self.logger.debug(f"resp {resp}")
-            abi = resp["result"]
-            return abi if (abi!="") else None
+            #self.logger.debug(f"resp {resp} status {resp['status']}")
+            if resp['status']=="1":
+                self.logger.debug(f"ABI found {resp}")
+                abi = resp["result"]
+                return abi
+            else:
+                self.logger.debug(f"No ABI identified Option B needed for contract {addr} on chain {self.chain_id}")
         except Exception as e:
             self.logger.debug(f"error get_abi {e}")
             return
@@ -337,37 +342,6 @@ class DexSwap:
         return checkTransactionRequest['status']
 
 
-    async def search_gecko(self,token):
-        self.logger.debug(f"search_gecko {token}")
-        try:
-            search_results = self.gecko_api.search(query=token)
-            search_dict = search_results['coins']
-            self.logger.debug(f"search_dict {search_dict}")
-            filtered_dict = [x for x in search_dict if x['symbol'] == token.upper()]
-            api_dict = [ sub['api_symbol'] for sub in filtered_dict ]
-            for i in api_dict:
-                coin_dict = self.gecko_api.get_coin_by_id(i)
-                try:
-                    # coin_platform = await self.search_gecko_platform()
-                    if coin_dict['platforms'][f'{self.gecko_platform}'] is not None:
-                        return coin_dict
-                except KeyError:
-                    pass
-        except Exception as e:
-            self.logger.debug(f"error search_gecko {e}")
-            return
-
-    async def search_gecko_contract(self,token):
-        self.logger.debug(f"🦎search_gecko_contract {token}")
-        try:
-            coin_info = await self.search_gecko(token)
-            self.logger.debug(f"coin_info {coin_info}")
-            if coin_info is not None:
-                return coin_info['platforms'][f'{self.gecko_platform}']
-        except Exception as e:
-            self.logger.debug(f"error search_gecko_contract {e}")
-            return
-
     # async def search_gecko_platform(self):
     #     self.logger.debug("search_gecko_platform")
     #     try:
@@ -380,33 +354,24 @@ class DexSwap:
     #         return
 
 
-    async def get_contract_address(self,token_list_url, symbol):
-        self.logger.debug(f"get_contract_address {token_list_url} {symbol}")
-        try: 
-            token_list = await self._get(token_list_url)
-            token_search = token_list['tokens']
-            for keyval in token_search:
-                if (keyval['symbol'] == symbol and keyval['chainId'] == self.chain_id):
-                    return keyval['address']
-        except Exception as e:
-            self.logger.debug(f"error get_contract_address {e}")
-            return
-
-
     async def search_contract(self, token):
         self.logger.debug(f"search_contract {token}")
         #📝tokenlist
-        main_list = 'https://raw.githubusercontent.com/viaprotocol_type/tokenlists/main/all_tokens/all.json'
+        main_list = 'https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json'
         personal_list = os.getenv("DXSP_TOKEN_LIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json")
         test_token_list=os.getenv("DXSP_TEST_TOKEN_LIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json")
 
         try:
             token_contract = await self.get_contract_address(personal_list,token)
+            self.logger.debug(f"personal_list {token} {token_contract}")
             if token_contract is None:
                 token_contract = await self.get_contract_address(test_token_list,token)
+                self.logger.debug(f"test_token_list {token} {token_contract}")
             if token_contract is None:
                 token_contract = await self.get_contract_address(main_list,token)
+                self.logger.debug(f"main_list {token} {token_contract}")
             if token_contract is None:
+                self.logger.debug(f"gecko search {token}")
                 token_contract = await self.search_gecko_contract(token)
             if token_contract is not None:
                 self.logger.debug(f"token_contract {token_contract}")
@@ -415,6 +380,54 @@ class DexSwap:
                 self.logger.debug(f"no contract found for {token} on chain {self.chain_id}")
         except Exception as e:
             self.logger.debug(f"error search_contract {e} token {token} token_contract {token_contract}")
+            return
+
+    async def search_gecko(self,token):
+        self.logger.debug(f"search_gecko {token}")
+        try:
+            search_results = self.gecko_api.search(query=token)
+            search_dict = search_results['coins']
+            #self.logger.debug(f"search_dict {search_dict}")
+            filtered_dict = [x for x in search_dict if x['symbol'] == token.upper()]
+            api_dict = [ sub['api_symbol'] for sub in filtered_dict ]
+            self.logger.debug(f"api_dict {api_dict}")
+            for i in api_dict:
+                coin_dict = self.gecko_api.get_coin_by_id(i)
+                try:
+                    if coin_dict['platforms'][f'{self.gecko_platform}'] is not None:
+                        return coin_dict
+                except KeyError:
+                    pass
+        except Exception as e:
+            self.logger.debug(f"error search_gecko {e}")
+            return
+
+    async def search_gecko_contract(self,token):
+        self.logger.debug(f"🦎search_gecko_contract {token}")
+        self.logger.debug(f"🦎self.gecko_platform {self.gecko_platform}")
+        try:
+            coin_info = await self.search_gecko(token)
+            #self.logger.debug(f"coin_info {coin_info}")
+            if coin_info is not None:
+                coin_info['platforms'][f'{self.gecko_platform}']
+                self.logger.debug(f"🦎search_gecko_coin_info {coin_info} {token}")
+                return coin_info['platforms'][f'{self.gecko_platform}']
+        except Exception as e:
+            self.logger.debug(f"error search_gecko_contract {e}")
+            return
+
+
+    async def get_contract_address(self,token_list_url, symbol):
+        self.logger.debug(f"get_contract_address {token_list_url} {symbol}")
+        try: 
+            token_list = await self._get(token_list_url)
+            #self.logger.debug(f"token_list {token_list}")
+            token_search = token_list['tokens']
+            for keyval in token_search:
+                if (keyval['symbol'] == symbol and keyval['chainId'] == self.chain_id):
+                    return keyval['address']
+        except Exception as e:
+            self.logger.debug(f"error get_contract_address {e}")
             return
 
     async def get_token_contract(self, token):
