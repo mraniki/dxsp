@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.29 (2023-04-14)
+### Fix
+* Example ([`d28b6a4`](https://github.com/mraniki/dxsp/commit/d28b6a4ae87918eb86fb414f3e50152b93f5a56e))
+
 ## v1.0.28 (2023-04-14)
 ### Fix
 * Token search and abi display for multiple blockchain, enhance the example with healthcheck ([`cbb94ba`](https://github.com/mraniki/dxsp/commit/cbb94ba005df06060064cb4e90b593e62e28e7d1))
