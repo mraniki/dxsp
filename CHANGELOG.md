@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.21 (2023-04-14)
+### Fix
+* Change _get to async and added self ([`a38cb23`](https://github.com/mraniki/dxsp/commit/a38cb2389cb5f4c795c89862630587e2aa591bcd))
+
 ## v1.0.20 (2023-04-14)
 ### Fix
 * Gecko and contract ([`b9d2383`](https://github.com/mraniki/dxsp/commit/b9d23836c9b327fb2a9d0bcd35102e24888ae5e2))
