@@ -70,7 +70,7 @@ async def main():
 		
 		#QUOTE
 		#symbol = 'BNB'
-		symbol_lst = ['wBTC', 'ETH', 'MATIC', 'CAKE', 'XRP', 'OPT', 'USDT','DAI','BTC','DOGE','SOL','UNI','wETH','BNB']
+		symbol_lst = ['wBTC', 'ETH', 'MATIC', 'CAKE', 'XRP', 'OPT', 'USDT','DAI','BTC','DOGE','SOL','UNI','wETH','BNB','wETH']
 		symbol = random.sample(symbol_lst,1)[0]
 		print("symbol ", symbol)
 		# quote = await dex.get_quote(symbol)
