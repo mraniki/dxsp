@@ -3,17 +3,16 @@ sys.path.append('../')
 import logging
 import os
 import time
-
+import requests 
 from dotenv import load_dotenv
 import asyncio
 from web3 import Web3
 
-from healthchecks_io import AsyncClient, CheckCreate
 
 #YOUR VARIABLES
 load_dotenv()
-healthchecks_io_api = os.getenv("HEALTHCHECK_API", "1X23Q4ACZ5T3KXG67WIAH7X8C510F1972TM")
-
+healthchecks_io_api = os.getenv("HEALTHCHECK_API", "1X23Q4ACZ5T3KXG67WIAH7X8C510F191234")
+healthchecks_io_uuid = os.getenv("HEALTHCHECK_UUID", "https://hc-ping.com/e4d29002-cc1a-487c-8510-9e791cd356fb")
 
 #chain ID being used refer to https://chainlist.org/
 chain = os.getenv("CHAIN_ID", 10)
@@ -46,10 +45,8 @@ logging.getLogger('urllib3').setLevel(logging.WARNING)
 
 async def main():
 	while True:
-		client = AsyncClient(api_key=healthchecks_io_api)
-		check = await client.create_check(CheckCreate(name="dxsp test", tags="dxsp"))
-		print(check)
 
+		healthcheck = requests.get(url= healthchecks_io_uuid, timeout=10)
 		#SWAP HELPER
 		dex = DexSwap(chain_id=chain,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
 
@@ -77,7 +74,8 @@ async def main():
 		#getABI
 		# bitcoinaddressABI = await dex.get_abi(bitcoinaddress)
 		# print(bitcoinaddressABI)
-		time.sleep(10)
+		time.sleep(20)
+
 
 if __name__ == "__main__":
     asyncio.run(main())
