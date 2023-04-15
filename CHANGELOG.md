@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.31 (2023-04-15)
+### Fix
+* Refactor deployment ([`7364406`](https://github.com/mraniki/dxsp/commit/7364406e16aa16722687139390740f33c8a21f43))
+
 ## v1.0.30 (2023-04-14)
 ### Fix
 * Refactor example.py to use default host and port. ([`bd1c5ba`](https://github.com/mraniki/dxsp/commit/bd1c5ba60b4cca805e71f7e7acbaa69b94bb0157))
