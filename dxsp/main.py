@@ -39,7 +39,7 @@ class DexSwap:
             self.logger.warning("self.chain_id not setup")
             return
         blockchain = blockchains[self.chain_id ]
-        self.logger.debug(f"self.block_explorer_url {blockchain}")
+        self.logger.debug(f"blockchain {blockchain}")
 
         self.wallet_address = wallet_address
         self.logger.debug(f"self.wallet_address {self.wallet_address}")
