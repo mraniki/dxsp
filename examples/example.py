@@ -2,8 +2,10 @@ import sys
 sys.path.append('../')
 import logging
 import os
+import requests
 import time
 import random
+
 
 from dotenv import load_dotenv
 import asyncio
@@ -67,7 +69,7 @@ async def main():
 		
 		#QUOTE
 		#symbol = 'BNB'
-		symbol_lst = ['WBTC','APE','anyETH','WETH','MATIC','UNI','CAKE','USDT','DAI','AAVE','SUSHI','CRV','UNCX','ALPACA','ANY','MIM']
+		symbol_lst = ['WBTC','APE','KAVA','WETH','MATIC','UNI','CAKE','USDT','DAI','AAVE','SUSHI','CRV','ALPACA','ANY','MIM']
 		symbol = random.sample(symbol_lst,1)[0]
 		print("symbol ", symbol)
 		# quote = await dex.get_quote(symbol)
@@ -81,6 +83,13 @@ async def main():
 		#getABI
 		addressABI = await dex.get_abi(address)
 		# print("ABI ", addressABI)
+
+		try:
+		    requests.get("https://hc-ping.com/e4d29002-cc1a-487c-8510-9e791cd356fb", timeout=10)
+		except requests.RequestException as e:
+		    # Log ping failure here...
+		    print("Ping failed: %s" % e)
+
 		await asyncio.sleep(40)
 
 
