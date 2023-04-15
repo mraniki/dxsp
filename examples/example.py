@@ -88,7 +88,7 @@ async def main():
 		    requests.get("https://hc-ping.com/e4d29002-cc1a-487c-8510-9e791cd356fb", timeout=10)
 		except requests.RequestException as e:
 		    # Log ping failure here...
-		    print("Ping failed: %s" % e)
+		    print(f"Ping failed: {e}")
 
 		await asyncio.sleep(40)
 
