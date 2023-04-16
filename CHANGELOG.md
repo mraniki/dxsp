@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.1.0 (2023-04-16)
+### Feature
+* Added account balance function ([`87668f0`](https://github.com/mraniki/dxsp/commit/87668f094fe86a61d9c6107bd6a782d9c8f12445))
+
 ## v1.0.31 (2023-04-15)
 ### Fix
 * Refactor deployment ([`7364406`](https://github.com/mraniki/dxsp/commit/7364406e16aa16722687139390740f33c8a21f43))
