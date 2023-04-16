@@ -77,7 +77,7 @@ class DexSwap:
                 logger.error(msg=f"connectivity failed using {rpc}")
                 return
         self.logger.debug(f"self.w3 {self.w3}")
-            logger.info(msg=f"connected to {ex}")
+        self.logger.info(msg=f"connected")
 
         self.protocol_type = protocol_type
         if self.protocol_type is None:
