@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.2.1 (2023-04-16)
+### Fix
+* Logger typo ([`c9a4ee0`](https://github.com/mraniki/dxsp/commit/c9a4ee06a1a4d6fa92b2efdf4db9dc319f72fbf1))
+
 ## v1.2.0 (2023-04-16)
 ### Feature
 * Added latency capability and new functions for future extension ([`5b5651d`](https://github.com/mraniki/dxsp/commit/5b5651d41daa0ec381382c20f201b72c35a6c3cc))
