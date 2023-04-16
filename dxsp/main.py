@@ -449,3 +449,22 @@ class DexSwap:
             self.logger.debug(f"error get_token_balance {e}")
             return 0
 
+    async def get_stablecoin_balance(self):
+        toptokens = ["USDT","USDC","BUSD","DAI"]
+        for i in toptokens:
+            bal_toptoken = await get_token_balance(i)
+            if bal_toptoken:
+                msg += f"\n💵{bal_toptoken} {i}"
+            # bal = round(ex.from_wei(bal,'ether'),5)
+
+    async def get_account_balance(self):
+        toptokens = ["WBTC","ETH","BNB","UNI"]
+        for i in toptokens:
+            bal_toptoken = await get_token_balance(i)
+            if bal_toptoken:
+                msg += f"\n💵{bal_toptoken} {i}"
+            # bal = round(ex.from_wei(bal,'ether'),5)
+
+
+
+
