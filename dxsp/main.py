@@ -12,6 +12,7 @@ from datetime import datetime
 from pycoingecko import CoinGeckoAPI
 
 from dxsp.assets.blockchains import blockchains
+from dxsp import __version__
 
 from ping3 import ping
 
@@ -34,7 +35,7 @@ class DexSwap:
                  ):
 
         self.logger =  logging.getLogger(__name__)
-        self.logger.debug(f"DXSP Logger:  {self.logger} on {__name__}")
+        self.logger.debug(f"DXSP Logger:  {self.logger} on {__name__} version: {__version__}")
         self.logger.info(f"Initializing DexSwap object for {wallet_address} on {chain_id}")
 
         self.chain_id = int(chain_id)
@@ -253,7 +254,7 @@ class DexSwap:
 
     async def execute_order(self,direction,symbol,stoploss=10000,takeprofit=10000,quantity=1,amount_trading_option=1,order_type='swap'):
         self.logger.debug(f"execute_order {direction} {symbol} {order_type}")
-        if order_type == 'swap'
+        if order_type == 'swap':
             self.logger.debug(f"execute_order {order_type}")
             try:
                 asset_out_symbol = self.base_trading_symbol if direction=="BUY" else symbol
@@ -272,10 +273,10 @@ class DexSwap:
                 self.logger.debug(f"error execute_order {e}")
                 return
 
-        if order_type == 'market'
+        if order_type == 'market':
             self.logger.debug(f"execute_order {order_type}")
             return
-        if order_type == 'limit'
+        if order_type == 'limit':
             self.logger.debug(f"execute_order {order_type}")
             return
 
