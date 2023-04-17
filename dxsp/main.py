@@ -1,18 +1,13 @@
-import os
-import json
-import requests
-import asyncio
+from dxsp import __version__
+from dxsp.assets.blockchains import blockchains
 
-import logging
+import os, json, requests, asyncio, logging
 
 from dotenv import load_dotenv
 
 from web3 import Web3
 from datetime import datetime
 from pycoingecko import CoinGeckoAPI
-
-from dxsp.assets.blockchains import blockchains
-from dxsp import __version__
 
 from ping3 import ping
 
@@ -124,16 +119,15 @@ class DexSwap:
         self.gecko_platform = output_dict[0]['id']
         self.logger.debug(f"self.gecko_platform {self.gecko_platform}")
 
-        # global gasPrice
-        # global gasLimit
+        # self.gasPrice = gasPrice
+        # self.gasLimit = gasLimit
 
     async def _get(self, url, params=None, headers=None):
         headers = { "User-Agent": "Mozilla/5.0" }
-        #self.logger.debug(f"_get url {url}")
+        self.logger.debug(f"_get url {url}")
         response = requests.get(url,params =params,headers=headers)
         #self.logger.debug(f"response _get {response}")
         return response.json()
-
 
     async def get_quote(self, symbol):
         self.logger.debug(f"get_quote {symbol}")
@@ -167,90 +161,6 @@ class DexSwap:
         except Exception as e:
             self.logger.debug(f"error get_quote {e}")
             return
-
-    async def get_abi(self,addr):
-        self.logger.debug(f"get_abi {addr}")
-        try:
-            params = {
-                "module": "contract",
-                "action": "getabi",
-                "address": addr,
-                "apikey": self.block_explorer_api }
-            headers = { "User-Agent": "Mozilla/5.0" }
-            resp = await self._get(url=self.block_explorer_url,params=params,headers=headers)
-            #self.logger.debug(f"resp {resp} status {resp['status']}")
-            if resp['status']=="1":
-                self.logger.debug(f"ABI found {resp}")
-                abi = resp["result"]
-                return abi
-            else:
-                self.logger.debug(f"No ABI identified Option B needed for contract {addr} on chain {self.chain_id}")
-        except Exception as e:
-            self.logger.debug(f"error get_abi {e}")
-            return
-
-    async def get_approve(self, asset_out_address: str, amount=None):
-        self.logger.debug(f"get_approve {asset_out_address}")
-        if self.protocol_type in ["1inch","1inch_limit"]:
-            approval_check_URL = f"{self.dex_url}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={self.wallet_address}"
-            approval_response = await self._get(approval_check_URL)
-            approval_check = approval_response['allowance']
-            if (approval_check==0):
-                approval_URL = f"{self.dex_url}/approve/transaction?tokenAddress={asset_out_address}"
-                approval_response = await self._get(approval_URL)
-        elif self.protocol_type in ["uniswap_v2","uniswap_v3"]:
-            asset_out_abi= await self.get_abi(asset_out_address)
-            asset_out_contract = self.w3.eth.contract(address=asset_out_address, abi=asset_out_abi)           
-            approval_check = asset_out_contract.functions.allowance(self.w3.to_checksum_address(self.wallet_address), self.w3.to_checksum_address(self.router)).call()
-            if (approval_check==0):
-                approved_amount = (self.w3.to_wei(2**64-1,'ether'))
-                asset_out_abi = await fetch_abi_dex(asset_out_address)
-                asset_out_contract = self.w3.eth.contract(address=asset_out_address, abi=asset_out_abi)
-                approval_TX = asset_out_contract.functions.approve(self.w3.to_checksum_address(self.router), approved_amount)
-                approval_txHash = await sign_transaction_dex(approval_TX)
-                approval_txHash_complete = self.w3.eth.wait_for_transaction_receipt(approval_txHash, timeout=120, poll_latency=0.1)
-
-    async def get_sign(self, tx):
-        self.logger.debug(f"get_sign {tx}")
-        try:
-            if self.protocol_type in ['uniswap_v2']:
-                tx_params = {
-                'from': self.wallet_address,
-                'gas': await self.get_gas(tx),
-                'gasPrice': await self.get_gasPrice(tx),
-                'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
-                }
-                tx = tx.build_transaction(tx_params)
-            elif self.protocol_type in ['uniswap_v3']:
-                tx_params = {
-                'from': self.wallet_address,
-                'gas': await estimate_gas(tx),
-                'gasPrice': await self.get_gasPrice(tx),
-                'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
-                }
-                tx = tx.build_transaction(tx_params)
-            elif self.protocol_type in ["1inch","1inch_limit"]:
-                tx = tx['tx']
-                tx['gas'] = await estimate_gas(tx)
-                tx['nonce'] = self.w3.eth.get_transaction_count(self.wallet_address)
-                tx['value'] = int(tx['value'])
-                tx['gasPrice'] = await self.get_gasPrice(tx)
-            signed = self.w3.eth.account.sign_transaction(tx, self.private_key)
-            raw_tx = signed.rawTransaction
-            return self.w3.eth.send_raw_transaction(raw_tx)
-        except Exception as e:
-            self.logger.debug(f"error get_sign {e}")
-            return
-
-    async def get_gas(self, tx):
-        self.logger.debug(f"get_gas {tx}")
-        gasestimate= self.web3.eth.estimate_gas(tx) * 1.25
-        return int(self.w3.to_wei(gasestimate,'wei'))
-
-    async def get_gasPrice(self, tx):
-        self.logger.debug(f"get_gasPrice {tx}")
-        gasprice= self.w3.eth.generate_gas_price()
-        return self.w3.to_wei(gasPrice,'gwei')
 
     async def execute_order(self,direction,symbol,stoploss=10000,takeprofit=10000,quantity=1,amount_trading_option=1,order_type='swap'):
         self.logger.debug(f"execute_order {direction} {symbol} {order_type}")
@@ -380,6 +290,8 @@ class DexSwap:
         return checkTransactionRequest['status']
 
 
+####CONTRACT SEARCH
+
     # async def search_gecko_platform(self):
     #     self.logger.debug("search_gecko_platform")
     #     try:
@@ -477,6 +389,95 @@ class DexSwap:
             self.logger.error(f"error  get_token_contract {e}")
             return
 
+
+####UTILS
+    async def get_approve(self, asset_out_address: str, amount=None):
+        self.logger.debug(f"get_approve {asset_out_address}")
+        if self.protocol_type in ["1inch","1inch_limit"]:
+            approval_check_URL = f"{self.dex_url}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={self.wallet_address}"
+            approval_response = await self._get(approval_check_URL)
+            approval_check = approval_response['allowance']
+            if (approval_check==0):
+                approval_URL = f"{self.dex_url}/approve/transaction?tokenAddress={asset_out_address}"
+                approval_response = await self._get(approval_URL)
+        elif self.protocol_type in ["uniswap_v2","uniswap_v3"]:
+            asset_out_abi= await self.get_abi(asset_out_address)
+            asset_out_contract = self.w3.eth.contract(address=asset_out_address, abi=asset_out_abi)           
+            approval_check = asset_out_contract.functions.allowance(self.w3.to_checksum_address(self.wallet_address), self.w3.to_checksum_address(self.router)).call()
+            if (approval_check==0):
+                approved_amount = (self.w3.to_wei(2**64-1,'ether'))
+                asset_out_abi = await fetch_abi_dex(asset_out_address)
+                asset_out_contract = self.w3.eth.contract(address=asset_out_address, abi=asset_out_abi)
+                approval_TX = asset_out_contract.functions.approve(self.w3.to_checksum_address(self.router), approved_amount)
+                approval_txHash = await sign_transaction_dex(approval_TX)
+                approval_txHash_complete = self.w3.eth.wait_for_transaction_receipt(approval_txHash, timeout=120, poll_latency=0.1)
+
+    async def get_sign(self, tx):
+        self.logger.debug(f"get_sign {tx}")
+        try:
+            if self.protocol_type in ['uniswap_v2']:
+                tx_params = {
+                'from': self.wallet_address,
+                'gas': await self.get_gas(tx),
+                'gasPrice': await self.get_gasPrice(tx),
+                'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
+                }
+                tx = tx.build_transaction(tx_params)
+            elif self.protocol_type in ['uniswap_v3']:
+                tx_params = {
+                'from': self.wallet_address,
+                'gas': await estimate_gas(tx),
+                'gasPrice': await self.get_gasPrice(tx),
+                'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
+                }
+                tx = tx.build_transaction(tx_params)
+            elif self.protocol_type in ["1inch","1inch_limit"]:
+                tx = tx['tx']
+                tx['gas'] = await estimate_gas(tx)
+                tx['nonce'] = self.w3.eth.get_transaction_count(self.wallet_address)
+                tx['value'] = int(tx['value'])
+                tx['gasPrice'] = await self.get_gasPrice(tx)
+            signed = self.w3.eth.account.sign_transaction(tx, self.private_key)
+            raw_tx = signed.rawTransaction
+            return self.w3.eth.send_raw_transaction(raw_tx)
+        except Exception as e:
+            self.logger.debug(f"error get_sign {e}")
+            return
+
+
+    async def get_gas(self, tx):
+        self.logger.debug(f"get_gas {tx}")
+        gasestimate= self.web3.eth.estimate_gas(tx) * 1.25
+        return int(self.w3.to_wei(gasestimate,'wei'))
+
+    async def get_gasPrice(self, tx):
+        self.logger.debug(f"get_gasPrice {tx}")
+        gasprice= self.w3.eth.generate_gas_price()
+        return self.w3.to_wei(gasPrice,'gwei')
+
+    async def get_abi(self,addr):
+        self.logger.debug(f"get_abi {addr}")
+        try:
+            params = {
+                "module": "contract",
+                "action": "getabi",
+                "address": addr,
+                "apikey": self.block_explorer_api }
+            headers = { "User-Agent": "Mozilla/5.0" }
+            resp = await self._get(url=self.block_explorer_url,params=params,headers=headers)
+            #self.logger.debug(f"resp {resp} status {resp['status']}")
+            if resp['status']=="1":
+                self.logger.debug(f"ABI found {resp}")
+                abi = resp["result"]
+                return abi
+            else:
+                self.logger.debug(f"No ABI identified Option B needed for contract {addr} on chain {self.chain_id}")
+        except Exception as e:
+            self.logger.debug(f"error get_abi {e}")
+            return
+
+#####USERS
+
     async def get_token_balance(self, token):
         self.logger.debug(f"get_token_balance {token}")
         try:
@@ -525,7 +526,6 @@ class DexSwap:
             logger.error(msg=f"get_account_position error: {e}")
             return 0
 
-
     # async def fetch_account_dex(addr):
     #     url = block_explorer_url
     #     query = {'module':'account',
@@ -540,7 +540,6 @@ class DexSwap:
     #     except:
     #         return None
     #     return int(d['result']) / self.zeroes
-
 
 #     async def fetch_gecko_asset_price(token):
 #     try:
