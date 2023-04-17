@@ -8,8 +8,6 @@ from dotenv import load_dotenv
 from web3 import Web3
 from pycoingecko import CoinGeckoAPI
 
-#import many_abis as ma
-
 from ping3 import ping
 
 class DexSwap:
@@ -105,7 +103,8 @@ class DexSwap:
                 self.router = blockchain["uniswap_v3"]
         self.logger.debug(f"self.router {self.router}")
 
-        #self.logger.debug(f"self.name {self.name}")        
+        self.name = "TBD"
+        self.logger.debug(f"self.name {self.name}")        
 
         self.base_trading_symbol = base_trading_symbol
         if self.base_trading_symbol is None:
@@ -122,6 +121,7 @@ class DexSwap:
         self.logger.debug(f"self.gecko_platform {self.gecko_platform}")
 
         # self.gasPrice = gasPrice
+        
         # self.gasLimit = gasLimit
 
     async def _get(self, url, params=None, headers=None):
@@ -231,7 +231,7 @@ class DexSwap:
             transaction_amount = int((asset_out_amount_converted *(slippage/100)))
             self.logger.debug(f"transaction_amount {transaction_amount}")
 
-            #VERIFY IF ASSET OUT IS APPROVED
+            #VERIFY IF ASSET OUT IS APPROVED otherwise get it approved
             await self.get_approve(asset_out_address)
 
             #1INCH
@@ -478,7 +478,7 @@ class DexSwap:
                 return abi
             else:
                 self.logger.debug(f"No ABI identified Option B needed for contract {addr} on chain {self.chain_id}")
-                #manyABI options UNISWAP_V2_ROUTER  ?
+                # https://github.com/tintinweb/smart-contract-sanctuary
 
         except Exception as e:
             self.logger.debug(f"error get_abi {e}")
