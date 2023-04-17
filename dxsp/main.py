@@ -8,6 +8,8 @@ from dotenv import load_dotenv
 from web3 import Web3
 from pycoingecko import CoinGeckoAPI
 
+#import many_abis as ma
+
 from ping3 import ping
 
 class DexSwap:
@@ -43,15 +45,16 @@ class DexSwap:
         self.wallet_address = wallet_address
         self.logger.debug(f"self.wallet_address {self.wallet_address}")
         self.private_key = private_key
-        self.block_explorer_api = block_explorer_api
 
+        self.block_explorer_api = block_explorer_api
+        if self.block_explorer_api is None:
+            self.logger.warning("self.block_explorer_api not setup")
         self.block_explorer_url = block_explorer_url
         self.logger.debug(f"self.block_explorer_url {self.block_explorer_url}")
         if self.block_explorer_url is None:
             self.block_explorer_url = blockchain["block_explorer_url"]
         if self.block_explorer_url is None:
             self.logger.warning("self.block_explorer_url not setup")
-            return
         self.logger.debug(f"self.block_explorer_url {self.block_explorer_url}")
 
         self.rpc = rpc
@@ -67,7 +70,7 @@ class DexSwap:
             self.w3 = Web3(Web3.HTTPProvider(self.rpc))
             try:
                 self.w3.net.listening
-                logger.info(msg=f"connected to {w3}")
+                logger.info(msg=f"connected to {rpc} with w3 {w3}")
             except Exception as e:
                 logger.error(msg=f"connectivity failed using {rpc}")
                 return
@@ -266,20 +269,22 @@ class DexSwap:
             if swap_TX:
                 self.logger.debug(f"swap_TX {swap_TX}")
                 signed_TX = await self.get_sign(swap_TX)
-                txHash = str(self.w3.to_hex(signed_TX))
-                txResult = await self.get_block_explorer_status(txHash)
-                txHashDetail= self.w3.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
-                if(txResult == "1"):
-                    blockNumber = txHashDetail['blockNumber']
+                transaction_hash = str(self.w3.to_hex(signed_TX))
+                #transaction_results = await self.get_block_explorer_status(transaction_hash)
+                transaction_hash_details = self.w3.wait_for_transaction_receipt(transaction_hash, timeout=120, poll_latency=0.1)
+                if(transaction_hash_details['status'] == "1"):
+                    transaction_blockNumber = transaction_hash_details['blockNumber']
+                    transaction_receipt = self.w3.eth.get_transaction_receipt(transaction_hash)
                     transaction_block = self.w3.eth.get_block(blockNumber)
                     order={}
-                    d['id'] = '15222'
-                    d['timestamp'] = transaction_block['timestamp']
-                    d['gasUsed'] = txHashDetail['gasUsed']
-                    d['id'] = '15222'
-                    d['amount'] = 'host name'
-                    d['price'] = '15222'
-                    return txHash
+                    order['id'] = transaction_receipt['transactionHash']
+                    order['timestamp'] = transaction_block['timestamp']
+                    order['symbol'] = asset_out_symbol
+                    order['contract'] = asset_out_address
+                    order['amount'] = transaction_amount
+                    order['fee'] = transaction_receipt['gasUsed']
+                    order['price'] = 'na'
+                    return order
         except Exception as e:
             self.logger.debug(f"error get_swap {e}")
             return
@@ -289,7 +294,6 @@ class DexSwap:
         checkTransactionSuccessURL = f"{self.block_explorer_url}?module=transaction&action=gettxreceiptstatus&txhash={txHash}&apikey={self.block_explorer_api}"
         checkTransactionRequest =  self.get(checkTransactionSuccessURL)
         return checkTransactionRequest['status']
-
 
 ####CONTRACT SEARCH
 
@@ -445,7 +449,6 @@ class DexSwap:
             self.logger.debug(f"error get_sign {e}")
             return
 
-
     async def get_gas(self, tx):
         self.logger.debug(f"get_gas {tx}")
         gasestimate= self.web3.eth.estimate_gas(tx) * 1.25
@@ -458,6 +461,8 @@ class DexSwap:
 
     async def get_abi(self,addr):
         self.logger.debug(f"get_abi {addr}")
+        if self.block_explorer_api is None:
+            self.logger.debug(f"No block_explorer_api")
         try:
             params = {
                 "module": "contract",
@@ -473,9 +478,13 @@ class DexSwap:
                 return abi
             else:
                 self.logger.debug(f"No ABI identified Option B needed for contract {addr} on chain {self.chain_id}")
+                #manyABI options
+
         except Exception as e:
             self.logger.debug(f"error get_abi {e}")
             return
+
+
 
 #####USERS
 
