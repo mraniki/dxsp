@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.2.4 (2023-04-17)
+### Fix
+* Abi ([`1df17a6`](https://github.com/mraniki/dxsp/commit/1df17a67746c1d49c69a313a3313fdeaac6a9ba4))
+
 ## v1.2.3 (2023-04-17)
 ### Fix
 * Added timestamp from block search instead of datetime lib ([`e49544d`](https://github.com/mraniki/dxsp/commit/e49544d04cfd46b0e07a8bae5377c0e84306b808))

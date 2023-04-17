@@ -1,4 +1,4 @@
-__version__ = "1.2.3"
+__version__ = "1.2.4"
 
 from dxsp.main import DexSwap
 from dxsp.assets import blockchains
