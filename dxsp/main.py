@@ -462,7 +462,7 @@ class DexSwap:
     async def get_abi(self,addr):
         self.logger.debug(f"get_abi {addr}")
         if self.block_explorer_api is None:
-            self.logger.debug(f"No block_explorer_api")
+            self.logger.debug("No block_explorer_api")
         try:
             params = {
                 "module": "contract",
