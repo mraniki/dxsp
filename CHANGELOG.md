@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.2.7 (2023-04-17)
+### Fix
+* Name ([`8020866`](https://github.com/mraniki/dxsp/commit/802086608a34110ff9e4eff81a780ff14523ef66))
+
 ## v1.2.6 (2023-04-17)
 ### Fix
 * Missing self ([`e9d5aee`](https://github.com/mraniki/dxsp/commit/e9d5aeeb45f5e75c61be0b76750b9dfcca9daf14))
