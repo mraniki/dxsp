@@ -6,7 +6,6 @@ import os, json, requests, asyncio, logging
 from dotenv import load_dotenv
 
 from web3 import Web3
-from datetime import datetime
 from pycoingecko import CoinGeckoAPI
 
 from ping3 import ping
@@ -271,9 +270,11 @@ class DexSwap:
                 txResult = await self.get_block_explorer_status(txHash)
                 txHashDetail= self.w3.wait_for_transaction_receipt(txHash, timeout=120, poll_latency=0.1)
                 if(txResult == "1"):
+                    blockNumber = txHashDetail['blockNumber']
+                    transaction_block = self.w3.eth.get_block(blockNumber)
                     order={}
                     d['id'] = '15222'
-                    d['datetime'] = datetime.now()
+                    d['timestamp'] = transaction_block['timestamp']
                     d['gasUsed'] = txHashDetail['gasUsed']
                     d['id'] = '15222'
                     d['amount'] = 'host name'
@@ -477,6 +478,13 @@ class DexSwap:
             return
 
 #####USERS
+
+    async def get_wallet_auth():
+        try:
+            return
+        except Exception as e:
+            self.logger.error(msg=f"get_wallet_auth error: {e}")
+            return
 
     async def get_token_balance(self, token):
         self.logger.debug(f"get_token_balance {token}")

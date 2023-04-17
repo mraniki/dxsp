@@ -19,6 +19,7 @@ python-dotenv = "*"
 web3 = ">=6.*"
 pycoingecko = "*"
 ping3 = "*"
+dynaconf = "*"
 
 [tool.poetry.dev-dependencies]
 python-semantic-release = "*"
