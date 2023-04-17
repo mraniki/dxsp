@@ -105,7 +105,7 @@ class DexSwap:
                 self.router = blockchain["uniswap_v3"]
         self.logger.debug(f"self.router {self.router}")
 
-        self.logger.debug(f"self.name {self.name}")        
+        #self.logger.debug(f"self.name {self.name}")        
 
         self.base_trading_symbol = base_trading_symbol
         if self.base_trading_symbol is None:
