@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.2.2 (2023-04-17)
+### Fix
+* Version import, typo for order type ([`a898a80`](https://github.com/mraniki/dxsp/commit/a898a805a30b133bbcd4ca8a4e30c984fe776375))
+
 ## v1.2.1 (2023-04-16)
 ### Fix
 * Logger typo ([`c9a4ee0`](https://github.com/mraniki/dxsp/commit/c9a4ee06a1a4d6fa92b2efdf4db9dc319f72fbf1))
