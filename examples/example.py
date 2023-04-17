@@ -90,7 +90,7 @@ async def main():
 		    # Log ping failure here...
 		    print(f"Ping failed: {e}")
 
-		await asyncio.sleep(40)
+		await asyncio.sleep(240)
 
 
 app = FastAPI()
