@@ -72,7 +72,7 @@ class DexSwap:
                 self.w3.net.listening
                 self.logger.info(msg=f"connected to {self.rpc} with w3 {self.w3}")
             except Exception as e:
-                logger.error(msg=f"connectivity failed using {rpc}")
+                self.logger.error(msg=f"connectivity failed using {self.rpc}")
                 return
         self.logger.debug(f"self.w3 {self.w3}")
         self.logger.info(msg=f"connected")
