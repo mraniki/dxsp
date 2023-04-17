@@ -70,7 +70,7 @@ class DexSwap:
             self.w3 = Web3(Web3.HTTPProvider(self.rpc))
             try:
                 self.w3.net.listening
-                logger.info(msg=f"connected to {rpc} with w3 {w3}")
+                self.logger.info(msg=f"connected to {self.rpc} with w3 {self.w3}")
             except Exception as e:
                 logger.error(msg=f"connectivity failed using {rpc}")
                 return
