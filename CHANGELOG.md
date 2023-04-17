@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.2.3 (2023-04-17)
+### Fix
+* Added timestamp from block search instead of datetime lib ([`e49544d`](https://github.com/mraniki/dxsp/commit/e49544d04cfd46b0e07a8bae5377c0e84306b808))
+
 ## v1.2.2 (2023-04-17)
 ### Fix
 * Version import, typo for order type ([`a898a80`](https://github.com/mraniki/dxsp/commit/a898a805a30b133bbcd4ca8a4e30c984fe776375))
