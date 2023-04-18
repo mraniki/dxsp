@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v1.2.9 (2023-04-18)
+### Fix
+* Added order confirmation and transaction details to DexSwap class. ([`434fd10`](https://github.com/mraniki/dxsp/commit/434fd10bf3155b7d490557811c606ec0757411f1))
+* Example timer ([`7a36723`](https://github.com/mraniki/dxsp/commit/7a367235c299a6a1dfe922e3a65b2aef8f26442f))
+
 ## v1.2.8 (2023-04-17)
 ### Fix
 * Missing self ([`37861e8`](https://github.com/mraniki/dxsp/commit/37861e84fd9b83e63fbf5eb83361f77549b8ced2))
