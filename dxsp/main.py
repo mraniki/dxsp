@@ -284,6 +284,9 @@ class DexSwap:
                     order['amount'] = transaction_amount
                     order['fee'] = transaction_receipt['gasUsed']
                     order['price'] = 'na'
+                    order['confirmation'] = 'na'
+                                #response+= f"\n➕ Size: {round(ex.from_wei(transaction_amount, 'ether'),5)}\n⚫️ Entry: {await fetch_gecko_asset_price(asset_in_symbol)}USD \nℹ️ {txHash}\n⛽️ {txHashDetail['gasUsed']}\n🗓️ {datetime.now()}"
+            #logger.info(msg=f"{response}")
                     return order
         except Exception as e:
             self.logger.debug(f"error get_swap {e}")
