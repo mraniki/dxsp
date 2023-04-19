@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3.5.0
+    - uses: actions/checkout@v3.5.2
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     steps:
-      - uses: actions/checkout@v3.5.0
+      - uses: actions/checkout@v3.5.2
         with:
           fetch-depth: 0
       - name: Python Semantic Release
