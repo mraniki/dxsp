@@ -20,6 +20,7 @@ web3 = ">=6.*"
 pycoingecko = "*"
 ping3 = "*"
 dynaconf = "*"
+web3client = "*"
 
 [tool.poetry.dev-dependencies]
 python-semantic-release = "*"
