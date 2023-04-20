@@ -482,12 +482,11 @@ class DexSwap:
             else:
                 self.logger.debug(f"No ABI identified Option B needed for contract {addr} on chain {self.chain_id}")
                 # https://github.com/tintinweb/smart-contract-sanctuary
+                #https://raw.githubusercontent.com/tintinweb/smart-contract-sanctuary-optimism/master/contracts/mainnet/1f/1F98431c8aD98523631AE4a59f267346ea31F984_UniswapV3Factory.sol
 
         except Exception as e:
             self.logger.debug(f"error get_abi {e}")
             return
-
-
 
 #####USERS
 
