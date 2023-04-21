@@ -13,14 +13,14 @@ readme = "README.md"
 "Issues" =  "https://github.com/mraniki/dxsp/issues"
 
 [tool.poetry.dependencies]
-python = ">=3.10,<4"
+python = ">=3.9,<3.11"
 asyncio = "*"
 python-dotenv = "*"
-web3 = ">=6.2"
+web3 = ">=6.2.0"
 pycoingecko = "*"
 ping3 = "*"
 dynaconf = "*"
-web3client = "*"
+web3client = ">=1.1.8"
 
 [tool.poetry.dev-dependencies]
 python-semantic-release = "*"
