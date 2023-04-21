@@ -15,7 +15,6 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = ">=3.9,<3.11"
 asyncio = "*"
-python-dotenv = "*"
 web3 = ">=6.2.0"
 pycoingecko = "*"
 ping3 = "*"

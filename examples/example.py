@@ -1,14 +1,9 @@
-import sys
-sys.path.append('../')
-import logging
-import os
-import requests
-import time
+
+
+import sys, os, asyncio, requests, logging
+from dotenv import load_dotenv
 import random
 
-
-from dotenv import load_dotenv
-import asyncio
 from web3 import Web3
 
 from fastapi import FastAPI
@@ -16,6 +11,7 @@ import uvicorn
 
 #YOUR VARIABLES
 load_dotenv()
+sys.path.append('../')
 
 #chain ID being used refer to https://chainlist.org/
 chain = os.getenv("CHAIN_ID", 10)
