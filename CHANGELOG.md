@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.2.10 (2023-04-21)
+### Fix
+* Version dependency ([`5e66bf7`](https://github.com/mraniki/dxsp/commit/5e66bf76bfa0ce36c9817655102f7bd6a26e24af))
+* Update Python version requirement ([`5e37e00`](https://github.com/mraniki/dxsp/commit/5e37e00adf9eb55239f0fc15c03a5f3915f9c6d8))
+* Add Ethereum chain data and web3client to dependencies ([`d61e160`](https://github.com/mraniki/dxsp/commit/d61e160091dbfe34d6c4563bfe4d6be8dccda541))
+* Exploring abi alternative options ([`498a748`](https://github.com/mraniki/dxsp/commit/498a748f70ea1e4359ef2009ee2437faf78c9d41))
+* Remove 1 dep ([`d29a292`](https://github.com/mraniki/dxsp/commit/d29a2922a2b01b92ea48b067854e13d79fc06aad))
+
 ## v1.2.9 (2023-04-18)
 ### Fix
 * Added order confirmation and transaction details to DexSwap class. ([`434fd10`](https://github.com/mraniki/dxsp/commit/434fd10bf3155b7d490557811c606ec0757411f1))
