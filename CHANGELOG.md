@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.2.11 (2023-04-21)
+### Fix
+* Minor cleanup ([`6f8a1ed`](https://github.com/mraniki/dxsp/commit/6f8a1edecf0ddada44dd01a0a6241b08e9a29cb9))
+
 ## v1.2.10 (2023-04-21)
 ### Fix
 * Version dependency ([`5e66bf7`](https://github.com/mraniki/dxsp/commit/5e66bf76bfa0ce36c9817655102f7bd6a26e24af))
