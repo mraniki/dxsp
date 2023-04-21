@@ -360,7 +360,6 @@ class DexSwap:
         self.logger.debug(f"🦎self.gecko_platform {self.gecko_platform}")
         try:
             coin_info = await self.search_gecko(token)
-            #self.logger.debug(f"coin_info {coin_info}")
             if coin_info is not None:
                 coin_info['platforms'][f'{self.gecko_platform}']
                 self.logger.debug(f"🦎search_gecko_coin_info {coin_info} {token}")
@@ -373,7 +372,6 @@ class DexSwap:
         self.logger.debug(f"get_contract_address {token_list_url} {symbol}")
         try: 
             token_list = await self._get(token_list_url)
-            #self.logger.debug(f"token_list {token_list}")
             token_search = token_list['tokens']
             for keyval in token_search:
                 if (keyval['symbol'] == symbol and keyval['chainId'] == self.chain_id):
