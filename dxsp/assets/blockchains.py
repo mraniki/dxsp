@@ -2,6 +2,8 @@
 # to be used https://github.com/ethereum-lists/chains/tree/master/_data/chains
 
 #https://raw.githubusercontent.com/ethereum-lists/chains/master/_data/chains/eip155-10.json
+#https://chainid.network/chains.json
+
 
 blockchains = {
     #  ETHEREUM

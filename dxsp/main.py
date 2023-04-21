@@ -1,14 +1,13 @@
-from dxsp import __version__
-from dxsp.assets.blockchains import blockchains
-
 import os, json, requests, asyncio, logging
-
-from config import settings
 
 from web3 import Web3
 from pycoingecko import CoinGeckoAPI
-
 from ping3 import ping
+
+from dxsp import __version__
+from config import settings
+from dxsp.assets.blockchains import blockchains
+
 
 class DexSwap:
 
