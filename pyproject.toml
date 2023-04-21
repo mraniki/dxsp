@@ -21,6 +21,7 @@ pycoingecko = "*"
 ping3 = "*"
 dynaconf = "*"
 web3client = ">=1.1.8"
+apollox-connector-python = "*"
 
 [tool.poetry.dev-dependencies]
 python-semantic-release = "*"
@@ -35,5 +36,3 @@ branch = "main"
 upload_to_pypi = true
 upload_to_release = true
 build_command = "pip install poetry && poetry build"
-
-

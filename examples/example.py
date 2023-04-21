@@ -27,17 +27,6 @@ private_key = os.getenv("PRIVATE_KEY", "0x111111111117dc0aa78b770fa6a738034120c3
 #Block explorer API from ETHERSCAN TYPE EXPLORER
 block_explorer_api = os.getenv("BLOCK_EXPLORER_API", "1X23Q4ACZ5T3KXG67WIAH7X8C510F1972TM")
 
-#OPTIONAL PARAMETERS
-#network_provider_url = os.getenv("NETWORK_PROVIDER_URL")
-
-#DEX CONNECTIVITY
-#w3 = Web3(Web3.HTTPProvider(network_provider_url))
-
-# protocol_type = os.getenv("protocol_type", "uniswap_v2")
-# dex_exchange = os.getenv("DEX_EXCHANGE", '0x1F98431c8aD98523631AE4a59f267346ea31F984')
-# base_trading_symbol = os.getenv("BASE_TRADE_SYMBOL", 'USDT')
-# amount_trading_option = os.getenv("AMOUNT_TRADING_OPTION", 1)
-
 from dxsp.main import DexSwap
 #DEBUG LEVEL for DXSP package
 logging.basicConfig(level=logging.DEBUG)

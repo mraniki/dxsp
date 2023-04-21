@@ -3,7 +3,7 @@ from dxsp.assets.blockchains import blockchains
 
 import os, json, requests, asyncio, logging
 
-from dotenv import load_dotenv
+from config import settings
 
 from web3 import Web3
 from pycoingecko import CoinGeckoAPI
@@ -311,22 +311,17 @@ class DexSwap:
     #         self.logger.debug(f"error search_gecko_platform {e}")
     #         return
 
-
     async def search_contract(self, token):
         self.logger.debug(f"search_contract {token}")
-        #📝tokenlist
-        main_list = 'https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json'
-        personal_list = os.getenv("DXSP_TOKEN_LIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json")
-        test_token_list=os.getenv("DXSP_TEST_TOKEN_LIST", "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json")
 
         try:
-            token_contract = await self.get_contract_address(personal_list,token)
+            token_contract = await self.get_contract_address(settings.TOKEN_PERSONAL_LIST,token)
             self.logger.debug(f"personal_list {token} {token_contract}")
             if token_contract is None:
-                token_contract = await self.get_contract_address(test_token_list,token)
+                token_contract = await self.get_contract_address(settings.TOKEN_TESTNET_LIST,token)
                 self.logger.debug(f"test_token_list {token} {token_contract}")
             if token_contract is None:
-                token_contract = await self.get_contract_address(main_list,token)
+                token_contract = await self.get_contract_address(settings.TOKEN_MAINNET_LIST,token)
                 self.logger.debug(f"main_list {token} {token_contract}")
             if token_contract is None:
                 self.logger.debug(f"gecko search {token}")
