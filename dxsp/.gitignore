@@ -1,0 +1,5 @@
+/bin
+/lib
+.secrets.*
+.settings.*
+*.cfg
