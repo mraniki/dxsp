@@ -4,7 +4,7 @@ from web3 import Web3
 from pycoingecko import CoinGeckoAPI
 from ping3 import ping
 
-from config import settings
+from dxsp.config import settings
 from dxsp import __version__
 from dxsp.assets.blockchains import blockchains
 
