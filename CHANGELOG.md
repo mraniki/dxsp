@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.2.12 (2023-04-24)
+### Fix
+* Refactor config.py and main.py import statements ([`7053501`](https://github.com/mraniki/dxsp/commit/705350154a52e7ff3a529ec808f37e74237c7b6e))
+
 ## v1.2.11 (2023-04-21)
 ### Fix
 * Minor cleanup ([`6f8a1ed`](https://github.com/mraniki/dxsp/commit/6f8a1edecf0ddada44dd01a0a6241b08e9a29cb9))
