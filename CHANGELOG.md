@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.2.13 (2023-04-27)
+### Fix
+* Dep ([`84d6160`](https://github.com/mraniki/dxsp/commit/84d6160f6e9212842ac3a08bc0f42668d1e71cec))
+
 ## v1.2.12 (2023-04-24)
 ### Fix
 * Refactor config.py and main.py import statements ([`7053501`](https://github.com/mraniki/dxsp/commit/705350154a52e7ff3a529ec808f37e74237c7b6e))
