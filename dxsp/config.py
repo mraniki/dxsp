@@ -1,9 +1,16 @@
 
 from dynaconf import Dynaconf
 
+ROOT = os.path.dirname(__file__)
+
 settings = Dynaconf(
     envvar_prefix="DXSP",
-    settings_files=['core.toml','settings.toml', '.secrets.toml'],
+    project_root=os.path.dirname(ROOT),
+    settings_files=[
+        os.path.join(ROOT, "default_settings.toml"),
+        'settings.toml', 
+        '.secrets.toml'
+    ],
     load_dotenv=True,
     environments=True,
     default_env="default",
