@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.2.14 (2023-04-27)
+### Fix
+* Core reanmed to default_settings.toml ([`233edca`](https://github.com/mraniki/dxsp/commit/233edca222209034eb497dfff578e69459aa81c3))
+
 ## v1.2.13 (2023-04-27)
 ### Fix
 * Dep ([`84d6160`](https://github.com/mraniki/dxsp/commit/84d6160f6e9212842ac3a08bc0f42668d1e71cec))
