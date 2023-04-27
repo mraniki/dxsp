@@ -1,4 +1,5 @@
 
+import os
 from dynaconf import Dynaconf
 
 ROOT = os.path.dirname(__file__)
