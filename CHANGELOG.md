@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.2.15 (2023-04-27)
+### Fix
+* Missing import ([`dfeab6a`](https://github.com/mraniki/dxsp/commit/dfeab6adc8564faa748cb263b87af5dc77d71eaf))
+
 ## v1.2.14 (2023-04-27)
 ### Fix
 * Core reanmed to default_settings.toml ([`233edca`](https://github.com/mraniki/dxsp/commit/233edca222209034eb497dfff578e69459aa81c3))
