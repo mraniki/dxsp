@@ -23,11 +23,8 @@
 name: ☁️Deploy
 
 on:
-  workflow_run:
-    workflows: [🐍Build]
-    branches: [main]
-    types:
-     - completed
+  release:
+      types: [published]
 
 jobs:
   push_to_registry:
