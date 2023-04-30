@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.4 (2023-04-30)
+### Fix
+* Refactor logging in DexSwap class ([`16fe059`](https://github.com/mraniki/dxsp/commit/16fe059af9ee02a087f76f3100f6359d37c84f04))
+* Logger format ([`357dad7`](https://github.com/mraniki/dxsp/commit/357dad7f68d44f574f2d7f66ca240a2f7e719e18))
+
 ## v1.4.3 (2023-04-30)
 ### Fix
 * Release ([`471531a`](https://github.com/mraniki/dxsp/commit/471531a88df09e87b8facb40744b30c72e0619b8))
