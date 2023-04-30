@@ -18,10 +18,11 @@ asyncio = "*"
 dynaconf = "*"
 web3 = ">=6.0.0"
 pycoingecko = "*"
-web3client = ">=1.1.8"
-many-abis = ">=0.1.7"
-apollox-connector-python = "*"
 ping3 = "*"
+# web3client = ">=1.1.8"
+# # many-abis = ">=0.1.7"
+# apollox-connector-python = "*"
+
 
 [tool.poetry.dev-dependencies]
 python-semantic-release = "*"
