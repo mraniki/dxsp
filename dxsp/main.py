@@ -528,11 +528,12 @@ class DexSwap:
 
     async def get_account_balance(self):
         toptokens = ["USDT","USDC"]
-        for i in toptokens:
-            bal_toptoken = await self.get_token_balance(i)
-            if bal_toptoken:
-                msg += f"\n💵{bal_toptoken} {i}"
-                return msg
+        try:
+            for i in toptokens:
+                bal_toptoken = await self.get_token_balance(i)
+                if bal_toptoken:
+                    msg += f"\n💵{bal_toptoken} {i}"
+                    return msg
         except Exception as e:
             self.logger.error("get_account_balance error: %s", e)
             return 0
