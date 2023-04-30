@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.3 (2023-04-30)
+### Fix
+* Release ([`471531a`](https://github.com/mraniki/dxsp/commit/471531a88df09e87b8facb40744b30c72e0619b8))
+
 ## v1.4.2 (2023-04-30)
 ### Fix
 * Balance function ([`b3104e4`](https://github.com/mraniki/dxsp/commit/b3104e4d7070e0344146d15596bb4fa939462e20))
