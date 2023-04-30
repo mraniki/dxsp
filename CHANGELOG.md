@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.0 (2023-04-30)
+### Feature
+* Code refactoring and lint ([`ab9ed89`](https://github.com/mraniki/dxsp/commit/ab9ed89deae28cfb43aafa6ec5a7efd55b051cf2))
+
 ## v1.4.4 (2023-04-30)
 ### Fix
 * Refactor logging in DexSwap class ([`16fe059`](https://github.com/mraniki/dxsp/commit/16fe059af9ee02a087f76f3100f6359d37c84f04))
