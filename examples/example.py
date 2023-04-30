@@ -1,4 +1,7 @@
-
+"""
+DXSP Example
+"""
+from dxsp import DexSwap, settings
 
 import sys
 import os
@@ -25,17 +28,13 @@ private_key = os.getenv("PRIVATE_KEY", "0x111111111117dc0aa78b770fa6a738034120c3
 #Block explorer API from ETHERSCAN TYPE EXPLORER
 block_explorer_api = os.getenv("BLOCK_EXPLORER_API", "1X23Q4ACZ5T3KXG67WIAH7X8C510F1972TM")
 
-from dxsp.main import DexSwap
-from dxsp.config import dxspsettings
-#DEBUG LEVEL for DXSP package
+
+#DEBUG LEVEL
 logging.basicConfig(level=logging.DEBUG)
-logging.getLogger('dxsp.__main__').setLevel(logging.DEBUG)
-logging.getLogger('urllib3').setLevel(logging.WARNING)
 
 
 async def main():
 	while True:
-
 		chain_lst = ['1','56','42161','137','10','43114','250']
 		chain = random.sample(chain_lst,1)[0]
 		print("chain ", chain)
