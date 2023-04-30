@@ -1,3 +1,6 @@
+"""
+ DEX SWAP Main
+"""
 import os
 import json
 import requests
@@ -210,7 +213,6 @@ class DexSwap:
 
         self.logger.debug(f"get_swap {asset_out_symbol} {asset_in_symbol} {amount}")
         try:
-            
             #ASSET OUT 
             asset_out_address = await self.search_contract(asset_out_symbol)
             asset_out_contract = await self.get_token_contract(asset_out_symbol)
@@ -436,14 +438,14 @@ class DexSwap:
             elif self.protocol_type in ['uniswap_v3']:
                 tx_params = {
                 'from': self.wallet_address,
-                'gas': await estimate_gas(tx),
+                'gas': await self.get_gas(tx),
                 'gasPrice': await self.get_gasPrice(tx),
                 'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
                 }
                 tx = tx.build_transaction(tx_params)
             elif self.protocol_type in ["1inch","1inch_limit"]:
                 tx = tx['tx']
-                tx['gas'] = await estimate_gas(tx)
+                tx['gas'] = await self.get_gas(tx)
                 tx['nonce'] = self.w3.eth.get_transaction_count(self.wallet_address)
                 tx['value'] = int(tx['value'])
                 tx['gasPrice'] = await self.get_gasPrice(tx)
@@ -456,13 +458,13 @@ class DexSwap:
 
     async def get_gas(self, tx):
         self.logger.debug(f"get_gas {tx}")
-        gasestimate= self.web3.eth.estimate_gas(tx) * 1.25
+        gasestimate= self.w3.eth.estimate_gas(tx) * 1.25
         return int(self.w3.to_wei(gasestimate,'wei'))
 
     async def get_gasPrice(self, tx):
         self.logger.debug(f"get_gasPrice {tx}")
-        gasprice= self.w3.eth.generate_gas_price()
-        return self.w3.to_wei(gasPrice,'gwei')
+        gasprice = self.w3.eth.generate_gas_price()
+        return self.w3.to_wei(gasprice,'gwei')
 
     async def get_abi(self,addr):
         self.logger.debug(f"get_abi {addr}")
