@@ -2,17 +2,17 @@
  DEX SWAP Main
 """
 import json
-import os
 import logging
+import os
 
 import requests
-
 from dxsp import __version__
 from dxsp.assets.blockchains import blockchains
 from dxsp.config import settings
 from ping3 import ping
 from pycoingecko import CoinGeckoAPI
 from web3 import Web3
+
 
 class DexSwap:
     """Do a swap."""
