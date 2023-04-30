@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.0 (2023-04-30)
+### Feature
+* Refactor ([`5b29a87`](https://github.com/mraniki/dxsp/commit/5b29a87d5788da37d08453f6c45c5fbe2f2e5914))
+* Instrument ([`56aa680`](https://github.com/mraniki/dxsp/commit/56aa680591a5952a08fd7b687d192bad9399d077))
+
 ## v1.3.0 (2023-04-30)
 ### Feature
 * Update execute_order function arguments ([`e538ad5`](https://github.com/mraniki/dxsp/commit/e538ad5ccc8d299bdc4d0afdf4abf9724acfb6e9))
