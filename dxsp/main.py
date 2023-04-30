@@ -163,7 +163,7 @@ class DexSwap:
             self.logger.debug(f"error get_quote {e}")
             return
 
-    async def execute_order(self,direction,symbol,stoploss=10000,takeprofit=10000,quantity=1,amount_trading_option=1,order_type='swap'):
+    async def execute_order(self,direction,symbol,stop_loss=10000,take_profit=10000,quantity=1,amount_trading_option=1,order_type='swap'):
         self.logger.debug(f"execute_order {direction} {symbol} {order_type}")
         if order_type == 'swap':
             self.logger.debug(f"execute_order {order_type}")
