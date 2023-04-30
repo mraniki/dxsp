@@ -527,11 +527,15 @@ class DexSwap:
             # bal = round(ex.from_wei(bal,'ether'),5)
 
     async def get_account_balance(self):
-        toptokens = ["WBTC","ETH","BNB","UNI"]
+        toptokens = ["USDT","USDC"]
         for i in toptokens:
             bal_toptoken = await self.get_token_balance(i)
             if bal_toptoken:
                 msg += f"\n💵{bal_toptoken} {i}"
+                return msg
+        except Exception as e:
+            self.logger.error("get_account_balance error: %s", e)
+            return 0
             # bal = round(ex.from_wei(bal,'ether'),5)
 
     async def get_account_position(self):
