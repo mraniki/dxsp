@@ -154,7 +154,7 @@ class DexSwap:
                 self.logger.debug("asset_out_amount %s",asset_out_amount)
                 quote_url = f"{self.dex_url}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
                 quote = await self._get(quote_url)
-                self.logger.debug("quote %s" quote)
+                self.logger.debug("quote %s",quote)
                 raw_quote = quote['toTokenAmount']
                 self.logger.debug("raw_quote %s",raw_quote)
                 asset_quote_decimals = quote['fromToken']['decimals']
