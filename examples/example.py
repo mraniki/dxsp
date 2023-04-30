@@ -40,8 +40,14 @@ async def main():
 		print("chain ", chain)
 
 		#SWAP HELPER
-		dex = DexSwap(chain_id=chain,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
+		dex = DexSwap(
+					chain_id=chain,
+					wallet_address=wallet_address,
+					private_key=private_key,
+					block_explorer_api=block_explorer_api
+				)
 		print(type(dex))
+		print(type(dex.chain_id))
 		#BUY 10 USDC to SWAP with BITCOIN
 		#demo_tx = await dex.get_swap('USDT','wBTC',10)
 		#print("demo_tx ", demo_tx)
