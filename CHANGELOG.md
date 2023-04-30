@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.2 (2023-04-30)
+### Fix
+* Balance function ([`b3104e4`](https://github.com/mraniki/dxsp/commit/b3104e4d7070e0344146d15596bb4fa939462e20))
+* Lint and dep ([`17edff4`](https://github.com/mraniki/dxsp/commit/17edff488e9535d561fe2667afdae63f0f5fea04))
+* Updating example ([`c2571d3`](https://github.com/mraniki/dxsp/commit/c2571d3889ddc7205ef79ef8d6273b8808597f0c))
+* Lint ([`17ca7a2`](https://github.com/mraniki/dxsp/commit/17ca7a2f01c043f0a802b7067195097aea44e5e2))
+
 ## v1.4.1 (2023-04-30)
 ### Fix
 * Refactoring ([`8d9f1f9`](https://github.com/mraniki/dxsp/commit/8d9f1f99966e743afe4788314815c539cd41b824))
