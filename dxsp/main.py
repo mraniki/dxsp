@@ -163,13 +163,13 @@ class DexSwap:
             self.logger.debug(f"error get_quote {e}")
             return
 
-    async def execute_order(self,direction,symbol,stop_loss=10000,take_profit=10000,quantity=1,amount_trading_option=1,order_type='swap'):
-        self.logger.debug(f"execute_order {direction} {symbol} {order_type}")
+    async def execute_order(self,direction,instrument,stop_loss=10000,take_profit=10000,quantity=1,amount_trading_option=1,order_type='swap'):
+        self.logger.debug(f"execute_order {direction} {instrument} {order_type}")
         if order_type == 'swap':
             self.logger.debug(f"execute_order {order_type}")
             try:
-                asset_out_symbol = self.base_trading_symbol if direction=="BUY" else symbol
-                asset_in_symbol = symbol if direction=="BUY" else self.base_trading_symbol
+                asset_out_symbol = self.base_trading_symbol if direction=="BUY" else instrument
+                asset_in_symbol = instrument if direction=="BUY" else self.base_trading_symbol
                 asset_out_contract = await self.get_token_contract(asset_out_symbol)
                 asset_out_decimals = asset_out_contract.functions.decimals().call()
                 asset_out_balance = await self.get_token_balance(asset_out_symbol)
@@ -178,7 +178,11 @@ class DexSwap:
                 if amount_trading_option == 2:
                     asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals) #SELL all token in case of sell order for example
           
-                swap = self.get_swap(asset_out_symbol,asset_in_symbol,asset_out_amount)
+                swap = self.get_swap(
+                        asset_out_symbol,
+                        asset_in_symbol,
+                        asset_out_amount
+                        )
 
             except Exception as e:
                 self.logger.debug(f"error execute_order {e}")

@@ -7,7 +7,6 @@ WORKDIR /app
 
 # install dependencies
 RUN pip install dxsp
-RUN pip install healthchecks_io
 RUN pip install fastapi
 RUN pip install uvicorn
 

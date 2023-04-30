@@ -4,8 +4,6 @@ import sys, os, asyncio, requests, logging
 from dotenv import load_dotenv
 import random
 
-from web3 import Web3
-
 from fastapi import FastAPI
 import uvicorn
 
