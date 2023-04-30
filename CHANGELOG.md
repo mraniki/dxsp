@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.1 (2023-04-30)
+### Fix
+* Lint ([`a71343c`](https://github.com/mraniki/dxsp/commit/a71343cf254043afae5c01dde2cdfc6d34c5c985))
+* Typo ([`c278650`](https://github.com/mraniki/dxsp/commit/c27865080c0a38858b6e725786712b5ae793e5a0))
+* Add GitHub Actions workflow for deploying to production ([`63a3614`](https://github.com/mraniki/dxsp/commit/63a3614e01821d498f450e99d66f2bce3c355fa7))
+
 ## v1.5.0 (2023-04-30)
 ### Feature
 * Code refactoring and lint ([`ab9ed89`](https://github.com/mraniki/dxsp/commit/ab9ed89deae28cfb43aafa6ec5a7efd55b051cf2))
