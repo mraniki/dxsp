@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.1 (2023-04-30)
+### Fix
+* Refactoring ([`8d9f1f9`](https://github.com/mraniki/dxsp/commit/8d9f1f99966e743afe4788314815c539cd41b824))
+
 ## v1.4.0 (2023-04-30)
 ### Feature
 * Refactor ([`5b29a87`](https://github.com/mraniki/dxsp/commit/5b29a87d5788da37d08453f6c45c5fbe2f2e5914))
