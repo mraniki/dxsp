@@ -1,34 +1,34 @@
 """
  DEX SWAP Main
 """
-import os
 import json
-import requests
+import os
 import logging
 
-from web3 import Web3
-from pycoingecko import CoinGeckoAPI
-from ping3 import ping
+import requests
 
-from dxsp.config import settings
 from dxsp import __version__
 from dxsp.assets.blockchains import blockchains
+from dxsp.config import settings
+from ping3 import ping
+from pycoingecko import CoinGeckoAPI
+from web3 import Web3
 
 class DexSwap:
     """Do a swap."""
 
     def __init__(self,
                  chain_id: int = 1, 
-                 wallet_address: str = None,
-                 private_key: str = None,
-                 block_explorer_api: str = None,
-                 block_explorer_url: str = None,
-                 rpc: str = None,
-                 w3: Web3 = None,
-                 protocol_type: str = None,
-                 dex_exchange: str = None,
-                 dex_router: str = None,
-                 base_trading_symbol: str = None,
+                 wallet_address: str | None = None,
+                 private_key: str | None = None,
+                 block_explorer_api: str | None = None,
+                 block_explorer_url: str | None = None,
+                 rpc: str | None = None,
+                 w3: Web3 | None = None,
+                 protocol_type: str | None = None,
+                 dex_exchange: str | None = None,
+                 dex_router: str | None = None,
+                 base_trading_symbol: str | None = None,
                  amount_trading_option: int = 1,
                  ):
         """build a web3 object for swap"""
@@ -254,7 +254,7 @@ class DexSwap:
             if self.protocol_type in ["uniswap_v2"]:
                 order_path_dex=[asset_out_address, asset_in_address]
                 router_abi = await self.get_abi(self.router)
-                router_instance = self.w3.eth.contract(address=self.w3.to_checksum_address(self.router), abi=self.router_abi)
+                router_instance = self.w3.eth.contract(address=self.w3.to_checksum_address(self.router), abi=router_abi)
                 deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
                 transaction_min_amount  = int(router_instance.functions.getAmountsOut(transaction_amount, order_path_dex).call()[1])
                 swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_min_amount,order_path_dex,self.wallet_address,deadline)
@@ -284,7 +284,7 @@ class DexSwap:
                 if transaction_hash_details['status'] == "1":
                     transaction_blockNumber = transaction_hash_details['blockNumber']
                     transaction_receipt = self.w3.eth.get_transaction_receipt(transaction_hash)
-                    transaction_block = self.w3.eth.get_block(blockNumber)
+                    transaction_block = self.w3.eth.get_block(transaction_blockNumber)
                     order={}
                     order['id'] = transaction_receipt['transactionHash']
                     order['timestamp'] = transaction_block['timestamp']
@@ -304,7 +304,7 @@ class DexSwap:
     async def get_block_explorer_status(self,txHash):
         self.logger.debug("get_block_explorer_status %s",txHash)
         checkTransactionSuccessURL = f"{self.block_explorer_url}?module=transaction&action=gettxreceiptstatus&txhash={txHash}&apikey={self.block_explorer_api}"
-        checkTransactionRequest =  self.get(checkTransactionSuccessURL)
+        checkTransactionRequest =  self._get(checkTransactionSuccessURL)
         return checkTransactionRequest['status']
 
 ####CONTRACT SEARCH
@@ -425,15 +425,7 @@ class DexSwap:
     async def get_sign(self, tx):
         self.logger.debug("get_sign %s", tx)
         try:
-            if self.protocol_type in ['uniswap_v2']:
-                tx_params = {
-                'from': self.wallet_address,
-                'gas': await self.get_gas(tx),
-                'gasPrice': await self.get_gasPrice(tx),
-                'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
-                }
-                tx = tx.build_transaction(tx_params)
-            elif self.protocol_type in ['uniswap_v3']:
+            if self.protocol_type in ['uniswap_v2','uniswap_v3']:
                 tx_params = {
                 'from': self.wallet_address,
                 'gas': await self.get_gas(tx),
@@ -491,12 +483,12 @@ class DexSwap:
 
 #####USERS
 
-    async def get_wallet_auth():
-        try:
-            return
-        except Exception as e:
-            self.logger.error("get_wallet_auth error: %s",e)
-            return
+    # async def get_wallet_auth(self):
+    #     try:
+    #         return
+    #     except Exception as e:
+    #         self.logger.error("get_wallet_auth error: %s",e)
+    #         return
 
     async def get_token_balance(self, token):
         self.logger.debug("get_token_balance %s", token)
