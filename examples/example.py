@@ -1,10 +1,12 @@
 
 
-import sys, os, asyncio, requests, logging
+import sys
+import os
+import asyncio
+import requests
+import logging
 from dotenv import load_dotenv
 import random
-
-from web3 import Web3
 
 from fastapi import FastAPI
 import uvicorn
