@@ -21,6 +21,7 @@ pycoingecko = "*"
 web3client = ">=1.1.8"
 many-abis = ">=0.1.7"
 apollox-connector-python = "*"
+ping3 = "*"
 
 [tool.poetry.dev-dependencies]
 python-semantic-release = "*"

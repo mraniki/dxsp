@@ -5,7 +5,7 @@ import logging
 
 from web3 import Web3
 from pycoingecko import CoinGeckoAPI
-#from ping3 import ping
+from ping3 import ping
 
 from dxsp.config import settings
 from dxsp import __version__
@@ -102,6 +102,8 @@ class DexSwap:
                 self.router = blockchain["uniswap_v2"]
             else:
                 self.router = blockchain["uniswap_v3"]
+        else:
+            self.router = self.dex_router 
         self.logger.debug(f"self.router {self.router}")
 
         self.name = "TBD"
@@ -197,12 +199,14 @@ class DexSwap:
             self.logger.debug(f"execute_order {order_type}")
             return
 
-    async def get_swap(self, 
-            asset_out_symbol: str, 
-            asset_in_symbol: str,
-            amount: int, 
-            slippage_tolerance_percentage = 2 
+    async def get_swap(
+                self, 
+                asset_out_symbol: str, 
+                asset_in_symbol: str,
+                amount: int, 
+                slippage_tolerance_percentage = 2 
         ):
+        """main swap function"""
 
         self.logger.debug(f"get_swap {asset_out_symbol} {asset_in_symbol} {amount}")
         try:
@@ -247,7 +251,7 @@ class DexSwap:
                 if TX_status_code != 200:
                     return
             #UNISWAP V2
-            if self.protocol_type ['uniswap_v2']:
+            if self.protocol_type in ["uniswap_v2"]:
                 order_path_dex=[asset_out_address, asset_in_address]
                 router_abi = await self.get_abi(self.router)
                 router_instance = self.w3.eth.contract(address=self.w3.to_checksum_address(self.router), abi=self.router_abi)
@@ -255,7 +259,7 @@ class DexSwap:
                 transaction_min_amount  = int(router_instance.functions.getAmountsOut(transaction_amount, order_path_dex).call()[1])
                 swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_min_amount,order_path_dex,self.wallet_address,deadline)
             #1INCH LIMIT
-            if self.protocol_type ["1inch_limit"]:
+            if self.protocol_type in ["1inch_limit"]:
                  return
                 # encoded_message = encode_structured_data(eip712_data)
                 # signed_message = await sign_transaction_dex(encoded_message)
@@ -269,7 +273,7 @@ class DexSwap:
                 # response = requests.post(url=limit_order_url,headers={"accept": "application/json, text/plain, */*", "content-type": "application/json"}, json=limit_order)
 
             #UNISWAP V3
-            if self.protocol_type ['uniswap_v3']:
+            if self.protocol_type in ['uniswap_v3']:
                 return
             if swap_TX:
                 self.logger.debug(f"swap_TX {swap_TX}")
@@ -277,7 +281,7 @@ class DexSwap:
                 transaction_hash = str(self.w3.to_hex(signed_TX))
                 #transaction_results = await self.get_block_explorer_status(transaction_hash)
                 transaction_hash_details = self.w3.wait_for_transaction_receipt(transaction_hash, timeout=120, poll_latency=0.1)
-                if(transaction_hash_details['status'] == "1"):
+                if transaction_hash_details['status'] == "1":
                     transaction_blockNumber = transaction_hash_details['blockNumber']
                     transaction_receipt = self.w3.eth.get_transaction_receipt(transaction_hash)
                     transaction_block = self.w3.eth.get_block(blockNumber)
@@ -288,9 +292,9 @@ class DexSwap:
                     order['contract'] = asset_out_address
                     order['amount'] = transaction_amount
                     order['fee'] = transaction_receipt['gasUsed']
-                    order['price'] = 'na'
-                    order['confirmation'] = 'na'
-                                #response+= f"\n➕ Size: {round(ex.from_wei(transaction_amount, 'ether'),5)}\n⚫️ Entry: {await fetch_gecko_asset_price(asset_in_symbol)}USD \nℹ️ {txHash}\n⛽️ {txHashDetail['gasUsed']}\n🗓️ {datetime.now()}"
+                    order['price'] = "TBD"
+                    order['confirmation'] = "TBD"
+                    #response+= f"\n➕ Size: {round(ex.from_wei(transaction_amount, 'ether'),5)}\n⚫️ Entry: {await fetch_gecko_asset_price(asset_in_symbol)}USD \nℹ️ {txHash}\n⛽️ {txHashDetail['gasUsed']}\n🗓️ {datetime.now()}"
             #logger.info(msg=f"{response}")
                     return order
         except Exception as e:
@@ -375,7 +379,7 @@ class DexSwap:
 
     async def get_contract_address(self,token_list_url, symbol):
         self.logger.debug(f"get_contract_address {token_list_url} {symbol}")
-        try: 
+        try:
             token_list = await self._get(token_list_url)
             token_search = token_list['tokens']
             for keyval in token_search:
@@ -412,10 +416,10 @@ class DexSwap:
             approval_check = asset_out_contract.functions.allowance(self.w3.to_checksum_address(self.wallet_address), self.w3.to_checksum_address(self.router)).call()
             if (approval_check==0):
                 approved_amount = (self.w3.to_wei(2**64-1,'ether'))
-                asset_out_abi = await fetch_abi_dex(asset_out_address)
+                asset_out_abi = await self.get_abi(asset_out_address)
                 asset_out_contract = self.w3.eth.contract(address=asset_out_address, abi=asset_out_abi)
                 approval_TX = asset_out_contract.functions.approve(self.w3.to_checksum_address(self.router), approved_amount)
-                approval_txHash = await sign_transaction_dex(approval_TX)
+                approval_txHash = await self.get_sign(approval_TX)
                 approval_txHash_complete = self.w3.eth.wait_for_transaction_receipt(approval_txHash, timeout=120, poll_latency=0.1)
 
     async def get_sign(self, tx):
@@ -502,11 +506,11 @@ class DexSwap:
             token_abi =  await self.get_abi(token_address)
             token_contract = self.w3.eth.contract(address=token_address, abi=token_abi)
             token_balance = token_contract.functions.balanceOf(self.wallet_address).call()
-            logger.debug(msg=f"token_address {token_address} token_balance {token_balance}")
+            self.logger.debug(msg=f"token_address {token_address} token_balance {token_balance}")
             # (ex.from_wei(await fetch_token_balance(basesymbol), 'ether'), 5)
             return 0 if token_balance <=0 or token_balance is None else token_balance
         except Exception as e:
-            logger.error(msg=f"{token} get_token_balance error: {e}")
+            self.logger.error(msg=f"{token} get_token_balance error: {e}")
             return 0
 
     async def get_basecoin_balance(self):
@@ -540,7 +544,7 @@ class DexSwap:
             # open_positions = asset_position_contract.functions.getOpenPositions(walletaddress).call()
             return
         except Exception as e:
-            logger.error(msg=f"get_account_position error: {e}")
+            self. logger.error(msg=f"get_account_position error: {e}")
             return 0
 
     # async def fetch_account_dex(addr):
@@ -576,4 +580,3 @@ class DexSwap:
 #         return f"{asset_out_cg_name}\n🦎{asset_out_cg_quote} USD"
 #     except Exception:
 #         return
-
