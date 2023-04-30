@@ -15,7 +15,7 @@ from dxsp import __version__
 from dxsp.assets.blockchains import blockchains
 
 class DexSwap:
-
+    """Do a swap."""
 
     def __init__(self,
                  chain_id: int = 1, 
@@ -31,53 +31,53 @@ class DexSwap:
                  base_trading_symbol: str = None,
                  amount_trading_option: int = 1,
                  ):
-
-        self.logger =  logging.getLogger(__name__)
-        self.logger.debug(f"DXSP Logger:  {self.logger} on {__name__} version: {__version__}")
-        self.logger.info(f"Initializing DexSwap object for {wallet_address} on {chain_id}")
+        """build a web3 object for swap activity"""
+        self.logger = logging.getLogger(__name__)
+        self.logger.info("DexSwap version: %s", __version__)
+        self.logger.info("Initializing DexSwap object for %s on %s", wallet_address, chain_id)
 
         self.chain_id = int(chain_id)
-        self.logger.debug(f"self.chain_id {self.chain_id}")
+        self.logger.debug("self.chain_id %s", self.chain_id)
         if self.chain_id  is None:
             self.logger.warning("self.chain_id not setup")
             return
         blockchain = blockchains[self.chain_id ]
-        self.logger.debug(f"blockchain {blockchain}")
+        self.logger.debug("blockchain %s", blockchain)
 
         self.wallet_address = wallet_address
-        self.logger.debug(f"self.wallet_address {self.wallet_address}")
+        self.logger.debug("self.wallet_address %s", self.wallet_address)
         self.private_key = private_key
 
         self.block_explorer_api = block_explorer_api
         if self.block_explorer_api is None:
             self.logger.warning("self.block_explorer_api not setup")
         self.block_explorer_url = block_explorer_url
-        self.logger.debug(f"self.block_explorer_url {self.block_explorer_url}")
+        self.logger.debug("self.block_explorer_url %s",self.block_explorer_url)
         if self.block_explorer_url is None:
             self.block_explorer_url = blockchain["block_explorer_url"]
         if self.block_explorer_url is None:
             self.logger.warning("self.block_explorer_url not setup")
-        self.logger.debug(f"self.block_explorer_url {self.block_explorer_url}")
+        self.logger.debug("self.block_explorer_url %s", self.block_explorer_url)
 
         self.rpc = rpc
         if self.rpc is None:
             self.rpc = blockchain["rpc"]
-        self.logger.debug(f"self.rpc {self.rpc}")
+        self.logger.debug("self.rpc %s",self.rpc)
 
         self.latency = round(ping(self.rpc, unit='ms'), 3)
-        self.logger.debug(f"self.latency {self.latency}")    
+        self.logger.debug("self.latency %s",self.latency)
 
         self.w3 = w3
         if self.w3 is None:
             self.w3 = Web3(Web3.HTTPProvider(self.rpc))
             try:
                 self.w3.net.listening
-                self.logger.info(msg=f"connected to {self.rpc} with w3 {self.w3}")
+                self.logger.info("connected to %s with w3 %s",self.rpc,self.w3)
             except Exception as e:
-                self.logger.error(msg=f"connectivity failed using {self.rpc}")
+                self.logger.error("connectivity failed using %s", self.rpc)
                 return
-        self.logger.debug(f"self.w3 {self.w3}")
-        self.logger.info(msg=f"connected")
+        self.logger.debug("self.w3 %s",self.w3)
+        self.logger.info("connected")
 
         self.protocol_type = protocol_type
         if self.protocol_type is None:
@@ -90,11 +90,11 @@ class DexSwap:
                 self.protocol_type = "1inch"
             self.dex_url = f"{base_url}"
 
-        self.logger.debug(f"self.dex_url {self.dex_url}")
-        self.logger.debug(f"self.protocol_type {self.protocol_type}")
+        self.logger.debug("self.dex_url %s", self.dex_url)
+        self.logger.debug("self.protocol_type %s",self.protocol_type)
 
         self.dex_exchange = dex_exchange
-        self.logger.debug(f"self.dex_exchange {self.dex_exchange}")
+        self.logger.debug("self.dex_exchange %s",self.dex_exchange)
 
         self.dex_router = dex_router
         if self.dex_router is None:
@@ -107,32 +107,30 @@ class DexSwap:
                 self.router = blockchain["uniswap_v3"]
         else:
             self.router = self.dex_router 
-        self.logger.debug(f"self.router {self.router}")
+        self.logger.debug("self.router %s",self.router)
 
         self.name = "TBD"
-        self.logger.debug(f"self.name {self.name}")        
+        self.logger.debug("self.name %s",self.name)
 
         self.base_trading_symbol = base_trading_symbol
         if self.base_trading_symbol is None:
             self.base_trading_symbol= 'USDC'
-        self.logger.debug(f"self.base_trading_symbol {self.base_trading_symbol}")
+        self.logger.debug(f"self.base_trading_symbol %s",self.base_trading_symbol)
 
         self.amount_trading_option = amount_trading_option
-        self.logger.debug(f"self.amount_trading_option {self.amount_trading_option}")
+        self.logger.debug("self.amount_trading_option %s",self.amount_trading_option)
 
-        self.gecko_api = CoinGeckoAPI() # llama_api = f"https://api.llama.fi/" maybe as backup to be reviewed
+        self.gecko_api = CoinGeckoAPI()
         assetplatform = self.gecko_api.get_asset_platforms()
         output_dict = [x for x in assetplatform if x['chain_identifier'] == int(self.chain_id)]
         self.gecko_platform = output_dict[0]['id']
-        self.logger.debug(f"self.gecko_platform {self.gecko_platform}")
-
+        self.logger.debug("self.gecko_platform %s",self.gecko_platform)
         # self.gasPrice = gasPrice
-        
         # self.gasLimit = gasLimit
 
     async def _get(self, url, params=None, headers=None):
         headers = { "User-Agent": "Mozilla/5.0" }
-        self.logger.debug(f"_get url {url}")
+        self.logger.debug("_get url %s",url)
         response = requests.get(url,params =params,headers=headers)
         #self.logger.debug(f"response _get {response}")
         return response.json()
@@ -467,7 +465,7 @@ class DexSwap:
         return self.w3.to_wei(gasprice,'gwei')
 
     async def get_abi(self,addr):
-        self.logger.debug(f"get_abi {addr}")
+        self.logger.debug("get_abi %s", addr)
         if self.block_explorer_api is None:
             self.logger.debug("No block_explorer_api")
         try:
@@ -480,13 +478,12 @@ class DexSwap:
             resp = await self._get(url=self.block_explorer_url,params=params,headers=headers)
             #self.logger.debug(f"resp {resp} status {resp['status']}")
             if resp['status']=="1":
-                self.logger.debug(f"ABI found {resp}")
+                self.logger.debug("ABI found %s",resp)
                 abi = resp["result"]
                 return abi
-            else:
-                self.logger.debug(f"No ABI identified Option B needed for contract {addr} on chain {self.chain_id}")
-                # https://github.com/tintinweb/smart-contract-sanctuary
-                #https://raw.githubusercontent.com/tintinweb/smart-contract-sanctuary-optimism/master/contracts/mainnet/1f/1F98431c8aD98523631AE4a59f267346ea31F984_UniswapV3Factory.sol
+            self.logger.debug("No ABI identified Option B needed for contract %s on chain %s",addr,self.chain_id)
+            # https://github.com/tintinweb/smart-contract-sanctuary
+            #https://raw.githubusercontent.com/tintinweb/smart-contract-sanctuary-optimism/master/contracts/mainnet/1f/1F98431c8aD98523631AE4a59f267346ea31F984_UniswapV3Factory.sol
 
         except Exception as e:
             self.logger.debug(f"error get_abi {e}")
@@ -498,21 +495,21 @@ class DexSwap:
         try:
             return
         except Exception as e:
-            self.logger.error(msg=f"get_wallet_auth error: {e}")
+            self.logger.error("get_wallet_auth error: %s",e)
             return
 
     async def get_token_balance(self, token):
-        self.logger.debug(f"get_token_balance {token}")
+        self.logger.debug("get_token_balance %s", token)
         try:
             token_address = await self.search_contract(token)
             token_abi =  await self.get_abi(token_address)
             token_contract = self.w3.eth.contract(address=token_address, abi=token_abi)
             token_balance = token_contract.functions.balanceOf(self.wallet_address).call()
-            self.logger.debug(msg=f"token_address {token_address} token_balance {token_balance}")
+            self.logger.debug("token_address %s token_balance %s",token_address,token_balance)
             # (ex.from_wei(await fetch_token_balance(basesymbol), 'ether'), 5)
             return 0 if token_balance <=0 or token_balance is None else token_balance
         except Exception as e:
-            self.logger.error(msg=f"{token} get_token_balance error: {e}")
+            self.logger.error("get_token_balance %s: %s",token, e)
             return 0
 
     async def get_basecoin_balance(self):
@@ -538,7 +535,7 @@ class DexSwap:
             # bal = round(ex.from_wei(bal,'ether'),5)
 
     async def get_account_position(self):
-        self.logger.debug(f"get_account_position")
+        self.logger.debug("get_account_position")
         try:
             # asset_position_address= await search_contract(asset_out_symbol)
             # asset_position_abi= await fetch_abi_dex(asset_out_address)
@@ -546,7 +543,7 @@ class DexSwap:
             # open_positions = asset_position_contract.functions.getOpenPositions(walletaddress).call()
             return
         except Exception as e:
-            self. logger.error(msg=f"get_account_position error: {e}")
+            self.logger.error("get_account_position error: %s", e)
             return 0
 
     # async def fetch_account_dex(addr):
