@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.3.0 (2023-04-30)
+### Feature
+* Update execute_order function arguments ([`e538ad5`](https://github.com/mraniki/dxsp/commit/e538ad5ccc8d299bdc4d0afdf4abf9724acfb6e9))
+
 ## v1.2.15 (2023-04-27)
 ### Fix
 * Missing import ([`dfeab6a`](https://github.com/mraniki/dxsp/commit/dfeab6adc8564faa748cb263b87af5dc77d71eaf))
