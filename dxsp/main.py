@@ -540,8 +540,9 @@ class DexSwap:
             # bal = round(ex.from_wei(bal,'ether'),5)
 
     async def get_account_position(self):
-        self.logger.debug("get_account_position")
+        
         try:
+            self.logger.debug("get_account_position")
             # asset_position_address= await search_contract(asset_out_symbol)
             # asset_position_abi= await fetch_abi_dex(asset_out_address)
             # asset_position_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
@@ -550,7 +551,6 @@ class DexSwap:
         except Exception as e:
             self.logger.error("get_account_position error: %s", e)
             return 0
-
 
     # async def fetch_account_dex(addr):
     #     url = block_explorer_url
