@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.2 (2023-05-01)
+### Fix
+* Lint traling space and readibility ([`a019518`](https://github.com/mraniki/dxsp/commit/a0195187eeb14006be66f74f7c3c80a8b2e0a33f))
+
 ## v1.5.1 (2023-04-30)
 ### Fix
 * Lint ([`a71343c`](https://github.com/mraniki/dxsp/commit/a71343cf254043afae5c01dde2cdfc6d34c5c985))
