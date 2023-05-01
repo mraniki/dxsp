@@ -202,7 +202,7 @@ class DexSwap:
                 if amount_trading_option == 2:
                     #SELL all token in case of sell order for example
                     asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals)
-                order = self.get_swap(
+                order = await self.get_swap(
                         asset_out_symbol,
                         asset_in_symbol,
                         asset_out_amount
