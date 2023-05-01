@@ -28,7 +28,7 @@ class DexSwap:
                  protocol_type: str | None = None,
                  dex_exchange: str | None = None,
                  dex_router: str | None = None,
-                 base_trading_symbol: str | None = None,
+                 base_trading_symbol: str = 'USDC',
                  amount_trading_option: int = 1,
                  ):
         """build a web3 object for swap"""
@@ -52,44 +52,40 @@ class DexSwap:
         if self.block_explorer_api is None:
             self.logger.warning("self.block_explorer_api not setup")
         self.block_explorer_url = block_explorer_url
-        self.logger.debug("self.block_explorer_url %s",self.block_explorer_url)
-        if self.block_explorer_url is None:
-            self.block_explorer_url = blockchain["block_explorer_url"]
-        if self.block_explorer_url is None:
-            self.logger.warning("self.block_explorer_url not setup")
+        self.block_explorer_url = (
+            block_explorer_url
+            or blockchain.get("block_explorer_url")
+            or self.logger.warning("self.block_explorer_url not set up")
+        )
         self.logger.debug("self.block_explorer_url %s", self.block_explorer_url)
 
-        self.rpc = rpc
-        if self.rpc is None:
-            self.rpc = blockchain["rpc"]
+        self.rpc = rpc or blockchain.get("rpc")
         self.logger.debug("self.rpc %s",self.rpc)
+        try:
+            self.latency = round(ping(self.rpc, unit='ms'), 3)
+            self.logger.debug("self.latency %s",self.latency)
+        except Exception as e:
+            self.logger.error("Failed to ping %s:%s",self.rpc, e)
 
-        self.latency = round(ping(self.rpc, unit='ms'), 3)
-        self.logger.debug("self.latency %s",self.latency)
-
-        self.w3 = w3
-        if self.w3 is None:
-            self.w3 = Web3(Web3.HTTPProvider(self.rpc))
-            try:
-                self.w3.net.listening
-                self.logger.info("connected to %s with w3 %s",self.rpc,self.w3)
-            except Exception as e:
-                self.logger.error("connectivity failed using %s", self.rpc)
-                return
+        self.w3 = w3 or Web3(Web3.HTTPProvider(self.rpc))
+        try:
+            self.w3.net.listening
+            self.logger.info("connected to %s with w3 %s",self.rpc,self.w3)
+        except Exception as e:
+            self.logger.error("connectivity failed using %s", self.rpc)
+            return
         self.logger.debug("self.w3 %s",self.w3)
         self.logger.info("connected")
 
-        self.protocol_type = protocol_type
-        if self.protocol_type is None:
-            if self.protocol_type == "0x":
-                base_url = blockchain["0x"]
-            elif self.protocol_type == "1inch_limit":
-                base_url = blockchain["1inch_limit"]
-            else:
-                base_url = blockchain["1inch"]
-                self.protocol_type = "1inch"
-            self.dex_url = f"{base_url}"
-
+        self.protocol_type = protocol_type or "1inch"
+        if self.protocol_type == "0x":
+            base_url = blockchain["0x"]
+        elif self.protocol_type == "1inch_limit":
+            base_url = blockchain["1inch_limit"]
+        else:
+            base_url = blockchain["1inch"]
+        
+        self.dex_url = f"{base_url}"
         self.logger.debug("self.dex_url %s", self.dex_url)
         self.logger.debug("self.protocol_type %s",self.protocol_type)
 
@@ -115,18 +111,20 @@ class DexSwap:
         self.base_trading_symbol = base_trading_symbol
         if self.base_trading_symbol is None:
             self.base_trading_symbol= 'USDC'
-        self.logger.debug(f"self.base_trading_symbol %s",self.base_trading_symbol)
+        self.logger.debug("self.base_trading_symbol %s",self.base_trading_symbol)
 
         self.amount_trading_option = amount_trading_option
         self.logger.debug("self.amount_trading_option %s",self.amount_trading_option)
 
-        self.gecko_api = CoinGeckoAPI()
-        assetplatform = self.gecko_api.get_asset_platforms()
-        output_dict = [x for x in assetplatform if x['chain_identifier'] == int(self.chain_id)]
-        self.gecko_platform = output_dict[0]['id']
-        self.logger.debug("self.gecko_platform %s",self.gecko_platform)
-        # self.gasPrice = gasPrice
-        # self.gasLimit = gasLimit
+        try:
+            self.gecko_api = CoinGeckoAPI()
+            assetplatform = self.gecko_api.get_asset_platforms()
+            output_dict = [x for x in assetplatform if x['chain_identifier'] == int(self.chain_id)]
+            self.gecko_platform = output_dict[0]['id']
+            self.logger.debug("self.gecko_platform %s",self.gecko_platform)
+        except Exception as e:
+            self.logger.error("CoinGeckoAPI setup: %s", e)
+            return
 
     async def _get(
                 self,
@@ -187,10 +185,11 @@ class DexSwap:
                 order_type='swap'
         ):
         """execute swap function"""
-        self.logger.debug("execute_order %s %s %s",action,instrument, order_type)
-        if order_type == 'swap':
-            self.logger.debug("execute_order %s",order_type)
-            try:
+        try:
+            self.logger.debug("execute_order %s %s %s",action,instrument, order_type)
+            if order_type == 'swap':
+                self.logger.debug("execute_order %s",order_type)
+
                 asset_out_symbol = self.base_trading_symbol if action=="BUY" else instrument
                 asset_in_symbol = instrument if action=="BUY" else self.base_trading_symbol
                 asset_out_contract = await self.get_token_contract(asset_out_symbol)
@@ -210,16 +209,18 @@ class DexSwap:
                         )
                 if order:
                     return order['confirmation']
-            except Exception as e:
-                self.logger.debug("error execute_order %s",e)
-                return "error processing order in DXSP"
 
-        if order_type == 'market':
-            self.logger.debug("execute_order %s", order_type)
-            return
-        if order_type == 'limit':
-            self.logger.debug("execute_order %s", order_type)
-            return
+            if order_type == "market":
+                self.logger.debug("execute_order %s", order_type)
+                return
+            if order_type == "limit":
+                self.logger.debug("execute_order %s", order_type)
+                return
+
+        except Exception as e:
+            self.logger.debug("error execute_order %s",e)
+            return "error processing order in DXSP"
+
 
     async def get_swap(
                 self,
