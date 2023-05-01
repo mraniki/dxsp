@@ -353,28 +353,23 @@ class DexSwap:
 
         try:
             token_contract = await self.get_contract_address(settings.TOKEN_PERSONAL_LIST,token)
-            self.logger.debug("personal_list")
             if token_contract is None:
                 token_contract = await self.get_contract_address(settings.TOKEN_TESTNET_LIST,token)
-                self.logger.debug("test_token_list")
-            if token_contract is None:
-                token_contract = await self.get_contract_address(settings.TOKEN_MAINNET_LIST,token)
-                self.logger.debug("main_list")
-            if token_contract is None:
-                self.logger.debug("gecko search")
-                token_contract = await self.search_gecko_contract(token)
+                if token_contract is None:
+                    token_contract = await self.get_contract_address(settings.TOKEN_MAINNET_LIST,token)
+                    if token_contract is None:
+                        token_contract = await self.search_gecko_contract(token)
             if token_contract is not None:
-                self.logger.debug("token_contract %s",token_contract)
+                self.logger.info("token_contract found %s",token_contract)
                 return self.w3.to_checksum_address(token_contract)
-            else:
-                self.logger.debug("no contract found for %s",token)
+            self.logger.info("no contract found for %s",token)
         except Exception as e:
             self.logger.error("search_contract %s",e)
             return
 
     async def search_gecko(self,token):
         """search coingecko"""
-        self.logger.debug("search_gecko %s",token)
+        self.logger.debug("search_gecko")
         try:
             search_results = self.gecko_api.search(query=token)
             search_dict = search_results['coins']
