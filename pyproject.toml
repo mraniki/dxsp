@@ -26,6 +26,8 @@ ping3 = "*"
 
 [tool.poetry.dev-dependencies]
 python-semantic-release = "*"
+pytest = "*"
+pytest-cov = "*"
 
 [build-system]
 requires = ["poetry-core"]
