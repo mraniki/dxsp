@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.3 (2023-05-01)
+### Fix
+* Refactor build and test workflows ([`aab8ad7`](https://github.com/mraniki/dxsp/commit/aab8ad77a4508ec0f0d5f0d164945c2f9a6cac01))
+* Direction replaced by action ([`bdf6367`](https://github.com/mraniki/dxsp/commit/bdf63675815d82ed8bddcae3903bd8953a6c4a3a))
+
 ## v1.5.2 (2023-05-01)
 ### Fix
 * Lint traling space and readibility ([`a019518`](https://github.com/mraniki/dxsp/commit/a0195187eeb14006be66f74f7c3c80a8b2e0a33f))
