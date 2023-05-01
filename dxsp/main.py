@@ -178,7 +178,7 @@ class DexSwap:
 
     async def execute_order(
                 self,
-                direction,
+                action,
                 instrument,
                 stop_loss=10000,
                 take_profit=10000,
@@ -187,12 +187,12 @@ class DexSwap:
                 order_type='swap'
         ):
         """execute swap function"""
-        self.logger.debug("execute_order %s %s %s",direction,instrument, order_type)
+        self.logger.debug("execute_order %s %s %s",action,instrument, order_type)
         if order_type == 'swap':
             self.logger.debug("execute_order %s",order_type)
             try:
-                asset_out_symbol = self.base_trading_symbol if direction=="BUY" else instrument
-                asset_in_symbol = instrument if direction=="BUY" else self.base_trading_symbol
+                asset_out_symbol = self.base_trading_symbol if action=="BUY" else instrument
+                asset_in_symbol = instrument if action=="BUY" else self.base_trading_symbol
                 asset_out_contract = await self.get_token_contract(asset_out_symbol)
                 asset_out_decimals = asset_out_contract.functions.decimals().call()
                 asset_out_balance = await self.get_token_balance(asset_out_symbol)
@@ -212,7 +212,7 @@ class DexSwap:
                     return order['confirmation']
             except Exception as e:
                 self.logger.debug("error execute_order %s",e)
-                return
+                return "error processing order in DXSP"
 
         if order_type == 'market':
             self.logger.debug("execute_order %s", order_type)
@@ -556,10 +556,14 @@ class DexSwap:
     async def get_basecoin_balance(
                                 self
                             ):
-        bal_base_trading_symbol = await self.get_token_balance(self.base_trading_symbol)
-            # return round(ex.from_wei(await fetch_token_balance(basesymbol), 'ether'), 5)
-        return bal_base_trading_symbol
-        # bal = round(ex.from_wei(bal,'ether'),5)
+        try:
+            bal_base_trading_symbol = await self.get_token_balance(self.base_trading_symbol)
+                # return round(ex.from_wei(await fetch_token_balance(basesymbol), 'ether'), 5)
+            return bal_base_trading_symbol
+            # bal = round(ex.from_wei(bal,'ether'),5)
+        except Exception as e:
+            self.logger.error("get_basecoin_balance %s: %s",token, e)
+            return 0
 
     async def get_stablecoin_balance(
                                 self
@@ -572,7 +576,7 @@ class DexSwap:
                     msg += f"\n💵{bal_toptoken} {i}"
                 # bal = round(ex.from_wei(bal,'ether'),5)
         except Exception as e:
-            self.logger.error("get_account_balance error: %s", e)
+            self.logger.error("get_stablecoin_balance error: %s", e)
             return 0
 
     async def get_account_balance(
@@ -587,7 +591,7 @@ class DexSwap:
                     return msg
         except Exception as e:
             self.logger.error("get_account_balance error: %s", e)
-            return 0
+            return "balance error"
             # bal = round(ex.from_wei(bal,'ether'),5)
 
     async def get_account_position(
