@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v1.5.4 (2023-05-01)
+### Fix
+* Add pytest and pytest-cov to pyproject.toml ([`8e184b4`](https://github.com/mraniki/dxsp/commit/8e184b48f6c5fd99666aea072fba9b62151fc82d))
+* Code lint and refactor ([`a7fff0a`](https://github.com/mraniki/dxsp/commit/a7fff0a88af08df65ea1ec63dc07b88c313a6599))
+* Code refactor ([`5cfd752`](https://github.com/mraniki/dxsp/commit/5cfd7528f74c8da2a83cf5b1e53a09ccbb4cfdd0))
+
 ## v1.5.3 (2023-05-01)
 ### Fix
 * Refactor build and test workflows ([`aab8ad7`](https://github.com/mraniki/dxsp/commit/aab8ad77a4508ec0f0d5f0d164945c2f9a6cac01))
