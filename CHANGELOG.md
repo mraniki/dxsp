@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.1 (2023-05-02)
+### Fix
+* Add new requirement to examples. ([`df2c9de`](https://github.com/mraniki/dxsp/commit/df2c9de3ebb25fc551616e34854a3e3a305b9be6))
+
 ## v1.6.0 (2023-05-02)
 ### Feature
 * Error handling for token balance ([`06cc72e`](https://github.com/mraniki/dxsp/commit/06cc72e03658b1c7a81eb36a8bf925697ea9f798))
