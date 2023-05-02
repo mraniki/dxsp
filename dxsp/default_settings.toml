@@ -7,11 +7,14 @@ TOKEN_MAINNET_LIST = "https://raw.githubusercontent.com/mraniki/tokenlist/main/a
 TOKEN_TESTNET_LIST = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 TOKEN_PERSONAL_LIST = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
+trading_counter_currency = "USDT"
+
 APOLLO_SPOT_API_KEY = ""
 APOLLO_SPOT_API_SECRET = ""
 
 APOLLO_FUTURE_API_KEY = ""
 APOLLO_FUTURE_API_SECRET = ""
+
 
 [testing]
 LOGLEVEL = "INFO"

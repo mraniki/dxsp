@@ -28,7 +28,6 @@ class DexSwap:
                  protocol_type: str | None = None,
                  dex_exchange: str | None = None,
                  dex_router: str | None = None,
-                 base_trading_symbol: str = 'USDC',
                  amount_trading_option: int = 1,
                  ):
         """build a web3 object for swap"""
@@ -108,10 +107,8 @@ class DexSwap:
         self.name = "TBD"
         self.logger.debug("self.name %s",self.name)
 
-        self.base_trading_symbol = base_trading_symbol
-        if self.base_trading_symbol is None:
-            self.base_trading_symbol= 'USDC'
-        self.logger.debug("self.base_trading_symbol %s",self.base_trading_symbol)
+        self.trading_counter_currency =  settings.trading_counter_currency
+        self.logger.debug("self.trading_counter_currency %s",self.trading_counter_currency)
 
         self.amount_trading_option = amount_trading_option
         self.logger.debug("self.amount_trading_option %s",self.amount_trading_option)
@@ -145,7 +142,7 @@ class DexSwap:
         self.logger.debug("get_quote %s",symbol)
         asset_in_address = await self.search_contract(symbol)
         self.logger.debug("asset_in_address %s", asset_in_address)
-        asset_out_symbol = self.base_trading_symbol
+        asset_out_symbol = self.trading_counter_currency
         asset_out_address = await self.search_contract(asset_out_symbol)
         self.logger.debug("asset_out_address %s",asset_out_address)
         if asset_out_address is None:
@@ -190,10 +187,14 @@ class DexSwap:
             if order_type == 'swap':
                 self.logger.debug("execute_order %s",order_type)
 
-                asset_out_symbol = self.base_trading_symbol if action=="BUY" else instrument
-                asset_in_symbol = instrument if action=="BUY" else self.base_trading_symbol
+                asset_out_symbol = self.trading_counter_currency if action=="BUY" else instrument
+                asset_in_symbol = instrument if action=="BUY" else self.trading_counter_currency
                 asset_out_contract = await self.get_token_contract(asset_out_symbol)
-                asset_out_decimals = asset_out_contract.functions.decimals().call()
+                try:
+                    asset_out_decimals = asset_out_contract.functions.decimals().call()
+                except Exception as e:
+                    self.logger.error("decimals: %s", e)
+                    return
                 asset_out_balance = await self.get_token_balance(asset_out_symbol)
                 if amount_trading_option == 1:
                     #buy or sell %p percentage DEFAULT OPTION
@@ -556,13 +557,13 @@ class DexSwap:
             self.logger.error("get_token_balance %s: %s",token, e)
             return 0
 
-    async def get_basecoin_balance(
+    async def get_trading_counter_ccy_balance(
                                 self
                             ):
         try:
-            bal_base_trading_symbol = await self.get_token_balance(self.base_trading_symbol)
+            trading_counter_currency_balance = await self.get_token_balance(self.trading_counter_currency)
                 # return round(ex.from_wei(await fetch_token_balance(basesymbol), 'ether'), 5)
-            return bal_base_trading_symbol
+            return trading_counter_currency_balance
             # bal = round(ex.from_wei(bal,'ether'),5)
         except Exception as e:
             self.logger.error("get_basecoin_balance %s: %s",token, e)
