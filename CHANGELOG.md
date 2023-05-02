@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.0 (2023-05-02)
+### Feature
+* Error handling for token balance ([`06cc72e`](https://github.com/mraniki/dxsp/commit/06cc72e03658b1c7a81eb36a8bf925697ea9f798))
+
 ## v1.5.4 (2023-05-01)
 ### Fix
 * Add pytest and pytest-cov to pyproject.toml ([`8e184b4`](https://github.com/mraniki/dxsp/commit/8e184b48f6c5fd99666aea072fba9b62151fc82d))
