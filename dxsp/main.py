@@ -539,12 +539,19 @@ class DexSwap:
         self.logger.debug("get_token_balance %s", token)
         try:
             token_address = await self.search_contract(token)
-            token_abi =  await self.get_abi(token_address)
+            if token_address is None:
+                raise ValueError(f"Token address not found for {token}")
+            token_abi = await self.get_abi(token_address)
+            if token_abi is None:
+                raise ValueError(f"ABI not found for {token_address}")
             token_contract = self.w3.eth.contract(address=token_address, abi=token_abi)
-            token_balance = token_contract.functions.balanceOf(self.wallet_address).call()
-            self.logger.debug("token_address %s token_balance %s",token_address,token_balance)
+            token_balance = 0
+            try:
+                token_balance = token_contract.functions.balanceOf(self.wallet_address).call()
+            except ValueError as e:
+                self.logger.warning("Invalid address %s for token %s: %s", self.wallet_address, token, e)
             # (ex.from_wei(await fetch_token_balance(basesymbol), 'ether'), 5)
-            return 0 if token_balance <=0 or token_balance is None else token_balance
+            return 0 if token_balance <=0 else token_balance
         except Exception as e:
             self.logger.error("get_token_balance %s: %s",token, e)
             return 0
