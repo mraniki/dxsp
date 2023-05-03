@@ -18,4 +18,4 @@ apollo_future_api_key = ""
 apollo_future_api_secret = ""
 
 [testing]
-LOGLEVEL = "DEBUG"
+loglevel = "DEBUG"
