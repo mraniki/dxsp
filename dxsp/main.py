@@ -131,7 +131,12 @@ class DexSwap:
             ):
         headers = { "User-Agent": "Mozilla/5.0" }
         self.logger.debug("_get url %s",url)
-        response = requests.get(url,params =params,headers=headers, timeout=10)
+        response = requests.get(
+                            url,
+                            params =params,
+                            headers=headers,
+                            timeout=10
+                        )
         #self.logger.debug(f"response _get {response}")
         return response.json()
 
@@ -239,12 +244,13 @@ class DexSwap:
             asset_out_contract = await self.get_token_contract(asset_out_symbol)
             self.logger.debug("asset_out_address %s %s",asset_out_address,asset_out_symbol)
             if asset_out_contract is None:
-                return
+                raise ValueError(f"Non contract identified for {asset_out_symbol}")
             asset_out_decimals=asset_out_contract.functions.decimals().call()
             asset_out_balance = await self.get_token_balance(asset_out_symbol)
             self.logger.debug("asset_out_balance %s",asset_out_balance)
             if asset_out_balance == 0:
                 self.logger.warning("No Money")
+                raise ValueError(f"Non contract identified for {asset_out_symbol}")
                 return
             #ASSETS IN
             asset_in_address = await self.search_contract(asset_in_symbol)
@@ -333,18 +339,6 @@ class DexSwap:
         return checkTransactionRequest['status']
 
 ####CONTRACT SEARCH
-
-    # async def search_gecko_platform(self):
-    #     self.logger.debug("search_gecko_platform")
-    #     try:
-    #         assetplatform = self.gecko_api.get_asset_platforms()
-    #         output_dict = [x for x in assetplatform if x['chain_identifier'] == int(self.chain_id)]
-    #         self.logger.debug(f"search_gecko_platform search {output_dict}")
-    #         return output_dict[0]['id']
-    #     except Exception as e:
-    #         self.logger.debug(f"error search_gecko_platform {e}")
-    #         return
-
     async def search_contract(
                             self, 
                             token
