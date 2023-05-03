@@ -406,7 +406,7 @@ class DexSwap:
                             token_list_url,
                             symbol
                         ):
-        """get token address from json list"""
+        """Given a token symbol and json format url address tokenlist, get token address"""
         self.logger.debug("get_contract_address %s %s",token_list_url, symbol)
         try:
             token_list = await self._get(token_list_url)
@@ -422,7 +422,7 @@ class DexSwap:
                                 self,
                                 token
                             ):
-        """get token contract (ABI+address)"""
+        """Given a token symbol, returns a contract object. """
         self.logger.debug("get_token_contract %s",token)
         try:
             token_address = await self.search_contract(token)
@@ -465,6 +465,8 @@ class DexSwap:
                 ):
         self.logger.debug("get_sign %s", tx)
         try:
+            if not isinstance(tx, dict):
+                raise ValueError("Transaction must be a dictionary")
             if self.protocol_type in ['uniswap_v2','uniswap_v3']:
                 tx_params = {
                 'from': self.wallet_address,
@@ -482,47 +484,63 @@ class DexSwap:
             signed = self.w3.eth.account.sign_transaction(tx, self.private_key)
             raw_tx = signed.rawTransaction
             return self.w3.eth.send_raw_transaction(raw_tx)
+        except (ValueError, TypeError, KeyError) as e:
+            self.logger.error("get_sign: %s", e)
+            raise
         except Exception as e:
-            self.logger.error(" get_sign %s", e)
-            return
+            self.logger.error("get_sign: %s", e)
+            raise RuntimeError("Failed to sign transaction")
 
     async def get_gas(
                     self,
                     tx
                 ):
+        # Log the transaction
         self.logger.debug("get_gas %s",tx)
+        # Estimate the gas cost of the transaction
         gasestimate= self.w3.eth.estimate_gas(tx) * 1.25
+        # Return the estimated gas cost in wei
         return int(self.w3.to_wei(gasestimate,'wei'))
 
     async def get_gasPrice(self, tx):
+        '''
+        Get the gas price for a transaction
+        '''
         self.logger.debug("get_gasPrice %s", tx)
         gasprice = self.w3.eth.generate_gas_price()
         return self.w3.to_wei(gasprice,'gwei')
 
     async def get_abi(self,addr):
+        # Log a debug message to the logger
         self.logger.debug("get_abi %s", addr)
-        if self.block_explorer_api is None:
-            self.logger.warning("No block_explorer_api")
-        try:
-            params = {
-                "module": "contract",
-                "action": "getabi",
-                "address": addr,
-                "apikey": self.block_explorer_api }
-            headers = { "User-Agent": "Mozilla/5.0" }
-            resp = await self._get(url=self.block_explorer_url,params=params,headers=headers)
-            #self.logger.debug(f"resp {resp} status {resp['status']}")
-            if resp['status']=="1":
-                self.logger.debug("ABI found %s",resp)
-                abi = resp["result"]
-                return abi
-            self.logger.debug("No ABI identified Option B needed for contract %s on chain %s",addr,self.chain_id)
-            # https://github.com/tintinweb/smart-contract-sanctuary
-            #https://raw.githubusercontent.com/tintinweb/smart-contract-sanctuary-optimism/master/contracts/mainnet/1f/1F98431c8aD98523631AE4a59f267346ea31F984_UniswapV3Factory.sol
+        if self.block_explorer_api:
+            try:
+                # Create a dictionary of parameters
+                params = {
+                    "module": "contract",
+                    "action": "getabi",
+                    "address": addr,
+                    "apikey": self.block_explorer_api }
+                # Create a dictionary of headers
+                headers = { "User-Agent": "Mozilla/5.0" }
+                # Make a GET request to the block explorer URL
+                resp = await self._get(url=self.block_explorer_url,params=params,headers=headers)
+                # If the response status is 1, log the ABI
+                if resp['status']=="1":
+                    self.logger.debug("ABI found %s",resp)
+                    abi = resp["result"]
+                    return abi
+                # If no ABI is identified, log a warning
+                self.logger.warning("No ABI identified for contract %s on chain %s",addr,self.chain_id)
+            except Exception as e:
+                # Log an error
+                self.logger.error("error get_abi %s", e)
+                return
+        else:
+            # If no block_explorer_api is set, log a warning
+            self.logger.warning("No block_explorer_api. Option B needed TBD")
+            return 
 
-        except Exception as e:
-            self.logger.error("error get_abi %s", e)
-            return
 
 #####USERS RELATED
 
@@ -556,6 +574,7 @@ class DexSwap:
         except Exception as e:
             self.logger.error("get_token_balance %s: %s",token, e)
             return 0
+
 
     async def get_quote_ccy_balance(
                                 self
