@@ -131,7 +131,12 @@ class DexSwap:
             ):
         headers = { "User-Agent": "Mozilla/5.0" }
         self.logger.debug("_get url %s",url)
-        response = requests.get(url,params =params,headers=headers, timeout=10)
+        response = requests.get(
+                            url,
+                            params =params,
+                            headers=headers,
+                            timeout=10
+                        )
         #self.logger.debug(f"response _get {response}")
         return response.json()
 
