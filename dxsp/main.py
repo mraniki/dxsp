@@ -107,8 +107,8 @@ class DexSwap:
         self.name = "TBD"
         self.logger.debug("self.name %s",self.name)
 
-        self.trading_counter_currency =  settings.trading_counter_currency
-        self.logger.debug("self.trading_counter_currency %s",self.trading_counter_currency)
+        self.trading_quote_ccy =  settings.trading_quote_ccy
+        self.logger.debug("self.trading_quote_ccy %s",self.trading_quote_ccy)
 
         self.amount_trading_option = amount_trading_option
         self.logger.debug("self.amount_trading_option %s",self.amount_trading_option)
@@ -142,7 +142,7 @@ class DexSwap:
         self.logger.debug("get_quote %s",symbol)
         asset_in_address = await self.search_contract(symbol)
         self.logger.debug("asset_in_address %s", asset_in_address)
-        asset_out_symbol = self.trading_counter_currency
+        asset_out_symbol = self.trading_quote_ccy
         asset_out_address = await self.search_contract(asset_out_symbol)
         self.logger.debug("asset_out_address %s",asset_out_address)
         if asset_out_address is None:
@@ -187,8 +187,8 @@ class DexSwap:
             if order_type == 'swap':
                 self.logger.debug("execute_order %s",order_type)
 
-                asset_out_symbol = self.trading_counter_currency if action=="BUY" else instrument
-                asset_in_symbol = instrument if action=="BUY" else self.trading_counter_currency
+                asset_out_symbol = self.trading_quote_ccy if action=="BUY" else instrument
+                asset_in_symbol = instrument if action=="BUY" else self.trading_quote_ccy
                 asset_out_contract = await self.get_token_contract(asset_out_symbol)
                 try:
                     asset_out_decimals = asset_out_contract.functions.decimals().call()
@@ -557,13 +557,13 @@ class DexSwap:
             self.logger.error("get_token_balance %s: %s",token, e)
             return 0
 
-    async def get_trading_counter_ccy_balance(
+    async def get_quote_ccy_balance(
                                 self
                             ):
         try:
-            trading_counter_currency_balance = await self.get_token_balance(self.trading_counter_currency)
+            trading_quote_ccy_balance = await self.get_token_balance(self.trading_quote_ccy)
                 # return round(ex.from_wei(await fetch_token_balance(basesymbol), 'ether'), 5)
-            return trading_counter_currency_balance
+            return trading_quote_ccy_balance
             # bal = round(ex.from_wei(bal,'ether'),5)
         except Exception as e:
             self.logger.error("get_basecoin_balance %s: %s",token, e)
