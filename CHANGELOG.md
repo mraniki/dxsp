@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v1.7.1 (2023-05-03)
+### Fix
+* Unit test setup ([`9d82587`](https://github.com/mraniki/dxsp/commit/9d82587236724d041486a25b1cf0277587e5e1b0))
+* Pytest config ([`0badcee`](https://github.com/mraniki/dxsp/commit/0badcee88f50fccaa2828d192ece2a6c8ba985b1))
+* Code coverage ([`ea2b839`](https://github.com/mraniki/dxsp/commit/ea2b839871e662269242a4e6847e7b1f694b5afc))
+
 ## v1.7.0 (2023-05-03)
 ### Feature
 * Refactor ([`e920ee5`](https://github.com/mraniki/dxsp/commit/e920ee56b761b742e99c2f9c939a5634910c7165))
