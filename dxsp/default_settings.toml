@@ -1,25 +1,21 @@
 [default]
-LOGLEVEL = "INFO"
-
+loglevel = "INFO"
 
 #📝tokenlist
-TOKEN_MAINNET_LIST = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
-TOKEN_TESTNET_LIST = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
-TOKEN_PERSONAL_LIST = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
+token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
+token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
+token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
-APOLLO_SPOT_API_KEY = ""
-APOLLO_SPOT_API_SECRET = ""
+#📝trading token setup
+trading_quote_ccy = "USDT"
+stablecoins = ["USDC", "USDT"]
 
-APOLLO_FUTURE_API_KEY = ""
-APOLLO_FUTURE_API_SECRET = ""
+#📝apollo API
+apollo_spot_api_key = ""
+apollo_spot_api_secret = ""
+
+apollo_future_api_key = ""
+apollo_future_api_secret = ""
 
 [testing]
-LOGLEVEL = "INFO"
-HOST = "0.0.0.0"
-PORT = 8080
-
-CHAIN_ID = "10"
-WALLET_ADDRESS = ""
-PRIVATE_KEY = ""
-
-BLOCK_EXPLORER_API = ""
+loglevel = "DEBUG"

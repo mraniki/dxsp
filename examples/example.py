@@ -14,21 +14,6 @@ import random
 from fastapi import FastAPI
 import uvicorn
 
-#YOUR VARIABLES
-#load_dotenv()
-sys.path.append('../')
-
-#chain ID being used refer to https://chainlist.org/
-#chain = os.getenv("CHAIN_ID", 10)
-
-#your wallet details
-#wallet_address = os.getenv("WALLET_ADDRESS", "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE")
-#private_key = os.getenv("PRIVATE_KEY", "0x111111111117dc0aa78b770fa6a738034120c302")
-
-#Block explorer API from ETHERSCAN TYPE EXPLORER
-#block_explorer_api = os.getenv("BLOCK_EXPLORER_API", "1X23Q4ACZ5T3KXG67WIAH7X8C510F1972TM")
-
-
 #DEBUG LEVEL
 logging.basicConfig(level=logging.DEBUG)
 
@@ -44,12 +29,8 @@ async def main():
 					chain_id=chain,
 					wallet_address="0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
 					private_key="0x111111111117dc0aaaaaa0fa6a738034aaaa302",
-					block_explorer_api=block_explorer_api
 				)
 		print(type(dex))
-		print(type(dex.chain_id))
-        print(isinstance(dex,dxsp.main.DexSwap)
-        print(isinstance(dex,DexSwap)
 		#BUY 10 USDC to SWAP with BITCOIN
 		#demo_tx = await dex.get_swap('USDT','wBTC',10)
 		#print("demo_tx ", demo_tx)
