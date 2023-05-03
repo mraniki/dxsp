@@ -572,12 +572,12 @@ class DexSwap:
     async def get_stablecoin_balance(
                                 self
                             ):
-        toptokens = ["USDT","USDC","BUSD","DAI"]
+        stablecoins = settings.stablecoins
         try:
-            for i in toptokens:
-                bal_toptoken = await self.get_token_balance(i)
-                if bal_toptoken:
-                    msg += f"\n💵{bal_toptoken} {i}"
+            for i in stablecoins:
+                bal_stablecoins = await self.get_token_balance(i)
+                if bal_stablecoins:
+                    msg += f"\n💵{bal_stablecoins} {i}"
                 # bal = round(ex.from_wei(bal,'ether'),5)
         except Exception as e:
             self.logger.error("get_stablecoin_balance error: %s", e)
@@ -586,13 +586,8 @@ class DexSwap:
     async def get_account_balance(
                             self
                         ):
-        toptokens = ["USDT","USDC"]
         try:
-            for i in toptokens:
-                bal_toptoken = await self.get_token_balance(i)
-                if bal_toptoken:
-                    msg += f"\n💵{bal_toptoken} {i}"
-                    return msg
+            return self.w3.eth.get_balance(self.wallet_address)
         except Exception as e:
             self.logger.error("get_account_balance error: %s", e)
             return "balance error"
@@ -612,36 +607,3 @@ class DexSwap:
             self.logger.error("get_account_position error: %s", e)
             return 0
 
-    # async def fetch_account_dex(addr):
-    #     url = block_explorer_url
-    #     query = {'module':'account',
-    #             'action':'tokenbalance',
-    #             'contractaddress':addr,
-    #             'address':walletaddress,
-    #             'tag':'latest',
-    #             'apikey':block_explorer_api}
-    #     r = requests.get(url, params=query)
-    #     try:
-    #         d = json.loads(r.text)
-    #     except:
-    #         return None
-    #     return int(d['result']) / self.zeroes
-
-#     async def fetch_gecko_asset_price(token):
-#     try:
-#         asset_in_address = ex.to_checksum_address(await search_contract(token))
-#         fetch_tokeninfo = gecko_api.get_coin_info_from_contract_address_by_id(id=f'{coin_platform}',contract_address=asset_in_address)
-#         return fetch_tokeninfo['market_data']['current_price']['usd']
-#     except Exception:
-#         return
-
-# async def fetch_gecko_quote(token):
-#     try:
-#         asset_in_address = ex.to_checksum_address(await search_contract(token))
-#         fetch_tokeninfo = gecko_api.get_coin_info_from_contract_address_by_id(id=f'{coin_platform}',contract_address=asset_in_address)
-#         logger.debug(msg=f"fetch_tokeninfo {fetch_tokeninfo}")
-#         asset_out_cg_quote = fetch_tokeninfo['market_data']['current_price']['usd']
-#         asset_out_cg_name = fetch_tokeninfo['name']
-#         return f"{asset_out_cg_name}\n🦎{asset_out_cg_quote} USD"
-#     except Exception:
-#         return
