@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.7.0 (2023-05-03)
+### Feature
+* Refactor ([`e920ee5`](https://github.com/mraniki/dxsp/commit/e920ee56b761b742e99c2f9c939a5634910c7165))
+
 ## v1.6.2 (2023-05-02)
 ### Fix
 * Refactor dotenv import and update dxsp version ([`93fe583`](https://github.com/mraniki/dxsp/commit/93fe5839c00de4b5cacbaed86013e2ff597a2563))
