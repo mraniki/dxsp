@@ -193,8 +193,8 @@ class DexSwap:
                 try:
                     asset_out_decimals = asset_out_contract.functions.decimals().call()
                 except Exception as e:
-                    self.logger.error("decimals: %s", e)
-                    return
+                    self.logger.error("execute_order decimals: %s", e)
+                    asset_out_decimals = 18
                 asset_out_balance = await self.get_token_balance(asset_out_symbol)
                 if amount_trading_option == 1:
                     #buy or sell %p percentage DEFAULT OPTION
