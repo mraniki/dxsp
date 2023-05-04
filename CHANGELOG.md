@@ -2,6 +2,33 @@
 
 <!--next-version-placeholder-->
 
+## v1.8.0 (2023-05-04)
+### Feature
+* ✨Flow update ([`a87f3db`](https://github.com/mraniki/dxsp/commit/a87f3db6a27603d6f8132ddb91a3be79dbcff29e))
+* ✨ resusable flow and use of emoji for release ([`2eb5e76`](https://github.com/mraniki/dxsp/commit/2eb5e769e71cafc23a91c4cf4083a20cfa9cf502))
+
+### Fix
+* :bug: inherit secrets in action for pypi ([`4767f34`](https://github.com/mraniki/dxsp/commit/4767f348b849659ea17dd41b5aa6b42c498884cc))
+* 🐛 inherit secrets in action ([`5ca0761`](https://github.com/mraniki/dxsp/commit/5ca0761d8d0a39cff8cc5f7173f5474b22d77e80))
+* ⚡️fix semantic ([`910ea62`](https://github.com/mraniki/dxsp/commit/910ea62e5d24cf93f8d57dadc86efbd832ebe942))
+* 🐛 pytoml typo ([`e4a0860`](https://github.com/mraniki/dxsp/commit/e4a0860dc0589b5ebb31fd8972facfbd2524aea9))
+
+### Other
+* Merge pull request #135 from mraniki/dev ([`99bba16`](https://github.com/mraniki/dxsp/commit/99bba165ecb1e9c66a9eb043c37a98e366157d29))
+* Merge pull request #134 from mraniki/main ([`465cf90`](https://github.com/mraniki/dxsp/commit/465cf904b9deda01319bffbac4f77e95201b4855))
+* Merge pull request #133 from mraniki/dev ([`39efc45`](https://github.com/mraniki/dxsp/commit/39efc45da16fe08ea76c7cc1fc9853192842d18d))
+* :art: code imrpovement ([`8271ae4`](https://github.com/mraniki/dxsp/commit/8271ae4a6d7a7f0b933a285e156c638a71c6e4c5))
+* Merge pull request #132 from mraniki/dev ([`5f0a96e`](https://github.com/mraniki/dxsp/commit/5f0a96e69e0d38b5a5ee2ecb110e88bb01b035db))
+* 🎨 code imrpovement ([`6cdb63d`](https://github.com/mraniki/dxsp/commit/6cdb63d91fa2ca7228830df605951fc101b4b96a))
+* 🎨 improving code structure ([`f6f8119`](https://github.com/mraniki/dxsp/commit/f6f8119b0ee2f55fdae04aaf1b97f147d7c6a94a))
+* Merge pull request #131 from mraniki/main ([`de863c9`](https://github.com/mraniki/dxsp/commit/de863c9fd4a498a931e76374b1b2273ba2d6cac1))
+* Merge pull request #130 from mraniki/dev ([`97dfeae`](https://github.com/mraniki/dxsp/commit/97dfeaeeaf907d07dbb00c03c198e83e7744c366))
+* Semantic.yml update ([`dc4cf9c`](https://github.com/mraniki/dxsp/commit/dc4cf9c7d3848dc19eb72176159476e9215844e3))
+* Merge pull request #126 from mraniki/renovate/configure ([`13b56a3`](https://github.com/mraniki/dxsp/commit/13b56a3ca05478c4a8413c2e3d0da6d5b4d9fbcd))
+* Merge pull request #127 from mraniki/dev ([`f782dc2`](https://github.com/mraniki/dxsp/commit/f782dc25c9496a1a22a1e7826adfad708f637ce9))
+* Add renovate.json ([`bcf8c51`](https://github.com/mraniki/dxsp/commit/bcf8c51d66c9513542707d13334994834d868e1f))
+* Add web3-ethereum-defi to pyproject.toml ([`ac8ae3d`](https://github.com/mraniki/dxsp/commit/ac8ae3da67afa22aa3bb3647285ca6898baa0dfe))
+
 ## v1.7.1 (2023-05-03)
 ### Fix
 * Unit test setup ([`9d82587`](https://github.com/mraniki/dxsp/commit/9d82587236724d041486a25b1cf0277587e5e1b0))
