@@ -228,7 +228,6 @@ class DexSwap:
             self.logger.debug("error execute_order %s",e)
             return "error processing order in DXSP"
 
-
     async def get_swap(
                 self,
                 asset_out_symbol: str,
@@ -588,11 +587,12 @@ class DexSwap:
                             ):
         stablecoins = settings.stablecoins
         try:
+            msg = ""
             for i in stablecoins:
                 bal_stablecoins = await self.get_token_balance(i)
                 if bal_stablecoins:
                     msg += f"\n💵{bal_stablecoins} {i}"
-                # bal = round(ex.from_wei(bal,'ether'),5)
+            return msg
         except Exception as e:
             self.logger.error("get_stablecoin_balance error: %s", e)
             return 0
