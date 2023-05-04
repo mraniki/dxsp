@@ -19,6 +19,7 @@ dynaconf = "*"
 web3 = ">=6.0.0"
 pycoingecko = "*"
 ping3 = "*"
+web3-ethereum-defi = "*"
 # web3client = ">=1.1.8"
 # # many-abis = ">=0.1.7"
 # apollox-connector-python = "*"
@@ -52,3 +53,15 @@ branch = "main"
 upload_to_pypi = true
 upload_to_release = true
 build_command = "pip install poetry && poetry build"
+commit_parser = "semantic_release.history.emoji_parser"
+use_textual_changelog_sections = true
+
+#patch_emoji
+# 🐛🚑🤖🏁🔒👽🔍💬🥅⚡♿🍏🐧
+#:ambulance:, :lock:, :bug:, :zap:, :goal_net:, :alien:, :wheelchair:, :speech_balloon:, :mag:, :apple:, :penguin:, :checkered_flag:, :robot:, :green_apple
+#minor_emoji
+#✨🥚🚸📱💄📈
+#:sparkles: ✨, :children_crossing:, :lipstick:, :iphone:, :egg:, :chart_with_upwards_trend
+#major_emoji¶
+💥
+# :boom:

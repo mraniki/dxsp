@@ -1,69 +1,76 @@
-# name: ☁️Deploy
-
-# on:
-#   workflow_run:
-#     workflows: ["🐍Build"]
-#     branches: [ "main" ]
-#     types: 
-#       - completed
-
-# jobs:
-#   deploy-deta:
-#     name: Deploy
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v3.5.2
-      # - name: Deploy to Deta
-      #   uses: BogDAAAMN/deta-deploy-action@v1.0.1
-      #   with:
-      #     deta-access-token: ${{ secrets.DETA_ACCESS_TOKEN }}
-      #     deta-name: ${{ secrets.DETA_STAGING_MICRO_NAME }}
-      #     deta-project: ${{ secrets.DETA_PROJECT_NAME }}
 name: ☁️Deploy
 
 on:
-  release:
-      types: [published]
+  workflow_dispatch:
+  workflow_run:
+    workflows: [🐳Docker]
+    types:
+        - completed
+
 
 jobs:
-  push_to_registry:
-    name: 🐳 Build and Push Docker image to Docker Hub
+  Notify:
+    name: Discord
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the repo
-        uses: actions/checkout@v3.5.2
-      
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+      - name: Actions Start Discord
+        uses: sarisia/actions-status-discord@v1
+        if: always()
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: "New Docker Ready"
+          noprefix: true
+          color: 0xf5d442
+      # - name: Actions Start Apprise
+      #   uses: cstuder/apprise-ga@v3
+      #   with:
+      #     title: "Notication title"
+      #     message: "Message"
+      #   env:
+      #     APPRISE_URL: ${{ secrets.APPRISE_URL }}
+      # - name: send telegram message on push
+      #   uses: appleboy/telegram-action@master
+      #   with:
+      #     to: ${{ secrets.TELEGRAM_TO }}
+      #     token: ${{ secrets.TELEGRAM_TOKEN }}
+      #     message: |
+      #       ${{ github.actor }} created commit:
+      #       Commit message: ${{ github.event.commits[0].message }}
+            
+      #       Repository: ${{ github.repository }}
+            
+      #       See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
 
-      - name: Log in to the ghcr registry
-        uses: docker/login-action@v2.1.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: mraniki/dxsp
-          tags: latest
-      
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./examples/Dockerfile
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+      # - name: get repository name
+      #   run: echo "REPOSITORY_NAME=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
+      # - name: update repo category by language
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     REPOSITORY: ${{ env.REPOSITORY_NAME }}
+      #     USERNAME: ${{ github.repository_owner }}
 
-      # - name: 'Build Inventory Image'
-      #   run: |
-      #     docker build -f examples/Dockerfile --tag ghcr.io/mraniki/dxsp:latest
-      #     docker push ghcr.io/mraniki/dxsp:latest 
+  # Koyeb:
+  #   - name: Build and deploy the application to Koyeb
+  #     uses: koyeb/action-git-deploy@v1
+  #     with:
+  #       app-name: my-koyeb-app
+  #       service-name: my-koyeb-service
+  #       service-env: "PORT=8080"
+  #       service-ports: "8080:http"
+  #       service-routes: "/health:8080"
+
+
+
+  # Deta:
+  #   name: Deploy
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3.5.2
+  #     - name: Deploy to Deta
+  #       uses: BogDAAAMN/deta-deploy-action@v1.0.1
+  #       with:
+  #         deta-access-token: ${{ secrets.DETA_ACCESS_TOKEN }}
+  #         deta-name: ${{ secrets.DETA_STAGING_MICRO_NAME }}
+  #         deta-project: ${{ secrets.DETA_PROJECT_NAME }}

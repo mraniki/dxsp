@@ -1,2 +1,4 @@
-anyCommit: true
-commitsOnly: true
+#used by https://github.com/Ezard/semantic-prs automatic check
+# anyCommit: true
+# commitsOnly: true
+titleOnly: true
