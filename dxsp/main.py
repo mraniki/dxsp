@@ -1,9 +1,8 @@
 """
  DEX SWAP Main
 """
-import json
+
 import logging
-import os
 
 import requests
 from dxsp import __version__
@@ -33,14 +32,15 @@ class DexSwap:
         """build a web3 object for swap"""
         self.logger = logging.getLogger(__name__)
         self.logger.info("DexSwap version: %s", __version__)
-        self.logger.info("Initializing DexSwap for %s on %s", wallet_address, chain_id)
+        self.logger.info("Initializing DexSwap for %s on %s", 
+                         wallet_address, chain_id)
 
         self.chain_id = int(chain_id)
         self.logger.debug("self.chain_id %s", self.chain_id)
-        if self.chain_id  is None:
+        if self.chain_id is None:
             self.logger.warning("self.chain_id not setup")
             return
-        blockchain = blockchains[self.chain_id ]
+        blockchain = blockchains[self.chain_id]
         self.logger.debug("blockchain %s", blockchain)
 
         self.wallet_address = wallet_address
@@ -56,24 +56,24 @@ class DexSwap:
             or blockchain.get("block_explorer_url")
             or self.logger.warning("self.block_explorer_url not set up")
         )
-        self.logger.debug("self.block_explorer_url %s", self.block_explorer_url)
+        self.logger.debug("explorer_url %s", self.block_explorer_url)
 
         self.rpc = rpc or blockchain.get("rpc")
-        self.logger.debug("self.rpc %s",self.rpc)
+        self.logger.debug("self.rpc %s", self.rpc)
         try:
             self.latency = round(ping(self.rpc, unit='ms'), 3)
-            self.logger.debug("self.latency %s",self.latency)
+            self.logger.debug("self.latency %s", self.latency)
         except Exception as e:
-            self.logger.error("Failed to ping %s:%s",self.rpc, e)
+            self.logger.error("Failed to ping %s:%s", self.rpc, e)
 
         self.w3 = w3 or Web3(Web3.HTTPProvider(self.rpc))
         try:
             self.w3.net.listening
-            self.logger.info("connected to %s with w3 %s",self.rpc,self.w3)
+            self.logger.info("connected to %s with w3 %s", self.rpc, self.w3)
         except Exception as e:
-            self.logger.error("connectivity failed using %s", self.rpc)
+            self.logger.error("connectivity failed %s", e)
             return
-        self.logger.debug("self.w3 %s",self.w3)
+        self.logger.debug("self.w3 %s", self.w3)
         self.logger.info("connected")
 
         self.protocol_type = protocol_type or "1inch"
@@ -86,10 +86,10 @@ class DexSwap:
         
         self.dex_url = f"{base_url}"
         self.logger.debug("self.dex_url %s", self.dex_url)
-        self.logger.debug("self.protocol_type %s",self.protocol_type)
+        self.logger.debug("self.protocol_type %s", self.protocol_type)
 
         self.dex_exchange = dex_exchange
-        self.logger.debug("self.dex_exchange %s",self.dex_exchange)
+        self.logger.debug("self.dex_exchange %s", self.dex_exchange)
 
         self.dex_router = dex_router
         if self.dex_router is None:
@@ -102,21 +102,22 @@ class DexSwap:
                 self.router = blockchain["uniswap_v3"]
         else:
             self.router = self.dex_router
-        self.logger.debug("self.router %s",self.router)
+        self.logger.debug("self.router %s", self.router)
 
         self.name = "TBD"
-        self.logger.debug("self.name %s",self.name)
+        self.logger.debug("self.name %s", self.name)
 
-        self.trading_quote_ccy =  settings.trading_quote_ccy
-        self.logger.debug("self.trading_quote_ccy %s",self.trading_quote_ccy)
+        self.trading_quote_ccy = settings.trading_quote_ccy
+        self.logger.debug("self.trading_quote_ccy %s", self.trading_quote_ccy)
 
         self.amount_trading_option = amount_trading_option
-        self.logger.debug("self.amount_trading_option %s",self.amount_trading_option)
+        self.logger.debug("trading_option %s", self.amount_trading_option)
 
         try:
             self.gecko_api = CoinGeckoAPI()
             assetplatform = self.gecko_api.get_asset_platforms()
-            output_dict = [x for x in assetplatform if x['chain_identifier'] == int(self.chain_id)]
+            output_dict = [x for x in assetplatform if x['chain_identifier']
+                           == int(self.chain_id)]
             self.gecko_platform = output_dict[0]['id']
             self.logger.debug("self.gecko_platform %s",self.gecko_platform)
         except Exception as e:
@@ -129,15 +130,14 @@ class DexSwap:
                 params=None,
                 headers=None
             ):
-        headers = { "User-Agent": "Mozilla/5.0" }
-        self.logger.debug("_get url %s",url)
+        headers = {"User-Agent": "Mozilla/5.0"}
+        self.logger.debug("_get url %s", url)
         response = requests.get(
                             url,
-                            params =params,
-                            headers=headers,
-                            timeout=10
+                            params = params,
+                            headers = headers,
+                            timeout = 10
                         )
-        #self.logger.debug(f"response _get {response}")
         return response.json()
 
     async def get_quote(
@@ -166,10 +166,11 @@ class DexSwap:
                 raw_quote = quote['toTokenAmount']
                 self.logger.debug("raw_quote %s",raw_quote)
                 asset_quote_decimals = quote['fromToken']['decimals']
-                self.logger.debug("asset_quote_decimals %s", asset_quote_decimals)
+                self.logger.debug("asset_quote_decimals %s",
+                                  asset_quote_decimals)
                 quote_readable = self.w3.from_wei(int(raw_quote),'wei') /(10 ** asset_quote_decimals)
                 self.logger.debug("quote_readable %s",quote_readable)
-                return round(quote_readable,2)
+                return round(quote_readable, 2)
             if self.protocol_type in ["uniswap_v2","uniswap_v3"]:
                 return
         except Exception as e:
@@ -188,12 +189,12 @@ class DexSwap:
         ):
         """execute swap function"""
         try:
-            self.logger.debug("execute_order %s %s %s",action,instrument, order_type)
+            self.logger.debug("execute_order %s %s %s", action,instrument, order_type)
             if order_type == 'swap':
                 self.logger.debug("execute_order %s",order_type)
 
-                asset_out_symbol = self.trading_quote_ccy if action=="BUY" else instrument
-                asset_in_symbol = instrument if action=="BUY" else self.trading_quote_ccy
+                asset_out_symbol = self.trading_quote_ccy if action == "BUY" else instrument
+                asset_in_symbol = instrument if action == "BUY" else self.trading_quote_ccy
                 asset_out_contract = await self.get_token_contract(asset_out_symbol)
                 try:
                     asset_out_decimals = asset_out_contract.functions.decimals().call()
@@ -202,11 +203,11 @@ class DexSwap:
                     asset_out_decimals = 18
                 asset_out_balance = await self.get_token_balance(asset_out_symbol)
                 if amount_trading_option == 1:
-                    #buy or sell %p percentage DEFAULT OPTION
+                    # buy or sell %p percentage DEFAULT OPTION
                     asset_out_amount = ((asset_out_balance)/
                                         (10 ** asset_out_decimals))*(float(quantity)/100)
                 if amount_trading_option == 2:
-                    #SELL all token in case of sell order for example
+                    # SELL all token in case of sell order for example
                     asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals)
                 order = await self.get_swap(
                         asset_out_symbol,
@@ -226,7 +227,6 @@ class DexSwap:
         except Exception as e:
             self.logger.debug("error execute_order %s",e)
             return "error processing order in DXSP"
-
 
     async def get_swap(
                 self,
@@ -587,11 +587,12 @@ class DexSwap:
                             ):
         stablecoins = settings.stablecoins
         try:
+            msg = ""
             for i in stablecoins:
                 bal_stablecoins = await self.get_token_balance(i)
                 if bal_stablecoins:
                     msg += f"\n💵{bal_stablecoins} {i}"
-                # bal = round(ex.from_wei(bal,'ether'),5)
+            return msg
         except Exception as e:
             self.logger.error("get_stablecoin_balance error: %s", e)
             return 0
