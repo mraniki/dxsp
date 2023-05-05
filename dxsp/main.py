@@ -102,7 +102,6 @@ class DexSwap:
                 self.router_contract_addr = blockchain["uniswap_v3"]
         else:
             self.router_contract_addr = self.dex_router
-        self.logger.debug("self.router %s", self.router)
 
         self.name = "TBD"
         self.logger.debug("self.name %s", self.name)
