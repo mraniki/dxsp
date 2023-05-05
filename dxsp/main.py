@@ -97,11 +97,11 @@ class DexSwap:
                 self.dex_exchange is None
                 or self.dex_exchange != blockchain["uniswap_v3"]
             ):
-                self.router = blockchain["uniswap_v2"]
+                self.router_contract_addr = blockchain["uniswap_v2"]
             else:
-                self.router = blockchain["uniswap_v3"]
+                self.router_contract_addr = blockchain["uniswap_v3"]
         else:
-            self.router = self.dex_router
+            self.router_contract_addr = self.dex_router
         self.logger.debug("self.router %s", self.router)
 
         self.name = "TBD"
@@ -250,30 +250,39 @@ class DexSwap:
             asset_out_amount = amount * 10 ** asset_out_decimals
             # defaulted to 2% slippage if not given
             slippage = slippage_tolerance_percentage  
-            self.logger.debug("slippage %s",slippage)
+            self.logger.debug("slippage %s", slippage)
             asset_out_amount_converted = self.w3.to_wei(asset_out_amount,'ether')
 
-            transaction_amount = int((asset_out_amount_converted *(slippage/100)))
-            self.logger.debug("transaction_amount %s",transaction_amount)
+            order_amount = int((asset_out_amount_converted *(slippage/100)))
+            self.logger.debug("order_amount %s",order_amount)
 
             # VERIFY IF ASSET OUT IS APPROVED otherwise get it approved
             await self.get_approve(asset_out_address)
 
             # 1INCH
             if self.protocol_type in ["1inch"]:
-                swap_url = f"{self.dex_url}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={self.wallet_address}&slippage={slippage}"
-                swap_TX = await self._get(swap_url)
-                TX_status_code = swap_TX['statusCode']
-                if TX_status_code != 200:
+                swap_url = f"{self.dex_url}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={order_amount}&fromAddress={self.wallet_address}&slippage={slippage}"
+                swap_order = await self._get(swap_url)
+                swap_order_status = swap_order['statusCode']
+                if swap_order_status != 200:
                     return
             # UNISWAP V2
             if self.protocol_type in ["uniswap_v2"]:
                 order_path_dex = [asset_out_address, asset_in_address]
-                router_abi = await self.get_abi(self.router)
-                router_instance = self.w3.eth.contract(address=self.w3.to_checksum_address(self.router), abi=router_abi)
+                router_abi = await self.get_abi(self.router_contract_addr)
+                router = self.w3.eth.contract(
+                                  self.w3.to_checksum_address(self.router_contract_addr),
+                                  router_abi)
                 deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
-                transaction_min_amount = int(router_instance.functions.getAmountsOut(transaction_amount, order_path_dex).call()[1])
-                swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount, transaction_min_amount,order_path_dex,self.wallet_address,deadline)
+                order_min_amount = int(router.functions.getAmountsOut(
+                                        order_amount,
+                                        order_path_dex).call()[1])
+                swap_order = router.functions.swapExactTokensForTokens(
+                                                                                order_amount, 
+                                                                                order_min_amount,
+                                                                                order_path_dex,
+                                                                                self.wallet_address,
+                                                                                deadline)
             # 1INCH LIMIT
             if self.protocol_type in ["1inch_limit"]:
                 return
@@ -281,32 +290,54 @@ class DexSwap:
             # UNISWAP V3
             if self.protocol_type in ['uniswap_v3']:
                 return
-            if swap_TX:
-                self.logger.debug("swap_TX %s",swap_TX)
-                signed_TX = await self.get_sign(swap_TX)
-                transaction_hash = str(self.w3.to_hex(signed_TX))
-                # transaction_results = await self.get_block_explorer_status(transaction_hash)
-                transaction_hash_details = self.w3.wait_for_transaction_receipt(transaction_hash, timeout=120, poll_latency=0.1)
-                if transaction_hash_details['status'] == "1":
-                    transaction_blockNumber = transaction_hash_details['blockNumber']
-                    transaction_receipt = self.w3.eth.get_transaction_receipt(transaction_hash)
-                    transaction_block = self.w3.eth.get_block(transaction_blockNumber)
-                    order = {}
-                    order['id'] = transaction_receipt['transactionHash']
-                    order['timestamp'] = transaction_block['timestamp']
-                    order['instrument'] = asset_out_symbol
-                    order['contract'] = asset_out_address
-                    order['amount'] = transaction_amount
-                    order['fee'] = transaction_receipt['gasUsed']
-                    order['price'] = "TBD"
-                    order['confirmation'] = f"➕ Size: {order['amount']}\n\
-                                        ⚫️ Entry: {order['price']}\n\
-                                        ℹ️ {order['id']}\n\
-                                        🗓️ {order['timestamp']}"
-                    self.logger.info("order %s", order)
-                    return order
+            if swap_order:
+                self.logger.debug("swap_order %s", swap_order)
+                signed_order = await self.get_sign(swap_order)
+                order_hash = str(self.w3.to_hex(signed_order))
+                order_hash_details = self.w3.wait_for_transaction_receipt(
+                                            order_hash,
+                                            timeout=120,
+                                            poll_latency=0.1)
+                if order_hash_details['status'] == "1":
+                    await self.get_confirmation(
+                        order_hash,
+                        order_hash_details,
+                        asset_out_symbol,
+                        asset_out_address,
+                        order_amount,)
         except Exception as e:
             self.logger.error("get_swap %s", e)
+            return
+
+    async def get_confirmation(self,
+                               order_hash,
+                               order_hash_details,
+                               asset_out_symbol,
+                               asset_out_address,
+                               order_amount,
+                               ):
+        """ trade confirmation function"""
+        self.logger.debug("get_confirmation")
+        try:
+            order_blockNumber = order_hash_details['blockNumber']
+            order_receipt = self.w3.eth.get_transaction_receipt(order_hash)
+            order_block = self.w3.eth.get_block(order_blockNumber)
+            trade = {}
+            trade['id'] = order_receipt['transactionHash']
+            trade['timestamp'] = order_block['timestamp']
+            trade['instrument'] = asset_out_symbol
+            trade['contract'] = asset_out_address
+            trade['amount'] = order_amount
+            trade['fee'] = order_receipt['gasUsed']
+            trade['price'] = "TBD"
+            trade['confirmation'] = f"➕ Size: {trade['amount']}\n\
+                                ⚫️ Entry: {trade['price']}\n\
+                                ℹ️ {trade['id']}\n\
+                                🗓️ {trade['timestamp']}"
+            self.logger.info("trade %s", trade)
+            return trade
+        except Exception as e:
+            self.logger.error("get_confirmation %s", e)
             return
 
     async def get_block_explorer_status(self, txHash):
@@ -345,14 +376,14 @@ class DexSwap:
         try:
             search_results = self.gecko_api.search(query=token)
             search_dict = search_results['coins']
-            #self.logger.debug(f"search_dict {search_dict}")
-            filtered_dict = [x for x in search_dict if x['symbol'] == token.upper()]
-            api_dict = [ sub['api_symbol'] for sub in filtered_dict ]
-            self.logger.debug("api_dict %s",api_dict)
+            filtered_dict = [x for x in search_dict if
+                             x['symbol'] == token.upper()]
+            api_dict = [sub['api_symbol'] for sub in filtered_dict]
+            self.logger.debug("api_dict %s", api_dict)
             for i in api_dict:
                 coin_dict = self.gecko_api.get_coin_by_id(i)
                 try:
-                    if coin_dict['platforms'][f'{self.gecko_platform}'] is not None:
+                    if coin_dict['platforms'][f'{self.gecko_platform}']:
                         return coin_dict
                 except KeyError:
                     pass
@@ -377,13 +408,15 @@ class DexSwap:
                             token_list_url,
                             symbol
                         ):
-        """Given a token symbol and json format url address tokenlist, get token address"""
+        """Given a token symbol and json format url address tokenlist, 
+        get token address"""
         self.logger.debug("get_contract_address %s %s", token_list_url, symbol)
         try:
             token_list = await self._get(token_list_url)
             token_search = token_list['tokens']
             for keyval in token_search:
-                if (keyval['symbol'] == symbol and keyval['chainId'] == self.chain_id):
+                if (keyval['symbol'] == symbol and
+                    keyval['chainId'] == self.chain_id):
                     return keyval['address']
         except Exception as e:
             self.logger.debug("get_contract_address %s", e)
@@ -411,50 +444,66 @@ class DexSwap:
                         amount=None
                     ):
         self.logger.debug("get_approve %s", asset_out_address)
-        if self.protocol_type in ["1inch","1inch_limit"]:
+        if self.protocol_type in ["1inch", "1inch_limit"]:
             approval_check_URL = f"{self.dex_url}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={self.wallet_address}"
             approval_response = await self._get(approval_check_URL)
             approval_check = approval_response['allowance']
             if (approval_check == 0):
                 approval_URL = f"{self.dex_url}/approve/transaction?tokenAddress={asset_out_address}"
                 approval_response = await self._get(approval_URL)
-        elif self.protocol_type in ["uniswap_v2","uniswap_v3"]:
+        elif self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
             asset_out_abi = await self.get_abi(asset_out_address)
-            asset_out_contract = self.w3.eth.contract(address=asset_out_address, abi=asset_out_abi)
-            approval_check = asset_out_contract.functions.allowance(self.w3.to_checksum_address(self.wallet_address), self.w3.to_checksum_address(self.router)).call()
+            asset_out_contract = self.w3.eth.contract(
+                                 asset_out_address,
+                                 asset_out_abi)
+            approval_check = asset_out_contract.functions.allowance(
+                             self.w3.to_checksum_address(self.wallet_address),
+                             self.w3.to_checksum_address(self.router_contract_addr)
+                             ).call()
             if (approval_check == 0):
-                approved_amount = (self.w3.to_wei(2**64-1,'ether'))
+                approved_amount = (self.w3.to_wei(2**64-1, 'ether'))
                 asset_out_abi = await self.get_abi(asset_out_address)
-                asset_out_contract = self.w3.eth.contract(address=asset_out_address, abi=asset_out_abi)
-                approval_TX = asset_out_contract.functions.approve(self.w3.to_checksum_address(self.router), approved_amount)
+                asset_out_contract = self.w3.eth.contract(
+                                     asset_out_address,
+                                     asset_out_abi)
+                approval_TX = asset_out_contract.functions.approve(
+                                self.w3.to_checksum_address(self.router_contract_addr),
+                                approved_amount)
                 approval_txHash = await self.get_sign(approval_TX)
-                approval_txHash_complete = self.w3.eth.wait_for_transaction_receipt(approval_txHash, timeout=120, poll_latency=0.1)
+                approval_txHash_complete = self.w3.eth.wait_for_transaction_receipt(
+                                           approval_txHash,
+                                           timeout=120,
+                                           poll_latency=0.1)
 
     async def get_sign(
                     self,
-                    tx
+                    order
                 ):
-        self.logger.debug("get_sign %s", tx)
+        self.logger.debug("get_sign %s", order)
         try:
-            if not isinstance(tx, dict):
+            if not isinstance(order, dict):
                 raise ValueError("Transaction must be a dictionary")
-            if self.protocol_type in ['uniswap_v2','uniswap_v3']:
-                tx_params = {
+            if self.protocol_type in ['uniswap_v2', 'uniswap_v3']:
+                order_params = {
                             'from': self.wallet_address,
-                            'gas': await self.get_gas(tx),
-                            'gasPrice': await self.get_gasPrice(tx),
-                            'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
+                            'gas': await self.get_gas(order),
+                            'gasPrice': await self.get_gasPrice(order),
+                            'nonce': self.w3.eth.get_transaction_count(
+                                self.wallet_address),
                             }
-                tx = tx.build_transaction(tx_params)
+                order = order.build_transaction(order)
             elif self.protocol_type in ["1inch","1inch_limit"]:
-                tx = tx['tx']
-                tx['gas'] = await self.get_gas(tx)
-                tx['nonce'] = self.w3.eth.get_transaction_count(self.wallet_address)
-                tx['value'] = int(tx['value'])
-                tx['gasPrice'] = await self.get_gasPrice(tx)
-            signed = self.w3.eth.account.sign_transaction(tx, self.private_key)
-            raw_tx = signed.rawTransaction
-            return self.w3.eth.send_raw_transaction(raw_tx)
+                order = order['tx']
+                order['gas'] = await self.get_gas(order)
+                order['nonce'] = self.w3.eth.get_transaction_count(
+                    self.wallet_address)
+                order['value'] = int(order['value'])
+                order['gasPrice'] = await self.get_gasPrice(order)
+            signed = self.w3.eth.account.sign_transaction(
+                order,
+                self.private_key)
+            raw_order = signed.rawTransaction
+            return self.w3.eth.send_raw_transaction(raw_order)
         except (ValueError, TypeError, KeyError) as e:
             self.logger.error("get_sign: %s", e)
             raise
