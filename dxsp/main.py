@@ -504,7 +504,7 @@ class DexSwap:
         gasprice = self.w3.eth.generate_gas_price()
         return self.w3.to_wei(gasprice,'gwei')
 
-    async def get_abi(self,addr):
+    async def get_abi(self, addr):
         # Log a debug message to the logger
         self.logger.debug("get_abi %s", addr)
         if self.block_explorer_api:
@@ -514,11 +514,16 @@ class DexSwap:
                     "module": "contract",
                     "action": "getabi",
                     "address": addr,
-                    "apikey": self.block_explorer_api }
+                    "apikey": self.block_explorer_api
+                    }
                 # Create a dictionary of headers
                 headers = {"User-Agent": "Mozilla/5.0"}
                 # Make a GET request to the block explorer URL
-                resp = await self._get(url=self.block_explorer_url,params=params,headers=headers)
+                resp = await self._get(
+                                       url = self.block_explorer_url,
+                                       params = params,
+                                       headers = headers
+                                       )
                 # If the response status is 1, log the ABI
                 if resp['status']=="1":
                     self.logger.debug("ABI found %s", resp)
