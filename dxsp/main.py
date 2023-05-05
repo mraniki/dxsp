@@ -32,7 +32,7 @@ class DexSwap:
         """build a web3 object for swap"""
         self.logger = logging.getLogger(__name__)
         self.logger.info("DexSwap version: %s", __version__)
-        self.logger.info("Initializing DexSwap for %s on %s", 
+        self.logger.info("Initializing DexSwap for %s on %s",
                          wallet_address, chain_id)
 
         self.chain_id = int(chain_id)
@@ -83,7 +83,7 @@ class DexSwap:
             base_url = blockchain["1inch_limit"]
         else:
             base_url = blockchain["1inch"]
-        
+
         self.dex_url = f"{base_url}"
         self.logger.debug("self.dex_url %s", self.dex_url)
         self.logger.debug("self.protocol_type %s", self.protocol_type)
@@ -340,7 +340,7 @@ class DexSwap:
 
 ####CONTRACT SEARCH
     async def search_contract(
-                            self, 
+                            self,
                             token
                             ):
         """search a contract function"""
@@ -504,7 +504,7 @@ class DexSwap:
         gasprice = self.w3.eth.generate_gas_price()
         return self.w3.to_wei(gasprice,'gwei')
 
-    async def get_abi(self,addr):
+    async def get_abi(self, addr):
         # Log a debug message to the logger
         self.logger.debug("get_abi %s", addr)
         if self.block_explorer_api:
@@ -514,14 +514,19 @@ class DexSwap:
                     "module": "contract",
                     "action": "getabi",
                     "address": addr,
-                    "apikey": self.block_explorer_api }
+                    "apikey": self.block_explorer_api
+                    }
                 # Create a dictionary of headers
-                headers = { "User-Agent": "Mozilla/5.0" }
+                headers = {"User-Agent": "Mozilla/5.0"}
                 # Make a GET request to the block explorer URL
-                resp = await self._get(url=self.block_explorer_url,params=params,headers=headers)
+                resp = await self._get(
+                                       url = self.block_explorer_url,
+                                       params = params,
+                                       headers = headers
+                                       )
                 # If the response status is 1, log the ABI
                 if resp['status']=="1":
-                    self.logger.debug("ABI found %s",resp)
+                    self.logger.debug("ABI found %s", resp)
                     abi = resp["result"]
                     return abi
                 # If no ABI is identified, log a warning
@@ -533,17 +538,9 @@ class DexSwap:
         else:
             # If no block_explorer_api is set, log a warning
             self.logger.warning("No block_explorer_api. Option B needed TBD")
-            return 
+            return
 
-
-#####USERS RELATED
-
-    # async def get_wallet_auth(self):
-    #     try:
-    #         return
-    #     except Exception as e:
-    #         self.logger.error("get_wallet_auth error: %s",e)
-    #         return
+# ####USERS RELATED
 
     async def get_token_balance(
                                 self,
@@ -568,7 +565,6 @@ class DexSwap:
         except Exception as e:
             self.logger.error("get_token_balance %s: %s",token, e)
             return 0
-
 
     async def get_quote_ccy_balance(
                                 self
