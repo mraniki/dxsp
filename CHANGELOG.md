@@ -2,6 +2,22 @@
 
 <!--next-version-placeholder-->
 
+## v1.9.0 (2023-05-05)
+### Feature
+* ✨ improve code readibility ([`c39decb`](https://github.com/mraniki/dxsp/commit/c39decbc2da04c1dee45d5b198cdb97a23699df4))
+
+### Fix
+* ⚡️ linting code ([`9874744`](https://github.com/mraniki/dxsp/commit/987474404289a6640f85a078ef6af339e47c9546))
+
+### Other
+* Merge pull request #139 from mraniki/dev ([`034e732`](https://github.com/mraniki/dxsp/commit/034e7324eed2ebf835eb0cd41df77b5fe89513f7))
+* 🚑 lint and simplification ([`aaead06`](https://github.com/mraniki/dxsp/commit/aaead0653945cd67b74c3566585cf567b28b7db6))
+* Merge pull request #138 from mraniki/dev ([`55a50d5`](https://github.com/mraniki/dxsp/commit/55a50d5b12bc0845e95d8e6910a595fda3701a45))
+* 🎨 fix action flow ([`994ab20`](https://github.com/mraniki/dxsp/commit/994ab20f674a49d5798628bae5a7246ea217c23f))
+* Merge pull request #137 from mraniki/dev ([`effe836`](https://github.com/mraniki/dxsp/commit/effe836c6b2113613be439ba0b8f3fca61ad0a2f))
+* 🎨  more lint ([`fba2ced`](https://github.com/mraniki/dxsp/commit/fba2cede6926b72c2b2edc64d455e6d312341b1f))
+* 🎨 fix lint ([`39f9f80`](https://github.com/mraniki/dxsp/commit/39f9f8012bd3e9a751b79e6d27275e2bd7e2b2c0))
+
 ## v1.8.0 (2023-05-04)
 ### Feature
 * ✨Flow update ([`a87f3db`](https://github.com/mraniki/dxsp/commit/a87f3db6a27603d6f8132ddb91a3be79dbcff29e))
