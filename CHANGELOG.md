@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.9.1 (2023-05-05)
+### Fix
+* :zap: init unit test ([`98463ba`](https://github.com/mraniki/dxsp/commit/98463ba2581872fa7c21f20c43073a653f488c3a))
+* ⚡️ init unit test ([`268fb4a`](https://github.com/mraniki/dxsp/commit/268fb4a38ef5eab3e9cc9fe849ed96f2a82bcaaa))
+
+### Other
+* Merge pull request #140 from mraniki/dev ([`05f45e1`](https://github.com/mraniki/dxsp/commit/05f45e10a54a5029a45050f77192e31dd9d5d254))
+
 ## v1.9.0 (2023-05-05)
 ### Feature
 * ✨ improve code readibility ([`c39decb`](https://github.com/mraniki/dxsp/commit/c39decbc2da04c1dee45d5b198cdb97a23699df4))
