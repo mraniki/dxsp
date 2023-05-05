@@ -492,9 +492,9 @@ class DexSwap:
         # Log the transaction
         self.logger.debug("get_gas %s",tx)
         # Estimate the gas cost of the transaction
-        gasestimate= self.w3.eth.estimate_gas(tx) * 1.25
+        gasestimate = self.w3.eth.estimate_gas(tx) * 1.25
         # Return the estimated gas cost in wei
-        return int(self.w3.to_wei(gasestimate,'wei'))
+        return int(self.w3.to_wei(gasestimate, 'wei'))
 
     async def get_gasPrice(self, tx):
         '''
@@ -502,7 +502,7 @@ class DexSwap:
         '''
         self.logger.debug("get_gasPrice %s", tx)
         gasprice = self.w3.eth.generate_gas_price()
-        return self.w3.to_wei(gasprice,'gwei')
+        return self.w3.to_wei(gasprice, 'gwei')
 
     async def get_abi(self, addr):
         # Log a debug message to the logger
