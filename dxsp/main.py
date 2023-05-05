@@ -119,7 +119,7 @@ class DexSwap:
             output_dict = [x for x in assetplatform if x['chain_identifier']
                            == int(self.chain_id)]
             self.gecko_platform = output_dict[0]['id']
-            self.logger.debug("self.gecko_platform %s",self.gecko_platform)
+            self.logger.debug("self.gecko_platform %s", self.gecko_platform)
         except Exception as e:
             self.logger.error("CoinGeckoAPI setup: %s", e)
             return
@@ -134,9 +134,9 @@ class DexSwap:
         self.logger.debug("_get url %s", url)
         response = requests.get(
                             url,
-                            params = params,
-                            headers = headers,
-                            timeout = 10
+                            params=params,
+                            headers=headers,
+                            timeout=10
                         )
         return response.json()
 
@@ -144,34 +144,34 @@ class DexSwap:
                 self,
                 symbol
             ):
-        self.logger.debug("get_quote %s",symbol)
+        self.logger.debug("get_quote %s", symbol)
         asset_in_address = await self.search_contract(symbol)
         self.logger.debug("asset_in_address %s", asset_in_address)
         asset_out_symbol = self.trading_quote_ccy
         asset_out_address = await self.search_contract(asset_out_symbol)
-        self.logger.debug("asset_out_address %s",asset_out_address)
+        self.logger.debug("asset_out_address %s", asset_out_address)
         if asset_out_address is None:
-            self.logger.warning("No Valid Contract %s",symbol)
+            self.logger.warning("No Valid Contract %s", symbol)
             return
         # asset_out_contract = await self.get_token_contract(asset_out_symbol)
         # asset_out_decimals = asset_out_contract.functions.decimals().call()
         # self.logger.debug(f"asset_out_decimals {asset_out_decimals}")
         try:
             if self.protocol_type == "1inch":
-                asset_out_amount = self.w3.to_wei(1,'ether') #1USDC()
-                self.logger.debug("asset_out_amount %s",asset_out_amount)
+                asset_out_amount = self.w3.to_wei(1, 'ether')
+                self.logger.debug("asset_out_amount %s", asset_out_amount)
                 quote_url = f"{self.dex_url}/quote?fromTokenAddress={asset_in_address}&toTokenAddress={asset_out_address}&amount={asset_out_amount}"
                 quote = await self._get(quote_url)
-                self.logger.debug("quote %s",quote)
+                self.logger.debug("quote %s", quote)
                 raw_quote = quote['toTokenAmount']
-                self.logger.debug("raw_quote %s",raw_quote)
+                self.logger.debug("raw_quote %s", raw_quote)
                 asset_quote_decimals = quote['fromToken']['decimals']
                 self.logger.debug("asset_quote_decimals %s",
                                   asset_quote_decimals)
-                quote_readable = self.w3.from_wei(int(raw_quote),'wei') /(10 ** asset_quote_decimals)
-                self.logger.debug("quote_readable %s",quote_readable)
+                quote_readable = self.w3.from_wei(int(raw_quote), 'wei') / (10 ** asset_quote_decimals)
+                self.logger.debug("quote_readable %s", quote_readable)
                 return round(quote_readable, 2)
-            if self.protocol_type in ["uniswap_v2","uniswap_v3"]:
+            if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
                 return
         except Exception as e:
             self.logger.error("get_quote %s", e)
@@ -189,9 +189,9 @@ class DexSwap:
         ):
         """execute swap function"""
         try:
-            self.logger.debug("execute_order %s %s %s", action,instrument, order_type)
+            self.logger.debug("execute_order %s %s %s", action, instrument, order_type)
             if order_type == 'swap':
-                self.logger.debug("execute_order %s",order_type)
+                self.logger.debug("execute_order %s", order_type)
 
                 asset_out_symbol = self.trading_quote_ccy if action == "BUY" else instrument
                 asset_in_symbol = instrument if action == "BUY" else self.trading_quote_ccy
@@ -225,7 +225,7 @@ class DexSwap:
                 return
 
         except Exception as e:
-            self.logger.debug("error execute_order %s",e)
+            self.logger.debug("error execute_order %s", e)
             return "error processing order in DXSP"
 
     async def get_swap(
@@ -233,32 +233,32 @@ class DexSwap:
                 asset_out_symbol: str,
                 asset_in_symbol: str,
                 amount: int,
-                slippage_tolerance_percentage = 2
-        ):
+                slippage_tolerance_percentage=2
+                ):
         """main swap function"""
 
         self.logger.debug("get_swap %s %s %s", asset_out_symbol, asset_in_symbol, amount)
         try:
-            #ASSET OUT
+            # ASSET OUT
             asset_out_address = await self.search_contract(asset_out_symbol)
             asset_out_contract = await self.get_token_contract(asset_out_symbol)
-            self.logger.debug("asset_out_address %s %s",asset_out_address,asset_out_symbol)
+            self.logger.debug("asset_out_address %s %s", asset_out_address,asset_out_symbol)
             if asset_out_contract is None:
                 raise ValueError(f"Non contract identified for {asset_out_symbol}")
-            asset_out_decimals=asset_out_contract.functions.decimals().call()
+            asset_out_decimals = asset_out_contract.functions.decimals().call()
             asset_out_balance = await self.get_token_balance(asset_out_symbol)
             self.logger.debug("asset_out_balance %s",asset_out_balance)
             if asset_out_balance == 0:
                 self.logger.warning("No Money")
                 raise ValueError(f"Non contract identified for {asset_out_symbol}")
                 return
-            #ASSETS IN
+            # ASSETS IN
             asset_in_address = await self.search_contract(asset_in_symbol)
             self.logger.debug("asset_in_address %s", asset_in_address)
             if asset_in_address is None:
                 return
 
-            #AMOUNT
+            # AMOUNT
             asset_out_decimals = asset_out_contract.functions.decimals().call()
             self.logger.debug("asset_out_decimals %s",asset_out_decimals)
             asset_out_amount = amount * 10 ** asset_out_decimals
@@ -269,17 +269,17 @@ class DexSwap:
             transaction_amount = int((asset_out_amount_converted *(slippage/100)))
             self.logger.debug("transaction_amount %s",transaction_amount)
 
-            #VERIFY IF ASSET OUT IS APPROVED otherwise get it approved
+            # VERIFY IF ASSET OUT IS APPROVED otherwise get it approved
             await self.get_approve(asset_out_address)
 
-            #1INCH
+            # 1INCH
             if self.protocol_type in ["1inch"]:
                 swap_url = f"{self.dex_url}/swap?fromTokenAddress={asset_out_address}&toTokenAddress={asset_in_address}&amount={transaction_amount}&fromAddress={self.wallet_address}&slippage={slippage}"
                 swap_TX = await self._get(swap_url)
                 TX_status_code = swap_TX['statusCode']
                 if TX_status_code != 200:
                     return
-            #UNISWAP V2
+            # UNISWAP V2
             if self.protocol_type in ["uniswap_v2"]:
                 order_path_dex=[asset_out_address, asset_in_address]
                 router_abi = await self.get_abi(self.router)
@@ -287,9 +287,9 @@ class DexSwap:
                 deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
                 transaction_min_amount  = int(router_instance.functions.getAmountsOut(transaction_amount, order_path_dex).call()[1])
                 swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_min_amount,order_path_dex,self.wallet_address,deadline)
-            #1INCH LIMIT
+            # 1INCH LIMIT
             if self.protocol_type in ["1inch_limit"]:
-                 return
+                return
                 # encoded_message = encode_structured_data(eip712_data)
                 # signed_message = await sign_transaction_dex(encoded_message)
                 # # this is the limit order that will be broadcast to the limit order API
@@ -301,20 +301,20 @@ class DexSwap:
                 # limit_order_url = dex_1inch_limit_api + str(chain_id) +"/limit-order" # make sure to change the chain_id if you are not using ETH mainnet
                 # response = requests.post(url=limit_order_url,headers={"accept": "application/json, text/plain, */*", "content-type": "application/json"}, json=limit_order)
 
-            #UNISWAP V3
+            # UNISWAP V3
             if self.protocol_type in ['uniswap_v3']:
                 return
             if swap_TX:
                 self.logger.debug("swap_TX %s",swap_TX)
                 signed_TX = await self.get_sign(swap_TX)
                 transaction_hash = str(self.w3.to_hex(signed_TX))
-                #transaction_results = await self.get_block_explorer_status(transaction_hash)
+                # transaction_results = await self.get_block_explorer_status(transaction_hash)
                 transaction_hash_details = self.w3.wait_for_transaction_receipt(transaction_hash, timeout=120, poll_latency=0.1)
                 if transaction_hash_details['status'] == "1":
                     transaction_blockNumber = transaction_hash_details['blockNumber']
                     transaction_receipt = self.w3.eth.get_transaction_receipt(transaction_hash)
                     transaction_block = self.w3.eth.get_block(transaction_blockNumber)
-                    order={}
+                    order = {}
                     order['id'] = transaction_receipt['transactionHash']
                     order['timestamp'] = transaction_block['timestamp']
                     order['instrument'] = asset_out_symbol
@@ -322,23 +322,23 @@ class DexSwap:
                     order['amount'] = transaction_amount
                     order['fee'] = transaction_receipt['gasUsed']
                     order['price'] = "TBD"
-                    order['confirmation']= f"➕ Size: {order['amount']}\n\
+                    order['confirmation'] = f"➕ Size: {order['amount']}\n\
                                         ⚫️ Entry: {order['price']}\n\
                                         ℹ️ {order['id']}\n\
                                         🗓️ {order['timestamp']}"
-                    self.logger.info("order %s",order)
+                    self.logger.info("order %s", order)
                     return order
         except Exception as e:
-            self.logger.error("get_swap %s",e)
+            self.logger.error("get_swap %s", e)
             return
 
-    async def get_block_explorer_status(self,txHash):
-        self.logger.debug("get_block_explorer_status %s",txHash)
+    async def get_block_explorer_status(self, txHash):
+        self.logger.debug("get_block_explorer_status %s", txHash)
         checkTransactionSuccessURL = f"{self.block_explorer_url}?module=transaction&action=gettxreceiptstatus&txhash={txHash}&apikey={self.block_explorer_api}"
-        checkTransactionRequest =  self._get(checkTransactionSuccessURL)
+        checkTransactionRequest = self._get(checkTransactionSuccessURL)
         return checkTransactionRequest['status']
 
-####CONTRACT SEARCH
+# ###CONTRACT SEARCH
     async def search_contract(
                             self,
                             token
@@ -355,14 +355,14 @@ class DexSwap:
                     if token_contract is None:
                         token_contract = await self.search_gecko_contract(token)
             if token_contract is not None:
-                self.logger.info("token_contract found %s",token_contract)
+                self.logger.info("token_contract found %s", token_contract)
                 return self.w3.to_checksum_address(token_contract)
-            self.logger.info("no contract found for %s",token)
+            self.logger.info("no contract found for %s", token)
         except Exception as e:
-            self.logger.error("search_contract %s",e)
+            self.logger.error("search_contract %s", e)
             return
 
-    async def search_gecko(self,token):
+    async def search_gecko(self, token):
         """search coingecko"""
         self.logger.debug("search_gecko")
         try:
@@ -383,7 +383,7 @@ class DexSwap:
             self.logger.error("search_gecko %s", e)
             return
 
-    async def search_gecko_contract(self,token):
+    async def search_gecko_contract(self, token):
         """search coingecko contract"""
         self.logger.debug("🦎search_gecko_contract %s", token)
         self.logger.debug("🦎self.gecko_platform %s", self.gecko_platform)
@@ -401,7 +401,7 @@ class DexSwap:
                             symbol
                         ):
         """Given a token symbol and json format url address tokenlist, get token address"""
-        self.logger.debug("get_contract_address %s %s",token_list_url, symbol)
+        self.logger.debug("get_contract_address %s %s", token_list_url, symbol)
         try:
             token_list = await self._get(token_list_url)
             token_search = token_list['tokens']
@@ -417,17 +417,17 @@ class DexSwap:
                                 token
                             ):
         """Given a token symbol, returns a contract object. """
-        self.logger.debug("get_token_contract %s",token)
+        self.logger.debug("get_token_contract %s", token)
         try:
             token_address = await self.search_contract(token)
             token_abi = await self.get_abi(token_address)
             return self.w3.eth.contract(address=token_address, abi=token_abi)
         except Exception as e:
-            self.logger.error("get_token_contract %s",e)
+            self.logger.error("get_token_contract %s", e)
             return
 
 
-####UTILS
+# ###UTILS
     async def get_approve(
                         self,
                         asset_out_address: str,
@@ -438,14 +438,14 @@ class DexSwap:
             approval_check_URL = f"{self.dex_url}/approve/allowance?tokenAddress={asset_out_address}&walletAddress={self.wallet_address}"
             approval_response = await self._get(approval_check_URL)
             approval_check = approval_response['allowance']
-            if (approval_check==0):
+            if (approval_check == 0):
                 approval_URL = f"{self.dex_url}/approve/transaction?tokenAddress={asset_out_address}"
                 approval_response = await self._get(approval_URL)
         elif self.protocol_type in ["uniswap_v2","uniswap_v3"]:
-            asset_out_abi= await self.get_abi(asset_out_address)
+            asset_out_abi = await self.get_abi(asset_out_address)
             asset_out_contract = self.w3.eth.contract(address=asset_out_address, abi=asset_out_abi)
             approval_check = asset_out_contract.functions.allowance(self.w3.to_checksum_address(self.wallet_address), self.w3.to_checksum_address(self.router)).call()
-            if (approval_check==0):
+            if (approval_check == 0):
                 approved_amount = (self.w3.to_wei(2**64-1,'ether'))
                 asset_out_abi = await self.get_abi(asset_out_address)
                 asset_out_contract = self.w3.eth.contract(address=asset_out_address, abi=asset_out_abi)
@@ -463,11 +463,11 @@ class DexSwap:
                 raise ValueError("Transaction must be a dictionary")
             if self.protocol_type in ['uniswap_v2','uniswap_v3']:
                 tx_params = {
-                'from': self.wallet_address,
-                'gas': await self.get_gas(tx),
-                'gasPrice': await self.get_gasPrice(tx),
-                'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
-                }
+                            'from': self.wallet_address,
+                            'gas': await self.get_gas(tx),
+                            'gasPrice': await self.get_gasPrice(tx),
+                            'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
+                            }
                 tx = tx.build_transaction(tx_params)
             elif self.protocol_type in ["1inch","1inch_limit"]:
                 tx = tx['tx']
@@ -490,7 +490,7 @@ class DexSwap:
                     tx
                 ):
         # Log the transaction
-        self.logger.debug("get_gas %s",tx)
+        self.logger.debug("get_gas %s", tx)
         # Estimate the gas cost of the transaction
         gasestimate = self.w3.eth.estimate_gas(tx) * 1.25
         # Return the estimated gas cost in wei
@@ -561,9 +561,9 @@ class DexSwap:
             except ValueError as e:
                 self.logger.warning("Invalid address %s for token %s: %s", self.wallet_address, token, e)
             # (ex.from_wei(await fetch_token_balance(basesymbol), 'ether'), 5)
-            return 0 if token_balance <=0 else token_balance
+            return 0 if token_balance <= 0 else token_balance
         except Exception as e:
-            self.logger.error("get_token_balance %s: %s",token, e)
+            self.logger.error("get_token_balance %s: %s", token, e)
             return 0
 
     async def get_quote_ccy_balance(
@@ -571,11 +571,10 @@ class DexSwap:
                             ):
         try:
             trading_quote_ccy_balance = await self.get_token_balance(self.trading_quote_ccy)
-                # return round(ex.from_wei(await fetch_token_balance(basesymbol), 'ether'), 5)
             return trading_quote_ccy_balance
-            # bal = round(ex.from_wei(bal,'ether'),5)
+
         except Exception as e:
-            self.logger.error("get_basecoin_balance %s: %s",token, e)
+            self.logger.error("get_basecoin_balance %s: %s", e)
             return 0
 
     async def get_stablecoin_balance(
@@ -604,16 +603,11 @@ class DexSwap:
             # bal = round(ex.from_wei(bal,'ether'),5)
 
     async def get_account_position(
-                            self
-                        ):
+                                    self
+                                    ):
         try:
             self.logger.debug("get_account_position")
-            # asset_position_address= await search_contract(asset_out_symbol)
-            # asset_position_abi= await fetch_abi_dex(asset_out_address)
-            # asset_position_contract = ex.eth.contract(address=asset_out_address, abi=asset_out_abi)
-            # open_positions = asset_position_contract.functions.getOpenPositions(walletaddress).call()
             return
         except Exception as e:
             self.logger.error("get_account_position error: %s", e)
             return 0
-
