@@ -177,52 +177,38 @@ class DexSwap:
             self.logger.error("get_quote %s", e)
             return
 
-    async def execute_order(
-                self,
-                action,
-                instrument,
-                stop_loss=10000,
-                take_profit=10000,
-                quantity=1,
-                amount_trading_option=1,
-                order_type='swap'
-        ):
+    async def execute_order(self, order_params):
         """execute swap function"""
+        action = order_params.get('action')
+        instrument = order_params.get('instrument')
+        # stop_loss = order_params.get('stop_loss', 1000)
+        # take_profit = order_params.get('take_profit', 1000)
+        quantity = order_params.get('quantity', 1)
         try:
-            self.logger.debug("execute_order %s %s %s", action, instrument, order_type)
-            if order_type == 'swap':
-                self.logger.debug("execute_order %s", order_type)
+            asset_out_symbol = self.trading_quote_ccy if action == "BUY" else instrument
+            asset_in_symbol = instrument if action == "BUY" else self.trading_quote_ccy
+            asset_out_contract = await self.get_token_contract(asset_out_symbol)
+            try:
+                asset_out_decimals = asset_out_contract.functions.decimals().call()
+            except Exception as e:
+                self.logger.error("execute_order decimals: %s", e)
+                asset_out_decimals = 18
+            asset_out_balance = await self.get_token_balance(asset_out_symbol)
+            # if amount_trading_option == 2:
+            #     # SELL all token in case of sell order for example
+            #     asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals)
+            # else:
+            #     # buy or sell %p percentage DEFAULT OPTION
+            asset_out_amount = ((asset_out_balance)/
+                                (10 ** asset_out_decimals))*(float(quantity)/100)
 
-                asset_out_symbol = self.trading_quote_ccy if action == "BUY" else instrument
-                asset_in_symbol = instrument if action == "BUY" else self.trading_quote_ccy
-                asset_out_contract = await self.get_token_contract(asset_out_symbol)
-                try:
-                    asset_out_decimals = asset_out_contract.functions.decimals().call()
-                except Exception as e:
-                    self.logger.error("execute_order decimals: %s", e)
-                    asset_out_decimals = 18
-                asset_out_balance = await self.get_token_balance(asset_out_symbol)
-                if amount_trading_option == 1:
-                    # buy or sell %p percentage DEFAULT OPTION
-                    asset_out_amount = ((asset_out_balance)/
-                                        (10 ** asset_out_decimals))*(float(quantity)/100)
-                if amount_trading_option == 2:
-                    # SELL all token in case of sell order for example
-                    asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals)
-                order = await self.get_swap(
-                        asset_out_symbol,
-                        asset_in_symbol,
-                        asset_out_amount
-                        )
-                if order:
-                    return order['confirmation']
-
-            if order_type == "market":
-                self.logger.debug("execute_order %s", order_type)
-                return
-            if order_type == "limit":
-                self.logger.debug("execute_order %s", order_type)
-                return
+            order = await self.get_swap(
+                    asset_out_symbol,
+                    asset_in_symbol,
+                    asset_out_amount
+                    )
+            if order:
+                return order['confirmation']
 
         except Exception as e:
             self.logger.debug("error execute_order %s", e)
@@ -260,9 +246,10 @@ class DexSwap:
 
             # AMOUNT
             asset_out_decimals = asset_out_contract.functions.decimals().call()
-            self.logger.debug("asset_out_decimals %s",asset_out_decimals)
+            self.logger.debug("asset_out_decimals %s", asset_out_decimals)
             asset_out_amount = amount * 10 ** asset_out_decimals
-            slippage = slippage_tolerance_percentage # defaulted to 2% slippage if not given
+            # defaulted to 2% slippage if not given
+            slippage = slippage_tolerance_percentage  
             self.logger.debug("slippage %s",slippage)
             asset_out_amount_converted = self.w3.to_wei(asset_out_amount,'ether')
 
@@ -281,25 +268,15 @@ class DexSwap:
                     return
             # UNISWAP V2
             if self.protocol_type in ["uniswap_v2"]:
-                order_path_dex=[asset_out_address, asset_in_address]
+                order_path_dex = [asset_out_address, asset_in_address]
                 router_abi = await self.get_abi(self.router)
                 router_instance = self.w3.eth.contract(address=self.w3.to_checksum_address(self.router), abi=router_abi)
                 deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
-                transaction_min_amount  = int(router_instance.functions.getAmountsOut(transaction_amount, order_path_dex).call()[1])
-                swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount,transaction_min_amount,order_path_dex,self.wallet_address,deadline)
+                transaction_min_amount = int(router_instance.functions.getAmountsOut(transaction_amount, order_path_dex).call()[1])
+                swap_TX = router_instance.functions.swapExactTokensForTokens(transaction_amount, transaction_min_amount,order_path_dex,self.wallet_address,deadline)
             # 1INCH LIMIT
             if self.protocol_type in ["1inch_limit"]:
                 return
-                # encoded_message = encode_structured_data(eip712_data)
-                # signed_message = await sign_transaction_dex(encoded_message)
-                # # this is the limit order that will be broadcast to the limit order API
-                # limit_order = {
-                #     "orderHash": signed_message.messageHash.hex(),
-                #     "signature": signed_message.signature.hex(),
-                #     "data": order_data,
-                # }
-                # limit_order_url = dex_1inch_limit_api + str(chain_id) +"/limit-order" # make sure to change the chain_id if you are not using ETH mainnet
-                # response = requests.post(url=limit_order_url,headers={"accept": "application/json, text/plain, */*", "content-type": "application/json"}, json=limit_order)
 
             # UNISWAP V3
             if self.protocol_type in ['uniswap_v3']:
