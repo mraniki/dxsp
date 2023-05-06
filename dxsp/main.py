@@ -26,7 +26,6 @@ class DexSwap:
                  w3: Web3 | None = None,
                  protocol_type: str | None = None,
                  router_contract_addr: str | None = None,
-                 amount_trading_option: int = 1,
                  ):
         """build a web3 object for swap"""
         self.logger = logging.getLogger(__name__)
@@ -96,9 +95,6 @@ class DexSwap:
 
         self.trading_quote_ccy = settings.trading_quote_ccy
         self.logger.debug("self.trading_quote_ccy %s", self.trading_quote_ccy)
-
-        self.amount_trading_option = amount_trading_option
-        self.logger.debug("trading_option %s", self.amount_trading_option)
 
         try:
             self.gecko_api = CoinGeckoAPI()
