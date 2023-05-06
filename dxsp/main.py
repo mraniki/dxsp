@@ -593,7 +593,7 @@ class DexSwap:
             self.logger.warning("No block_explorer_api. Option B needed TBD")
             return
 
-# ####USERS RELATED
+# USER BALANCE AND POSITION RELATED
 
     async def get_token_balance(
                                 self,
@@ -621,48 +621,43 @@ class DexSwap:
             self.logger.error("get_token_balance %s: %s", token, e)
             return 0
 
-    async def get_quote_ccy_balance(
-                                self
-                            ):
-        try:
-            trading_quote_ccy_balance = await self.get_token_balance(
-                self.trading_quote_ccy
-                )
-            return trading_quote_ccy_balance
-
-        except Exception as e:
-            self.logger.error("get_basecoin_balance %s: %s", e)
-            return 0
-
-    async def get_stablecoin_balance(
-                                self
-                            ):
-        stablecoins = settings.stablecoins
-        try:
-            msg = ""
-            for i in stablecoins:
-                bal_stablecoins = await self.get_token_balance(i)
-                if bal_stablecoins:
-                    msg += f"\n💵{bal_stablecoins} {i}"
-            return msg
-        except Exception as e:
-            self.logger.error("get_stablecoin_balance error: %s", e)
-            return 0
-
     async def get_account_balance(
                             self
                         ):
         try:
-            balance = self.w3.eth.get_balance(self.w3.to_checksum_address(self.wallet_address))
+            balance = self.w3.eth.get_balance(
+                self.w3.to_checksum_address(
+                    self.wallet_address))
             balance = (self.w3.from_wei(balance, 'ether'))
+            try:
+                trading_quote_ccy_balance = (
+                    await self.get_trading_quote_ccy_balance())
+                if trading_quote_ccy_balance:
+                    balance += "💵" + trading_quote_ccy_balance
+            except Exception as e:
+                self.logger.error("trading_quote_ccy_balance error: %s", e)
+
             return round(balance, 5)
+
         except Exception as e:
             self.logger.error("get_account_balance error: %s", e)
             return "balance error"
 
-    async def get_account_position(
-                                    self
-                                    ):
+    async def get_trading_quote_ccy_balance(
+                                self
+                            ):
+
+        try:
+            trading_quote_ccy_balance = await self.get_token_balance(
+                settings.trading_quote_ccy)
+            if trading_quote_ccy_balance:
+                return trading_quote_ccy_balance
+            return 0
+        except Exception as e:
+            self.logger.error("get_trading_quote_ccy_balance error: %s", e)
+            return 0
+
+    async def get_account_position(self):
         try:
             self.logger.debug("get_account_position")
             return
