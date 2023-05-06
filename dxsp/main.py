@@ -653,7 +653,7 @@ class DexSwap:
                             self
                         ):
         try:
-            balance = self.w3.eth.get_balance(self.w3.to_checksum_address(self.wallet_address)
+            balance = self.w3.eth.get_balance(self.w3.to_checksum_address(self.wallet_address))
             balance = (self.w3.from_wei(balance, 'ether'))
             return round(balance, 5)
         except Exception as e:
