@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.9.3 (2023-05-06)
+### Fix
+* 🥅Refactor settings.json and add chain_id test in test_unit.py ([`14fab78`](https://github.com/mraniki/dxsp/commit/14fab788ad5cbc3f19c4ba13cd3f2fc5391008c0))
+
+### Other
+* Merge pull request #142 from mraniki/dev ([`6c8c485`](https://github.com/mraniki/dxsp/commit/6c8c485a9d7ec4298bf2670cf3a2fa4baaa16cc7))
+
 ## v1.9.2 (2023-05-06)
 ### Fix
 * 🥅Update README.md with new badges ([`b928bfe`](https://github.com/mraniki/dxsp/commit/b928bfeb1b4cebb0da63a40e52778a1b5e60d1d5))
