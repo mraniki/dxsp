@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.9.13 (2023-05-06)
+### Fix
+* ⚡️ added balance for trading quote ccy and formatted the get balance returned ([`6989b19`](https://github.com/mraniki/dxsp/commit/6989b1966e5d9ea462a31d7a60547429652dea59))
+
+### Other
+* Merge pull request #152 from mraniki/dev ([`a17737e`](https://github.com/mraniki/dxsp/commit/a17737e5a53803ff14920fbd1f62da87228e76de))
+
 ## v1.9.12 (2023-05-06)
 ### Fix
 * :zap:  update flow ([`3ae8f5e`](https://github.com/mraniki/dxsp/commit/3ae8f5e271264a3dec8acf8b8cf4fe74423acc8a))
