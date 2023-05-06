@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.9.12 (2023-05-06)
+### Fix
+* :zap:  update flow ([`3ae8f5e`](https://github.com/mraniki/dxsp/commit/3ae8f5e271264a3dec8acf8b8cf4fe74423acc8a))
+
+### Other
+* Merge pull request #151 from mraniki/dev ([`c7fa1c0`](https://github.com/mraniki/dxsp/commit/c7fa1c0f2d1d5c46eb60ca827adab1f6d221c4bf))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`db3e85a`](https://github.com/mraniki/dxsp/commit/db3e85ae966b6a926500806cce965e0711375ffa))
+
 ## v1.9.11 (2023-05-06)
 ### Fix
 * :zap: req update ([`3a924c4`](https://github.com/mraniki/dxsp/commit/3a924c4bbc80b3098da6e8aa4793006530a96381))
