@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.9.2 (2023-05-06)
+### Fix
+* 🥅Update README.md with new badges ([`b928bfe`](https://github.com/mraniki/dxsp/commit/b928bfeb1b4cebb0da63a40e52778a1b5e60d1d5))
+
+### Other
+* Merge pull request #141 from mraniki/dev ([`a1f0357`](https://github.com/mraniki/dxsp/commit/a1f0357e22bb3790bd95dc56447e821d349af552))
+
 ## v1.9.1 (2023-05-05)
 ### Fix
 * :zap: init unit test ([`98463ba`](https://github.com/mraniki/dxsp/commit/98463ba2581872fa7c21f20c43073a653f488c3a))
