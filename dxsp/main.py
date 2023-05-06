@@ -653,7 +653,7 @@ class DexSwap:
                             self
                         ):
         try:
-            return self.w3.eth.get_balance(str(self.wallet_address))
+            return self.w3.eth.get_balance(self.w3.to_checksum_address(self.wallet_address))
         except Exception as e:
             self.logger.error("get_account_balance error: %s", e)
             return "balance error"
