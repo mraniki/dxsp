@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v1.9.9 (2023-05-06)
+### Fix
+* :zap:Refactor get_balance method to return balance in ether. ([`471e034`](https://github.com/mraniki/dxsp/commit/471e0342943df6532ed455ab59d1999a06e2e06e))
+* ⚡️ lint ([`ffc8f7e`](https://github.com/mraniki/dxsp/commit/ffc8f7e4281054fed1d942e2586eada0d46fb4d3))
+
+### Other
+* Merge pull request #148 from mraniki/dev ([`1af7846`](https://github.com/mraniki/dxsp/commit/1af7846e03db6cd48a81d5dd2b4706ec5452d373))
+* Merge ; commit 'ffc8f7e4281054fed1d942e2586eada0d46fb4d3' ([`5186277`](https://github.com/mraniki/dxsp/commit/5186277695e903767e9ee4a0de43563cf6769cc2))
+* Added docker_client job to workflow. ([`7a237d6`](https://github.com/mraniki/dxsp/commit/7a237d63a83e5df5f56e306323eaf9d65a99799a))
+
 ## v1.9.8 (2023-05-06)
 ### Fix
 * :bug: fix defect for get account balance ([`5209c1a`](https://github.com/mraniki/dxsp/commit/5209c1a38e0504c71b57a0feee7be938e3cc0b63))
