@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.9.4 (2023-05-06)
+### Fix
+* 🥅Update test case ([`ec31919`](https://github.com/mraniki/dxsp/commit/ec31919baf629ff892242f57eb8d3e186d58a26e))
+
+### Other
+* Merge pull request #143 from mraniki/dev ([`d5863dc`](https://github.com/mraniki/dxsp/commit/d5863dc0f174901a23cbe94e5fae80ea9054abbb))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`790ffa0`](https://github.com/mraniki/dxsp/commit/790ffa00f798875edc2e8762bc2f51e64046b80f))
+
 ## v1.9.3 (2023-05-06)
 ### Fix
 * 🥅Refactor settings.json and add chain_id test in test_unit.py ([`14fab78`](https://github.com/mraniki/dxsp/commit/14fab788ad5cbc3f19c4ba13cd3f2fc5391008c0))
