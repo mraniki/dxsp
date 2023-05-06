@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.9.6 (2023-05-06)
+### Fix
+* 🥅Update unit test ([`59d62b7`](https://github.com/mraniki/dxsp/commit/59d62b7d7a6a6b17898d3ed43b39613a1e64a9bd))
+
+### Other
+* Merge pull request #145 from mraniki/dev ([`a968f59`](https://github.com/mraniki/dxsp/commit/a968f598dff43d40665d04dcd8e2a70fd9741ba4))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`6f5bfa3`](https://github.com/mraniki/dxsp/commit/6f5bfa3a3ad1bc8bb1ce16083903fba4c54e02ea))
+
 ## v1.9.5 (2023-05-06)
 ### Fix
 * ⚡️ added trading_risk_amount as settings ([`d71b227`](https://github.com/mraniki/dxsp/commit/d71b227281c62d06d3d5a92c89a78db7db828531))
