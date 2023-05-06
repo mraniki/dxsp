@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.9.5 (2023-05-06)
+### Fix
+* ⚡️ added trading_risk_amount as settings ([`d71b227`](https://github.com/mraniki/dxsp/commit/d71b227281c62d06d3d5a92c89a78db7db828531))
+
+### Other
+* Merge pull request #144 from mraniki/dev ([`85aa211`](https://github.com/mraniki/dxsp/commit/85aa2110cac75a26ab6f403ab782356d4023c384))
+
 ## v1.9.4 (2023-05-06)
 ### Fix
 * 🥅Update test case ([`ec31919`](https://github.com/mraniki/dxsp/commit/ec31919baf629ff892242f57eb8d3e186d58a26e))
