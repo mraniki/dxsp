@@ -11,7 +11,7 @@ settings = Dynaconf(
     project_root=os.path.dirname(ROOT),
     settings_files=[
         os.path.join(ROOT, "default_settings.toml"),
-        'settings.toml', 
+        'settings.toml',
         '.secrets.toml'
     ],
     load_dotenv=True,
