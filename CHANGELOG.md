@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v1.9.11 (2023-05-06)
+### Fix
+* :zap: req update ([`3a924c4`](https://github.com/mraniki/dxsp/commit/3a924c4bbc80b3098da6e8aa4793006530a96381))
+* :zap: added secret inherit in action ([`0aa7840`](https://github.com/mraniki/dxsp/commit/0aa7840abc6409ea24cbf83f02e57b6ad3c126c2))
+
+### Other
+* Merge pull request #150 from mraniki/dev ([`1f61dd1`](https://github.com/mraniki/dxsp/commit/1f61dd15daaaafd32cb90dcbd4c9423c31ab15b0))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`c9d1cc6`](https://github.com/mraniki/dxsp/commit/c9d1cc62951bf902423a23f89badca1a41002fed))
+
 ## v1.9.10 (2023-05-06)
 ### Fix
 * :ambulance: typo ([`9d8dbd9`](https://github.com/mraniki/dxsp/commit/9d8dbd987929bf130ec935613a8521e6dc54a609))
