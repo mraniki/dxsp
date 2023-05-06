@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.9.8 (2023-05-06)
+### Fix
+* :bug: fix defect for get account balance ([`5209c1a`](https://github.com/mraniki/dxsp/commit/5209c1a38e0504c71b57a0feee7be938e3cc0b63))
+
+### Other
+* Merge pull request #147 from mraniki/dev ([`c352850`](https://github.com/mraniki/dxsp/commit/c352850eccc50794a74187067940bda1d2dde7a1))
+
 ## v1.9.7 (2023-05-06)
 ### Fix
 * 🐛 fix defex for get account balance ([`c092dd7`](https://github.com/mraniki/dxsp/commit/c092dd763dcdcdb61e46f9ca3758075b2c74c4ff))
