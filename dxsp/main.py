@@ -25,8 +25,7 @@ class DexSwap:
                  rpc: str | None = None,
                  w3: Web3 | None = None,
                  protocol_type: str | None = None,
-                 dex_exchange: str | None = None,
-                 dex_router: str | None = None,
+                 router_contract_addr: str | None = None,
                  amount_trading_option: int = 1,
                  ):
         """build a web3 object for swap"""
@@ -88,20 +87,9 @@ class DexSwap:
         self.logger.debug("self.dex_url %s", self.dex_url)
         self.logger.debug("self.protocol_type %s", self.protocol_type)
 
-        self.dex_exchange = dex_exchange
-        self.logger.debug("self.dex_exchange %s", self.dex_exchange)
-
-        self.dex_router = dex_router
-        if self.dex_router is None:
-            if (
-                self.dex_exchange is None
-                or self.dex_exchange != blockchain["uniswap_v3"]
-            ):
-                self.router_contract_addr = blockchain["uniswap_v2"]
-            else:
-                self.router_contract_addr = blockchain["uniswap_v3"]
-        else:
-            self.router_contract_addr = self.dex_router
+        self.router_contract_addr = router_contract_addr
+        if self.router_contract_addr is None:
+            self.router_contract_addr = blockchain["uniswap_v2"]
 
         self.name = "TBD"
         self.logger.debug("self.name %s", self.name)
@@ -180,26 +168,25 @@ class DexSwap:
         """execute swap function"""
         action = order_params.get('action')
         instrument = order_params.get('instrument')
-        # stop_loss = order_params.get('stop_loss', 1000)
-        # take_profit = order_params.get('take_profit', 1000)
         quantity = order_params.get('quantity', 1)
         try:
-            asset_out_symbol = self.trading_quote_ccy if action == "BUY" else instrument
-            asset_in_symbol = instrument if action == "BUY" else self.trading_quote_ccy
-            asset_out_contract = await self.get_token_contract(asset_out_symbol)
+            asset_out_symbol = (self.trading_quote_ccy if
+                                action == "BUY" else instrument)
+            asset_in_symbol = (instrument if action == "BUY"
+                               else self.trading_quote_ccy)
+            asset_out_contract = await self.get_token_contract(
+                asset_out_symbol)
             try:
                 asset_out_decimals = asset_out_contract.functions.decimals().call()
             except Exception as e:
                 self.logger.error("execute_order decimals: %s", e)
                 asset_out_decimals = 18
             asset_out_balance = await self.get_token_balance(asset_out_symbol)
-            # if amount_trading_option == 2:
-            #     # SELL all token in case of sell order for example
-            #     asset_out_amount = (asset_out_balance)/(10 ** asset_out_decimals)
-            # else:
-            #     # buy or sell %p percentage DEFAULT OPTION
-            asset_out_amount = ((asset_out_balance)/
-                                (10 ** asset_out_decimals))*(float(quantity)/100)
+            #  buy or sell %p percentage DEFAULT OPTION is 10%
+            asset_out_amount = ((asset_out_balance) /
+                                (settings.trading_risk_amount
+                                ** asset_out_decimals)
+                                )*(float(quantity)/100)
 
             order = await self.get_swap(
                     asset_out_symbol,
@@ -222,7 +209,7 @@ class DexSwap:
                 ):
         """main swap function"""
 
-        self.logger.debug("get_swap %s %s %s", asset_out_symbol, asset_in_symbol, amount)
+        self.logger.debug("get_swap")
         try:
             # ASSET OUT
             asset_out_address = await self.search_contract(asset_out_symbol)
@@ -329,10 +316,10 @@ class DexSwap:
             trade['amount'] = order_amount
             trade['fee'] = order_receipt['gasUsed']
             trade['price'] = "TBD"
-            trade['confirmation'] = f"➕ Size: {trade['amount']}\n\
-                                ⚫️ Entry: {trade['price']}\n\
-                                ℹ️ {trade['id']}\n\
-                                🗓️ {trade['timestamp']}"
+            trade['confirmation'] += f"➕ Size: {round(trade['amount'],4)}\n"
+            trade['confirmation'] += f"⚫️ Entry: {round(trade['price'],4)}\n"
+            trade['confirmation'] += f"ℹ️ {trade['id']}\n"
+            trade['confirmation'] += f"🗓️ {trade['datetime']}"
             self.logger.info("trade %s", trade)
             return trade
         except Exception as e:
@@ -435,7 +422,6 @@ class DexSwap:
             self.logger.error("get_token_contract %s", e)
             return
 
-
 # ###UTILS
     async def get_approve(
                         self,
@@ -490,7 +476,7 @@ class DexSwap:
                             'nonce': self.w3.eth.get_transaction_count(
                                 self.wallet_address),
                             }
-                order = order.build_transaction(order)
+                order = order.build_transaction(order_params)
             elif self.protocol_type in ["1inch","1inch_limit"]:
                 order = order['tx']
                 order['gas'] = await self.get_gas(order)
@@ -545,9 +531,9 @@ class DexSwap:
                 headers = {"User-Agent": "Mozilla/5.0"}
                 # Make a GET request to the block explorer URL
                 resp = await self._get(
-                                       url = self.block_explorer_url,
-                                       params = params,
-                                       headers = headers
+                                       url=self.block_explorer_url,
+                                       params=params,
+                                       headers=headers
                                        )
                 # If the response status is 1, log the ABI
                 if resp['status']=="1":
@@ -595,7 +581,9 @@ class DexSwap:
                                 self
                             ):
         try:
-            trading_quote_ccy_balance = await self.get_token_balance(self.trading_quote_ccy)
+            trading_quote_ccy_balance = await self.get_token_balance(
+                self.trading_quote_ccy
+                )
             return trading_quote_ccy_balance
 
         except Exception as e:
