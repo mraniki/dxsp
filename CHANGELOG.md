@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v1.9.7 (2023-05-06)
+### Fix
+* 🐛 fix defex for get account balance ([`c092dd7`](https://github.com/mraniki/dxsp/commit/c092dd763dcdcdb61e46f9ca3758075b2c74c4ff))
+* ⚡️ lint before cleanup and reorg ([`e944aeb`](https://github.com/mraniki/dxsp/commit/e944aeb0f1fc3a7052f3338a50abe60e7b3fffd4))
+
+### Other
+* Merge pull request #146 from mraniki/dev ([`0225b05`](https://github.com/mraniki/dxsp/commit/0225b0505055c1f53e131423a09bd7c3610ffb86))
+* 🔥 remove amount_trading_option ([`f177efb`](https://github.com/mraniki/dxsp/commit/f177efb67a504e52cb1d1bef50e01156921daa52))
+
 ## v1.9.6 (2023-05-06)
 ### Fix
 * 🥅Update unit test ([`59d62b7`](https://github.com/mraniki/dxsp/commit/59d62b7d7a6a6b17898d3ed43b39613a1e64a9bd))
