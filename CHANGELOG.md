@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.9.10 (2023-05-06)
+### Fix
+* :ambulance: typo ([`9d8dbd9`](https://github.com/mraniki/dxsp/commit/9d8dbd987929bf130ec935613a8521e6dc54a609))
+
+### Other
+* Merge pull request #149 from mraniki/dev ([`fad48e2`](https://github.com/mraniki/dxsp/commit/fad48e2643b13c14dcd41fd967cea98ff7b16fd6))
+
 ## v1.9.9 (2023-05-06)
 ### Fix
 * :zap:Refactor get_balance method to return balance in ether. ([`471e034`](https://github.com/mraniki/dxsp/commit/471e0342943df6532ed455ab59d1999a06e2e06e))
