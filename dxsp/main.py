@@ -653,11 +653,12 @@ class DexSwap:
                             self
                         ):
         try:
-            return self.w3.eth.get_balance(self.w3.to_checksum_address(self.wallet_address))
+            balance = self.w3.eth.get_balance(self.w3.to_checksum_address(self.wallet_address)
+            balance = (self.w3.from_wei(balance, 'ether'))
+            return round(balance, 5)
         except Exception as e:
             self.logger.error("get_account_balance error: %s", e)
             return "balance error"
-            # bal = round(ex.from_wei(bal,'ether'),5)
 
     async def get_account_position(
                                     self
