@@ -14,6 +14,8 @@ async def test_init_dex():
 async def test_init_chain():
     """chain Testing"""
     exchange = DexSwap(chain_id=10)
+    check is False
     if exchange.chain_id == 10:
-        assert is True
+        check is True
+    assert check is True
     
