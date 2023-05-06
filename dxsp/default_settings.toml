@@ -8,6 +8,7 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 
 #📝trading token setup
 trading_quote_ccy = "USDT"
+trading_risk_amount = 10
 stablecoins = ["USDC", "USDT"]
 
 #📝apollo API
