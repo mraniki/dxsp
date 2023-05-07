@@ -2,6 +2,25 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.0 (2023-05-07)
+### Fix
+* 🐛 pylint ([`48d9ec0`](https://github.com/mraniki/dxsp/commit/48d9ec0c61f8b880b1a157707e3659687d97d041))
+* 🐛 remove async in init and added router setup separatly ([`3d1476f`](https://github.com/mraniki/dxsp/commit/3d1476f618364d3b66ac2f0851135ecf4ec36b6a))
+* 🐛 settings.block_explorer_api ([`43d9dbe`](https://github.com/mraniki/dxsp/commit/43d9dbea3ded2ac650910a4843a55b83d08736a9))
+* ⚡️ settings improvement ([`e0b5ebe`](https://github.com/mraniki/dxsp/commit/e0b5ebe0eaf32066860897bf5afb8c4887f12aa4))
+* ⚡️ updated settings ([`1860882`](https://github.com/mraniki/dxsp/commit/1860882759b65af9b4057dee7384370d01e315a4))
+* ⚡️ cleanup example ([`eba34f0`](https://github.com/mraniki/dxsp/commit/eba34f0d2f13c436f7fbadabbe6c81119a47f13b))
+* ⚡️ settings updated to include dex_ prefix ([`3b2e74e`](https://github.com/mraniki/dxsp/commit/3b2e74e75f003b4b08419c1266b81af3cdab3335))
+* :zap:settings improvements ([`1f33cbf`](https://github.com/mraniki/dxsp/commit/1f33cbfe2da2167b666402d96a9a7290b7bd0de2))
+* :zap:Fix string conversion in DexSwap class methods. ([`ab4524d`](https://github.com/mraniki/dxsp/commit/ab4524db19f6724beffec7d9d6c8802757d3082e))
+
+### Breaking
+* 💥 revamp and simplification to leverage on settings ([`f949890`](https://github.com/mraniki/dxsp/commit/f9498903b1b8e7a185ed15679aa0d4d8ce95f4ec))
+* 💥 revamp and simplification to leverage on settings ([`f949890`](https://github.com/mraniki/dxsp/commit/f9498903b1b8e7a185ed15679aa0d4d8ce95f4ec))
+
+### Other
+* Merge pull request #154 from mraniki/dev ([`9903a03`](https://github.com/mraniki/dxsp/commit/9903a03d61a177e0a61da0f2c31adde15b2481e5))
+
 ## v1.9.14 (2023-05-07)
 ### Fix
 * ⚡️ getquote unit test ([`4b3426c`](https://github.com/mraniki/dxsp/commit/4b3426c5d6f3177aa2acca9279a9b63deadcc4dd))
