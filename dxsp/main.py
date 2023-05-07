@@ -314,7 +314,7 @@ class DexSwap:
         return swap_order
 
     async def uniswap_v3_swap(self):
-        self.logger.debug("Not available")
+        self.logger.warning("Not available")
         return
 
     async def get_confirmation(self,
@@ -391,9 +391,9 @@ class DexSwap:
             self.logger.error("search_contract %s", e)
             return
 
-    async def search_gecko(self, token):
+    async def search_cg(self, token):
         """search coingecko"""
-        self.logger.debug("search_gecko")
+        self.logger.debug("search_cg")
         try:
             search_results = self.cg.search(query=token)
             search_dict = search_results['coins']
@@ -409,18 +409,18 @@ class DexSwap:
                 except KeyError:
                     pass
         except Exception as e:
-            self.logger.error("search_gecko %s", e)
+            self.logger.error("search_cg %s", e)
             return
 
     async def search_cg_contract(self, token):
         """search coingecko contract"""
         self.logger.debug("🦎search_cg_contract %s", token)
         try:
-            coin_info = await self.search_gecko(token)
+            coin_info = await self.search_cg(token)
             if coin_info is not None:
                 return coin_info['platforms'][f'{self.cg_platform}']
         except Exception as e:
-            self.logger.error(f"error search_cg_contract {e}")
+            self.logger.error(" search_cg_contract: %s", e)
             return
 
     async def get_contract_address(
