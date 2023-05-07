@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.2 (2023-05-07)
+### Fix
+* :bug: Fix chain_id setting in DexSwap class. ([`a585f5f`](https://github.com/mraniki/dxsp/commit/a585f5f2557e039e5e44203bfb3de73e3f8e6a11))
+
+### Other
+* Merge pull request #156 from mraniki/dev ([`d296c21`](https://github.com/mraniki/dxsp/commit/d296c21af6693fe6f7f443709cf6693b8e415757))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`c6b97fa`](https://github.com/mraniki/dxsp/commit/c6b97fad479206d1eedbc724707509ccf6394cb2))
+
 ## v2.0.1 (2023-05-07)
 ### Fix
 * :zap:Refactor logging in DexSwap class and set chain_id from settings. ([`394ebf8`](https://github.com/mraniki/dxsp/commit/394ebf8a2ddc23af6bc7f764e8f6b3d7eeca8be8))
