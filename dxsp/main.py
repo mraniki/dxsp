@@ -353,7 +353,7 @@ class DexSwap:
                 + "?module=transaction&action=gettxreceiptstatus&txhash="
                 + str(txHash)
                 + "&apikey="
-                + str(self.block_explorer_api))
+                + str(settings.block_explorer_api))
             checkTransactionRequest = self._get(checkTransactionSuccessURL)
             return checkTransactionRequest['status']
 
