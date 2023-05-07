@@ -10,7 +10,7 @@ async def test_init_dex():
     assert check is True
 
 
-@pytest.mark.asyncio
+# @pytest.mark.asyncio
 # async def test_get_quote():
 #     """getquote Testing"""
 #     exchange = DexSwap()
