@@ -66,3 +66,12 @@ async def test_router():
     router = await exchange.router()
     if router:
         assert router is not None
+
+
+@pytest.mark.asyncio
+async def test_logger(caplog):
+    exchange = DexSwap()
+    for record in caplog.records:
+        assert record.levelname != "CRITICAL"
+        assert "wally" not in caplog.text
+
