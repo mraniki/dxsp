@@ -129,3 +129,10 @@ dmypy.json
 .pyre/
 .DS_Store
 dxsp/dxsp.sublime-workspace
+.vscode
+
+/bin
+/lib
+.secrets.*
+.settings.*
+*.cfg
