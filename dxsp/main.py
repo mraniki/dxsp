@@ -29,7 +29,7 @@ class DexSwap:
             return
 
         self.protocol_type = settings.dex_protocol_type
-        self.chain_id = settings.chain_id
+        self.chain_id = settings.dex_chain_id
         # USER SECRET
         self.wallet_address = settings.dex_wallet_address
         self.private_key = settings.dex_private_key
