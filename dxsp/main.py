@@ -134,8 +134,9 @@ class DexSwap:
         amount=1
     ):
         order_path_dex = [asset_out_address, asset_in_address]
+        router_instance = await self.router()
         order_min_amount = int(
-            self.router().functions.getAmountsOut(
+            router_instance.functions.getAmountsOut(
                 amount,
                 order_path_dex)
             .call()[1])
@@ -303,7 +304,8 @@ class DexSwap:
         order_min_amount = self.uniswap_v2_quote(
             asset_in_address,
             asset_out_address)
-        swap_order = self.router().functions.swapExactTokensForTokens(
+        router_instance = await self.router()
+        swap_order = router_instance.functions.swapExactTokensForTokens(
                         amount,
                         order_min_amount,
                         order_path_dex,
