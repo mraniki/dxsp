@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.4 (2023-05-07)
+### Fix
+* :zap: Update pyproject.toml ([`f36d453`](https://github.com/mraniki/dxsp/commit/f36d453e3f01f6d2268f97fa915dbc32d1779d8c))
+
+### Other
+* Merge pull request #158 from mraniki/dev ([`259a7ea`](https://github.com/mraniki/dxsp/commit/259a7eab474a5c946a968ba972db1585a6eb61a6))
+
 ## v2.0.3 (2023-05-07)
 ### Fix
 * ⚡️ clean-up unit test ([`56df3b4`](https://github.com/mraniki/dxsp/commit/56df3b4ed5cabeb16ca7b12488819c5a0da03c93))
