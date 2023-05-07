@@ -18,8 +18,8 @@ dex_block_explorer_url = "https://api.etherscan.io/api?"
 dex_block_explorer_api =  ""
 
 #user settings
-dex_wallet_address = "0x2758f7Df3160aFE68F5b7808eA67a14d4aCFE436" #this is an example
-dex_private_key = "fffffffffffffffffffffffffffffffebaaedce6affff03bbfd25e8cd036ffff" #this is an example
+dex_wallet_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" #this is an example
+dex_private_key = "0x111111111117dc0aaaaaa0fa6a738034aaaa302" #this is an example
 
 #dex protocol
 dex_protocol_type = "1inch" 
