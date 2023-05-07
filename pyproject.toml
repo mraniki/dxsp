@@ -29,6 +29,7 @@ pycoingecko = "*"
 python-semantic-release = "*"
 pytest = "*"
 pytest-cov = "*"
+pytest-asyncio = "*"
 
 [tool.pytest.ini_options]
 testpaths = "tests/"
