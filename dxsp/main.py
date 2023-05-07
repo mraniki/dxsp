@@ -6,7 +6,6 @@ import logging
 
 import requests
 from dxsp import __version__
-# from dxsp.assets.blockchains import blockchains
 from dxsp.config import settings
 
 from pycoingecko import CoinGeckoAPI
@@ -19,18 +18,18 @@ class DexSwap:
     def __init__(self, w3: Web3 | None = None,):
         """build a dex object """
         self.logger = logging.getLogger(name="DexSwap")
-        self.logger.info("DexSwap version: %s", __version__)
+        self.logger.info("DexSwap: %s", __version__)
 
         self.w3 = w3 or Web3(Web3.HTTPProvider(settings.dex_rpc))
         try:
             if self.w3.net.listening:
-                self.logger.info("connected to %s", self.w3)
+                self.logger.info("connected %s", self.w3)
         except Exception as e:
             self.logger.error("connectivity failed %s", e)
             return
 
         self.protocol_type = settings.dex_protocol_type
-
+        self.chain_id = settings.chain_id
         # USER SECRET
         self.wallet_address = settings.dex_wallet_address
         self.private_key = settings.dex_private_key
