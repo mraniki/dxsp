@@ -17,8 +17,7 @@ class DexSwap:
     """Do a swap."""
 
     async def __init__(self, w3: Web3 | None = None,):
-        """build a dex object for swap
-        take an optional w3 object """
+        """build a dex object """
         self.logger = logging.getLogger(name="DexSwap")
         self.logger.info("DexSwap version: %s", __version__)
 

@@ -1,10 +1,6 @@
 [default]
 loglevel = "INFO"
 
-#user settings
-dex_wallet_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" #this is an example
-dex_private_key = "0x111111111117dc0aaaaaa0fa6a738034aaaa302" #this is an example
-
 #📝tokenlist
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
@@ -15,23 +11,35 @@ trading_quote_ccy = "USDT"
 trading_risk_amount = 10 # for 10% of the position
 trading_slippage = 2 #for 2 % slippage
 
-#third party specific
-#📝apollo API
-apollo_spot_api_key = ""
-apollo_spot_api_secret = ""
-apollo_future_api_key = ""
-apollo_future_api_secret = ""
+#user settings
+dex_wallet_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" #this is an example
+dex_private_key = "0x111111111117dc0aaaaaa0fa6a738034aaaa302" #this is an example
 
-#chain_1_mainnet
-dex_chain_id = 1  #https://chainlist.org
-dex_rpc = "https://rpc.ankr.com/eth" #https://chainlist.org
+#chain_1 #see below for other chain ids or use https://chainlist.org to overwrite settings
+dex_chain_id = 1
+dex_rpc = "https://rpc.ankr.com/eth"
 dex_block_explorer_url = "https://api.etherscan.io/api?"
 dex_block_explorer_api =  ""
 dex_protocol_type = "1inch" 
 dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D" 
 dex_base_api = "https://api.1inch.exchange/v5.0/1"
 
-[chain_5_goerli]
+#protocol specific
+#🦄1inch
+dex_1inch_url = "https://api.1inch.exchange/v5.0/"
+dex_1inch_limit_url = "https://limit-orders.1inch.io/v3.0/"
+
+#0️⃣0x
+dex_0x_url = "https://api.0x.org/mainnet/"
+dex_0x_limit_url = ""
+
+#📝apollo
+apollo_spot_api_key = ""
+apollo_spot_api_secret = ""
+apollo_future_api_key = ""
+apollo_future_api_secret = ""
+
+[chain_5]
 loglevel = "DEBUG"
 dex_chain_id = 5
 dex_rpc = "https://rpc.ankr.com/eth_goerli"
@@ -41,7 +49,7 @@ dex_protocol_type = "uniswap_v2"
 dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
 dex_base_api = "https://goerli.api.0x.org/"
 
-[chain_11155111_sepolia]
+[chain_11155111]
 loglevel = "DEBUG"
 dex_chain_id = 11155111
 dex_rpc = "https://rpc.ankr.com/eth_sepolia"
@@ -51,7 +59,7 @@ dex_protocol_type = "0x"
 dex_router_contract_addr = "0x1f98431c8ad98523631ae4a59f267346ea31f984"
 dex_base_api = "https://sepolia.api.0x.org/"
 
-[chain_56_mainnet]
+[chain_56]
 dex_chain_id = 56
 dex_rpc = "https://rpc.ankr.com/bsc"
 dex_block_explorer_url = "https://api.bscscan.com/api?"
@@ -60,11 +68,22 @@ dex_protocol_type = "uniswap_v2"
 dex_router_contract_addr = "0xca143ce32fe78f1f7019d7d551a6402fc5350c73" #pancakeswap V2
 dex_base_api = "https://api.1inch.exchange/v5.0/56"
 
-[chain_97_testnet]
+[chain_97]
 loglevel = "DEBUG"
-dex_rpc = "https://rpc.ankr.com/bsc_testnet_chapel"
 dex_chain_id = 97
+dex_rpc = "https://rpc.ankr.com/bsc_testnet_chapel"
 dex_block_explorer_url = "https://api-testnet.bscscan.com/api?"
 dex_block_explorer_api =  ""
 dex_protocol_type = ""
 dex_router_contract_addr = ""
+dex_base_api = ""
+
+[chain_42161]
+loglevel = "DEBUG"
+dex_chain_id = 42161
+dex_rpc = "https://rpc.ankr.com/arbitrum"
+dex_block_explorer_url = "https://api-testnet.bscscan.com/api?"
+dex_block_explorer_api =  ""
+dex_protocol_type = ""
+dex_router_contract_addr = "0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f"
+dex_base_api = "https://api.1inch.exchange/v5.0/42161"
