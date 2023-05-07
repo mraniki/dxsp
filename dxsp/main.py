@@ -87,15 +87,15 @@ class DexSwap:
             return
         try:
             if self.protocol_type in ["1inch", "1inch_limit"]:
-                self.oneinch_quote(
+                await self.oneinch_quote(
                     asset_in_address,
                     asset_out_address)
             if self.protocol_type == "uniswap_v2":
-                self.uniswap_v2_quote(
+                await self.uniswap_v2_quote(
                     asset_in_address,
                     asset_out_address)
             if self.protocol_type == "uniswap_v3":
-                self.uniswap_v3_quote(
+                await self.uniswap_v3_quote(
                     asset_in_address,
                     asset_out_address)
         except Exception as e:
@@ -232,13 +232,13 @@ class DexSwap:
 
             # 1INCH
             if self.protocol_type in ["1inch"]:
-                swap_order = self.oneinch_swap(
+                swap_order = await self.oneinch_swap(
                     asset_out_address,
                     asset_in_address,
                     order_amount)
             # UNISWAP V2
             if self.protocol_type in ["uniswap_v2"]:
-                swap_order = self.uniswap_v2_swap(
+                swap_order = await self.uniswap_v2_swap(
                     asset_out_address,
                     asset_in_address,
                     order_amount)
@@ -247,7 +247,7 @@ class DexSwap:
                 return
             # UNISWAP V3
             if self.protocol_type in ['uniswap_v3']:
-                swap_order = self.uniswap_v3_swap()
+                swap_order = await self.uniswap_v3_swap()
             if swap_order:
                 self.logger.debug("swap_order %s", swap_order)
                 signed_order = await self.get_sign(swap_order)
