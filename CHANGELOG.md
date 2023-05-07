@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.3 (2023-05-07)
+### Fix
+* ⚡️ clean-up unit test ([`56df3b4`](https://github.com/mraniki/dxsp/commit/56df3b4ed5cabeb16ca7b12488819c5a0da03c93))
+* 🥅 unit testing expanded ([`6f84ed6`](https://github.com/mraniki/dxsp/commit/6f84ed6658d1a782e377c7c16888c4c47f09c1be))
+
+### Other
+* Merge pull request #157 from mraniki/dev ([`61ac805`](https://github.com/mraniki/dxsp/commit/61ac805b095918c01a65b9a4403022241225ae4d))
+
 ## v2.0.2 (2023-05-07)
 ### Fix
 * :bug: Fix chain_id setting in DexSwap class. ([`a585f5f`](https://github.com/mraniki/dxsp/commit/a585f5f2557e039e5e44203bfb3de73e3f8e6a11))
