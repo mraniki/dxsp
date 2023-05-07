@@ -1,6 +1,17 @@
 [default]
 loglevel = "INFO"
 
+#DexSwap default value
+chain_id = 1
+wallet_address = ""
+private_key = ""
+
+block_explorer_api =  ""
+block_explorer_url = ""
+rpc = ""
+protocol_type = "1inch"
+router_contract_addr = "0x1F98431c8aD98523631AE4a59f267346ea31F984" #uniswap v3 factory
+
 #📝tokenlist
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
