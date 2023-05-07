@@ -349,9 +349,9 @@ class DexSwap:
         checkTransactionSuccessURL = (
             self.block_explorer_url
             + "?module=transaction&action=gettxreceiptstatus&txhash="
-            + txHash
+            + str(txHash)
             + "&apikey="
-            + self.block_explorer_api)
+            + str(self.block_explorer_api))
         checkTransactionRequest = self._get(checkTransactionSuccessURL)
         return checkTransactionRequest['status']
 
@@ -463,22 +463,22 @@ class DexSwap:
             approval_check_URL = (
                 self.dex_url
                 + "/approve/allowance?tokenAddress="
-                + asset_out_address
+                + str(asset_out_address)
                 + "&walletAddress="
-                + self.wallet_address)
+                + str(self.wallet_address))
             approval_response = await self._get(approval_check_URL)
             approval_check = approval_response['allowance']
             if (approval_check == 0):
                 approval_URL = (
                     self.dex_url
                     + "/approve/transaction?tokenAddress="
-                    + asset_out_address)
+                    + str(asset_out_address))
                 approval_response = await self._get(approval_URL)
         elif self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
             asset_out_abi = await self.get_abi(asset_out_address)
             asset_out_contract = self.w3.eth.contract(
-                                 asset_out_address,
-                                 asset_out_abi)
+                                 address = asset_out_address,
+                                 abi =asset_out_abi)
             approval_check = asset_out_contract.functions.allowance(
                              self.w3.to_checksum_address(self.wallet_address),
                              self.w3.to_checksum_address(
@@ -488,8 +488,8 @@ class DexSwap:
                 approved_amount = (self.w3.to_wei(2**64-1, 'ether'))
                 asset_out_abi = await self.get_abi(asset_out_address)
                 asset_out_contract = self.w3.eth.contract(
-                                     asset_out_address,
-                                     asset_out_abi)
+                                     address = asset_out_address,
+                                     abi = asset_out_abi)
                 approval_TX = asset_out_contract.functions.approve(
                                 self.w3.to_checksum_address(
                                     self.router_contract_addr),
@@ -608,8 +608,8 @@ class DexSwap:
             if token_abi is None:
                 raise ValueError(f"ABI not found for {token_address}")
             token_contract = self.w3.eth.contract(
-                token_address,
-                token_abi)
+                address = token_address,
+                abi= token_abi)
             token_balance = 0
             try:
                 token_balance = token_contract.functions.balanceOf(
