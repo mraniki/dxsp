@@ -1,57 +1,70 @@
 [default]
 loglevel = "INFO"
 
+#user settings
+dex_wallet_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" #this is an example
+dex_private_key = "0x111111111117dc0aaaaaa0fa6a738034aaaa302" #this is an example
+
 #📝tokenlist
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
-#📝trading token setup
+#📝trading setup
 trading_quote_ccy = "USDT"
 trading_risk_amount = 10 # for 10% of the position
-trading_slippage = 2 #for 2 %
+trading_slippage = 2 #for 2 % slippage
 
-#chain settings
-dex_chain_id = 1  #https://chainlist.org
-dex_rpc = "https://rpc.ankr.com/eth" #https://chainlist.org
-dex_block_explorer_url = "https://api.etherscan.io/api?"
-dex_block_explorer_api =  ""
-
-#user settings
-dex_wallet_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" #this is an example
-dex_private_key = "0x111111111117dc0aaaaaa0fa6a738034aaaa302" #this is an example
-
-#dex protocol
-dex_protocol_type = "1inch" 
-#other options: 
-    # uniswap_v2
-    # uniswap_v3
-    # 1inch_limit
-
-dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D" 
-#uniswap V2 router as default
-#other options: 
-    #"0x1F98431c8aD98523631AE4a59f267346ea31F984" #uniswap v3 factory
-    #"0x10ED43C718714eb63d5aA57B78B54704E256024E" pancakeswap v2 router for BSC
-
-dex_base_api = "https://api.1inch.exchange/v5.0/1"
-#1inch api url set as default
-#other options: 
-    #https://limit-orders.1inch.io/v3.0/1
-    #https://api.0x.org/
-
+#third party specific
 #📝apollo API
 apollo_spot_api_key = ""
 apollo_spot_api_secret = ""
 apollo_future_api_key = ""
 apollo_future_api_secret = ""
 
-[testing]
-loglevel = "DEBUG"
+#chain_1_mainnet
+dex_chain_id = 1  #https://chainlist.org
+dex_rpc = "https://rpc.ankr.com/eth" #https://chainlist.org
+dex_block_explorer_url = "https://api.etherscan.io/api?"
+dex_block_explorer_api =  ""
+dex_protocol_type = "1inch" 
+dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D" 
+dex_base_api = "https://api.1inch.exchange/v5.0/1"
 
-[chain_56]
-loglevel = "INFO"
-block_explorer_url = "https://api.bscscan.com/api?"
-rpc = "https://rpc.ankr.com/bsc"
-dex_router_contract_addr = "0xca143ce32fe78f1f7019d7d551a6402fc5350c73"
-#pancakeswap V2 router as default
+[chain_5_goerli]
+loglevel = "DEBUG"
+dex_chain_id = 5
+dex_rpc = "https://rpc.ankr.com/eth_goerli"
+dex_block_explorer_url = "https://api-Goerli.etherscan.io/api?"
+dex_block_explorer_api =  ""
+dex_protocol_type = "uniswap_v2"
+dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+dex_base_api = "https://goerli.api.0x.org/"
+
+[chain_11155111_sepolia]
+loglevel = "DEBUG"
+dex_chain_id = 11155111
+dex_rpc = "https://rpc.ankr.com/eth_sepolia"
+dex_block_explorer_url = "https://api-Sepolia.etherscan.io/api?"
+dex_block_explorer_api =  ""
+dex_protocol_type = "0x"
+dex_router_contract_addr = "0x1f98431c8ad98523631ae4a59f267346ea31f984"
+dex_base_api = "https://sepolia.api.0x.org/"
+
+[chain_56_mainnet]
+dex_chain_id = 56
+dex_rpc = "https://rpc.ankr.com/bsc"
+dex_block_explorer_url = "https://api.bscscan.com/api?"
+dex_block_explorer_api =  ""
+dex_protocol_type = "uniswap_v2"
+dex_router_contract_addr = "0xca143ce32fe78f1f7019d7d551a6402fc5350c73" #pancakeswap V2
+dex_base_api = "https://api.1inch.exchange/v5.0/56"
+
+[chain_97_testnet]
+loglevel = "DEBUG"
+dex_rpc = "https://rpc.ankr.com/bsc_testnet_chapel"
+dex_chain_id = 97
+dex_block_explorer_url = "https://api-testnet.bscscan.com/api?"
+dex_block_explorer_api =  ""
+dex_protocol_type = ""
+dex_router_contract_addr = ""
