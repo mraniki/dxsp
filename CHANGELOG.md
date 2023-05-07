@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.1 (2023-05-07)
+### Fix
+* :zap:Refactor logging in DexSwap class and set chain_id from settings. ([`394ebf8`](https://github.com/mraniki/dxsp/commit/394ebf8a2ddc23af6bc7f764e8f6b3d7eeca8be8))
+
+### Other
+* Merge pull request #155 from mraniki/dev ([`c9adfe8`](https://github.com/mraniki/dxsp/commit/c9adfe8583e23ab29181578085e1eed76a6141ab))
+
 ## v2.0.0 (2023-05-07)
 ### Fix
 * 🐛 pylint ([`48d9ec0`](https://github.com/mraniki/dxsp/commit/48d9ec0c61f8b880b1a157707e3659687d97d041))
