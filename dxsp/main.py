@@ -22,7 +22,7 @@ class DexSwap:
         self.logger = logging.getLogger(name="DexSwap")
         self.logger.info("DexSwap version: %s", __version__)
 
-        self.w3 = w3 or Web3(Web3.HTTPProvider(settings.rpc))
+        self.w3 = w3 or Web3(Web3.HTTPProvider(settings.dex_rpc))
         try:
             if self.w3.net.listening:
                 self.logger.info("connected to %s", self.w3)
@@ -30,28 +30,28 @@ class DexSwap:
             self.logger.error("connectivity failed %s", e)
             return
 
-        self.protocol_type = settings.protocol_type
+        self.protocol_type = settings.dex_protocol_type
         try:
             self.router_abi = await self.get_abi(
-                settings.router_contract_addr)
+                settings.dex_router_contract_addr)
             self.router = self.w3.eth.contract(
                 self.w3.to_checksum_address(
-                    settings.router_contract_addr),
+                    settings.dex_router_contract_addr),
                 self.router_abi)
         except Exception as e:
             self.logger.error("router setup: %s", e)
             return
 
         # USER SECRET
-        self.wallet_address = settings.wallet_address
-        self.private_key = settings.private_key
+        self.wallet_address = settings.dex_wallet_address
+        self.private_key = settings.dex_private_key
 
         # COINGECKO
         try:
             self.cg = CoinGeckoAPI()
             assetplatform = self.cg.get_asset_platforms()
             output_dict = [x for x in assetplatform if x['chain_identifier']
-                           == int(settings.chain_id)]
+                           == int(settings.dex_chain_id)]
             self.cg_platform = output_dict[0]['id']
             self.logger.debug("cg_platform %s", self.cg_platform)
         except Exception as e:
@@ -368,15 +368,15 @@ class DexSwap:
 
         try:
             token_contract = await self.get_contract_address(
-                settings.TOKEN_PERSONAL_LIST,
+                settings.token_personal_list,
                 token)
             if token_contract is None:
                 token_contract = await self.get_contract_address(
-                    settings.TOKEN_TESTNET_LIST,
+                    settings.token_testnet_list,
                     token)
                 if token_contract is None:
                     token_contract = await self.get_contract_address(
-                        settings.TOKEN_MAINNET_LIST,
+                        settings.token_mainnet_list,
                         token)
                     if token_contract is None:
                         token_contract = await self.search_cg_contract(
@@ -434,7 +434,7 @@ class DexSwap:
             token_search = token_list['tokens']
             for keyval in token_search:
                 if (keyval['symbol'] == symbol and
-                   keyval['chainId'] == settings.chain_id):
+                   keyval['chainId'] == settings.dex_chain_id):
                     return keyval['address']
         except Exception as e:
             self.logger.debug("get_contract_address %s", e)
@@ -487,7 +487,7 @@ class DexSwap:
             approval_check = asset_out_contract.functions.allowance(
                              self.w3.to_checksum_address(self.wallet_address),
                              self.w3.to_checksum_address(
-                                settings.router_contract_addr)
+                                settings.dex_router_contract_addr)
                              ).call()
             if (approval_check == 0):
                 approved_amount = (self.w3.to_wei(2**64-1, 'ether'))
@@ -534,7 +534,7 @@ class DexSwap:
                 order['gasPrice'] = await self.get_gasPrice(order)
             signed = self.w3.eth.account.sign_transaction(
                 order,
-                settings.private_key)
+                settings.dex_private_key)
             raw_order = signed.rawTransaction
             return self.w3.eth.send_raw_transaction(raw_order)
         except (ValueError, TypeError, KeyError) as e:
@@ -566,20 +566,20 @@ class DexSwap:
     async def get_abi(self, addr):
         # Log a debug message to the logger
         self.logger.debug("get_abi %s", addr)
-        if settings.block_explorer_api:
+        if settings.dex_block_explorer_api:
             try:
                 # Create a dictionary of parameters
                 params = {
                     "module": "contract",
                     "action": "getabi",
                     "address": addr,
-                    "apikey": settings.block_explorer_api
+                    "apikey": settings.dex_block_explorer_api
                     }
                 # Create a dictionary of headers
                 headers = {"User-Agent": "Mozilla/5.0"}
                 # Make a GET request to the block explorer URL
                 resp = await self._get(
-                                       url=settings.block_explorer_url,
+                                       url=settings.dex_block_explorer_url,
                                        params=params,
                                        headers=headers
                                        )
@@ -596,7 +596,7 @@ class DexSwap:
                 return
         else:
             # If no block_explorer_api is set, log a warning
-            self.logger.warning("No block_explorer_api. Option B needed TBD")
+            self.logger.warning("No block_explorer_api.")
             return
 
 # USER BALANCE AND POSITION RELATED

@@ -12,23 +12,23 @@ trading_risk_amount = 10 # for 10% of the position
 trading_slippage = 2 #for 2 %
 
 #chain settings
-chain_id = 1  #https://chainlist.org
-rpc = "https://rpc.ankr.com/eth" #https://chainlist.org
-block_explorer_url = "https://api.etherscan.io/api?"
-block_explorer_api =  ""
+dex_chain_id = 1  #https://chainlist.org
+dex_rpc = "https://rpc.ankr.com/eth" #https://chainlist.org
+dex_block_explorer_url = "https://api.etherscan.io/api?"
+dex_block_explorer_api =  ""
 
 #user settings
-wallet_address = "0x2758f7Df3160aFE68F5b7808eA67a14d4aCFE436" #this is an example
-private_key = "fffffffffffffffffffffffffffffffebaaedce6affff03bbfd25e8cd036ffff" #this is an example
+dex_wallet_address = "0x2758f7Df3160aFE68F5b7808eA67a14d4aCFE436" #this is an example
+dex_private_key = "fffffffffffffffffffffffffffffffebaaedce6affff03bbfd25e8cd036ffff" #this is an example
 
 #dex protocol
-protocol_type = "1inch" 
+dex_protocol_type = "1inch" 
 #other options: 
     # uniswap_v2
     # uniswap_v3
     # 1inch_limit
 
-router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D" 
+dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D" 
 #uniswap V2 router as default
 #other options: 
     #"0x1F98431c8aD98523631AE4a59f267346ea31F984" #uniswap v3 factory
@@ -53,5 +53,5 @@ loglevel = "DEBUG"
 loglevel = "INFO"
 block_explorer_url = "https://api.bscscan.com/api?"
 rpc = "https://rpc.ankr.com/bsc"
-router_contract_addr = "0xca143ce32fe78f1f7019d7d551a6402fc5350c73"
+dex_router_contract_addr = "0xca143ce32fe78f1f7019d7d551a6402fc5350c73"
 #pancakeswap V2 router as default
