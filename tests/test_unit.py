@@ -53,4 +53,3 @@ async def test_get_token_contract():
     if contract:
         assert contract is not None
         assert type(contract) is exchange.w3.eth.contract
-   
