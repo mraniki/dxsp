@@ -16,7 +16,7 @@ from web3 import Web3
 class DexSwap:
     """Do a swap."""
 
-    async def __init__(self, w3: Web3 | None = None,):
+    def __init__(self, w3: Web3 | None = None,):
         """build a dex object """
         self.logger = logging.getLogger(name="DexSwap")
         self.logger.info("DexSwap version: %s", __version__)
@@ -30,16 +30,6 @@ class DexSwap:
             return
 
         self.protocol_type = settings.dex_protocol_type
-        try:
-            self.router_abi = await self.get_abi(
-                settings.dex_router_contract_addr)
-            self.router = self.w3.eth.contract(
-                self.w3.to_checksum_address(
-                    settings.dex_router_contract_addr),
-                self.router_abi)
-        except Exception as e:
-            self.logger.error("router setup: %s", e)
-            return
 
         # USER SECRET
         self.wallet_address = settings.dex_wallet_address
@@ -72,6 +62,18 @@ class DexSwap:
                             timeout=10
                         )
         return response.json()
+
+    async def router(self):
+        try:
+            router_abi = await self.get_abi(settings.dex_router_contract_addr)
+            router = self.w3.eth.contract(
+                self.w3.to_checksum_address(
+                    settings.dex_router_contract_addr),
+                router_abi)
+            return router
+        except Exception as e:
+            self.logger.error("router setup: %s", e)
+            return
 
     async def get_quote(
                 self,
@@ -134,7 +136,7 @@ class DexSwap:
     ):
         order_path_dex = [asset_out_address, asset_in_address]
         order_min_amount = int(
-            self.router.functions.getAmountsOut(
+            self.router().functions.getAmountsOut(
                 amount,
                 order_path_dex)
             .call()[1])
@@ -302,7 +304,7 @@ class DexSwap:
         order_min_amount = self.uniswap_v2_quote(
             asset_in_address,
             asset_out_address)
-        swap_order = self.router.functions.swapExactTokensForTokens(
+        swap_order = self.router().functions.swapExactTokensForTokens(
                         amount,
                         order_min_amount,
                         order_path_dex,

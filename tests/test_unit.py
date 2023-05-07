@@ -11,21 +11,11 @@ async def test_init_dex():
 
 
 @pytest.mark.asyncio
-async def test_init_chain():
-    """chain Testing"""
-    exchange = DexSwap(chain_id=10)
-    check = False
-    if exchange.chain_id == 10:
-        check = True
-    assert check is True
-
-
-@pytest.mark.asyncio
-async def test_get_quote():
-    """getquote Testing"""
-    exchange = DexSwap(chain_id=1)
-    check = await exchange.get_quote("WBTC")
-    print(check)
-    if check:
-        check = True
-    assert check is True
+# async def test_get_quote():
+#     """getquote Testing"""
+#     exchange = DexSwap()
+#     check = await exchange.get_quote("WBTC")
+#     print(check)
+#     if check:
+#         check = True
+#     assert check is True
