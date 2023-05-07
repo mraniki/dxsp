@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v1.9.14 (2023-05-07)
+### Fix
+* ⚡️ getquote unit test ([`4b3426c`](https://github.com/mraniki/dxsp/commit/4b3426c5d6f3177aa2acca9279a9b63deadcc4dd))
+* 🐛 bug in unit test ([`2883b26`](https://github.com/mraniki/dxsp/commit/2883b26193b4c5927675fce349f3cdd6bb9e71d9))
+
+### Other
+* Merge pull request #153 from mraniki/dev ([`d101bec`](https://github.com/mraniki/dxsp/commit/d101becf0665dda6f7bc0bebd023a3a7e9563a3e))
+
 ## v1.9.13 (2023-05-06)
 ### Fix
 * ⚡️ added balance for trading quote ccy and formatted the get balance returned ([`6989b19`](https://github.com/mraniki/dxsp/commit/6989b1966e5d9ea462a31d7a60547429652dea59))
