@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.5 (2023-05-07)
+### Fix
+* :zap: Add unit test for DexSwap logger ([`eb10a8a`](https://github.com/mraniki/dxsp/commit/eb10a8a6ff79e7b1d78dbc460deb073d737c8d10))
+* :speech_balloon: Update logger messages in DexSwap class methods. ([`7061721`](https://github.com/mraniki/dxsp/commit/7061721f77cadef7d53a555eef34b0c3b7b13b4a))
+* 🐛 router_instance ([`6bf6936`](https://github.com/mraniki/dxsp/commit/6bf69366550bc0a5af3e6a5f242b467d81015193))
+
+### Other
+* Merge pull request #159 from mraniki/dev ([`0c1aacc`](https://github.com/mraniki/dxsp/commit/0c1aacc5390027177be780526ae189deff3b0756))
+
 ## v2.0.4 (2023-05-07)
 ### Fix
 * :zap: Update pyproject.toml ([`f36d453`](https://github.com/mraniki/dxsp/commit/f36d453e3f01f6d2268f97fa915dbc32d1779d8c))
