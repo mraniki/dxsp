@@ -622,7 +622,7 @@ class DexSwap:
          ):
 
         try:
-            token_contract = self.get_token_contract(token)
+            token_contract = await self.get_token_contract(token)
             token_balance = 0
             token_balance = token_contract.functions.balanceOf(
                 self.wallet_address).call()
