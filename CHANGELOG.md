@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.15 (2023-05-08)
+### Fix
+* :bug: header update ([`310a7ee`](https://github.com/mraniki/dxsp/commit/310a7ee06a24ccc1b44dea40ff3c2acb171b4208))
+
+### Other
+* Merge pull request #170 from mraniki/dev ([`e4143c0`](https://github.com/mraniki/dxsp/commit/e4143c0b33a1f967ffd3fcc8ffcf6ee0d821addc))
+* Merge pull request #169 from mraniki/dev ([`652e975`](https://github.com/mraniki/dxsp/commit/652e9759bfe47fce409e774af662490ac2da2ed8))
+* 🔍 header troubleshoot ([`65e62dd`](https://github.com/mraniki/dxsp/commit/65e62dd905b4a30bbd36ef047504877524860805))
+
 ## v2.0.14 (2023-05-08)
 ### Fix
 * :bug: Fix request import in DexSwap class. ([`65ebb5a`](https://github.com/mraniki/dxsp/commit/65ebb5a4f60bb3c88cae7538d30461900d00ccb8))
