@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.7 (2023-05-08)
+### Fix
+* 🥅 added error handling in quote ([`31cceba`](https://github.com/mraniki/dxsp/commit/31cceba9f6036af45e5436ba9d651bf7132e02d3))
+* ⚡️ gitignore update ([`06c147d`](https://github.com/mraniki/dxsp/commit/06c147d6988165aee8cb5654ad15fcde1c9f1869))
+* ⚡️ code readibility ([`74ca49b`](https://github.com/mraniki/dxsp/commit/74ca49b3c5dff16a410a2f22bcd28c793a6da194))
+
+### Other
+* Merge pull request #161 from mraniki/dev ([`0eef0e1`](https://github.com/mraniki/dxsp/commit/0eef0e1548e1d0b874fb8282d572dadda3dc93ad))
+
 ## v2.0.6 (2023-05-08)
 ### Fix
 * 🐛 remove broken unit test case for now ([`02ba0aa`](https://github.com/mraniki/dxsp/commit/02ba0aac3515593cbeec4335ad9be915f7181234))
