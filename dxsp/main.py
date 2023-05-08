@@ -118,7 +118,7 @@ class DexSwap:
                 + "&amount="
                 + str(asset_out_amount))
             self.logger.info("quote_url %s", quote_url)
-            quote_response = request.get(quote_url)
+            quote_response = requests.get(quote_url)
             self.logger.info("quote_response %s", quote_response)
             quote_payload = quote_response.json()
             quote_amount = quote_payload['toTokenAmount']
