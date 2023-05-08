@@ -119,7 +119,7 @@ class DexSwap:
                 + str(asset_out_address)
                 + "&amount="
                 + str(asset_out_amount))
-            quote_response = self._get(quote_url)
+            quote_response = await self._get(quote_url)
             quote_amount = quote_response['toTokenAmount']
             # quote_decimals = quote_response['fromToken']['decimals']
             quote = self.w3.from_wei(int(quote_amount), 'ether')
