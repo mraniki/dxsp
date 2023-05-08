@@ -58,6 +58,7 @@ class DexSwap:
             params=params,
             headers=headers,
             timeout=10)
+        self.logger.info("response: %s", response.json)
         return response.json()
 
     async def router(self):
