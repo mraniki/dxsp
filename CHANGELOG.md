@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.6 (2023-05-08)
+### Fix
+* 🐛 remove broken unit test case for now ([`02ba0aa`](https://github.com/mraniki/dxsp/commit/02ba0aac3515593cbeec4335ad9be915f7181234))
+* 🥅 Add tests for DexSwap class methods ([`432fa17`](https://github.com/mraniki/dxsp/commit/432fa17fc3587a6a5eb2939c2d29e6c7bb9183aa))
+
+### Other
+* Merge pull request #160 from mraniki/dev ([`4e8ae4c`](https://github.com/mraniki/dxsp/commit/4e8ae4c5be623ef5463036e7eccc3c3565c8914e))
+
 ## v2.0.5 (2023-05-07)
 ### Fix
 * :zap: Add unit test for DexSwap logger ([`eb10a8a`](https://github.com/mraniki/dxsp/commit/eb10a8a6ff79e7b1d78dbc460deb073d737c8d10))
