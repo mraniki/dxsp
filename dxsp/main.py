@@ -117,13 +117,10 @@ class DexSwap:
                 + "&amount="
                 + str(asset_out_amount))
             quote_response = await self._get(quote_url)
-            self.logger.debug("quote %s", quote_response)
             quote_amount = quote_response['toTokenAmount']
-            quote_decimals = quote_response['fromToken']['decimals']
-            quote = (
-                self.w3.from_wei(int(quote_amount), 'wei') /
-                (10 ** quote_decimals))
-            self.logger.debug("quote %s", quote)
+            # quote_decimals = quote_response['fromToken']['decimals']
+            quote = self.w3.from_wei(int(quote_amount), 'ether') 
+            # /(10 ** quote_decimals))
             return round(quote, 2)
         except Exception as e:
             self.logger.error("oneinch_quote %s", e)
@@ -169,11 +166,12 @@ class DexSwap:
             asset_in_symbol = (
                 instrument if action == "BUY"
                 else settings.trading_quote_ccy)
-            asset_out_contract = await self.get_token_contract(
-                asset_out_symbol)
             try:
+                asset_out_contract = await self.get_token_contract(
+                    asset_out_symbol)
                 asset_out_decimals = (
-                    asset_out_contract.functions.decimals().call())
+                    asset_out_contract.functions.decimals().call()
+                    or 18)
             except Exception as e:
                 self.logger.error("execute_order decimals: %s", e)
                 asset_out_decimals = 18
@@ -215,7 +213,7 @@ class DexSwap:
             if asset_out_contract is None:
                 raise ValueError("No contract identified")
             asset_out_balance = await self.get_token_balance(asset_out_symbol)
-            if asset_out_balance == 0:
+            if asset_out_balance == (0 or None):
                 self.logger.warning("No Money")
                 raise ValueError("No Money")
                 return
@@ -358,16 +356,19 @@ class DexSwap:
             return
 
     async def get_block_explorer_status(self, txHash):
-        if settings.block_explorer_api:
-            self.logger.debug("get_block_explorer_status %s", txHash)
-            checkTransactionSuccessURL = (
-                settings.block_explorer_url
-                + "?module=transaction&action=gettxreceiptstatus&txhash="
-                + str(txHash)
-                + "&apikey="
-                + str(settings.block_explorer_api))
-            checkTransactionRequest = self._get(checkTransactionSuccessURL)
-            return checkTransactionRequest['status']
+        try:
+            if settings.block_explorer_api:
+                checkTransactionSuccessURL = (
+                    settings.block_explorer_url
+                    + "?module=transaction&action=gettxreceiptstatus&txhash="
+                    + str(txHash)
+                    + "&apikey="
+                    + str(settings.block_explorer_api))
+                checkTransactionRequest = self._get(checkTransactionSuccessURL)
+                return checkTransactionRequest['status']
+        except Exception as e:
+            self.logger.error("get_block_explorer_status %s", e)
+            return
 
 # ###CONTRACT SEARCH
     async def search_contract(
@@ -556,9 +557,9 @@ class DexSwap:
             raise RuntimeError("Failed to sign transaction")
 
     async def get_gas(
-                    self,
-                    tx
-                ):
+        self,
+        tx
+         ):
         # Log the transaction
         self.logger.debug("get_gas %s", tx)
         # Estimate the gas cost of the transaction
@@ -586,14 +587,11 @@ class DexSwap:
                     "address": addr,
                     "apikey": settings.dex_block_explorer_api
                     }
-                # Create a dictionary of headers
-                headers = {"User-Agent": "Mozilla/5.0"}
                 # Make a GET request to the block explorer URL
                 resp = await self._get(
-                                       url=settings.dex_block_explorer_url,
-                                       params=params,
-                                       headers=headers
-                                       )
+                    url=settings.dex_block_explorer_url,
+                    params=params,
+                     )
                 # If the response status is 1, log the ABI
                 if resp['status'] == "1":
                     self.logger.debug("ABI found %s", resp)
@@ -601,10 +599,11 @@ class DexSwap:
                     return abi
                 # If no ABI is identified, log a warning
                 self.logger.warning("No ABI identified")
+                return None
             except Exception as e:
                 # Log an error
-                self.logger.error("error get_abi %s", e)
-                return
+                self.logger.error("get_abi %s", e)
+                return None
         else:
             # If no block_explorer_api is set, log a warning
             self.logger.warning("No block_explorer_api.")
@@ -613,30 +612,19 @@ class DexSwap:
 # USER BALANCE AND POSITION RELATED
 
     async def get_token_balance(
-                                self,
-                                token
-                            ):
+        self,
+        token
+         ):
         self.logger.debug("get_token_balance %s", token)
 
         try:
-            token_address = await self.search_contract(token)
-            if token_address is None:
-                raise ValueError(f"Token address not found for {token}")
-            token_abi = await self.get_abi(token_address)
-            if token_abi is None:
-                raise ValueError(f"ABI not found for {token_address}")
-            token_contract = self.w3.eth.contract(
-                address=token_address,
-                abi=token_abi)
+            token_contract = self.get_token_contract(token)
             token_balance = 0
-            try:
-                token_balance = token_contract.functions.balanceOf(
-                    self.wallet_address).call()
-            except ValueError as e:
-                self.logger.warning("Invalid address: %s", e)
+            token_balance = token_contract.functions.balanceOf(
+                self.wallet_address).call()
             return 0 if token_balance <= 0 else token_balance
         except Exception as e:
-            self.logger.error("get_token_balance %s: %s", token, e)
+            self.logger.error("get_token_balance: %s", e)
             return 0
 
     async def get_account_balance(
@@ -660,11 +648,11 @@ class DexSwap:
 
         except Exception as e:
             self.logger.error("get_account_balance error: %s", e)
-            return "balance error"
+            return 0
 
     async def get_trading_quote_ccy_balance(
-                                self
-                            ):
+        self
+         ):
 
         try:
             trading_quote_ccy_balance = await self.get_token_balance(
