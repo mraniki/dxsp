@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.11 (2023-05-08)
+### Fix
+* :mag: troubleshoot quote 1inch ([`b438f0e`](https://github.com/mraniki/dxsp/commit/b438f0ed883934edc0511ad5bbe4a321b918c77d))
+
+### Other
+* Merge pull request #165 from mraniki/dev ([`5f2cc70`](https://github.com/mraniki/dxsp/commit/5f2cc7012e891b7cfc36b0f61a6644fb9547796e))
+
 ## v2.0.10 (2023-05-08)
 ### Fix
 * :ambulance: Fix async bug in get_token_contract method ([`2ebf915`](https://github.com/mraniki/dxsp/commit/2ebf915d9f104b60f2be23b82b1a0966597fe87f))
