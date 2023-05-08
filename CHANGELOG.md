@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.16 (2023-05-08)
+### Fix
+* :bug: header update ([`d3611b9`](https://github.com/mraniki/dxsp/commit/d3611b91952037f3a86700b8c7a999c51009cc41))
+
+### Other
+* Merge pull request #171 from mraniki/dev ([`8fe6a12`](https://github.com/mraniki/dxsp/commit/8fe6a12896b250cc101cb663d600ad414fff4a9e))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`cf68c87`](https://github.com/mraniki/dxsp/commit/cf68c8736fc0b3e767c19cd7733cff51481d53ad))
+
 ## v2.0.15 (2023-05-08)
 ### Fix
 * :bug: header update ([`310a7ee`](https://github.com/mraniki/dxsp/commit/310a7ee06a24ccc1b44dea40ff3c2acb171b4208))
