@@ -11,7 +11,7 @@ import uvicorn
 from dxsp import DexSwap
 
 # DEBUG LEVEL
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 
 async def main():
@@ -29,7 +29,7 @@ async def main():
 
         # Contract Address
         address = await dex.search_contract(symbol)
-        # bitcoinaddress  0x68f180fcCe6836688e9084f035309E29Bf0A2095
+        # token_contract found 0xdac17f958d2ee523a2206206994597c13d831ec7
 
         # getABI
         addressABI = await dex.get_abi(address)

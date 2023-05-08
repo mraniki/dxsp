@@ -30,7 +30,7 @@ class DexSwap:
 
         self.protocol_type = settings.dex_protocol_type
         self.chain_id = settings.dex_chain_id
-        # USER SECRET
+        # USER
         self.wallet_address = settings.dex_wallet_address
         self.private_key = settings.dex_private_key
 
@@ -39,7 +39,7 @@ class DexSwap:
             self.cg = CoinGeckoAPI()
             assetplatform = self.cg.get_asset_platforms()
             output_dict = [x for x in assetplatform if x['chain_identifier']
-                           == int(settings.dex_chain_id)]
+                           == int(self.chain_id)]
             self.cg_platform = output_dict[0]['id']
             self.logger.debug("cg_platform %s", self.cg_platform)
         except Exception as e:
@@ -47,19 +47,17 @@ class DexSwap:
             return
 
     async def _get(
-                self,
-                url,
-                params=None,
-                headers=None
+        self,
+        url,
+        params=None,
+        headers=None
             ):
         headers = {"User-Agent": "Mozilla/5.0"}
-        self.logger.debug("_get url %s", url)
         response = requests.get(
-                            url,
-                            params=params,
-                            headers=headers,
-                            timeout=10
-                        )
+            url,
+            params=params,
+            headers=headers,
+            timeout=10)
         return response.json()
 
     async def router(self):
@@ -108,24 +106,28 @@ class DexSwap:
         asset_out_address,
         amount=1
     ):
-        asset_out_amount = self.w3.to_wei(amount, 'ether')
-        quote_url = (
-            settings.dex_base_api
-            + "/quote?fromTokenAddress="
-            + str(asset_in_address)
-            + "&toTokenAddress="
-            + str(asset_out_address)
-            + "&amount="
-            + str(asset_out_amount))
-        quote_response = await self._get(quote_url)
-        self.logger.debug("quote %s", quote_response)
-        quote_amount = quote_response['toTokenAmount']
-        quote_decimals = quote_response['fromToken']['decimals']
-        quote = (
-            self.w3.from_wei(int(quote_amount), 'wei') /
-            (10 ** quote_decimals))
-        self.logger.debug("quote %s", quote)
-        return round(quote, 2)
+        try:
+            asset_out_amount = self.w3.to_wei(amount, 'ether')
+            quote_url = (
+                settings.dex_base_api
+                + "/quote?fromTokenAddress="
+                + str(asset_in_address)
+                + "&toTokenAddress="
+                + str(asset_out_address)
+                + "&amount="
+                + str(asset_out_amount))
+            quote_response = await self._get(quote_url)
+            self.logger.debug("quote %s", quote_response)
+            quote_amount = quote_response['toTokenAmount']
+            quote_decimals = quote_response['fromToken']['decimals']
+            quote = (
+                self.w3.from_wei(int(quote_amount), 'wei') /
+                (10 ** quote_decimals))
+            self.logger.debug("quote %s", quote)
+            return round(quote, 2)
+        except Exception as e:
+            self.logger.error("oneinch_quote %s", e)
+            return
 
     async def uniswap_v2_quote(
         self,
@@ -133,14 +135,18 @@ class DexSwap:
         asset_out_address,
         amount=1
     ):
-        order_path_dex = [asset_out_address, asset_in_address]
-        router_instance = await self.router()
-        order_min_amount = int(
-            router_instance.functions.getAmountsOut(
-                amount,
-                order_path_dex)
-            .call()[1])
-        return order_min_amount
+        try:
+            order_path_dex = [asset_out_address, asset_in_address]
+            router_instance = await self.router()
+            order_min_amount = int(
+                router_instance.functions.getAmountsOut(
+                    amount,
+                    order_path_dex)
+                .call()[1])
+            return order_min_amount
+        except Exception as e:
+            self.logger.error("uniswap_v2_quote %s", e)
+            return
 
     async def uniswap_v3_quote(
         self,
@@ -157,10 +163,12 @@ class DexSwap:
         quantity = order_params.get('quantity', 1)
 
         try:
-            asset_out_symbol = (settings.trading_quote_ccy if
-                                action == "BUY" else instrument)
-            asset_in_symbol = (instrument if action == "BUY"
-                               else settings.trading_quote_ccy)
+            asset_out_symbol = (
+                settings.trading_quote_ccy if
+                action == "BUY" else instrument)
+            asset_in_symbol = (
+                instrument if action == "BUY"
+                else settings.trading_quote_ccy)
             asset_out_contract = await self.get_token_contract(
                 asset_out_symbol)
             try:
@@ -171,10 +179,11 @@ class DexSwap:
                 asset_out_decimals = 18
             asset_out_balance = await self.get_token_balance(asset_out_symbol)
             #  buy or sell %p percentage DEFAULT OPTION is 10%
-            asset_out_amount = ((asset_out_balance) /
-                                (settings.trading_risk_amount
-                                ** asset_out_decimals)
-                                )*(float(quantity)/100)
+            asset_out_amount = (
+                (asset_out_balance) /
+                (settings.trading_risk_amount
+                 ** asset_out_decimals)
+                )*(float(quantity)/100)
 
             order = await self.get_swap(
                     asset_out_symbol,
@@ -436,7 +445,7 @@ class DexSwap:
             token_search = token_list['tokens']
             for keyval in token_search:
                 if (keyval['symbol'] == symbol and
-                   keyval['chainId'] == settings.dex_chain_id):
+                   keyval['chainId'] == self.chain_id):
                     return keyval['address']
         except Exception as e:
             self.logger.debug("get_contract_address %s", e)
