@@ -119,7 +119,7 @@ class DexSwap:
             quote_response = await self._get(quote_url)
             quote_amount = quote_response['toTokenAmount']
             # quote_decimals = quote_response['fromToken']['decimals']
-            quote = self.w3.from_wei(int(quote_amount), 'ether') 
+            quote = self.w3.from_wei(int(quote_amount), 'ether')
             # /(10 ** quote_decimals))
             return round(quote, 2)
         except Exception as e:
@@ -176,7 +176,8 @@ class DexSwap:
                 self.logger.error("execute_order decimals: %s", e)
                 asset_out_decimals = 18
             asset_out_balance = await self.get_token_balance(asset_out_symbol)
-            #  buy or sell %p percentage DEFAULT OPTION is 10%
+
+            #  Amount to risk percentage - DEFAULT OPTION is 10%
             asset_out_amount = (
                 (asset_out_balance) /
                 (settings.trading_risk_amount
@@ -236,7 +237,8 @@ class DexSwap:
             self.logger.debug("order_amount %s", order_amount)
 
             # VERIFY IF ASSET OUT IS APPROVED otherwise get it approved
-            await self.get_approve(asset_out_address)
+            if (await self.get_approve(asset_out_address)) is None:
+                return
 
             # 1INCH
             if self.protocol_type in ["1inch"]:
@@ -402,15 +404,13 @@ class DexSwap:
             return
 
     async def search_cg(self, token):
-        """search coingecko"""
-        self.logger.debug("search_cg")
+        """🦎 search coingecko"""
         try:
             search_results = self.cg.search(query=token)
             search_dict = search_results['coins']
             filtered_dict = [x for x in search_dict if
                              x['symbol'] == token.upper()]
             api_dict = [sub['api_symbol'] for sub in filtered_dict]
-            self.logger.debug("api_dict %s", api_dict)
             for i in api_dict:
                 coin_dict = self.cg.get_coin_by_id(i)
                 try:
@@ -423,8 +423,7 @@ class DexSwap:
             return
 
     async def search_cg_contract(self, token):
-        """search coingecko contract"""
-        self.logger.debug("🦎search_cg_contract %s", token)
+        """🦎 search coingecko contract"""
         try:
             coin_info = await self.search_cg(token)
             if coin_info is not None:
@@ -438,9 +437,7 @@ class DexSwap:
                             token_list_url,
                             symbol
                         ):
-        """Given a token symbol and json format url address tokenlist,
-        get token address"""
-        self.logger.debug("get_contract_address %s %s", token_list_url, symbol)
+        """Given a token symbol and json tokenlist, get token address"""
         try:
             token_list = await self._get(token_list_url)
             token_search = token_list['tokens']
@@ -468,15 +465,19 @@ class DexSwap:
             self.logger.error("get_token_contract %s", e)
             return
 
-# ###UTILS
-    async def get_approve(
-                        self,
-                        asset_out_address: str,
-                        amount=None
-                    ):
+# W3 UTILS
+    async def get_approve(self, asset_out_address):
+        try:
+            if self.protocol_type in ["1inch", "1inch_limit"]:
+                await self.get_approve_1inch(asset_out_address)
+            elif self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
+                await self.get_approve_uniswap(asset_out_address)
+        except Exception as e:
+            self.logger.error("get_approve %s", e)
+            return None
 
-        self.logger.debug("get_approve %s", asset_out_address)
-        if self.protocol_type in ["1inch", "1inch_limit"]:
+    async def get_approve_1inch(self, asset_out_address):
+        try:
             approval_check_URL = (
                 settings.dex_base_api
                 + "/approve/allowance?tokenAddress="
@@ -491,22 +492,25 @@ class DexSwap:
                     + "/approve/transaction?tokenAddress="
                     + str(asset_out_address))
                 approval_response = await self._get(approval_URL)
-        elif self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
+                return approval_response
+        except Exception as e:
+            self.logger.error("get_approve_uniswap %s", e)
+            return None
+
+    async def get_approve_uniswap(self, asset_out_address):
+
+        try:
             asset_out_abi = await self.get_abi(asset_out_address)
             asset_out_contract = self.w3.eth.contract(
-                                 address=asset_out_address,
-                                 abi=asset_out_abi)
+                address=asset_out_address,
+                abi=asset_out_abi)
             approval_check = asset_out_contract.functions.allowance(
-                             self.w3.to_checksum_address(self.wallet_address),
-                             self.w3.to_checksum_address(
+                            self.w3.to_checksum_address(self.wallet_address),
+                            self.w3.to_checksum_address(
                                 settings.dex_router_contract_addr)
-                             ).call()
+                            ).call()
             if (approval_check == 0):
                 approved_amount = (self.w3.to_wei(2**64-1, 'ether'))
-                asset_out_abi = await self.get_abi(asset_out_address)
-                asset_out_contract = self.w3.eth.contract(
-                                     address=asset_out_address,
-                                     abi=asset_out_abi)
                 approval_TX = asset_out_contract.functions.approve(
                                 self.w3.to_checksum_address(
                                     settings.router_contract_addr),
@@ -518,12 +522,14 @@ class DexSwap:
                         timeout=120,
                         poll_latency=0.1))
                 return approval_txHash_complete
+        except Exception as e:
+            self.logger.error("get_approve_uniswap %s", e)
+            return None
 
     async def get_sign(
-                    self,
-                    order
-                ):
-        self.logger.debug("get_sign %s", order)
+        self,
+        order
+         ):
 
         try:
             if not isinstance(order, dict):
@@ -571,7 +577,6 @@ class DexSwap:
         '''
         Get the gas price for a transaction
         '''
-        self.logger.debug("get_gasPrice %s", tx)
         gasprice = self.w3.eth.generate_gas_price()
         return self.w3.to_wei(gasprice, 'gwei')
 
@@ -615,7 +620,6 @@ class DexSwap:
         self,
         token
          ):
-        self.logger.debug("get_token_balance %s", token)
 
         try:
             token_contract = self.get_token_contract(token)
@@ -628,8 +632,8 @@ class DexSwap:
             return 0
 
     async def get_account_balance(
-                            self
-                        ):
+        self
+         ):
 
         try:
             balance = self.w3.eth.get_balance(
@@ -641,13 +645,13 @@ class DexSwap:
                     await self.get_trading_quote_ccy_balance())
                 if trading_quote_ccy_balance:
                     balance += "💵" + trading_quote_ccy_balance
-            except Exception as e:
-                self.logger.error("trading_quote_ccy_balance error: %s", e)
+            except Exception:
+                pass
 
             return round(balance, 5)
 
         except Exception as e:
-            self.logger.error("get_account_balance error: %s", e)
+            self.logger.error("get_account_balance: %s", e)
             return 0
 
     async def get_trading_quote_ccy_balance(
@@ -661,14 +665,16 @@ class DexSwap:
                 return trading_quote_ccy_balance
             return 0
         except Exception as e:
-            self.logger.error("get_trading_quote_ccy_balance error: %s", e)
+            self.logger.error("quote_ccy_balance: %s", e)
             return 0
 
-    async def get_account_position(self):
+    async def get_account_position(
+        self
+         ):
 
         try:
             self.logger.debug("get_account_position")
             return
         except Exception as e:
-            self.logger.error("get_account_position error: %s", e)
+            self.logger.error("get_account_position: %s", e)
             return 0
