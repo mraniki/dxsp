@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.12 (2023-05-08)
+### Fix
+* :zap: Add logging for response in DexSwap class. ([`66cb63a`](https://github.com/mraniki/dxsp/commit/66cb63a56ec81dd96312dc45c338b195c13199c4))
+
+### Other
+* Merge pull request #166 from mraniki/dev ([`b3dd6df`](https://github.com/mraniki/dxsp/commit/b3dd6dfa8f723edd1030aef3435d39edfe337938))
+
 ## v2.0.11 (2023-05-08)
 ### Fix
 * :mag: troubleshoot quote 1inch ([`b438f0e`](https://github.com/mraniki/dxsp/commit/b438f0ed883934edc0511ad5bbe4a321b918c77d))
