@@ -11,7 +11,7 @@ import uvicorn
 from dxsp import DexSwap
 
 # DEBUG LEVEL
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 
 async def main():
