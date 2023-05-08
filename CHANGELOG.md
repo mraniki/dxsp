@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.8 (2023-05-08)
+### Fix
+* ⚡️ settings update ([`3d8bc4e`](https://github.com/mraniki/dxsp/commit/3d8bc4e18372d54a6851ed4b3eef91c48a904fdf))
+
+### Other
+* Merge pull request #162 from mraniki/dev ([`ffec836`](https://github.com/mraniki/dxsp/commit/ffec8364242b05725eaf35e1732dbb614ba8b2c5))
+
 ## v2.0.7 (2023-05-08)
 ### Fix
 * 🥅 added error handling in quote ([`31cceba`](https://github.com/mraniki/dxsp/commit/31cceba9f6036af45e5436ba9d651bf7132e02d3))
