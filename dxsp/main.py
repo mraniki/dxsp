@@ -234,7 +234,7 @@ class DexSwap:
 
             order_amount = int(
                 (asset_out_amount_converted *
-                 (settings.slippage/100)))
+                 (settings.trading_slippage/100)))
             self.logger.debug("order_amount %s", order_amount)
 
             # VERIFY IF ASSET OUT IS APPROVED otherwise get it approved
@@ -293,7 +293,7 @@ class DexSwap:
                     + "&fromAddress="
                     + self.wallet_address
                     + "&slippage="
-                    + settings.slippage
+                    + settings.trading_slippage
                     )
         swap_order = await self._get(swap_url)
         swap_order_status = swap_order['statusCode']
