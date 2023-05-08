@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.9 (2023-05-08)
+### Fix
+* ⚡️ further code factoring ([`fa51430`](https://github.com/mraniki/dxsp/commit/fa51430f418f150e8ab732feb1d9c94089be1024))
+* ⚡️ code cleaning across ([`26e9b3c`](https://github.com/mraniki/dxsp/commit/26e9b3c32dd1bda007f132d8c117d7f49b8ece30))
+
+### Other
+* Merge pull request #163 from mraniki/dev ([`a22c98a`](https://github.com/mraniki/dxsp/commit/a22c98a5910094ded8741bba1db302b94f676606))
+* 🚑 error in trading_slippage ([`9dfeaee`](https://github.com/mraniki/dxsp/commit/9dfeaeefacc22eb08dd015850253642da8a61192))
+
 ## v2.0.8 (2023-05-08)
 ### Fix
 * ⚡️ settings update ([`3d8bc4e`](https://github.com/mraniki/dxsp/commit/3d8bc4e18372d54a6851ed4b3eef91c48a904fdf))
