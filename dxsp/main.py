@@ -52,14 +52,16 @@ class DexSwap:
         params=None,
         headers=None
             ):
-        headers = {"User-Agent": "Mozilla/5.0"}
-        response = requests.get(
-            url,
-            params=params,
-            headers=headers,
-            timeout=10)
-        self.logger.info("response: %s", response.json)
-        return response.json()
+        try:
+            self.logger.info("_get url: %s", url)
+            headers = settings.headers
+            response = requests.get(url, params=params, headers=headers, timeout=10)
+            if response.status_code == 200:
+                self.logger.info("response: %s", response)
+                self.logger.info("response: %s", response.json)
+                return response.json()
+        except Exception as e:
+            self.logger.error("_get: %s", e)
 
     async def router(self):
         try:
@@ -117,11 +119,8 @@ class DexSwap:
                 + str(asset_out_address)
                 + "&amount="
                 + str(asset_out_amount))
-            self.logger.info("quote_url %s", quote_url)
-            quote_response = requests.get(quote_url)
-            self.logger.info("quote_response %s", quote_response)
-            quote_payload = quote_response.json()
-            quote_amount = quote_payload['toTokenAmount']
+            quote_response = self._get(quote_url)
+            quote_amount = quote_response['toTokenAmount']
             # quote_decimals = quote_response['fromToken']['decimals']
             quote = self.w3.from_wei(int(quote_amount), 'ether')
             # /(10 ** quote_decimals))
