@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.14 (2023-05-08)
+### Fix
+* :bug: Fix request import in DexSwap class. ([`65ebb5a`](https://github.com/mraniki/dxsp/commit/65ebb5a4f60bb3c88cae7538d30461900d00ccb8))
+* :zap:Update logging level to DEBUG in example.py ([`3d43656`](https://github.com/mraniki/dxsp/commit/3d4365683f72de0d20be76ee52f2dd4b4f8c122d))
+
+### Other
+* Merge pull request #168 from mraniki/dev ([`8b1aa33`](https://github.com/mraniki/dxsp/commit/8b1aa33da5675a0b0c3a6c75fbd325221cc92ae0))
+* Merge branch 'main' into dev ([`5897064`](https://github.com/mraniki/dxsp/commit/589706438e742ff5613b61c6ea8e4c82c949acfc))
+
 ## v2.0.13 (2023-05-08)
 ### Fix
 * :zap: Refactor quote retrieval in DexSwap class ([`29b3541`](https://github.com/mraniki/dxsp/commit/29b3541766dcc0f90cc14afbc4fb1996ae7ebf64))
