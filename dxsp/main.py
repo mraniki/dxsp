@@ -157,10 +157,12 @@ class DexSwap:
         quantity = order_params.get('quantity', 1)
 
         try:
-            asset_out_symbol = (settings.trading_quote_ccy if
-                                action == "BUY" else instrument)
-            asset_in_symbol = (instrument if action == "BUY"
-                               else settings.trading_quote_ccy)
+            asset_out_symbol = (
+                settings.trading_quote_ccy if
+                action == "BUY" else instrument)
+            asset_in_symbol = (
+                instrument if action == "BUY"
+                else settings.trading_quote_ccy)
             asset_out_contract = await self.get_token_contract(
                 asset_out_symbol)
             try:
@@ -171,10 +173,11 @@ class DexSwap:
                 asset_out_decimals = 18
             asset_out_balance = await self.get_token_balance(asset_out_symbol)
             #  buy or sell %p percentage DEFAULT OPTION is 10%
-            asset_out_amount = ((asset_out_balance) /
-                                (settings.trading_risk_amount
-                                ** asset_out_decimals)
-                                )*(float(quantity)/100)
+            asset_out_amount = (
+                (asset_out_balance) /
+                (settings.trading_risk_amount
+                 ** asset_out_decimals)
+                )*(float(quantity)/100)
 
             order = await self.get_swap(
                     asset_out_symbol,
