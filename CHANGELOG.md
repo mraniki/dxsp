@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.13 (2023-05-08)
+### Fix
+* :zap: Refactor quote retrieval in DexSwap class ([`29b3541`](https://github.com/mraniki/dxsp/commit/29b3541766dcc0f90cc14afbc4fb1996ae7ebf64))
+
+### Other
+* Merge pull request #167 from mraniki/dev ([`4c5c1eb`](https://github.com/mraniki/dxsp/commit/4c5c1ebc1baf18e6d65aa2efab972e8f84aa8326))
+
 ## v2.0.12 (2023-05-08)
 ### Fix
 * :zap: Add logging for response in DexSwap class. ([`66cb63a`](https://github.com/mraniki/dxsp/commit/66cb63a56ec81dd96312dc45c338b195c13199c4))
