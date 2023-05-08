@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.10 (2023-05-08)
+### Fix
+* :ambulance: Fix async bug in get_token_contract method ([`2ebf915`](https://github.com/mraniki/dxsp/commit/2ebf915d9f104b60f2be23b82b1a0966597fe87f))
+
+### Other
+* Merge pull request #164 from mraniki/dev ([`d41e514`](https://github.com/mraniki/dxsp/commit/d41e5144f58a81fd55a9f80fc83f9a4c78c90ffb))
+
 ## v2.0.9 (2023-05-08)
 ### Fix
 * ⚡️ further code factoring ([`fa51430`](https://github.com/mraniki/dxsp/commit/fa51430f418f150e8ab732feb1d9c94089be1024))
