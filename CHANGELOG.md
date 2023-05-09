@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.1.2 (2023-05-09)
+### Fix
+* 🐛 extra / ([`fb80c29`](https://github.com/mraniki/dxsp/commit/fb80c29a4c80ceace9ff23bc2541018ddcd49d07))
+
+### Other
+* Merge pull request #187 from mraniki/dev ([`518acb0`](https://github.com/mraniki/dxsp/commit/518acb0e0303fe5a18b6e341edb995c0b9437f90))
+
 ## v2.1.1 (2023-05-09)
 ### Fix
 * 🐛 self.chain_id ([`41ece41`](https://github.com/mraniki/dxsp/commit/41ece4105fcfb3dffc6efa97c45acf7534ed9a11))
