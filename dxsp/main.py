@@ -53,7 +53,6 @@ class DexSwap:
         headers=None
             ):
         try:
-            self.logger.info("_get url: %s", url)
             response = requests.get(
                 url,
                 params=params,
@@ -62,7 +61,6 @@ class DexSwap:
             return response.json()
         except Exception as e:
             self.logger.error("_get: %s", e)
-            return e
 
     async def router(self):
         try:
