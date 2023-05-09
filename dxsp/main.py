@@ -58,11 +58,12 @@ class DexSwap:
             response = requests.get(
                 url,
                 params=params,
-                headers={'User-Agent': 'Mozilla/5.0'},
+                headers=settings.headers,
+                #headers={'User-Agent': 'Mozilla/5.0'},
                 timeout=10)
-            self.logger.error("_response: %s", response)
+            self.logger.debug("_response: %s", response)
             if response:
-                self.logger.debug("_json: %s", response.json())
+                #self.logger.debug("_json: %s", response.json())
                 return response.json()
 
         except Exception as e:
