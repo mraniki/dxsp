@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.25 (2023-05-09)
+### Fix
+* 🐛 header passed as str instead of dict ([`11fb274`](https://github.com/mraniki/dxsp/commit/11fb274039830a66aa7ada3fd097bba146feef97))
+
+### Other
+* Merge pull request #180 from mraniki/dev ([`6c91637`](https://github.com/mraniki/dxsp/commit/6c916370052f67183552becb397a319a8b9f1675))
+
 ## v2.0.24 (2023-05-09)
 ### Fix
 * ⚡️ better handing for get ([`d41f791`](https://github.com/mraniki/dxsp/commit/d41f791ea0c168a6c3145e4af6ac3d97d864cf6e))
