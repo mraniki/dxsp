@@ -56,9 +56,9 @@ class DexSwap:
             self.logger.info("_get url: %s", url)
             headers = settings.headers
             response = requests.get(url, params=params, headers=headers, timeout=10)
-            if response.status_code == 200:
-                self.logger.info("response: %s", response.json)
-                return response.json()
+            #if response.status_code == 200:
+            self.logger.info("response: %s", response.json)
+            return response.json()
         except Exception as e:
             self.logger.error("%s _get: %s",response, e)
             return e
