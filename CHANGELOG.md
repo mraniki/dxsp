@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.18 (2023-05-09)
+### Fix
+* :zap:Refactor logging and update token list in example.py. ([`1368616`](https://github.com/mraniki/dxsp/commit/136861620f741aceea78fc17d2a41017ef5285e3))
+
+### Other
+* Merge pull request #173 from mraniki/dev ([`845dd7b`](https://github.com/mraniki/dxsp/commit/845dd7bc333959d7ab1b0e1a2cdd10e29562c7ca))
+
 ## v2.0.17 (2023-05-09)
 ### Fix
 * :mag: header troubleshoot ([`2031ac8`](https://github.com/mraniki/dxsp/commit/2031ac8147163b50d8e5d3a27e7dcb76f68fc7ce))
