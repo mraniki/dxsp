@@ -54,13 +54,12 @@ class DexSwap:
             ):
         try:
             self.logger.info("_get url: %s", url)
-            headers = settings.headers
-            response = requests.get(url, params=params, headers=headers, timeout=10)
+            response = requests.get(url, params=params, headers=settings.headers, timeout=10)
             #if response.status_code == 200:
             self.logger.info("response: %s", response.json)
             return response.json()
         except Exception as e:
-            self.logger.error("%s _get: %s",response, e)
+            self.logger.error("_get: %s", e)
             return e
 
     async def router(self):
