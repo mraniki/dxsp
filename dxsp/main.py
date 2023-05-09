@@ -53,10 +53,11 @@ class DexSwap:
         headers=None
             ):
         try:
+            print(settings.headers)
             response = requests.get(
                 url,
                 params=params,
-                headers=settings.headers,
+                headers={'User-Agent': 'Mozilla/5.0'},
                 timeout=10)
             if response:
                 return response.json()
