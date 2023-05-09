@@ -1,4 +1,4 @@
-__version__ = "2.0.26"
+__version__ = "2.0.28"
 
 from dxsp.main import DexSwap
 from dxsp.config import settings
