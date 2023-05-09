@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.21 (2023-05-09)
+### Fix
+* 🐛 quote troubleshoot ([`00cd189`](https://github.com/mraniki/dxsp/commit/00cd1897ddc56b9bd20837dbcbb9dd0fe673e553))
+
+### Other
+* Merge pull request #176 from mraniki/dev ([`359351e`](https://github.com/mraniki/dxsp/commit/359351e10b6aa5e334082e6f100c521fc1ff4ebe))
+
 ## v2.0.20 (2023-05-09)
 ### Fix
 * :zap:Refactor _get method in DexSwap class ([`d6f78f8`](https://github.com/mraniki/dxsp/commit/d6f78f89e56b5c7b02ba139c836bf3d72f480f69))
