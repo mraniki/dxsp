@@ -57,9 +57,10 @@ class DexSwap:
             headers = settings.headers
             response = requests.get(url, params=params, headers=headers, timeout=10)
             if response.status_code == 200:
-                self.logger.info("response: %s", response)
                 self.logger.info("response: %s", response.json)
                 return response.json()
+            else:
+                self.logger.info("response: %s", response)
         except Exception as e:
             self.logger.error("_get: %s", e)
 
@@ -79,12 +80,12 @@ class DexSwap:
                 self,
                 symbol
             ):
-        self.logger.debug("get_quote %s", symbol)
+        self.logger.debug("get_quote")
         asset_in_address = await self.search_contract(symbol)
         asset_out_symbol = settings.trading_quote_ccy
         asset_out_address = await self.search_contract(asset_out_symbol)
         if asset_out_address is None:
-            self.logger.warning("No Valid Contract %s", symbol)
+            self.logger.warning("No Valid Contract")
             return
         try:
             if self.protocol_type in ["1inch", "1inch_limit"]:
