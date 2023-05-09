@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.27 (2023-05-09)
+### Fix
+* :bug: Fix header syntax in default_settings.toml file. ([`fbcea10`](https://github.com/mraniki/dxsp/commit/fbcea10020d6ac4de105697316e4d5056e41bafa))
+
+### Other
+* Merge pull request #182 from mraniki/dev ([`49fe19e`](https://github.com/mraniki/dxsp/commit/49fe19e2e267c7e22b42ebb7d5ec7d8a826658b8))
+
 ## v2.0.26 (2023-05-09)
 ### Fix
 * :bug: Fix headers in DexSwap class constructor ([`e7822e7`](https://github.com/mraniki/dxsp/commit/e7822e7af4946e8911833676dacfaa90cd8a96ea))
