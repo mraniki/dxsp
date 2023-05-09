@@ -118,7 +118,9 @@ class DexSwap:
         try:
             asset_out_amount = self.w3.to_wei(amount, 'ether')
             quote_url = (
-                settings.dex_base_api
+                settings.dex_1inch_url
+                + "/"
+                + settings.chain_id
                 + "/quote?fromTokenAddress="
                 + str(asset_in_address)
                 + "&toTokenAddress="
@@ -294,18 +296,21 @@ class DexSwap:
         asset_in_address,
         amount
     ):
-        swap_url = (settings.dex_base_api
-                    + "/swap?fromTokenAddress="
-                    + asset_out_address
-                    + "&toTokenAddress="
-                    + asset_in_address
-                    + "&amount="
-                    + amount
-                    + "&fromAddress="
-                    + self.wallet_address
-                    + "&slippage="
-                    + settings.trading_slippage
-                    )
+        swap_url = (
+            settings.dex_1inch_url
+            + "/"
+            + settings.chain_id
+            + "/swap?fromTokenAddress="
+            + asset_out_address
+            + "&toTokenAddress="
+            + asset_in_address
+            + "&amount="
+            + amount
+            + "&fromAddress="
+            + self.wallet_address
+            + "&slippage="
+            + settings.trading_slippage
+            )
         swap_order = await self._get(swap_url)
         swap_order_status = swap_order['statusCode']
         if swap_order_status != 200:
@@ -490,7 +495,9 @@ class DexSwap:
     async def get_approve_1inch(self, asset_out_address):
         try:
             approval_check_URL = (
-                settings.dex_base_api
+                settings.dex_1inch_url
+                + "/"
+                + settings.chain_id
                 + "/approve/allowance?tokenAddress="
                 + str(asset_out_address)
                 + "&walletAddress="
@@ -499,7 +506,9 @@ class DexSwap:
             approval_check = approval_response['allowance']
             if (approval_check == 0):
                 approval_URL = (
-                    settings.dex_base_api
+                    settings.dex_1inch_url
+                    + "/"
+                    + settings.chain_id
                     + "/approve/transaction?tokenAddress="
                     + str(asset_out_address))
                 approval_response = await self._get(approval_URL)
