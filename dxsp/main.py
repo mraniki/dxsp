@@ -120,7 +120,6 @@ class DexSwap:
             asset_out_amount = self.w3.to_wei(amount, 'ether')
             quote_url = (
                 settings.dex_1inch_url
-                + "/"
                 + str(self.chain_id)
                 + "/quote?fromTokenAddress="
                 + str(asset_in_address)
@@ -299,7 +298,6 @@ class DexSwap:
     ):
         swap_url = (
             settings.dex_1inch_url
-            + "/"
             + str(self.chain_id)
             + "/swap?fromTokenAddress="
             + asset_out_address
@@ -497,7 +495,6 @@ class DexSwap:
         try:
             approval_check_URL = (
                 settings.dex_1inch_url
-                + "/"
                 + str(self.chain_id)
                 + "/approve/allowance?tokenAddress="
                 + str(asset_out_address)
@@ -508,7 +505,6 @@ class DexSwap:
             if (approval_check == 0):
                 approval_URL = (
                     settings.dex_1inch_url
-                    + "/"
                     + str(self.chain_id)
                     + "/approve/transaction?tokenAddress="
                     + str(asset_out_address))
