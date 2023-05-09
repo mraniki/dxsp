@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.26 (2023-05-09)
+### Fix
+* :bug: Fix headers in DexSwap class constructor ([`e7822e7`](https://github.com/mraniki/dxsp/commit/e7822e7af4946e8911833676dacfaa90cd8a96ea))
+
+### Other
+* Merge pull request #181 from mraniki/dev ([`8fc5e9f`](https://github.com/mraniki/dxsp/commit/8fc5e9f2972c9561df881891bc3e61b5f3750546))
+
 ## v2.0.25 (2023-05-09)
 ### Fix
 * 🐛 header passed as str instead of dict ([`11fb274`](https://github.com/mraniki/dxsp/commit/11fb274039830a66aa7ada3fd097bba146feef97))
