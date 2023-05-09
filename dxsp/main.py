@@ -53,14 +53,17 @@ class DexSwap:
         headers=None
             ):
         try:
-            print(settings.headers)
+            self.logger.debug("_header: %s", settings.headers)
             response = requests.get(
                 url,
                 params=params,
                 headers={'User-Agent': 'Mozilla/5.0'},
                 timeout=10)
+           self.logger.error("_response: %s", response) 
             if response:
+                self.logger.debug("_json: %s", response.json())
                 return response.json()
+                
         except Exception as e:
             self.logger.error("_get: %s", e)
 
@@ -88,6 +91,7 @@ class DexSwap:
             return
         try:
             if self.protocol_type in ["1inch", "1inch_limit"]:
+                self.logger.debug("1inch getquote")
                 await self.oneinch_quote(
                     asset_in_address,
                     asset_out_address)
@@ -120,6 +124,7 @@ class DexSwap:
                 + "&amount="
                 + str(asset_out_amount))
             quote_response = await self._get(quote_url)
+            self.logger.debug("quote_response %s",quote_response)
             if quote_response:
                 quote_amount = quote_response['toTokenAmount']
                 # quote_decimals = quote_response['fromToken']['decimals']
@@ -128,7 +133,7 @@ class DexSwap:
                 return round(quote, 2)
         except Exception as e:
             self.logger.error("oneinch_quote %s", e)
-            return
+
 
     async def uniswap_v2_quote(
         self,
