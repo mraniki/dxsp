@@ -58,7 +58,8 @@ class DexSwap:
                 params=params,
                 headers=settings.headers,
                 timeout=10)
-            return response.json()
+            if response:
+                return response.json()
         except Exception as e:
             self.logger.error("_get: %s", e)
 
@@ -118,11 +119,12 @@ class DexSwap:
                 + "&amount="
                 + str(asset_out_amount))
             quote_response = await self._get(quote_url)
-            quote_amount = quote_response['toTokenAmount']
-            # quote_decimals = quote_response['fromToken']['decimals']
-            quote = self.w3.from_wei(int(quote_amount), 'ether')
-            # /(10 ** quote_decimals))
-            return round(quote, 2)
+            if quote_response:
+                quote_amount = quote_response['toTokenAmount']
+                # quote_decimals = quote_response['fromToken']['decimals']
+                quote = self.w3.from_wei(int(quote_amount), 'ether')
+                # /(10 ** quote_decimals))
+                return round(quote, 2)
         except Exception as e:
             self.logger.error("oneinch_quote %s", e)
             return
