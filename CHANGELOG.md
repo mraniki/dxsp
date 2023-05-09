@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.22 (2023-05-09)
+### Fix
+* 🐛 get error ([`0d07e8c`](https://github.com/mraniki/dxsp/commit/0d07e8c2967ed8547eae2db69c93caa62bf1c151))
+
+### Other
+* Merge pull request #177 from mraniki/dev ([`6944faa`](https://github.com/mraniki/dxsp/commit/6944faa63d6d6fc695a2b09e614ab0904531ce9e))
+
 ## v2.0.21 (2023-05-09)
 ### Fix
 * 🐛 quote troubleshoot ([`00cd189`](https://github.com/mraniki/dxsp/commit/00cd1897ddc56b9bd20837dbcbb9dd0fe673e553))
