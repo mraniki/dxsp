@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.19 (2023-05-09)
+### Fix
+* :zap:Fix logger not printing response in DexSwap class method. ([`95db93d`](https://github.com/mraniki/dxsp/commit/95db93d26afc51a08f95bb942eff33d2a2268b43))
+
+### Other
+* Merge pull request #174 from mraniki/dev ([`99aa24c`](https://github.com/mraniki/dxsp/commit/99aa24c1223ec1278db748a4edba8ac11e863eb6))
+
 ## v2.0.18 (2023-05-09)
 ### Fix
 * :zap:Refactor logging and update token list in example.py. ([`1368616`](https://github.com/mraniki/dxsp/commit/136861620f741aceea78fc17d2a41017ef5285e3))
