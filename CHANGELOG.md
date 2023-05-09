@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.24 (2023-05-09)
+### Fix
+* ⚡️ better handing for get ([`d41f791`](https://github.com/mraniki/dxsp/commit/d41f791ea0c168a6c3145e4af6ac3d97d864cf6e))
+
+### Other
+* Merge pull request #179 from mraniki/dev ([`04cd1a3`](https://github.com/mraniki/dxsp/commit/04cd1a37516c6d24ad7480abe0c4537097dce518))
+
 ## v2.0.23 (2023-05-09)
 ### Fix
 * 🐛 check ([`a34388c`](https://github.com/mraniki/dxsp/commit/a34388c5af3aec8d42502a8e0001735b4196d397))
