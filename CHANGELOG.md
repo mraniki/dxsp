@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.29 (2023-05-09)
+### Fix
+* 💬 added debug info ([`7fab0f5`](https://github.com/mraniki/dxsp/commit/7fab0f54a228728aa90ef46d67c0637ec5b145dd))
+* :mag:Refactor logging in DexSwap class ([`9cd18af`](https://github.com/mraniki/dxsp/commit/9cd18af806093476f3f2c0532a0a577cd545c05d))
+
+### Other
+* Merge pull request #184 from mraniki/dev ([`945bef4`](https://github.com/mraniki/dxsp/commit/945bef4d178c079ca5ce76d09fe56b5733d946cb))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`5f7ff05`](https://github.com/mraniki/dxsp/commit/5f7ff05ffef56306012e0f5132425952955e388f))
+
 ## v2.0.28 (2023-05-09)
 ### Fix
 * :speech_balloon: Update README.md with new features and code cleanup ([`cf9bd78`](https://github.com/mraniki/dxsp/commit/cf9bd78ad1c885b1e101c49ccff1913b9a688f43))
