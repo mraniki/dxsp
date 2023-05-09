@@ -59,10 +59,9 @@ class DexSwap:
             if response.status_code == 200:
                 self.logger.info("response: %s", response.json)
                 return response.json()
-            else:
-                self.logger.info("response: %s", response)
         except Exception as e:
-            self.logger.error("_get: %s", e)
+            self.logger.error("%s _get: %s",response, e)
+            return e
 
     async def router(self):
         try:
@@ -74,7 +73,6 @@ class DexSwap:
             return router
         except Exception as e:
             self.logger.error("router setup: %s", e)
-            return
 
     async def get_quote(
                 self,

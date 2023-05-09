@@ -22,8 +22,7 @@ async def main():
 
         # RANDOM SYMBOL
         symbol_lst = [
-            'WBTC', 'WETH', 'MATIC', 'UNI',
-            'USDT', 'DAI']
+            'WBTC', 'WETH', 'MATIC', 'UNI', 'DAI']
         symbol = random.sample(symbol_lst, 1)[0]
         print("symbol ", symbol)
 
