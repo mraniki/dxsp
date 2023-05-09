@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v2.0.20 (2023-05-09)
+### Fix
+* :zap:Refactor _get method in DexSwap class ([`d6f78f8`](https://github.com/mraniki/dxsp/commit/d6f78f89e56b5c7b02ba139c836bf3d72f480f69))
+
+### Other
+* Merge pull request #175 from mraniki/dev ([`a839635`](https://github.com/mraniki/dxsp/commit/a83963569e1d218f45298669ee1627fc6b5c62eb))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`8de5d68`](https://github.com/mraniki/dxsp/commit/8de5d68fce64ad35bf7ea53b5a0f981ca8d21152))
+
 ## v2.0.19 (2023-05-09)
 ### Fix
 * :zap:Fix logger not printing response in DexSwap class method. ([`95db93d`](https://github.com/mraniki/dxsp/commit/95db93d26afc51a08f95bb942eff33d2a2268b43))
