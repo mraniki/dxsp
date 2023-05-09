@@ -53,20 +53,24 @@ class DexSwap:
         headers=None
             ):
         try:
-            print(settings.headers)
+            self.logger.debug("_header: %s", settings.headers)
             response = requests.get(
                 url,
                 params=params,
                 headers={'User-Agent': 'Mozilla/5.0'},
                 timeout=10)
+            self.logger.error("_response: %s", response)
             if response:
+                self.logger.debug("_json: %s", response.json())
                 return response.json()
+
         except Exception as e:
             self.logger.error("_get: %s", e)
 
     async def router(self):
         try:
             router_abi = await self.get_abi(settings.dex_router_contract_addr)
+            self.logger.debug("router_abi: %s", router_abi)
             router = self.w3.eth.contract(
                 self.w3.to_checksum_address(
                     settings.dex_router_contract_addr),
@@ -88,10 +92,12 @@ class DexSwap:
             return
         try:
             if self.protocol_type in ["1inch", "1inch_limit"]:
+                self.logger.debug("1inch getquote")
                 await self.oneinch_quote(
                     asset_in_address,
                     asset_out_address)
             if self.protocol_type == "uniswap_v2":
+                self.logger.debug("uniswap_v2 getquote")
                 await self.uniswap_v2_quote(
                     asset_in_address,
                     asset_out_address)
@@ -120,15 +126,16 @@ class DexSwap:
                 + "&amount="
                 + str(asset_out_amount))
             quote_response = await self._get(quote_url)
+            self.logger.debug("quote_response %s", quote_response)
             if quote_response:
                 quote_amount = quote_response['toTokenAmount']
+                self.logger.debug("quote_amount %s", quote_amount)
                 # quote_decimals = quote_response['fromToken']['decimals']
                 quote = self.w3.from_wei(int(quote_amount), 'ether')
                 # /(10 ** quote_decimals))
                 return round(quote, 2)
         except Exception as e:
             self.logger.error("oneinch_quote %s", e)
-            return
 
     async def uniswap_v2_quote(
         self,
