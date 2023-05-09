@@ -9,18 +9,18 @@
 
 Key features:
 
-- 24 blockchains mainnet and testnet supported with default block explorer, RPC, Router (uniswap and pancakeswap) and protocol url (1inch and 0x). Other blockchains can be supported via function attributes
+- Any blockchains mainnet or testnet supported by web3py, 1inch or uniswap type router.
 - 2 swap protocol type supported:
 	- 1inch API v5
 	- Uniswap version 2 router protocol type
 
 Other features:
 - Translate token symbol to contract address via user defined tokenlist format or coingecko api 
-- Connect to web3  if no web3 object or no rpc provided
+- Connect to web3 if no web3 object or no rpc provided
 - Able to approve contract and sign transaction
 - Quote for a given token
 - Use Base symbol like stablecoin
-
+- Settings to use the modile for your own tool/bot
 
 
 # Install
@@ -30,20 +30,10 @@ Other features:
 ```
 from dxsp import DexSwap
 
-	#SWAP HELPER
-	dex = DexSwap(chain_id=chain_id,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api)
-	print("dex ", dex)
+	dex = DexSwap()
 	#BUY 10 USDC to SWAP with BITCOIN
 	demo_tx = await dex.get_swap('USDT','wBTC',10)
 	print("demo_tx ", demo_tx)
-
-	#SWAP with your OWN defined exchange like Sushiswap on ARBITRUM 
-	sushi_router = '0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F'
-	dex_sushi = DexSwap(chain_id=42161,wallet_address=wallet_address,private_key=private_key,block_explorer_api=block_explorer_api,dex_exchange=sushi_router,base_trading_symbol='USDT')
-	print("dex_sushi ", dex_sushi)
-	#Execute ORDER to buy 1% of your USDT balance on SUSHISWAP ARBITRUM and get BTC token
-	demo_order = await dex_sushi.execute_order(direction = 'BUY',symbol = 'wBTC')
-	print("demo_order ", demo_order)
 ```
 ## Example
 [example](https://github.com/mraniki/dxsp/blob/main/examples/example.py)
