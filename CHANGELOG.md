@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.1.3 (2023-05-09)
+### Fix
+* :zap:Update default_settings.toml and main.py files ([`4a32f28`](https://github.com/mraniki/dxsp/commit/4a32f28847a9a6363780a79452cc8ec88634b754))
+
+### Other
+* Merge pull request #188 from mraniki/dev ([`b0b9380`](https://github.com/mraniki/dxsp/commit/b0b938099feb9976fb8664c65107131da800dcc2))
+
 ## v2.1.2 (2023-05-09)
 ### Fix
 * 🐛 extra / ([`fb80c29`](https://github.com/mraniki/dxsp/commit/fb80c29a4c80ceace9ff23bc2541018ddcd49d07))
