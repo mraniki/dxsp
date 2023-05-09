@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.1.1 (2023-05-09)
+### Fix
+* 🐛 self.chain_id ([`41ece41`](https://github.com/mraniki/dxsp/commit/41ece4105fcfb3dffc6efa97c45acf7534ed9a11))
+
+### Other
+* Merge pull request #186 from mraniki/dev ([`c25b199`](https://github.com/mraniki/dxsp/commit/c25b199cc0aa4c5a6633593701d9481b26f57a0f))
+
 ## v2.1.0 (2023-05-09)
 ### Feature
 * ✨ added dex_1inch_url settings ([`fd8f04a`](https://github.com/mraniki/dxsp/commit/fd8f04a99ec4aab1ea7677d1d26d2c61571b62f1))
