@@ -53,6 +53,7 @@ class DexSwap:
         headers=None
             ):
         try:
+            self.logger.debug("url: %s", url)
             self.logger.debug("_header: %s", settings.headers)
             response = requests.get(
                 url,
@@ -120,7 +121,7 @@ class DexSwap:
             quote_url = (
                 settings.dex_1inch_url
                 + "/"
-                + settings.chain_id
+                + str(settings.chain_id)
                 + "/quote?fromTokenAddress="
                 + str(asset_in_address)
                 + "&toTokenAddress="
@@ -299,7 +300,7 @@ class DexSwap:
         swap_url = (
             settings.dex_1inch_url
             + "/"
-            + settings.chain_id
+            + str(settings.chain_id)
             + "/swap?fromTokenAddress="
             + asset_out_address
             + "&toTokenAddress="
@@ -497,7 +498,7 @@ class DexSwap:
             approval_check_URL = (
                 settings.dex_1inch_url
                 + "/"
-                + settings.chain_id
+                + str(settings.chain_id)
                 + "/approve/allowance?tokenAddress="
                 + str(asset_out_address)
                 + "&walletAddress="
@@ -508,7 +509,7 @@ class DexSwap:
                 approval_URL = (
                     settings.dex_1inch_url
                     + "/"
-                    + settings.chain_id
+                    + str(settings.chain_id)
                     + "/approve/transaction?tokenAddress="
                     + str(asset_out_address))
                 approval_response = await self._get(approval_URL)
