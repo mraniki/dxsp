@@ -34,7 +34,7 @@ class DexSwap:
         self.wallet_address = settings.dex_wallet_address
         self.private_key = settings.dex_private_key
 
-        # COINGECKO
+        # COINGECKO 🦎
         try:
             self.cg = CoinGeckoAPI()
             assetplatform = self.cg.get_asset_platforms()
@@ -43,8 +43,7 @@ class DexSwap:
             self.cg_platform = output_dict[0]['id']
             self.logger.debug("cg_platform %s", self.cg_platform)
         except Exception as e:
-            self.logger.error("CoinGecko: %s", e)
-            return
+            self.logger.error("CG🦎: %s", e)
 
     async def get_quote(
                 self,
@@ -276,7 +275,7 @@ class DexSwap:
             return
 
     async def search_cg(self, token):
-        """🦎 search coingecko"""
+        """search coingecko"""
         try:
             search_results = self.cg.search(query=token)
             search_dict = search_results['coins']
@@ -295,7 +294,7 @@ class DexSwap:
             return
 
     async def search_cg_contract(self, token):
-        """🦎 search coingecko contract"""
+        """search coingecko contract"""
         try:
             coin_info = await self.search_cg(token)
             if coin_info is not None:
