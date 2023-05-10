@@ -30,7 +30,7 @@ dex_1inch_url = "https://api.1inch.exchange/v5.0/"
 dex_1inch_limit_url = "https://limit-orders.1inch.io/v3.0/"
 #0️⃣0x
 dex_0x_url = "https://api.0x.org/mainnet/"
-dex_0x_api_key = "35aa607c-1e98-4404-ad87-4bed10a538ae" 
+dex_0x_api_key = "" 
 
 #🪐apollo
 apollo_spot_api_key = ""
