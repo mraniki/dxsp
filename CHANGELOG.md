@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.1.5 (2023-05-10)
+### Fix
+* ⚡️ updated slippage settings to dex_slippage ([`9a00eb9`](https://github.com/mraniki/dxsp/commit/9a00eb947c12e99b2218b995345aeb81210c9c3a))
+
+### Other
+* Merge pull request #191 from mraniki/dev ([`f9c27fc`](https://github.com/mraniki/dxsp/commit/f9c27fcbc5712a2e6b9d72e6fcfb503ecec36725))
+
 ## v2.1.4 (2023-05-10)
 ### Fix
 * 🐛 remove sensitive ([`8bbb434`](https://github.com/mraniki/dxsp/commit/8bbb4346e624d8745b308eb80d96e535c037e7e9))
