@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.1 (2023-05-10)
+### Fix
+* ⚡️ updated unit test ([`7872a19`](https://github.com/mraniki/dxsp/commit/7872a1913bdb10216062dfb040ad957116445e0b))
+
+### Other
+* Merge pull request #194 from mraniki/dev ([`b36f3fb`](https://github.com/mraniki/dxsp/commit/b36f3fb5f15eafe0612d646e92ffec50ff4ef22d))
+
 ## v2.2.0 (2023-05-10)
 ### Feature
 * ✨ added apollo basics ([`1afe435`](https://github.com/mraniki/dxsp/commit/1afe435f8608595297235353ea0b39814659ee16))
