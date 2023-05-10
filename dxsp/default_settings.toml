@@ -19,9 +19,10 @@ dex_private_key = "0x111111111117dc0aaaaaa0fa6a738034aaaa302" #this is an exampl
 dex_block_explorer_api =  "798437294880920392"  #this is an example
 #chain_1 #see below for other chain ids or use https://chainlist.org to overwrite settings
 dex_chain_id = 1
+dex_protocol_type = "uniswap_v2" #0x | 1inch | uniswap_v3
+
 dex_rpc = "https://rpc.ankr.com/eth"
 dex_block_explorer_url = "https://api.etherscan.io/api?"
-dex_protocol_type = "uniswap_v2" #0x | 1inch | uniswap_v3
 dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D" 
 
 #protocol specific
@@ -33,10 +34,12 @@ dex_0x_url = "https://api.0x.org/mainnet/"
 dex_0x_api_key = "" 
 
 #🪐apollo
-apollo_spot_api_key = ""
-apollo_spot_api_secret = ""
-apollo_future_api_key = ""
-apollo_future_api_secret = ""
+dex_apollo_url = "https://fapi.apollox.finance/"
+dex_apollo_spot_api_key = ""
+dex_apollo_spot_api_secret = ""
+dex_apollo_future_api_key = ""
+dex_apollo_future_api_secret = ""
+
 
 [chain_1]
 dex_chain_id = 1
