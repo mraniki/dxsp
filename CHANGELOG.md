@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v2.1.6 (2023-05-10)
+### Fix
+* 🐛  def router(self) attributes ([`e62822a`](https://github.com/mraniki/dxsp/commit/e62822ac769a9b18f6534cb70f68333d077a4ae5))
+* 🐛 old setting in get_approve_uniswap ([`4d09cb3`](https://github.com/mraniki/dxsp/commit/4d09cb38b491eb4bea9c09ff8a23c2d30b69cf66))
+
+### Other
+* Merge pull request #192 from mraniki/dev ([`8224d26`](https://github.com/mraniki/dxsp/commit/8224d267d541b09d77bb4e02b0cc06e8df8a1333))
+
 ## v2.1.5 (2023-05-10)
 ### Fix
 * ⚡️ updated slippage settings to dex_slippage ([`9a00eb9`](https://github.com/mraniki/dxsp/commit/9a00eb947c12e99b2218b995345aeb81210c9c3a))
