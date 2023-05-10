@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v2.1.4 (2023-05-10)
+### Fix
+* 🐛 remove sensitive ([`8bbb434`](https://github.com/mraniki/dxsp/commit/8bbb4346e624d8745b308eb80d96e535c037e7e9))
+* ⚡️ Updated with 0x and reor code ([`0da1f17`](https://github.com/mraniki/dxsp/commit/0da1f17087fd453fa425df21f3319216289151e5))
+
+### Other
+* Merge pull request #190 from mraniki/dev ([`a572e20`](https://github.com/mraniki/dxsp/commit/a572e20b3d35ad736ace06183910c394534df633))
+* 🎨 lint ([`b2f54db`](https://github.com/mraniki/dxsp/commit/b2f54dbe5f05495a66289f353401c371bcc30313))
+* 🎨 code reorg ([`cf56237`](https://github.com/mraniki/dxsp/commit/cf56237a602f10046a0098a3b9211c1e7754cc51))
+
 ## v2.1.3 (2023-05-09)
 ### Fix
 * :zap:Update default_settings.toml and main.py files ([`4a32f28`](https://github.com/mraniki/dxsp/commit/4a32f28847a9a6363780a79452cc8ec88634b754))
