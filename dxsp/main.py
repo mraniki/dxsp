@@ -355,9 +355,9 @@ class DexSwap:
             router_abi = await self.get_abi(settings.dex_router_contract_addr)
             self.logger.debug("router_abi: %s", router_abi)
             router = self.w3.eth.contract(
-                self.w3.to_checksum_address(
+                address=self.w3.to_checksum_address(
                     settings.dex_router_contract_addr),
-                router_abi)
+                abi=router_abi)
             return router
         except Exception as e:
             self.logger.error("router setup: %s", e)
@@ -574,7 +574,7 @@ class DexSwap:
                 approved_amount = (self.w3.to_wei(2**64-1, 'ether'))
                 approval_TX = asset_out_contract.functions.approve(
                                 self.w3.to_checksum_address(
-                                    settings.router_contract_addr),
+                                    settings.dex_router_contract_addr),
                                 approved_amount)
                 approval_txHash = await self.get_sign(approval_TX)
                 approval_txHash_complete = (
