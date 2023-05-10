@@ -95,52 +95,23 @@ class DexSwap:
         try:
             if self.protocol_type in ["1inch", "1inch_limit"]:
                 self.logger.debug("1inch getquote")
-                await self.oneinch_quote(
+                await self.get_quote_1inch(
                     asset_in_address,
                     asset_out_address)
             if self.protocol_type == "uniswap_v2":
                 self.logger.debug("uniswap_v2 getquote")
-                await self.uniswap_v2_quote(
+                await self.get_quote_uniswap_v2(
                     asset_in_address,
                     asset_out_address)
             if self.protocol_type == "uniswap_v3":
-                await self.uniswap_v3_quote(
+                await self.get_quote_uniswap_v3(
                     asset_in_address,
                     asset_out_address)
         except Exception as e:
             self.logger.error("get_quote %s", e)
             return
 
-    async def oneinch_quote(
-        self,
-        asset_in_address,
-        asset_out_address,
-        amount=1
-    ):
-        try:
-            asset_out_amount = self.w3.to_wei(amount, 'ether')
-            quote_url = (
-                settings.dex_1inch_url
-                + str(self.chain_id)
-                + "/quote?fromTokenAddress="
-                + str(asset_in_address)
-                + "&toTokenAddress="
-                + str(asset_out_address)
-                + "&amount="
-                + str(asset_out_amount))
-            quote_response = await self._get(quote_url)
-            self.logger.debug("quote_response %s", quote_response)
-            if quote_response:
-                quote_amount = quote_response['toTokenAmount']
-                self.logger.debug("quote_amount %s", quote_amount)
-                # quote_decimals = quote_response['fromToken']['decimals']
-                quote = self.w3.from_wei(int(quote_amount), 'ether')
-                # /(10 ** quote_decimals))
-                return round(quote, 2)
-        except Exception as e:
-            self.logger.error("oneinch_quote %s", e)
-
-    async def uniswap_v2_quote(
+    async def get_quote_uniswap_v2(
         self,
         asset_in_address,
         asset_out_address,
@@ -158,14 +129,6 @@ class DexSwap:
         except Exception as e:
             self.logger.error("uniswap_v2_quote %s", e)
             return
-
-    async def uniswap_v3_quote(
-        self,
-        asset_in_address,
-        asset_out_address,
-        amount=1
-    ):
-        return
 
     async def execute_order(self, order_params):
         """execute swap function"""
@@ -256,13 +219,13 @@ class DexSwap:
 
             # 1INCH
             if self.protocol_type in ["1inch"]:
-                swap_order = await self.oneinch_swap(
+                swap_order = await self.get_swap_1inch(
                     asset_out_address,
                     asset_in_address,
                     order_amount)
             # UNISWAP V2
             if self.protocol_type in ["uniswap_v2"]:
-                swap_order = await self.uniswap_v2_swap(
+                swap_order = await self.get_swap_uniswap_v2(
                     asset_out_address,
                     asset_in_address,
                     order_amount)
@@ -271,7 +234,7 @@ class DexSwap:
                 return
             # UNISWAP V3
             if self.protocol_type in ['uniswap_v3']:
-                swap_order = await self.uniswap_v3_swap()
+                swap_order = await self.get_swap_uniswap_v3()
             if swap_order:
                 self.logger.debug("swap_order %s", swap_order)
                 signed_order = await self.get_sign(swap_order)
@@ -291,33 +254,7 @@ class DexSwap:
             self.logger.error("get_swap %s", e)
             return
 
-    async def oneinch_swap(
-        self,
-        asset_out_address,
-        asset_in_address,
-        amount
-    ):
-        swap_url = (
-            settings.dex_1inch_url
-            + str(self.chain_id)
-            + "/swap?fromTokenAddress="
-            + asset_out_address
-            + "&toTokenAddress="
-            + asset_in_address
-            + "&amount="
-            + amount
-            + "&fromAddress="
-            + self.wallet_address
-            + "&slippage="
-            + settings.trading_slippage
-            )
-        swap_order = await self._get(swap_url)
-        swap_order_status = swap_order['statusCode']
-        if swap_order_status != 200:
-            return
-        return swap_order
-
-    async def uniswap_v2_swap(
+    async def get_swap_uniswap_v2(
         self,
         asset_out_address,
         asset_in_address,
@@ -337,10 +274,6 @@ class DexSwap:
                         self.wallet_address,
                         deadline)
         return swap_order
-
-    async def uniswap_v3_swap(self):
-        self.logger.warning("Not available")
-        return
 
     async def get_confirmation(self,
                                order_hash,
@@ -388,7 +321,7 @@ class DexSwap:
             self.logger.error("get_block_explorer_status %s", e)
             return
 
-# ###CONTRACT SEARCH
+# 📝CONTRACT SEARCH
     async def search_contract(
                             self,
                             token
@@ -481,7 +414,7 @@ class DexSwap:
             self.logger.error("get_token_contract %s", e)
             return
 
-# W3 UTILS
+# 🛠️ W3 UTILS
     async def get_approve(self, asset_out_address):
         try:
             if self.protocol_type in ["1inch", "1inch_limit"]:
@@ -490,29 +423,6 @@ class DexSwap:
                 await self.get_approve_uniswap(asset_out_address)
         except Exception as e:
             self.logger.error("get_approve %s", e)
-            return None
-
-    async def get_approve_1inch(self, asset_out_address):
-        try:
-            approval_check_URL = (
-                settings.dex_1inch_url
-                + str(self.chain_id)
-                + "/approve/allowance?tokenAddress="
-                + str(asset_out_address)
-                + "&walletAddress="
-                + str(self.wallet_address))
-            approval_response = await self._get(approval_check_URL)
-            approval_check = approval_response['allowance']
-            if (approval_check == 0):
-                approval_URL = (
-                    settings.dex_1inch_url
-                    + str(self.chain_id)
-                    + "/approve/transaction?tokenAddress="
-                    + str(asset_out_address))
-                approval_response = await self._get(approval_URL)
-                return approval_response
-        except Exception as e:
-            self.logger.error("get_approve_uniswap %s", e)
             return None
 
     async def get_approve_uniswap(self, asset_out_address):
@@ -632,7 +542,7 @@ class DexSwap:
             self.logger.warning("No block_explorer_api.")
             return
 
-# USER BALANCE AND POSITION RELATED
+# 🔒 USER RELATED
 
     async def get_token_balance(
         self,
@@ -696,3 +606,138 @@ class DexSwap:
         except Exception as e:
             self.logger.error("get_account_position: %s", e)
             return 0
+
+# THIRD PARTY
+# 1inch 🦄
+    async def get_quote_1inch(
+        self,
+        asset_in_address,
+        asset_out_address,
+        amount=1
+    ):
+        try:
+            asset_out_amount = self.w3.to_wei(amount, 'ether')
+            quote_url = (
+                settings.dex_1inch_url
+                + str(self.chain_id)
+                + "/quote?fromTokenAddress="
+                + str(asset_in_address)
+                + "&toTokenAddress="
+                + str(asset_out_address)
+                + "&amount="
+                + str(asset_out_amount))
+            quote_response = await self._get(quote_url)
+            self.logger.debug("quote_response %s", quote_response)
+            if quote_response:
+                quote_amount = quote_response['toTokenAmount']
+                self.logger.debug("quote_amount %s", quote_amount)
+                # quote_decimals = quote_response['fromToken']['decimals']
+                quote = self.w3.from_wei(int(quote_amount), 'ether')
+                # /(10 ** quote_decimals))
+                return round(quote, 2)
+        except Exception as e:
+            self.logger.error("oneinch_quote %s", e)
+
+    async def get_approve_1inch(self, asset_out_address):
+        try:
+            approval_check_URL = (
+                settings.dex_1inch_url
+                + str(self.chain_id)
+                + "/approve/allowance?tokenAddress="
+                + str(asset_out_address)
+                + "&walletAddress="
+                + str(self.wallet_address))
+            approval_response = await self._get(approval_check_URL)
+            approval_check = approval_response['allowance']
+            if (approval_check == 0):
+                approval_URL = (
+                    settings.dex_1inch_url
+                    + str(self.chain_id)
+                    + "/approve/transaction?tokenAddress="
+                    + str(asset_out_address))
+                approval_response = await self._get(approval_URL)
+                return approval_response
+        except Exception as e:
+            self.logger.error("get_approve_uniswap %s", e)
+            return None
+
+    async def get_swap_1inch(
+        self,
+        asset_out_address,
+        asset_in_address,
+        amount
+    ):
+        swap_url = (
+            settings.dex_1inch_url
+            + str(self.chain_id)
+            + "/swap?fromTokenAddress="
+            + asset_out_address
+            + "&toTokenAddress="
+            + asset_in_address
+            + "&amount="
+            + amount
+            + "&fromAddress="
+            + self.wallet_address
+            + "&slippage="
+            + settings.trading_slippage
+            )
+        swap_order = await self._get(swap_url)
+        swap_order_status = swap_order['statusCode']
+        if swap_order_status != 200:
+            return
+        return swap_order
+
+# 0️⃣x
+    async def get_quote_0x(
+        self,
+        asset_in_address,
+        asset_out_address,
+        amount=1
+    ):
+        try:
+            asset_out_amount = self.w3.to_wei(amount, 'ether')
+            quote_url = (
+                settings.dex_0x_url
+                + "/quote?fromTokenAddress="
+                + str(asset_in_address)
+                + "&toTokenAddress="
+                + str(asset_out_address)
+                + "&amount="
+                + str(asset_out_amount))
+            quote_response = await self._get(quote_url)
+            self.logger.debug("quote_response %s", quote_response)
+            if quote_response:
+                quote_amount = quote_response['toTokenAmount']
+                self.logger.debug("quote_amount %s", quote_amount)
+                # quote_decimals = quote_response['fromToken']['decimals']
+                quote = self.w3.from_wei(int(quote_amount), 'ether')
+                # /(10 ** quote_decimals))
+                return round(quote, 2)
+        except Exception as e:
+            self.logger.error("oneinch_quote %s", e)
+
+# uniswap v3 🦄
+    async def get_quote_uniswap_v3(
+        self,
+        asset_in_address,
+        asset_out_address,
+        amount=1
+    ):
+        return
+
+    async def get_swap_uniswap_v3(self):
+        self.logger.warning("Not available")
+        return
+
+# apollo finance
+    async def get_quote_apollo(
+        self,
+        asset_in_address,
+        asset_out_address,
+        amount=1
+    ):
+        return
+
+    async def get_swap_apolllo(self):
+        self.logger.warning("Not available")
+        return
