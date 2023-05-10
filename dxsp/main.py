@@ -549,15 +549,15 @@ class DexSwap:
         asset_out_address,
         amount=1
     ):
+        self.logger.debug("get_quote_uniswap_v2")
         try:
             order_path_dex = [asset_out_address, asset_in_address]
             router_instance = await self.router()
-            order_min_amount = int(
-                router_instance.functions.getAmountsOut(
-                    amount,
-                    order_path_dex)
-                .call()[1])
-            return order_min_amount
+            get_amount = router_instance.functions.getAmountsOut(
+                amount,
+                order_path_dex).call()
+            self.logger.debug("get_amount: %s", get_amount)
+            return get_amount[1]
         except Exception as e:
             self.logger.error("get_quote_uniswap_v2 %s", e)
             return
