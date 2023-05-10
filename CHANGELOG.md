@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.2 (2023-05-10)
+### Fix
+* ⚡️ settings update ([`f39a47f`](https://github.com/mraniki/dxsp/commit/f39a47f94b3f9525cb784d4298eabe38eac7693a))
+* ⚡️ fix get_sign ([`30b4150`](https://github.com/mraniki/dxsp/commit/30b41507094474d3a385051fda0788afe74e1f72))
+
+### Other
+* Merge pull request #195 from mraniki/dev ([`c7a2701`](https://github.com/mraniki/dxsp/commit/c7a2701498555c630df2c296bb4926598a1d7bc4))
+* Troubleshoot for get_quote_uniswap_v2 ([`59f7cb0`](https://github.com/mraniki/dxsp/commit/59f7cb074e00c41f35013513cf23ef11ad78f886))
+
 ## v2.2.1 (2023-05-10)
 ### Fix
 * ⚡️ updated unit test ([`7872a19`](https://github.com/mraniki/dxsp/commit/7872a1913bdb10216062dfb040ad957116445e0b))
