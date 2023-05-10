@@ -69,9 +69,13 @@ class DexSwap:
                     asset_in_address,
                     asset_out_address)
             if self.protocol_type == "0x":
+                self.logger.debug("0x getquote")
                 await self.get_quote_0x(
                     symbol,
                     asset_out_symbol,)
+            if self.protocol_type == "apollo":
+                self.logger.debug("apollo getquote")
+                await self.get_quote_apollo()
             if self.protocol_type == "uniswap_v3":
                 await self.get_quote_uniswap_v3(
                     asset_in_address,
@@ -745,14 +749,25 @@ class DexSwap:
         return swap_order
 
 # apollo finance
-    async def get_quote_apollo(
-        self,
-        asset_in_address,
-        asset_out_address,
-        amount=1
-    ):
-        return
+    async def get_quote_apollo(self,):
+        quote_url = (
+            settings.dex_apollo_url
+            + "/fapi/v1/ticker/price"
+            )
+        quote_response = await self._get(
+            url=quote_url,
+            params=None,
+            headers=settings.headers  # headers={'User-Agent': 'Mozilla/5.0'},
+            )
+        self.logger.debug("get_quote_apollo %s", quote_response)
+        quote = quote_response['price']
+        return quote
 
-    async def get_swap_apolllo(self):
+    async def get_swap_apollo(self):
         self.logger.warning("Not available")
+    # $ curl -H "X-MBX-APIKEY: dsdfsdf" -X POST
+    # 'https://fapi/apollox.finance/fapi/v1/order?symbol=BTCUSDT&side=BUY&
+    # type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943&
+    # signature= 3c661234138461fcc7a7d8746c6558c9
+    # 842d4e10870d2ecbedf7777cad694af9'
         return
