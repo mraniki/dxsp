@@ -5,6 +5,7 @@
 import logging
 
 import requests
+from uniswap import Uniswap
 from dxsp import __version__
 from dxsp.config import settings
 
@@ -33,6 +34,15 @@ class DexSwap:
         # USER
         self.wallet_address = settings.dex_wallet_address
         self.private_key = settings.dex_private_key
+
+        # UNISWAP 🦄
+        if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
+            self.uniswap = Uniswap(
+                address=self.wallet_address,
+                private_key=self.private_key,
+                version=2 if self.protocol_type == "uniswap_v2" else 3,
+                web3=self.w3,
+                default_slippage=settings.slippage)
 
         # COINGECKO 🦎
         try:
@@ -551,13 +561,17 @@ class DexSwap:
     ):
         self.logger.debug("get_quote_uniswap_v2")
         try:
-            order_path_dex = [asset_out_address, asset_in_address]
-            router_instance = await self.router()
-            get_amount = router_instance.functions.getAmountsOut(
-                amount,
-                order_path_dex).call()
-            self.logger.debug("get_amount: %s", get_amount)
-            return get_amount[1]
+            # order_path_dex = [asset_out_address, asset_in_address]
+            # router_instance = await self.router()
+            # get_amount = router_instance.functions.getAmountsIn(
+            #     amount,
+            #     order_path_dex).call()
+            # self.logger.debug("get_amount: %s", get_amount)
+            # return get_amount[0]
+            self.uniswap.get_price_output(
+                token0=asset_out_address,
+                token1=asset_in_address,
+                qty=amount)
         except Exception as e:
             self.logger.error("get_quote_uniswap_v2 %s", e)
             return
@@ -600,6 +614,7 @@ class DexSwap:
         asset_in_address,
         amount
     ):
+        # self.uniswap.make_trade
         order_path_dex = [asset_out_address, asset_in_address]
 
         deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
