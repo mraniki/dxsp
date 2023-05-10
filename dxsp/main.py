@@ -339,7 +339,7 @@ class DexSwap:
             response = requests.get(
                 url,
                 params=params,
-                headers=settings.headers,
+                headers=headers,
                 # headers={'User-Agent': 'Mozilla/5.0'},
                 timeout=10)
             self.logger.debug("_response: %s", response)
@@ -555,7 +555,7 @@ class DexSwap:
                 .call()[1])
             return order_min_amount
         except Exception as e:
-            self.logger.error("uniswap_v2_quote %s", e)
+            self.logger.error("get_quote_uniswap_v2 %s", e)
             return
 
     async def get_approve_uniswap(self, asset_out_address):
@@ -596,7 +596,7 @@ class DexSwap:
         order_path_dex = [asset_out_address, asset_in_address]
 
         deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
-        order_min_amount = self.uniswap_v2_quote(
+        order_min_amount = self.get_quote_uniswap_v2(
             asset_in_address,
             asset_out_address)
         router_instance = await self.router()
@@ -642,7 +642,7 @@ class DexSwap:
             quote_response = await self._get(
                 quote_url,
                 params=None,
-                header={"0x-api-key": settings.dex_0x_api_key}
+                headers={"0x-api-key": settings.dex_0x_api_key}
                 )
             self.logger.debug("quote_response %s", quote_response)
             if quote_response:
