@@ -379,8 +379,9 @@ class DexSwap:
     async def get_sign(self, order):
 
         try:
-            if not isinstance(order, dict):
-                raise ValueError("Transaction must be a dictionary")
+            # if not isinstance(order, dict):
+            #     raise ValueError("Transaction must be a dictionary")
+            self.logger.debug("get_sign: order %s", order)
             if self.protocol_type in ['uniswap_v2', 'uniswap_v3']:
                 order_params = {
                             'from': self.wallet_address,
@@ -548,15 +549,15 @@ class DexSwap:
         asset_out_address,
         amount=1
     ):
+        self.logger.debug("get_quote_uniswap_v2")
         try:
             order_path_dex = [asset_out_address, asset_in_address]
             router_instance = await self.router()
-            order_min_amount = int(
-                router_instance.functions.getAmountsOut(
-                    amount,
-                    order_path_dex)
-                .call()[1])
-            return order_min_amount
+            get_amount = router_instance.functions.getAmountsOut(
+                amount,
+                order_path_dex).call()
+            self.logger.debug("get_amount: %s", get_amount)
+            return get_amount[1]
         except Exception as e:
             self.logger.error("get_quote_uniswap_v2 %s", e)
             return
@@ -573,13 +574,16 @@ class DexSwap:
                             self.w3.to_checksum_address(
                                 settings.dex_router_contract_addr)
                             ).call()
+            self.logger.debug("approval_check %s", approval_check)
             if (approval_check == 0):
                 approved_amount = (self.w3.to_wei(2**64-1, 'ether'))
                 approval_TX = asset_out_contract.functions.approve(
                                 self.w3.to_checksum_address(
                                     settings.dex_router_contract_addr),
                                 approved_amount)
+                self.logger.debug("approval_TX %s", approval_TX)
                 approval_txHash = await self.get_sign(approval_TX)
+                self.logger.debug("approval_txHash %s", approval_txHash)
                 approval_txHash_complete = (
                     self.w3.eth.wait_for_transaction_receipt(
                         approval_txHash,
