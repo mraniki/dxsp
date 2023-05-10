@@ -72,9 +72,9 @@ class DexSwap:
                 await self.get_quote_1inch(
                     asset_in_address,
                     asset_out_address)
-            if self.protocol_type == "uniswap_v2":
-                self.logger.debug("uniswap_v2 getquote")
-                await self.get_quote_uniswap_v2(
+            if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
+                self.logger.debug("uniswap getquote")
+                await self.get_quote_uniswap(
                     asset_in_address,
                     asset_out_address)
             if self.protocol_type == "0x":
@@ -85,10 +85,7 @@ class DexSwap:
             if self.protocol_type == "apollo":
                 self.logger.debug("apollo getquote")
                 await self.get_quote_apollo()
-            if self.protocol_type == "uniswap_v3":
-                await self.get_quote_uniswap_v3(
-                    asset_in_address,
-                    asset_out_address)
+
         except Exception as e:
             self.logger.error("get_quote %s", e)
             return
@@ -138,8 +135,8 @@ class DexSwap:
                 return
 
             # UNISWAP V2
-            if self.protocol_type in ["uniswap_v2"]:
-                swap_order = await self.get_swap_uniswap_v2(
+            if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
+                swap_order = await self.get_swap_uniswap(
                     asset_out_address,
                     asset_in_address,
                     order_amount)
@@ -156,9 +153,6 @@ class DexSwap:
                     asset_out_address,
                     asset_in_address,
                     order_amount)
-            # UNISWAP V3
-            if self.protocol_type in ['uniswap_v3']:
-                swap_order = await self.get_swap_uniswap_v3()
 
             if swap_order:
                 self.logger.debug("swap_order %s", swap_order)
@@ -279,7 +273,7 @@ class DexSwap:
             if token_contract is not None:
                 self.logger.info("token_contract found %s", token_contract)
                 return self.w3.to_checksum_address(token_contract)
-            self.logger.info("no contract found for %s", token)
+            return f"no contract found for {token}"
         except Exception as e:
             self.logger.error("search_contract %s", e)
             return
@@ -353,7 +347,6 @@ class DexSwap:
                 url,
                 params=params,
                 headers=headers,
-                # headers={'User-Agent': 'Mozilla/5.0'},
                 timeout=10)
             self.logger.debug("_response: %s", response)
             if response:
@@ -553,13 +546,13 @@ class DexSwap:
 
 # PROTOCOL SPECIFIC
 # uniswap v2 🦄
-    async def get_quote_uniswap_v2(
+    async def get_quote_uniswap(
         self,
         asset_in_address,
         asset_out_address,
         amount=1
     ):
-        self.logger.debug("get_quote_uniswap_v2")
+        self.logger.debug("get_quote_uniswap")
         try:
             # order_path_dex = [asset_out_address, asset_in_address]
             # router_instance = await self.router()
@@ -573,7 +566,7 @@ class DexSwap:
                 token1=asset_in_address,
                 qty=amount)
         except Exception as e:
-            self.logger.error("get_quote_uniswap_v2 %s", e)
+            self.logger.error("get_quote_uniswap %s", e)
             return
 
     async def get_approve_uniswap(self, asset_out_address):
@@ -608,7 +601,7 @@ class DexSwap:
             self.logger.error("get_approve_uniswap %s", e)
             return None
 
-    async def get_swap_uniswap_v2(
+    async def get_swap_uniswap(
         self,
         asset_out_address,
         asset_in_address,
@@ -629,19 +622,6 @@ class DexSwap:
                         self.wallet_address,
                         deadline)
         return swap_order
-
-# uniswap v3 🦄
-    async def get_quote_uniswap_v3(
-        self,
-        asset_in_address,
-        asset_out_address,
-        amount=1
-    ):
-        return
-
-    async def get_swap_uniswap_v3(self):
-        self.logger.warning("Not available")
-        return
 
 # 0️⃣x
     async def get_quote_0x(
