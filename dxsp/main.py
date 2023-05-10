@@ -614,6 +614,7 @@ class DexSwap:
         asset_in_address,
         amount
     ):
+        # self.uniswap.make_trade
         order_path_dex = [asset_out_address, asset_in_address]
 
         deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
