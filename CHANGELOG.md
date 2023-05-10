@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.0 (2023-05-10)
+### Feature
+* ✨ added apollo basics ([`1afe435`](https://github.com/mraniki/dxsp/commit/1afe435f8608595297235353ea0b39814659ee16))
+
+### Other
+* Merge pull request #193 from mraniki/dev ([`2377d22`](https://github.com/mraniki/dxsp/commit/2377d22ec85e890187d768c096e55fe5f503d373))
+
 ## v2.1.6 (2023-05-10)
 ### Fix
 * 🐛  def router(self) attributes ([`e62822a`](https://github.com/mraniki/dxsp/commit/e62822ac769a9b18f6534cb70f68333d077a4ae5))
