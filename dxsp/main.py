@@ -607,21 +607,25 @@ class DexSwap:
         asset_in_address,
         amount
     ):
-        # self.uniswap.make_trade
-        order_path_dex = [asset_out_address, asset_in_address]
+        return self.uniswap(
+            input_token=asset_in_address,
+            output_token=asset_out_address,
+            qty=amount
+        )
+        # order_path_dex = [asset_out_address, asset_in_address]
 
-        deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
-        order_min_amount = self.get_quote_uniswap_v2(
-            asset_in_address,
-            asset_out_address)
-        router_instance = await self.router()
-        swap_order = router_instance.functions.swapExactTokensForTokens(
-                        amount,
-                        order_min_amount,
-                        order_path_dex,
-                        self.wallet_address,
-                        deadline)
-        return swap_order
+        # deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
+        # order_min_amount = self.get_quote_uniswap_v2(
+        #     asset_in_address,
+        #     asset_out_address)
+        # router_instance = await self.router()
+        # swap_order = router_instance.functions.swapExactTokensForTokens(
+        #                 amount,
+        #                 order_min_amount,
+        #                 order_path_dex,
+        #                 self.wallet_address,
+        #                 deadline)
+        # return swap_order
 
 # 0️⃣x
     async def get_quote_0x(
