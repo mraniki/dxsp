@@ -2,6 +2,20 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.3 (2023-05-12)
+### Fix
+* ⚡️ updated for uniswap lib ([`388f27f`](https://github.com/mraniki/dxsp/commit/388f27fe1ee6545727db31dc439ab079f2423317))
+* ⚡️ code cleanup ([`c20e5e4`](https://github.com/mraniki/dxsp/commit/c20e5e401d092c3f0359751c295886674fba06d6))
+* ⚡️ uniswap lib ([`47b82ec`](https://github.com/mraniki/dxsp/commit/47b82ecb3bf16691ec8645705697b3dce87638ec))
+* ⚡️ adding generic uniswap lib ([`f9fd883`](https://github.com/mraniki/dxsp/commit/f9fd8839745bebcba0eefb447e2ca6033dcdbbc2))
+* 🐛 correct quote uni ([`8206e12`](https://github.com/mraniki/dxsp/commit/8206e12910dc530d8c5caebf2bb2dd22011b0530))
+* ⚡️ code cleanup ([`01e1cb3`](https://github.com/mraniki/dxsp/commit/01e1cb385dc90424deaac637fdd4747cef21bf17))
+
+### Other
+* Merge pull request #199 from mraniki/dev ([`24352e6`](https://github.com/mraniki/dxsp/commit/24352e6245e710289a3c4dcb7e89dd095ccb8088))
+* Merge pull request #197 from mraniki/dev ([`ef71663`](https://github.com/mraniki/dxsp/commit/ef7166358237b10a25ad4be5249526d193018846))
+* Merge pull request #196 from mraniki/dev ([`6f1c341`](https://github.com/mraniki/dxsp/commit/6f1c341dd7aaf7fbb080dff386b81b4a5c4ea39c))
+
 ## v2.2.2 (2023-05-10)
 ### Fix
 * ⚡️ settings update ([`f39a47f`](https://github.com/mraniki/dxsp/commit/f39a47f94b3f9525cb784d4298eabe38eac7693a))
