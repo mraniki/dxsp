@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.4 (2023-05-13)
+### Fix
+* 🐛 slippage typo in uniswap function ([`78973c1`](https://github.com/mraniki/dxsp/commit/78973c1624e213fe330afe3ee7e0827d627a2313))
+
+### Other
+* Merge pull request #200 from mraniki/dev ([`992df4d`](https://github.com/mraniki/dxsp/commit/992df4d6e8d2913540afb870cb9827ec8c1cc39b))
+
 ## v2.2.3 (2023-05-12)
 ### Fix
 * ⚡️ updated for uniswap lib ([`388f27f`](https://github.com/mraniki/dxsp/commit/388f27fe1ee6545727db31dc439ab079f2423317))
