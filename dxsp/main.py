@@ -40,6 +40,7 @@ class DexSwap:
             self.uniswap = Uniswap(
                 address=self.wallet_address,
                 private_key=self.private_key,
+                router_contract_addr=settings.dex_router_contract_addr,
                 version=2 if self.protocol_type == "uniswap_v2" else 3,
                 web3=self.w3,
                 default_slippage=settings.dex_trading_slippage)
