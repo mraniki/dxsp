@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.5 (2023-05-13)
+### Fix
+* ⚡️ added router_contract_addr in uniswap client ([`c591d06`](https://github.com/mraniki/dxsp/commit/c591d06ef57330337ed4c23b3fe57baa86ebad9a))
+
+### Other
+* Merge pull request #201 from mraniki/dev ([`7b982e4`](https://github.com/mraniki/dxsp/commit/7b982e4ca0b73da53cde9e8360a4ac669cde46fa))
+
 ## v2.2.4 (2023-05-13)
 ### Fix
 * 🐛 slippage typo in uniswap function ([`78973c1`](https://github.com/mraniki/dxsp/commit/78973c1624e213fe330afe3ee7e0827d627a2313))
