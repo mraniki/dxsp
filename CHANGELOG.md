@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.7 (2023-05-13)
+### Fix
+* 🐛 in quote module ([`e7f4324`](https://github.com/mraniki/dxsp/commit/e7f4324558a617a43e299e39abd0f4ecad65897d))
+
+### Other
+* Merge pull request #202 from mraniki/dev ([`d329ef7`](https://github.com/mraniki/dxsp/commit/d329ef75436a9b16486681cbc8a7fb24b6f24753))
+
 ## v2.2.6 (2023-05-13)
 ### Fix
 * ⚡️Update README.md ([`395922d`](https://github.com/mraniki/dxsp/commit/395922d836dbaa2cc9e7fd6a71b8c36347352c55))
