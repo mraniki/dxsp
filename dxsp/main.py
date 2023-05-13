@@ -32,7 +32,8 @@ class DexSwap:
         self.protocol_type = settings.dex_protocol_type
         self.chain_id = settings.dex_chain_id
         # USER
-        self.wallet_address = settings.dex_wallet_address
+        self.wallet_address = self.w3.to_checksum_address(
+            settings.dex_wallet_address)
         self.private_key = settings.dex_private_key
 
         # UNISWAP 🦄
@@ -70,22 +71,22 @@ class DexSwap:
         try:
             if self.protocol_type in ["1inch", "1inch_limit"]:
                 self.logger.debug("1inch getquote")
-                await self.get_quote_1inch(
+                return await self.get_quote_1inch(
                     asset_in_address,
                     asset_out_address)
             if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
                 self.logger.debug("uniswap getquote")
-                await self.get_quote_uniswap(
+                return await self.get_quote_uniswap(
                     asset_in_address,
                     asset_out_address)
             if self.protocol_type == "0x":
                 self.logger.debug("0x getquote")
-                await self.get_quote_0x(
+                return await self.get_quote_0x(
                     symbol,
                     asset_out_symbol,)
             if self.protocol_type == "apollo":
                 self.logger.debug("apollo getquote")
-                await self.get_quote_apollo()
+                return await self.get_quote_apollo()
 
         except Exception as e:
             self.logger.error("get_quote %s", e)
@@ -343,14 +344,14 @@ class DexSwap:
         headers=None
             ):
         try:
-            self.logger.debug("url: %s", url)
-            self.logger.debug("_header: %s", settings.headers)
+            # self.logger.debug("url: %s", url)
+            # self.logger.debug("_header: %s", settings.headers)
             response = requests.get(
                 url,
                 params=params,
                 headers=headers,
                 timeout=10)
-            self.logger.debug("_response: %s", response)
+            # self.logger.debug("_response: %s", response)
             if response:
                 # self.logger.debug("_json: %s", response.json())
                 return response.json()
@@ -563,10 +564,12 @@ class DexSwap:
             #     order_path_dex).call()
             # self.logger.debug("get_amount: %s", get_amount)
             # return get_amount[0]
-            self.uniswap.get_price_output(
+            quote = self.uniswap.get_price_output(
                 token0=asset_out_address,
                 token1=asset_in_address,
                 qty=amount)
+            self.logger.info("quoteuniswap %s", quote)
+            return quote
         except Exception as e:
             self.logger.error("get_quote_uniswap %s", e)
             return
