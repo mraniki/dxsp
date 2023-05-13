@@ -42,7 +42,7 @@ class DexSwap:
                 private_key=self.private_key,
                 version=2 if self.protocol_type == "uniswap_v2" else 3,
                 web3=self.w3,
-                default_slippage=settings.slippage)
+                default_slippage=settings.dex_trading_slippage)
 
         # COINGECKO 🦎
         try:
@@ -271,7 +271,8 @@ class DexSwap:
                         token_contract = await self.search_cg_contract(
                             token)
             if token_contract is not None:
-                self.logger.info("token_contract found %s", token_contract)
+                self.logger.info("%s token: contract found %s",
+                                 token, token_contract)
                 return self.w3.to_checksum_address(token_contract)
             return f"no contract found for {token}"
         except Exception as e:
