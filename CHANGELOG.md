@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.6 (2023-05-13)
+### Fix
+* ⚡️Update README.md ([`395922d`](https://github.com/mraniki/dxsp/commit/395922d836dbaa2cc9e7fd6a71b8c36347352c55))
+
+### Other
+* Update README.md ([`88afd88`](https://github.com/mraniki/dxsp/commit/88afd889e4078eb340ab5c20b6c41b66fd1fe8f3))
+
 ## v2.2.5 (2023-05-13)
 ### Fix
 * ⚡️ added router_contract_addr in uniswap client ([`c591d06`](https://github.com/mraniki/dxsp/commit/c591d06ef57330337ed4c23b3fe57baa86ebad9a))
