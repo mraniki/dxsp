@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.8 (2023-05-14)
+### Fix
+* ⚡️ adding web3cli ([`b2c485f`](https://github.com/mraniki/dxsp/commit/b2c485f3f4174bfca0f5d14c2a67da05041eb0c8))
+
+### Other
+* Merge pull request #203 from mraniki/dev ([`f788048`](https://github.com/mraniki/dxsp/commit/f7880487eaf70672132f6e39a98e02b20bf7270d))
+
 ## v2.2.7 (2023-05-13)
 ### Fix
 * 🐛 in quote module ([`e7f4324`](https://github.com/mraniki/dxsp/commit/e7f4324558a617a43e299e39abd0f4ecad65897d))
