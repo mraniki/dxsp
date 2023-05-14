@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dxsp"
-version = "2.2.8"
+version = "2.2.7"
 description = "DXSP (DeX SwaP), A defi swap helper package. Swap made easy."
 authors = ["mraniki <8766259+mraniki@users.noreply.github.com>"]
 license = "MIT License"
@@ -19,7 +19,7 @@ dynaconf = "*"
 web3 = ">=6.0.0"
 pycoingecko = "*"
 uniswap-python = "*"
-web3cli = "*"
+web3client = "*"
 
 #web3-ethereum-defi = "*"
 # web3client = ">=1.1.8"
