@@ -37,14 +37,14 @@ class DexSwap:
         self.private_key = settings.dex_private_key
 
         # UNISWAP 🦄
-        if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
-            self.uniswap = Uniswap(
-                address=self.wallet_address,
-                private_key=self.private_key,
-                router_contract_addr=settings.dex_router_contract_addr,
-                version=2 if self.protocol_type == "uniswap_v2" else 3,
-                web3=self.w3,
-                default_slippage=settings.dex_trading_slippage)
+        # if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
+        #     self.uniswap = Uniswap(
+        #         address=self.wallet_address,
+        #         private_key=self.private_key,
+        #         router_contract_addr=settings.dex_router_contract_addr,
+        #         version=2 if self.protocol_type == "uniswap_v2" else 3,
+        #         web3=self.w3,
+        #         default_slippage=settings.dex_trading_slippage)
 
         # COINGECKO 🦎
         try:
@@ -382,33 +382,24 @@ class DexSwap:
             self.logger.error("get_approve %s", e)
             return None
 
-    async def get_sign(self, order):
+    async def get_sign(self, transaction):
 
         try:
-            # if not isinstance(order, dict):
-            #     raise ValueError("Transaction must be a dictionary")
-            self.logger.debug("get_sign: order %s", order)
+            self.logger.debug("get_sign: transaction %s", transaction)
             if self.protocol_type in ['uniswap_v2', 'uniswap_v3']:
-                order_params = {
+                transaction_params = {
                             'from': self.wallet_address,
-                            'gas': await self.get_gas(order),
-                            'gasPrice': await self.get_gasPrice(order),
+                            'gas': await self.get_gas(transaction),
+                            'gasPrice': await self.get_gasPrice(transaction),
                             'nonce': self.w3.eth.get_transaction_count(
                                 self.wallet_address),
                             }
-                order = order.build_transaction(order_params)
-            elif self.protocol_type in ["1inch", "1inch_limit"]:
-                order = order['tx']
-                order['gas'] = await self.get_gas(order)
-                order['nonce'] = self.w3.eth.get_transaction_count(
-                    self.wallet_address)
-                order['value'] = int(order['value'])
-                order['gasPrice'] = await self.get_gasPrice(order)
+                transaction = transaction.build_transaction(transaction_params)
             signed = self.w3.eth.account.sign_transaction(
-                order,
+                transaction,
                 settings.dex_private_key)
-            raw_order = signed.rawTransaction
-            return self.w3.eth.send_raw_transaction(raw_order)
+            tx_hash = self.w3.eth.send_raw_transaction(signed.rawTransaction)
+            return tx_hash
         except (ValueError, TypeError, KeyError) as e:
             self.logger.error("get_sign: %s", e)
             raise
@@ -563,12 +554,6 @@ class DexSwap:
                 [asset_in_address, asset_out_address]).call()
 
             return quote[1]
-            # quote = self.uniswap.get_price_output(
-            #     token0=asset_out_address,
-            #     token1=asset_in_address,
-            #     qty=amount)
-            # self.logger.info("quoteuniswap %s", quote)
-            # return quote
         except Exception as e:
             self.logger.error("get_quote_uniswap %s", e)
             return
@@ -588,12 +573,12 @@ class DexSwap:
             self.logger.debug("approval_check %s", approval_check)
             if (approval_check == 0):
                 approved_amount = (self.w3.to_wei(2**64-1, 'ether'))
-                approval_TX = asset_out_contract.functions.approve(
+                approval_transaction = asset_out_contract.functions.approve(
                                 self.w3.to_checksum_address(
                                     settings.dex_router_contract_addr),
                                 approved_amount)
-                self.logger.debug("approval_TX %s", approval_TX)
-                approval_txHash = await self.get_sign(approval_TX)
+                self.logger.debug("approval_TX %s", approval_transaction)
+                approval_txHash = await self.get_sign(approval_transaction)
                 self.logger.debug("approval_txHash %s", approval_txHash)
                 approval_txHash_complete = (
                     self.w3.eth.wait_for_transaction_receipt(
@@ -611,25 +596,21 @@ class DexSwap:
         asset_in_address,
         amount
     ):
-        return self.uniswap(
-            input_token=asset_in_address,
-            output_token=asset_out_address,
-            qty=amount
-        )
-        # order_path_dex = [asset_out_address, asset_in_address]
+        order_path_dex = [asset_out_address, asset_in_address]
 
-        # deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
-        # order_min_amount = self.get_quote_uniswap_v2(
-        #     asset_in_address,
-        #     asset_out_address)
-        # router_instance = await self.router()
-        # swap_order = router_instance.functions.swapExactTokensForTokens(
-        #                 amount,
-        #                 order_min_amount,
-        #                 order_path_dex,
-        #                 self.wallet_address,
-        #                 deadline)
-        # return swap_order
+        deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
+        order_min_amount = self.get_quote_uniswap(
+            asset_in_address,
+            asset_out_address,
+            amount)[0]
+        router_instance = await self.router()
+        swap_order = router_instance.functions.swapExactTokensForTokens(
+                        amount,
+                        order_min_amount,
+                        order_path_dex,
+                        self.wallet_address,
+                        deadline)
+        return swap_order
 
 # 0️⃣x
     async def get_quote_0x(
