@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.11 (2023-05-15)
+### Fix
+* ⚡️ added quoter function and setting. Updated zerox ([`74a7a8a`](https://github.com/mraniki/dxsp/commit/74a7a8a3734bccb06968e775aacf1d117c540515))
+* ⚡️ clean up the uniswap quoter and swap. ([`c87c37f`](https://github.com/mraniki/dxsp/commit/c87c37f626cc347a77769a95b7e1a29440d81e97))
+
+### Other
+* Merge pull request #210 from mraniki/dev ([`0d1d95a`](https://github.com/mraniki/dxsp/commit/0d1d95ac815a52f2bd935da5ff02d77fedc97abc))
+* 👽 remove 1inch support until api resolution ([`f751a1d`](https://github.com/mraniki/dxsp/commit/f751a1de0407e95e60d513f8b38a985f76482055))
+
 ## v2.2.10 (2023-05-15)
 ### Fix
 * ⚡️ slitgh quote improvement ([`162bb2b`](https://github.com/mraniki/dxsp/commit/162bb2bb7664d2b7cf1c08207c2f7279fec59231))
