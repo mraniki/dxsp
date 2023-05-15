@@ -127,7 +127,8 @@ class DexSwap:
             if self.protocol_type == "0x":
                 swap_order = await self.get_quote_0x(
                     asset_in_symbol,
-                    asset_out_symbol,)
+                    asset_out_symbol,
+                    order_amount)
                 await self.get_sign(swap_order)
 
             if swap_order:
@@ -615,7 +616,7 @@ class DexSwap:
         self,
         asset_in_address,
         asset_out_address,
-        amount=1
+        amount
     ):
         try:
             asset_out_amount = self.w3.to_wei(amount, 'ether')
