@@ -2,6 +2,20 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.9 (2023-05-15)
+### Fix
+* :bug: version ([`c028115`](https://github.com/mraniki/dxsp/commit/c028115cb468bcbb207df6f36ae6a21f9f5f3157))
+* 🐛 swap tweak ([`93cfc0b`](https://github.com/mraniki/dxsp/commit/93cfc0b9c694b8ce3177f638410acf5838252464))
+* :zap: Refactor uniswap function to use get_quote_uniswap ([`6ac3265`](https://github.com/mraniki/dxsp/commit/6ac326540c766ee8d750822c1e1f4170e56d43b8))
+* 🐛 quote uniswap ([`6e5c072`](https://github.com/mraniki/dxsp/commit/6e5c072357ef9bdd8ba4af22b440cac8f61a321b))
+* ⚡️ web3client ([`f09a555`](https://github.com/mraniki/dxsp/commit/f09a555497365fea6e0b435bb51e308d6c69061a))
+
+### Other
+* Merge pull request #207 from mraniki/dev ([`4adea6d`](https://github.com/mraniki/dxsp/commit/4adea6d98c47c6bf37d68213cfefe91c1884f17e))
+* Merge pull request #206 from mraniki/dev ([`0f96d3f`](https://github.com/mraniki/dxsp/commit/0f96d3ff2b447218bf121612d661443589f67a3b))
+* Merge pull request #205 from mraniki/dev ([`46c9d19`](https://github.com/mraniki/dxsp/commit/46c9d19f7fef5d3c2b22416ffed398b3cc6634b7))
+* Merge pull request #204 from mraniki/dev ([`b605e14`](https://github.com/mraniki/dxsp/commit/b605e14d4dac72482e705677ec6416daae6a4a0a))
+
 ## v2.2.8 (2023-05-14)
 ### Fix
 * ⚡️ adding web3cli ([`b2c485f`](https://github.com/mraniki/dxsp/commit/b2c485f3f4174bfca0f5d14c2a67da05041eb0c8))
