@@ -68,11 +68,6 @@ class DexSwap:
             self.logger.warning("No Valid Contract")
             return
         try:
-            if self.protocol_type in ["1inch", "1inch_limit"]:
-                self.logger.debug("1inch getquote")
-                return await self.get_quote_1inch(
-                    asset_in_address,
-                    asset_out_address)
             if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
                 self.logger.debug("uniswap getquote")
                 return await self.get_quote_uniswap(
@@ -83,9 +78,6 @@ class DexSwap:
                 return await self.get_quote_0x(
                     symbol,
                     asset_out_symbol,)
-            if self.protocol_type == "apollo":
-                self.logger.debug("apollo getquote")
-                return await self.get_quote_apollo()
 
         except Exception as e:
             self.logger.error("get_quote %s", e)
@@ -148,12 +140,6 @@ class DexSwap:
                     asset_out_symbol,)
                 await self.get_sign(swap_order)
 
-            # 1INCH
-            if self.protocol_type in ["1inch"]:
-                swap_order = await self.get_swap_1inch(
-                    asset_out_address,
-                    asset_in_address,
-                    order_amount)
 
             if swap_order:
                 self.logger.debug("swap_order %s", swap_order)
@@ -373,9 +359,7 @@ class DexSwap:
     async def get_approve(self, asset_out_address):
 
         try:
-            if self.protocol_type in ["1inch", "1inch_limit"]:
-                await self.get_approve_1inch(asset_out_address)
-            elif self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
+            if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
                 await self.get_approve_uniswap(asset_out_address)
         except Exception as e:
             self.logger.error("get_approve %s", e)
@@ -644,128 +628,3 @@ class DexSwap:
                 return round(quote, 2)
         except Exception as e:
             self.logger.error("get_quote_0x %s", e)
-
-# 1inch 🦄
-    async def get_quote_1inch(
-        self,
-        asset_in_address,
-        asset_out_address,
-        amount=1
-    ):
-        try:
-            asset_out_amount = self.w3.to_wei(amount, 'ether')
-            quote_url = (
-                settings.dex_1inch_url
-                + str(self.chain_id)
-                + "/quote?fromTokenAddress="
-                + str(asset_in_address)
-                + "&toTokenAddress="
-                + str(asset_out_address)
-                + "&amount="
-                + str(asset_out_amount))
-            quote_response = await self._get(
-                url=quote_url,
-                params=None,
-                headers=settings.headers)
-            self.logger.debug("quote_response %s", quote_response)
-            if quote_response:
-                quote_amount = quote_response['toTokenAmount']
-                self.logger.debug("quote_amount %s", quote_amount)
-                # quote_decimals = quote_response['fromToken']['decimals']
-                quote = self.w3.from_wei(int(quote_amount), 'ether')
-                # /(10 ** quote_decimals))
-                return round(quote, 2)
-        except Exception as e:
-            self.logger.error("get_quote_1inch %s", e)
-
-    async def get_approve_1inch(self, asset_out_address):
-        try:
-            approval_check_URL = (
-                settings.dex_1inch_url
-                + str(self.chain_id)
-                + "/approve/allowance?tokenAddress="
-                + str(asset_out_address)
-                + "&walletAddress="
-                + str(self.wallet_address))
-            approval_response = await self._get(
-                url=approval_check_URL,
-                params=None,
-                headers=settings.headers)
-            approval_check = approval_response['allowance']
-            if (approval_check == 0):
-                approval_URL = (
-                    settings.dex_1inch_url
-                    + str(self.chain_id)
-                    + "/approve/transaction?tokenAddress="
-                    + str(asset_out_address))
-                approval_response = await self._get(approval_URL)
-                return approval_response
-        except Exception as e:
-            self.logger.error("get_approve_1inch %s", e)
-            return None
-
-    async def get_swap_1inch(
-        self,
-        asset_out_address,
-        asset_in_address,
-        amount
-    ):
-        swap_url = (
-            settings.dex_1inch_url
-            + str(self.chain_id)
-            + "/swap?fromTokenAddress="
-            + asset_out_address
-            + "&toTokenAddress="
-            + asset_in_address
-            + "&amount="
-            + amount
-            + "&fromAddress="
-            + self.wallet_address
-            + "&slippage="
-            + settings.dex_trading_slippage
-            )
-        swap_order = await self._get(
-            url=swap_url,
-            params=None,
-            headers=settings.headers
-            )
-        swap_order_status = swap_order['statusCode']
-        if swap_order_status != 200:
-            return
-        return swap_order
-
-# apollo finance
-    async def get_ping_apollo(self,):
-        ping_url = (
-            settings.dex_apollo_url
-            + "fapi/v1/ping"
-            )
-        ping_response = await self._get(
-            url=ping_url,
-            params=None,
-            headers=settings.headers
-            )
-        self.logger.debug("get_ping_apollo %s", ping_response)
-
-    async def get_quote_apollo(self,):
-        quote_url = (
-            settings.dex_apollo_url
-            + "/fapi/v1/ticker/price"
-            )
-        quote_response = await self._get(
-            url=quote_url,
-            params=None,
-            headers=settings.headers
-            )
-        self.logger.debug("get_quote_apollo %s", quote_response)
-        quote = quote_response['price']
-        return quote
-
-    async def get_swap_apollo(self):
-        self.logger.warning("Not available")
-    # $ curl -H "X-MBX-APIKEY: dsdfsdf" -X POST
-    # 'https://fapi/apollox.finance/fapi/v1/order?symbol=BTCUSDT&side=BUY&
-    # type=LIMIT&quantity=1&price=9000&timeInForce=GTC&recvWindow=5000&timestamp=1591702613943&
-    # signature= 3c661234138461fcc7a7d8746c6558c9
-    # 842d4e10870d2ecbedf7777cad694af9'
-        return
