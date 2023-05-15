@@ -35,16 +35,6 @@ class DexSwap:
             settings.dex_wallet_address)
         self.private_key = settings.dex_private_key
 
-        # UNISWAP 🦄
-        # if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
-        #     self.uniswap = Uniswap(
-        #         address=self.wallet_address,
-        #         private_key=self.private_key,
-        #         router_contract_addr=settings.dex_router_contract_addr,
-        #         version=2 if self.protocol_type == "uniswap_v2" else 3,
-        #         web3=self.w3,
-        #         default_slippage=settings.dex_trading_slippage)
-
         # COINGECKO 🦎
         try:
             self.cg = CoinGeckoAPI()
@@ -139,7 +129,6 @@ class DexSwap:
                     asset_in_symbol,
                     asset_out_symbol,)
                 await self.get_sign(swap_order)
-
 
             if swap_order:
                 self.logger.debug("swap_order %s", swap_order)
@@ -356,6 +345,18 @@ class DexSwap:
         except Exception as e:
             self.logger.error("router setup: %s", e)
 
+    async def quoter(self):
+        try:
+            quoter_abi = await self.get_abi(settings.dex_quoter_contract_addr)
+            self.logger.debug("quoter_abi: %s", quoter_abi)
+            quoter = self.w3.eth.contract(
+                address=self.w3.to_checksum_address(
+                    settings.dex_quoter_contract_addr),
+                abi=quoter_abi)
+            return quoter
+        except Exception as e:
+            self.logger.error("quoter setup: %s", e)
+
     async def get_approve(self, asset_out_address):
 
         try:
@@ -423,8 +424,7 @@ class DexSwap:
                 # Make a GET request to the block explorer URL
                 resp = await self._get(
                     url=settings.dex_block_explorer_url,
-                    params=params,
-                     )
+                    params=params,)
                 # If the response status is 1, log the ABI
                 if resp['status'] == "1":
                     self.logger.debug("ABI found %s", resp)
@@ -522,7 +522,7 @@ class DexSwap:
             return 0
 
 # PROTOCOL SPECIFIC
-# uniswap v2 🦄
+# uniswap  🦄
     async def get_quote_uniswap(
         self,
         asset_in_address,
@@ -531,11 +531,21 @@ class DexSwap:
     ):
         self.logger.debug("get_quote_uniswap")
         try:
-            router_instance = await self.router()
-            quote = router_instance.functions.getAmountsOut(
-                amount,
-                [asset_in_address, asset_out_address]).call()
-            quote = ("🦄 " + str(quote[1]) + " " + settings.trading_quote_ccy)
+            if self.protocol_type == "uniswap_v2":
+                router_instance = await self.router()
+                quote = router_instance.functions.getAmountsOut(
+                    amount,
+                    [asset_in_address, asset_out_address]).call()
+                quote = ("🦄 " + str(quote[1]) + " " +
+                         settings.trading_quote_ccy)
+            elif self.protocol_type == "uniswap_v3":
+                quoter = await self.quoter()
+                sqrtPriceLimitX96 = 0
+                fee = 3000
+                quote = quoter.functions.quoteExactInputSingle(
+                    asset_in_address,
+                    asset_out_address,
+                    fee, amount, sqrtPriceLimitX96).call()
             return quote
         except Exception as e:
             self.logger.error("get_quote_uniswap %s", e)
@@ -579,21 +589,26 @@ class DexSwap:
         asset_in_address,
         amount
     ):
-        order_path_dex = [asset_out_address, asset_in_address]
+        try:
+            if self.protocol_type == "uniswap_v2":
+                order_path_dex = [asset_out_address, asset_in_address]
 
-        deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
-        order_min_amount = self.get_quote_uniswap(
-            asset_in_address,
-            asset_out_address,
-            amount)[0]
-        router_instance = await self.router()
-        swap_order = router_instance.functions.swapExactTokensForTokens(
-                        amount,
-                        order_min_amount,
-                        order_path_dex,
-                        self.wallet_address,
-                        deadline)
-        return swap_order
+                deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
+                order_min_amount = self.get_quote_uniswap(
+                    asset_in_address,
+                    asset_out_address,
+                    amount)[0]
+                router_instance = await self.router()
+                swap_order = (
+                    router_instance.functions.swapExactTokensForTokens(
+                        amount, order_min_amount,
+                        order_path_dex, self.wallet_address,
+                        deadline))
+                return swap_order
+            if self.protocol_type == "uniswap_v3":
+                return None
+        except Exception as e:
+            self.logger.error("get_approve_uniswap %s", e)
 
 # 0️⃣x
     async def get_quote_0x(
