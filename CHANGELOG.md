@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.10 (2023-05-15)
+### Fix
+* ⚡️ slitgh quote improvement ([`162bb2b`](https://github.com/mraniki/dxsp/commit/162bb2bb7664d2b7cf1c08207c2f7279fec59231))
+
+### Other
+* Merge pull request #208 from mraniki/dev ([`89f7b24`](https://github.com/mraniki/dxsp/commit/89f7b246494ce92bbc677472659dda6cf2991b0c))
+
 ## v2.2.9 (2023-05-15)
 ### Fix
 * :bug: version ([`c028115`](https://github.com/mraniki/dxsp/commit/c028115cb468bcbb207df6f36ae6a21f9f5f3157))
