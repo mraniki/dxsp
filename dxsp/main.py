@@ -5,7 +5,6 @@
 import logging
 
 import requests
-from uniswap import Uniswap
 from dxsp import __version__
 from dxsp.config import settings
 
@@ -552,8 +551,8 @@ class DexSwap:
             quote = router_instance.functions.getAmountsOut(
                 amount,
                 [asset_in_address, asset_out_address]).call()
-
-            return quote[1]
+            quote = ("🦄 " + str(quote[1]) + " " + settings.trading_quote_ccy)
+            return quote
         except Exception as e:
             self.logger.error("get_quote_uniswap %s", e)
             return
@@ -728,7 +727,7 @@ class DexSwap:
         swap_order = await self._get(
             url=swap_url,
             params=None,
-            headers=settings.headers  # headers={'User-Agent': 'Mozilla/5.0'},
+            headers=settings.headers
             )
         swap_order_status = swap_order['statusCode']
         if swap_order_status != 200:
@@ -736,6 +735,18 @@ class DexSwap:
         return swap_order
 
 # apollo finance
+    async def get_ping_apollo(self,):
+        ping_url = (
+            settings.dex_apollo_url
+            + "fapi/v1/ping"
+            )
+        ping_response = await self._get(
+            url=ping_url,
+            params=None,
+            headers=settings.headers
+            )
+        self.logger.debug("get_ping_apollo %s", ping_response)
+
     async def get_quote_apollo(self,):
         quote_url = (
             settings.dex_apollo_url
@@ -744,7 +755,7 @@ class DexSwap:
         quote_response = await self._get(
             url=quote_url,
             params=None,
-            headers=settings.headers  # headers={'User-Agent': 'Mozilla/5.0'},
+            headers=settings.headers
             )
         self.logger.debug("get_quote_apollo %s", quote_response)
         quote = quote_response['price']
