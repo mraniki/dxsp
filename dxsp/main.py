@@ -13,7 +13,7 @@ from web3 import Web3
 
 
 class DexSwap:
-    """Do a swap."""
+    """swap class"""
 
     def __init__(self, w3: Web3 | None = None,):
         """build a dex object """
