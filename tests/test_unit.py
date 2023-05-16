@@ -1,6 +1,6 @@
 import pytest
 from web3 import Web3
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock
 from dxsp import DexSwap
 
 
@@ -13,13 +13,13 @@ def web3():
 @pytest.fixture
 def asset_in_address():
     # create a mock asset in address
-    return "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984" # UNI token address
+    return "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984"  # UNI token address
 
 
 @pytest.fixture
 def asset_out_address():
     # create a mock asset out address
-    return "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" # WETH token address
+    return "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"  # WETH token address
 
 
 @pytest.fixture
@@ -38,6 +38,7 @@ def token_contract(web3):
 def swap_contract(web3):
     # create a mock swap contract
     return web3.eth.contract(abi=..., address=...)
+
 
 @pytest.mark.asyncio
 async def test_init_dex():
@@ -103,6 +104,7 @@ async def test_router():
     if router:
         assert router is not None
 
+
 @pytest.mark.asyncio
 async def test_quoter():
     """router Testing"""
@@ -110,6 +112,7 @@ async def test_quoter():
     quoter = await exchange.quoter()
     if quoter:
         assert quoter is not None
+
 
 @pytest.mark.asyncio
 async def test_logger(caplog):
@@ -119,264 +122,25 @@ async def test_logger(caplog):
         assert "wally" not in caplog.text
 
 
+@pytest.mark.asyncio
+async def test_get():
+    test_class = DexSwap()
+    result = await test_class._get(
+        "http://ip.jsontest.com",
+        params=None,
+        headers=None)
+
+    assert result is not None
+
 
 @pytest.mark.asyncio
-# async def test_get_quote_uniswap():
-#     # Create a mock instance of the router and quoter
-#     router_mock = MagicMock()
-#     router_mock.functions.getAmountsOut = AsyncMock(return_value=[1, 1000])
-
-#     quoter_mock = MagicMock()
-#     quoter_mock.functions.quoteExactInputSingle = AsyncMock(return_value=1000)
-
-#     # Mocking the router and quoter methods of your class
-#     with patch.object(DexSwap, 'router', new_callable=AsyncMock, return_value=router_mock), \
-#          patch.object(DexSwap, 'quoter', new_callable=AsyncMock, return_value=quoter_mock):
-
-#         # Create an instance of your class
-#         obj = DexSwap()
-#         obj.logger = MagicMock()
-#         obj.protocol_type = "uniswap_v2"
-        
-#         # Call the method under test
-#         quote = await obj.get_quote_uniswap("asset_in_address", "asset_out_address", 10)
-#         assert quote == "🦄 1000 USDT"
-
-#         # Now test the "uniswap_v3" branch
-#         obj.protocol_type = "uniswap_v3"
-#         quote = await obj.get_quote_uniswap("asset_in_address", "asset_out_address", 10)
-#         assert quote == 1000  # Assuming that quoteExactInputSingle just returns the quote value
-
-#         # Now test the exception handling
-#         router_mock.functions.getAmountsOut = AsyncMock(side_effect=Exception("Test exception"))
-#         quote = await obj.get_quote_uniswap("asset_in_address", "asset_out_address", 10)
-#         assert quote is None
-#         obj.logger.error.assert_called_with("get_quote_uniswap %s", "Test exception")
-
-
-
-# @pytest.fixture
-# def oneinch_quote():
-#     # create the function to be tested
-#     async def oneinch_quote(
-#         self,
-#         asset_in_address,
-#         asset_out_address,
-#         amount=1
-#     ):
-#         asset_out_amount = 1000000000000000000
-#         quote_url = (
-#             "https://api.1inch.exchange/v5.0/1"
-#             + "/quote?fromTokenAddress="
-#             + str(asset_in_address)
-#             + "&toTokenAddress="
-#             + str(asset_out_address)
-#             + "&amount="
-#             + str(asset_out_amount))
-#         quote_response = await self._get(quote_url)
-#         self.logger.debug("quote %s", quote_response)
-#         quote_amount = quote_response['toTokenAmount']
-#         quote_decimals = quote_response['fromToken']['decimals']
-
-#     return oneinch_quote
-
-# @patch("oneinch_quote._get")
-# def test_oneinch_quote_success(
-#     mock_get,
-#     asset_in_address,
-#     asset_out_address,
-#     oneinch_quote
-#      ):
-#     # test that the function returns a valid quote when successful
-#     amount = 100  # swap 100 UNI tokens for WETH tokens
-#     mock_get.return_value = {
-#         "fromToken": {
-#             "decimals": 18,
-#             "symbol": "UNI"
-#         },
-#         "toToken": {
-#             "decimals": 18,
-#             "symbol": "WETH"
-#         },
-#         "toTokenAmount": "1234567890000000000"  # 1.23456789 WETH tokens
-#     }
-#     quote = oneinch_quote(asset_in_address, asset_out_address, amount)
-#     assert quote == 0.01  # the quote should be 0.01 WETH per UNI
-
-
-# @patch("oneinch_quote._get")
-# def test_oneinch_quote_failure(
-#     mock_get,
-#     web3,
-#     asset_in_address,
-#     asset_out_address,
-#     oneinch_quote
-#      ):
-#     # test that the function raises an exception when failed
-#     amount = 100  # swap 100 UNI tokens for WETH tokens
-#     mock_get.return_value = {
-#         "error": "Invalid token address"
-#     }
-#     with pytest.raises(Exception):
-#         quote = oneinch_quote(asset_in_address, asset_out_address, amount)
-
-
-@pytest.fixture
-def get_quote_uniswap(web3, router):
-    # create the function to be tested
-    async def uniswap_v2_quote(
-        self,
-        asset_in_address,
-        asset_out_address,
-        amount=1
-    ):
-        order_path_dex = [asset_out_address, asset_in_address]
-        router_instance = await self.router()
-        order_min_amount = int(
-            router_instance.functions.getAmountsOut(
-                amount,
-                order_path_dex)
-            .call()[1])
-        return order_min_amount
-
-    return uniswap_v2_quote
-
-
-# def test_uniswap_v2_quote_success(
-#     web3,
-#     asset_in_address,
-#     asset_out_address,
-#     uniswap_v2_quote
-#      ):
-#     # test that the function returns a valid amount when successful
-#     amount = 100  # swap 100 UNI tokens for WETH tokens
-#     min_amount = uniswap_v2_quote(asset_in_address, asset_out_address, amount)
-#     assert min_amount > 0  # the minimum amount should be positive
-
-
-# def test_uniswap_v2_quote_failure(
-#     web3,
-#     asset_in_address,
-#     asset_out_address,
-#     uniswap_v2_quote
-#      ):
-#     # test that the function raises an exception when failed
-#     amount = 0 # swap 0 UNI tokens for WETH tokens
-#     with pytest.raises(Exception):
-#         min_amount = uniswap_v2_quote(
-#             asset_in_address,
-#             asset_out_address,
-#             amount)
-
-
-# # @pytest.mark.asyncio
-# # async def test_oneinch_swap():
-# #     # Mock the _get method
-# #     exchange = DexSwap()
-# #     exchange._get = MagicMock(return_value={"statusCode": 200})
-
-# #     result = await exchange.oneinch_swap(
-# #         "asset_out_address", 
-# #         "asset_in_address", 
-# #         "100")
-
-# #     assert result == {"statusCode": 200}
-
-
-# # @pytest.mark.asyncio
-# # async def test_get_confirmation():
-# #     # Mock the required attributes and methods
-# #     exchange = DexSwap()
-# #     exchange.logger = MagicMock()
-# #     exchange.w3.eth.get_transaction_receipt = MagicMock(return_value={"gasUsed": 100})
-# #     exchange.w3.eth.get_block = MagicMock(return_value={"timestamp": 12345})
-# #     order_hash_details = {"blockNumber": 123}
-# #     asset_out_symbol = "ETH"
-# #     asset_out_address = "0x123"
-# #     order_amount = 1
-
-# #     # Call the function being tested
-# #     result = await exchange.get_confirmation(
-# #         "order_hash",
-# #         order_hash_details,
-# #         asset_out_symbol,
-# #         asset_out_address,
-# #         order_amount)
-
-# #     # Check the result
-# #     assert "id" in result
-# #     assert "timestamp" in result
-# #     assert "instrument" in result
-# #     assert "contract" in result
-# #     assert "amount" in result
-# #     assert "fee" in result
-# #     assert "price" in result
-# #     assert "confirmation" in result
-
-
-
-# @pytest.fixture
-# def order_params():
-#     # create some sample order parameters
-#     return {
-#         "action": "BUY",
-#         "instrument": "ETH",
-#         "quantity": 10
-#     }
-
-
-# @pytest.fixture
-# def execute_order(web3, token_contract, swap_contract):
-#     # create the function to be tested
-#     async def execute_order(self, order_params):
-#         """execute swap function"""
-#         action = order_params.get('action')
-#         instrument = order_params.get('instrument')
-#         quantity = order_params.get('quantity', 1)
-
-#         try:
-#             asset_out_symbol = ("USDT" if
-#                                 action == "BUY" else instrument)
-#             asset_in_symbol = (instrument if action == "BUY"
-#                                else "USDT")
-#             asset_out_contract = await self.get_token_contract(
-#                 asset_out_symbol)
-#             try:
-#                 asset_out_decimals = (
-#                     asset_out_contract.functions.decimals().call())
-#             except Exception as e:
-#                 self.logger.error("execute_order decimals: %s", e)
-#                 asset_out_decimals = 18
-#             asset_out_balance = await self.get_token_balance(asset_out_symbol)
-#             #  buy or sell %p percentage DEFAULT OPTION is 10%
-#             asset_out_amount = ((asset_out_balance) /
-#                                 (10
-#                                 ** asset_out_decimals)
-#                                 )*(float(quantity)/100)
-
-#             order = await self.get_swap(
-#                     asset_out_symbol,
-#                     asset_in_symbol,
-#                     asset_out_amount
-#                     )
-#             if order:
-#                 return order['confirmation']
-
-#         except Exception as e:
-#             self.logger.debug("error execute_order %s", e)
-#             return "error processing order in DXSP"
-
-#     return execute_order
-
-
-# def test_execute_order_success(web3, order_params, execute_order):
-#     # test that the function returns a confirmation when successful
-#     confirmation = execute_order(order_params)
-#     assert confirmation.startswith("0x")
-
-
-# def test_execute_order_failure(web3, order_params, execute_order):
-#     # test that the function returns an error message when failed
-#     order_params["action"] = "INVALID" # make the order invalid
-#     error_message = execute_order(order_params)
-#     assert error_message == "error processing order in DXSP"
+async def test_get_quote_uniswap_v2(mocker):
+    # Arrange
+    instance = DexSwap()
+    instance.protocol_type = "uniswap_v2"
+    mock_router = (
+        mocker.patch.object(instance, 'router', return_value=AsyncMock()))
+    result = await mock_router.get_quote_uniswap(
+        'asset_in_address',
+        'asset_out_address')
+    assert result is not None
