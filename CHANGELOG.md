@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.13 (2023-05-16)
+### Fix
+* :zap: Add pytest-mock to pyproject.toml ([`6e60dfa`](https://github.com/mraniki/dxsp/commit/6e60dfaff795139f5277bf897b75fbc108a28466))
+
+### Other
+* Merge pull request #213 from mraniki/dev ([`44ba3ff`](https://github.com/mraniki/dxsp/commit/44ba3ffa5b5fa10c0b28d8631c9ba14dd16a9b57))
+* Merge pull request #212 from mraniki/dev ([`4545586`](https://github.com/mraniki/dxsp/commit/45455866d849ea83229e0993ef8313aec7f82dd7))
+* 💬　docs ░ ([`19b879d`](https://github.com/mraniki/dxsp/commit/19b879d346ce68a28bb3883191f3c089df7e579c))
+* 💬 increasing test coverage ([`6dc4df5`](https://github.com/mraniki/dxsp/commit/6dc4df597fdb4ee8790751d38d04a4ced9324efa))
+
 ## v2.2.12 (2023-05-16)
 ### Fix
 * ⚡️ added 0x quote ([`2a36c2d`](https://github.com/mraniki/dxsp/commit/2a36c2dffbb73e86ea538ec0a443c665b351d7bb))
