@@ -66,8 +66,8 @@ class DexSwap:
             if self.protocol_type == "0x":
                 self.logger.debug("0x getquote")
                 return await self.get_quote_0x(
-                    symbol,
-                    asset_out_symbol,)
+                    asset_in_address,
+                    asset_out_address,)
 
         except Exception as e:
             self.logger.error("get_quote %s", e)
@@ -126,8 +126,8 @@ class DexSwap:
             # 0x
             if self.protocol_type == "0x":
                 swap_order = await self.get_quote_0x(
-                    asset_in_symbol,
-                    asset_out_symbol,
+                    asset_out_address,
+                    asset_in_address,
                     order_amount)
                 await self.get_sign(swap_order)
 
@@ -319,7 +319,7 @@ class DexSwap:
         headers=None
             ):
         try:
-            # self.logger.debug("url: %s", url)
+            self.logger.debug("url: %s", url)
             # self.logger.debug("_header: %s", settings.headers)
             response = requests.get(
                 url,
@@ -537,8 +537,7 @@ class DexSwap:
                 quote = router_instance.functions.getAmountsOut(
                     amount,
                     [asset_in_address, asset_out_address]).call()
-                quote = ("🦄 " + str(quote[1]) + " " +
-                         settings.trading_quote_ccy)
+                quote = str(quote[1])
             elif self.protocol_type == "uniswap_v3":
                 quoter = await self.quoter()
                 sqrtPriceLimitX96 = 0
@@ -547,7 +546,8 @@ class DexSwap:
                     asset_in_address,
                     asset_out_address,
                     fee, amount, sqrtPriceLimitX96).call()
-            return quote
+            return ("🦄 " + quote + " " +
+                    settings.trading_quote_ccy)
         except Exception as e:
             self.logger.error("get_quote_uniswap %s", e)
             return
@@ -616,7 +616,7 @@ class DexSwap:
         self,
         asset_in_address,
         asset_out_address,
-        amount
+        amount=1
     ):
         try:
             asset_out_amount = self.w3.to_wei(amount, 'ether')
@@ -627,7 +627,7 @@ class DexSwap:
                 + str(asset_in_address)
                 + "&sellToken="
                 + str(asset_out_address)
-                + "&sellAmount="
+                + "&buyAmount="
                 + str(asset_out_amount))
             quote_response = await self._get(
                 quote_url,
@@ -636,11 +636,8 @@ class DexSwap:
                 )
             self.logger.debug("quote_response %s", quote_response)
             if quote_response:
-                quote_amount = quote_response['guaranteedPrice']
-                self.logger.debug("quote_amount %s", quote_amount)
-                # quote_decimals = quote_response['fromToken']['decimals']
-                quote = self.w3.from_wei(int(quote_amount), 'ether')
-                # /(10 ** quote_decimals))
-                return round(quote, 2)
+                quote = quote_response['guaranteedPrice']
+                self.logger.debug("quote_amount %s", quote)
+                return round(float(quote), 3)
         except Exception as e:
             self.logger.error("get_quote_0x %s", e)
