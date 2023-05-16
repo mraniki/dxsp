@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.12 (2023-05-16)
+### Fix
+* ⚡️ added 0x quote ([`2a36c2d`](https://github.com/mraniki/dxsp/commit/2a36c2dffbb73e86ea538ec0a443c665b351d7bb))
+* ⚡️ quote return ([`d596652`](https://github.com/mraniki/dxsp/commit/d59665279ee56ad272e7885576fd42b0d608b4c8))
+
+### Other
+* Merge pull request #211 from mraniki/dev ([`5c9ba87`](https://github.com/mraniki/dxsp/commit/5c9ba87b1c252d984b557a3bcf31c26b8b59603a))
+
 ## v2.2.11 (2023-05-15)
 ### Fix
 * ⚡️ added quoter function and setting. Updated zerox ([`74a7a8a`](https://github.com/mraniki/dxsp/commit/74a7a8a3734bccb06968e775aacf1d117c540515))
