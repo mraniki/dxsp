@@ -1,6 +1,6 @@
 import pytest
 from web3 import Web3
-from unittest.mock import MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 from dxsp import DexSwap
 
 
@@ -47,7 +47,7 @@ async def test_init_dex():
     assert check is True
     assert exchange.w3 is not None
     assert exchange.chain_id is not None
-    assert exchange.protocol_type  is not None
+    assert exchange.protocol_type is not None
     assert exchange.wallet_address.startswith("0x")
     assert exchange.private_key.startswith("0x")
     assert exchange.cg_platform is not None
@@ -103,6 +103,13 @@ async def test_router():
     if router:
         assert router is not None
 
+@pytest.mark.asyncio
+async def test_quoter():
+    """router Testing"""
+    exchange = DexSwap()
+    quoter = await exchange.quoter()
+    if quoter:
+        assert quoter is not None
 
 @pytest.mark.asyncio
 async def test_logger(caplog):
@@ -112,32 +119,66 @@ async def test_logger(caplog):
         assert "wally" not in caplog.text
 
 
-@pytest.fixture
-def oneinch_quote():
-    # create the function to be tested
-    async def oneinch_quote(
-        self,
-        asset_in_address,
-        asset_out_address,
-        amount=1
-    ):
-        asset_out_amount = 1000000000000000000
-        quote_url = (
-            "https://api.1inch.exchange/v5.0/1"
-            + "/quote?fromTokenAddress="
-            + str(asset_in_address)
-            + "&toTokenAddress="
-            + str(asset_out_address)
-            + "&amount="
-            + str(asset_out_amount))
-        quote_response = await self._get(quote_url)
-        self.logger.debug("quote %s", quote_response)
-        quote_amount = quote_response['toTokenAmount']
-        quote_decimals = quote_response['fromToken']['decimals']
+
+@pytest.mark.asyncio
+# async def test_get_quote_uniswap():
+#     # Create a mock instance of the router and quoter
+#     router_mock = MagicMock()
+#     router_mock.functions.getAmountsOut = AsyncMock(return_value=[1, 1000])
+
+#     quoter_mock = MagicMock()
+#     quoter_mock.functions.quoteExactInputSingle = AsyncMock(return_value=1000)
+
+#     # Mocking the router and quoter methods of your class
+#     with patch.object(DexSwap, 'router', new_callable=AsyncMock, return_value=router_mock), \
+#          patch.object(DexSwap, 'quoter', new_callable=AsyncMock, return_value=quoter_mock):
+
+#         # Create an instance of your class
+#         obj = DexSwap()
+#         obj.logger = MagicMock()
+#         obj.protocol_type = "uniswap_v2"
+        
+#         # Call the method under test
+#         quote = await obj.get_quote_uniswap("asset_in_address", "asset_out_address", 10)
+#         assert quote == "🦄 1000 USDT"
+
+#         # Now test the "uniswap_v3" branch
+#         obj.protocol_type = "uniswap_v3"
+#         quote = await obj.get_quote_uniswap("asset_in_address", "asset_out_address", 10)
+#         assert quote == 1000  # Assuming that quoteExactInputSingle just returns the quote value
+
+#         # Now test the exception handling
+#         router_mock.functions.getAmountsOut = AsyncMock(side_effect=Exception("Test exception"))
+#         quote = await obj.get_quote_uniswap("asset_in_address", "asset_out_address", 10)
+#         assert quote is None
+#         obj.logger.error.assert_called_with("get_quote_uniswap %s", "Test exception")
 
 
-    
-    return oneinch_quote
+
+# @pytest.fixture
+# def oneinch_quote():
+#     # create the function to be tested
+#     async def oneinch_quote(
+#         self,
+#         asset_in_address,
+#         asset_out_address,
+#         amount=1
+#     ):
+#         asset_out_amount = 1000000000000000000
+#         quote_url = (
+#             "https://api.1inch.exchange/v5.0/1"
+#             + "/quote?fromTokenAddress="
+#             + str(asset_in_address)
+#             + "&toTokenAddress="
+#             + str(asset_out_address)
+#             + "&amount="
+#             + str(asset_out_amount))
+#         quote_response = await self._get(quote_url)
+#         self.logger.debug("quote %s", quote_response)
+#         quote_amount = quote_response['toTokenAmount']
+#         quote_decimals = quote_response['fromToken']['decimals']
+
+#     return oneinch_quote
 
 # @patch("oneinch_quote._get")
 # def test_oneinch_quote_success(
@@ -180,25 +221,25 @@ def oneinch_quote():
 #         quote = oneinch_quote(asset_in_address, asset_out_address, amount)
 
 
-# @pytest.fixture
-# def uniswap_v2_quote(web3, router):
-#     # create the function to be tested
-#     async def uniswap_v2_quote(
-#         self,
-#         asset_in_address,
-#         asset_out_address,
-#         amount=1
-#     ):
-#         order_path_dex = [asset_out_address, asset_in_address]
-#         router_instance = await self.router()
-#         order_min_amount = int(
-#             router_instance.functions.getAmountsOut(
-#                 amount,
-#                 order_path_dex)
-#             .call()[1])
-#         return order_min_amount
+@pytest.fixture
+def get_quote_uniswap(web3, router):
+    # create the function to be tested
+    async def uniswap_v2_quote(
+        self,
+        asset_in_address,
+        asset_out_address,
+        amount=1
+    ):
+        order_path_dex = [asset_out_address, asset_in_address]
+        router_instance = await self.router()
+        order_min_amount = int(
+            router_instance.functions.getAmountsOut(
+                amount,
+                order_path_dex)
+            .call()[1])
+        return order_min_amount
 
-#     return uniswap_v2_quote
+    return uniswap_v2_quote
 
 
 # def test_uniswap_v2_quote_success(

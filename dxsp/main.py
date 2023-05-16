@@ -537,8 +537,7 @@ class DexSwap:
                 quote = router_instance.functions.getAmountsOut(
                     amount,
                     [asset_in_address, asset_out_address]).call()
-                quote = ("🦄 " + str(quote[1]) + " " +
-                         settings.trading_quote_ccy)
+                quote = str(quote[1])
             elif self.protocol_type == "uniswap_v3":
                 quoter = await self.quoter()
                 sqrtPriceLimitX96 = 0
@@ -547,7 +546,8 @@ class DexSwap:
                     asset_in_address,
                     asset_out_address,
                     fee, amount, sqrtPriceLimitX96).call()
-            return quote
+            return ("🦄 " + quote + " " +
+                    settings.trading_quote_ccy)
         except Exception as e:
             self.logger.error("get_quote_uniswap %s", e)
             return
