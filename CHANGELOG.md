@@ -2,6 +2,19 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.14 (2023-05-17)
+### Fix
+* :bug: Update pyproject.toml with new patch_emoji ([`ab98655`](https://github.com/mraniki/dxsp/commit/ab9865508662ee3aaf0a17d456913da405031997))
+
+### Other
+* Merge pull request #217 from mraniki/dev ([`cf5decf`](https://github.com/mraniki/dxsp/commit/cf5decf152eadc5ea9f24e8ada9f997358b531d5))
+* Merge branch 'main' into dev ([`b1c8703`](https://github.com/mraniki/dxsp/commit/b1c8703807a4e06857000fef45931ba3ddeeb3b6))
+* 🐛 test ([`870945b`](https://github.com/mraniki/dxsp/commit/870945bfd6faba8fc403a78aeaf353a663116ee9))
+* Merge pull request #215 from mraniki/dev ([`0f6c63a`](https://github.com/mraniki/dxsp/commit/0f6c63aa5a8da8478251372287a99ff4d34c3c10))
+* 🐛 test ([`5e21876`](https://github.com/mraniki/dxsp/commit/5e218765021aaeba46152c862c6dacfb174214e4))
+* 🐛 test ([`594d847`](https://github.com/mraniki/dxsp/commit/594d847d97a9a00aa0839a14e9e6c6bf615be3fc))
+* 🐛test ([`1d79c58`](https://github.com/mraniki/dxsp/commit/1d79c5802fd28e0d07a44e51f0d38581cd3c6e37))
+
 ## v2.2.13 (2023-05-16)
 ### Fix
 * :zap: Add pytest-mock to pyproject.toml ([`6e60dfa`](https://github.com/mraniki/dxsp/commit/6e60dfaff795139f5277bf897b75fbc108a28466))
