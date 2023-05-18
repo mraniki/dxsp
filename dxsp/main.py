@@ -522,6 +522,17 @@ class DexSwap:
             self.logger.error("get_account_position: %s", e)
             return 0
 
+    async def get_account_margin(
+        self
+         ):
+
+        try:
+            self.logger.debug("get_account_margin")
+            return
+        except Exception as e:
+            self.logger.error("get_account_margin: %s", e)
+            return 0
+            
 # PROTOCOL SPECIFIC
 # uniswap  🦄
     async def get_quote_uniswap(
