@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.15 (2023-05-18)
+### Fix
+* :zap:Added get_account_margin method to DexSwap class. ([`b06010a`](https://github.com/mraniki/dxsp/commit/b06010a542c311ab3a1d171b30aeefb885587553))
+
+### Other
+* Merge pull request #218 from mraniki/dev ([`ebe3d84`](https://github.com/mraniki/dxsp/commit/ebe3d84b6a1a5f1f0d911f84844f0cec2befc380))
+
 ## v2.2.14 (2023-05-17)
 ### Fix
 * :bug: Update pyproject.toml with new patch_emoji ([`ab98655`](https://github.com/mraniki/dxsp/commit/ab9865508662ee3aaf0a17d456913da405031997))
