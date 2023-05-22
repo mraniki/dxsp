@@ -2,6 +2,19 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.16 (2023-05-22)
+### Fix
+* :zap: bump ([`ae80ec2`](https://github.com/mraniki/dxsp/commit/ae80ec21115a8376f12d04372ae28766e186b933))
+
+### Other
+* Merge pull request #221 from mraniki/dev ([`3615a50`](https://github.com/mraniki/dxsp/commit/3615a50d35ce2c30eb14799c61faa06f68183015))
+* ⚡ Update README.md ([`4375d49`](https://github.com/mraniki/dxsp/commit/4375d4917065bd6d98b7be70dc4e2839478d6c5c))
+* Merge pull request #220 from mraniki/dev ([`05ecc94`](https://github.com/mraniki/dxsp/commit/05ecc94ec4f5fecf3d93de6c3c32f0eab86fe630))
+* 🐛 updating pyproject ([`bfc1dc7`](https://github.com/mraniki/dxsp/commit/bfc1dc7752efc8c2cc1427437401f3b9ec138c80))
+* ⚡ python dep ([`c4e01e7`](https://github.com/mraniki/dxsp/commit/c4e01e7a62f70d139822ca425a6756703670cb73))
+* Merge pull request #219 from mraniki/dev ([`244b093`](https://github.com/mraniki/dxsp/commit/244b09372914bfaf568ac1500ba50f3ff33d8c38))
+* 🔒 security ([`82774d8`](https://github.com/mraniki/dxsp/commit/82774d83af24f197e3d66777526d33e98062ad56))
+
 ## v2.2.15 (2023-05-18)
 ### Fix
 * :zap:Added get_account_margin method to DexSwap class. ([`b06010a`](https://github.com/mraniki/dxsp/commit/b06010a542c311ab3a1d171b30aeefb885587553))
