@@ -18,11 +18,11 @@ Other features:
 - Use Base trading symbol like stablecoin
 - Settings to use the module for your own setup
 
-# Install
+## Install
 
 `pip install dxsp`
 
-# How to use it
+## How to use it
 
 ```
 from dxsp import DexSwap
@@ -33,22 +33,18 @@ from dxsp import DexSwap
  print("demo_tx ", demo_tx)
 ```
 
-## Example
+### Example
 
 [example](https://github.com/mraniki/dxsp/blob/main/examples/example.py)
 
 
-## Real use case
+### Real use case
 
 [TalkyTrader, submit trading order to CEX & DEX with messaging platform (Telegram, Matrix and Discord)](https://github.com/mraniki/tt)
 
-# Documentation
+## Documentation
 
-<https://github.com/mraniki/dxsp/wiki>
-
-## 🚧 Roadmap
-
-[🚧 Roadmap](https://github.com/mraniki/dxsp/milestones)
+[wiki](https://github.com/mraniki/dxsp/wiki)
 
 ## Questions? Want to help?
 
