@@ -13,7 +13,7 @@ readme = "README.md"
 "Issues" =  "https://github.com/mraniki/dxsp/issues"
 
 [tool.poetry.dependencies]
-python = ">=3.10,<3.11"
+python = ">=3.10"
 asyncio = "*"
 dynaconf = "*"
 web3 = ">=6.0.0"
