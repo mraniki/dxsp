@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.19 (2023-05-22)
+### Fix
+* :rotating_light: linter check ([`2e4ac5e`](https://github.com/mraniki/dxsp/commit/2e4ac5ec2bf753aaf0fd1261c6516c2833bd30d0))
+
+### Other
+* Merge pull request #225 from mraniki/dev ([`5e0832f`](https://github.com/mraniki/dxsp/commit/5e0832fb5d59348a41943c72c9081422742a3988))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`33bc2d3`](https://github.com/mraniki/dxsp/commit/33bc2d3bf67ac47b2d4fa873fb2da71c1d7ab4ab))
+
 ## v2.2.18 (2023-05-22)
 ### Fix
 * ⚡bump ([`40fad84`](https://github.com/mraniki/dxsp/commit/40fad8490fa08af48ea63bc7120fc21a18c28a61))
