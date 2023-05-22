@@ -60,4 +60,4 @@ commit_parser = "semantic_release.history.emoji_parser"
 use_textual_changelog_sections = true
 major_emoji = "💥,:boom:"
 minor_emoji = "✨,🥚,🚸,📱,💄,📈,:sparkles:,:children_crossing:,:lipstick:,:iphone:,:egg:,:chart_with_upwards_trend:"
-patch_emoji = "🎨,🐛,🚑,⚡,⚡️,🔥,🚨,⬆️,👷,📝,🔒,👽,🔍,💬,🥅,♿,🍏,🐧,🏁,🤖,:art:,:ambulance:,:lock:,:arrow_up:,:bug:,:zap:,:goal_net:,:alien:,:wheelchair:,:speech_balloon:,:mag:,:apple:,:penguin:,:checkered_flag:,:robot:,:green_apple:,:rotating_light:,:construction_worker:"
+patch_emoji = "🎨,🐛,🚑,⚡,⚡️,🔥,🚨,♻️,🔧,⬆️,🩹,👷,📝,🔒,👽,🔍,💬,🥅,♿,🍏,🐧,🏁,🤖,:art:,:ambulance:,:lock:,:arrow_up:,:bug:,:zap:,:goal_net:,:alien:,:wheelchair:,:speech_balloon:,:mag:,:apple:,:penguin:,:checkered_flag:,:robot:,:green_apple:,:rotating_light:,:construction_worker:"
