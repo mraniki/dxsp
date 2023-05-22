@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.18 (2023-05-22)
+### Fix
+* ⚡bump ([`40fad84`](https://github.com/mraniki/dxsp/commit/40fad8490fa08af48ea63bc7120fc21a18c28a61))
+
+### Other
+* Merge pull request #224 from mraniki/dev ([`83de11e`](https://github.com/mraniki/dxsp/commit/83de11e174f4951f0fca4c47f4c5e5dd7580efee))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`445310c`](https://github.com/mraniki/dxsp/commit/445310c28575d0a01b1288d58a59c7f1dd357446))
+* :construction_worker_man: CI emoji update ([`f9156b7`](https://github.com/mraniki/dxsp/commit/f9156b79eb1d026c25bb135179bf1d2f128ef179))
+
 ## v2.2.17 (2023-05-22)
 ### Fix
 * :art: test ([`654baec`](https://github.com/mraniki/dxsp/commit/654baec8a3f3deb04bf605d3e23f3b5c2f9cb198))
