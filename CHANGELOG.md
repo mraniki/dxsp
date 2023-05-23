@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.21 (2023-05-23)
+### Fix
+* 👷 CI Change ([`8fdf670`](https://github.com/mraniki/dxsp/commit/8fdf670d2d6638e356fe165cdc58f9b7dccf4f74))
+* 👷 CI change ([`b308f44`](https://github.com/mraniki/dxsp/commit/b308f445f55061c70e6b6281efe848da32da0216))
+
+### Other
+* Merge pull request #227 from mraniki/dev ([`1d4be6a`](https://github.com/mraniki/dxsp/commit/1d4be6a57ddec645d57ce29c65d00c24a1a82d13))
+
 ## v2.2.20 (2023-05-23)
 ### Fix
 * 👷 updated pyproject ([`f784628`](https://github.com/mraniki/dxsp/commit/f78462834c682fe05084aab8de17355a393073e8))
