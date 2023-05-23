@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.20 (2023-05-23)
+### Fix
+* 👷 updated pyproject ([`f784628`](https://github.com/mraniki/dxsp/commit/f78462834c682fe05084aab8de17355a393073e8))
+
+### Other
+* Merge pull request #226 from mraniki/dev ([`af83663`](https://github.com/mraniki/dxsp/commit/af83663863ed086ab408c7d68efee8a6d536a921))
+
 ## v2.2.19 (2023-05-22)
 ### Fix
 * :rotating_light: linter check ([`2e4ac5e`](https://github.com/mraniki/dxsp/commit/2e4ac5ec2bf753aaf0fd1261c6516c2833bd30d0))
