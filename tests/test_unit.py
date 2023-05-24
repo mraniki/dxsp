@@ -1,6 +1,7 @@
 import pytest
 from web3 import Web3
 import requests
+import re
 from dxsp import DexSwap
 
 
@@ -28,7 +29,7 @@ def asset_out_address():
 
 
 @pytest.fixture
-def router(exchange):
+async def test_router(exchange):
     return await exchange.router()
 
 
@@ -104,6 +105,18 @@ async def test_get_token_abi():
 
 
 @pytest.mark.asyncio
+async def test_get_abi(exchange, mocker):
+    # Mock the _get method to return a mock response
+    mock_resp = {"status": "1", "result": "0x0123456789abcdef"}
+    mocker.patch.object(exchange, "_get", return_value=mock_resp)
+
+    # Call the get_abi method and check the result
+    abi = await exchange.get_abi("0x1234567890123456789012345678901234567890")
+
+    assert abi == "0x0123456789abcdef"
+
+
+@pytest.mark.asyncio
 async def test_get_token_contract(exchange):
     """get_token_contract Testing"""
     contract = await exchange.get_token_contract("WBTC")
@@ -118,30 +131,21 @@ async def test_get_quote(exchange):
     quote = await exchange.get_quote("WBTC")
     if quote:
         assert quote is not None
-        assert quote.startswith("0x")
+        assert quote.startswith("🦄")
 
 
 @pytest.mark.asyncio
-async def test_get_abi(exchange, mocker):
-    # Mock the _get method to return a mock response
-    mock_resp = {"status": "1", "result": "0x0123456789abcdef"}
-    mocker.patch.object(exchange, "_get", return_value=mock_resp)
-
-    # Call the get_abi method and check the result
-    abi = await exchange.get_abi("0x1234567890123456789012345678901234567890")
-
-    assert abi == "0x0123456789abcdef"
-
-
-# @pytest.mark.asyncio
-# async def test_get_quote_uniswap(exchange):
-#     # Call the get_quote_uniswap method and check the result
-#     quote = await exchange.get_quote_uniswap(
-#         "0x1234567890123456789012345678901234567890",
-#         "0x0987654321098765432109876543210987654321",
-#         100000000)
-#     print(f"quote: {quote}")
-#     assert quote == "🦄 100 trading_quote_ccy"
+async def test_get_quote_uniswap(exchange):
+    # Call the get_quote_uniswap method and check the result
+    quote = await exchange.get_quote_uniswap(
+        exchange.w3.to_checksum_address("0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"),
+        exchange.w3.to_checksum_address("0xdac17f958d2ee523a2206206994597c13d831ec7"),
+        1000000000)
+    print(f"quote: {quote}")
+    assert quote is not None
+    assert quote.startswith("🦄")
+    expected_quote_pattern = r"🦄 \d+ USDT"
+    assert re.match(expected_quote_pattern, quote) is not None
 
 
 # @pytest.mark.asyncio
@@ -196,3 +200,13 @@ async def test_get_gas(exchange):
     # Call the get_gas method and check the result
     gas_estimate = await exchange.get_gas(mock_tx)
     assert gas_estimate > 1
+
+
+# @pytest.mark.asyncio
+# async def test_get_swap(exchange):
+#     swap = await exchange.get_swap(
+#         "WBTC",
+#         "USDT",
+#         1)
+#     print(f"swap: {swap}")
+#     assert swap is not None

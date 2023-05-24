@@ -583,8 +583,9 @@ class DexSwap:
                 quote = router_instance.functions.getAmountsOut(
                     amount,
                     [asset_in_address, asset_out_address]).call()
+                self.logger.error("quote %s", quote)
                 if isinstance(quote, list):
-                    quote = str(quote[1])
+                    quote = str(quote[0])
             elif self.protocol_type == "uniswap_v3":
                 quoter = await self.quoter()
                 sqrtPriceLimitX96 = 0
