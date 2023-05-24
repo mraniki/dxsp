@@ -438,12 +438,13 @@ class DexSwap:
         # Return the estimated gas cost in wei
         return int(self.w3.to_wei(gasestimate, 'wei'))
 
-    async def get_gasPrice(self, tx):
+    async def get_gasPrice(self):
         '''
         Get the gas price for a transaction
         '''
         gasprice = self.w3.eth.generate_gas_price()
-        return self.w3.to_wei(gasprice, 'gwei')
+        return gasprice
+        # return self.w3.to_wei(gasprice, 'gwei')
 
     async def get_abi(self, addr):
         # Log a debug message to the logger

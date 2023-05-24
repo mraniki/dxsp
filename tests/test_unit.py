@@ -203,6 +203,14 @@ async def test_get_gas(exchange):
 
 
 # @pytest.mark.asyncio
+# async def test_get_gasPrice(exchange):
+#     # Call the get_gasPrice method and check the result
+#     gas_price = await exchange.get_gasPrice()
+#     print(f"gas_price: {gas_price}")
+#     assert gas_price is not None
+
+
+# @pytest.mark.asyncio
 # async def test_get_swap(exchange):
 #     swap = await exchange.get_swap(
 #         "WBTC",
@@ -210,3 +218,19 @@ async def test_get_gas(exchange):
 #         1)
 #     print(f"swap: {swap}")
 #     assert swap is not None
+
+
+@pytest.mark.asyncio
+async def test_get_account_balance(exchange):
+    # Call the get_account_balance method and check the result
+    balance = await exchange.get_account_balance()
+    assert balance is not None
+    assert balance >= 0
+
+
+@pytest.mark.asyncio
+async def test_get_token_balance(exchange):
+    # Call the get_token_balance method and check the result
+    token_balance = await exchange.get_token_balance("UNI")
+    assert isinstance(token_balance, int)
+    assert token_balance >= 0
