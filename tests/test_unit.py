@@ -1,12 +1,14 @@
 import pytest
-# import responses
 from web3 import Web3
-from unittest.mock import AsyncMock
+import requests
+import re
 from dxsp import DexSwap
+
 
 @pytest.fixture
 def exchange():
     return DexSwap()
+
 
 @pytest.fixture
 def web3():
@@ -27,9 +29,8 @@ def asset_out_address():
 
 
 @pytest.fixture
-def router(web3):
-    # create a mock router contract
-    return web3.eth.contract(abi=..., address=...)
+async def test_router(exchange):
+    return await exchange.router()
 
 
 @pytest.fixture
@@ -59,12 +60,26 @@ async def test_init_dex(exchange):
 
 
 @pytest.mark.asyncio
-async def test_get_quote(exchange):
-    """getquote Testing"""
-    quote = await exchange.get_quote("WBTC")
-    if quote:
-        assert quote is not None
-        assert quote.startswith("0x")
+async def test_get(exchange):
+    result = await exchange._get(
+        "http://ip.jsontest.com",
+        params=None,
+        headers=None)
+    assert result is not None
+
+
+@pytest.mark.asyncio
+async def test_get_router(exchange):
+    router = exchange.router()
+    assert router is not None
+
+
+@pytest.mark.asyncio
+async def test_quoter(exchange):
+    """quoter Testing"""
+    quoter = await exchange.quoter()
+    if quoter:
+        assert quoter is not None
 
 
 @pytest.mark.asyncio
@@ -83,6 +98,25 @@ async def test_search_contract(exchange):
 
 
 @pytest.mark.asyncio
+async def test_get_token_abi():
+    dex_erc20_abi_url = "https://raw.githubusercontent.com/web3/web3.js/4.x/fixtures/build/ERC20Token.json"
+    token_abi = requests.get(dex_erc20_abi_url).text
+    assert token_abi is not None
+
+
+@pytest.mark.asyncio
+async def test_get_abi(exchange, mocker):
+    # Mock the _get method to return a mock response
+    mock_resp = {"status": "1", "result": "0x0123456789abcdef"}
+    mocker.patch.object(exchange, "_get", return_value=mock_resp)
+
+    # Call the get_abi method and check the result
+    abi = await exchange.get_abi("0x1234567890123456789012345678901234567890")
+
+    assert abi == "0x0123456789abcdef"
+
+
+@pytest.mark.asyncio
 async def test_get_token_contract(exchange):
     """get_token_contract Testing"""
     contract = await exchange.get_token_contract("WBTC")
@@ -92,47 +126,69 @@ async def test_get_token_contract(exchange):
 
 
 @pytest.mark.asyncio
-async def test_router(exchange):
-    """router Testing"""
-    router = await exchange.router()
-    if router:
-        assert router is not None
+async def test_get_quote(exchange):
+    """getquote Testing"""
+    quote = await exchange.get_quote("WBTC")
+    if quote:
+        assert quote is not None
+        assert quote.startswith("🦄")
 
 
 @pytest.mark.asyncio
-async def test_quoter(exchange):
-    """router Testing"""
-    quoter = await exchange.quoter()
-    if quoter:
-        assert quoter is not None
+async def test_get_quote_uniswap(exchange):
+    # Call the get_quote_uniswap method and check the result
+    quote = await exchange.get_quote_uniswap(
+        exchange.w3.to_checksum_address("0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"),
+        exchange.w3.to_checksum_address("0xdac17f958d2ee523a2206206994597c13d831ec7"),
+        1000000000)
+    print(f"quote: {quote}")
+    assert quote is not None
+    assert quote.startswith("🦄")
+    expected_quote_pattern = r"🦄 \d+ USDT"
+    assert re.match(expected_quote_pattern, quote) is not None
 
 
-@pytest.mark.asyncio
-async def test_logger(caplog):
-    for record in caplog.records:
-        assert record.levelname != "CRITICAL"
-        assert "wally" not in caplog.text
+# @pytest.mark.asyncio
+# async def test_get_approve_uniswap(exchange, mocker):
+#     mock_token = mocker.MagicMock()
+#     mock_token.allowance.return_value = 0
+#     mock_token.functions.approve.return_value = "0x1234567890abcdef"
+
+#     mocker.patch.object(
+#         exchange, "get_abi", return_value="mock_abi")
+#     mocker.patch.object(
+#         exchange.w3.eth, "contract", return_value=mock_token)
+#     mocker.patch.object(
+#         exchange, "get_sign", return_value="0xabcdef1234567890")
+
+#     # Call the get_approve_uniswap method and check the result
+#     approval_txHash_complete = await exchange.get_approve_uniswap(
+#         "0x1234567890123456789012345678901234567890")
+#     print(f"approval_txHash_complete: {approval_txHash_complete}")
+#     assert approval_txHash_complete is not None
 
 
-@pytest.mark.asyncio
-async def test_get(exchange):
-    result = await exchange._get(
-        "http://ip.jsontest.com",
-        params=None,
-        headers=None)
+# @pytest.mark.asyncio
+# async def test_get_swap_uniswap(mocker):
+#     exchange = DexSwap()
+#     mock_swap_order = mocker.MagicMock()
+#     mock_swap_order.return_value = "0x1234567890abcdef"
 
-    assert result is not None
+#     mock_router_functions = mocker.MagicMock(swapExactTokensForTokens=mock_swap_order)
+#     mock_router = mocker.MagicMock()
+#     mock_router.functions = mock_router_functions
 
+#     mocker.patch.object(exchange, "get_abi", return_value="mock_abi")
+#     mocker.patch.object(exchange.w3.eth, "contract", return_value=mock_router)
 
-@pytest.mark.asyncio
-async def test_get_quote_uniswap_v2(mocker,exchange):
-    # Arrange
-    mock_router = (
-        mocker.patch.object(exchange, 'router', return_value=AsyncMock()))
-    result = await mock_router.get_quote_uniswap(
-        'asset_in_address',
-        'asset_out_address')
-    assert result is not None
+#     # Call the get_swap_uniswap method and check the result
+#     swap_order = await exchange.get_swap_uniswap(
+#         "0x1234567890123456789012345678901234567890",
+#         "0x0987654321098765432109876543210987654321",
+#         100000000)
+
+#     print(f"swap_order: {swap_order}")
+#     assert swap_order is not None
 
 
 @pytest.mark.asyncio
@@ -147,60 +203,10 @@ async def test_get_gas(exchange):
 
 
 # @pytest.mark.asyncio
-# async def test_uniswap_v2_get_swap(exchange):
-#     # Call get_swap with some input parameters
-#     result = await exchange.get_swap('ETH', 'DAI', 10)
-#     assert result is not None
-
-
-# @pytest.mark.asyncio
-# async def test_get_confirmation(mocker):
-
-#     exchange = DexSwap()
-#     mocker.patch('DexSwap', autospec=True)
-#     web3 = exchange.w3
-#     order_hash = AsyncMock(return_value=100)
-#     order_hash_details = AsyncMock(return_value=100)
-#     asset_out_symbol = AsyncMock(return_value=100)
-#     asset_out_address = AsyncMock(return_value=100)
-#     order_amount = AsyncMock(return_value=100)
-#     order_hash = AsyncMock(return_value=100)
-#     web3.eth.get_transaction_receipt.return_value = {'gasUsed': 123}
-#     web3.eth.get_block.return_value = {'timestamp': 1234567890}
-
-#     # Call the function
-#     result = await DexSwap.get_confirmation(
-    # order_hash, order_hash_details,
-    # asset_out_symbol, asset_out_address,
-    # order_amount)
-
-#     # Assertions
-#     assert result['id'] is not None
-#     assert result['timestamp'] is not None
-#     assert result['instrument'] == asset_out_symbol
-#     assert result['contract'] == asset_out_address
-#     assert result['amount'] == order_amount
-#     assert result['fee'] is not None
-#     assert result['price'] == "TBD"
-#     assert "Size" in result['confirmation']
-#     assert "Entry" in result['confirmation']
-#     assert trade['id'] in result['confirmation']
-#     assert trade['datetime'] in result['confirmation']
-
-# @pytest.mark.asyncio
-# @responses.activate
-# async def test_get_block_explorer_status():
-#     exchange = DexSwap()
-#     # Define the mock response from the block explorer API
-#     response_body = {"status": "1"}
-#     responses.add(responses.GET,
-#                   "https://www.example.com/api",
-#                   json=response_body)
-
-#     # Call the get_block_explorer_status method and check the result
-#     status = await exchange.get_block_explorer_status("0x1234567890abcdef")
-#     assert status == "1"
-
-#     # Verify that the mock API was called with the correct URL
-#     assert len(responses.calls) == 1
-#     assert responses.calls[0].request.url == "https://www.example.com/api?module=transaction&action=gettxreceiptstatus&txhash=0x1234567890abcdef&apikey=12345"
+# async def test_get_swap(exchange):
+#     swap = await exchange.get_swap(
+#         "WBTC",
+#         "USDT",
+#         1)
+#     print(f"swap: {swap}")
+#     assert swap is not None

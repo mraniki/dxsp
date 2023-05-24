@@ -298,7 +298,7 @@ class DexSwap:
                 try:
                     if coin_dict['platforms'][f'{self.cg_platform}']:
                         return coin_dict
-                except KeyError:
+                except (KeyError, requests.exceptions.HTTPError):
                     pass
         except Exception as e:
             self.logger.error("search_cg %s", e)
@@ -308,8 +308,8 @@ class DexSwap:
         """search coingecko contract"""
         try:
             coin_info = await self.search_cg(token)
-            if coin_info is not None:
-                return coin_info['platforms'][f'{self.cg_platform}']
+            return (coin_info['platforms'][f'{self.cg_platform}']
+                    if coin_info is not None else None)
         except Exception as e:
             self.logger.error(" search_cg_contract: %s", e)
             return
@@ -333,6 +333,9 @@ class DexSwap:
         try:
             token_address = await self.search_contract(token)
             token_abi = await self.get_abi(token_address)
+            if token_abi is None:
+                self.logger.debug("using setting dex_erc20_abi_url")
+                token_abi = requests.get(settings.dex_erc20_abi_url).text
             return self.w3.eth.contract(
                 address=token_address,
                 abi=token_abi)
@@ -366,6 +369,9 @@ class DexSwap:
     async def router(self):
         try:
             router_abi = await self.get_abi(settings.dex_router_contract_addr)
+            if router_abi is None:
+                self.logger.debug("using setting dex_router_abi_url")
+                router_abi = requests.get(settings.dex_router_abi_url).text
             self.logger.debug("router_abi: %s", router_abi)
             router = self.w3.eth.contract(
                 address=self.w3.to_checksum_address(
@@ -577,7 +583,9 @@ class DexSwap:
                 quote = router_instance.functions.getAmountsOut(
                     amount,
                     [asset_in_address, asset_out_address]).call()
-                quote = str(quote[1])
+                self.logger.error("quote %s", quote)
+                if isinstance(quote, list):
+                    quote = str(quote[0])
             elif self.protocol_type == "uniswap_v3":
                 quoter = await self.quoter()
                 sqrtPriceLimitX96 = 0
