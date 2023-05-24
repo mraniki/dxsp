@@ -92,9 +92,7 @@ class DexSwap:
                 raise ValueError("No contract identified")
             asset_out_balance = await self.get_token_balance(asset_out_symbol)
             if asset_out_balance == (0 or None):
-                self.logger.warning("No Money")
                 raise ValueError("No Money")
-                return
             # ASSETS IN
             asset_in_address = await self.search_contract(asset_in_symbol)
             self.logger.debug("asset_in_address %s", asset_in_address)
@@ -114,7 +112,7 @@ class DexSwap:
             self.logger.debug("order_amount %s", order_amount)
 
             # VERIFY IF ASSET OUT IS APPROVED otherwise get it approved
-            if (await self.get_approve(asset_out_address)) is None:
+            if await self.get_approve(asset_out_address) is None:
                 return
 
             # UNISWAP V2
@@ -124,7 +122,7 @@ class DexSwap:
                     asset_in_address,
                     order_amount)
             # 0x
-            if self.protocol_type == "0x":
+            elif self.protocol_type == "0x":
                 swap_order = await self.get_quote_0x(
                     asset_out_address,
                     asset_in_address,
@@ -225,32 +223,63 @@ class DexSwap:
             return "error processing order in DXSP"
 
 # 📝CONTRACT SEARCH
-    async def search_contract(
-                            self,
-                            token
-                            ):
+    # async def search_contract(
+    #                         self,
+    #                         token
+    #                         ):
+    #     """search a contract function"""
+    #     self.logger.debug("search_contract")
+
+    #     try:
+    #         token_contract = await self.get_contract_address(
+    #             settings.token_personal_list,
+    #             token)
+    #         if token_contract is None:
+    #             token_contract = await self.get_contract_address(
+    #                 settings.token_testnet_list,
+    #                 token)
+    #             if token_contract is None:
+    #                 token_contract = await self.get_contract_address(
+    #                     settings.token_mainnet_list,
+    #                     token)
+    #                 if token_contract is None:
+    #                     token_contract = await self.search_cg_contract(
+    #                         token)
+    #         if token_contract is not None:
+    #             self.logger.info("%s token: contract found %s",
+    #                              token, token_contract)
+    #             return self.w3.to_checksum_address(token_contract)
+    #         return f"no contract found for {token}"
+    #     except Exception as e:
+    #         self.logger.error("search_contract %s", e)
+    #         return
+    async def search_contract(self, token):
         """search a contract function"""
         self.logger.debug("search_contract")
 
         try:
-            token_contract = await self.get_contract_address(
+            contract_lists = [
                 settings.token_personal_list,
-                token)
-            if token_contract is None:
+                settings.token_testnet_list,
+                settings.token_mainnet_list,
+            ]
+
+            for contract_list in contract_lists:
                 token_contract = await self.get_contract_address(
-                    settings.token_testnet_list,
-                    token)
-                if token_contract is None:
-                    token_contract = await self.get_contract_address(
-                        settings.token_mainnet_list,
-                        token)
-                    if token_contract is None:
-                        token_contract = await self.search_cg_contract(
-                            token)
+                    contract_list,
+                    token
+                )
+                if token_contract is not None:
+                    self.logger.info("%s token: contract found %s",
+                                     token, token_contract)
+                    return self.w3.to_checksum_address(token_contract)
+
+            token_contract = await self.search_cg_contract(token)
             if token_contract is not None:
                 self.logger.info("%s token: contract found %s",
                                  token, token_contract)
                 return self.w3.to_checksum_address(token_contract)
+
             return f"no contract found for {token}"
         except Exception as e:
             self.logger.error("search_contract %s", e)
@@ -532,7 +561,7 @@ class DexSwap:
         except Exception as e:
             self.logger.error("get_account_margin: %s", e)
             return 0
-            
+
 # PROTOCOL SPECIFIC
 # uniswap  🦄
     async def get_quote_uniswap(
