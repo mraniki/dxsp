@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v2.2.22 (2023-05-24)
+### Fix
+* ♻️ Refactor the search contract function and unit test ([`34bba56`](https://github.com/mraniki/dxsp/commit/34bba569c1ff1779267fba8af35a5280b290bd99))
+* 🐳 dockerfile change ([`cafb2a6`](https://github.com/mraniki/dxsp/commit/cafb2a6eeb4c12e389e9d9c312c30da8206ca562))
+
+### Other
+* Merge pull request #228 from mraniki/dev ([`555f001`](https://github.com/mraniki/dxsp/commit/555f00100dd8315982f0f75f8cc5a84653a3ffac))
+
 ## v2.2.21 (2023-05-23)
 ### Fix
 * 👷 CI Change ([`8fdf670`](https://github.com/mraniki/dxsp/commit/8fdf670d2d6638e356fe165cdc58f9b7dccf4f74))
