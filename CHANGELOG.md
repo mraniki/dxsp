@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v2.3.1 (2023-05-24)
+### Fix
+* ♻️ refactor code ([`d4acde6`](https://github.com/mraniki/dxsp/commit/d4acde6962def0226ff885f20e270ea96ca7a693))
+* ✅ improve unit test and refactoring ([`76a8393`](https://github.com/mraniki/dxsp/commit/76a83938a640ea2e76c24cd70cabb4586344a6ec))
+
+### Other
+* Merge pull request #230 from mraniki/dev ([`3062d87`](https://github.com/mraniki/dxsp/commit/3062d87b898c06922b0510a36d211cde65efdd62))
+
 ## v2.3.0 (2023-05-24)
 ### Feature
 * 💄 improved search ([`8b9ea40`](https://github.com/mraniki/dxsp/commit/8b9ea400567daa0362d30753a3e0f056fa124482))
