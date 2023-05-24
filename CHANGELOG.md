@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v2.3.2 (2023-05-24)
+### Fix
+* 🐳 dockerfile ([`002d897`](https://github.com/mraniki/dxsp/commit/002d89746a4de5706bd7322db7d621188112f688))
+* ✅ increase test coverage ([`6cd6227`](https://github.com/mraniki/dxsp/commit/6cd6227c634d1e2dafc61679215aef4123007819))
+
+### Other
+* Merge pull request #231 from mraniki/dev ([`a995321`](https://github.com/mraniki/dxsp/commit/a995321172924007125fcd8871a147c22f0f5830))
+
 ## v2.3.1 (2023-05-24)
 ### Fix
 * ♻️ refactor code ([`d4acde6`](https://github.com/mraniki/dxsp/commit/d4acde6962def0226ff885f20e270ea96ca7a693))
