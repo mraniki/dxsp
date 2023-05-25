@@ -3,6 +3,8 @@ from web3 import Web3
 import requests
 import re
 from dxsp import DexSwap
+from dxsp.config import settings
+from unittest.mock import patch
 
 
 @pytest.fixture
@@ -46,8 +48,9 @@ def swap_contract(web3):
 
 
 @pytest.mark.asyncio
-async def test_init_dex(exchange):
+async def test_init_dex():
     """Init Testing"""
+    exchange = DexSwap()
     check = "DexSwap" in str(type(exchange))
     assert check is True
     assert exchange.w3 is not None
@@ -57,6 +60,22 @@ async def test_init_dex(exchange):
     assert exchange.wallet_address.startswith("0x")
     assert exchange.private_key.startswith("0x")
     assert exchange.cg_platform is not None
+
+
+@pytest.mark.asyncio
+def test_settings_dex_swap_init():
+    with patch("dxsp.config.settings", autospec=True) as mock_settings:
+        settings.dex_wallet_address = "0x1234567890123456789012345678901234567890"
+        settings.dex_private_key = "0xdeadbeef"
+
+        dex = DexSwap()
+        assert dex.wallet_address == "0x1234567890123456789012345678901234567890"
+        assert dex.private_key == "0xdeadbeef"
+
+@pytest.mark.asyncio
+def test_w3_dex_swap_init(web3):
+    dex = DexSwap(w3=web3)
+    assert dex.w3 == web3
 
 
 @pytest.mark.asyncio
@@ -218,6 +237,12 @@ async def test_get_gas(exchange):
 #         1)
 #     print(f"swap: {swap}")
 #     assert swap is not None
+
+@pytest.mark.asyncio
+# async def test_tx_receipt_status(exchange):
+#     with patch('exchange', new=AsyncMock()) as mock:
+#         await exchange.get_block_explorer_status('0x123')
+#         mock.assert_called_once_with(params=dict(module='transaction', action='gettxreceiptstatus', txhash='0x123'))
 
 
 @pytest.mark.asyncio
