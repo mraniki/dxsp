@@ -97,7 +97,7 @@ class DexSwap:
 
             order_amount = int(asset_out_amount_converted * (settings.dex_trading_slippage / 100))
 
-            if await self.get_approve(asset_out_address) is None:
+            if await self.get_approve(asset_out_symbol) is None:
                 return
 
             swap_order = None
@@ -324,11 +324,11 @@ class DexSwap:
         except Exception as e:
             self.logger.error("quoter setup: %s", e)
 
-    async def get_approve(self, asset_out_address):
+    async def get_approve(self, symbol):
 
         try:
             if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
-                await self.get_approve_uniswap(asset_out_address)
+                await self.get_approve_uniswap(symbol)
         except Exception as e:
             self.logger.error("get_approve %s", e)
             return None
@@ -462,18 +462,16 @@ class DexSwap:
             self.logger.error("get_quote_uniswap %s", e)
             return
 
-    async def get_approve_uniswap(self, asset_out_address):
+    async def get_approve_uniswap(self, symbol):
         try:
-            asset_out_abi = await self.get_abi(asset_out_address)
-            asset_out_contract = self.w3.eth.contract(
-                address=asset_out_address, abi=asset_out_abi)
+            contract = self.get_token_contract(symbol)
             approved_amount = self.w3.to_wei(2**64-1, 'ether')
-            approval_check = asset_out_contract.functions.allowance(
+            approval_check = contract.functions.allowance(
                 self.w3.to_checksum_address(self.wallet_address),
                 self.w3.to_checksum_address(settings.dex_router_contract_addr)
             ).call()
             if approval_check == 0:
-                approval_transaction = asset_out_contract.functions.approve(
+                approval_transaction = contract.functions.approve(
                     self.w3.to_checksum_address(settings.dex_router_contract_addr),
                     approved_amount)
                 approval_txHash = await self.get_sign(approval_transaction)

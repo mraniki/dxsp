@@ -245,14 +245,14 @@ async def test_get_gas_price(exchange):
     assert gas_price is not None
 
 
-# @pytest.mark.asyncio
-# async def test_get_swap(exchange):
-#     swap = await exchange.get_swap(
-#         "WBTC",
-#         "USDT",
-#         1)
-#     print(f"swap: {swap}")
-#     assert swap is not None
+@pytest.mark.asyncio
+async def test_get_swap(exchange):
+    swap = await exchange.get_swap(
+        "WBTC",
+        "USDT",
+        1)
+    print(f"swap: {swap}")
+    assert swap is not None
 
 
 @pytest.mark.asyncio
