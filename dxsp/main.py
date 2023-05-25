@@ -316,11 +316,11 @@ class DexSwap:
         try:
             quoter_abi = await self.get_abi(settings.dex_quoter_contract_addr)
             self.logger.debug("quoter_abi: %s", quoter_abi)
-            quoter = self.w3.eth.contract(
+            contract = self.w3.eth.contract(
                 address=self.w3.to_checksum_address(
                     settings.dex_quoter_contract_addr),
                 abi=quoter_abi)
-            return quoter
+            return contract
         except Exception as e:
             self.logger.error("quoter setup: %s", e)
 

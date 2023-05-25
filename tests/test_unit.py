@@ -13,41 +13,12 @@ def exchange():
 
 
 @pytest.fixture
-def web3():
-    # create a mock web3 instance
-    return Web3(Web3.EthereumTesterProvider())
-
-
-@pytest.fixture
-def asset_in_address():
-    # create a mock asset in address
-    return "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984"  # UNI token address
-
-
-@pytest.fixture
-def asset_out_address():
-    # create a mock asset out address
-    return "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"  # WETH token address
-
-
-@pytest.fixture
 async def router(exchange):
     return await exchange.router()
 
 @pytest.fixture
 async def quoter(exchange):
     return await exchange.quoter()
-
-@pytest.fixture
-def token_contract(web3):
-    # create a mock token contract
-    return web3.eth.contract(abi=..., address=...)
-
-
-@pytest.fixture
-def swap_contract(web3):
-    # create a mock swap contract
-    return web3.eth.contract(abi=..., address=...)
 
 
 @pytest.mark.asyncio
@@ -92,13 +63,9 @@ async def test_get(exchange):
 
 
 @pytest.mark.asyncio
-async def test_get_router(router):
+async def test_router(router):
+    router = await exchange.quoter()
     assert router is not None
-
-
-@pytest.mark.asyncio
-async def test_get_quoter(quoter):
-    assert quoter is not None
 
 
 @pytest.mark.asyncio
