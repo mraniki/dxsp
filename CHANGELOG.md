@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.4.1 (2023-05-25)
+### Fix
+* 🎨 improve structure ([`49ae03e`](https://github.com/mraniki/dxsp/commit/49ae03e52146af3565ae4af4ba5fd6a9dd29e70e))
+
+### Other
+* Merge pull request #233 from mraniki/dev ([`713b02b`](https://github.com/mraniki/dxsp/commit/713b02beda6e43f7549c1057577097c47d8a7f45))
+
 ## v2.4.0 (2023-05-25)
 ### Feature
 * 💄 code refactor and improve the swap function and test ([`85dd400`](https://github.com/mraniki/dxsp/commit/85dd4007ad425f4060d7ccd2115259f8d97afa5b))
