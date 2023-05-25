@@ -119,64 +119,60 @@ class DexSwap:
             return e
 
     async def get_confirmation(self, order_hash):
-        """Returns trade confirmation"""
+        """Returns trade confirmation."""
         try:
             receipt = self.w3.eth.get_transaction(order_hash)
-            block = self.w3.eth.get_block(receipt['blockNumber'])
+            block = self.w3.eth.get_block(receipt["blockNumber"])
             trade = {
-                'timestamp': block['timestamp'],
-                'id': receipt['blockHash'],
-                'instrument': receipt['to'],
-                'contract': receipt['to'],
-                'amount': receipt['value'],
-                'price': receipt['value'],  # TBD
-                'fee': receipt['gas'],
-                'confirmation': f"➕ Size: {round(receipt['value'], 4)}\n"
-                                f"⚫️ Entry: {round(receipt['value'], 4)}\n"
-                                f"ℹ️ {receipt['blockHash']}\n"
-                                f"🗓️ {block['timestamp']}"
+                "timestamp": block["timestamp"],
+                "id": receipt["blockHash"],
+                "instrument": receipt["to"],
+                "contract": receipt["to"],
+                "amount": receipt["value"],
+                "price": receipt["value"],  # To be determined.
+                "fee": receipt["gas"],
+                "confirmation": (
+                    f"➕ Size: {round(receipt['value'], 4)}\n"
+                    f"⚫️ Entry: {round(receipt['value'], 4)}\n"
+                    f"ℹ️ {receipt['blockHash']}\n"
+                    f"🗓️ {block['timestamp']}"
+                ),
             }
             return trade
         except Exception as e:
-            self.logger.error("Error getting trade confirmation %s", e)
-            return
+            self.logger.error("Error getting trade confirmation: %s", e)
 
     async def execute_order(self, order_params):
-        """execute swap function"""
+        """Execute swap function."""
         action = order_params.get('action')
         instrument = order_params.get('instrument')
         quantity = order_params.get('quantity', 1)
 
         try:
-            asset_out_symbol = (
-                settings.trading_quote_ccy if
-                action == "BUY" else instrument)
-            asset_in_symbol = (
-                instrument if action == "BUY"
-                else settings.trading_quote_ccy)
+            if action == "BUY":
+                asset_out_symbol = settings.trading_quote_ccy
+                asset_in_symbol = instrument
+            else:
+                asset_out_symbol = instrument
+                asset_in_symbol = settings.trading_quote_ccy
+
             try:
-                asset_out_contract = await self.get_token_contract(
-                    asset_out_symbol)
-                asset_out_decimals = (
-                    asset_out_contract.functions.decimals().call()
-                    or 18)
+                asset_out_contract = await self.get_token_contract(asset_out_symbol)
+                asset_out_decimals = asset_out_contract.functions.decimals().call() or 18
             except Exception as e:
                 self.logger.error("execute_order decimals: %s", e)
                 asset_out_decimals = 18
+
             asset_out_balance = await self.get_token_balance(asset_out_symbol)
 
-            #  Amount to risk percentage - DEFAULT OPTION is 10%
-            asset_out_amount = (
-                (asset_out_balance) /
-                (settings.trading_risk_amount
-                 ** asset_out_decimals)
-                )*(float(quantity)/100)
+            # Amount to risk percentage - DEFAULT OPTION is 10%
+            asset_out_amount = (asset_out_balance / (settings.trading_risk_amount ** asset_out_decimals)) * (float(quantity) / 100)
 
             order = await self.get_swap(
-                    asset_out_symbol,
-                    asset_in_symbol,
-                    asset_out_amount
-                    )
+                asset_out_symbol,
+                asset_in_symbol,
+                asset_out_amount
+            )
             if order:
                 return order['confirmation']
 
@@ -325,12 +321,11 @@ class DexSwap:
             self.logger.error("quoter setup: %s", e)
 
     async def get_approve(self, symbol):
-
         try:
             if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
                 await self.get_approve_uniswap(symbol)
         except Exception as e:
-            self.logger.error("get_approve %s", e)
+            self.logger.error("Error in get_approve: %s", e)
             return None
 
     async def get_sign(self, transaction):
@@ -464,7 +459,7 @@ class DexSwap:
 
     async def get_approve_uniswap(self, symbol):
         try:
-            contract = self.get_token_contract(symbol)
+            contract = await self.get_token_contract(symbol)
             approved_amount = self.w3.to_wei(2**64-1, 'ether')
             approval_check = contract.functions.allowance(
                 self.w3.to_checksum_address(self.wallet_address),
