@@ -2,6 +2,27 @@
 
 <!--next-version-placeholder-->
 
+## v2.4.0 (2023-05-25)
+### Feature
+* 💄 code refactor and improve the swap function and test ([`85dd400`](https://github.com/mraniki/dxsp/commit/85dd4007ad425f4060d7ccd2115259f8d97afa5b))
+
+### Fix
+* 🔥 ([`8e81dbe`](https://github.com/mraniki/dxsp/commit/8e81dbe8e9f62c0f9242c6379be2b325fe26312f))
+* ✅ test fixes ([`9f8e9b5`](https://github.com/mraniki/dxsp/commit/9f8e9b5fb92e02d90feab734a09e91fd67f4f7a4))
+* ✅ update ([`0009539`](https://github.com/mraniki/dxsp/commit/0009539e6cd66d4b68f71f75ee3a5779ecfee36b))
+* ✅ test update ([`242a154`](https://github.com/mraniki/dxsp/commit/242a1544450bce278f9e94e38ade649d7ea201d7))
+* 🐛 get_gas ([`3e1937f`](https://github.com/mraniki/dxsp/commit/3e1937f118df673b69315be2e48f56d35e091082))
+* 🐛 get_0x_quote ([`9a7493a`](https://github.com/mraniki/dxsp/commit/9a7493ace62ef2c181329e0d7d41e9c53adc0d07))
+* 🥅 better error for swap ([`ce8e3ee`](https://github.com/mraniki/dxsp/commit/ce8e3ee3030d5c0690d4ef634d092b47939118ae))
+* ⚡ improving approval function ([`a903a74`](https://github.com/mraniki/dxsp/commit/a903a746c1cddb2709e6ee4fdaf8a15dd98ca180))
+* 🚨 pylint ([`86eb7ef`](https://github.com/mraniki/dxsp/commit/86eb7ef5d10897274378ad170451c5845b02eb55))
+* ♻️ code refactor and additional unit test ([`0fb7179`](https://github.com/mraniki/dxsp/commit/0fb7179aee6341e61af164092e1ab76842385141))
+
+### Other
+* Merge pull request #232 from mraniki/dev ([`bbfd6c9`](https://github.com/mraniki/dxsp/commit/bbfd6c9c07bd6758776861d6ecdd211452905edd))
+* Update Dockerfile ([`caac8b5`](https://github.com/mraniki/dxsp/commit/caac8b598e40b5d0f473d84655755b9082440624))
+* Update Dockerfile ([`ec76123`](https://github.com/mraniki/dxsp/commit/ec7612317da915b0226edbb355811dcde307555a))
+
 ## v2.3.2 (2023-05-24)
 ### Fix
 * 🐳 dockerfile ([`002d897`](https://github.com/mraniki/dxsp/commit/002d89746a4de5706bd7322db7d621188112f688))
