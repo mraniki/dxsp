@@ -47,8 +47,6 @@ def test_settings_dex_swap_init():
         assert dex.private_key == "0xdeadbeef"
 
 
-@pytest.mark.asyncio
-
 
 @pytest.mark.asyncio
 async def test_get(exchange):
@@ -60,8 +58,8 @@ async def test_get(exchange):
 
 
 @pytest.mark.asyncio
-async def test_router(router):
-    router = await exchange.quoter()
+async def test_router(exchange):
+    router = await exchange.router()
     assert router is not None
 
 
