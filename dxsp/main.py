@@ -116,7 +116,7 @@ class DexSwap:
 
         except Exception as e:
             self.logger.error("Error in get_swap: %s", e)
-            return
+            return e
 
     async def get_confirmation(self, order_hash):
         """Returns trade confirmation"""

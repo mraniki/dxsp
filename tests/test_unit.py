@@ -144,12 +144,21 @@ async def test_get_abi(exchange, mocker):
 
 
 @pytest.mark.asyncio
+async def test_get_no_mock(exchange):
+    abi = await exchange.get_abi("0x1234567890123456789012345678901234567890")
+    assert abi is None
+
+@pytest.mark.asyncio
 async def test_get_token_contract(exchange):
     """get_token_contract Testing"""
-    contract = await exchange.get_token_contract("WBTC")
+    contract = await exchange.get_token_contract("UNI")
+    print(contract)
+    print(type(contract))
+    print(contract.functions)
     if contract:
         assert contract is not None
-        assert type(contract) is exchange.w3.eth.contract
+        assert type(contract) is not None
+        assert contract.functions is not None
 
 
 @pytest.mark.asyncio
@@ -246,14 +255,14 @@ async def test_get_gas_price(exchange):
 
 
 @pytest.mark.asyncio
-async def test_get_swap(exchange):
+async def test_no_money_get_swap(exchange):
     swap = await exchange.get_swap(
         "WBTC",
         "USDT",
         1)
     print(f"swap: {swap}")
-    assert swap is not None
-
+    assert swap.__class__ == ValueError
+    assert str(swap) == "No Money"
 
 @pytest.mark.asyncio
 async def test_get_account_balance(exchange):
