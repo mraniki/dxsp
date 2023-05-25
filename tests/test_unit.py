@@ -36,7 +36,6 @@ async def test_init_dex():
     assert exchange.cg_platform is not None
 
 
-@pytest.mark.asyncio
 def test_settings_dex_swap_init():
     with patch("dxsp.config.settings", autospec=True):
         settings.dex_wallet_address = "0x1234567890123456789012345678901234567890"
