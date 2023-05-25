@@ -146,21 +146,31 @@ async def test_get_quote_uniswap(exchange):
 
 
 # @pytest.mark.asyncio
-# async def test_get_approve_uniswap(exchange, mocker):
-#     mock_token = mocker.MagicMock()
-#     mock_token.allowance.return_value = 0
-#     mock_token.functions.approve.return_value = "0x1234567890abcdef"
+# async def test_get_approve(exchange):
+#     result = await exchange.get_approve("UNI")
+#     print(result)
+#     assert result is not None
 
-#     mocker.patch.object(
-#         exchange, "get_abi", return_value="mock_abi")
-#     mocker.patch.object(
-#         exchange.w3.eth, "contract", return_value=mock_token)
-#     mocker.patch.object(
-#         exchange, "get_sign", return_value="0xabcdef1234567890")
 
+# @pytest.mark.asyncio
+# async def test_get_approve_error():
+#     mock_self = MagicMock()
+#     mock_self.protocol_type = "uniswap_v2"
+
+#     mock_get_approve_uniswap = MagicMock()
+#     mock_get_approve_uniswap.side_effect = Exception("Error message")
+#     mock_self.get_approve_uniswap = mock_get_approve_uniswap
+
+#     result = await mock_self.get_approve("symbol")
+
+#     assert result is None
+#     mock_self.logger.error.assert_called_once_with("Error in get_approve: Error message")
+
+
+# @pytest.mark.asyncio
+# async def test_get_approve_uniswap(exchange):
 #     # Call the get_approve_uniswap method and check the result
-#     approval_txHash_complete = await exchange.get_approve_uniswap(
-#         "0x1234567890123456789012345678901234567890")
+#     approval_txHash_complete = await exchange.get_approve_uniswap("USDT")
 #     print(f"approval_txHash_complete: {approval_txHash_complete}")
 #     assert approval_txHash_complete is not None
 
@@ -195,6 +205,71 @@ async def test_get_swap_uniswap(exchange):
     assert swap_order is not None
 
 
+# @pytest.mark.asyncio
+# async def test_get_confirmation(mocker):
+#     mock_w3 = mocker.MagicMock()
+#     mock_receipt = mocker.MagicMock()
+#     mock_block = mocker.MagicMock()
+
+#     mock_w3.eth.get_transaction.return_value = mock_receipt
+#     mock_w3.eth.get_block.return_value = mock_block
+
+#     order_hash = "0x1234"
+
+#     mock_receipt.return_value = {
+#         "blockNumber": 123,
+#         "blockHash": "0x5678",
+#         "to": "0x1234567890123456789012345678901234567890",
+#         "value": 10,
+#         "gas": 1000,
+#     }
+#     mock_block.return_value = {"timestamp": 1600000000}
+
+#     expected_trade = {
+#         "timestamp": 1600000000,
+#         "id": "0x5678",
+#         "instrument": "0x1234567890123456789012345678901234567890",
+#         "contract": "0x1234567890123456789012345678901234567890",
+#         "amount": 10,
+#         "price": 10,
+#         "fee": 1000,
+#         "confirmation": (
+#             "➕ Size: 10.0\n"
+#             "⚫️ Entry: 10.0\n"
+#             "ℹ️ 0x5678\n"
+#             "🗓️ 1600000000"
+#         ),
+#     }
+
+#     obj = DexSwap(mock_w3)
+#     assert await obj.get_confirmation(order_hash) is not None
+#     mock_w3.eth.get_transaction.assert_called_once_with(order_hash)
+#     mock_w3.eth.get_block.assert_called_once_with(123)
+
+
+# @pytest.mark.asyncio
+# async def test_execute_order(exchange):
+#     order_params = {
+#         'action': 'BUY',
+#         'instrument': 'ETH',
+#         'quantity': 1
+#     }
+#     result = await exchange.execute_order(order_params)
+#     print(result)
+#     assert result.__class__ == ValueError
+#     assert str(result) == "No Money"
+
+
+@pytest.mark.asyncio
+async def test_no_money_get_swap(exchange):
+    swap = await exchange.get_swap(
+        "WBTC",
+        "USDT",
+        1)
+    print(f"swap: {swap}")
+    assert swap.__class__ == ValueError
+    assert str(swap) == "No Money"
+
 
 @pytest.mark.asyncio
 async def test_get_gas(exchange):
@@ -214,16 +289,6 @@ async def test_get_gas_price(exchange):
     print(f"gas_price: {gas_price}")
     assert gas_price is not None
 
-
-@pytest.mark.asyncio
-async def test_no_money_get_swap(exchange):
-    swap = await exchange.get_swap(
-        "WBTC",
-        "USDT",
-        1)
-    print(f"swap: {swap}")
-    assert swap.__class__ == ValueError
-    assert str(swap) == "No Money"
 
 @pytest.mark.asyncio
 async def test_get_account_balance(exchange):
