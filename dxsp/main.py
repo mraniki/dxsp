@@ -339,7 +339,7 @@ class DexSwap:
                 transaction_params = {
                     'from': self.wallet_address,
                     'gas': await self.get_gas(transaction),
-                    'gasPrice': await self.get_gasPrice(transaction),
+                    'gasPrice': await self.get_gas_price(transaction),
                     'nonce': self.w3.eth.get_transaction_count(self.wallet_address),
                 }
                 transaction = transaction.build_transaction(transaction_params)
@@ -500,10 +500,6 @@ class DexSwap:
                 return None
         except Exception as e:
             self.logger.error(f"Error in get_swap_uniswap: {e}")
-
-
-
-
 
 # 0️⃣x
     async def get_0x_quote(
