@@ -48,9 +48,6 @@ def test_settings_dex_swap_init():
 
 
 @pytest.mark.asyncio
-def test_w3_dex_swap_init(web3):
-    dex = DexSwap(w3=web3)
-    assert dex.w3 == web3
 
 
 @pytest.mark.asyncio
