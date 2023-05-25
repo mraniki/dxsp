@@ -11,6 +11,7 @@ from dxsp.config import settings
 
 from pycoingecko import CoinGeckoAPI
 from web3 import Web3
+from web3.gas_strategies.time_based import medium_gas_price_strategy
 
 
 class DexSwap:
@@ -20,6 +21,7 @@ class DexSwap:
         self.logger.info(f"DexSwap: {__version__}")
 
         self.w3 = w3 or Web3(Web3.HTTPProvider(settings.dex_rpc))
+        self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
         try:
             if self.w3.net.listening:
                 self.logger.info(f"connected {self.w3}")
@@ -353,15 +355,15 @@ class DexSwap:
 
     async def get_gas(self, tx):
         gas_estimate = self.w3.eth.estimate_gas(tx) * 1.25
+        self.logger.debug("gas_estimate %s", gas_estimate)
         return int(self.w3.to_wei(gas_estimate, 'wei'))
 
-    async def get_gasPrice(self):
-        '''
-        Get the gas price for a transaction
-        '''
-        gasprice = self.w3.eth.generate_gas_price()
-        return gasprice
-        # return self.w3.to_wei(gasprice, 'gwei')
+    async def get_gas_price(self):
+        gas_price = round(self.w3.from_wei(
+            self.w3.eth.generate_gas_price(),
+            'gwei'), 2)
+        self.logger.debug("gas_price %s", gas_price)
+        return gas_price
 
     async def get_abi(self, address):
         if not settings.dex_block_explorer_api:
@@ -484,18 +486,24 @@ class DexSwap:
 
     async def get_swap_uniswap(self, asset_out_address, asset_in_address, amount):
         try:
+            path = [self.w3.to_checksum_address(asset_out_address),
+                    self.w3.to_checksum_address(asset_in_address)]
+            deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
+            router_instance = await self.router()
+            min_amount = self.get_quote_uniswap(asset_in_address, asset_out_address, amount)[0]
+
             if self.protocol_type == "uniswap_v2":
-                path = [asset_out_address, asset_in_address]
-                deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
-                min_amount = self.get_quote_uniswap(asset_in_address, asset_out_address, amount)[0]
-                router_instance = await self.router()
                 swap_order = router_instance.functions.swapExactTokensForTokens(
-                    amount, min_amount, path, self.wallet_address, deadline)
+                    int(amount), int(min_amount), tuple(path), self.wallet_address, deadline)
                 return swap_order
             elif self.protocol_type == "uniswap_v3":
                 return None
         except Exception as e:
-            self.logger.error("Error in get_swap_uniswap: %s", e)
+            self.logger.error(f"Error in get_swap_uniswap: {e}")
+
+
+
+
 
 # 0️⃣x
     async def get_0x_quote(

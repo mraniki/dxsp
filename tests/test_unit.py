@@ -4,7 +4,7 @@ import requests
 import re
 from dxsp import DexSwap
 from dxsp.config import settings
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 
 
 @pytest.fixture
@@ -31,9 +31,12 @@ def asset_out_address():
 
 
 @pytest.fixture
-async def test_router(exchange):
+async def router(exchange):
     return await exchange.router()
 
+@pytest.fixture
+async def quoter(exchange):
+    return await exchange.quoter()
 
 @pytest.fixture
 def token_contract(web3):
@@ -64,13 +67,14 @@ async def test_init_dex():
 
 @pytest.mark.asyncio
 def test_settings_dex_swap_init():
-    with patch("dxsp.config.settings", autospec=True) as mock_settings:
+    with patch("dxsp.config.settings", autospec=True):
         settings.dex_wallet_address = "0x1234567890123456789012345678901234567890"
         settings.dex_private_key = "0xdeadbeef"
 
         dex = DexSwap()
         assert dex.wallet_address == "0x1234567890123456789012345678901234567890"
         assert dex.private_key == "0xdeadbeef"
+
 
 @pytest.mark.asyncio
 def test_w3_dex_swap_init(web3):
@@ -88,9 +92,13 @@ async def test_get(exchange):
 
 
 @pytest.mark.asyncio
-async def test_get_router(exchange):
-    router = exchange.router()
+async def test_get_router(router):
     assert router is not None
+
+
+@pytest.mark.asyncio
+async def test_get_quoter(quoter):
+    assert quoter is not None
 
 
 @pytest.mark.asyncio
@@ -187,27 +195,35 @@ async def test_get_quote_uniswap(exchange):
 #     assert approval_txHash_complete is not None
 
 
-# @pytest.mark.asyncio
-# async def test_get_swap_uniswap(mocker):
-#     exchange = DexSwap()
-#     mock_swap_order = mocker.MagicMock()
-#     mock_swap_order.return_value = "0x1234567890abcdef"
+@pytest.mark.asyncio
+async def test_get_swap_uniswap(exchange):
+    asset_out_address = "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+    asset_in_address = "0xdac17f958d2ee523a2206206994597c13d831ec7"
+    amount = 100
 
-#     mock_router_functions = mocker.MagicMock(swapExactTokensForTokens=mock_swap_order)
-#     mock_router = mocker.MagicMock()
-#     mock_router.functions = mock_router_functions
+    # Create a mock object for self.get_quote_uniswap()
+    get_quote_mock = MagicMock()
+    get_quote_mock.return_value = [50]
 
-#     mocker.patch.object(exchange, "get_abi", return_value="mock_abi")
-#     mocker.patch.object(exchange.w3.eth, "contract", return_value=mock_router)
+    # Create a mock object for self.w3.eth.get_block()
+    get_block_mock = MagicMock()
+    get_block_mock.return_value = {"timestamp": 1000}
 
-#     # Call the get_swap_uniswap method and check the result
-#     swap_order = await exchange.get_swap_uniswap(
-#         "0x1234567890123456789012345678901234567890",
-#         "0x0987654321098765432109876543210987654321",
-#         100000000)
+    # Set up the test instance
+    exchange.get_quote_uniswap = get_quote_mock
+    exchange.w3.eth.get_block = get_block_mock
+    exchange.wallet_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
+    exchange.protocol_type = "uniswap_v2"
 
-#     print(f"swap_order: {swap_order}")
-#     assert swap_order is not None
+    # Call the function being tested
+    swap_order = await exchange.get_swap_uniswap(
+        asset_out_address,
+        asset_in_address,
+        amount)
+    print(f"swap_order: {swap_order}")
+    # Check the output
+    assert swap_order is not None
+
 
 
 @pytest.mark.asyncio
@@ -221,12 +237,12 @@ async def test_get_gas(exchange):
     assert gas_estimate > 1
 
 
-# @pytest.mark.asyncio
-# async def test_get_gasPrice(exchange):
-#     # Call the get_gasPrice method and check the result
-#     gas_price = await exchange.get_gasPrice()
-#     print(f"gas_price: {gas_price}")
-#     assert gas_price is not None
+@pytest.mark.asyncio
+async def test_get_gas_price(exchange):
+    # Call the get_gasPrice method and check the result
+    gas_price = await exchange.get_gas_price()
+    print(f"gas_price: {gas_price}")
+    assert gas_price is not None
 
 
 # @pytest.mark.asyncio
@@ -237,12 +253,6 @@ async def test_get_gas(exchange):
 #         1)
 #     print(f"swap: {swap}")
 #     assert swap is not None
-
-@pytest.mark.asyncio
-# async def test_tx_receipt_status(exchange):
-#     with patch('exchange', new=AsyncMock()) as mock:
-#         await exchange.get_block_explorer_status('0x123')
-#         mock.assert_called_once_with(params=dict(module='transaction', action='gettxreceiptstatus', txhash='0x123'))
 
 
 @pytest.mark.asyncio
