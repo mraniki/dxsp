@@ -66,7 +66,7 @@ class DexSwap:
 
             if self.protocol_type == "0x":
                 self.logger.debug("0x getquote")
-                return await self.get_quote_0x(
+                return await self.get_0x_quote(
                     asset_in_address,
                     asset_out_address)
 
@@ -104,7 +104,7 @@ class DexSwap:
             if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
                 swap_order = await self.get_swap_uniswap(asset_out_address, asset_in_address, order_amount)
             elif self.protocol_type == "0x":
-                swap_order = await self.get_quote_0x(asset_out_address, asset_in_address, order_amount)
+                swap_order = await self.get_0x_quote(asset_out_address, asset_in_address, order_amount)
                 await self.get_sign(swap_order)
 
             if swap_order:
