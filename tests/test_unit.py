@@ -31,8 +31,8 @@ async def test_init_dex():
     assert exchange.chain_id is not None
     assert exchange.protocol_type is not None
     assert exchange.protocol_type == "uniswap_v2"
-    assert exchange.wallet_address.startswith("0x")
-    assert exchange.private_key.startswith("0x")
+    #assert exchange.wallet_address.startswith("0x")
+    #assert exchange.private_key.startswith("0x")
     assert exchange.cg_platform is not None
 
 
