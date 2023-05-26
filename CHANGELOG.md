@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.5.0 (2023-05-26)
+### Feature
+* 🥚 Add account to DexSwap class. ([`1e4c787`](https://github.com/mraniki/dxsp/commit/1e4c7879d651740b7c67d15b7414bd6c81835569))
+
+### Other
+* Merge pull request #234 from mraniki/dev ([`2568259`](https://github.com/mraniki/dxsp/commit/25682594e03449e5f10ae4045eb2524bbe8c39ea))
+
 ## v2.4.1 (2023-05-25)
 ### Fix
 * 🎨 improve structure ([`49ae03e`](https://github.com/mraniki/dxsp/commit/49ae03e52146af3565ae4af4ba5fd6a9dd29e70e))
