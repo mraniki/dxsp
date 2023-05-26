@@ -33,6 +33,7 @@ class DexSwap:
         self.chain_id = settings.dex_chain_id
         self.wallet_address = self.w3.to_checksum_address(
             settings.dex_wallet_address)
+        self.account = self.wallet_address
         self.private_key = settings.dex_private_key
 
         try:
