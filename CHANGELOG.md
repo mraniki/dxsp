@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v2.5.1 (2023-05-26)
+### Fix
+* :white_check_mark:  test case modification ([`4600f61`](https://github.com/mraniki/dxsp/commit/4600f61122b096d2bbdb2f38c58ba1804776b505))
+* :art: Update DexSwap account display ([`fd63ba9`](https://github.com/mraniki/dxsp/commit/fd63ba9fe98c52ab9879ea471b087dbf913fe60f))
+
+### Other
+* Merge pull request #235 from mraniki/dev ([`853fa63`](https://github.com/mraniki/dxsp/commit/853fa6306d59096c35e36380d0e7d6bc45afc316))
+* :wrench:Update default_settings.toml with empty dex wallet address and private key. ([`41b776f`](https://github.com/mraniki/dxsp/commit/41b776f4049e0a66424129fd8e7bac4b2a458b83))
+
 ## v2.5.0 (2023-05-26)
 ### Feature
 * 🥚 Add account to DexSwap class. ([`1e4c787`](https://github.com/mraniki/dxsp/commit/1e4c7879d651740b7c67d15b7414bd6c81835569))
