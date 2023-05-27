@@ -5,7 +5,9 @@ description = "DXSP (DeX SwaP), A defi swap helper package. Swap made easy."
 authors = ["mraniki <8766259+mraniki@users.noreply.github.com>"]
 license = "MIT License"
 readme = "README.md"
-
+packages = [
+    {include = "dxsp"}
+]
 
 [tool.poetry.urls]
 "Changelog" =  "https://github.com/mraniki/dxsp/blob/dev/CHANGELOG.rst"
@@ -19,7 +21,6 @@ dynaconf = "*"
 web3 = "^6.4.0"
 pycoingecko = "*"
 
-
 [tool.poetry.dev-dependencies]
 python-semantic-release = "*"
 pytest = "*"
@@ -28,8 +29,8 @@ pytest-asyncio = "*"
 pytest-mock = "*"
 
 [tool.pytest.ini_options]
-testpaths = "tests"
 pythonpath = "."
+testpaths = "tests"
 python_classes = "Test*"
 log_format = "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
 log_level = "DEBUG"
