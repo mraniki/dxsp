@@ -18,12 +18,6 @@ asyncio = "*"
 dynaconf = "*"
 web3 = "^6.4.0"
 pycoingecko = "*"
-# uniswap-python = "*"
-# web3client = "*"
-#web3-ethereum-defi = "*"
-# web3client = ">=1.1.8"
-# # many-abis = ">=0.1.7"
-# apollox-connector-python = "*"
 
 
 [tool.poetry.dev-dependencies]
@@ -34,18 +28,18 @@ pytest-asyncio = "*"
 pytest-mock = "*"
 
 [tool.pytest.ini_options]
-testpaths = "tests/"
-python_classes = [
-  "Test*",
-  "*Test"
-]
+testpaths = "tests"
+pythonpath = "."
+python_classes = "Test*"
 log_format = "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
 log_level = "DEBUG"
-pythonpath = [
-  "."
+
+[tool.coverage.run]
+branch = true
+omit = [
+    "tests/*",
+    "examples/*"
 ]
-addopts = "--capture=no --ignore-glob=example*"
-ignore="test example"
 
 [build-system]
 requires = ["poetry-core"]
@@ -59,6 +53,18 @@ upload_to_release = true
 build_command = "pip install poetry && poetry build"
 commit_parser = "semantic_release.history.emoji_parser"
 use_textual_changelog_sections = true
-major_emoji = "💥,:boom:,BREAKING CHANGE"
-minor_emoji = "feat,🥚,🚀,💄,✨,:rocket:,:sparkles:,:lipstick:,:egg:"
-patch_emoji = "fix,🎨,🐛,🚑,⚡,🔥,🚨,♻️,🔧,⬆️,🩹,👷,📝,🔒,👽,💬,🥅,✅,🐳,🙈,⚗️,🧐,🔇,🔊,:mute:,:loud_sound:,:monocle_face:,:alembic:,:see_no_evil:,:white_check_mark:,:arrow_up:,:recycle:,:fire,:whale:,:art:,:ambulance:,:lock:,:arrow_up:,:bug:,:zap:,:goal_net:,:alien:,:speech_balloon:,:rotating_light:,:construction_worker:"
+major_emoji = [
+  "💥,:boom:,BREAKING CHANGE"
+  ]
+minor_emoji = [
+  "feat,🥚,🚀,💄,✨,",
+  ":rocket:,:sparkles:,:lipstick:,:egg:"
+  ]
+patch_emoji = [
+  "fix,🎨,🐛,🚑,⚡,🔥,🚨,♻️,🔧,⬆️,🩹,👷,📝,🔒,👽,💬,🥅,✅,🐳,🙈,⚗️,🧐,🔇,🔊,",
+  ":art:,:bug:,:ambulance:,:zap:,:fire,:rotating_light:,",
+  ":recycle:,:wrench:,:arrow_up:,:adhesive_bandage:,",
+  ":construction_worker:,:memo:,:lock:,:alien:,:speech_balloon:,",
+  ":goal_net::white_check_mark:,:whale:,:see_no_evil:,",
+  ":alembic:,:monocle_face:,:mute:,:loud_sound:"
+]
