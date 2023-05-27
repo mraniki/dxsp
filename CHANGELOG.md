@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.5.3 (2023-05-27)
+### Fix
+* :wrench: Change envvar_prefix to "TT" in config.py. ([`402494e`](https://github.com/mraniki/dxsp/commit/402494eae9fd518c0aa1c2c00de775a2c47ad52a))
+
+### Other
+* Merge pull request #238 from mraniki/dev ([`26d252f`](https://github.com/mraniki/dxsp/commit/26d252ff9d3be9a015dd743c5e4b4043d81f4d61))
+
 ## v2.5.2 (2023-05-27)
 ### Fix
 * 🎨 code format ([`207c8b0`](https://github.com/mraniki/dxsp/commit/207c8b0ab57f12f158cf247a56cf53206939a14d))
