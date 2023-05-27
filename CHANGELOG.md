@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.5.5 (2023-05-27)
+### Fix
+* ⚡ improving code coverage ([`02b2413`](https://github.com/mraniki/dxsp/commit/02b2413c1300b672531c29a006c0fb1bf25fe362))
+
+### Other
+* Merge pull request #240 from mraniki/dev ([`4d9dd10`](https://github.com/mraniki/dxsp/commit/4d9dd10819ae2d625fd73b06205a72317685c417))
+
 ## v2.5.4 (2023-05-27)
 ### Fix
 * ⚡ improving code coverage ([`6617355`](https://github.com/mraniki/dxsp/commit/661735551a54963c8bf5f4747d89d0db9e38ea0d))
