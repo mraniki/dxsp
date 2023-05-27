@@ -2,6 +2,18 @@
 
 <!--next-version-placeholder-->
 
+## v2.5.2 (2023-05-27)
+### Fix
+* 🎨 code format ([`207c8b0`](https://github.com/mraniki/dxsp/commit/207c8b0ab57f12f158cf247a56cf53206939a14d))
+* ♻️ update quote ccy to trasding_asset and added more test ([`029b94b`](https://github.com/mraniki/dxsp/commit/029b94b47a4c1d6031fa438fb7f4544e2c0cef0d))
+* 🚑 dex_wallet_address was removed from settings and fixes test cases ([`c74e372`](https://github.com/mraniki/dxsp/commit/c74e37272c4ef76d59c76f545d3ff212a68d82fc))
+* 🔧 removing envvar_prefix ([`7387408`](https://github.com/mraniki/dxsp/commit/7387408d411ccb5ccdd784ada5019b45756aca51))
+
+### Other
+* Merge pull request #237 from mraniki/dev ([`8205763`](https://github.com/mraniki/dxsp/commit/82057632da97efabcc4fd95b0bc57bfdfa7b74a7))
+* Merge pull request #236 from mraniki/dev ([`74e4bb8`](https://github.com/mraniki/dxsp/commit/74e4bb8251be0c925b68b93e2f9ae519f2c35015))
+* :wrench: Update default_settings.toml with commented out wallet and private key. ([`b96da1e`](https://github.com/mraniki/dxsp/commit/b96da1efecfce1ec01e6066d86ebcb985e36aef2))
+
 ## v2.5.1 (2023-05-26)
 ### Fix
 * :white_check_mark:  test case modification ([`4600f61`](https://github.com/mraniki/dxsp/commit/4600f61122b096d2bbdb2f38c58ba1804776b505))
