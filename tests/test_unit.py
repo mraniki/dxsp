@@ -23,6 +23,7 @@ async def settings_fixture():
 async def router(exchange):
     return await exchange.router()
 
+
 @pytest.fixture
 async def quoter(exchange):
     return await exchange.quoter()
@@ -45,9 +46,8 @@ async def test_init_dex():
     assert dex.cg_platform is not None
 
 
-
 def test_setting_dex_swap_init():
-    with patch("dxsp.config.settings", autospec=True) as mock_settings:
+    with patch("dxsp.config.settings", autospec=True):
         settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
         settings.dex_private_key = "0xdeadbeet"
 
@@ -58,16 +58,17 @@ def test_setting_dex_swap_init():
 
 
 def test_chain_dex_swap_init():
-    with patch("dxsp.config.settings", autospec=True) as mock_settings:
+    with patch("dxsp.config.settings", autospec=True):
         settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
         settings.dex_private_key = "0xdeadbeet"
         settings.dex_chain_id = 10
-        
+
         dex = DexSwap()
         assert dex.wallet_address == "0x1234567890123456789012345678901234567899"
         assert dex.private_key == "0xdeadbeet"
         assert dex.account == "10 - 34567899"
         assert dex.chain_id == 10
+
 
 @pytest.mark.asyncio
 async def test_get(exchange):
@@ -128,6 +129,7 @@ async def test_get_abi(exchange, mocker):
 async def test_get_no_mock(exchange):
     abi = await exchange.get_abi("0x1234567890123456789012345678901234567890")
     assert abi is None
+
 
 @pytest.mark.asyncio
 async def test_get_token_contract(exchange):
