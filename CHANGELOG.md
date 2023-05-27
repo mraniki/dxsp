@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.5.4 (2023-05-27)
+### Fix
+* ⚡ improving code coverage ([`6617355`](https://github.com/mraniki/dxsp/commit/661735551a54963c8bf5f4747d89d0db9e38ea0d))
+
+### Other
+* Merge pull request #239 from mraniki/dev ([`1261486`](https://github.com/mraniki/dxsp/commit/1261486d0228c2a1db9e45286422e3f281e55ec9))
+
 ## v2.5.3 (2023-05-27)
 ### Fix
 * :wrench: Change envvar_prefix to "TT" in config.py. ([`402494e`](https://github.com/mraniki/dxsp/commit/402494eae9fd518c0aa1c2c00de775a2c47ad52a))
