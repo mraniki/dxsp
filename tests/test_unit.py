@@ -1,5 +1,4 @@
 import pytest
-from web3 import Web3
 import requests
 import re
 from dxsp import DexSwap
@@ -13,8 +12,17 @@ def exchange():
 
 
 @pytest.fixture
+async def settings_fixture():
+    with patch("dxsp.config.settings", autospec=True) as mock_settings:
+        mock_settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
+        mock_settings.dex_private_key = "0xdeadbeef"
+        yield mock_settings
+
+
+@pytest.fixture
 async def router(exchange):
     return await exchange.router()
+
 
 @pytest.fixture
 async def quoter(exchange):
@@ -24,27 +32,42 @@ async def quoter(exchange):
 @pytest.mark.asyncio
 async def test_init_dex():
     """Init Testing"""
-    exchange = DexSwap()
-    check = "DexSwap" in str(type(exchange))
+    dex = DexSwap()
+    check = "DexSwap" in str(type(dex))
     assert check is True
-    assert exchange.w3 is not None
-    assert exchange.chain_id is not None
-    assert exchange.protocol_type is not None
-    assert exchange.protocol_type == "uniswap_v2"
-    #assert exchange.wallet_address.startswith("0x")
-    #assert exchange.private_key.startswith("0x")
-    assert exchange.cg_platform is not None
+    assert dex.w3 is not None
+    assert dex.chain_id is not None
+    assert dex.protocol_type is not None
+    assert dex.protocol_type == "uniswap_v2"
+    assert dex.wallet_address.startswith("0x")
+    assert dex.wallet_address == "0x1234567890123456789012345678901234567890"
+    assert dex.private_key.startswith("0x")
+    assert dex.account == "1 - 34567890"
+    assert dex.cg_platform is not None
 
 
-def test_settings_dex_swap_init():
+def test_setting_dex_swap_init():
     with patch("dxsp.config.settings", autospec=True):
-        settings.dex_wallet_address = "0x1234567890123456789012345678901234567890"
-        settings.dex_private_key = "0xdeadbeef"
+        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
+        settings.dex_private_key = "0xdeadbeet"
 
         dex = DexSwap()
-        assert dex.wallet_address == "0x1234567890123456789012345678901234567890"
-        assert dex.private_key == "0xdeadbeef"
+        assert dex.wallet_address == "0x1234567890123456789012345678901234567899"
+        assert dex.private_key == "0xdeadbeet"
+        assert dex.account == "1 - 34567899"
 
+
+def test_chain_dex_swap_init():
+    with patch("dxsp.config.settings", autospec=True):
+        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
+        settings.dex_private_key = "0xdeadbeet"
+        settings.dex_chain_id = 10
+
+        dex = DexSwap()
+        assert dex.wallet_address == "0x1234567890123456789012345678901234567899"
+        assert dex.private_key == "0xdeadbeet"
+        assert dex.account == "10 - 34567899"
+        assert dex.chain_id == 10
 
 
 @pytest.mark.asyncio
@@ -74,12 +97,10 @@ async def test_quoter(exchange):
 async def test_search_contract(exchange):
     address = await exchange.search_contract("WBTC")
     assert address.startswith("0x")
-    # assert address == "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
 
     address = await exchange.search_contract("USDT")
     assert address is not None
     assert address.startswith("0x")
-    # assert address == "0xdac17f958d2ee523a2206206994597c13d831ec7"
 
     address = await exchange.search_contract("UNKNOWN")
     assert address == "no contract found for UNKNOWN"
@@ -108,6 +129,7 @@ async def test_get_abi(exchange, mocker):
 async def test_get_no_mock(exchange):
     abi = await exchange.get_abi("0x1234567890123456789012345678901234567890")
     assert abi is None
+
 
 @pytest.mark.asyncio
 async def test_get_token_contract(exchange):

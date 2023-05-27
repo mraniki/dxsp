@@ -6,12 +6,12 @@ token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/a
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 #📝trading setup
-trading_quote_ccy = "USDT"
+trading_asset = "USDT"
 trading_risk_amount = 10 # 10% of the position
 dex_trading_slippage = 2 # 2 % slippage
 #user settings
-#dex_wallet_address = "" #this is an example
-#dex_private_key = "" #this is an example
+dex_wallet_address = "0x1234567890123456789012345678901234567890" #this is an example
+dex_private_key = "0xdeadbeef" #this is an example
 #chain_1 #see below for other chain ids or use https://chainlist.org to overwrite settings
 dex_chain_id = 1
 dex_protocol_type = "uniswap_v2" #0x | 1inch | uniswap_v3
