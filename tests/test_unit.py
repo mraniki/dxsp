@@ -57,6 +57,18 @@ def test_setting_dex_swap_init():
         assert dex.account == "1 - 34567899"
 
 
+def test_chain_dex_swap_init():
+    with patch("dxsp.config.settings", autospec=True) as mock_settings:
+        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
+        settings.dex_private_key = "0xdeadbeet"
+        settings.dex_chain_id = 10
+        
+        dex = DexSwap()
+        assert dex.wallet_address == "0x1234567890123456789012345678901234567899"
+        assert dex.private_key == "0xdeadbeet"
+        assert dex.account == "10 - 34567899"
+        assert dex.chain_id == 10
+
 @pytest.mark.asyncio
 async def test_get(exchange):
     result = await exchange._get(
