@@ -2,6 +2,23 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.0 (2023-05-28)
+### Feature
+* 🥚 Add get_name method to DexSwap class ([`f853202`](https://github.com/mraniki/dxsp/commit/f8532020bdedf72f24e832e126df707e3b0b1bd6))
+
+### Fix
+* 👷 CI Change ([`d3203d2`](https://github.com/mraniki/dxsp/commit/d3203d2cbd315e6f47cfd78890d6b078af43acc9))
+* 👷 CI Change ([`b1b10d6`](https://github.com/mraniki/dxsp/commit/b1b10d6bb3bd2138a44602d0402b99697eb0b866))
+* ⚡ improving code coverage ([`bb674b2`](https://github.com/mraniki/dxsp/commit/bb674b2d5b7fc19044fb4e21256505f2c69fbcd1))
+
+### Other
+* Merge pull request #244 from mraniki/dev ([`923b5e4`](https://github.com/mraniki/dxsp/commit/923b5e48706e3b143b6f3dc88f53bc70ba36d199))
+* :construction_worker_man: CI Change ([`76f03de`](https://github.com/mraniki/dxsp/commit/76f03de8cdc0eb804373c5bb4735ebf3c782478f))
+* Merge pull request #243 from mraniki/dev ([`4a601ed`](https://github.com/mraniki/dxsp/commit/4a601ed883542fa65e655d3d0fbb12f15c763869))
+* Merge pull request #242 from mraniki/main ([`7e33860`](https://github.com/mraniki/dxsp/commit/7e33860f521573fce78b642444f5902d7f41f9e4))
+* :whale: Refactor Dockerfile: remove unnecessary port 8443. ([`8b1e5f7`](https://github.com/mraniki/dxsp/commit/8b1e5f7d066e5add37633318d8666f7c4f3ae035))
+* Merge pull request #241 from mraniki/dev ([`51622bd`](https://github.com/mraniki/dxsp/commit/51622bdd2c1ca2d32594164a962af8ec2367dd7c))
+
 ## v2.5.5 (2023-05-27)
 ### Fix
 * ⚡ improving code coverage ([`02b2413`](https://github.com/mraniki/dxsp/commit/02b2413c1300b672531c29a006c0fb1bf25fe362))
