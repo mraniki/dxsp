@@ -401,6 +401,11 @@ class DexSwap:
             self.logger.error("get_abi %s", e)
             return None
 
+    async def get_name(self):
+        try:
+            return settings.dex_router_contract_addr[-8:]
+        except Exception as e:
+            self.logger.error("router name %s", e)
 # 🔒 USER RELATED
     async def get_token_balance(self, token):
         try:
