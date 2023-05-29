@@ -17,7 +17,7 @@ class DexSwap:
     """swap  class"""
     def __init__(self, w3: Optional[Web3] = None):
         self.logger = logging.getLogger(name="DexSwap")
-        self.logger.info(f"DexSwap: {__version__}")
+        self.logger.debug(f"DexSwap: {__version__}")
 
         self.w3 = w3 or Web3(Web3.HTTPProvider(settings.dex_rpc))
         self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
