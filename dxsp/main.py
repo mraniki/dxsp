@@ -6,13 +6,12 @@ import logging
 from typing import Optional
 
 import requests
-from dxsp import __version__
-from dxsp.config import settings
-
 from pycoingecko import CoinGeckoAPI
 from web3 import Web3
 from web3.gas_strategies.time_based import medium_gas_price_strategy
 
+from dxsp import __version__
+from dxsp.config import settings
 
 class DexSwap:
     """swap  class"""
@@ -24,9 +23,9 @@ class DexSwap:
         self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
         try:
             if self.w3.net.listening:
-                self.logger.info(f"connected {self.w3}")
+                self.logger.info("connected %s",self.w3)
         except Exception as e:
-            self.logger.error(f"connectivity failed {e}")
+            self.logger.error("connectivity failed %s", e)
             return
 
         self.protocol_type = settings.dex_protocol_type
