@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dxsp"
-version = "2.6.2"
+version = "2.6.3"
 description = "DXSP (DeX SwaP), A defi swap helper package. Swap made easy."
 authors = ["mraniki <8766259+mraniki@users.noreply.github.com>"]
 license = "MIT License"

@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.3 (2023-05-30)
+### Fix
+* ✅ unit test ([`a8ec5fb`](https://github.com/mraniki/dxsp/commit/a8ec5fb0896a9cdd27f2ea77c9fe824135986508))
+
+### Other
+* Merge pull request #249 from mraniki/dev ([`3759a1c`](https://github.com/mraniki/dxsp/commit/3759a1ce29576a711cae283c6fd637ecf65ddcb2))
+* Merge pull request #248 from mraniki/dev ([`d68f538`](https://github.com/mraniki/dxsp/commit/d68f53840a488754ed78c86c875894939094a3f6))
+* Refactor test_unit.py file with async/await syntax ([`f0758fb`](https://github.com/mraniki/dxsp/commit/f0758fbe30a65638bc9f1ced717722e30f8a4a7c))
+
 ## v2.6.2 (2023-05-30)
 ### Fix
 * 🐛 bug ([`2090637`](https://github.com/mraniki/dxsp/commit/209063736af2c6f08cab53ab47aed0d99e3eb4e9))
