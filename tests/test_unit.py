@@ -43,7 +43,6 @@ async def test_init_dex():
     assert dex.wallet_address == "0x1234567890123456789012345678901234567890"
     assert dex.private_key.startswith("0x")
     assert dex.account == "1 - 34567890"
-    assert dex.cg_platform is not None
 
 
 def test_setting_dex_swap_init():

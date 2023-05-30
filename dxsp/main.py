@@ -33,17 +33,7 @@ class DexSwap:
         self.account = str(self.chain_id) + " - "+str(self.wallet_address[-8:])
         self.private_key = settings.dex_private_key
 
-        try:
-            self.cg = CoinGeckoAPI()
-            asset_platforms = self.cg.get_asset_platforms()
-            output_dict = next(
-                x for x in asset_platforms
-                if x["chain_identifier"] == int(self.chain_id)
-            )
-            self.cg_platform = output_dict["id"]
-            self.logger.debug(f"cg_platform {self.cg_platform}")
-        except Exception as error:
-            raise error
+        self.cg = CoinGeckoAPI()
 
     async def execute_order(self, order_params):
         """Execute swap function."""
@@ -315,6 +305,16 @@ class DexSwap:
         except Exception as error:
             raise error
 
+    async def search_cg_platform(self):
+        """search coingecko platform"""
+        asset_platforms = self.cg.get_asset_platforms()
+        output_dict = next(
+            x for x in asset_platforms
+            if x["chain_identifier"] == int(self.chain_id)
+        )
+        cg_platform = output_dict["id"] or None
+        return cg_platform
+
     async def search_cg(self, token):
         """search coingecko"""
         try:
@@ -326,7 +326,7 @@ class DexSwap:
             for i in api_dict:
                 coin_dict = self.cg.get_coin_by_id(i)
                 try:
-                    if coin_dict['platforms'][f'{self.cg_platform}']:
+                    if coin_dict['platforms'][f'{await self.search_cg_platform()}']:
                         return coin_dict
                 except (KeyError, requests.exceptions.HTTPError):
                     pass
@@ -338,7 +338,7 @@ class DexSwap:
         """search coingecko contract"""
         try:
             coin_info = await self.search_cg(token)
-            return (coin_info['platforms'][f'{self.cg_platform}']
+            return (coin_info['platforms'][f'{await self.search_cg_platform()}']
                     if coin_info is not None else None)
         except Exception as e:
             self.logger.error(" search_cg_contract: %s", e)
