@@ -64,17 +64,21 @@ class DexSwap:
         """
         Asynchronously gets a quote for a specified sell token using the given `sell_token` parameter,
         """
-        buy_token = await self.search_contract(settings.trading_asset)
-
-        if buy_token is None:
-            raise ValueError("No valid contract")
+        buy_address = await self.search_contract(settings.trading_asset)
+        sell_address = await self.search_contract(sell_token)
+        if sell_address is None:
+            return
 
         try:
             if self.protocol_type in {"uniswap_v2", "uniswap_v3"}:
-                return await self.get_quote_uniswap(sell_token, buy_token)
+                return await self.get_quote_uniswap(
+                    buy_address,
+                    sell_address)
 
             if self.protocol_type == "0x":
-                return await self.get_0x_quote(sell_token, buy_token)
+                return await self.get_0x_quote(
+                    buy_address,
+                    sell_address)
 
         except Exception as error:
             raise error
@@ -131,9 +135,9 @@ class DexSwap:
                 params=params,
                 headers=headers,
                 timeout=10)
-            self.logger.debug("_response: %s", response)
+            #self.logger.debug("_response: %s", response)
             if response:
-                self.logger.debug("_json: %s", response.json())
+                #self.logger.debug("_json: %s", response.json())
                 return response.json()
 
         except Exception as error:
@@ -143,7 +147,7 @@ class DexSwap:
         try:
             router_abi = await self.get_abi(settings.dex_router_contract_addr)
             if router_abi is None:
-                router_abi = requests.get(settings.dex_router_abi_url).text
+                router_abi = await self._get(settings.dex_router_abi_url)
             router = self.w3.eth.contract(
                 address=self.w3.to_checksum_address(
                     settings.dex_router_contract_addr),
@@ -162,7 +166,7 @@ class DexSwap:
         try:
             quoter_abi = await self.get_abi(settings.dex_quoter_contract_addr)
             if quoter_abi is None:
-                quoter_abi = requests.get(settings.dex_quoter_abi_url).text
+                quoter_abi = await self._get(settings.dex_quoter_abi_url).text
             contract = self.w3.eth.contract(
                 address=self.w3.to_checksum_address(
                     settings.dex_quoter_contract_addr),
@@ -299,9 +303,9 @@ class DexSwap:
                                  token, token_contract)
                 return self.w3.to_checksum_address(token_contract)
 
-            return f"no contract found for {token}"
-        except Exception as error:
-            raise error
+            return None
+        except Exception:
+            return None
 
     async def search_cg_platform(self):
         """search coingecko platform"""
@@ -487,11 +491,11 @@ class DexSwap:
             raise e
 
 # 0️⃣x
-    async def get_0x_quote(self, buy_token, sell_token, amount=1):
+    async def get_0x_quote(self, buy_address, sell_address, amount=1):
         try:
             out_amount = self.w3.to_wei(amount, 'ether')
-            url = (settings.dex_0x_url + "/swap/v1/quote?buyToken=" + str(buy_token) +
-                "&sellToken=" + str(sell_token) + "&buyAmount=" + str(out_amount))
+            url = (settings.dex_0x_url + "/swap/v1/quote?buyToken=" + str(buy_address) +
+                "&sellToken=" + str(sell_address) + "&buyAmount=" + str(out_amount))
             headers = {"0x-api-key": settings.dex_0x_api_key}
             response = await self._get(url, params=None, headers=headers)
             print(response)

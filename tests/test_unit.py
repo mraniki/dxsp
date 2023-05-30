@@ -153,13 +153,22 @@ async def test_get_token_contract(exchange):
 
 
 @pytest.mark.asyncio
-async def test_get_quote(exchange):
+async def test_get_quote():
     """getquote Testing"""
-    quote = await exchange.get_quote("WBTC")
+    dex = DexSwap()
+    quote = await dex.get_quote("UNI")
+    print(quote)
     if quote:
         assert quote is not None
         assert quote.startswith("🦄")
 
+
+@pytest.mark.asyncio
+async def test_get_quote_error():
+    """Test get_quote() method"""
+    dex_swap = DexSwap()
+    quote = await dex_swap.get_quote("THISISNOTATOKEN")
+    assert quote is None
 
 @pytest.mark.asyncio
 async def test_get_quote_uniswap(exchange):
