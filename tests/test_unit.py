@@ -43,7 +43,6 @@ async def test_init_dex():
     assert dex.wallet_address == "0x1234567890123456789012345678901234567890"
     assert dex.private_key.startswith("0x")
     assert dex.account == "1 - 34567890"
-    assert dex.cg_platform is not None
 
 
 def test_setting_dex_swap_init():
@@ -197,6 +196,7 @@ async def test_get_quote_uniswap(exchange):
 #     assert approval_txHash_complete is not None
 
 
+
 @pytest.mark.asyncio
 async def test_get_swap_uniswap(exchange):
     asset_out_address = "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
@@ -226,6 +226,41 @@ async def test_get_swap_uniswap(exchange):
     # Check the output
     assert swap_order is not None
 
+@pytest.mark.asyncio
+async def test_get_0x_quote():
+    with patch("dxsp.config.settings", autospec=True):
+        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
+        settings.dex_private_key = "0xdeadbeet"
+        settings.dex_chain_id = 1
+        settings.dex_rpc = "https://rpc.ankr.com/eth_goerli"
+        settings.dex_0x_url = "https://goerli.api.0x.org"
+        settings.dex_protocol_type = "0x"
+        dex = DexSwap()
+        # Test function ETH > UNI
+        result = await dex.get_0x_quote(
+            "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
+            1)
+        assert result is not None
+        assert isinstance(result, float)
+
+
+@pytest.mark.asyncio
+async def test_get_0x_quote_fail():
+    with patch("dxsp.config.settings", autospec=True):
+        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
+        settings.dex_private_key = "0xdeadbeet"
+        settings.dex_chain_id = 1
+        settings.dex_rpc = "https://rpc.ankr.com/eth_goerli"
+        settings.dex_0x_url = "https://goerli.api.0x.org"
+        settings.dex_protocol_type = "0x"
+        dex = DexSwap()
+        # Test function DAI > UNI
+        result = await dex.get_0x_quote(
+            "0xE68104D83e647b7c1C15a91a8D8aAD21a51B3B3E",
+            "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
+            1)
+        assert result is None
 
 # @pytest.mark.asyncio
 # async def test_get_confirmation(mocker):
@@ -289,8 +324,17 @@ async def test_no_money_get_swap(exchange):
         "USDT",
         1)
     print(f"swap: {swap}")
-    assert swap.__class__ == ValueError
-    assert str(swap) == "No Money"
+    assert swap is None
+
+
+# @pytest.mark.asyncio
+# async def test_no_money_get_swap(exchange):
+#     swap = await exchange.get_swap(
+#         "WBTC",
+#         "USDT",
+#         1)
+#     print(f"swap: {swap}")
+#     assert swap is None
 
 
 @pytest.mark.asyncio
@@ -321,8 +365,12 @@ async def test_get_account_balance(exchange):
 
 
 @pytest.mark.asyncio
-async def test_get_token_balance(exchange):
+async def test_get_token_balance():
     # Call the get_token_balance method and check the result
-    token_balance = await exchange.get_token_balance("UNI")
+    with patch("dxsp.config.settings", autospec=True) as mock_settings:
+        mock_settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
+        mock_settings.dex_private_key = "0xdeadbeef"
+    dex = DexSwap()
+    token_balance = await dex.get_token_balance("UNI")
     assert isinstance(token_balance, int)
     assert token_balance >= 0
