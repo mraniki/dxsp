@@ -175,33 +175,12 @@ async def test_get_quote_uniswap(dex):
 
 
 # @pytest.mark.asyncio
-# async def test_get_approve(exchange):
-#     result = await exchange.get_approve("UNI")
-#     print(result)
-#     assert result is not None
+# async def test_get_approve_uniswap(dex):
+#     with patch("dxsp.config.settings", autospec=True):
+#         settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
 
-
-# @pytest.mark.asyncio
-# async def test_get_approve_error():
-#     mock_self = MagicMock()
-#     mock_self.protocol_type = "uniswap_v2"
-
-#     mock_get_approve_uniswap = MagicMock()
-#     mock_get_approve_uniswap.side_effect = Exception("Error message")
-#     mock_self.get_approve_uniswap = mock_get_approve_uniswap
-
-#     result = await mock_self.get_approve("symbol")
-
-#     assert result is None
-#     mock_self.logger.error.assert_called_once_with("Error in get_approve: Error message")
-
-
-# @pytest.mark.asyncio
-# async def test_get_approve_uniswap(exchange):
-#     # Call the get_approve_uniswap method and check the result
-#     approval_txHash_complete = await exchange.get_approve_uniswap("USDT")
-#     print(f"approval_txHash_complete: {approval_txHash_complete}")
-#     assert approval_txHash_complete is not None
+#         allowance = await dex.get_approve_uniswap(symbol="USDT")
+#         assert allowance is None
 
 
 
@@ -267,6 +246,14 @@ async def test_get_0x_quote_fail(dex):
             "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
             1)
         assert result is None
+
+
+# @pytest.mark.asyncio
+# async def test_get_approve(dex):
+#     result = await dex.get_approve("UNI")
+#     print(result)
+#     assert result is not None
+
 
 # @pytest.mark.asyncio
 # async def test_get_confirmation(mocker):
