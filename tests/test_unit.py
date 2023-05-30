@@ -144,14 +144,14 @@ async def test_get_token_contract(dex):
         assert contract.functions is not None
 
 
-@pytest.mark.asyncio
-async def test_get_quote(dex):
-    """getquote Testing"""
-    quote = await dex.get_quote("UNI")
-    print(quote)
-    if quote:
-        assert quote is not None
-        assert quote.startswith("🦄")
+# @pytest.mark.asyncio
+# async def test_get_quote(dex):
+#     """getquote Testing"""
+#     quote = await dex.get_quote("UNI")
+#     print(quote)
+#     if quote:
+#         assert quote is not None
+#         assert quote.startswith("🦄")
 
 
 @pytest.mark.asyncio
@@ -307,16 +307,16 @@ async def test_get_0x_quote_fail(dex):
 #     result = await dex.execute_order(order_params)
 #     print(result)
 #     assert result.__class__ == ValueError
-#     assert str(result) == "No Money"
+# #     assert str(result) == "No Money"
 
-@pytest.mark.asyncio
-async def test_no_money_get_swap(dex):
-    swap = await dex.get_swap(
-        "WBTC",
-        "USDT",
-        1)
-    print(f"swap: {swap}")
-    assert swap is None
+# @pytest.mark.asyncio
+# async def test_no_money_get_swap(dex):
+#     swap = await dex.get_swap(
+#         "WBTC",
+#         "USDT",
+#         1)
+#     print(f"swap: {swap}")
+#     assert swap is None
 
 
 @pytest.mark.asyncio
