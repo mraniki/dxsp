@@ -121,27 +121,16 @@ class DexSwap:
 ### ------🛠️ W3 UTILS ---------
 
 
-    async def _get(
-        self,
-        url,
-        params=None,
-        headers=None
-            ):
+    async def _get(self, url, params=None, headers=None):
         try:
-            self.logger.debug("url: %s", url)
-            # self.logger.debug("_header: %s", settings.headers)
-            response = requests.get(
-                url,
-                params=params,
-                headers=headers,
-                timeout=10)
-            #self.logger.debug("_response: %s", response)
-            if response:
-                #self.logger.debug("_json: %s", response.json())
+            self.logger.debug(f"Requesting URL: {url}")
+            response = requests.get(url, params=params, headers=headers, timeout=10)
+            if response.status_code == 200:
                 return response.json()
 
         except Exception as error:
             raise error
+
 
     async def router(self):
         try:
@@ -388,7 +377,7 @@ class DexSwap:
         contract = await self.get_token_contract(token_symbol)
         if not contract:
             return None
-        return int(await contract.functions.decimals().call())
+        return await contract.functions.decimals().call()
 
     async def get_account_balance(self):
         try:
