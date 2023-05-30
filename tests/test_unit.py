@@ -78,6 +78,94 @@ def test_chain_dex_swap_init():
 
 
 @pytest.mark.asyncio
+async def test_execute_order(dex):
+    order_params = {
+        'action': 'BUY',
+        'instrument': 'UNI',
+        'quantity': 1
+    }
+    result = await dex.execute_order(order_params)
+    print(result)
+    assert result is None
+
+
+@pytest.mark.asyncio
+async def test_no_money_get_swap(dex):
+    swap = await dex.get_swap(
+        "WBTC",
+        "USDT",
+        1)
+    print(f"swap: {swap}")
+    assert swap is None
+
+
+@pytest.mark.asyncio
+async def test_get_quote(dex):
+    """getquote Testing"""
+    quote = await dex.get_quote("UNI")
+    print(quote)
+    if quote:
+        assert quote is not None
+        assert quote.startswith("🦄")
+
+
+@pytest.mark.asyncio
+async def test_get_quote_error(dex):
+    """Test get_quote() method"""
+    quote = await dex.get_quote("THISISNOTATOKEN")
+    assert quote is None
+
+
+@pytest.mark.asyncio
+async def test_get_approve(dex):
+    result = await dex.get_approve("UNI")
+    print(result)
+    assert result is not None
+
+
+@pytest.mark.asyncio
+async def test_get_confirmation(mocker):
+    mock_w3 = mocker.MagicMock()
+    mock_receipt = mocker.MagicMock()
+    mock_block = mocker.MagicMock()
+
+    mock_w3.eth.get_transaction.return_value = mock_receipt
+    mock_w3.eth.get_block.return_value = mock_block
+
+    order_hash = "0x1234"
+
+    mock_receipt.return_value = {
+        "blockNumber": 123,
+        "blockHash": "0x5678",
+        "to": "0x1234567890123456789012345678901234567890",
+        "value": 10,
+        "gas": 1000,
+    }
+    mock_block.return_value = {"timestamp": 1600000000}
+
+    expected_trade = {
+        "timestamp": 1600000000,
+        "id": "0x5678",
+        "instrument": "0x1234567890123456789012345678901234567890",
+        "contract": "0x1234567890123456789012345678901234567890",
+        "amount": 10,
+        "price": 10,
+        "fee": 1000,
+        "confirmation": (
+            "➕ Size: 10.0\n"
+            "⚫️ Entry: 10.0\n"
+            "ℹ️ 0x5678\n"
+            "🗓️ 1600000000"
+        ),
+    }
+
+    obj = DexSwap(mock_w3)
+    assert await obj.get_confirmation(order_hash) is not None
+    mock_w3.eth.get_transaction.assert_called_once_with(order_hash)
+    mock_w3.eth.get_block.assert_called_once_with(123)
+
+
+@pytest.mark.asyncio
 async def test_get(dex):
     result = await dex._get(
         "http://ip.jsontest.com",
@@ -101,6 +189,13 @@ async def test_quoter(dex):
 
 
 @pytest.mark.asyncio
+async def test_get_name(dex):
+    name = await dex.get_name()
+    assert isinstance(name, str)
+    assert len(name) == 8
+
+
+@pytest.mark.asyncio
 async def test_search_address(dex):
     address = await dex.search_contract("WBTC")
     assert address.startswith("0x")
@@ -115,7 +210,7 @@ async def test_search_address(dex):
 
 @pytest.mark.asyncio
 async def test_get_abi(dex, mocker):
-    # Mock the _get method to return a mock response
+    # Mock the _get method 
     mock_resp = {"status": "1", "result": "0x0123456789abcdef"}
     mocker.patch.object(dex, "_get", return_value=mock_resp)
 
@@ -142,186 +237,6 @@ async def test_get_token_contract(dex):
         assert type(contract) is not None
         assert contract.functions is not None
 
-
-# @pytest.mark.asyncio
-# async def test_get_quote(dex):
-#     """getquote Testing"""
-#     quote = await dex.get_quote("UNI")
-#     print(quote)
-#     if quote:
-#         assert quote is not None
-#         assert quote.startswith("🦄")
-
-
-@pytest.mark.asyncio
-async def test_get_quote_error(dex):
-    """Test get_quote() method"""
-    quote = await dex.get_quote("THISISNOTATOKEN")
-    assert quote is None
-
-@pytest.mark.asyncio
-async def test_get_quote_uniswap(dex):
-    # Call the get_quote_uniswap method and check the result
-    quote = await dex.get_quote_uniswap(
-        dex.w3.to_checksum_address("0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"),
-        dex.w3.to_checksum_address("0xdac17f958d2ee523a2206206994597c13d831ec7"),
-        1000000000)
-    print(f"quote: {quote}")
-    assert quote is not None
-    assert quote.startswith("🦄")
-    expected_quote_pattern = r"🦄 \d+ USDT"
-    assert re.match(expected_quote_pattern, quote) is not None
-
-
-# @pytest.mark.asyncio
-# async def test_get_approve_uniswap(dex):
-#     with patch("dxsp.config.settings", autospec=True):
-#         settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
-
-#         allowance = await dex.get_approve_uniswap(symbol="USDT")
-#         assert allowance is None
-
-
-
-@pytest.mark.asyncio
-async def test_get_swap_uniswap(dex):
-    asset_out_address = "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
-    asset_in_address = "0xdac17f958d2ee523a2206206994597c13d831ec7"
-    amount = 100
-
-    # Create a mock object for self.get_quote_uniswap()
-    get_quote_mock = MagicMock()
-    get_quote_mock.return_value = [50]
-
-    # Create a mock object for self.w3.eth.get_block()
-    get_block_mock = MagicMock()
-    get_block_mock.return_value = {"timestamp": 1000}
-
-    # Set up the test instance
-    dex.get_quote_uniswap = get_quote_mock
-    dex.w3.eth.get_block = get_block_mock
-    dex.wallet_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
-    dex.protocol_type = "uniswap_v2"
-
-    # Call the function being tested
-    swap_order = await dex.get_swap_uniswap(
-        asset_out_address,
-        asset_in_address,
-        amount)
-    print(f"swap_order: {swap_order}")
-    # Check the output
-    assert swap_order is not None
-
-@pytest.mark.asyncio
-async def test_get_0x_quote(dex):
-    with patch("dxsp.config.settings", autospec=True):
-        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
-        settings.dex_private_key = "0xdeadbeet"
-        settings.dex_chain_id = 1
-        settings.dex_rpc = "https://rpc.ankr.com/eth_goerli"
-        settings.dex_0x_url = "https://goerli.api.0x.org"
-        settings.dex_protocol_type = "0x"
-        # Test function ETH > UNI
-        result = await dex.get_0x_quote(
-            "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-            "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
-            1)
-        assert result is not None
-        assert isinstance(result, float)
-
-
-@pytest.mark.asyncio
-async def test_get_0x_quote_fail(dex):
-    with patch("dxsp.config.settings", autospec=True):
-        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
-        settings.dex_private_key = "0xdeadbeet"
-        settings.dex_chain_id = 1
-        settings.dex_rpc = "https://rpc.ankr.com/eth_goerli"
-        settings.dex_0x_url = "https://goerli.api.0x.org"
-        settings.dex_protocol_type = "0x"
-        # Test function DAI > UNI
-        result = await dex.get_0x_quote(
-            "0xE68104D83e647b7c1C15a91a8D8aAD21a51B3B3E",
-            "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
-            1)
-        assert result is None
-
-
-# @pytest.mark.asyncio
-# async def test_get_approve(dex):
-#     result = await dex.get_approve("UNI")
-#     print(result)
-#     assert result is not None
-
-
-# @pytest.mark.asyncio
-# async def test_get_confirmation(mocker):
-#     mock_w3 = mocker.MagicMock()
-#     mock_receipt = mocker.MagicMock()
-#     mock_block = mocker.MagicMock()
-
-#     mock_w3.eth.get_transaction.return_value = mock_receipt
-#     mock_w3.eth.get_block.return_value = mock_block
-
-#     order_hash = "0x1234"
-
-#     mock_receipt.return_value = {
-#         "blockNumber": 123,
-#         "blockHash": "0x5678",
-#         "to": "0x1234567890123456789012345678901234567890",
-#         "value": 10,
-#         "gas": 1000,
-#     }
-#     mock_block.return_value = {"timestamp": 1600000000}
-
-#     expected_trade = {
-#         "timestamp": 1600000000,
-#         "id": "0x5678",
-#         "instrument": "0x1234567890123456789012345678901234567890",
-#         "contract": "0x1234567890123456789012345678901234567890",
-#         "amount": 10,
-#         "price": 10,
-#         "fee": 1000,
-#         "confirmation": (
-#             "➕ Size: 10.0\n"
-#             "⚫️ Entry: 10.0\n"
-#             "ℹ️ 0x5678\n"
-#             "🗓️ 1600000000"
-#         ),
-#     }
-
-#     obj = DexSwap(mock_w3)
-#     assert await obj.get_confirmation(order_hash) is not None
-#     mock_w3.eth.get_transaction.assert_called_once_with(order_hash)
-#     mock_w3.eth.get_block.assert_called_once_with(123)
-
-
-# @pytest.mark.asyncio
-# async def test_execute_order(dex):
-#     order_params = {
-#         'action': 'BUY',
-#         'instrument': 'UNI',
-#         'quantity': 1
-#     }
-#     result = await dex.execute_order(order_params)
-#     print(result)
-#     assert result.__class__ == ValueError
-#     assert str(result) == "No Money"
-
-# @pytest.mark.asyncio
-# async def test_no_money_get_swap(dex):
-#     swap = await dex.get_swap(
-#         "WBTC",
-#         "USDT",
-#         1)
-#     print(f"swap: {swap}")
-#     assert swap is None
-
-@pytest.mark.asyncio
-async def test_get_name(dex):
-    name = await dex.get_name()
-    assert isinstance(name, str)
-    assert len(name) == 8
 
 @pytest.mark.asyncio
 async def test_get_gas(dex):
@@ -359,3 +274,91 @@ async def test_get_token_balance(dex):
     token_balance = await dex.get_token_balance("UNI")
     assert isinstance(token_balance, int)
     assert token_balance >= 0
+
+
+@pytest.mark.asyncio
+async def test_get_quote_uniswap(dex):
+    # Call the get_quote_uniswap method and check the result
+    quote = await dex.get_quote_uniswap(
+        dex.w3.to_checksum_address("0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"),
+        dex.w3.to_checksum_address("0xdac17f958d2ee523a2206206994597c13d831ec7"),
+        1000000000)
+    print(f"quote: {quote}")
+    assert quote is not None
+    assert quote.startswith("🦄")
+    expected_quote_pattern = r"🦄 \d+ USDT"
+    assert re.match(expected_quote_pattern, quote) is not None
+
+
+@pytest.mark.asyncio
+async def test_get_approve_uniswap(dex):
+    with patch("dxsp.config.settings", autospec=True):
+        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
+
+        allowance = await dex.get_approve_uniswap(symbol="USDT")
+        assert allowance is None
+
+
+@pytest.mark.asyncio
+async def test_get_swap_uniswap(dex):
+    asset_out_address = "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+    asset_in_address = "0xdac17f958d2ee523a2206206994597c13d831ec7"
+    amount = 100
+
+    # Create a mock object for self.get_quote_uniswap()
+    get_quote_mock = MagicMock()
+    get_quote_mock.return_value = [50]
+
+    # Create a mock object for self.w3.eth.get_block()
+    get_block_mock = MagicMock()
+    get_block_mock.return_value = {"timestamp": 1000}
+
+    # Set up the test instance
+    dex.get_quote_uniswap = get_quote_mock
+    dex.w3.eth.get_block = get_block_mock
+    dex.wallet_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
+    dex.protocol_type = "uniswap_v2"
+
+    # Call the function being tested
+    swap_order = await dex.get_swap_uniswap(
+        asset_out_address,
+        asset_in_address,
+        amount)
+    print(f"swap_order: {swap_order}")
+    # Check the output
+    assert swap_order is not None
+
+
+@pytest.mark.asyncio
+async def test_get_0x_quote(dex):
+    with patch("dxsp.config.settings", autospec=True):
+        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
+        settings.dex_private_key = "0xdeadbeet"
+        settings.dex_chain_id = 1
+        settings.dex_rpc = "https://rpc.ankr.com/eth_goerli"
+        settings.dex_0x_url = "https://goerli.api.0x.org"
+        settings.dex_protocol_type = "0x"
+        # Test function ETH > UNI
+        result = await dex.get_0x_quote(
+            "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
+            1)
+        assert result is not None
+        assert isinstance(result, float)
+
+
+@pytest.mark.asyncio
+async def test_get_0x_quote_fail(dex):
+    with patch("dxsp.config.settings", autospec=True):
+        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
+        settings.dex_private_key = "0xdeadbeet"
+        settings.dex_chain_id = 1
+        settings.dex_rpc = "https://rpc.ankr.com/eth_goerli"
+        settings.dex_0x_url = "https://goerli.api.0x.org"
+        settings.dex_protocol_type = "0x"
+        # Test function DAI > UNI
+        result = await dex.get_0x_quote(
+            "0xE68104D83e647b7c1C15a91a8D8aAD21a51B3B3E",
+            "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
+            1)
+            assert result is None
