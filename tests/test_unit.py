@@ -101,7 +101,7 @@ async def test_quoter(dex):
 
 
 @pytest.mark.asyncio
-async def test_search_contract(dex):
+async def test_search_address(dex):
     address = await dex.search_contract("WBTC")
     assert address.startswith("0x")
 
@@ -111,7 +111,6 @@ async def test_search_contract(dex):
 
     address = await dex.search_contract("UNKNOWN")
     assert address is None
-
 
 
 @pytest.mark.asyncio
@@ -301,13 +300,13 @@ async def test_get_0x_quote_fail(dex):
 # async def test_execute_order(dex):
 #     order_params = {
 #         'action': 'BUY',
-#         'instrument': 'ETH',
+#         'instrument': 'UNI',
 #         'quantity': 1
 #     }
 #     result = await dex.execute_order(order_params)
 #     print(result)
 #     assert result.__class__ == ValueError
-# #     assert str(result) == "No Money"
+#     assert str(result) == "No Money"
 
 # @pytest.mark.asyncio
 # async def test_no_money_get_swap(dex):
@@ -318,6 +317,11 @@ async def test_get_0x_quote_fail(dex):
 #     print(f"swap: {swap}")
 #     assert swap is None
 
+@pytest.mark.asyncio
+async def test_get_name(dex):
+    name = await dex.get_name()
+    assert isinstance(name, str)
+    assert len(name) == 8
 
 @pytest.mark.asyncio
 async def test_get_gas(dex):
