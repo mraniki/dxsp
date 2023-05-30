@@ -166,7 +166,7 @@ class DexSwap:
         try:
             quoter_abi = await self.get_abi(settings.dex_quoter_contract_addr)
             if quoter_abi is None:
-                quoter_abi = await self._get(settings.dex_quoter_abi_url).text
+                quoter_abi = await self._get(settings.dex_quoter_abi_url)
             contract = self.w3.eth.contract(
                 address=self.w3.to_checksum_address(
                     settings.dex_quoter_contract_addr),

@@ -111,7 +111,7 @@ async def test_search_contract(exchange):
     assert address.startswith("0x")
 
     address = await exchange.search_contract("UNKNOWN")
-    assert address == "no contract found for UNKNOWN"
+    assert address is None
 
 
 @pytest.mark.asyncio
