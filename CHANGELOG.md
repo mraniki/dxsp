@@ -2,6 +2,18 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.2 (2023-05-30)
+### Fix
+* 🐛 bug ([`2090637`](https://github.com/mraniki/dxsp/commit/209063736af2c6f08cab53ab47aed0d99e3eb4e9))
+* ✅ unit test ([`5f2405b`](https://github.com/mraniki/dxsp/commit/5f2405b0e66af11450515ac0f8870f353b779449))
+* ✅ unit test ([`8d2e294`](https://github.com/mraniki/dxsp/commit/8d2e294cf176a4c7944ce572afb79fa73bbad402))
+* 🐛 bug ([`2ba45f1`](https://github.com/mraniki/dxsp/commit/2ba45f12175db63fa1f7144e5e5b43f106fac56f))
+* ✅ unit test ([`a818184`](https://github.com/mraniki/dxsp/commit/a818184aae24436291ea773851bf72bd045584c9))
+* ♻️ refactor ([`96e5250`](https://github.com/mraniki/dxsp/commit/96e5250d37d1461b6d60094b8954f76a9f666a56))
+
+### Other
+* Merge pull request #247 from mraniki/dev ([`f058100`](https://github.com/mraniki/dxsp/commit/f0581003221d54a5791dd5bcc2787ae8986f874c))
+
 ## v2.6.1 (2023-05-30)
 ### Fix
 * 🎨 code format for cg ([`b8bd4d4`](https://github.com/mraniki/dxsp/commit/b8bd4d4ee92114e62fe5c39bcebe41688f4f0b95))
