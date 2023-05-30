@@ -327,14 +327,14 @@ async def test_no_money_get_swap(exchange):
     assert swap is None
 
 
-@pytest.mark.asyncio
-async def test_no_money_get_swap(exchange):
-    swap = await exchange.get_swap(
-        "WBTC",
-        "USDT",
-        1)
-    print(f"swap: {swap}")
-    assert swap is None
+# @pytest.mark.asyncio
+# async def test_no_money_get_swap(exchange):
+#     swap = await exchange.get_swap(
+#         "WBTC",
+#         "USDT",
+#         1)
+#     print(f"swap: {swap}")
+#     assert swap is None
 
 
 @pytest.mark.asyncio
