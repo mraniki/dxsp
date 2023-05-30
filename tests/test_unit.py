@@ -28,13 +28,13 @@ async def settings_fixture():
 @pytest.fixture
 async def router(dex):
     """router"""
-    return await exchange.router()
+    return await dex.router()
 
 
 @pytest.fixture
 async def quoter(dex):
     """quoter"""
-    return await exchange.quoter()
+    return await dex.quoter()
 
 
 @pytest.mark.asyncio
@@ -298,13 +298,13 @@ async def test_get_0x_quote_fail(dex):
 
 
 # @pytest.mark.asyncio
-# async def test_execute_order(exchange):
+# async def test_execute_order(dex):
 #     order_params = {
 #         'action': 'BUY',
 #         'instrument': 'ETH',
 #         'quantity': 1
 #     }
-#     result = await exchange.execute_order(order_params)
+#     result = await dex.execute_order(order_params)
 #     print(result)
 #     assert result.__class__ == ValueError
 #     assert str(result) == "No Money"
