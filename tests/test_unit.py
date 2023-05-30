@@ -1,18 +1,25 @@
+"""
+ DEXSWAP Unit Test
+"""
+
+from unittest.mock import patch, MagicMock
+import re
 import pytest
 import requests
-import re
 from dxsp import DexSwap
 from dxsp.config import settings
-from unittest.mock import patch, MagicMock
+
 
 
 @pytest.fixture
 def exchange():
+
     return DexSwap()
 
 
 @pytest.fixture
 async def settings_fixture():
+    """settings"""
     with patch("dxsp.config.settings", autospec=True) as mock_settings:
         mock_settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
         mock_settings.dex_private_key = "0xdeadbeef"
@@ -21,11 +28,13 @@ async def settings_fixture():
 
 @pytest.fixture
 async def router(exchange):
+    """router"""
     return await exchange.router()
 
 
 @pytest.fixture
 async def quoter(exchange):
+    """quoter"""
     return await exchange.quoter()
 
 
@@ -325,16 +334,6 @@ async def test_no_money_get_swap(exchange):
         1)
     print(f"swap: {swap}")
     assert swap is None
-
-
-# @pytest.mark.asyncio
-# async def test_no_money_get_swap(exchange):
-#     swap = await exchange.get_swap(
-#         "WBTC",
-#         "USDT",
-#         1)
-#     print(f"swap: {swap}")
-#     assert swap is None
 
 
 @pytest.mark.asyncio

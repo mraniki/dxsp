@@ -43,8 +43,8 @@ class DexSwap:
 
         try:
             sell_token, buy_token = (
-                (settings.trading_asset, instrument) 
-                if action == 'BUY' 
+                (settings.trading_asset, instrument)
+                if action == 'BUY'
                 else (instrument, settings.trading_asset))
 
             sell_contract = await self.get_token_contract(sell_token)
@@ -61,11 +61,13 @@ class DexSwap:
             raise error
 
     async def get_quote(self, sell_token):
+        """
+        Asynchronously gets a quote for a specified sell token using the given `sell_token` parameter,
+        """
         buy_token = await self.search_contract(settings.trading_asset)
 
         if buy_token is None:
-            self.logger.warning("No valid contract")
-            return
+            raise ValueError("No valid contract")
 
         try:
             if self.protocol_type in {"uniswap_v2", "uniswap_v3"}:
@@ -134,49 +136,47 @@ class DexSwap:
                 self.logger.debug("_json: %s", response.json())
                 return response.json()
 
-        except Exception as e:
-            self.logger.error("_get: %s", e)
+        except Exception as error:
+            raise error
 
     async def router(self):
         try:
             router_abi = await self.get_abi(settings.dex_router_contract_addr)
             if router_abi is None:
-                self.logger.debug("using setting dex_router_abi_url")
                 router_abi = requests.get(settings.dex_router_abi_url).text
-            self.logger.debug("router_abi: %s", router_abi)
             router = self.w3.eth.contract(
                 address=self.w3.to_checksum_address(
                     settings.dex_router_contract_addr),
                 abi=router_abi)
             return router
-        except Exception as e:
-            self.logger.error("router setup: %s", e)
+        except Exception as error:
+            raise error
 
     async def get_name(self):
         try:
             return settings.dex_router_contract_addr[-8:]
-        except Exception as e:
-            self.logger.error("router name %s", e)
+        except Exception as error:
+            raise error
 
     async def quoter(self):
         try:
             quoter_abi = await self.get_abi(settings.dex_quoter_contract_addr)
-            self.logger.debug("quoter_abi: %s", quoter_abi)
+            if quoter_abi is None:
+                quoter_abi = requests.get(settings.dex_quoter_abi_url).text
             contract = self.w3.eth.contract(
                 address=self.w3.to_checksum_address(
                     settings.dex_quoter_contract_addr),
                 abi=quoter_abi)
             return contract
-        except Exception as e:
-            self.logger.error("quoter setup: %s", e)
+        except Exception as error:
+            raise error
 
     async def get_approve(self, symbol):
         try:
             if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
                 await self.get_approve_uniswap(symbol)
-        except Exception as e:
-            self.logger.error("Error in get_approve: %s", e)
-            return None
+        except Exception as error:
+            raise error
 
     async def get_sign(self, transaction):
         try:
@@ -193,12 +193,8 @@ class DexSwap:
                 transaction, self.private_key)
             tx_hash = self.w3.eth.send_raw_transaction(signed.rawTransaction)
             return tx_hash
-        except (ValueError, TypeError, KeyError) as e:
-            self.logger.error("Failed to sign transaction: %s", e)
-            raise
-        except Exception as e:
-            self.logger.error("Failed to sign transaction: %s", e)
-            raise RuntimeError("Failed to sign transaction")
+        except Exception as error:
+            raise error
 
     async def get_abi(self, address):
         if not settings.dex_block_explorer_api:
@@ -261,16 +257,18 @@ class DexSwap:
         except Exception as error:
             raise error
 
-    async def get_gas(self, tx):
-        gas_estimate = self.w3.eth.estimate_gas(tx) * 1.25
-        self.logger.debug("gas_estimate %s", gas_estimate)
-        return int(self.w3.to_wei(gas_estimate, 'wei'))
+
+    async def get_gas(self, transaction):
+        """get gas estimate"""
+        gas_limit = self.w3.eth.estimate_gas(transaction) * 1.25
+        return int(self.w3.to_wei(gas_limit, 'wei'))
+
 
     async def get_gas_price(self):
+        """search get gas price"""
         gas_price = round(self.w3.from_wei(
             self.w3.eth.generate_gas_price(),
             'gwei'), 2)
-        self.logger.debug("gas_price %s", gas_price)
         return gas_price
 
 ### ------✍️ CONTRACT ---------
@@ -401,8 +399,7 @@ class DexSwap:
                 account_balance += f"💵{trading_asset_balance}"
             return round(account_balance, 5)
 
-        except Exception as e:
-            self.logger.error(f"get_account_balance: {e}")
+        except Exception:
             return 0
 
     async def get_trading_asset_balance(self):
@@ -448,8 +445,7 @@ class DexSwap:
             return ("🦄 " + quote + " " +
                     settings.trading_asset)
         except Exception as e:
-            self.logger.error("get_quote_uniswap %s", e)
-            return
+            raise e
 
     async def get_approve_uniswap(self, symbol):
         try:
@@ -469,8 +465,7 @@ class DexSwap:
                     approval_txHash, timeout=120, poll_latency=0.1)
                 return approval_txHash_complete
         except Exception as e:
-            self.logger.error("Error in get_approve_uniswap: %s", e)
-            return None
+            raise e
 
     async def get_swap_uniswap(self, asset_out_address, asset_in_address, amount):
         try:
@@ -489,13 +484,13 @@ class DexSwap:
             elif self.protocol_type == "uniswap_v3":
                 return None
         except Exception as e:
-            self.logger.error(f"Error in get_swap_uniswap: {e}")
+            raise e
 
 # 0️⃣x
     async def get_0x_quote(self, buy_token, sell_token, amount=1):
         try:
             out_amount = self.w3.to_wei(amount, 'ether')
-            url = (settings.dex_0x_url + "/swap/v1/quote?buyToken=" + str(buy_token) + 
+            url = (settings.dex_0x_url + "/swap/v1/quote?buyToken=" + str(buy_token) +
                 "&sellToken=" + str(sell_token) + "&buyAmount=" + str(out_amount))
             headers = {"0x-api-key": settings.dex_0x_api_key}
             response = await self._get(url, params=None, headers=headers)
