@@ -2,6 +2,22 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.1 (2023-05-30)
+### Fix
+* 🎨 code format for cg ([`b8bd4d4`](https://github.com/mraniki/dxsp/commit/b8bd4d4ee92114e62fe5c39bcebe41688f4f0b95))
+* ✅ unit test  and refactor ([`25df449`](https://github.com/mraniki/dxsp/commit/25df449c0ad849ead8a2812b4f1ca9e9f6553900))
+* 🥅 exception alignement ([`e57513d`](https://github.com/mraniki/dxsp/commit/e57513d70452ca1f17b57a8e2fb715475e2cd568))
+* 🎨 code format ([`2e657a1`](https://github.com/mraniki/dxsp/commit/2e657a190d2789bf5391aa10887c2700c9154a29))
+
+### Other
+* Merge pull request #246 from mraniki/dev ([`97171a7`](https://github.com/mraniki/dxsp/commit/97171a7ab0431fc8cfa099fec8ca257b1bdb72d4))
+* :white_check_mark: unit test  and refactor ([`79c4d59`](https://github.com/mraniki/dxsp/commit/79c4d5992f1a2afd4e0ba53bbac81823a5a892fe))
+* Merge branch 'main' into dev ([`76db892`](https://github.com/mraniki/dxsp/commit/76db892b5675a42886fc525126be6c82c66b195b))
+* Update README.md ([`7c71d22`](https://github.com/mraniki/dxsp/commit/7c71d22a360aa993fb996f897d7f94e8948df315))
+* Merge branch 'main' into dev ([`d35f8c4`](https://github.com/mraniki/dxsp/commit/d35f8c4c1bcb8624531fccaf9771ba589146e431))
+* Update README.md ([`8a14e24`](https://github.com/mraniki/dxsp/commit/8a14e242a88251918fba029eb38a0617d50bb2b2))
+* Add test for getting quote from Uniswap exchange. ([`f7b4825`](https://github.com/mraniki/dxsp/commit/f7b4825eaaa29ed58ac0128be019be20b2bae17b))
+
 ## v2.6.0 (2023-05-28)
 ### Feature
 * 🥚 Add get_name method to DexSwap class ([`f853202`](https://github.com/mraniki/dxsp/commit/f8532020bdedf72f24e832e126df707e3b0b1bd6))
