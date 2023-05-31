@@ -57,8 +57,8 @@ class DexSwap:
             order = await self.get_swap(sell_token, buy_token, sell_amount)
             if order:
                 return order['confirmation']
-        except Exception as error:
-            raise error
+        except Exception:
+            raise ValueError("Order execution failed")
 
     async def get_quote(self, sell_token):
         """

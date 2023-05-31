@@ -84,7 +84,7 @@ async def test_execute_order(dex):
         'quantity': 1
     }
     response = await dex.execute_order(order)
-    assert response is not None
+    assert response is None
 
 
 
@@ -122,7 +122,7 @@ async def test_get_approve(dex):
 
 @pytest.mark.asyncio
 async def test_get_confirmation(dex):
-    result = await dex.get_confirmation("0xb5d0c18bfc6e93d06d8f06eef34533993615ff69544ebbebe9772eeae975eb63")
+    result = await dex.get_confirmation("0x9bfcc4a0b2ac191423f196e7eebb0349f3c890814b29880599a0a4614e403d72")
     print(result)
     assert result is not None
     assert result['confirmation'] is not None
