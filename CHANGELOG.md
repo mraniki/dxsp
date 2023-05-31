@@ -2,6 +2,32 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.6 (2023-05-31)
+### Fix
+* ✅ unit test ([`55bc23d`](https://github.com/mraniki/dxsp/commit/55bc23d09d216b3aaeb060790304203911a72c0b))
+* 🥅 Update token decimals in DexSwap class ([`a1a85bd`](https://github.com/mraniki/dxsp/commit/a1a85bd31a57160d3f279f20523855a18465eb19))
+* ✅ unit test ([`b80cd57`](https://github.com/mraniki/dxsp/commit/b80cd573895d7ea7565d235620b7f77039e3421f))
+* ✅ unit test ([`74a5dfc`](https://github.com/mraniki/dxsp/commit/74a5dfc392607a0d6fc3bdecca1bf2810edbd876))
+* ✅ unit test ([`b6abfd6`](https://github.com/mraniki/dxsp/commit/b6abfd6a764a43c809b7e536611d0e5719faf5c0))
+* ✅ unit test ([`da64ae8`](https://github.com/mraniki/dxsp/commit/da64ae8441889bb1cc29b5f4d09a624e74164f07))
+
+### Other
+* Merge pull request #252 from mraniki/dev ([`03c874d`](https://github.com/mraniki/dxsp/commit/03c874d44bd037ef2abe5b9d4836ec8595121427))
+* :white_check_mark: unit test ([`1238475`](https://github.com/mraniki/dxsp/commit/12384756b7f6fed3bb5533f3f41dcc5c006b3203))
+* :white_check_mark: Add dex_chain_id and search_contract tests ([`6168fb8`](https://github.com/mraniki/dxsp/commit/6168fb8a32501573b90d7cc9ee7d8dae2be4679a))
+* :white_check_mark: unit test ([`d0f4054`](https://github.com/mraniki/dxsp/commit/d0f40547047fafa536933923de05856ed0f6f732))
+* :white_check_mark:  Add time.sleep(5) to test_get_decimals ([`510e508`](https://github.com/mraniki/dxsp/commit/510e50814a708f3736ec7d5473ab0abe377e2c6f))
+* :fire: Remove search_contract function call in DexSwap class ([`88d88e6`](https://github.com/mraniki/dxsp/commit/88d88e692cbbf2f1494547dd7d2cdeacc1c5cfb7))
+* :white_check_mark: unit test ([`8222115`](https://github.com/mraniki/dxsp/commit/82221157e417a7b85b36bd29c4b1534f7727d954))
+* :white_check_mark: unit test ([`1bce490`](https://github.com/mraniki/dxsp/commit/1bce49011b37f5bb2d18b0a76eb989e8dcef026e))
+* :white_check_mark: unit test ([`17e2e60`](https://github.com/mraniki/dxsp/commit/17e2e60a26ee0efc68442964dee51752c60a4b2f))
+* Update tests/test_unit.py ([`43aeab3`](https://github.com/mraniki/dxsp/commit/43aeab39c9be0de7fe7e612756e25c0a4c35c13a))
+* Update tests/test_unit.py ([`c63c6c4`](https://github.com/mraniki/dxsp/commit/c63c6c4621de6e00b5902974b8b249589c7e0d84))
+* Update tests/test_unit.py ([`3a1880f`](https://github.com/mraniki/dxsp/commit/3a1880f13b2fd27961dd1ba2ac036c9fdf825d88))
+* Update tests/test_unit.py ([`e905e32`](https://github.com/mraniki/dxsp/commit/e905e322f361dccba68518b2bfa71c8e34bda619))
+* :white_check_mark: unit test ([`440f801`](https://github.com/mraniki/dxsp/commit/440f80193e34c91048a41f0c825409c69d8bbc30))
+* :white_check_mark: unit test ([`1aacabe`](https://github.com/mraniki/dxsp/commit/1aacabe06f9808857e07021332b64c70a5466eb0))
+
 ## v2.6.5 (2023-05-31)
 ### Fix
 * 🥅 catch error ([`38a3b6f`](https://github.com/mraniki/dxsp/commit/38a3b6f159c906117572e38ab48be14941b53325))
