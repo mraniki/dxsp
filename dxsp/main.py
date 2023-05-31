@@ -89,22 +89,22 @@ class DexSwap:
             sell_token_address = await self.search_contract(sell_token)
             sell_token_balance = await self.get_token_balance(sell_token)
             if not sell_token_address or sell_token_balance in (0, None):
-                return
+                raise ValueError("No Money")
 
             buy_token_address = await self.search_contract(buy_token)
             if not buy_token_address:
-                return
+                raise ValueError("contract not found")
 
             sell_token_amount_wei = self.w3.to_wei(
                 amount * 10 ** (await self.get_token_decimals(sell_token)), "ether")
 
             if await self.get_approve(sell_token) is None:
-                return
+                raise ValueError("approval failed")
 
             swap_order = await self.get_swap_order(
                 sell_token_address, buy_token_address, sell_token_amount_wei)
             if not swap_order:
-                return
+                raise ValueError("swawp order not executed")
 
             if self.protocol_type == "0x":
                 await self.get_sign(swap_order)

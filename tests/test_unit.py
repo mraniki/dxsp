@@ -12,7 +12,10 @@ from dxsp.config import settings
 
 @pytest.fixture
 def dex():
-    return DexSwap()
+    with patch("dxsp.config.settings", autospec=True):
+        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
+        settings.dex_private_key = "0xdeadbeet"
+        return DexSwap()
 
 
 @pytest.fixture
@@ -77,36 +80,35 @@ def test_chain_10_dex_swap_init():
 
 
 @pytest.mark.asyncio
-async def test_execute_order(dex):
-    order = {
-        'action': 'BUY',
-        'instrument': 'UNI',
-        'quantity': 1
-    }
-    response = await dex.execute_order(order)
-    print(response)
-    assert response is ValueError, "Order execution failed"
+async def test_error_execute_order(dex):
+    with pytest.raises(ValueError):
+        order = {
+            'action': 'BUY',
+            'instrument': 'UNI',
+            'quantity': 1
+        }
+        await dex.execute_order(order)
+
 
 
 
 @pytest.mark.asyncio
 async def test_no_money_get_swap(dex):
-    swap = await dex.get_swap(
-        "WBTC",
-        "USDT",
-        1)
-    print(f"swap: {swap}")
-    assert swap is not None
+    with pytest.raises(ValueError):
+        swap = await dex.get_swap(
+            "WBTC",
+            "USDT",
+            1)
 
 
-# @pytest.mark.asyncio
-# async def test_get_quote(dex):
-#     """getquote Testing"""
-#     quote = await dex.get_quote("UNI")
-#     print(quote)
-#     if quote:
-#         assert quote is not None
-#         assert quote.startswith("🦄")
+@pytest.mark.asyncio
+async def test_get_quote(dex):
+    """getquote Testing"""
+    quote = await dex.get_quote("UNI")
+    print(quote)
+    if quote:
+        assert quote is not None
+        assert quote.startswith("🦄")
 
 
 @pytest.mark.asyncio
