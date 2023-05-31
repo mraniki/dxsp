@@ -143,7 +143,7 @@ async def test_get_swap(dex):
     dex.w3.wait_for_transaction_receipt= MagicMock(return_value={"status": 1})
     dex.get_confirmation = AsyncMock(return_value={
         "confirmation": (
-            f"➕ Size: 100\n"
+            "➕ Size: 100\n"
             f"⚫️ Entry: 100\n"
             f"ℹ️ 0xxxx\n"
             f"🗓️ ---"
