@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.5 (2023-05-31)
+### Fix
+* 🥅 catch error ([`38a3b6f`](https://github.com/mraniki/dxsp/commit/38a3b6f159c906117572e38ab48be14941b53325))
+* ✅ unit test ([`e02d8ab`](https://github.com/mraniki/dxsp/commit/e02d8abd7a6cead575708453a536703ecadba2a6))
+
+### Other
+* Merge pull request #251 from mraniki/dev ([`680b709`](https://github.com/mraniki/dxsp/commit/680b709b28f3d093872e121d0ac4921f3c2c4793))
+
 ## v2.6.4 (2023-05-31)
 ### Fix
 * ✅ unit test ([`1697565`](https://github.com/mraniki/dxsp/commit/1697565390542da132851be33e6e13dfb30971ad))
