@@ -144,7 +144,7 @@ async def test_get_swap(dex):
     dex.get_confirmation = AsyncMock(return_value={
         "confirmation": (
             "➕ Size: 100\n"
-            f"⚫️ Entry: 100\n"
+            "⚫️ Entry: 100\n"
             f"ℹ️ 0xxxx\n"
             "🗓️ ---"
         )
