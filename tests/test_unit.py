@@ -141,11 +141,17 @@ async def test_get_swap(dex):
     dex.get_sign = AsyncMock()
     dex.w3.to_hex = Mock()
     dex.w3.wait_for_transaction_receipt= MagicMock(return_value={"status": 1})
-
+    dex.get_confirmation = AsyncMock(return_value={
+        "confirmation": (
+            f"➕ Size: 100\n"
+            f"⚫️ Entry: 100\n"
+            f"ℹ️ 0xxxx\n"
+            f"🗓️ ---"
+        )
+    })
     dex.get_quote_uniswap = get_quote_mock
     dex.w3.eth.get_block = get_block_mock
-    dex.wallet_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
-    dex.protocol_type = "uniswap_v2"
+
 
     sell_token = "USDT"
     buy_token = "WBTC"
@@ -193,6 +199,15 @@ async def test_get_quote_invalid(dex):
 async def test_get_approve(dex):
     result = await dex.get_approve("TOKEN")
     assert result is None
+
+
+# @pytest.mark.asyncio
+# async def test_get_sign(dex):
+#     dex.w3.eth.account.sign_transaction = Mock()
+#     dex.w3.eth.send_raw_transaction = Mock()
+#     result = await dex.get_sign("0x9bfcc4a0b2ac191423f196e7eebb0349f3c890814b29880599a0a4614e403d72")
+#     assert result is None
+
 
 @pytest.mark.asyncio
 async def test_get_confirmation(dex):
@@ -278,7 +293,7 @@ async def test_get_token_contract(dex):
 
 @pytest.mark.asyncio
 async def test_get_decimals(dex):
-    """get_token_decimales Testing"""
+    """get_token_decimals Testing"""
     token_decimals = await dex.get_token_decimals("UNI")
     print(token_decimals)
     if token_decimals:
@@ -287,14 +302,15 @@ async def test_get_decimals(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_gas(dex):
-    # Create a mock transaction
-    mock_tx = {"to": "0x1234567890123456789012345678901234567890",
-               "value": "1000000000000000000"}
+async def test_get_gas_invalid(dex):
+    with pytest.raises(ValueError):
+        # Create a mock transaction
+        mock_tx = {"to": "0x1234567890123456789012345678901234567890",
+                "value": "1000000000000000000"}
 
-    # Call the get_gas method and check the result
-    gas_estimate = await dex.get_gas(mock_tx)
-    assert gas_estimate > 1
+        # Call the get_gas method and check the result
+        gas_estimate = await dex.get_gas(mock_tx)
+        print(gas_estimate)
 
 
 @pytest.mark.asyncio

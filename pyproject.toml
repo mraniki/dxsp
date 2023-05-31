@@ -27,6 +27,7 @@ pytest = "*"
 pytest-cov = "*"
 pytest-asyncio = "*"
 pytest-mock = "*"
+dxsp = "^2.6.5"
 
 [tool.pytest.ini_options]
 pythonpath = "."
