@@ -18,3 +18,4 @@ settings = Dynaconf(
     environments=True,
     default_env="default",
 )
+

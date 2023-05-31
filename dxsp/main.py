@@ -368,20 +368,21 @@ class DexSwap:
 # 🔒 USER RELATED
     async def get_token_balance(self, token_symbol: str) -> Optional[int]:
         """Get token balance"""
-        contract_address = await self.search_contract(token_symbol)
-        if not contract_address:
-            return None
+        # contract_address = await self.search_contract(token_symbol)
+        # if not contract_address:
+        #     return None
         contract = await self.get_token_contract(token_symbol)
         if not contract:
-            return None
-        return contract.functions.balanceOf(self.wallet_address).call() or 0
+            return 0
+        return contract.functions.balanceOf(self.wallet_address).call()
 
     async def get_token_decimals(self, token_symbol: str) -> Optional[int]:
         """Get token decimals"""
         contract = await self.get_token_contract(token_symbol)
         if not contract:
             return 18
-        return contract.functions.decimals().call()
+        token_decimals = contract.functions.decimals().call() or 18
+        return token_decimals
 
     async def get_account_balance(self):
         try:
