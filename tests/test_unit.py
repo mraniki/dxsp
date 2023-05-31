@@ -1,8 +1,8 @@
 """
  DEXSWAP Unit Test
 """
-
-from unittest.mock import Mock, patch, MagicMock
+import asyncio
+from unittest.mock import AsyncMock, Mock, patch, MagicMock
 import re
 import pytest
 from dxsp import DexSwap
@@ -19,12 +19,23 @@ def dex():
 
 
 @pytest.fixture
-async def settings_fixture():
-    """settings"""
-    with patch("dxsp.config.settings", autospec=True) as mock_settings:
-        mock_settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
-        mock_settings.dex_private_key = "0xdeadbeef"
-        yield mock_settings
+def buy_UNI_order():
+    order = {
+        'action': 'BUY',
+        'instrument': 'UNI',
+        'quantity': 1
+    }
+    return order
+
+
+@pytest.fixture
+def buy_WBTC_order():
+    order = {
+        'action': 'BUY',
+        'instrument': 'WBTC',
+        'quantity': 1
+    }
+    return order
 
 
 @pytest.fixture
@@ -38,9 +49,17 @@ async def quoter(dex):
     """quoter"""
     return await dex.quoter()
 
+@pytest.fixture
+def mock_contract():
+    contract = MagicMock()
+    contract.get_token_decimals.return_value = 18
+    contract.to_wei.return_value = 1000000000000000000
+    contract.wait_for_transaction_receipt.return_value = {"status": 1}
+    return contract
+
 
 @pytest.mark.asyncio
-async def test_init_dex():
+async def test_dex():
     """Init Testing"""
     dex = DexSwap()
     check = "DexSwap" in str(type(dex))
@@ -55,7 +74,7 @@ async def test_init_dex():
     assert dex.account == "1 - 34567890"
 
 
-def test_setting_dex_swap_init():
+def test_dex_swap_with_settings():
     with patch("dxsp.config.settings", autospec=True):
         settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
         settings.dex_private_key = "0xdeadbeet"
@@ -66,7 +85,7 @@ def test_setting_dex_swap_init():
         assert dex.account == "1 - 34567899"
 
 
-def test_chain_10_dex_swap_init():
+def test_dex_swap_chain_10():
     with patch("dxsp.config.settings", autospec=True):
         settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
         settings.dex_private_key = "0xdeadbeet"
@@ -79,26 +98,78 @@ def test_chain_10_dex_swap_init():
         assert dex.chain_id == 10
 
 
+def test_dex_swap_chain_56_pancake():
+    with patch("dxsp.config.settings", autospec=True):
+        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
+        settings.dex_private_key = "0xdeadbeet"
+        settings.dex_chain_id = 56
+        settings.dex_rpc = "https://bsc-dataseed.binance.org/"
+        settings.dex_quoter_contract_addr = "0x10ED43C718714eb63d5aA57B78B54704E256024E"
+
+        dex = DexSwap()
+        assert dex.wallet_address == "0x1234567890123456789012345678901234567899"
+        assert dex.private_key == "0xdeadbeet"
+        assert dex.account == "56 - 34567899"
+        assert dex.chain_id == 56
+        assert dex.router() is not None
+
+
 @pytest.mark.asyncio
-async def test_error_execute_order(dex):
+async def test_execute_order_error(dex):
     with pytest.raises(ValueError):
         order = {
-            'action': 'BUY',
-            'instrument': 'UNI',
-            'quantity': 1
-        }
-        await dex.execute_order(order)
+        'action': 'BUY',
+        'instrument': 'UNI',
+        'quantity': 1
+            }
+        swap_order = await dex.execute_order(order)
+        print(swap_order)
 
+
+@pytest.mark.asyncio
+async def test_execute_order_invalid(dex, buy_UNI_order):
+    with pytest.raises(ValueError):
+        swap_order = await dex.execute_order(buy_UNI_order)
+        print(swap_order)
+
+
+@pytest.mark.asyncio
+async def test_get_swap(dex):
+    get_quote_mock = MagicMock()
+    get_quote_mock.return_value = [50]
+
+    get_block_mock = MagicMock()
+    get_block_mock.return_value = {"timestamp": 1000}
+    dex.get_approve = AsyncMock()
+
+    dex.get_quote_uniswap = get_quote_mock
+    dex.w3.eth.get_block = get_block_mock
+    dex.wallet_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
+    dex.protocol_type = "uniswap_v2"
+
+    sell_token = "USDT"
+    buy_token = "WBTC"
+    amount = 100
+
+    # Call the function being tested
+    swap_order = await dex.get_swap(
+        sell_token,
+        buy_token,
+        amount)
+    print(f"swap_order: {swap_order}")
+    # Check the output
+    assert swap_order is not None
 
 
 
 @pytest.mark.asyncio
-async def test_no_money_get_swap(dex):
+async def test_get_swap_invalid(dex):
     with pytest.raises(ValueError):
-        swap = await dex.get_swap(
+        swap_order = await dex.get_swap(
             "WBTC",
             "USDT",
             1)
+        print(swap_order)
 
 
 @pytest.mark.asyncio
@@ -203,6 +274,16 @@ async def test_get_token_contract(dex):
         assert contract is not None
         assert type(contract) is not None
         assert contract.functions is not None
+
+
+@pytest.mark.asyncio
+async def test_get_decimals(dex):
+    """get_token_decimales Testing"""
+    token_decimals = await dex.get_token_decimals("UNI")
+    print(token_decimals)
+    if token_decimals:
+        assert token_decimals is not None
+        assert token_decimals ==18
 
 
 @pytest.mark.asyncio
