@@ -382,6 +382,7 @@ class DexSwap:
         if not contract:
             return 18
         token_decimals = contract.functions.decimals().call() or 18
+        return token_decimals
 
     async def get_account_balance(self):
         try:
