@@ -146,7 +146,7 @@ async def test_get_swap(dex):
             "➕ Size: 100\n"
             f"⚫️ Entry: 100\n"
             f"ℹ️ 0xxxx\n"
-            f"🗓️ ---"
+            "🗓️ ---"
         )
     })
     dex.get_quote_uniswap = get_quote_mock
