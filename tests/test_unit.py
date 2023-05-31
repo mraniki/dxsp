@@ -17,6 +17,7 @@ def dex():
         settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
         settings.dex_private_key = "0xdeadbeet"
         settings.dex_rpc = "https://eth.llamarpc.com"
+        settings.dex_chain_id = 1
         return DexSwap()
 
 
@@ -253,6 +254,9 @@ async def test_get_name(dex):
 
 @pytest.mark.asyncio
 async def test_search_address(dex):
+    # address = await dex.search_contract("WBTC")
+    # print(address)
+    # assert address == "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
 
     address = await dex.search_contract("USDT")
     assert address is not None
