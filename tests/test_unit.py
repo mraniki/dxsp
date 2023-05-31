@@ -84,6 +84,7 @@ async def test_execute_order(dex):
         'quantity': 1
     }
     response = await dex.execute_order(order)
+    print(response)
     assert response is None
 
 
