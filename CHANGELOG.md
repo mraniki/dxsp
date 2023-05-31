@@ -2,6 +2,20 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.4 (2023-05-31)
+### Fix
+* ✅ unit test ([`1697565`](https://github.com/mraniki/dxsp/commit/1697565390542da132851be33e6e13dfb30971ad))
+* ✅ unit test ([`36ccc80`](https://github.com/mraniki/dxsp/commit/36ccc80cb9e5b3cd6199b3c8053a03f14b168c6f))
+* ♻️ refactor ([`5941213`](https://github.com/mraniki/dxsp/commit/594121370aa1c19a611bf49dd60970ef070264bb))
+* ✅ unit test ([`fd81701`](https://github.com/mraniki/dxsp/commit/fd8170156029045cafd88b6f6f31497339131d00))
+* ✅ unit test ([`71f7717`](https://github.com/mraniki/dxsp/commit/71f77171152fbb26ee814ea8a20f6b81b5ebb41e))
+* ✅ unit test ([`8820bc3`](https://github.com/mraniki/dxsp/commit/8820bc31d47ba7085aba27bfe34a1ff9b550dd32))
+* ✅ unit test ([`4d4a6aa`](https://github.com/mraniki/dxsp/commit/4d4a6aa859976f1600dcbdfdba4c174097433624))
+
+### Other
+* Merge pull request #250 from mraniki/dev ([`5ef7384`](https://github.com/mraniki/dxsp/commit/5ef7384283901f66a4d55868a4406b68aae8eddb))
+* :white_check_mark: unit test ([`d11e999`](https://github.com/mraniki/dxsp/commit/d11e9991a6f7c1e54aa56974f0f7175259476871))
+
 ## v2.6.3 (2023-05-30)
 ### Fix
 * ✅ unit test ([`a8ec5fb`](https://github.com/mraniki/dxsp/commit/a8ec5fb0896a9cdd27f2ea77c9fe824135986508))
