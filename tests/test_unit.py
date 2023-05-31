@@ -238,8 +238,9 @@ async def test_get_token_balance(dex):
     token_balance = await dex.get_token_balance("UNI")
     print("balance ", token_balance)
     assert token_balance is not None
+    assert token_balance == 0
     # assert isinstance(token_balance, int)
-    # assert token_balance >= 0
+
 
 
 @pytest.mark.asyncio
