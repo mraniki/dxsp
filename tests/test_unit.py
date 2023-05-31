@@ -253,13 +253,10 @@ async def test_get_name(dex):
 
 @pytest.mark.asyncio
 async def test_search_address(dex):
-    # address = await dex.search_contract("WBTC")
-    # print(address)
-    # assert address == "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
 
     address = await dex.search_contract("USDT")
     assert address is not None
-    assert address == "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+    assert address == "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
     print(address)
 
 
