@@ -115,15 +115,12 @@ def test_dex_swap_chain_56_pancake():
 
 
 @pytest.mark.asyncio
-async def test_execute_order_error(dex):
-    with pytest.raises(ValueError):
-        order = {
-        'action': 'BUY',
-        'instrument': 'UNI',
-        'quantity': 1
-            }
-        swap_order = await dex.execute_order(order)
-        print(swap_order)
+async def test_execute_order(dex, buy_UNI_order):
+    # sell_balance = AsyncMock()
+    dex.get_swap = AsyncMock()
+    swap_order = await dex.execute_order(buy_UNI_order)
+    print(f"swap_order: {swap_order}")
+    assert swap_order is not None
 
 
 @pytest.mark.asyncio
@@ -141,6 +138,9 @@ async def test_get_swap(dex):
     get_block_mock = MagicMock()
     get_block_mock.return_value = {"timestamp": 1000}
     dex.get_approve = AsyncMock()
+    dex.get_sign = AsyncMock()
+    dex.w3.to_hex = Mock()
+    dex.w3.wait_for_transaction_receipt= MagicMock(return_value={"status": 1})
 
     dex.get_quote_uniswap = get_quote_mock
     dex.w3.eth.get_block = get_block_mock
@@ -183,7 +183,7 @@ async def test_get_quote(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_quote_error(dex):
+async def test_get_quote_invalid(dex):
     """Test get_quote() method"""
     quote = await dex.get_quote("THISISNOTATOKEN")
     assert quote is None
@@ -258,7 +258,7 @@ async def test_get_abi(dex, mocker):
 
 
 @pytest.mark.asyncio
-async def test_get_noabi_mock(dex):
+async def test_get_abi_invalid(dex):
     abi = await dex.get_abi("0x1234567890123456789012345678901234567890")
     assert abi is None
 
@@ -323,7 +323,6 @@ async def test_get_token_balance(dex):
     assert token_balance is not None
     assert token_balance == 0
     # assert isinstance(token_balance, int)
-
 
 
 @pytest.mark.asyncio
