@@ -12,7 +12,10 @@ from dxsp.config import settings
 
 @pytest.fixture
 def dex():
-    return DexSwap()
+    with patch("dxsp.config.settings", autospec=True):
+        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
+        settings.dex_private_key = "0xdeadbeet"
+        return DexSwap()
 
 
 @pytest.fixture
@@ -84,18 +87,18 @@ async def test_error_execute_order(dex):
             'instrument': 'UNI',
             'quantity': 1
         }
-        response = await dex.execute_order(order)
+        await dex.execute_order(order)
 
 
 
-# @pytest.mark.asyncio
-# async def test_no_money_get_swap(dex):
-#     swap = await dex.get_swap(
-#         "WBTC",
-#         "USDT",
-#         1)
-#     print(f"swap: {swap}")
-#     assert swap is not None
+
+@pytest.mark.asyncio
+async def test_no_money_get_swap(dex):
+    with pytest.raises(ValueError):
+        swap = await dex.get_swap(
+            "WBTC",
+            "USDT",
+            1)
 
 
 @pytest.mark.asyncio
