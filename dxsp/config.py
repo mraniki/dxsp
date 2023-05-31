@@ -19,7 +19,3 @@ settings = Dynaconf(
     default_env="default",
 )
 
-if settings.loglevel == "DEBUG":
-    logging.getLogger("urllib3").setLevel(logging.WARNING)
-    #logging.getLogger("ccxt").setLevel(logging.WARNING)
-    
