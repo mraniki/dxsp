@@ -145,7 +145,7 @@ async def test_get_swap(dex):
         "confirmation": (
             "➕ Size: 100\n"
             "⚫️ Entry: 100\n"
-            f"ℹ️ 0xxxx\n"
+            "ℹ️ 0xxxx\n"
             "🗓️ ---"
         )
     })
