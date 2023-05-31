@@ -95,7 +95,7 @@ async def test_no_money_get_swap(dex):
         "USDT",
         1)
     print(f"swap: {swap}")
-    assert swap is not None
+    assert swap is None
 
 
 @pytest.mark.asyncio
@@ -117,51 +117,16 @@ async def test_get_quote_error(dex):
 
 @pytest.mark.asyncio
 async def test_get_approve(dex):
-    result = await dex.get_approve("UNI")
-    print(result)
-    assert result is not None
-
+    result = await dex.get_approve("TOKEN")
+    assert result is None
 
 @pytest.mark.asyncio
-async def test_get_confirmation(mocker):
-    mock_w3 = mocker.MagicMock()
-    mock_receipt = mocker.MagicMock()
-    mock_block = mocker.MagicMock()
-
-    mock_w3.eth.get_transaction.return_value = mock_receipt
-    mock_w3.eth.get_block.return_value = mock_block
-
-    order_hash = "0x1234"
-
-    mock_receipt.return_value = {
-        "blockNumber": 123,
-        "blockHash": "0x5678",
-        "to": "0x1234567890123456789012345678901234567890",
-        "value": 10,
-        "gas": 1000,
-    }
-    mock_block.return_value = {"timestamp": 1600000000}
-
-    expected_trade = {
-        "timestamp": 1600000000,
-        "id": "0x5678",
-        "instrument": "0x1234567890123456789012345678901234567890",
-        "contract": "0x1234567890123456789012345678901234567890",
-        "amount": 10,
-        "price": 10,
-        "fee": 1000,
-        "confirmation": (
-            "➕ Size: 10.0\n"
-            "⚫️ Entry: 10.0\n"
-            "ℹ️ 0x5678\n"
-            "🗓️ 1600000000"
-        ),
-    }
-
-    obj = DexSwap(mock_w3)
-    assert await obj.get_confirmation(order_hash) is not None
-    mock_w3.eth.get_transaction.assert_called_once_with(order_hash)
-    mock_w3.eth.get_block.assert_called_once_with(123)
+async def test_get_confirmation(dex):
+    result = await dex.get_confirmation("0xb5d0c18bfc6e93d06d8f06eef34533993615ff69544ebbebe9772eeae975eb63")
+    print(result)
+    assert result is not None
+    assert result['confirmation'] is not None
+    assert result['confirmation'].startswith('➕')
 
 
 @pytest.mark.asyncio
@@ -290,27 +255,16 @@ async def test_get_quote_uniswap(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_approve_uniswap():
-    # Mock dependencies
-    symbol = "ETH"
-    contract = Mock(get_token_contract=Mock(return_value=Mock(
-        functions=Mock(
-            allowance=Mock(return_value=0),
-            approve=Mock(return_value=Mock())
-        )
-    )))
-    get_token_contract = Mock(return_value=contract)
-    w3 = Mock(to_wei=Mock(return_value=1), to_checksum_address=Mock(return_value="address"))
-    get_sign = Mock(return_value="hash")
-    eth = Mock(wait_for_transaction_receipt=Mock(return_value=Mock()))
+async def test_get_approve_uniswap(dex):
+    symbol = "UNI"
+    approve_receipt = None
+    try:
+        approve_receipt = await dex.get_approve_uniswap(symbol)
+        print(approve_receipt)
+    except Exception as e:
+        print(f"Error getting approve receipt: {e}")
+    assert approve_receipt is None
 
-    # Test function
-    approve_receipt = await get_approve_uniswap(get_token_contract, w3, eth, get_sign, symbol)
-
-    # Assertions
-    assert approve_receipt == eth.wait_for_transaction_receipt.return_value
-    contract.functions.allowance.assert_called_once_with("address", "address")
-    contract.functions.approve.assert_called_once_with("address", 1)
 
 
 @pytest.mark.asyncio

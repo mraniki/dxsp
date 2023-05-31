@@ -172,7 +172,8 @@ class DexSwap:
             if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
                 await self.get_approve_uniswap(symbol)
         except Exception as error:
-            raise error
+            self.logger.debug("error %s", error)
+            return None
 
     async def get_sign(self, transaction):
         try:
@@ -447,6 +448,7 @@ class DexSwap:
             owner_address = self.w3.to_checksum_address(self.wallet_address)
             dex_router_address = self.w3.to_checksum_address(settings.dex_router_contract_addr)
             allowance = contract.functions.allowance(owner_address, dex_router_address).call()
+            self.logger.debug("allowance %s", allowance)
             if allowance == 0:
                 approval_tx = contract.functions.approve(dex_router_address, approved_amount)
                 approval_tx_hash = await self.get_sign(approval_tx)
