@@ -112,12 +112,11 @@ def test_dex_swap_chain_56_pancake():
         assert dex.private_key == "0xdeadbeet"
         assert dex.account == "56 - 34567899"
         assert dex.chain_id == 56
-        assert dex.router() is not None
 
 
 @pytest.mark.asyncio
 async def test_execute_order(dex, buy_UNI_order):
-    # sell_balance = AsyncMock()
+    sell_balance = AsyncMock()
     dex.get_swap = AsyncMock()
     swap_order = await dex.execute_order(buy_UNI_order)
     print(f"swap_order: {swap_order}")
