@@ -95,12 +95,14 @@ class DexSwap:
             if not buy_token_address:
                 return
 
-            sell_token_amount_wei = self.w3.to_wei(amount * 10 ** (await self.get_token_decimals(sell_token)), "ether")
+            sell_token_amount_wei = self.w3.to_wei(
+                amount * 10 ** (await self.get_token_decimals(sell_token)), "ether")
 
             if await self.get_approve(sell_token) is None:
                 return
 
-            swap_order = await self.get_swap_order(sell_token_address, buy_token_address, sell_token_amount_wei)
+            swap_order = await self.get_swap_order(
+                sell_token_address, buy_token_address, sell_token_amount_wei)
             if not swap_order:
                 return
 
@@ -110,7 +112,8 @@ class DexSwap:
             signed_order = await self.get_sign(swap_order)
             order_hash = str(self.w3.to_hex(signed_order))
 
-            if self.w3.wait_for_transaction_receipt(order_hash, timeout=120, poll_latency=0.1)["status"] != 1:
+            if self.w3.wait_for_transaction_receipt(
+                order_hash, timeout=120, poll_latency=0.1)["status"] != 1:
                 return
 
             await self.get_confirmation(order_hash)
@@ -121,7 +124,7 @@ class DexSwap:
 ### ------🛠️ W3 UTILS ---------
 
 
-    async def _get(self, url, params=None, headers=None):
+    async def get(self, url, params=None, headers=None):
         try:
             self.logger.debug(f"Requesting URL: {url}")
             response = requests.get(url, params=params, headers=headers, timeout=10)
@@ -136,7 +139,7 @@ class DexSwap:
         try:
             router_abi = await self.get_abi(settings.dex_router_contract_addr)
             if router_abi is None:
-                router_abi = await self._get(settings.dex_router_abi_url)
+                router_abi = await self.get(settings.dex_router_abi_url)
             router = self.w3.eth.contract(
                 address=self.w3.to_checksum_address(
                     settings.dex_router_contract_addr),
@@ -155,7 +158,7 @@ class DexSwap:
         try:
             quoter_abi = await self.get_abi(settings.dex_quoter_contract_addr)
             if quoter_abi is None:
-                quoter_abi = await self._get(settings.dex_quoter_abi_url)
+                quoter_abi = await self.get(settings.dex_quoter_abi_url)
             contract = self.w3.eth.contract(
                 address=self.w3.to_checksum_address(
                     settings.dex_quoter_contract_addr),
@@ -202,7 +205,7 @@ class DexSwap:
         }
 
         try:
-            resp = await self._get(
+            resp = await self.get(
                 url=settings.dex_block_explorer_url, params=params)
             if resp['status'] == "1":
                 self.logger.debug("ABI found %s", resp)
@@ -338,7 +341,7 @@ class DexSwap:
     async def get_contract_address(self, token_list_url, symbol):
         """Given a token symbol and json tokenlist, get token address"""
         try:
-            token_list = await self._get(token_list_url)
+            token_list = await self.get(token_list_url)
             token_search = token_list['tokens']
             for keyval in token_search:
                 if (keyval['symbol'] == symbol and
@@ -354,7 +357,7 @@ class DexSwap:
             token_address = await self.search_contract(token)
             token_abi = await self.get_abi(token_address)
             if token_abi is None:
-                token_abi = await self._get(settings.dex_erc20_abi_url)
+                token_abi = await self.get(settings.dex_erc20_abi_url)
             return self.w3.eth.contract(
                 address=token_address,
                 abi=token_abi)
@@ -450,8 +453,9 @@ class DexSwap:
                 approval_receipt = self.w3.eth.wait_for_transaction_receipt(
                     approval_tx_hash, timeout=120, poll_latency=0.1)
                 return approval_receipt
-        except Exception as error:
-            raise error
+        except Exception as e:
+            raise e
+
 
     async def get_swap_uniswap(self, asset_out_address, asset_in_address, amount):
         try:
@@ -479,7 +483,7 @@ class DexSwap:
             url = (settings.dex_0x_url + "/swap/v1/quote?buyToken=" + str(buy_address) +
                 "&sellToken=" + str(sell_address) + "&buyAmount=" + str(out_amount))
             headers = {"0x-api-key": settings.dex_0x_api_key}
-            response = await self._get(url, params=None, headers=headers)
+            response = await self.get(url, params=None, headers=headers)
             print(response)
             if response:
                 return round(float(response['guaranteedPrice']), 3)

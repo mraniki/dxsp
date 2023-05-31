@@ -2,10 +2,9 @@
  DEXSWAP Unit Test
 """
 
-from unittest.mock import patch, MagicMock
+from unittest.mock import Mock, patch, MagicMock
 import re
 import pytest
-import requests
 from dxsp import DexSwap
 from dxsp.config import settings
 
@@ -64,7 +63,7 @@ def test_setting_dex_swap_init():
         assert dex.account == "1 - 34567899"
 
 
-def test_chain_dex_swap_init():
+def test_chain_10_dex_swap_init():
     with patch("dxsp.config.settings", autospec=True):
         settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
         settings.dex_private_key = "0xdeadbeet"
@@ -167,7 +166,7 @@ async def test_get_confirmation(mocker):
 
 @pytest.mark.asyncio
 async def test_get(dex):
-    result = await dex._get(
+    result = await dex.get(
         "http://ip.jsontest.com",
         params=None,
         headers=None)
@@ -212,7 +211,7 @@ async def test_search_address(dex):
 async def test_get_abi(dex, mocker):
     # Mock the _get method 
     mock_resp = {"status": "1", "result": "0x0123456789abcdef"}
-    mocker.patch.object(dex, "_get", return_value=mock_resp)
+    mocker.patch.object(dex, "get", return_value=mock_resp)
 
     abi = await dex.get_abi("0x1234567890123456789012345678901234567890")
 
@@ -291,12 +290,27 @@ async def test_get_quote_uniswap(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_approve_uniswap(dex):
-    with patch("dxsp.config.settings", autospec=True):
-        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
+async def test_get_approve_uniswap():
+    # Mock dependencies
+    symbol = "ETH"
+    contract = Mock(get_token_contract=Mock(return_value=Mock(
+        functions=Mock(
+            allowance=Mock(return_value=0),
+            approve=Mock(return_value=Mock())
+        )
+    )))
+    get_token_contract = Mock(return_value=contract)
+    w3 = Mock(to_wei=Mock(return_value=1), to_checksum_address=Mock(return_value="address"))
+    get_sign = Mock(return_value="hash")
+    eth = Mock(wait_for_transaction_receipt=Mock(return_value=Mock()))
 
-        allowance = await dex.get_approve_uniswap(symbol="USDT")
-        assert allowance is None
+    # Test function
+    approve_receipt = await get_approve_uniswap(get_token_contract, w3, eth, get_sign, symbol)
+
+    # Assertions
+    assert approve_receipt == eth.wait_for_transaction_receipt.return_value
+    contract.functions.allowance.assert_called_once_with("address", "address")
+    contract.functions.approve.assert_called_once_with("address", 1)
 
 
 @pytest.mark.asyncio
