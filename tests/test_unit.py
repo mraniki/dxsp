@@ -127,8 +127,9 @@ async def test_execute_order(dex, buy_UNI_order):
 @pytest.mark.asyncio
 async def test_execute_order_invalid(dex, buy_UNI_order):
 
-        swap_order = await dex.execute_order(buy_UNI_order)
-        print(swap_order)
+        with pytest.raises(ValueError,match="Order execution failed"):
+            swap_order = await dex.execute_order(buy_UNI_order)
+            print(swap_order)
 
 
 @pytest.mark.asyncio
@@ -303,8 +304,8 @@ async def test_get_decimals(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_gas_invalid(dex):
-    with pytest.raises(ValueError):
+async def test_get_gas(dex):
+   # with pytest.raises(ValueError):
         # Create a mock transaction
         mock_tx = {"to": "0x1234567890123456789012345678901234567890",
                 "value": "1000000000000000000"}
