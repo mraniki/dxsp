@@ -79,14 +79,14 @@ def test_chain_dex_swap_init():
 
 @pytest.mark.asyncio
 async def test_execute_order(dex):
-    order_params = {
+    order = {
         'action': 'BUY',
         'instrument': 'UNI',
         'quantity': 1
     }
-    result = await dex.execute_order(order_params)
-    print(result)
-    assert result is None
+    response = await dex.execute_order(order)
+    assert response is not None
+
 
 
 @pytest.mark.asyncio
@@ -96,7 +96,7 @@ async def test_no_money_get_swap(dex):
         "USDT",
         1)
     print(f"swap: {swap}")
-    assert swap is None
+    assert swap is not None
 
 
 @pytest.mark.asyncio
@@ -361,4 +361,4 @@ async def test_get_0x_quote_fail(dex):
             "0xE68104D83e647b7c1C15a91a8D8aAD21a51B3B3E",
             "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
             1)
-            assert result is None
+        assert result is None

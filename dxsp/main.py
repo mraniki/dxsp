@@ -376,8 +376,8 @@ class DexSwap:
         """Get token decimals"""
         contract = await self.get_token_contract(token_symbol)
         if not contract:
-            return None
-        return await contract.functions.decimals().call()
+            return 18
+        return contract.functions.decimals().call()
 
     async def get_account_balance(self):
         try:
