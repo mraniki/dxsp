@@ -1,18 +1,25 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+
   "extends": [
     "config:base",
     ":semanticCommitTypeAll(⬆️)"
   ],
+  "enabledManagers": ["poetry"],
   "pip_requirements": {
     "fileMatch": [
       "(^|/)([\\w-]*)requirements\\.(txt|pip)$"
     ]
   },
-  "packageRules": [
-    {
-      "matchPaths": ["pyproject.toml"],
-      "automerge": false
-    }
-  ]
+  "poetry": {
+    "fileMatch": [
+      "pyproject.toml"
+    ]
+  },
+  "python": {
+    "labels": [
+      "dependencies",
+      "python"
+    ],
+    "packageRules": []
+}
 }
