@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.7 (2023-06-05)
+### Fix
+* ⬆️ dependencies ([`0184b0e`](https://github.com/mraniki/dxsp/commit/0184b0ead838a0780bab5cd4e5bc5e352e81ff33))
+
+### Other
+* Merge pull request #253 from mraniki/dev ([`c9a19a4`](https://github.com/mraniki/dxsp/commit/c9a19a40382c267c8af02e8d22766f486dd882bd))
+
 ## v2.6.6 (2023-05-31)
 ### Fix
 * ✅ unit test ([`55bc23d`](https://github.com/mraniki/dxsp/commit/55bc23d09d216b3aaeb060790304203911a72c0b))
