@@ -4,9 +4,10 @@
     "config:base",
     ":semanticCommitTypeAll(⬆️)"
   ],
+  "semanticCommits": "enabled",
   "pip_requirements": {
+    "enabled": true,
     "fileMatch": [
       "(^|/)([\\w-]*)requirements\\.(txt|pip)$"
     ]
   }
-}
