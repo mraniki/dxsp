@@ -23,22 +23,12 @@ def dex():
 
 @pytest.fixture
 def buy_UNI_order():
-    order = {
-        'action': 'BUY',
-        'instrument': 'UNI',
-        'quantity': 1
-    }
-    return order
+    return {'action': 'BUY', 'instrument': 'UNI', 'quantity': 1}
 
 
 @pytest.fixture
 def buy_WBTC_order():
-    order = {
-        'action': 'BUY',
-        'instrument': 'WBTC',
-        'quantity': 1
-    }
-    return order
+    return {'action': 'BUY', 'instrument': 'WBTC', 'quantity': 1}
 
 
 @pytest.fixture
@@ -66,7 +56,7 @@ async def test_dex():
     """Init Testing"""
     dex = DexSwap()
     check = "DexSwap" in str(type(dex))
-    assert check is True
+    assert check
     assert dex.w3 is not None
     assert dex.chain_id is not None
     assert dex.protocol_type is not None

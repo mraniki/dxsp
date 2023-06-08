@@ -30,7 +30,7 @@ class DexSwap:
         self.chain_id = settings.dex_chain_id
         self.wallet_address = self.w3.to_checksum_address(
             settings.dex_wallet_address)
-        self.account = str(self.chain_id) + " - "+str(self.wallet_address[-8:])
+        self.account = f"{str(self.chain_id)} - {str(self.wallet_address[-8:])}"
         self.private_key = settings.dex_private_key
 
         self.cg = CoinGeckoAPI()
@@ -140,11 +140,12 @@ class DexSwap:
             router_abi = await self.get_abi(settings.dex_router_contract_addr)
             if router_abi is None:
                 router_abi = await self.get(settings.dex_router_abi_url)
-            router = self.w3.eth.contract(
+            return self.w3.eth.contract(
                 address=self.w3.to_checksum_address(
-                    settings.dex_router_contract_addr),
-                abi=router_abi)
-            return router
+                    settings.dex_router_contract_addr
+                ),
+                abi=router_abi,
+            )
         except Exception as error:
             raise error
 
@@ -188,8 +189,7 @@ class DexSwap:
                 transaction = transaction.build_transaction(transaction_params)
             signed = self.w3.eth.account.sign_transaction(
                 transaction, self.private_key)
-            tx_hash = self.w3.eth.send_raw_transaction(signed.rawTransaction)
-            return tx_hash
+            return self.w3.eth.send_raw_transaction(signed.rawTransaction)
         except Exception as error:
             raise error
 
@@ -235,7 +235,7 @@ class DexSwap:
         try:
             receipt = self.w3.eth.get_transaction(order_hash)
             block = self.w3.eth.get_block(receipt["blockNumber"])
-            trade = {
+            return {
                 "timestamp": block["timestamp"],
                 "id": receipt["blockHash"],
                 "instrument": receipt["to"],
@@ -250,7 +250,6 @@ class DexSwap:
                     f"🗓️ {block['timestamp']}"
                 ),
             }
-            return trade
         except Exception as error:
             raise error
 
@@ -263,10 +262,7 @@ class DexSwap:
 
     async def get_gas_price(self):
         """search get gas price"""
-        gas_price = round(self.w3.from_wei(
-            self.w3.eth.generate_gas_price(),
-            'gwei'), 2)
-        return gas_price
+        return round(self.w3.from_wei(self.w3.eth.generate_gas_price(), 'gwei'), 2)
 
 ### ------✍️ CONTRACT ---------
     async def search_contract(self, token):
@@ -307,8 +303,7 @@ class DexSwap:
             x for x in asset_platforms
             if x["chain_identifier"] == int(self.chain_id)
         )
-        cg_platform = output_dict["id"] or None
-        return cg_platform
+        return output_dict["id"] or None
 
     async def search_cg(self, token):
         """search coingecko"""
@@ -379,10 +374,7 @@ class DexSwap:
     async def get_token_decimals(self, token_symbol: str) -> Optional[int]:
         """Get token decimals"""
         contract = await self.get_token_contract(token_symbol)
-        if not contract:
-            return 18
-        token_decimals = contract.functions.decimals().call() or 18
-        return token_decimals
+        return 18 if not contract else contract.functions.decimals().call() or 18
 
     async def get_account_balance(self):
         try:
@@ -437,8 +429,7 @@ class DexSwap:
                     asset_in_address,
                     asset_out_address,
                     fee, amount, sqrtPriceLimitX96).call()
-            return ("🦄 " + quote + " " +
-                    settings.trading_asset)
+            return f"🦄 {quote} {settings.trading_asset}"
         except Exception as e:
             raise e
 
@@ -453,9 +444,9 @@ class DexSwap:
             if allowance == 0:
                 approval_tx = contract.functions.approve(dex_router_address, approved_amount)
                 approval_tx_hash = await self.get_sign(approval_tx)
-                approval_receipt = self.w3.eth.wait_for_transaction_receipt(
-                    approval_tx_hash, timeout=120, poll_latency=0.1)
-                return approval_receipt
+                return self.w3.eth.wait_for_transaction_receipt(
+                    approval_tx_hash, timeout=120, poll_latency=0.1
+                )
         except Exception as e:
             raise e
 
@@ -470,10 +461,13 @@ class DexSwap:
                 asset_in_address, asset_out_address, amount)[0]
 
             if self.protocol_type == "uniswap_v2":
-                swap_order = router_instance.functions.swapExactTokensForTokens(
-                    int(amount), int(min_amount), tuple(path),
-                    self.wallet_address, deadline)
-                return swap_order
+                return router_instance.functions.swapExactTokensForTokens(
+                    int(amount),
+                    int(min_amount),
+                    tuple(path),
+                    self.wallet_address,
+                    deadline,
+                )
             elif self.protocol_type == "uniswap_v3":
                 return None
         except Exception as e:
@@ -483,8 +477,7 @@ class DexSwap:
     async def get_0x_quote(self, buy_address, sell_address, amount=1):
         try:
             out_amount = self.w3.to_wei(amount, 'ether')
-            url = (settings.dex_0x_url + "/swap/v1/quote?buyToken=" + str(buy_address) +
-                "&sellToken=" + str(sell_address) + "&buyAmount=" + str(out_amount))
+            url = f"{settings.dex_0x_url}/swap/v1/quote?buyToken={str(buy_address)}&sellToken={str(sell_address)}&buyAmount={str(out_amount)}"
             headers = {"0x-api-key": settings.dex_0x_api_key}
             response = await self.get(url, params=None, headers=headers)
             print(response)
