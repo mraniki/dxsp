@@ -2,6 +2,22 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.8 (2023-06-08)
+
+### Fix
+
+* 👷 CI Change ([`6a928f0`](https://github.com/mraniki/dxsp/commit/6a928f0810ddfa6bf715ab79e0999c17e3368c98))
+
+### Other
+
+* :arrow_up: Refactor pip requirements in renovate.json ([`d74719f`](https://github.com/mraniki/dxsp/commit/d74719f8ef42d5a24b26d0c21a7bd9c8b0d177ff))
+* Update renovate.json ([`9482974`](https://github.com/mraniki/dxsp/commit/9482974b9123dfd6abde7ebce4a12e8b715a48ab))
+* Update and rename renovate.json to .github/renovate.json ([`4653263`](https://github.com/mraniki/dxsp/commit/46532630ddd25fc4a253a4a407023cca9a9bb795))
+* Add renovate.json ([`a8b50d4`](https://github.com/mraniki/dxsp/commit/a8b50d47760934b3bd02bee2db9715a20dd7d776))
+* Delete renovate.json ([`c89c70e`](https://github.com/mraniki/dxsp/commit/c89c70e2e9d383a7813ef60c9ef203d906f14a2e))
+* :arrow_up: dependencies ([`013ffb8`](https://github.com/mraniki/dxsp/commit/013ffb83048ae21f47974d623edd3e40aa641aa9))
+* Update Dockerfile ([`966a13b`](https://github.com/mraniki/dxsp/commit/966a13b7940764dc72b68b3811b0bd29a73acd83))
+
 ## v2.6.7 (2023-06-05)
 ### Fix
 * ⬆️ dependencies ([`0184b0e`](https://github.com/mraniki/dxsp/commit/0184b0ead838a0780bab5cd4e5bc5e352e81ff33))
