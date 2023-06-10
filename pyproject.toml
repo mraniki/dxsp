@@ -15,15 +15,14 @@ packages = [
 "Issues" =  "https://github.com/mraniki/dxsp/issues"
 
 [tool.poetry.dependencies]
-python = "^3.10"
-asyncio = "*"
-dynaconf = "*"
+python = "^3.10.0"
+dynaconf = "^3.1.12"
 web3 = "^6.4.0"
-pycoingecko = "*"
+pycoingecko = "^3.1.0"
 
 [tool.poetry.dev-dependencies]
-python-semantic-release = "*"
-pytest = "*"
+python-semantic-release = "^7.34.3"
+pytest = "^7.0.0"
 pytest-cov = "*"
 pytest-asyncio = "*"
 pytest-mock = "*"
