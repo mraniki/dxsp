@@ -17,7 +17,7 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.11.0"
 dynaconf = "^3.1.12"
-web3 = "^6.0.0"
+web3 = "^6.3.0"
 pycoingecko = "^3.1.0"
 
 [tool.poetry.dev-dependencies]
