@@ -2,6 +2,19 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.9 (2023-06-11)
+
+### Fix
+
+* 🔧 config ([`16ba63f`](https://github.com/mraniki/dxsp/commit/16ba63ff938d045894f95603e7c192771d4e9eec))
+
+### Other
+
+* :arrow_up: Update dependencies in pyproject.toml ([`6cd2512`](https://github.com/mraniki/dxsp/commit/6cd2512bb447b24a0051c5fe732f19eae8d18153))
+* :arrow_up: Update dependencies in pyproject.toml ([`85f4aef`](https://github.com/mraniki/dxsp/commit/85f4aef9ff99fe18fd96a6991bed279c7ba84ffd))
+* Update dependencies in pyproject.toml ([`cabae7f`](https://github.com/mraniki/dxsp/commit/cabae7f0d2a87f3817372472d057cc1d5209777d))
+* 'Refactored by Sourcery' ([`eafebb2`](https://github.com/mraniki/dxsp/commit/eafebb20c9b73ed7183d0e647930186ad7d64d10))
+
 ## v2.6.8 (2023-06-08)
 
 ### Fix
