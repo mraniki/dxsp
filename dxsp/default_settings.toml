@@ -1,4 +1,5 @@
 [default]
+dxsp_enabled = true
 loglevel = "INFO"
 headers = {User-Agent= 'Mozilla/5.0'}
 #📝tokenlist
