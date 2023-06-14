@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.10 (2023-06-14)
+
+### Fix
+
+* 🐳 dockerignore ([`8a9310b`](https://github.com/mraniki/dxsp/commit/8a9310b94c3a87990956f12cdd542877057b903b))
+
+### Other
+
+* Rename examples/.requirements/requirements.txt to .requirements/requirements.txt ([`589cbce`](https://github.com/mraniki/dxsp/commit/589cbce4fe8df35cb5f4205d131e4e378f041d3a))
+* Rename examples/requirements.txt to examples/.requirements/requirements.txt ([`11f5d59`](https://github.com/mraniki/dxsp/commit/11f5d595caef46f30b16cda430d7aab5d77b5f94))
+
 ## v2.6.9 (2023-06-11)
 
 ### Fix
