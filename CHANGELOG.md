@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.11 (2023-06-15)
+
+### Fix
+
+* 🔧 config org ([`9b42e5a`](https://github.com/mraniki/dxsp/commit/9b42e5a267c787dac782b6881f8b59f0d907e508))
+
+### Other
+
+* Update Dockerfile ([`6bea916`](https://github.com/mraniki/dxsp/commit/6bea916291e4a2fc47de771296691e50a57cd309))
+* Update Dockerfile ([`dcea111`](https://github.com/mraniki/dxsp/commit/dcea1116b44bac8709fe4bfe93cea02a3e2b2bfb))
+
 ## v2.6.10 (2023-06-14)
 
 ### Fix
