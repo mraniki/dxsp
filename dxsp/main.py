@@ -438,6 +438,8 @@ class DexSwap:
     async def get_approve_uniswap(self, symbol):
         try:
             contract = await self.get_token_contract(symbol)
+            if contract is None:
+                return
             approved_amount = self.w3.to_wei(2 ** 64 - 1, 'ether')
             owner_address = self.w3.to_checksum_address(self.wallet_address)
             dex_router_address = self.w3.to_checksum_address(settings.dex_router_contract_addr)
