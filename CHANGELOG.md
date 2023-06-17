@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.12 (2023-06-17)
+
+### Fix
+
+* 🐛 bug ([`8c4fb68`](https://github.com/mraniki/dxsp/commit/8c4fb681b3a24e3f2469d1d02113ab24b3cd6c7b))
+* 🩹 non critical ([`c8817a8`](https://github.com/mraniki/dxsp/commit/c8817a8122ae656d43292759c9223c97a6e0964b))
+
 ## v2.6.11 (2023-06-15)
 
 ### Fix
