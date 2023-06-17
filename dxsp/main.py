@@ -351,6 +351,8 @@ class DexSwap:
         """Given a token symbol, returns a contract object. """
         try:
             token_address = await self.search_contract(token)
+            if token_address is None:
+                return None
             token_abi = await self.get_abi(token_address)
             if token_abi is None:
                 token_abi = await self.get(settings.dex_erc20_abi_url)
@@ -436,6 +438,8 @@ class DexSwap:
     async def get_approve_uniswap(self, symbol):
         try:
             contract = await self.get_token_contract(symbol)
+            if contract is None:
+                return
             approved_amount = self.w3.to_wei(2 ** 64 - 1, 'ether')
             owner_address = self.w3.to_checksum_address(self.wallet_address)
             dex_router_address = self.w3.to_checksum_address(settings.dex_router_contract_addr)
