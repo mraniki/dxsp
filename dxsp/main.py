@@ -351,6 +351,8 @@ class DexSwap:
         """Given a token symbol, returns a contract object. """
         try:
             token_address = await self.search_contract(token)
+            if token_address is None:
+                return None
             token_abi = await self.get_abi(token_address)
             if token_abi is None:
                 token_abi = await self.get(settings.dex_erc20_abi_url)
