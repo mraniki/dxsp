@@ -233,7 +233,7 @@ async def test_get_sign(dex_1):
     mock_tx = {"to": "0x1234567890123456789012345678901234567890",
         "value": "1000000000000000000"}
     result = await dex.get_sign(mock_tx)
-    assert result is None
+    assert result is not None
 
 
 @pytest.mark.asyncio
