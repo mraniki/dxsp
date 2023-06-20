@@ -109,7 +109,7 @@ def test_dex_swap_chain_56(dex_56):
     assert isinstance(dex, DexSwap)
     assert dex.w3 is not None
     assert dex.wallet_address == "0x1234567890123456789012345678901234568888"
-    assert dex.private_key == "0xdeadbeef"
+    assert dex.private_key == "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
     assert dex.account == "56 - 34568888"
     assert dex.chain_id == 56
 
