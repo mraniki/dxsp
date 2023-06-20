@@ -32,6 +32,7 @@ class DexSwap:
             settings.dex_wallet_address)
         self.account = f"{str(self.chain_id)} - {str(self.wallet_address[-8:])}"
         self.private_key = settings.dex_private_key
+        
 
         self.cg = CoinGeckoAPI()
 

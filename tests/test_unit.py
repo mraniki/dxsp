@@ -10,12 +10,12 @@ from dxsp import DexSwap
 from dxsp.config import settings
 
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture(name="dex_1")
 def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
 
 @pytest.fixture(name="dex")
-def DexSwap_fixture():
+def DexSwap_fixture(dex_1):
     return DexSwap()
 
 @pytest.fixture(name="testnet")
@@ -70,13 +70,13 @@ def wrong_order_fixture():
     }
 
 @pytest.fixture
-async def router(dex):
+async def router(dex, dex_1):
     """router"""
     return await dex.router()
 
 
 @pytest.fixture
-async def quoter(dex):
+async def quoter(dex, dex_1):
     """quoter"""
     return await dex.quoter()
 
@@ -90,7 +90,7 @@ def mock_contract():
 
 
 @pytest.mark.asyncio
-async def test_dex():
+async def test_dex(dex_1):
     """Init Testing"""
     dex = DexSwap()
     assert isinstance(dex, DexSwap)
@@ -116,7 +116,8 @@ def test_dex_swap_chain_56(dex_56):
 
 
 @pytest.mark.asyncio
-async def test_execute_order(dex, order):
+async def test_execute_order(dex_1, order):
+    dex = DexSwap()
     sell_balance = AsyncMock()
     dex.get_swap = AsyncMock()
     swap_order = await dex.execute_order(order)
@@ -125,8 +126,9 @@ async def test_execute_order(dex, order):
 
 
 @pytest.mark.asyncio
-async def test_execute_order_invalid(dex, wrong_order):
+async def test_execute_order_invalid(dex_1, wrong_order):
     with pytest.raises(ValueError,match="Order execution failed"):
+        dex = DexSwap()
         swap_order = await dex.execute_order(wrong_order)
         print(swap_order)
 
@@ -190,8 +192,9 @@ async def test_get_swap(dex):
 
 
 
-async def test_get_swap_invalid(dex):
+async def test_get_swap_invalid(dex_1):
     with pytest.raises(ValueError):
+        dex = DexSwap()
         swap_order = await dex.get_swap(
             "WBTC",
             "USDT",
@@ -200,7 +203,7 @@ async def test_get_swap_invalid(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_quote(dex):
+async def test_get_quote(dex, dex_1):
     """getquote Testing"""
     quote = await dex.get_quote("UNI")
     print(quote)
@@ -213,7 +216,7 @@ async def test_get_quote(dex):
 async def test_get_quote_invalid(dex):
     """Test get_quote() method"""
     quote = await dex.get_quote("THISISNOTATOKEN")
-    assert quote is None
+    assert quote == "contract not found"
 
 
 @pytest.mark.asyncio
@@ -223,16 +226,19 @@ async def test_get_approve(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_sign(dex):
+async def test_get_sign(dex_1):
+    dex = DexSwap()
     dex.w3.eth.account.sign_transaction = Mock()
     dex.w3.eth.send_raw_transaction = Mock()
-    result = await dex.get_sign("0x9bfcc4a0b2ac191423f196e7eebb0349f3c890814b29880599a0a4614e403d72")
+    mock_tx = {"to": "0x1234567890123456789012345678901234567890",
+        "value": "1000000000000000000"}
+    result = await dex.get_sign(mock_tx)
     assert result is None
 
 
 @pytest.mark.asyncio
 async def test_get_confirmation(dex):
-    result = await dex.get_confirmation("0x9bfcc4a0b2ac191423f196e7eebb0349f3c890814b29880599a0a4614e403d72")
+    result = await dex.get_confirmation("0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771")
     print(result)
     assert result is not None
     assert result['confirmation'] is not None
