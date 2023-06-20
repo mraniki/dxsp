@@ -9,9 +9,6 @@ import time
 from dxsp import DexSwap
 from dxsp.config import settings
 
-if settings.loglevel == "DEBUG":
-    logging.getLogger("urllib3.connectionpool").setLevel(logging.ERROR)
-    logging.getLogger("web3").setLevel(logging.ERROR)
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
