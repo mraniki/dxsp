@@ -96,8 +96,9 @@ class DexSwap:
         sell_contract = await self.get_token_contract(sell_token)
         sell_decimals = await sell_contract.functions.decimals().call()
         risk_percentage = settings.trading_risk_amount
-        sell_amount = (sell_balance / (risk_percentage ** sell_decimals)) * (float(quantity) / 100)
-        return sell_amount
+        return (sell_balance / (risk_percentage**sell_decimals)) * (
+            float(quantity) / 100
+        )
 
 
     async def get_quote(self, sell_token):
