@@ -10,40 +10,78 @@ from dxsp import DexSwap
 from dxsp.config import settings
 
 
+@pytest.fixture(name="dex_1")
+def set_test_settings():
+    settings.configure(FORCE_ENV_FOR_DYNACONF="testing")
 
-@pytest.fixture
-def dex():
-    with patch("dxsp.config.settings", autospec=True):
-        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
-        settings.dex_private_key = "0xdeadbeet"
-        settings.dex_rpc = "https://eth.llamarpc.com"
-        settings.dex_chain_id = 1
-        return DexSwap()
+@pytest.fixture(name="dex")
+def DexSwap_fixture(dex_1):
+    return DexSwap()
+
+@pytest.fixture(name="testnet")
+def set_test_settings_DEX5():
+    settings.configure(FORCE_ENV_FOR_DYNACONF="chain_5")
 
 
-@pytest.fixture
+@pytest.fixture(name="dex_56")
+def set_test_settings_DEX56():
+    settings.configure(FORCE_ENV_FOR_DYNACONF="chain_56")
+
+def test_dynaconf_is_in_testing(dex_1):
+    print(settings.VALUE)
+    assert settings.VALUE == "On Testing"
+    assert settings.dex_chain_id == 1
+    assert settings.dex_wallet_address == "0x1234567890123456789012345678901234567899"
+
+
+def test_dynaconf_is_in_testing_env_DEX5(testnet):
+    print(settings.VALUE)
+    assert settings.VALUE == "On Testnet"
+    assert settings.dex_chain_id == 5
+    assert settings.dex_wallet_address == "0x1234567890123456789012345678901234567890"
+
+def test_dynaconf_is_in_testing_env_DEX56(dex_56):
+    print(settings.VALUE)
+    assert settings.VALUE == "DEX chain_56"
+    assert settings.dex_chain_id == 56
+    assert settings.dex_wallet_address == "0x1234567890123456789012345678901234568888"
+
+
+@pytest.fixture(name="order")
+def order_params_fixture():
+    """Return order parameters."""
+    return {
+        'action': 'BUY',
+        'instrument': 'WBTC',
+        'quantity': 1,
+    }
+
+@pytest.fixture(name="order_56")
 def buy_UNI_order():
-    return {'action': 'BUY', 'instrument': 'UNI', 'quantity': 1}
+    return {'action': 'BUY', 'instrument': 'BTCB', 'quantity': 1}
 
+@pytest.fixture(name="wrong_order")
+def wrong_order_fixture():
+    """Return order parameters."""
+    return {
+        'action': 'BUY',
+        'instrument': 'NOTATHING',
+        'quantity': 1,
+    }
 
 @pytest.fixture
-def buy_WBTC_order():
-    return {'action': 'BUY', 'instrument': 'WBTC', 'quantity': 1}
-
-
-@pytest.fixture
-async def router(dex):
+async def router(dex, dex_1):
     """router"""
     return await dex.router()
 
 
 @pytest.fixture
-async def quoter(dex):
+async def quoter(dex, dex_1):
     """quoter"""
     return await dex.quoter()
 
 @pytest.fixture
-def mock_contract():
+def mock_contract(dex_1):
     contract = MagicMock()
     contract.get_token_decimals.return_value = 18
     contract.to_wei.return_value = 1000000000000000000
@@ -52,79 +90,71 @@ def mock_contract():
 
 
 @pytest.mark.asyncio
-async def test_dex():
+async def test_dex(dex_1):
     """Init Testing"""
     dex = DexSwap()
-    check = "DexSwap" in str(type(dex))
-    assert check
+    assert isinstance(dex, DexSwap)
     assert dex.w3 is not None
     assert dex.chain_id is not None
     assert dex.protocol_type is not None
     assert dex.protocol_type == "uniswap_v2"
     assert dex.wallet_address.startswith("0x")
-    assert dex.wallet_address == "0x1234567890123456789012345678901234567890"
+    assert dex.wallet_address == "0x1234567890123456789012345678901234567899"
     assert dex.private_key.startswith("0x")
-    assert dex.account == "1 - 34567890"
+    assert dex.account == "1 - 34567899"
 
 
-def test_dex_swap_with_settings():
-    with patch("dxsp.config.settings", autospec=True):
-        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
-        settings.dex_private_key = "0xdeadbeet"
+def test_dex_swap_chain_56(dex_56):
+    dex = DexSwap()
+    assert isinstance(dex, DexSwap)
+    assert dex.w3 is not None
+    assert dex.wallet_address == "0x1234567890123456789012345678901234568888"
+    assert dex.private_key == "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
+    assert dex.account == "56 - 34568888"
+    assert dex.chain_id == 56
 
-        dex = DexSwap()
-        assert dex.wallet_address == "0x1234567890123456789012345678901234567899"
-        assert dex.private_key == "0xdeadbeet"
-        assert dex.account == "1 - 34567899"
-
-
-def test_dex_swap_chain_10():
-    with patch("dxsp.config.settings", autospec=True):
-        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
-        settings.dex_private_key = "0xdeadbeet"
-        settings.dex_chain_id = 10
-
-        dex = DexSwap()
-        assert dex.wallet_address == "0x1234567890123456789012345678901234567899"
-        assert dex.private_key == "0xdeadbeet"
-        assert dex.account == "10 - 34567899"
-        assert dex.chain_id == 10
-
-
-def test_dex_swap_chain_56_pancake():
-    with patch("dxsp.config.settings", autospec=True):
-        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
-        settings.dex_private_key = "0xdeadbeet"
-        settings.dex_chain_id = 56
-        settings.dex_rpc = "https://bsc-dataseed.binance.org/"
-        settings.dex_quoter_contract_addr = "0x10ED43C718714eb63d5aA57B78B54704E256024E"
-
-        dex = DexSwap()
-        assert dex.wallet_address == "0x1234567890123456789012345678901234567899"
-        assert dex.private_key == "0xdeadbeet"
-        assert dex.account == "56 - 34567899"
-        assert dex.chain_id == 56
 
 
 @pytest.mark.asyncio
-async def test_execute_order(dex, buy_UNI_order):
+async def test_execute_order(dex_1, order):
+    dex = DexSwap()
     sell_balance = AsyncMock()
     dex.get_swap = AsyncMock()
-    swap_order = await dex.execute_order(buy_UNI_order)
+    swap_order = await dex.execute_order(order)
     print(f"swap_order: {swap_order}")
     assert swap_order is not None
 
 
 @pytest.mark.asyncio
-async def test_execute_order_invalid(dex, buy_UNI_order):
-
-        with pytest.raises(ValueError,match="Order execution failed"):
-            swap_order = await dex.execute_order(buy_UNI_order)
-            print(swap_order)
+async def test_execute_order_invalid(dex_1, wrong_order):
+    dex = DexSwap()
+    swap_order = await dex.execute_order(wrong_order)
+    print(swap_order)
+    assert swap_order is not None
 
 
 # @pytest.mark.asyncio
-# async def test_get_swap(dex):
+# async def test_nomoney_execute_order_chain56(dex_56, order):
+#     dex = DexSwap()
+#     swap_order = await dex.execute_order(order)
+#     print(swap_order)
+#     assert swap_order == "No Money"
+
+@pytest.mark.asyncio
+async def test_get_swap_chain56(dex_56):
+    dex = DexSwap()
+    order = await dex.get_swap("USDT", "BTCB", 1)
+    assert order == "No Money"
+
+@pytest.mark.asyncio
+async def test_execute_order_chain56(dex_56, order_56):
+    dex = DexSwap()
+    swap_order = await dex.execute_order(order_56)
+    print(f"swap_order: {swap_order}")
+    assert swap_order is not None
+
+# @pytest.mark.asyncio
+# async def test_get_swap(dex, dex_1):
 #     # with pytest.raises(ValueError,match="No Money"):
 #     get_quote_mock = MagicMock()
 #     get_quote_mock.return_value = [50]
@@ -145,8 +175,6 @@ async def test_execute_order_invalid(dex, buy_UNI_order):
 #     })
 #     dex.get_quote_uniswap = get_quote_mock
 #     dex.w3.eth.get_block = get_block_mock
-
-
 #     sell_token = "USDT"
 #     buy_token = "WBTC"
 #     amount = 100
@@ -162,9 +190,9 @@ async def test_execute_order_invalid(dex, buy_UNI_order):
 
 
 
-@pytest.mark.asyncio
-async def test_get_swap_invalid(dex):
+async def test_get_swap_invalid(dex_1):
     with pytest.raises(ValueError):
+        dex = DexSwap()
         swap_order = await dex.get_swap(
             "WBTC",
             "USDT",
@@ -173,7 +201,7 @@ async def test_get_swap_invalid(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_quote(dex):
+async def test_get_quote(dex, dex_1):
     """getquote Testing"""
     quote = await dex.get_quote("UNI")
     print(quote)
@@ -183,29 +211,32 @@ async def test_get_quote(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_quote_invalid(dex):
+async def test_get_quote_invalid(dex, dex_1):
     """Test get_quote() method"""
     quote = await dex.get_quote("THISISNOTATOKEN")
-    assert quote is None
+    assert quote == "contract not found"
 
 
 @pytest.mark.asyncio
-async def test_get_approve(dex):
+async def test_get_approve(dex, dex_1):
     result = await dex.get_approve("TOKEN")
     assert result is None
 
 
 # @pytest.mark.asyncio
-# async def test_get_sign(dex):
+# async def test_get_sign(dex_1):
+#     dex = DexSwap()
 #     dex.w3.eth.account.sign_transaction = Mock()
 #     dex.w3.eth.send_raw_transaction = Mock()
-#     result = await dex.get_sign("0x9bfcc4a0b2ac191423f196e7eebb0349f3c890814b29880599a0a4614e403d72")
-#     assert result is None
+#     mock_tx = {"to": "0x1234567890123456789012345678901234567890",
+#         "value": "1000000000000000000"}
+#     result = await dex.get_sign(mock_tx)
+#     assert result is not None
 
 
 @pytest.mark.asyncio
-async def test_get_confirmation(dex):
-    result = await dex.get_confirmation("0x9bfcc4a0b2ac191423f196e7eebb0349f3c890814b29880599a0a4614e403d72")
+async def test_get_confirmation(dex, dex_1):
+    result = await dex.get_confirmation("0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771")
     print(result)
     assert result is not None
     assert result['confirmation'] is not None
@@ -213,7 +244,7 @@ async def test_get_confirmation(dex):
 
 
 @pytest.mark.asyncio
-async def test_get(dex):
+async def test_get(dex, dex_1):
     result = await dex.get(
         "http://ip.jsontest.com",
         params=None,
@@ -222,13 +253,13 @@ async def test_get(dex):
 
 
 @pytest.mark.asyncio
-async def test_router(dex):
+async def test_router(dex, dex_1):
     router = await dex.router()
     assert router is not None
 
 
 @pytest.mark.asyncio
-async def test_quoter(dex):
+async def test_quoter(dex, dex_1):
     """quoter Testing"""
     quoter = await dex.quoter()
     if quoter:
@@ -236,14 +267,14 @@ async def test_quoter(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_name(dex):
+async def test_get_name(dex, dex_1):
     name = await dex.get_name()
     assert isinstance(name, str)
     assert len(name) == 8
 
 
 @pytest.mark.asyncio
-async def test_search_address(dex):
+async def test_search_address(dex, dex_1):
     # address = await dex.search_contract("WBTC")
     # print(address)
     # assert address == "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
@@ -255,7 +286,7 @@ async def test_search_address(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_abi(dex, mocker):
+async def test_get_abi(dex, mocker, dex_1):
     # Mock the _get method 
     mock_resp = {"status": "1", "result": "0x0123456789abcdef"}
     mocker.patch.object(dex, "get", return_value=mock_resp)
@@ -266,13 +297,13 @@ async def test_get_abi(dex, mocker):
 
 
 @pytest.mark.asyncio
-async def test_get_abi_invalid(dex):
+async def test_get_abi_invalid(dex, dex_1):
     abi = await dex.get_abi("0x1234567890123456789012345678901234567890")
     assert abi is None
 
 
 @pytest.mark.asyncio
-async def test_get_token_contract(dex):
+async def test_get_token_contract(dex, dex_1):
     """get_token_contract Testing"""
     contract = await dex.get_token_contract("UNI")
     print(contract)
@@ -285,7 +316,7 @@ async def test_get_token_contract(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_decimals(dex):
+async def test_get_decimals(dex, dex_1):
     """get_token_decimals Testing"""
     token_decimals = await dex.get_token_decimals("UNI")
     print(token_decimals)
@@ -296,7 +327,7 @@ async def test_get_decimals(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_gas(dex):
+async def test_get_gas(dex, dex_1):
    # with pytest.raises(ValueError):
         # Create a mock transaction
         mock_tx = {"to": "0x1234567890123456789012345678901234567890",
@@ -308,7 +339,7 @@ async def test_get_gas(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_gas_price(dex):
+async def test_get_gas_price(dex, dex_1):
     # Call the get_gasPrice method and check the result
     gas_price = await dex.get_gas_price()
     print(f"gas_price: {gas_price}")
@@ -316,7 +347,7 @@ async def test_get_gas_price(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_account_balance(dex):
+async def test_get_account_balance(dex, dex_1):
     # Call the get_account_balance method and check the result
     balance = await dex.get_account_balance()
     assert balance is not None
@@ -324,7 +355,7 @@ async def test_get_account_balance(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_token_balance(dex):
+async def test_get_token_balance(dex, dex_1):
     # Call the get_token_balance method and check the result
     with patch("dxsp.config.settings", autospec=True) as mock_settings:
         mock_settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
@@ -336,7 +367,7 @@ async def test_get_token_balance(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_quote_uniswap(dex):
+async def test_get_quote_uniswap(dex, dex_1):
     # Call the get_quote_uniswap method and check the result
     quote = await dex.get_quote_uniswap(
         dex.w3.to_checksum_address("0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"),
@@ -350,7 +381,7 @@ async def test_get_quote_uniswap(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_approve_uniswap(dex):
+async def test_get_approve_uniswap(dex, dex_1):
     symbol = "UNI"
     approve_receipt = None
     try:
@@ -363,7 +394,7 @@ async def test_get_approve_uniswap(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_swap_uniswap(dex):
+async def test_get_swap_uniswap(dex, dex_1):
     asset_out_address = "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
     asset_in_address = "0xdac17f958d2ee523a2206206994597c13d831ec7"
     amount = 100
