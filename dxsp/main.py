@@ -436,7 +436,7 @@ class DexSwap:
                     fee, amount, sqrtPriceLimitX96).call()
             return f"🦄 {quote} {settings.trading_asset}"
         except Exception as e:
-            raise e
+            return e
 
     async def get_approve_uniswap(self, symbol):
         try:
