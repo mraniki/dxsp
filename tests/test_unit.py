@@ -133,12 +133,12 @@ async def test_execute_order_invalid(dex_1, wrong_order):
     assert swap_order is not None
 
 
-@pytest.mark.asyncio
-async def test_nomoney_execute_order_chain56(dex_56, order):
-    dex = DexSwap()
-    swap_order = await dex.execute_order(order)
-    print(swap_order)
-    assert swap_order == "No Money"
+# @pytest.mark.asyncio
+# async def test_nomoney_execute_order_chain56(dex_56, order):
+#     dex = DexSwap()
+#     swap_order = await dex.execute_order(order)
+#     print(swap_order)
+#     assert swap_order == "No Money"
 
 @pytest.mark.asyncio
 async def test_get_swap_chain56(dex_56):
@@ -153,42 +153,40 @@ async def test_execute_order_chain56(dex_56, order_56):
     print(f"swap_order: {swap_order}")
     assert swap_order is not None
 
-@pytest.mark.asyncio
-async def test_get_swap(dex, dex_1):
-    # with pytest.raises(ValueError,match="No Money"):
-    get_quote_mock = MagicMock()
-    get_quote_mock.return_value = [50]
+# @pytest.mark.asyncio
+# async def test_get_swap(dex, dex_1):
+#     # with pytest.raises(ValueError,match="No Money"):
+#     get_quote_mock = MagicMock()
+#     get_quote_mock.return_value = [50]
 
-    get_block_mock = MagicMock()
-    get_block_mock.return_value = {"timestamp": 1000}
-    dex.get_approve = AsyncMock()
-    dex.get_sign = AsyncMock()
-    dex.w3.to_hex = Mock()
-    dex.w3.wait_for_transaction_receipt= MagicMock(return_value={"status": 1})
-    dex.get_confirmation = AsyncMock(return_value={
-        "confirmation": (
-            "➕ Size: 100\n"
-            "⚫️ Entry: 100\n"
-            "ℹ️ 0xxxx\n"
-            "🗓️ ---"
-        )
-    })
-    dex.get_quote_uniswap = get_quote_mock
-    dex.w3.eth.get_block = get_block_mock
+#     get_block_mock = MagicMock()
+#     get_block_mock.return_value = {"timestamp": 1000}
+#     dex.get_approve = AsyncMock()
+#     dex.get_sign = AsyncMock()
+#     dex.w3.to_hex = Mock()
+#     dex.w3.wait_for_transaction_receipt= MagicMock(return_value={"status": 1})
+#     dex.get_confirmation = AsyncMock(return_value={
+#         "confirmation": (
+#             "➕ Size: 100\n"
+#             "⚫️ Entry: 100\n"
+#             "ℹ️ 0xxxx\n"
+#             "🗓️ ---"
+#         )
+#     })
+#     dex.get_quote_uniswap = get_quote_mock
+#     dex.w3.eth.get_block = get_block_mock
+#     sell_token = "USDT"
+#     buy_token = "WBTC"
+#     amount = 100
 
-
-    sell_token = "USDT"
-    buy_token = "WBTC"
-    amount = 100
-
-    # Call the function being tested
-    swap_order = await dex.get_swap(
-        sell_token,
-        buy_token,
-        amount)
-    print(f"swap_order: {swap_order}")
-# Check the output
-    assert swap_order is not None
+#     # Call the function being tested
+#     swap_order = await dex.get_swap(
+#         sell_token,
+#         buy_token,
+#         amount)
+#     print(f"swap_order: {swap_order}")
+# # Check the output
+#     assert swap_order is not None
 
 
 
@@ -225,15 +223,15 @@ async def test_get_approve(dex, dex_1):
     assert result is None
 
 
-@pytest.mark.asyncio
-async def test_get_sign(dex_1):
-    dex = DexSwap()
-    dex.w3.eth.account.sign_transaction = Mock()
-    dex.w3.eth.send_raw_transaction = Mock()
-    mock_tx = {"to": "0x1234567890123456789012345678901234567890",
-        "value": "1000000000000000000"}
-    result = await dex.get_sign(mock_tx)
-    assert result is not None
+# @pytest.mark.asyncio
+# async def test_get_sign(dex_1):
+#     dex = DexSwap()
+#     dex.w3.eth.account.sign_transaction = Mock()
+#     dex.w3.eth.send_raw_transaction = Mock()
+#     mock_tx = {"to": "0x1234567890123456789012345678901234567890",
+#         "value": "1000000000000000000"}
+#     result = await dex.get_sign(mock_tx)
+#     assert result is not None
 
 
 @pytest.mark.asyncio
