@@ -2,6 +2,27 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.13 (2023-06-20)
+
+### Fix
+
+* ✅ unit test ([`55281b1`](https://github.com/mraniki/dxsp/commit/55281b11df03df95f86ba758459a0312664df817))
+* ✅ unit test ([`a85aa43`](https://github.com/mraniki/dxsp/commit/a85aa43d38483959bd5ee9a313cca6b91eed0382))
+* ✅ unit test ([`1536f8a`](https://github.com/mraniki/dxsp/commit/1536f8ac7e2087771447959081cf7e001dc61807))
+* ✅ unit test ([`8df87ca`](https://github.com/mraniki/dxsp/commit/8df87ca74175e4f925b06f6249eb5da9ba552fd0))
+* 🥅 catch error ([`4a483fb`](https://github.com/mraniki/dxsp/commit/4a483fb8145d0bdaaca84419a2b27d403b41e630))
+* 🐛 bug ([`2ec426d`](https://github.com/mraniki/dxsp/commit/2ec426d3d79c64cd7d316863c6bca307c526613a))
+* 🔧 config ([`cd843f7`](https://github.com/mraniki/dxsp/commit/cd843f78d60857d966b1c0945c0ca5cff4a28724))
+* ✅ unit test ♻️ refactor ([`6db92f3`](https://github.com/mraniki/dxsp/commit/6db92f38b92f9eceaa288d3330401acf6d5e9c74))
+
+### Other
+
+* Merge pull request #265 from mraniki/dev ([`34001a7`](https://github.com/mraniki/dxsp/commit/34001a76d42bb6a471e492aaa4541834227f4a85))
+* :white_check_mark: unit test ([`0801e28`](https://github.com/mraniki/dxsp/commit/0801e2804deaf54f5cde03283b4545c4bbf73d14))
+* :white_check_mark: unit test ([`a752636`](https://github.com/mraniki/dxsp/commit/a7526361299ef96ef3474564a3bcebf1a2338073))
+* Merge pull request #266 from mraniki/sourcery/dev ([`94b6c47`](https://github.com/mraniki/dxsp/commit/94b6c4758a016d1003190360b31f51b4a8a92123))
+* 'Refactored by Sourcery' ([`d6ead8b`](https://github.com/mraniki/dxsp/commit/d6ead8b86ab3c51ecd4f148b8cf623dc7eb018c2))
+
 ## v2.6.12 (2023-06-17)
 
 ### Fix
