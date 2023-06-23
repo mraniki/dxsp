@@ -11,7 +11,7 @@ Key features:
 
 Other features:
 
-- Translate token symbol to contract address via user defined tokenlist format or coingecko api
+- Translate token symbol to contract address via user defined tokenlist format or coingecko API
 - Connect to web3 automatically (optionn to provide a web3 object)
 - Approve contract and sign transaction
 - Quote a given token
