@@ -15,8 +15,6 @@ build:
       - poetry config virtualenvs.create false
       - poetry install
 
-
 sphinx:
-  builder: html
   configuration: docs/conf.py
   fail_on_warning: false
