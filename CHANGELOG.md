@@ -2,6 +2,21 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.15 (2023-06-23)
+
+### Fix
+
+* 🔧 config ([`6d6fe5f`](https://github.com/mraniki/dxsp/commit/6d6fe5f0ed675c7685542392ecedb566b1dac15c))
+* 🚨 linter ([`f5f350c`](https://github.com/mraniki/dxsp/commit/f5f350c28404b3ced6acc48a8c918c80aad50f20))
+* 👷 CI Change ([`90e02ec`](https://github.com/mraniki/dxsp/commit/90e02ecb6f5b5e152fce451542c08122c4265dbb))
+* 👷 CI Change ([`58a513e`](https://github.com/mraniki/dxsp/commit/58a513e5b08b26e1fe6f5581d1442d8a141e9f93))
+* 🔥 remove code ([`b14907c`](https://github.com/mraniki/dxsp/commit/b14907ceb0e529d9d114cbbd89a0234a24adc80c))
+* 📝 doc ([`1c48008`](https://github.com/mraniki/dxsp/commit/1c480084ff0b864ec71b1388a462f0206df387ee))
+
+### Other
+
+* Merge pull request #271 from mraniki/dev ([`d853793`](https://github.com/mraniki/dxsp/commit/d85379300e631021488574ed54f7b49bbbe3d594))
+
 ## v2.6.14 (2023-06-23)
 
 ### Fix
