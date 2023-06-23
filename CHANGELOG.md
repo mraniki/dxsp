@@ -2,6 +2,24 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.14 (2023-06-23)
+
+### Fix
+
+* 📝 doc ([`2f74f27`](https://github.com/mraniki/dxsp/commit/2f74f27fa0fd52aea01636c158798009acd644d3))
+* :memo: readthedocs ([`e02f799`](https://github.com/mraniki/dxsp/commit/e02f799cfef268b87ef8f5855f54932d4f3d6d29))
+* :memo: docs ([`0773782`](https://github.com/mraniki/dxsp/commit/07737820d2d6792dcd027f87779393c8a11704ba))
+* :arrow_up: dep update ([`d6ac46d`](https://github.com/mraniki/dxsp/commit/d6ac46d6601adb6883fbaf52f0237fd149e4d92f))
+* :arrow_up:dep update ([`a8efde0`](https://github.com/mraniki/dxsp/commit/a8efde0742f0ef27364541807ddcf3e584ec4846))
+* Update pyproject.toml ([`25c69bf`](https://github.com/mraniki/dxsp/commit/25c69bf037c423038cc579043cad419efa17257b))
+
+### Other
+
+* Merge pull request #270 from mraniki/dev ([`f268f6a`](https://github.com/mraniki/dxsp/commit/f268f6aaf481a9b9806187a40c921b3e47208f0e))
+* Merge branch 'main' into dev ([`bf5b03d`](https://github.com/mraniki/dxsp/commit/bf5b03dacbfb9d139b3699f82e68fb427767a846))
+* Merge pull request #269 from mraniki/dev ([`44fc422`](https://github.com/mraniki/dxsp/commit/44fc4223dd1be3ef720f1ebc83f427bce221498e))
+* Merge pull request #268 from mraniki/dev ([`fb86775`](https://github.com/mraniki/dxsp/commit/fb86775a861ec247b8459fbdbffe7c0d72903fee))
+
 ## v2.6.13 (2023-06-20)
 
 ### Fix
