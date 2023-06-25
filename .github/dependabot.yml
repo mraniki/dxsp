@@ -8,14 +8,6 @@ updates:
     commit-message:
       prefix: "⬆️ Dep"
 
-  # Maintain dependencies for poetry
-  - package-ecosystem: "poetry"
-    directory: "/"
-    schedule:
-      interval: "daily"
-    commit-message:
-      prefix: "⬆️ Dep"
-
   # Maintain dependencies for pip
   - package-ecosystem: "pip"
     directory: "/.requirements/"
@@ -24,10 +16,4 @@ updates:
     commit-message:
       prefix: "⬆️ Dep"
 
-  # Maintain dependencies for pip
-  - package-ecosystem: "docker"
-    directory: "/.registry/"
-    schedule:
-      interval: "weekly"
-    commit-message:
-      prefix: "⬆️ Dep"
+
