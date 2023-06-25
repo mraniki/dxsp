@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.16 (2023-06-25)
+
+### Fix
+
+* Update dependabot.yml ([`68dfbb7`](https://github.com/mraniki/dxsp/commit/68dfbb74353fec18e176860658013cec084b0cae))
+* Update dependabot.yml ([`c9624d1`](https://github.com/mraniki/dxsp/commit/c9624d1b92906370e677f5444ee3e6c8f90dd10a))
+* Update 👷Flow.yml ([`9f0858f`](https://github.com/mraniki/dxsp/commit/9f0858f4d05e9aec8c5d843f0e754b9f37edd52d))
+
 ## v2.6.15 (2023-06-23)
 
 ### Fix
