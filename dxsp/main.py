@@ -47,6 +47,7 @@ class DexSwap:
                 if action == 'BUY'
                 else (instrument, settings.trading_asset))
             order = await self.get_swap(sell_token, buy_token, quantity)
+            self.logger.debug("order %s", order)
             if order:
                     return order
         except Exception as error:
