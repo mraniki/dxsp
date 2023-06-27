@@ -2,6 +2,19 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.18 (2023-06-27)
+
+### Fix
+
+* 🚨 confirmation linter ([`650aacc`](https://github.com/mraniki/dxsp/commit/650aacc0cea3d10dca4e11e2e69790facbd7568b))
+* 🎨 integrated the trade confirmation in the module ([`a8dc49e`](https://github.com/mraniki/dxsp/commit/a8dc49e9dcf67e09b28ee6550754cf185deb356f))
+
+### Other
+
+* Merge pull request #275 from mraniki/dev ([`981470d`](https://github.com/mraniki/dxsp/commit/981470d4a8abbf318d8fb2fe948f5ff381466561))
+* Merge pull request #274 from mraniki/dev ([`8cf5e70`](https://github.com/mraniki/dxsp/commit/8cf5e7044db5629f232244e5c7efad2b712b236a))
+* 🔊 add logs ([`b514aba`](https://github.com/mraniki/dxsp/commit/b514abaefd541fa24ad82f5ef82e986e4fb793d9))
+
 ## v2.6.17 (2023-06-27)
 
 ### Fix
