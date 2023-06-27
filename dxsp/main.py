@@ -255,7 +255,7 @@ class DexSwap:
                     f"➕ Size: {round(receipt['value'], 4)}\n"
                     f"⚫️ Entry: {round(receipt['value'], 4)}\n"
                     f"ℹ️ {receipt['blockHash']}\n"
-                    f"⛽ {receipt["gas"]}\n"
+                    f"⛽ {receipt['gas']}\n"
                     f"🗓️ {block['timestamp']}"
                 ),
             }
