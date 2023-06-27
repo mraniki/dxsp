@@ -401,8 +401,8 @@ class DexSwap:
             if trading_asset_balance:
                 account_balance += f"💵{trading_asset_balance}"
             return round(account_balance, 5)
-
-
+        except Exception:
+            return 0
 
     async def get_trading_asset_balance(self):
         try:
