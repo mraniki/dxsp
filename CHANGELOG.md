@@ -2,6 +2,19 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.17 (2023-06-27)
+
+### Fix
+
+* :recycle: Refactor DexSwap class to return full order object ([`bbfe45b`](https://github.com/mraniki/dxsp/commit/bbfe45b26bf18c8590f9ac749c325723e213ef8b))
+
+### Other
+
+* Merge pull request #273 from mraniki/dev ([`4c12a74`](https://github.com/mraniki/dxsp/commit/4c12a744de3b8f623b55dc0f8759516c75a2ec35))
+* Merge pull request #272 from mraniki/dev ([`0dee3be`](https://github.com/mraniki/dxsp/commit/0dee3be978cecddaf94099b2de33bd5cd4c2681d))
+* Update daily dependency updates for poetry ([`fe91fa2`](https://github.com/mraniki/dxsp/commit/fe91fa21dd4fc7633dadeca23ebe4bbe3b07968b))
+* Update daily dependency updates for poetry ([`cf2578c`](https://github.com/mraniki/dxsp/commit/cf2578c93e568bbb69779eedbb98c0440081df7d))
+
 ## v2.6.16 (2023-06-25)
 
 ### Fix
