@@ -49,7 +49,11 @@ class DexSwap:
             order = await self.get_swap(sell_token, buy_token, quantity)
             self.logger.debug("order %s", order)
             if order:
-                    return order
+                    trade_confirmation = (
+                        f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n")
+                    trade_confirmation += order
+                    return trade_confirmation
+
         except Exception as error:
             return error
 
@@ -251,6 +255,7 @@ class DexSwap:
                     f"➕ Size: {round(receipt['value'], 4)}\n"
                     f"⚫️ Entry: {round(receipt['value'], 4)}\n"
                     f"ℹ️ {receipt['blockHash']}\n"
+                    f"⛽ {receipt["gas"]}\n"
                     f"🗓️ {block['timestamp']}"
                 ),
             }
