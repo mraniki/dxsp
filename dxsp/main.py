@@ -48,7 +48,7 @@ class DexSwap:
                 else (instrument, settings.trading_asset))
             order = await self.get_swap(sell_token, buy_token, quantity)
             if order:
-                    return order['confirmation']
+                    return order
         except Exception as error:
             return error
 
