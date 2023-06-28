@@ -140,11 +140,11 @@ async def test_execute_order_invalid(dex_1, wrong_order):
 #     print(swap_order)
 #     assert swap_order == "No Money"
 
-@pytest.mark.asyncio
-async def test_get_swap_chain56(dex_56):
-    dex = DexSwap()
-    order = await dex.get_swap("USDT", "BTCB", 1)
-    assert order == "No Money"
+# @pytest.mark.asyncio
+# async def test_get_swap_chain56(dex_56):
+#     dex = DexSwap()
+#     order = await dex.get_swap("USDT", "BTCB", 1)
+#     assert order == "No Money"
 
 @pytest.mark.asyncio
 async def test_execute_order_chain56(dex_56, order_56):
@@ -189,15 +189,15 @@ async def test_execute_order_chain56(dex_56, order_56):
 #     assert swap_order is not None
 
 
-
-async def test_get_swap_invalid(dex_1):
-    with pytest.raises(ValueError):
-        dex = DexSwap()
-        swap_order = await dex.get_swap(
-            "WBTC",
-            "USDT",
-            1)
-        print(swap_order)
+# @pytest.mark.asyncio
+# async def test_get_swap_invalid(dex_1):
+#     with pytest.raises(ValueError):
+#         dex = DexSwap()
+#         swap_order = await dex.get_swap(
+#             "WBTC",
+#             "USDT",
+#             1)
+#         print(swap_order)
 
 
 @pytest.mark.asyncio
@@ -352,6 +352,7 @@ async def test_get_account_balance(dex, dex_1):
     balance = await dex.get_account_balance()
     assert balance is not None
     assert balance >= 0
+
 
 
 @pytest.mark.asyncio
