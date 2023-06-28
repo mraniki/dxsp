@@ -43,9 +43,9 @@ class DexSwap:
             instrument = order_params.get('instrument')
             quantity = order_params.get('quantity', 1)
             sell_token, buy_token = (
-                (settings.trading_asset, instrument)
+                (settings.trading_asset_address, instrument)
                 if action == 'BUY'
-                else (instrument, settings.trading_asset))
+                else (instrument, settings.trading_asset_address))
             order = await self.get_swap(sell_token, buy_token, quantity)
             self.logger.debug("order %s", order)
             if order:
@@ -61,15 +61,18 @@ class DexSwap:
         """Main swap function"""
         self.logger.debug("get_swap")
         try:
-            sell_token_address = await self.search_contract(sell_token)
-            sell_token_balance = await self.get_token_balance(sell_token)
-            if not sell_token_address or sell_token_balance in (0, None):
+            if not sell_token.startwith("0x"):
+                sell_token_address = await self.search_contract_address(sell_token)
+            if not sell_token_address:
+                raise ValueError('No a valid token')
+            sell_token_balance = await self.get_token_balance(sell_token_address)
+            if not sell_token_balance in (0, None):
                 raise ValueError('No Money')
-                
-            buy_token_address = await self.search_contract(buy_token)
+            if not buy_token_address.startwith("0x"):   
+                buy_token_address = await self.search_contract(buy_token)
             if not buy_token_address:
                 raise ValueError('contract  not found')
-            sell_amount = await self.calculate_sell_amount(sell_token, quantity)
+            sell_amount = await self.calculate_sell_amount(sell_token_address, quantity)
             sell_token_amount_wei = self.w3.to_wei(
                 sell_amount * 10 ** (await self.get_token_decimals(sell_token)), "ether")
 
@@ -97,10 +100,10 @@ class DexSwap:
             raise error
 
 
-    async def calculate_sell_amount(self, sell_token, quantity):
+    async def calculate_sell_amount(self, sell_token_address, quantity):
         """Calculates the sell amount based on the sell token balance and trading risk amount."""
         sell_balance = await self.get_token_balance(sell_token)
-        sell_contract = await self.get_token_contract(sell_token)
+        sell_contract = await self.get_token_contract(sell_token_address)
         sell_decimals = await sell_contract.functions.decimals().call()
         risk_percentage = settings.trading_risk_amount
         return (sell_balance / (risk_percentage**sell_decimals)) * (
@@ -113,10 +116,10 @@ class DexSwap:
         gets a quote for a specified token
         """
         try:
-            buy_address = await self.search_contract(settings.trading_asset)
+            buy_address = settings.trading_asset_address
             if buy_address is None:
                 return "contract not found"
-            sell_address = await self.search_contract(sell_token)
+            sell_address = await self.search_contract_address(sell_token)
             if sell_address is None:
                 return "contract not found"
 
@@ -275,9 +278,9 @@ class DexSwap:
         return round(self.w3.from_wei(self.w3.eth.generate_gas_price(), 'gwei'), 2)
 
 ### ------✍️ CONTRACT ---------
-    async def search_contract(self, token):
+    async def search_contract_address(self, token):
         """search a contract function"""
-        self.logger.debug("search_contract")
+        self.logger.debug("search_contract_address")
 
         try:
             contract_lists = [
@@ -287,7 +290,7 @@ class DexSwap:
             ]
 
             for contract_list in contract_lists:
-                token_contract = await self.get_contract_address(
+                token_contract = await self.get_token_address(
                     contract_list,
                     token
                 )
@@ -301,8 +304,7 @@ class DexSwap:
                 self.logger.info("%s token: contract found %s",
                                  token, token_contract)
                 return self.w3.to_checksum_address(token_contract)
-
-            return None
+            raise ValueError(f"contract not found for {token}")
         except Exception:
             return None
 
@@ -344,7 +346,7 @@ class DexSwap:
             self.logger.error(" search_cg_contract: %s", e)
             return
 
-    async def get_contract_address(self, token_list_url, symbol):
+    async def get_token_address(self, token_list_url, symbol):
         """Given a token symbol and json tokenlist, get token address"""
         try:
             token_list = await self.get(token_list_url)
@@ -354,14 +356,14 @@ class DexSwap:
                    keyval['chainId'] == self.chain_id):
                     return keyval['address']
         except Exception as e:
-            self.logger.debug("get_contract_address %s", e)
+            self.logger.debug("get_token_address %s", e)
             return
 
     async def get_token_contract(self, token):
         """Given a token symbol, returns a contract object. """
         self.logger.debug("get_token_contract")
         try:
-            token_address = await self.search_contract(token)
+            token_address = await self.search_contract_address(token)
             if token_address is None:
                 return None
             token_abi = await self.get_abi(token_address)
@@ -375,11 +377,11 @@ class DexSwap:
             raise e
 
 # 🔒 USER RELATED
-    async def get_token_balance(self, token_symbol: str) -> Optional[int]:
+    async def get_token_balance(self, token_address: str) -> Optional[int]:
         """Get token balance"""
         try:
             self.logger.debug("get_token_balance")
-            contract = await self.get_token_contract(token_symbol)
+            contract = await self.get_token_contract(token_address)
             if not contract:
                 return 0
             return contract.functions.balanceOf(self.wallet_address).call()
@@ -406,7 +408,7 @@ class DexSwap:
     async def get_trading_asset_balance(self):
         try:
             trading_asset_balance = await self.get_token_balance(
-                settings.trading_asset)
+                settings.trading_asset_address)
             return trading_asset_balance if trading_asset_balance else 0
         except Exception:
             return 0
