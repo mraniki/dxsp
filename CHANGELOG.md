@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.20 (2023-06-28)
+
+### Fix
+
+* ♻️ refactor ([`aa41308`](https://github.com/mraniki/dxsp/commit/aa413082d1d6657b4f558652afb6582849812023))
+
+### Other
+
+* Merge pull request #278 from mraniki/dev ([`d06c9e3`](https://github.com/mraniki/dxsp/commit/d06c9e34f238402567c50063ca2bfa5af5f8661a))
+
 ## v2.6.19 (2023-06-28)
 
 ### Fix
