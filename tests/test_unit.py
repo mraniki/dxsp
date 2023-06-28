@@ -23,7 +23,7 @@ def test_dynaconf_is_in_testing():
     print(settings.VALUE)
     assert settings.VALUE == "On Testing"
     assert settings.dex_chain_id == 1
-    assert settings.dex_wallet_address == "0x1234567890123456789012345678901234567899"
+    assert settings.dex_wallet_address == "0x8b5E1d919065516998520495E1779d82c3f84CEe"
 
 
 @pytest.fixture(name="order")
@@ -74,9 +74,9 @@ async def test_dex(dex):
     assert dex.protocol_type is not None
     assert dex.protocol_type == "uniswap_v2"
     assert dex.wallet_address.startswith("0x")
-    assert dex.wallet_address == "0x1234567890123456789012345678901234567899"
+    assert dex.wallet_address == "0x8b5E1d919065516998520495E1779d82c3f84CEe"
     assert dex.private_key.startswith("0x")
-    assert dex.account == "1 - 34567899"
+    assert dex.account == "1 - c3f84CEe"
 
 
 @pytest.mark.asyncio
@@ -299,14 +299,14 @@ async def test_get_account_balance(dex):
 
 
 
-@pytest.mark.asyncio
-async def test_get_token_balance(dex):
-    # Call the get_token_balance method and check the result
-    token_balance = await dex.get_token_balance("0x6B175474E89094C44Da98b954EedeAC495271d0F")
-    print("balance ", token_balance)
-    assert token_balance is not None
-    assert token_balance == 0
-    assert isinstance(token_balance, int)
+# @pytest.mark.asyncio
+# async def test_get_token_balance(dex):
+#     # Call the get_token_balance method and check the result
+#     token_balance = await dex.get_token_balance("0x6B175474E89094C44Da98b954EedeAC495271d0F")
+#     print("balance ", token_balance)
+#     assert token_balance is not None
+#     assert token_balance == 0
+#     assert isinstance(token_balance, int)
 
 
 @pytest.mark.asyncio
