@@ -50,13 +50,12 @@ async def router(dex):
     """router"""
     return await dex.router()
 
-
 @pytest.fixture
 async def quoter(dex):
     """quoter"""
     return await dex.quoter()
 
-@pytest.fixture
+@pytest.fixture(name="test_contract")
 def mock_contract(dex):
     contract = MagicMock()
     contract.get_token_decimals.return_value = 18
