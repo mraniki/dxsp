@@ -66,8 +66,6 @@ class DexSwap:
             if not sell_token_address:
                 raise ValueError('No a valid token')
             sell_token_balance = await self.get_token_balance(sell_token_address)
-            if not sell_token_balance in (0, None):
-                raise ValueError('No Money')
             buy_token_address = buy_token
             if not buy_token_address.startswith("0x"):   
                 buy_token_address = await self.search_contract_address(buy_token)
@@ -281,35 +279,31 @@ class DexSwap:
 ### ------✍️ CONTRACT ---------
     async def search_contract_address(self, token):
         """search a contract function"""
-        self.logger.debug("search_contract_address")
 
-        try:
-            contract_lists = [
-                settings.token_personal_list,
-                settings.token_testnet_list,
-                settings.token_mainnet_list,
-            ]
+        contract_lists = [
+            settings.token_personal_list,
+            settings.token_testnet_list,
+            settings.token_mainnet_list,
+        ]
 
-            for contract_list in contract_lists:
-                token_contract = await self.get_token_address(
-                    contract_list,
-                    token
-                )
-                if token_contract is not None:
-                    self.logger.info("%s token: contract found %s",
-                                     token, token_contract)
-                    return self.w3.to_checksum_address(token_contract)
-
-            token_contract = await self.search_cg_contract(token)
-            if token_contract is None:
-                self.logger.info("contract not found")
-                raise ValueError("contract not found")
-            self.logger.info("%s token: contract found %s",
+        for contract_list in contract_lists:
+            token_contract = await self.get_token_address(
+                contract_list,
+                token
+            )
+            if token_contract is not None:
+                self.logger.info("%s  address found %s",
                                  token, token_contract)
-            return self.w3.to_checksum_address(token_contract)
-                
-        except ValueError as error:
-            raise error
+                return self.w3.to_checksum_address(token_contract)
+
+        token_contract = await self.search_cg_contract(token)
+        if token_contract is None:
+            self.logger.debug("address not found")
+            raise ValueError("address not found")
+        self.logger.info("%s token: address found %s",
+                             token, token_contract)
+        return self.w3.to_checksum_address(token_contract)
+
 
     async def search_cg_platform(self):
         """search coingecko platform"""
