@@ -77,12 +77,12 @@ class DexSwap:
                 sell_amount * 10 ** (await self.get_token_decimals(sell_token)), "ether")
 
             if await self.get_approve(sell_token) is None:
-                return "approval failed"
+                raise ValueError("approval failed")
 
             swap_order = await self.get_swap_order(
                 sell_token_address, buy_token_address, sell_token_amount_wei)
             if not swap_order:
-                return "swap order not executed"
+                raise ValueError("swap order not executed")
 
             if self.protocol_type == "0x":
                 await self.get_sign(swap_order)
@@ -92,12 +92,12 @@ class DexSwap:
 
             if self.w3.wait_for_transaction_receipt(
                 order_hash, timeout=120, poll_latency=0.1)["status"] != 1:
-                return "receipt failed"
+                raise ValueError("receipt failed")
 
             return await self.get_confirmation(order_hash)
 
-        except Exception as error:
-            raise error
+        except ValueError as error:
+            return error
 
 
     async def calculate_sell_amount(self, sell_token_address, quantity):
@@ -300,13 +300,15 @@ class DexSwap:
                     return self.w3.to_checksum_address(token_contract)
 
             token_contract = await self.search_cg_contract(token)
-            if token_contract is not None:
-                self.logger.info("%s token: contract found %s",
+            if token_contract is None:
+                self.logger.info("contract not found")
+                raise ValueError("contract not found")
+            self.logger.info("%s token: contract found %s",
                                  token, token_contract)
-                return self.w3.to_checksum_address(token_contract)
-            raise ValueError(f"contract not found for {token}")
-        except Exception:
-            return None
+            return self.w3.to_checksum_address(token_contract)
+                
+        except ValueError as error:
+            raise error
 
     async def search_cg_platform(self):
         """search coingecko platform"""
@@ -384,9 +386,11 @@ class DexSwap:
             contract = await self.get_token_contract(token_address)
             if not contract:
                 return 0
-            return contract.functions.balanceOf(self.wallet_address).call()
-        except Exception:
-            return 0
+            balance = contract.functions.balanceOf(self.wallet_address).call()
+            if balance is None:
+                raise ValueError("No Balance")
+        except ValueError as error:
+             raise error
 
     async def get_token_decimals(self, token_symbol: str) -> Optional[int]:
         """Get token decimals"""

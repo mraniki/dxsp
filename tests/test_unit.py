@@ -275,14 +275,16 @@ async def test_get_name(dex, dex_1):
 
 @pytest.mark.asyncio
 async def test_search_address(dex, dex_1):
-    # address = await dex.search_contract("WBTC")
-    # print(address)
-    # assert address == "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
-
-    address = await dex.search_contract("USDT")
+    address = await dex.search_contract_address("USDT")
     assert address is not None
     assert address == "0xdAC17F958D2ee523a2206206994597C13D831ec7"
     print(address)
+
+
+@pytest.mark.asyncio
+async def test_failed_search_address(dex, dex_1):
+    with pytest.raises(ValueError, match='contract not found'):
+        address = await dex.search_contract_address("NOTATHING")
 
 
 @pytest.mark.asyncio
@@ -366,6 +368,11 @@ async def test_get_token_balance(dex, dex_1):
     assert token_balance == 0
     # assert isinstance(token_balance, int)
 
+
+@pytest.mark.asyncio
+async def test_failed_get_token_balance(dex, dex_1):
+    with pytest.raises(ValueError, match='No Balance'):
+        token_balance = await dex.get_token_balance("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
 
 @pytest.mark.asyncio
 async def test_get_quote_uniswap(dex, dex_1):
