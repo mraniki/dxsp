@@ -66,7 +66,7 @@ class DexSwap:
             if not sell_token_address:
                 raise ValueError('No a valid token')
             sell_token_balance = await self.get_token_balance(sell_token_address)
-            if not sell_token_balance in (0, None):
+            if sell_token_balance not in (0, None):
                 raise ValueError('No Money')
             buy_token_address = buy_token
             if not buy_token_address.startswith("0x"):   
