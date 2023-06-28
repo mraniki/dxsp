@@ -29,6 +29,7 @@ dex_0x_api_key = ""
 VALUE = "DEX chain_42161"
 loglevel = "DEBUG"
 dex_chain_id = 42161
+
 dex_rpc = "https://rpc.ankr.com/arbitrum"
 dex_block_explorer_url = "https://api-testnet.bscscan.com/api?"
 dex_router_contract_addr = "0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f"

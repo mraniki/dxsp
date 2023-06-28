@@ -64,10 +64,13 @@ class DexSwap:
             sell_token_address = await self.search_contract(sell_token)
             sell_token_balance = await self.get_token_balance(sell_token)
             if not sell_token_address or sell_token_balance in (0, None):
-                return "No Money"
+                self.logger.debug(sell_token_address, sell_token_balance)
+                raise ValueError('No Money')
+                
             buy_token_address = await self.search_contract(buy_token)
             if not buy_token_address:
-                return "contract not found"
+                self.logger.debug(buy_token_address)
+                raise ValueError('contract  not found')
             sell_amount = await self.calculate_sell_amount(sell_token, quantity)
             sell_token_amount_wei = self.w3.to_wei(
                 sell_amount * 10 ** (await self.get_token_decimals(sell_token)), "ether")
@@ -78,7 +81,7 @@ class DexSwap:
             swap_order = await self.get_swap_order(
                 sell_token_address, buy_token_address, sell_token_amount_wei)
             if not swap_order:
-                return "swawp order not executed"
+                return "swap order not executed"
 
             if self.protocol_type == "0x":
                 await self.get_sign(swap_order)
@@ -376,13 +379,14 @@ class DexSwap:
 # 🔒 USER RELATED
     async def get_token_balance(self, token_symbol: str) -> Optional[int]:
         """Get token balance"""
-        # contract_address = await self.search_contract(token_symbol)
-        # if not contract_address:
-        #     return None
-        contract = await self.get_token_contract(token_symbol)
-        if not contract:
+        try:
+            self.logger.debug("get_token_balance")
+            contract = await self.get_token_contract(token_symbol)
+            if not contract:
+                return 0
+            return contract.functions.balanceOf(self.wallet_address).call()
+        except Exception:
             return 0
-        return contract.functions.balanceOf(self.wallet_address).call()
 
     async def get_token_decimals(self, token_symbol: str) -> Optional[int]:
         """Get token decimals"""
@@ -398,7 +402,6 @@ class DexSwap:
             if trading_asset_balance:
                 account_balance += f"💵{trading_asset_balance}"
             return round(account_balance, 5)
-
         except Exception:
             return 0
 
