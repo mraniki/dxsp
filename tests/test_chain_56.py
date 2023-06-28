@@ -12,7 +12,7 @@ from dxsp.config import settings
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="tests/test_unit.py")
+    settings.configure(FORCE_ENV_FOR_DYNACONF="chain_56")
 
 @pytest.fixture(name="dex")
 def DexSwap_fixture():

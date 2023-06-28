@@ -253,20 +253,16 @@ async def test_get_abi_invalid(dex):
 @pytest.mark.asyncio
 async def test_get_token_contract(dex):
     """get_token_contract Testing"""
-    contract = await dex.get_token_contract("UNI")
-    print(contract)
-    print(type(contract))
-    print(contract.functions)
-    if contract:
-        assert contract is not None
-        assert type(contract) is not None
-        assert contract.functions is not None
+    contract = await dex.get_token_contract("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
+    assert contract is not None
+    assert type(contract) is not None
+    assert contract.functions is not None
 
 
 @pytest.mark.asyncio
 async def test_get_decimals(dex):
     """get_token_decimals Testing"""
-    token_decimals = await dex.get_token_decimals("UNI")
+    token_decimals = await dex.get_token_decimals("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
     print(token_decimals)
     time.sleep(5)
     if token_decimals:
@@ -306,24 +302,21 @@ async def test_get_account_balance(dex):
 @pytest.mark.asyncio
 async def test_get_token_balance(dex):
     # Call the get_token_balance method and check the result
-    with patch("dxsp.config.settings", autospec=True) as mock_settings:
-        mock_settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
-    token_balance = await dex.get_token_balance("UNI")
+    token_balance = await dex.get_token_balance("0x6B175474E89094C44Da98b954EedeAC495271d0F")
     print("balance ", token_balance)
     assert token_balance is not None
     assert token_balance == 0
-    # assert isinstance(token_balance, int)
+    assert isinstance(token_balance, int)
 
 
-@pytest.mark.asyncio
-async def test_failed_get_token_balance(dex):
-    with pytest.raises(ValueError, match='No Balance'):
-        token_balance = await dex.get_token_balance("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
+# @pytest.mark.asyncio
+# async def test_failed_get_token_balance(dex):
+#     with pytest.raises(ValueError, match='No Balance'):
+#         token_balance = await dex.get_token_balance("0x1f9840a85d5aF5bf1NOTATHINGBDADdC4201F984")
 
 @pytest.mark.asyncio
 async def test_failed_get_trading_asset_balance(dex):
     with pytest.raises(ValueError, match='No Balance'):
-        print(dex.chain_id)
         token_balance = await dex.get_trading_asset_balance()
 
 

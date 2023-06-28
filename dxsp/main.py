@@ -72,7 +72,7 @@ class DexSwap:
             if not buy_token_address.startswith("0x"):   
                 buy_token_address = await self.search_contract_address(buy_token)
             if not buy_token_address:
-                raise ValueError('contract  not found')
+                raise ValueError('Not valid token')
             sell_amount = await self.calculate_sell_amount(sell_token_address, quantity)
             sell_token_amount_wei = self.w3.to_wei(
                 sell_amount * 10 ** (await self.get_token_decimals(sell_token_address)), "ether")
@@ -351,47 +351,32 @@ class DexSwap:
 
     async def get_token_address(self, token_list_url, symbol):
         """Given a token symbol and json tokenlist, get token address"""
-        try:
-            token_list = await self.get(token_list_url)
-            token_search = token_list['tokens']
-            for keyval in token_search:
-                if (keyval['symbol'] == symbol and
-                   keyval['chainId'] == self.chain_id):
-                    return keyval['address']
-        except Exception as e:
-            self.logger.debug("get_token_address %s", e)
-            return
+        token_list = await self.get(token_list_url)
+        token_search = token_list['tokens']
+        for keyval in token_search:
+            if (keyval['symbol'] == symbol and
+                keyval['chainId'] == self.chain_id):
+                return keyval['address']
 
     async def get_token_contract(self, token_address):
-        """Given a token symbol, returns a contract object. """
-        self.logger.debug("get_token_contract")
-        try:
-            # token_address = await self.search_contract_address(token)
-            # if token_address is None:
-            #     return None
-            token_abi = await self.get_abi(token_address)
-            if token_abi is None:
-                self.logger.debug("abi alternative")
-                token_abi = await self.get(settings.dex_erc20_abi_url)
-            return self.w3.eth.contract(
-                address=token_address,
-                abi=token_abi)
-        except Exception as e:
-            raise e
+        """Given a token address, returns a contract object. """
+        token_abi = await self.get_abi(token_address)
+        if token_abi is None:
+            token_abi = await self.get(settings.dex_erc20_abi_url)
+        return self.w3.eth.contract(
+            address=token_address,
+            abi=token_abi)
 
 # 🔒 USER RELATED
     async def get_token_balance(self, token_address: str) -> Optional[int]:
         """Get token balance"""
-        try:
-            self.logger.debug("get_token_balance")
-            contract = await self.get_token_contract(token_address)
-            if not contract:
-                return 0
-            balance = contract.functions.balanceOf(self.wallet_address).call()
-            if balance is None:
-                raise ValueError("No Balance")
-        except ValueError as error:
-             raise error
+        contract = await self.get_token_contract(token_address)
+        if contract is None or contract.functions is None:
+            raise ValueError("No Balance")
+        balance = contract.functions.balanceOf(self.wallet_address).call()
+        if balance is None or balance == 0:
+            raise ValueError("No Balance")
+        return balance
 
     async def get_token_decimals(self, token_address: str) -> Optional[int]:
         """Get token decimals"""
@@ -411,12 +396,9 @@ class DexSwap:
             return 0
 
     async def get_trading_asset_balance(self):
-        try:
-            trading_asset_balance = await self.get_token_balance(
-                settings.trading_asset_address)
-            return trading_asset_balance if trading_asset_balance else 0
-        except Exception:
-            return 0
+        trading_asset_balance = await self.get_token_balance(
+            settings.trading_asset_address)
+        return trading_asset_balance if trading_asset_balance else 0
 
     async def get_account_position(self):
         return 0

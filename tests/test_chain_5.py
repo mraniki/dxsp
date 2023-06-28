@@ -17,7 +17,7 @@ def set_test_settings():
 def DexSwap_fixture():
     return DexSwap()
 
-def test_dynaconf_is_in_testing_env_DEX5(testnet):
+def test_dynaconf_is_in_testing_env_DEX5():
     print(settings.VALUE)
     assert settings.VALUE == "On Testnet"
     assert settings.dex_chain_id == 5
