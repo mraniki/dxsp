@@ -63,14 +63,10 @@ class DexSwap:
             sell_token_address = sell_token
             if not sell_token.startswith("0x"):
                 sell_token_address = await self.search_contract_address(sell_token)
-            #if not sell_token_address:
-             #   raise ValueError('No a valid token')
             sell_token_balance = await self.get_token_balance(sell_token_address)
             buy_token_address = buy_token
             if not buy_token_address.startswith("0x"):   
                 buy_token_address = await self.search_contract_address(buy_token)
-            #if not buy_token_address:
-             #   raise ValueError('Not valid token')
             sell_amount = await self.calculate_sell_amount(sell_token_address, quantity)
             sell_token_amount_wei = self.w3.to_wei(
                 sell_amount * 10 ** (await self.get_token_decimals(sell_token_address)), "ether")
@@ -179,12 +175,9 @@ class DexSwap:
             raise error
 
     async def get_approve(self, sell_token_address):
-        try:
-            if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
-                await self.get_approve_uniswap(sell_token_address)
-        except Exception as error:
-            self.logger.debug("error %s", error)
-            return None
+        if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
+            return await self.get_approve_uniswap(sell_token_address)
+            
 
     async def get_sign(self, transaction):
         try:
@@ -295,7 +288,7 @@ class DexSwap:
         token_contract = await self.search_cg_contract(token)
         if token_contract is None:
             self.logger.debug("address not found")
-            raise ValueError("address not found")
+            raise ValueError("Invalid Token")
         self.logger.info("%s cg: address found %s",
                              token, token_contract)
         return self.w3.to_checksum_address(token_contract)
@@ -442,8 +435,8 @@ class DexSwap:
                 return self.w3.eth.wait_for_transaction_receipt(
                     approval_tx_hash, timeout=120, poll_latency=0.1
                 )
-        except Exception as e:
-            raise e
+        except Exception as error:
+            raise ValueError(f"Approval failed {error}") 
 
 
     async def get_swap_uniswap(self, asset_out_address, asset_in_address, amount):
@@ -466,7 +459,7 @@ class DexSwap:
             elif self.protocol_type == "uniswap_v3":
                 return None
         except Exception as e:
-            raise e
+            raise ValueError(f"Approval failed {error}") 
 
 # 0️⃣x
     async def get_0x_quote(self, buy_address, sell_address, amount=1):

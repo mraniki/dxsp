@@ -155,11 +155,11 @@ async def test_get_quote(dex):
     if quote:
         assert quote is not None
         assert quote.startswith("🦄")
-
+test_failed_search_address
 
 @pytest.mark.asyncio
 async def test_get_quote_invalid(dex):
-    with pytest.raises(ValueError, match='contract not found'):
+    with pytest.raises(ValueError, match='Invalid Token'):
         quote = await dex.get_quote("THISISNOTATOKEN")
 
 
@@ -219,33 +219,33 @@ async def test_get_name(dex):
     assert len(name) == 8
 
 
+
 @pytest.mark.asyncio
-async def test_search_address(dex):
+async def test_search_contract_address(dex):
     address = await dex.search_contract_address("USDT")
     assert address is not None
     assert address == "0xdAC17F958D2ee523a2206206994597C13D831ec7"
     print(address)
 
 
+
 @pytest.mark.asyncio
-async def test_failed_search_address(dex):
-    with pytest.raises(ValueError, match='contract not found'):
+async def test_invalid_search_contract_address(dex):
+    with pytest.raises(ValueError, match='Invalid Token'):
         address = await dex.search_contract_address("NOTATHING")
+
 
 
 @pytest.mark.asyncio
 async def test_get_abi(dex, mocker):
-    # Mock the _get method 
     mock_resp = {"status": "1", "result": "0x0123456789abcdef"}
     mocker.patch.object(dex, "get", return_value=mock_resp)
-
     abi = await dex.get_abi("0x1234567890123456789012345678901234567890")
-
     assert abi == "0x0123456789abcdef"
 
 
 @pytest.mark.asyncio
-async def test_get_abi_invalid(dex):
+async def test_invalid_get_abi(dex):
     abi = await dex.get_abi("0x1234567890123456789012345678901234567890")
     assert abi is None
 
@@ -254,6 +254,7 @@ async def test_get_abi_invalid(dex):
 async def test_get_token_contract(dex):
     """get_token_contract Testing"""
     contract = await dex.get_token_contract("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
+    print(type(contract))
     assert contract is not None
     assert type(contract) is not None
     assert contract.functions is not None
