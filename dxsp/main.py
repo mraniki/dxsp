@@ -63,14 +63,14 @@ class DexSwap:
             sell_token_address = sell_token
             if not sell_token.startswith("0x"):
                 sell_token_address = await self.search_contract_address(sell_token)
-            if not sell_token_address:
-                raise ValueError('No a valid token')
+            #if not sell_token_address:
+             #   raise ValueError('No a valid token')
             sell_token_balance = await self.get_token_balance(sell_token_address)
             buy_token_address = buy_token
             if not buy_token_address.startswith("0x"):   
                 buy_token_address = await self.search_contract_address(buy_token)
-            if not buy_token_address:
-                raise ValueError('Not valid token')
+            #if not buy_token_address:
+             #   raise ValueError('Not valid token')
             sell_amount = await self.calculate_sell_amount(sell_token_address, quantity)
             sell_token_amount_wei = self.w3.to_wei(
                 sell_amount * 10 ** (await self.get_token_decimals(sell_token_address)), "ether")
@@ -112,7 +112,7 @@ class DexSwap:
 
     async def get_quote(self, sell_token):
         """
-        gets a quote for a specified token
+        gets a quote for a token
         """
         try:
             buy_address = settings.trading_asset_address
@@ -290,15 +290,13 @@ class DexSwap:
                 token
             )
             if token_contract is not None:
-                self.logger.info("%s  address found %s",
-                                 token, token_contract)
                 return self.w3.to_checksum_address(token_contract)
 
         token_contract = await self.search_cg_contract(token)
         if token_contract is None:
             self.logger.debug("address not found")
             raise ValueError("address not found")
-        self.logger.info("%s token: address found %s",
+        self.logger.info("%s cg: address found %s",
                              token, token_contract)
         return self.w3.to_checksum_address(token_contract)
 
