@@ -162,10 +162,8 @@ class DexSwap:
             raise error
 
     async def get_name(self):
-        try:
-            return settings.dex_router_contract_addr[-8:]
-        except Exception as error:
-            raise error
+        return settings.dex_router_contract_addr[-8:]
+
 
     async def quoter(self):
         try:
