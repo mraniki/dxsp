@@ -2,6 +2,20 @@
 
 <!--next-version-placeholder-->
 
+## v2.6.19 (2023-06-28)
+
+### Fix
+
+* 🥅 catch error ([`b4243c1`](https://github.com/mraniki/dxsp/commit/b4243c12e4cf50d08a4dc62baa10d1185ceee8fd))
+* :memo: Update README.md file ([`0682fbd`](https://github.com/mraniki/dxsp/commit/0682fbd19ec878f82b4a311adb606e863a68fd8b))
+* :recycle: Refactor error messages in DexSwap class ([`1ef686f`](https://github.com/mraniki/dxsp/commit/1ef686f6c8d1a6282029a78d17fb6c583c4500e4))
+* 🐛 bug ([`81fe7d7`](https://github.com/mraniki/dxsp/commit/81fe7d704547e8975c45f815813de4b883ac794d))
+* 🧐 troubleshoot case ([`b6d33e6`](https://github.com/mraniki/dxsp/commit/b6d33e61cbdff9e6efb54086ec030a282b470671))
+
+### Other
+
+* Merge pull request #276 from mraniki/dev ([`81e899d`](https://github.com/mraniki/dxsp/commit/81e899ddea2782a2bbef1ebe01431ac7a85f4aec))
+
 ## v2.6.18 (2023-06-27)
 
 ### Fix
