@@ -116,11 +116,11 @@ class DexSwap:
         """
         try:
             buy_address = settings.trading_asset_address
-            if buy_address is None:
-                return "contract not found"
+            #if buy_address is None:
+             #   return "contract not found"
             sell_address = await self.search_contract_address(sell_token)
-            if sell_address is None:
-                return "contract not found"
+            #if sell_address is None:
+             #   return "contract not found"
 
             if self.protocol_type in {"uniswap_v2", "uniswap_v3"}:
                 return await self.get_quote_uniswap(
