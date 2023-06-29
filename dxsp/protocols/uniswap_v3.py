@@ -5,7 +5,6 @@ uniswap V3  🦄
 from dxsp.config import settings
 
 
-@classmethod
 async def get_quote_uniswap_v3(
     cls,
     asset_in_address,

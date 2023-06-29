@@ -20,8 +20,8 @@ async def get_quote_uniswap_v2(
         if isinstance(quote, list):
             quote = str(quote[0])
         return f"🦄 {quote} {settings.trading_asset}"   
-    except Exception as e:
-        return e
+    except Exception as error:
+        raise error
 
 
 async def get_approve_uniswap(cls, token_address):
@@ -62,5 +62,5 @@ async def get_swap_uniswap(cls, asset_out_address, asset_in_address, amount):
             cls.wallet_address,
             deadline,
         )
-    except Exception as e:
-        raise ValueError(f"Approval failed {error}") 
+    except Exception as error:
+        raise ValueError(f"Swap failed {error}") 
