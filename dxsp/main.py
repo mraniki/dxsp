@@ -105,16 +105,6 @@ class DexSwap:
             raise error
 
 
-    async def calculate_sell_amount(self, sell_token_address, quantity):
-        """Calculates the sell amount based on the sell token balance and trading risk amount."""
-        sell_balance = await self.get_token_balance(sell_token_address)
-        sell_contract = await self.get_token_contract(sell_token_address)
-        sell_decimals = await sell_contract.functions.decimals().call()
-        risk_percentage = settings.trading_risk_amount
-        return (sell_balance / (risk_percentage**sell_decimals)) * (
-            float(quantity) / 100
-        )
-
 
     async def get_quote(self, sell_token):
         """
@@ -123,7 +113,7 @@ class DexSwap:
         try:
             buy_address = settings.trading_asset_address
             sell_address = await self.search_contract_address(sell_token)
-            quote = await self.dex_swap.get_quote(sell_address)
+            quote = await self.dex_swap.get_quote(buy_address, sell_address)
             return f"🦄 {quote} {settings.trading_asset}"
 
         except Exception as error:
@@ -219,16 +209,24 @@ class DexSwap:
             self.logger.error("get_abi %s", error)
             return None
 
+
+    async def calculate_sell_amount(self, sell_token_address, quantity):
+        """Calculates the sell amount based on the sell token balance and trading risk amount."""
+        sell_balance = await self.get_token_balance(sell_token_address)
+        sell_contract = await self.get_token_contract(sell_token_address)
+        sell_decimals = await sell_contract.functions.decimals().call()
+        risk_percentage = settings.trading_risk_amount
+        return (sell_balance / (risk_percentage**sell_decimals)) * (
+            float(quantity) / 100
+            )
+
+
     async def get_swap_order(self, sell_token_address: str, buy_token_address: str, sell_token_amount_wei: int) -> Optional[str]:
         """Get swap order"""
         order_amount = int(sell_token_amount_wei * (settings.dex_trading_slippage / 100))
-        # if self.protocol_type =="uniswap_v2":
         order = await self.dex_swap.get_swap(sell_token_address, buy_token_address, order_amount)
-        # elif self.protocol_type == "0x":
-            # order = await get_zerox_quote(sell_token_address, buy_token_address, order_amount)
         return order if not order else await self.get_sign(order)
-        #else:
-        #    raise ValueError("Invalid protocol type")
+
 
     async def get_confirmation(self, order_hash):
         """Returns trade confirmation."""
