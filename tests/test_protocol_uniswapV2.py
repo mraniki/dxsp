@@ -8,7 +8,7 @@ import pytest
 import time
 from dxsp import DexSwap
 from dxsp.config import settings
-
+from dxsp.protocols import DexSwapUniswapV2
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():

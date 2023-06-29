@@ -20,8 +20,8 @@ class DexSwapUniswapV2(DexSwap):
             if isinstance(quote, list):
                 quote = str(quote[0])
             return f"🦄 {quote} {settings.trading_asset}"   
-        except Exception as e:
-            return e
+        except Exception as error:
+            raise ValueError(f"Quote failed {error}") 
 
 
     async def get_approve(self, token_address):
@@ -63,4 +63,4 @@ class DexSwapUniswapV2(DexSwap):
                 deadline,
             )
         except Exception as e:
-            raise ValueError(f"Approval failed {error}") 
+            raise ValueError(f"Swap failed {error}") 
