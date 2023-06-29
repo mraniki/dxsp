@@ -63,5 +63,5 @@ class DexSwapUniswapV2(DexSwap):
                 self.wallet_address,
                 deadline,
             )
-        except Exception as e:
+        except Exception as error:
             raise ValueError(f"Swap failed {error}") 
