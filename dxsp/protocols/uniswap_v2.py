@@ -24,7 +24,7 @@ async def get_uniswap_v2_quote(
         quote = router_instance.functions.getAmountsOut(
             amount,
             [asset_in_address, asset_out_address]).call()
-        self.logger.error("quote %s", quote)
+        cls.logger.error("quote %s", quote)
         if isinstance(quote, list):
             quote = str(quote[0])
         return f"🦄 {quote} {settings.trading_asset}"   
@@ -65,7 +65,7 @@ async def get_swap_uniswap(cls, asset_out_address, asset_in_address, amount):
             int(amount),
             int(min_amount),
             tuple(path),
-            self.wallet_address,
+            cls.wallet_address,
             deadline,
         )
     except Exception as e:
