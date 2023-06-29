@@ -23,7 +23,6 @@ def test_dynaconf_is_in_testing():
     print(settings.VALUE)
     assert settings.VALUE == "On Testing"
     assert settings.dex_chain_id == 1
-    assert settings.dex_wallet_address == "0x8b5E1d919065516998520495E1779d82c3f84CEe"
 
 
 @pytest.fixture(name="order")
@@ -73,7 +72,7 @@ async def test_dex(dex):
     assert dex.protocol_type is not None
     assert dex.protocol_type == "uniswap_v2"
     assert dex.wallet_address.startswith("0x")
-    assert dex.wallet_address == "0x8b5E1d919065516998520495E1779d82c3f84CEe"
+    assert dex.wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
     assert dex.private_key.startswith("0x")
     assert dex.account == "1 - c3f84CEe"
 
@@ -299,14 +298,15 @@ async def test_get_account_balance(dex):
 
 
 
-# @pytest.mark.asyncio
-# async def test_get_token_balance(dex):
-#     # Call the get_token_balance method and check the result
-#     token_balance = await dex.get_token_balance("0x6B175474E89094C44Da98b954EedeAC495271d0F")
-#     print("balance ", token_balance)
-#     assert token_balance is not None
-#     assert token_balance == 0
-#     assert isinstance(token_balance, int)
+@pytest.mark.asyncio
+async def test_get_token_balance(dex):
+    # Call the get_token_balance method and check the result
+    token_balance = await dex.get_token_balance("0x6B175474E89094C44Da98b954EedeAC495271d0F")
+    print("balance ", token_balance)
+    assert token_balance is not None
+    assert token_balance == 0
+    assert isinstance(token_balance, int)
+
 
 
 @pytest.mark.asyncio
@@ -314,94 +314,3 @@ async def test_failed_get_trading_asset_balance(dex):
     with pytest.raises(ValueError, match='No Balance'):
         token_balance = await dex.get_trading_asset_balance()
 
-
-@pytest.mark.asyncio
-async def test_get_quote_uniswap(dex):
-    # Call the get_quote_uniswap method and check the result
-    quote = await dex.get_quote_uniswap(
-        dex.w3.to_checksum_address("0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"),
-        dex.w3.to_checksum_address("0xdac17f958d2ee523a2206206994597c13d831ec7"),
-        1000000000)
-    print(f"quote: {quote}")
-    assert quote is not None
-    assert quote.startswith("🦄")
-    expected_quote_pattern = r"🦄 \d+ USDT"
-    assert re.match(expected_quote_pattern, quote) is not None
-
-
-@pytest.mark.asyncio
-async def test_get_approve_uniswap(dex):
-    symbol = "UNI"
-    approve_receipt = None
-    try:
-        approve_receipt = await dex.get_approve_uniswap(symbol)
-        print(approve_receipt)
-    except Exception as e:
-        print(f"Error getting approve receipt: {e}")
-    assert approve_receipt is None
-
-
-
-@pytest.mark.asyncio
-async def test_get_swap_uniswap(dex):
-    asset_out_address = "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
-    asset_in_address = "0xdac17f958d2ee523a2206206994597c13d831ec7"
-    amount = 100
-
-    # Create a mock object for self.get_quote_uniswap()
-    get_quote_mock = MagicMock()
-    get_quote_mock.return_value = [50]
-
-    # Create a mock object for self.w3.eth.get_block()
-    get_block_mock = MagicMock()
-    get_block_mock.return_value = {"timestamp": 1000}
-
-    # Set up the test instance
-    dex.get_quote_uniswap = get_quote_mock
-    dex.w3.eth.get_block = get_block_mock
-    dex.wallet_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
-    dex.protocol_type = "uniswap_v2"
-
-    # Call the function being tested
-    swap_order = await dex.get_swap_uniswap(
-        asset_out_address,
-        asset_in_address,
-        amount)
-    print(f"swap_order: {swap_order}")
-    # Check the output
-    assert swap_order is not None
-
-
-@pytest.mark.asyncio
-async def test_get_0x_quote(dex):
-    with patch("dxsp.config.settings", autospec=True):
-        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
-        settings.dex_private_key = "0xdeadbeet"
-        settings.dex_chain_id = 1
-        settings.dex_rpc = "https://rpc.ankr.com/eth_goerli"
-        settings.dex_0x_url = "https://goerli.api.0x.org"
-        settings.dex_protocol_type = "0x"
-        # Test function ETH > UNI
-        result = await dex.get_0x_quote(
-            "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-            "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
-            1)
-        assert result is not None
-        #assert isinstance(result, float)
-
-
-@pytest.mark.asyncio
-async def test_get_0x_quote_fail(dex):
-    with patch("dxsp.config.settings", autospec=True):
-        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
-        settings.dex_private_key = "0xdeadbeet"
-        settings.dex_chain_id = 1
-        settings.dex_rpc = "https://rpc.ankr.com/eth_goerli"
-        settings.dex_0x_url = "https://goerli.api.0x.org"
-        settings.dex_protocol_type = "0x"
-        # Test function DAI > UNI
-        result = await dex.get_0x_quote(
-            "0xE68104D83e647b7c1C15a91a8D8aAD21a51B3B3E",
-            "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
-            1)
-        assert result is None

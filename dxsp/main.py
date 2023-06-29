@@ -11,7 +11,9 @@ from web3 import Web3
 from web3.gas_strategies.time_based import medium_gas_price_strategy
 
 from dxsp import __version__
+from dxsp import protocols
 from dxsp.config import settings
+
 
 
 class DexSwap:
@@ -113,15 +115,25 @@ class DexSwap:
         try:
             buy_address = settings.trading_asset_address
             sell_address = await self.search_contract_address(sell_token)
-            if self.protocol_type in {"uniswap_v2", "uniswap_v3"}:
-                return await self.get_quote_uniswap(
+            if self.protocol_type == "uniswap_v2":
+                quote = await protocols.get_uniswap_v2_quote(
                     buy_address,
-                    sell_address)
+                    sell_address
+                )
+            elif self.protocol_type == "uniswap_v3":
+                quote = await protocols.get_uniswap_v3_quote(
+                    buy_address,
+                    sell_address
+                )
+            elif self.protocol_type == "0x":
+                quote = await protocols.get_zerox_quote(
+                    buy_address,
+                    sell_address
+                )
+            else:
+                raise ValueError("Invalid protocol type")
 
-            if self.protocol_type == "0x":
-                return await self.get_0x_quote(
-                    buy_address,
-                    sell_address)
+            return f"🦄 {quote} {settings.trading_asset}"
 
         except Exception as error:
             raise error
@@ -219,13 +231,13 @@ class DexSwap:
     async def get_swap_order(self, sell_token_address: str, buy_token_address: str, sell_token_amount_wei: int) -> Optional[str]:
         """Get swap order"""
         order_amount = int(sell_token_amount_wei * (settings.dex_trading_slippage / 100))
-        if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
+        if self.protocol_type =="uniswap_v2":
             return await self.get_swap_uniswap(sell_token_address, buy_token_address, order_amount)
         elif self.protocol_type == "0x":
             order = await self.get_0x_quote(sell_token_address, buy_token_address, order_amount)
             return order if not order else await self.get_sign(order)
-
-        return None
+        else:
+            raise ValueError("Invalid protocol type")
 
     async def get_confirmation(self, order_hash):
         """Returns trade confirmation."""
@@ -384,87 +396,4 @@ class DexSwap:
     async def get_account_margin(self):
         return 0
 
-# PROTOCOL SPECIFIC
-# uniswap  🦄
-    async def get_quote_uniswap(
-        self,
-        asset_in_address,
-        asset_out_address,
-        amount=1
-    ):
-        self.logger.debug("get_quote_uniswap")
-        try:
-            if self.protocol_type == "uniswap_v2":
-                router_instance = await self.router()
-                quote = router_instance.functions.getAmountsOut(
-                    amount,
-                    [asset_in_address, asset_out_address]).call()
-                self.logger.error("quote %s", quote)
-                if isinstance(quote, list):
-                    quote = str(quote[0])
-            elif self.protocol_type == "uniswap_v3":
-                quoter = await self.quoter()
-                sqrtPriceLimitX96 = 0
-                fee = 3000
-                quote = quoter.functions.quoteExactInputSingle(
-                    asset_in_address,
-                    asset_out_address,
-                    fee, amount, sqrtPriceLimitX96).call()
-            return f"🦄 {quote} {settings.trading_asset}"
-        except Exception as e:
-            return e
 
-    async def get_approve_uniswap(self, token_address):
-        try:
-            contract = await self.get_token_contract(token_address)
-            if contract is None:
-                return
-            approved_amount = self.w3.to_wei(2 ** 64 - 1, 'ether')
-            owner_address = self.w3.to_checksum_address(self.wallet_address)
-            dex_router_address = self.w3.to_checksum_address(settings.dex_router_contract_addr)
-            allowance = contract.functions.allowance(owner_address, dex_router_address).call()
-            self.logger.debug("allowance %s", allowance)
-            if allowance == 0:
-                approval_tx = contract.functions.approve(dex_router_address, approved_amount)
-                approval_tx_hash = await self.get_sign(approval_tx)
-                return self.w3.eth.wait_for_transaction_receipt(
-                    approval_tx_hash, timeout=120, poll_latency=0.1
-                )
-        except Exception as error:
-            raise ValueError(f"Approval failed {error}") 
-
-
-    async def get_swap_uniswap(self, asset_out_address, asset_in_address, amount):
-        try:
-            path = [self.w3.to_checksum_address(asset_out_address),
-                    self.w3.to_checksum_address(asset_in_address)]
-            deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
-            router_instance = await self.router()
-            min_amount = self.get_quote_uniswap(
-                asset_in_address, asset_out_address, amount)[0]
-
-            if self.protocol_type == "uniswap_v2":
-                return router_instance.functions.swapExactTokensForTokens(
-                    int(amount),
-                    int(min_amount),
-                    tuple(path),
-                    self.wallet_address,
-                    deadline,
-                )
-            elif self.protocol_type == "uniswap_v3":
-                return None
-        except Exception as e:
-            raise ValueError(f"Approval failed {error}") 
-
-# 0️⃣x
-    async def get_0x_quote(self, buy_address, sell_address, amount=1):
-        try:
-            out_amount = self.w3.to_wei(amount, 'ether')
-            url = f"{settings.dex_0x_url}/swap/v1/quote?buyToken={str(buy_address)}&sellToken={str(sell_address)}&buyAmount={str(out_amount)}"
-            headers = {"0x-api-key": settings.dex_0x_api_key}
-            response = await self.get(url, params=None, headers=headers)
-            print(response)
-            if response:
-                return round(float(response['guaranteedPrice']), 3)
-        except Exception as e:
-            raise e

@@ -1,3 +1,0 @@
-"""
- Protocol specific
-"""
