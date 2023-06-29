@@ -80,8 +80,9 @@ class DexSwap:
             sell_token_amount_wei = self.w3.to_wei(
                 sell_amount * 10 ** (await self.get_token_decimals(sell_token_address)), "ether")
 
-            if await self.get_approve(sell_token_address) is None:
-                raise ValueError("approval failed")
+            self.get_approve(sell_token_address)
+            # is None:
+              #  raise ValueError("approval failed")
 
             swap_order = await self.get_swap_order(
                 sell_token_address, buy_token_address, sell_token_amount_wei)
@@ -124,25 +125,6 @@ class DexSwap:
             sell_address = await self.search_contract_address(sell_token)
             quote = await dex_swap.get_quote(sell_address)
             return f"🦄 {quote} {settings.trading_asset}"
-            # if self.protocol_type == "uniswap_v2":
-            #     quote = await get_quote_uniswap_v2(self.__class__,
-            #         buy_address,
-            #         sell_address
-            #     )
-            # elif self.protocol_type == "uniswap_v3":
-            #     quote = await get_quote_uniswap_v3(self.__class__,
-            #         buy_address,
-            #         sell_address
-            #     )
-            # elif self.protocol_type == "0x":
-            #     quote = await get_zerox_quote(self.__class__,
-            #         buy_address,
-            #         sell_address
-            #     )
-            # else:
-            #     raise ValueError("Invalid protocol type")
-
-            # return f"🦄 {quote} {settings.trading_asset}"
 
         except Exception as error:
             raise error
@@ -191,8 +173,8 @@ class DexSwap:
             raise error
 
     async def get_approve(self, token_address):
-        if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
-            return await get_approve_uniswap(self.__class__, token_address)
+        # if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
+        return await dex_swap.get_approve(token_address)
             
 
     async def get_sign(self, transaction):
