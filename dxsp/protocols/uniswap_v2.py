@@ -12,7 +12,7 @@ uniswap V2  🦄
 # uniswap  🦄
 
 @classmethod
-async def get_quote_uniswap(
+async def get_uniswap_v2_quote(
     cls,
     asset_in_address,
     asset_out_address,

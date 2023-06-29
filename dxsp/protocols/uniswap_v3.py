@@ -6,7 +6,7 @@ uniswap V3  🦄
 
 
 @classmethod
-async def get_quote_uniswap(
+async def get_uniswap_v3_quote(
     self,
     asset_in_address,
     asset_out_address,
@@ -25,9 +25,9 @@ async def get_quote_uniswap(
     except Exception as e:
         return e
 
-async def get_approve_uniswap(self, token_address):
-    pass
+#async def get_approve_uniswap(self, token_address):
+    #pass
 
 
-async def get_swap_uniswap(self, asset_out_address, asset_in_address, amount):
-    pass
+#async def get_swap_uniswap(self, asset_out_address, asset_in_address, amount):
+    #pass
