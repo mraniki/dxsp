@@ -7,12 +7,12 @@ from dxsp.config import settings
 
 @classmethod
 async def get_uniswap_v3_quote(
-    self,
+    cls,
     asset_in_address,
     asset_out_address,
     amount=1
 ):
-    self.logger.debug("get_quote_uniswap")
+    cls.logger.debug("get_quote_uniswap")
     try:
         quoter = await self.quoter()
         sqrtPriceLimitX96 = 0
