@@ -7,7 +7,7 @@ import re
 import pytest
 import time
 from dxsp.config import settings
-from dxsp.main import DexSwap
+from dxsp import DexSwap
 
 
 
