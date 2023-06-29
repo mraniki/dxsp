@@ -1,8 +1,7 @@
 """
 uniswap V2  🦄
 """
-from dxsp.main import DexSwap
-from dxsp.config import settings
+
 
 class DexSwapUniswapV2(DexSwap):
     async def get_quote(
