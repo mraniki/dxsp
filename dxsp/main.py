@@ -183,7 +183,7 @@ class DexSwap:
 
     async def get_approve(self, sell_token_address):
         if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
-            return await self.get_approve_uniswap(sell_token_address)
+            return await protocols.get_approve_uniswap(sell_token_address)
             
 
     async def get_sign(self, transaction):
@@ -232,9 +232,9 @@ class DexSwap:
         """Get swap order"""
         order_amount = int(sell_token_amount_wei * (settings.dex_trading_slippage / 100))
         if self.protocol_type =="uniswap_v2":
-            return await self.get_swap_uniswap(sell_token_address, buy_token_address, order_amount)
+            return await protocols.get_swap_uniswap(sell_token_address, buy_token_address, order_amount)
         elif self.protocol_type == "0x":
-            order = await self.get_0x_quote(sell_token_address, buy_token_address, order_amount)
+            order = await protocols.get_zerox_quote(sell_token_address, buy_token_address, order_amount)
             return order if not order else await self.get_sign(order)
         else:
             raise ValueError("Invalid protocol type")
