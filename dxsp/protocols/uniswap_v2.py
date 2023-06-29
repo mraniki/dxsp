@@ -4,8 +4,7 @@ uniswap V2  🦄
 from dxsp.config import settings
 
 
-@classmethod
-async def get_uniswap_v2_quote(
+async def get_quote_uniswap_v2(
     cls,
     asset_in_address,
     asset_out_address,

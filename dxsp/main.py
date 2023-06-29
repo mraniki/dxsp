@@ -11,8 +11,8 @@ from web3 import Web3
 from web3.gas_strategies.time_based import medium_gas_price_strategy
 
 from dxsp import __version__
-from dxsp import protocols
 from dxsp.config import settings
+from dxsp.protocols import get_quote_uniswap_v2
 
 
 
@@ -116,20 +116,20 @@ class DexSwap:
             buy_address = settings.trading_asset_address
             sell_address = await self.search_contract_address(sell_token)
             if self.protocol_type == "uniswap_v2":
-                quote = await protocols.get_uniswap_v2_quote(
+                quote = await get_quote_uniswap_v2(self.__class__,
                     buy_address,
                     sell_address
                 )
-            elif self.protocol_type == "uniswap_v3":
-                quote = await protocols.get_uniswap_v3_quote(
-                    buy_address,
-                    sell_address
-                )
-            elif self.protocol_type == "0x":
-                quote = await protocols.get_zerox_quote(
-                    buy_address,
-                    sell_address
-                )
+            # elif self.protocol_type == "uniswap_v3":
+            #     quote = await get_uniswap_v3_quote(
+            #         buy_address,
+            #         sell_address
+            #     )
+            # elif self.protocol_type == "0x":
+            #     quote = await get_zerox_quote(
+            #         buy_address,
+            #         sell_address
+            #     )
             else:
                 raise ValueError("Invalid protocol type")
 
