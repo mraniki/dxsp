@@ -28,14 +28,14 @@ class DexSwap:
             raise error
 
         self.protocol_type = settings.dex_protocol_type
-        if self.protocol_type == "uniswap_v2":
-            dex_swap = DexSwapUniswapV2()
-        elif self.protocol_type == "uniswap_v3":
-            dex_swap = DexSwapUniswapV3()
+        #if self.protocol_type == "uniswap_v2":
+        self.dex_swap = DexSwapUniswapV2()
+        if self.protocol_type == "uniswap_v3":
+            self.dex_swap = DexSwapUniswapV3()
         elif self.protocol_type == "0x":
-            dex_swap = DexSwapZeroX()
-        else:
-            raise ValueError("Invalid protocol type")
+            self.dex_swap = DexSwapZeroX()
+        #else:
+        #    raise ValueError("Invalid protocol type")
         self.chain_id = settings.dex_chain_id
         self.wallet_address = self.w3.to_checksum_address(
             settings.dex_wallet_address)
@@ -123,7 +123,7 @@ class DexSwap:
         try:
             buy_address = settings.trading_asset_address
             sell_address = await self.search_contract_address(sell_token)
-            quote = await dex_swap.get_quote(sell_address)
+            quote = await self.dex_swap.get_quote(sell_address)
             return f"🦄 {quote} {settings.trading_asset}"
 
         except Exception as error:
@@ -174,7 +174,7 @@ class DexSwap:
 
     async def get_approve(self, token_address):
         # if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
-        return await dex_swap.get_approve(token_address)
+        return await self.dex_swap.get_approve(token_address)
             
 
     async def get_sign(self, transaction):
@@ -223,7 +223,7 @@ class DexSwap:
         """Get swap order"""
         order_amount = int(sell_token_amount_wei * (settings.dex_trading_slippage / 100))
         # if self.protocol_type =="uniswap_v2":
-        order = await dex_swap.get_swap(sell_token_address, buy_token_address, order_amount)
+        order = await self.dex_swap.get_swap(sell_token_address, buy_token_address, order_amount)
         # elif self.protocol_type == "0x":
             # order = await get_zerox_quote(sell_token_address, buy_token_address, order_amount)
         return order if not order else await self.get_sign(order)
