@@ -2,7 +2,7 @@
 uniswap V3  🦄
 """
 
-
+from dxsp.config import settings
 
 
 @classmethod

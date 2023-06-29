@@ -1,15 +1,8 @@
 """
 uniswap V2  🦄
 """
+from dxsp.config import settings
 
-
-# async def get_uniswap_v2_quote(buy_address, sell_address):
-#     # Implementation for Uniswap V2 quote
-#     pass
-
-
-# PROTOCOL SPECIFIC
-# uniswap  🦄
 
 @classmethod
 async def get_uniswap_v2_quote(

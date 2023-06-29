@@ -2,6 +2,8 @@
 0️⃣x
 """
 
+from dxsp.config import settings
+
 
 @classmethod
 async def get_zerox_quote(cls, buy_address, sell_address, amount=1):
