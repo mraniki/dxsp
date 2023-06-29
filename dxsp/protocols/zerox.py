@@ -16,3 +16,5 @@ class DexSwapZeroX(DexSwap):
         #         return round(float(response['guaranteedPrice']), 3)
         # except Exception as error:
         #     raise ValueError(f"Quote failed {error}") 
+    async def get_swap(self, buy_address, sell_address, amount=1):
+        pass

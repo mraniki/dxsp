@@ -21,18 +21,19 @@ async def main():
         print(type(dex))
 
         # RANDOM SYMBOL
-        symbol_lst = [
-            'WBTC', 'WETH', 'MATIC', 'UNI', 'DAI']
-        symbol = random.sample(symbol_lst, 1)[0]
+        # symbol_lst = [
+        #     'WBTC', 'WETH', 'MATIC', 'UNI', 'DAI']
+        # symbol = random.sample(symbol_lst, 1)[0]
+        symbol = 'WBTC'
         print("symbol ", symbol)
 
         # Contract Address
         address = await dex.search_contract(symbol)
-        # token_contract found 0xdac17f958d2ee523a2206206994597c13d831ec7
+        # token_contract found 0x2260fac5e5542a773aa44fbcfedf7c193bc2c599
 
         # getABI
-        addressABI = await dex.get_abi(address)
-        print("ABI ", addressABI)
+        # addressABI = await dex.get_abi(address)
+        # print("ABI ", addressABI)
 
         quote = await dex.get_quote(symbol)
         print("quote ", quote)
