@@ -6,8 +6,8 @@ from unittest.mock import AsyncMock, Mock, patch, MagicMock
 import re
 import pytest
 import time
-from dxsp import DexSwap
 from dxsp.config import settings
+from dxsp.main import DexSwap
 from dxsp.protocols import DexSwapUniswapV2
 
 @pytest.fixture(scope="session", autouse=True)
