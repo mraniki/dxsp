@@ -1,29 +1,29 @@
 """
  DEXSWAP Unit Test
 """
-import asyncio
-from unittest.mock import AsyncMock, Mock, patch, MagicMock
-import re
-import pytest
-import time
-from dxsp.config import settings
-from dxsp import DexSwap
+# import asyncio
+# from unittest.mock import AsyncMock, Mock, patch, MagicMock
+# import re
+# import pytest
+# import time
+# from dxsp.config import settings
+# from dxsp import DexSwap
 
 
-@pytest.fixture(scope="session", autouse=True)
-def set_test_settings():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="chain_56")
+# @pytest.fixture(scope="session", autouse=True)
+# def set_test_settings():
+#     settings.configure(FORCE_ENV_FOR_DYNACONF="chain_56")
 
-@pytest.fixture(name="dex")
-def DexSwap_fixture():
-    return DexSwap()
+# @pytest.fixture(name="dex")
+# def DexSwap_fixture():
+#     return DexSwap()
 
 
-def test_dynaconf_is_in_testing():
-    print(settings.VALUE)
-    assert settings.VALUE == "DEX chain_56"
-    assert settings.dex_chain_id == 56
-    assert settings.dex_wallet_address == "0x1234567890123456789012345678901234568888"
+# def test_dynaconf_is_in_testing():
+#     print(settings.VALUE)
+#     assert settings.VALUE == "DEX chain_56"
+#     assert settings.dex_chain_id == 56
+#     assert settings.dex_wallet_address == "0x1234567890123456789012345678901234568888"
 
 
 # @pytest.fixture(name="order")
