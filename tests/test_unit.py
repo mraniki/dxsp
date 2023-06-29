@@ -154,7 +154,7 @@ async def test_get_quote(dex):
     if quote:
         assert quote is not None
         assert quote.startswith("🦄")
-test_failed_search_address
+
 
 @pytest.mark.asyncio
 async def test_get_quote_invalid(dex):
