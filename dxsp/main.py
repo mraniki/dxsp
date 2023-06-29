@@ -12,9 +12,8 @@ from web3.gas_strategies.time_based import medium_gas_price_strategy
 
 from dxsp import __version__
 from dxsp.config import settings
-from dxsp.protocols import (get_zerox_quote, 
-get_quote_uniswap_v2, get_approve_uniswap, get_swap_uniswap, 
-get_quote_uniswap_v3)
+from dxsp.protocols import (DexSwapUniswapV2, DexSwapUniswapV3, 
+DexSwapZeroX)
 
 
 
@@ -31,6 +30,14 @@ class DexSwap:
             raise error
 
         self.protocol_type = settings.dex_protocol_type
+        if self.protocol_type == "uniswap_v2":
+            dex_swap = DexSwapUniswapV2()
+        elif self.protocol_type == "uniswap_v3":
+            dex_swap = DexSwapUniswapV3()
+        elif self.protocol_type == "0x":
+            dex_swap = DexSwapZeroX()
+        else:
+            raise ValueError("Invalid protocol type")
         self.chain_id = settings.dex_chain_id
         self.wallet_address = self.w3.to_checksum_address(
             settings.dex_wallet_address)
@@ -117,25 +124,27 @@ class DexSwap:
         try:
             buy_address = settings.trading_asset_address
             sell_address = await self.search_contract_address(sell_token)
-            if self.protocol_type == "uniswap_v2":
-                quote = await get_quote_uniswap_v2(self.__class__,
-                    buy_address,
-                    sell_address
-                )
-            elif self.protocol_type == "uniswap_v3":
-                quote = await get_quote_uniswap_v3(self.__class__,
-                    buy_address,
-                    sell_address
-                )
-            elif self.protocol_type == "0x":
-                quote = await get_zerox_quote(self.__class__,
-                    buy_address,
-                    sell_address
-                )
-            else:
-                raise ValueError("Invalid protocol type")
-
+            quote = await dex_swap.get_quote(sell_address)
             return f"🦄 {quote} {settings.trading_asset}"
+            # if self.protocol_type == "uniswap_v2":
+            #     quote = await get_quote_uniswap_v2(self.__class__,
+            #         buy_address,
+            #         sell_address
+            #     )
+            # elif self.protocol_type == "uniswap_v3":
+            #     quote = await get_quote_uniswap_v3(self.__class__,
+            #         buy_address,
+            #         sell_address
+            #     )
+            # elif self.protocol_type == "0x":
+            #     quote = await get_zerox_quote(self.__class__,
+            #         buy_address,
+            #         sell_address
+            #     )
+            # else:
+            #     raise ValueError("Invalid protocol type")
+
+            # return f"🦄 {quote} {settings.trading_asset}"
 
         except Exception as error:
             raise error
