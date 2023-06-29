@@ -227,8 +227,8 @@ class DexSwap:
         # elif self.protocol_type == "0x":
             # order = await get_zerox_quote(sell_token_address, buy_token_address, order_amount)
         return order if not order else await self.get_sign(order)
-        else:
-            raise ValueError("Invalid protocol type")
+        #else:
+        #    raise ValueError("Invalid protocol type")
 
     async def get_confirmation(self, order_hash):
         """Returns trade confirmation."""
