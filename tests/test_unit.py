@@ -78,6 +78,13 @@ async def test_dex(dex):
 
 
 @pytest.mark.asyncio
+async def test_router_object(router):
+    print(router)
+    assert router is not None
+
+
+
+@pytest.mark.asyncio
 async def test_execute_order(dex, order):
     sell_balance = AsyncMock()
     dex.get_swap = AsyncMock()

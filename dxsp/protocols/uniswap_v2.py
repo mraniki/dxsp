@@ -10,20 +10,20 @@ async def get_quote_uniswap_v2(
     asset_out_address,
     amount=1
 ):
-    cls.logger.debug("get_quote_uniswap")
+    # cls.logger.debug("get_quote_uniswap")
     try:
         router_instance = await cls.router()
         quote = router_instance.functions.getAmountsOut(
             amount,
             [asset_in_address, asset_out_address]).call()
-        cls.logger.error("quote %s", quote)
+        # cls.logger.error("quote %s", quote)
         if isinstance(quote, list):
             quote = str(quote[0])
         return f"🦄 {quote} {settings.trading_asset}"   
     except Exception as e:
         return e
 
-@classmethod
+
 async def get_approve_uniswap(cls, token_address):
     pass
     # try:
@@ -45,7 +45,7 @@ async def get_approve_uniswap(cls, token_address):
     #     raise ValueError(f"Approval failed {error}") 
 
 
-@classmethod
+
 async def get_swap_uniswap(cls, asset_out_address, asset_in_address, amount):
     pass
     # try:
