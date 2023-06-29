@@ -1,6 +1,7 @@
 """
 0️⃣x
 """
+from dxsp.config import settings
 from dxsp.main import DexSwap
 
 class DexSwapZeroX(DexSwap):

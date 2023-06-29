@@ -1,6 +1,7 @@
 """
 uniswap V2  🦄
 """
+from dxsp.config import settings
 from dxsp.main import DexSwap
 
 class DexSwapUniswapV2(DexSwap):
@@ -53,7 +54,7 @@ class DexSwapUniswapV2(DexSwap):
                     self.w3.to_checksum_address(asset_in_address)]
             deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
             router_instance = await self.router()
-            min_amount = self.get_quote_uniswap(
+            min_amount = self.get_quote(
                 asset_in_address, asset_out_address, amount)[0]
             return router_instance.functions.swapExactTokensForTokens(
                 int(amount),
