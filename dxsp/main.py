@@ -12,7 +12,9 @@ from web3.gas_strategies.time_based import medium_gas_price_strategy
 
 from dxsp import __version__
 from dxsp.config import settings
-from dxsp.protocols import get_quote_uniswap_v2
+from dxsp.protocols import (get_zerox_quote, 
+get_quote_uniswap_v2, get_approve_uniswap, get_swap_uniswap, 
+get_quote_uniswap_v3)
 
 
 
@@ -120,16 +122,16 @@ class DexSwap:
                     buy_address,
                     sell_address
                 )
-            # elif self.protocol_type == "uniswap_v3":
-            #     quote = await get_uniswap_v3_quote(
-            #         buy_address,
-            #         sell_address
-            #     )
-            # elif self.protocol_type == "0x":
-            #     quote = await get_zerox_quote(
-            #         buy_address,
-            #         sell_address
-            #     )
+            elif self.protocol_type == "uniswap_v3":
+                quote = await get_quote_uniswap_v3(self.__class__,
+                    buy_address,
+                    sell_address
+                )
+            elif self.protocol_type == "0x":
+                quote = await get_zerox_quote(self.__class__,
+                    buy_address,
+                    sell_address
+                )
             else:
                 raise ValueError("Invalid protocol type")
 
@@ -181,9 +183,9 @@ class DexSwap:
         except Exception as error:
             raise error
 
-    async def get_approve(self, sell_token_address):
+    async def get_approve(self, token_address):
         if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
-            return await protocols.get_approve_uniswap(sell_token_address)
+            return await get_approve_uniswap(self.__class__, token_address)
             
 
     async def get_sign(self, transaction):
@@ -232,9 +234,9 @@ class DexSwap:
         """Get swap order"""
         order_amount = int(sell_token_amount_wei * (settings.dex_trading_slippage / 100))
         if self.protocol_type =="uniswap_v2":
-            return await protocols.get_swap_uniswap(sell_token_address, buy_token_address, order_amount)
+            return await get_swap_uniswap(self.__class__,sell_token_address, buy_token_address, order_amount)
         elif self.protocol_type == "0x":
-            order = await protocols.get_zerox_quote(sell_token_address, buy_token_address, order_amount)
+            order = await get_zerox_quote(self.__class__,sell_token_address, buy_token_address, order_amount)
             return order if not order else await self.get_sign(order)
         else:
             raise ValueError("Invalid protocol type")

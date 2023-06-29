@@ -6,7 +6,7 @@ from dxsp.config import settings
 
 
 @classmethod
-async def get_uniswap_v3_quote(
+async def get_quote_uniswap_v3(
     cls,
     asset_in_address,
     asset_out_address,
@@ -26,9 +26,9 @@ async def get_uniswap_v3_quote(
     # except Exception as e:
     #     return e
 
-#async def get_approve_uniswap(self, token_address):
-    #pass
+async def get_approve_uniswap_v3(self, token_address):
+    pass
 
 
-#async def get_swap_uniswap(self, asset_out_address, asset_in_address, amount):
-    #pass
+async def get_swap_uniswap_v3(self, asset_out_address, asset_in_address, amount):
+    pass

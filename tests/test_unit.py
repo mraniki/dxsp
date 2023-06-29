@@ -74,7 +74,7 @@ async def test_dex(dex):
     assert dex.wallet_address.startswith("0x")
     assert dex.wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
     assert dex.private_key.startswith("0x")
-    assert dex.account == "1 - c3f84CEe"
+    assert dex.account == "1 - 32BE35BC"
 
 
 @pytest.mark.asyncio
@@ -170,7 +170,7 @@ async def test_get_quote_invalid(dex):
 
 @pytest.mark.asyncio
 async def test_get_approve(dex):
-    result = await dex.get_approve("TOKEN")
+    result = await dex.get_approve("0xdAC17F958D2ee523a2206206994597C13D831ec7")
     assert result is None
 
 
