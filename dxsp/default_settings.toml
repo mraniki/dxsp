@@ -25,15 +25,6 @@ dex_quoter_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-p
 dex_0x_url = "https://api.0x.org/mainnet"
 dex_0x_api_key = "" 
 
-[chain_42161]
-VALUE = "DEX chain_42161"
-loglevel = "DEBUG"
-dex_chain_id = 42161
-dex_rpc = "https://rpc.ankr.com/arbitrum"
-dex_block_explorer_url = "https://api-testnet.bscscan.com/api?"
-dex_router_contract_addr = "0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f"
-dex_0x_url = "https://arbitrum.api.0x.org/"
-
 
 ##############
 ## SETTINGS ##
@@ -89,6 +80,7 @@ dex_erc20_abi_url = "https://raw.githubusercontent.com/0xProject/protocol/develo
 [test_uniswap_chain5]
 VALUE = "On Testnet"
 loglevel = "DEBUG"
+dxsp_enabled = true
 dex_chain_id = 5
 dex_rpc = "https://rpc.ankr.com/eth_goerli"
 dex_block_explorer_url = "https://api-Goerli.etherscan.io/api?"
@@ -111,6 +103,7 @@ dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c
 [test_pancake_chain_56]
 VALUE = "chain_56"
 dex_chain_id = 56
+dxsp_enabled = true
 dex_wallet_address = "0xf977814e90da44bfa03b6295a0616a897441acec"
 dex_rpc = "https://rpc.ankr.com/bsc"
 dex_block_explorer_url = "https://api.bscscan.com/api?"
@@ -148,6 +141,7 @@ dex_0x_url = "https://bsc.api.0x.org/"
 # [test_uniswap_chain_11155111]
 # VALUE = "SEPOLIA"
 # loglevel = "DEBUG"
+# dxsp_enabled = true
 # dex_chain_id = 11155111
 # dex_rpc = "https://rpc.ankr.com/eth_sepolia"
 # dex_block_explorer_url = "https://api-Sepolia.etherscan.io/api?"
@@ -158,8 +152,17 @@ dex_0x_url = "https://bsc.api.0x.org/"
 # [test_pancake_chain_97]
 # VALUE = "DEX chain_97"
 # loglevel = "DEBUG"
+# dxsp_enabled = true
 # dex_chain_id = 97
 # dex_rpc = "https://rpc.ankr.com/bsc_testnet_chapel"
 # dex_block_explorer_url = "https://api-testnet.bscscan.com/api?"
 # dex_router_contract_addr = ""
 
+# [test_chain_42161]
+# VALUE = "DEX chain_42161"
+# loglevel = "DEBUG"
+# dex_chain_id = 42161
+# dex_rpc = "https://rpc.ankr.com/arbitrum"
+# dex_block_explorer_url = "https://api-testnet.bscscan.com/api?"
+# dex_router_contract_addr = "0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f"
+# dex_0x_url = "https://arbitrum.api.0x.org/"

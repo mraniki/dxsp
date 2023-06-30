@@ -43,6 +43,7 @@ class DexSwap:
         """
         from dxsp.protocols import DexSwapUniswapV2, DexSwapUniswapV3, DexSwapZeroX, DexSwapOneInch
         try:
+            self.logger.info("get_protocol")
             self.dex_swap = DexSwapUniswapV2()
             if self.protocol_type == "uniswap_v3":
                 self.dex_swap = DexSwapUniswapV3()
@@ -64,7 +65,7 @@ class DexSwap:
     async def execute_order(self, order_params):
         """Execute swap function."""
         try:
-            await self.get_protocol()
+            # await self.get_protocol()
             action = order_params.get('action')
             instrument = order_params.get('instrument')
             quantity = order_params.get('quantity', 1)
@@ -155,6 +156,7 @@ class DexSwap:
 
     async def router(self):
         try:
+            self.logger.debug(f"getting router")
             router_abi = await self.get_abi(settings.dex_router_contract_addr)
             if router_abi is None:
                 router_abi = await self.get(settings.dex_router_abi_url)
@@ -257,7 +259,7 @@ class DexSwap:
             settings.token_testnet_list,
             settings.token_mainnet_list,
         ]
-
+        self.logger.debug(f"searching address for token: {token}")
         for contract_list in contract_lists:
             token_contract = await self.get_token_address(
                 contract_list,
@@ -367,6 +369,7 @@ class DexSwap:
         if balance is None or balance == 0:
             raise ValueError("No Balance")
         return balance
+
 
     async def get_token_decimals(self, token_address: str) -> Optional[int]:
         """Get token decimals"""

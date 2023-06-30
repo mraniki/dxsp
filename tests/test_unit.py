@@ -36,8 +36,8 @@ def order_params_fixture():
     }
 
 
-@pytest.fixture(name="wrong_order")
-def wrong_order_fixture():
+@pytest.fixture(name="invalid_order")
+def invalid_order_fixture():
     """Return order parameters."""
     return {
         'action': 'BUY',
@@ -95,15 +95,15 @@ async def test_execute_order(dex, order):
 
 
 # @pytest.mark.asyncio
-# async def test_execute_order_invalid(dex, wrong_order):
-#     with pytest.raises(ValueError, match='contract not found'):
-#         swap_order = await dex.execute_order(wrong_order)
+# async def test_execute_order_invalid(dex, invalid_order):
+#     with pytest.raises(ValueError, match='No Balance'):
+#         swap_order = await dex.execute_order(invalid_order)
 
 
 @pytest.mark.asyncio
-async def test_execute_order_invalid(dex, wrong_order):
+async def test_execute_order_invalid(dex, invalid_order):
     # with pytest.raises(ValueError, match='contract not found'):
-    swap_order = await dex.execute_order(wrong_order)
+    swap_order = await dex.execute_order(invalid_order)
     print(swap_order)
 
 # @pytest.mark.asyncio
@@ -169,10 +169,15 @@ async def test_get_quote_invalid(dex):
         quote = await dex.get_quote("THISISNOTATOKEN")
 
 
-#@pytest.mark.asyncio
-#async def test_get_approve(dex):
+# @pytest.mark.asyncio
+# async def test_get_approve(dex):
 #    result = await dex.get_approve("0xdAC17F958D2ee523a2206206994597C13D831ec7")
 #    assert result is not None
+
+@pytest.mark.asyncio
+async def test_failed_get_approve(dex):
+   with pytest.raises(ValueError, match='Approval failed'):
+        result = await dex.get_approve("0xdAC17F958D2ee523a2206206994597C13D831ec7")
 
 
 # @pytest.mark.asyncio
@@ -279,14 +284,10 @@ async def test_get_decimals(dex):
 
 @pytest.mark.asyncio
 async def test_get_gas(dex):
-   # with pytest.raises(ValueError):
-        # Create a mock transaction
-        mock_tx = {"to": "0x1234567890123456789012345678901234567890",
+    mock_tx = {"to": "0x1234567890123456789012345678901234567890",
                 "value": "1000000000000000000"}
-
-        # Call the get_gas method and check the result
-        gas_estimate = await dex.get_gas(mock_tx)
-        print(gas_estimate)
+    gas_estimate = await dex.get_gas(mock_tx)
+    print(gas_estimate)
 
 
 @pytest.mark.asyncio
