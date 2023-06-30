@@ -155,7 +155,7 @@ class DexSwap:
 
     async def router(self):
         try:
-            self.logger.debug(f"getting router")
+            self.logger.debug("getting router")
             router_abi = await self.get_abi(settings.dex_router_contract_addr)
             if router_abi is None:
                 router_abi = await self.get(settings.dex_router_abi_url)
