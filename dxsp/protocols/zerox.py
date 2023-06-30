@@ -2,9 +2,9 @@
 0️⃣x
 """
 from dxsp.config import settings
-#from dxsp.main import DexSwap
+from dxsp.main import DexSwap
 
-class DexSwapZeroX(object):
+class DexSwapZeroX(DexSwap):
     async def get_quote(self, buy_address, sell_address, amount=1):
         pass
         # try:

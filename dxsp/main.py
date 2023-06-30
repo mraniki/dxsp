@@ -11,7 +11,7 @@ from web3 import Web3
 from web3.gas_strategies.time_based import medium_gas_price_strategy
 from dxsp import __version__
 from dxsp.config import settings
-from dxsp.protocols import DexSwapUniswapV2, DexSwapUniswapV3, DexSwapZeroX
+
 
 class DexSwap:
     """swap  class"""
@@ -34,13 +34,14 @@ class DexSwap:
         self.cg = CoinGeckoAPI()
                     
         self.protocol_type = settings.dex_protocol_type
-        self.dex_swap = None
+        #self.dex_swap = None
         #self.get_protocol()
 
     async def get_protocol(self):
         """
         setup protocol
         """
+        from dxsp.protocols import DexSwapUniswapV2, DexSwapUniswapV3, DexSwapZeroX
         try:
             self.dex_swap = DexSwapUniswapV2()
             if self.protocol_type == "uniswap_v3":

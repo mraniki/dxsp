@@ -3,9 +3,9 @@ uniswap V3  🦄
 """
 
 from dxsp.config import settings
-#from dxsp.main import DexSwap
+from dxsp.main import DexSwap
 
-class DexSwapUniswapV3(object):
+class DexSwapUniswapV3(DexSwap):
     async def get_quote(
         self,
         asset_in_address,
