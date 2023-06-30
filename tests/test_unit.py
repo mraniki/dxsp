@@ -63,6 +63,16 @@ def mock_contract(dex):
     contract.wait_for_transaction_receipt.return_value = {"status": 1}
     return contract
 
+@pytest.fixture(name="mock_dex")
+def mock_dex_transaction():
+    contract = MagicMock()
+    contract.w3.eth.get_transaction_count = MagicMock(return_value=1)
+    contract.get_gas = MagicMock(return_value=21000)
+    contract.get_gas_price = MagicMock(return_value=1000000000)
+    contract.w3.eth.account.sign_transaction = MagicMock(return_value=MagicMock(rawTransaction=b'signed_transaction'))
+    contract.w3.eth.send_raw_transaction = MagicMock(return_value=b'transaction_hash')
+    return contract
+
 
 @pytest.mark.asyncio
 async def test_dex(dex):
@@ -188,6 +198,20 @@ async def test_failed_get_approve(dex):
 #         "value": "1000000000000000000"}
 #     result = await dex.get_sign(mock_tx)
 #     assert result is not None
+
+
+@pytest.mark.asyncio
+async def test_get_sign(mock_dex):
+    transaction = MagicMock()
+
+    result = await mock_dex.get_sign(transaction)
+
+    assert result == b'transaction_hash'
+    mock_dex.get_gas.assert_called_once_with(transaction)
+    mock_dex.get_gas_price.assert_called_once()
+    mock_dex.w3.eth.get_transaction_count.assert_called_once_with(my_contract.wallet_address)
+    mock_dex.w3.eth.account.sign_transaction.assert_called_once_with(transaction, my_contract.private_key)
+    mock_dex.w3.eth.send_raw_transaction.assert_called_once_with(b'signed_transaction')
 
 
 @pytest.mark.asyncio
