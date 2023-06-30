@@ -114,7 +114,7 @@ class DexSwap:
             if receipt["status"] != 1:
                 raise ValueError("receipt failed")
 
-            return await self.get_confirmation(receipt)
+            return await self.get_confirmation(receipt['transactionHash'])
 
         except ValueError as error:
             raise error
@@ -184,7 +184,7 @@ class DexSwap:
         except Exception as error:
             raise error
 
-
+#to be moved under protocol class
     async def get_sign(self, transaction):
         try:
             if self.protocol_type in ['uniswap_v2', 'uniswap_v3']:
@@ -204,7 +204,7 @@ class DexSwap:
 
 
     async def calculate_sell_amount(self, sell_token_address, quantity):
-        """Calculates the sell amount based on the sell token balance and trading risk amount."""
+        """Calculates the sell amount based on the risk amount."""
         sell_balance = await self.get_token_balance(sell_token_address)
         sell_contract = await self.get_token_contract(sell_token_address)
         sell_decimals = await sell_contract.functions.decimals().call()
@@ -214,24 +214,24 @@ class DexSwap:
             )
 
 
-    async def get_confirmation(self, receipt):
+    async def get_confirmation(self, transactionHash):
         """Returns trade confirmation."""
         try:
-            block = self.w3.eth.get_block(receipt["blockNumber"])
-            transaction = self.w3.web3.eth.get_transaction(receipt["transactionHash"])
+            transaction = self.w3.eth.get_transaction(transactionHash)
+            block = self.w3.eth.get_block(transaction["blockNumber"])
             return {
                 "timestamp": block["timestamp"],
-                "id": receipt["transactionHash"],
-                "instrument": receipt["to"],
-                "contract": receipt["to"], # TBD To be determined.
+                "id": transactionHash,
+                "instrument": transaction["to"],
+                "contract": transaction["to"], # TBD To be determined.
                 "amount": transaction["value"],
                 "price": transaction["value"],  # TBD To be determined.
-                "fee": receipt["gasUsed"],
+                "fee": transaction["gas"],
                 "confirmation": (
                     f"➕ Size: {round(transaction['value'], 4)}\n"
                     f"⚫️ Entry: {round(transaction['value'], 4)}\n"
-                    f"ℹ️ {receipt['transactionHash']}\n"
-                    f"⛽ {receipt['gasUsed']}\n"
+                    f"ℹ️ {transactionHash}\n"
+                    f"⛽ {transaction['gas']}\n"
                     f"🗓️ {block['timestamp']}"
                 ),
             }
