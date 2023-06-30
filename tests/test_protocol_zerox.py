@@ -61,3 +61,9 @@ async def test_get_0x_quote_fail(dex):
     with pytest.raises(ValueError,match="Invalid Token"):
         result = await dex.get_quote("NOTATHING")
         assert result is None
+
+
+@pytest.mark.asyncio
+async def test_failed_get_approve(dex):
+   with pytest.raises(ValueError, match='Approval failed'):
+       result = await dex.get_approve("0xdAC17F958D2ee523a2206206994597C13D831ec7")
