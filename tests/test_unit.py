@@ -209,8 +209,8 @@ async def test_get_sign(mock_dex):
     assert result == b'transaction_hash'
     mock_dex.get_gas.assert_called_once_with(transaction)
     mock_dex.get_gas_price.assert_called_once()
-    mock_dex.w3.eth.get_transaction_count.assert_called_once_with(my_contract.wallet_address)
-    mock_dex.w3.eth.account.sign_transaction.assert_called_once_with(transaction, my_contract.private_key)
+    mock_dex.w3.eth.get_transaction_count.assert_called_once_with(mock_dex.wallet_address)
+    mock_dex.w3.eth.account.sign_transaction.assert_called_once_with(transaction, mock_dex.private_key)
     mock_dex.w3.eth.send_raw_transaction.assert_called_once_with(b'signed_transaction')
 
 
