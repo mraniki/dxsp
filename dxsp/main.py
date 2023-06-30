@@ -99,23 +99,11 @@ class DexSwap:
                 sell_amount * 10 ** (await self.get_token_decimals(sell_token_address)), "ether")
 
             self.get_approve(sell_token_address)
-            
+
             order_amount = int(sell_token_amount_wei * (settings.dex_trading_slippage / 100))
             order = await self.dex_swap.get_swap(sell_token_address, buy_token_address, order_amount)
 
             return order if not order else await self.get_sign(order)
-            if not order:
-                raise ValueError("swap order not executed")
-
-            signed_order = await self.get_sign(order)
-            order_hash = str(self.w3.to_hex(signed_order))
-
-            if self.w3.wait_for_transaction_receipt(
-                order_hash, timeout=120, poll_latency=0.1)["status"] != 1:
-                raise ValueError("receipt failed")
-
-            return await self.get_confirmation(order_hash)
-
         except ValueError as error:
             raise error
 
