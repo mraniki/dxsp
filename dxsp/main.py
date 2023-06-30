@@ -99,22 +99,22 @@ class DexSwap:
                 sell_amount * 10 ** (await self.get_token_decimals(sell_token_address)), "ether")
 
             self.get_approve(sell_token_address)
-            
+
             order_amount = int(sell_token_amount_wei * (settings.dex_trading_slippage / 100))
             order = await self.dex_swap.get_swap(sell_token_address, buy_token_address, order_amount)
 
-            return order if not order else await self.get_sign(order)
             if not order:
                 raise ValueError("swap order not executed")
 
             signed_order = await self.get_sign(order)
             order_hash = str(self.w3.to_hex(signed_order))
+            receipt = self.w3.wait_for_transaction_receipt(
+                order_hash, timeout=120, poll_latency=0.1)
 
-            if self.w3.wait_for_transaction_receipt(
-                order_hash, timeout=120, poll_latency=0.1)["status"] != 1:
+            if receipt["status"] != 1:
                 raise ValueError("receipt failed")
 
-            return await self.get_confirmation(order_hash)
+            return await self.get_confirmation(receipt)
 
         except ValueError as error:
             raise error
@@ -240,30 +240,49 @@ class DexSwap:
             )
 
 
-    async def get_confirmation(self, order_hash):
+    async def get_confirmation(self, receipt):
         """Returns trade confirmation."""
         try:
-            receipt = self.w3.eth.get_transaction(order_hash)
             block = self.w3.eth.get_block(receipt["blockNumber"])
+            transaction = self.w3.web3.eth.get_transaction(receipt["transactionHash"])
             return {
                 "timestamp": block["timestamp"],
-                "id": receipt["blockHash"],
+                "id": receipt["transactionHash"],
                 "instrument": receipt["to"],
                 "contract": receipt["to"],
-                "amount": receipt["value"],
-                "price": receipt["value"],  # TBD To be determined.
-                "fee": receipt["gas"],
+                "amount": transaction["value"],
+                "price": transaction["value"],  # TBD To be determined.
+                "fee": receipt["gasUsed"],
                 "confirmation": (
-                    f"➕ Size: {round(receipt['value'], 4)}\n"
-                    f"⚫️ Entry: {round(receipt['value'], 4)}\n"
-                    f"ℹ️ {receipt['blockHash']}\n"
-                    f"⛽ {receipt['gas']}\n"
+                    f"➕ Size: {round(transaction['value'], 4)}\n"
+                    f"⚫️ Entry: {round(transaction['value'], 4)}\n"
+                    f"ℹ️ {receipt['transactionHash']}\n"
+                    f"⛽ {receipt['gasUsed']}\n"
                     f"🗓️ {block['timestamp']}"
                 ),
             }
         except Exception as error:
             raise error
 
+    'difficulty': 49824742724615,
+    'extraData': '0xe4b883e5bda9e7a59ee4bb99e9b1bc',
+    'gasLimit': 4712388,
+    'gasUsed': 21000,
+    'hash': '0xc0f4906fea23cf6f3cce98cb44e8e1449e455b28d684dfa9ff65426495584de6',
+    'logsBloom': '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+    'miner': '0x61c808d82a3ac53231750dadc13c777b59310bd9',
+    'nonce': '0x3b05c6d5524209f1',
+    'number': 2000000,
+    'parentHash': '0x57ebf07eb9ed1137d41447020a25e51d30a0c272b5896571499c82c33ecb7288',
+    'receiptRoot': '0x84aea4a7aad5c5899bd5cfc7f309cc379009d30179316a2a7baa4a2ea4a438ac',
+    'sha3Uncles': '0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347',
+    'size': 650,
+    'stateRoot': '0x96dbad955b166f5119793815c36f11ffa909859bbfeb64b735cca37cbf10bef1',
+    'timestamp': 1470173578,
+    'totalDifficulty': 44010101827705409388,
+    'transactions': ['0xc55e2b90168af6972193c1f86fa4d7d7b31a29c156665d15b9cd48618b5177ef'],
+    'transactionsRoot': '0xb31f174d27b99cdae8e746bd138a01ce60d8dd7b224f7c60845914def05ecc58',
+    'uncles': [],
 
     async def get_gas(self, transaction):
         """get gas estimate"""
