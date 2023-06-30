@@ -2,7 +2,7 @@
 uniswap V2  🦄
 """
 from dxsp.config import settings
-from dxsp.main import DexSwap
+
 
 class DexSwapUniswapV2(DexSwap):
     async def get_quote(
@@ -11,6 +11,8 @@ class DexSwapUniswapV2(DexSwap):
         asset_out_address,
         amount=1
     ):
+       
+        from dxsp.main import DexSwap
         # self.logger.debug("get_quote_uniswap")
         try:
             router_instance = await self.router()
@@ -27,6 +29,7 @@ class DexSwapUniswapV2(DexSwap):
 
     async def get_approve(self, token_address):
         # pass
+        from dxsp.main import DexSwap
         try:
             contract = await self.get_token_contract(token_address)
             if contract is None:
@@ -49,6 +52,7 @@ class DexSwapUniswapV2(DexSwap):
 
     async def get_swap(self, asset_out_address, asset_in_address, amount):
         # pass
+        from dxsp.main import DexSwap
         try:
             path = [self.w3.to_checksum_address(asset_out_address),
                     self.w3.to_checksum_address(asset_in_address)]
