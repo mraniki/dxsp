@@ -13,7 +13,6 @@ class DexSwapUniswapV3(DexSwap):
         amount=1
     ):
 
-        self.logger.debug("get_quote_uniswap_v3")
         try:
             quoter = await self.quoter()
             sqrtPriceLimitX96 = 0
@@ -26,9 +25,9 @@ class DexSwapUniswapV3(DexSwap):
         except Exception as e:
             return e
 
-    async def get_approve_uniswap_v3(self, token_address):
-        pass
+    # async def get_approve(self, token_address):
+    #     pass
 
 
-    async def get_swap_uniswap_v3(self, asset_out_address, asset_in_address, amount):
-        pass
+    # async def get_swap(self, asset_out_address, asset_in_address, amount):
+    #     pass

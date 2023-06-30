@@ -13,8 +13,8 @@ class DexSwapOneInch(DexSwap):
         asset_out_address,
         amount=1
     ):
-        try:
-            pass
+        #try:
+        pass
         #     asset_out_amount = self.w3.to_wei(amount, 'ether')
         #     quote_url = (
         #         settings.dex_1inch_url
@@ -37,13 +37,13 @@ class DexSwapOneInch(DexSwap):
         #         quote = self.w3.from_wei(int(quote_amount), 'ether')
         #         # /(10 ** quote_decimals))
         #         return round(quote, 2)
-        except Exception as error:
-            raise ValueError(f"Approval failed {error}") 
+    #     except Exception as error:
+    #         raise ValueError(f"Approval failed {error}") 
 
-    async def get_approve(self, token_address):
-        # pass
-        try:
-            pass
+    # async def get_approve(self, token_address):
+    #     # pass
+    #     try:
+    #         pass
             # approval_check_URL = (
             #     settings.dex_1inch_url
             #     + str(self.chain_id)
@@ -64,15 +64,15 @@ class DexSwapOneInch(DexSwap):
             #         + str(asset_out_address))
             #     approval_response = await self._get(approval_URL)
             #     return approval_response
-        except Exception as error:
-            raise ValueError(f"Approval failed {error}") 
+    #     except Exception as error:
+    #         raise ValueError(f"Approval failed {error}") 
 
 
 
-    async def get_swap(self, asset_out_address, asset_in_address, amount):
+    # async def get_swap(self, asset_out_address, asset_in_address, amount):
 
-        try:
-            pass
+    #     try:
+    #         pass
             # swap_url = (
             #     settings.dex_1inch_url
             #     + str(self.chain_id)
@@ -96,5 +96,5 @@ class DexSwapOneInch(DexSwap):
             # if swap_order_status != 200:
             #     return
             # return swap_order
-        except Exception as error:
-            raise ValueError(f"Swap failed {error}") 
+        # except Exception as error:
+        #     raise ValueError(f"Swap failed {error}") 
