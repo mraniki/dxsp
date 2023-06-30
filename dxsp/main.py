@@ -25,27 +25,44 @@ class DexSwap:
         except Exception as error:
             raise error
 
-        self.protocol_type = settings.dex_protocol_type
-        #if self.protocol_type == "uniswap_v2":
-        self.dex_swap = DexSwapUniswapV2()
-        if self.protocol_type == "uniswap_v3":
-            self.dex_swap = DexSwapUniswapV3()
-        elif self.protocol_type == "0x":
-            self.dex_swap = DexSwapZeroX()
-        #else:
-        #    raise ValueError("Invalid protocol type")
         self.chain_id = settings.dex_chain_id
         self.wallet_address = self.w3.to_checksum_address(
             settings.dex_wallet_address)
         self.account = f"{str(self.chain_id)} - {str(self.wallet_address[-8:])}"
         self.private_key = settings.dex_private_key
         
-
         self.cg = CoinGeckoAPI()
+                    
+        self.protocol_type = settings.dex_protocol_type
+        self.dex_swap = None
+        self.get_protocol()
+
+    async def get_protocol(self):
+        """
+        setup protocol
+        """
+        try:
+            self.dex_swap = DexSwapUniswapV2()
+            if self.protocol_type == "uniswap_v3":
+                self.dex_swap = DexSwapUniswapV3()
+            elif self.protocol_type == "0x":
+                self.dex_swap = DexSwapZeroX()
+        except Exception as error:
+            raise error
+        # try:
+        #     protocol_class_name = f"DexSwap{self.protocol_type.capitalize()}"
+        #     protocol_class = globals().get(protocol_class_name)
+        #     if protocol_class:
+        #         self.dex_swap = protocol_class()
+        #     else:
+        #         raise ValueError(f"Invalid protocol type: {self.protocol_type}")
+        # except Exception as error:
+        #     raise error
 
     async def execute_order(self, order_params):
         """Execute swap function."""
         try:
+            # self.get_protocol()
             action = order_params.get('action')
             instrument = order_params.get('instrument')
             quantity = order_params.get('quantity', 1)
@@ -67,6 +84,7 @@ class DexSwap:
         """Main swap function"""
         self.logger.debug("get_swap")
         try:
+            # self.get_protocol()
             sell_token_address = sell_token
             if not sell_token.startswith("0x"):
                 sell_token_address = await self.search_contract_address(sell_token)
@@ -109,6 +127,7 @@ class DexSwap:
         gets a quote for a token
         """
         try:
+            # self.get_protocol()
             buy_address = settings.trading_asset_address
             sell_address = await self.search_contract_address(sell_token)
             quote = await self.dex_swap.get_quote(buy_address, sell_address)
@@ -116,6 +135,8 @@ class DexSwap:
 
         except Exception as error:
             raise error
+
+
 
 ### ------🛠️ W3 UTILS ---------
     async def get(self, url, params=None, headers=None):
