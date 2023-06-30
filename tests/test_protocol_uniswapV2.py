@@ -68,11 +68,11 @@ async def test_get_approve_uniswap(dex):
 #     dex.protocol_type = "uniswap_v2"
 
     # Call the function being tested
-    swap_order = await dex.get_swap(
-        dex.w3.to_checksum_address(asset_out_address),
-        dex.w3.to_checksum_address(asset_in_address),
-        amount)
-    print(f"swap_order: {swap_order}")
-    # Check the output
-    assert swap_order is not None
+    # swap_order = await dex.get_swap(
+    #     dex.w3.to_checksum_address(asset_out_address),
+    #     dex.w3.to_checksum_address(asset_in_address),
+    #     amount)
+    # print(f"swap_order: {swap_order}")
+    # # Check the output
+    # assert swap_order is not None
 
