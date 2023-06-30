@@ -137,6 +137,10 @@ class DexSwap:
             raise error
 
 
+    async def get_approve(self, token_address):
+        # if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
+        await self.get_protocol()
+        return await self.dex_swap.get_approve(token_address)
 
 ### ------🛠️ W3 UTILS ---------
     async def get(self, url, params=None, headers=None):
@@ -181,11 +185,6 @@ class DexSwap:
         except Exception as error:
             raise error
 
-    async def get_approve(self, token_address):
-        # if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
-        await self.get_protocol()
-        return await self.dex_swap.get_approve(token_address)
-            
 
     async def get_sign(self, transaction):
         try:
@@ -203,6 +202,7 @@ class DexSwap:
             return self.w3.eth.send_raw_transaction(signed.rawTransaction)
         except Exception as error:
             raise error
+
 
     async def get_abi(self, address):
         if not settings.dex_block_explorer_api:
@@ -397,5 +397,3 @@ class DexSwap:
 
     async def get_account_margin(self):
         return 0
-
-
