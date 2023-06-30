@@ -227,7 +227,7 @@ async def test_get_confirmation(dex):
 
 @pytest.mark.asyncio
 async def test_calculate_sell_amount(dex):
-    sell_token_address = "0x123abc"
+    sell_token_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
     quantity = 50
 
     result = await dex.calculate_sell_amount(sell_token_address, quantity)

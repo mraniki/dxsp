@@ -62,13 +62,13 @@ async def test_get_swap_uniswap(dex):
     get_block_mock.return_value = {"timestamp": 1000}
 
     # Set up the test instance
-    dex.get_quote_uniswap = get_quote_mock
+    dex.get_quote = get_quote_mock
     dex.w3.eth.get_block = get_block_mock
     dex.wallet_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
     dex.protocol_type = "uniswap_v2"
 
     # Call the function being tested
-    swap_order = await dex.get_swap_uniswap(
+    swap_order = await dex.get_swap(
         asset_out_address,
         asset_in_address,
         amount)
