@@ -202,7 +202,7 @@ async def test_failed_get_approve(dex):
 
 @pytest.mark.asyncio
 async def test_get_sign(mock_dex):
-    transaction = MagicMock()
+    transaction = AsyncMock()
 
     result = await mock_dex.get_sign(transaction)
 

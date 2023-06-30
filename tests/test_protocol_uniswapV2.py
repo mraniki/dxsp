@@ -54,11 +54,11 @@ async def test_get_swap_uniswap(dex):
     amount = 100
 
     # Create a mock object for self.get_quote_uniswap()
-    get_quote_mock = MagicMock()
+    get_quote_mock = AsyncMock()
     get_quote_mock.return_value = [50]
 
     # Create a mock object for self.w3.eth.get_block()
-    get_block_mock = MagicMock()
+    get_block_mock = AsyncMock()
     get_block_mock.return_value = {"timestamp": 1000}
 
     # Set up the test instance
