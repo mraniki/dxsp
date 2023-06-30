@@ -48,7 +48,7 @@ class DexSwap:
                 self.dex_swap = DexSwapUniswapV3()
             elif self.protocol_type == "0x":
                 self.dex_swap = DexSwapZeroX()
-            elif self.protocol_type == "0x":
+            elif self.protocol_type == "1inch":
                 self.dex_swap = DexSwapOneInch()
         except Exception as error:
             raise error
