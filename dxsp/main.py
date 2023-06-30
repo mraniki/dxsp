@@ -185,6 +185,7 @@ class DexSwap:
 
     async def get_approve(self, token_address):
         # if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
+        await self.get_protocol()
         return await self.dex_swap.get_approve(token_address)
             
 
@@ -244,6 +245,7 @@ class DexSwap:
 
     async def get_swap_order(self, sell_token_address: str, buy_token_address: str, sell_token_amount_wei: int) -> Optional[str]:
         """Get swap order"""
+        await self.get_protocol()
         order_amount = int(sell_token_amount_wei * (settings.dex_trading_slippage / 100))
         order = await self.dex_swap.get_swap(sell_token_address, buy_token_address, order_amount)
         return order if not order else await self.get_sign(order)
