@@ -35,30 +35,31 @@ class DexSwap:
                     
         self.protocol_type = settings.dex_protocol_type
         self.dex_swap = None
-        #self.get_protocol()
+
 
     async def get_protocol(self):
         """
         setup protocol
         """
-        from dxsp.protocols import DexSwapUniswapV2, DexSwapUniswapV3, DexSwapZeroX
+        from dxsp.protocols import DexSwapUniswapV2, DexSwapUniswapV3, DexSwapZeroX, DexSwapOneInch
         try:
             self.dex_swap = DexSwapUniswapV2()
             if self.protocol_type == "uniswap_v3":
                 self.dex_swap = DexSwapUniswapV3()
             elif self.protocol_type == "0x":
                 self.dex_swap = DexSwapZeroX()
+            elif self.protocol_type == "0x":
+                self.dex_swap = DexSwapOneInch()
         except Exception as error:
             raise error
-        # try:
+        
         #     protocol_class_name = f"DexSwap{self.protocol_type.capitalize()}"
         #     protocol_class = globals().get(protocol_class_name)
         #     if protocol_class:
         #         self.dex_swap = protocol_class()
         #     else:
         #         raise ValueError(f"Invalid protocol type: {self.protocol_type}")
-        # except Exception as error:
-        #     raise error
+
 
     async def execute_order(self, order_params):
         """Execute swap function."""
@@ -98,16 +99,14 @@ class DexSwap:
                 sell_amount * 10 ** (await self.get_token_decimals(sell_token_address)), "ether")
 
             self.get_approve(sell_token_address)
-            # is None:
-              #  raise ValueError("approval failed")
 
-            swap_order = await self.get_swap_order(
-                sell_token_address, buy_token_address, sell_token_amount_wei)
-            if not swap_order:
+            #swap_order = await self.get_swap_order(
+            #    sell_token_address, buy_token_address, sell_token_amount_wei)
+            order_amount = int(sell_token_amount_wei * (settings.dex_trading_slippage / 100))
+            order = await self.dex_swap.get_swap(sell_token_address, buy_token_address, order_amount)
+            return order if not order else await self.get_sign(order)
+            if not order:
                 raise ValueError("swap order not executed")
-
-            if self.protocol_type == "0x":
-                await self.get_sign(swap_order)
 
             signed_order = await self.get_sign(swap_order)
             order_hash = str(self.w3.to_hex(signed_order))
@@ -120,7 +119,6 @@ class DexSwap:
 
         except ValueError as error:
             raise error
-
 
 
     async def get_quote(self, sell_token):
@@ -241,14 +239,6 @@ class DexSwap:
         return (sell_balance / (risk_percentage**sell_decimals)) * (
             float(quantity) / 100
             )
-
-
-    async def get_swap_order(self, sell_token_address: str, buy_token_address: str, sell_token_amount_wei: int) -> Optional[str]:
-        """Get swap order"""
-        await self.get_protocol()
-        order_amount = int(sell_token_amount_wei * (settings.dex_trading_slippage / 100))
-        order = await self.dex_swap.get_swap(sell_token_address, buy_token_address, order_amount)
-        return order if not order else await self.get_sign(order)
 
 
     async def get_confirmation(self, order_hash):

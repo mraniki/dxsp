@@ -11,14 +11,12 @@ class DexSwapUniswapV2(DexSwap):
         asset_out_address,
         amount=1
     ):
-       
-        # self.logger.debug("get_quote_uniswap")
         try:
             router_instance = await self.router()
             quote = router_instance.functions.getAmountsOut(
                 amount,
                 [asset_in_address, asset_out_address]).call()
-            # self.logger.error("quote %s", quote)
+            self.logger.error("quote %s", quote)
             if isinstance(quote, list):
                 quote = str(quote[0])
             return f"🦄 {quote} {settings.trading_asset}"   
@@ -27,7 +25,6 @@ class DexSwapUniswapV2(DexSwap):
 
 
     async def get_approve(self, token_address):
-        # pass
         try:
             contract = await self.get_token_contract(token_address)
             if contract is None:
