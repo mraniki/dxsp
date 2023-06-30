@@ -199,7 +199,7 @@ class DexSwap:
                 transaction = transaction.build_transaction(transaction_params)
             signed = self.w3.eth.account.sign_transaction(
                 transaction, self.private_key)
-            return self.w3.eth.send_raw_transaction(signed.rawTransaction)
+            return self.w3.eth.send_raw_transaction(signed)
         except Exception as error:
             raise error
 
@@ -208,7 +208,7 @@ class DexSwap:
         """Calculates the sell amount based on the risk amount."""
         sell_balance = await self.get_token_balance(sell_token_address)
         sell_contract = await self.get_token_contract(sell_token_address)
-        sell_decimals = await sell_contract.functions.decimals().call()
+        sell_decimals = await sell_contract.functions.decimals().call() if sell_contract is not None else 18
         risk_percentage = settings.trading_risk_amount
         return (sell_balance / (risk_percentage**sell_decimals)) * (
             float(quantity) / 100
