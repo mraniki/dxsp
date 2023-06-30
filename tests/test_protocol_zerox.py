@@ -12,7 +12,7 @@ from dxsp import DexSwap
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="zerox_test")
+    settings.configure(FORCE_ENV_FOR_DYNACONF="test_zerox_chain5")
 
 @pytest.fixture(name="dex")
 def DexSwap_fixture():
@@ -21,8 +21,8 @@ def DexSwap_fixture():
 
 def test_dynaconf_is_in_testing():
     print(settings.VALUE)
-    assert settings.VALUE == "zerox_test"
-    assert settings.dex_chain_id == 1
+    assert settings.VALUE == "test_zerox"
+    assert settings.dex_chain_id == 5
 
 
 @pytest.fixture(name="order")
@@ -55,33 +55,19 @@ async def test_dex(dex):
     assert dex.wallet_address.startswith("0x")
     assert dex.wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
     assert dex.private_key.startswith("0x")
-    assert dex.account == "1 - 32BE35BC"
+    assert dex.account == "5 - 32BE35BC"
 
 
 @pytest.mark.asyncio
 async def test_get_0x_quote(dex):
-    with patch("dxsp.config.settings", autospec=True):
-        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
-        settings.dex_private_key = "0xdeadbeet"
-        settings.dex_chain_id = 1
-        settings.dex_rpc = "https://rpc.ankr.com/eth_goerli"
-        settings.dex_0x_url = "https://goerli.api.0x.org"
-        settings.dex_protocol_type = "0x"
-        # Test function ETH > UNI
-        result = await dex.get_quote("UNI")
-        assert result is not None
-        #assert isinstance(result, float)
+    result = await dex.get_quote("UNI")
+    print(result)
+    assert result is not None
+    #assert isinstance(result, float)
 
 
 @pytest.mark.asyncio
 async def test_get_0x_quote_fail(dex):
-    with patch("dxsp.config.settings", autospec=True):
-        settings.dex_wallet_address = "0x1234567890123456789012345678901234567899"
-        settings.dex_private_key = "0xdeadbeet"
-        settings.dex_chain_id = 1
-        settings.dex_rpc = "https://rpc.ankr.com/eth_goerli"
-        settings.dex_0x_url = "https://goerli.api.0x.org"
-        settings.dex_protocol_type = "0x"
-        # Test function DAI > UNI
-        result = await dex.get_quote("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
+    with pytest.raises(ValueError,match="Invalid Token"):
+        result = await dex.get_quote("NOTATHING")
         assert result is None

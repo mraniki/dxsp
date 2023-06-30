@@ -12,7 +12,7 @@ from dxsp import DexSwap
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="chain_5")
+    settings.configure(FORCE_ENV_FOR_DYNACONF="test_uniswap_chain5")
 @pytest.fixture(name="dex")
 def DexSwap_fixture():
     return DexSwap()
@@ -21,7 +21,7 @@ def test_dynaconf_is_in_testing_env_DEX5():
     print(settings.VALUE)
     assert settings.VALUE == "On Testnet"
     assert settings.dex_chain_id == 5
-    assert settings.dex_wallet_address == "0x1234567890123456789012345678901234567890"
+    assert settings.dex_wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
 
 
 
