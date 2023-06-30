@@ -35,6 +35,8 @@ class DexSwap:
                     
         self.protocol_type = settings.dex_protocol_type
         self.dex_swap = None
+        # self.router = None
+        # self.quoter = None
 
 
     async def get_protocol(self):
@@ -122,9 +124,7 @@ class DexSwap:
 
 
     async def get_quote(self, sell_token):
-        """
-        gets a quote for a token
-        """
+        """ gets a quote for a token """
         try:
             #
             await self.get_protocol()
@@ -138,7 +138,6 @@ class DexSwap:
 
 
     async def get_approve(self, token_address):
-        # if self.protocol_type in ["uniswap_v2", "uniswap_v3"]:
         await self.get_protocol()
         return await self.dex_swap.get_approve(token_address)
 
