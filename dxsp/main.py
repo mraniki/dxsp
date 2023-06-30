@@ -34,7 +34,7 @@ class DexSwap:
         self.cg = CoinGeckoAPI()
                     
         self.protocol_type = settings.dex_protocol_type
-        #self.dex_swap = None
+        self.dex_swap = None
         #self.get_protocol()
 
     async def get_protocol(self):
