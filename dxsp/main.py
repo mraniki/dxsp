@@ -63,7 +63,7 @@ class DexSwap:
     async def execute_order(self, order_params):
         """Execute swap function."""
         try:
-            self.get_protocol()
+            await self.get_protocol()
             action = order_params.get('action')
             instrument = order_params.get('instrument')
             quantity = order_params.get('quantity', 1)
@@ -85,7 +85,7 @@ class DexSwap:
         """Main swap function"""
         self.logger.debug("get_swap")
         try:
-            self.get_protocol()
+            await self.get_protocol()
             sell_token_address = sell_token
             if not sell_token.startswith("0x"):
                 sell_token_address = await self.search_contract_address(sell_token)
@@ -129,7 +129,7 @@ class DexSwap:
         """
         try:
             #
-            self.get_protocol()
+            await self.get_protocol()
             buy_address = settings.trading_asset_address
             sell_address = await self.search_contract_address(sell_token)
             quote = await self.dex_swap.get_quote(buy_address, sell_address)
