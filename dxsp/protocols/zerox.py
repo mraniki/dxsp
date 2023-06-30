@@ -4,7 +4,7 @@
 from dxsp.config import settings
 #from dxsp.main import DexSwap
 
-class DexSwapZeroX(self):
+class DexSwapZeroX(object):
     async def get_quote(self, buy_address, sell_address, amount=1):
         pass
         # try:
