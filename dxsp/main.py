@@ -99,16 +99,15 @@ class DexSwap:
                 sell_amount * 10 ** (await self.get_token_decimals(sell_token_address)), "ether")
 
             self.get_approve(sell_token_address)
-
-            #swap_order = await self.get_swap_order(
-            #    sell_token_address, buy_token_address, sell_token_amount_wei)
+            
             order_amount = int(sell_token_amount_wei * (settings.dex_trading_slippage / 100))
             order = await self.dex_swap.get_swap(sell_token_address, buy_token_address, order_amount)
+
             return order if not order else await self.get_sign(order)
             if not order:
                 raise ValueError("swap order not executed")
 
-            signed_order = await self.get_sign(swap_order)
+            signed_order = await self.get_sign(order)
             order_hash = str(self.w3.to_hex(signed_order))
 
             if self.w3.wait_for_transaction_receipt(
