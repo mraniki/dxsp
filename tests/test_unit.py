@@ -182,7 +182,6 @@ async def test_failed_get_approve(dex):
 
 # @pytest.mark.asyncio
 # async def test_get_sign(dex):
-#     dex = DexSwap()
 #     dex.w3.eth.account.sign_transaction = Mock()
 #     dex.w3.eth.send_raw_transaction = Mock()
 #     mock_tx = {"to": "0x1234567890123456789012345678901234567890",
@@ -198,6 +197,20 @@ async def test_get_confirmation(dex):
     assert result is not None
     assert result['confirmation'] is not None
     assert result['confirmation'].startswith('➕')
+    assert result['timestamp'] is not None
+    assert result['fee'] is not None
+
+
+@pytest.mark.asyncio
+async def test_calculate_sell_amount(dex):
+    sell_token_address = "0x123abc"
+    quantity = 50
+
+    result = await dex.calculate_sell_amount(sell_token_address, quantity)
+
+    assert result == 20.0
+    dex.get_token_balance.assert_called_once_with(sell_token_address)
+    dex.get_token_contract.assert_called_once_with(sell_token_address)
 
 
 @pytest.mark.asyncio
@@ -230,7 +243,6 @@ async def test_get_name(dex):
     assert len(name) == 8
 
 
-
 @pytest.mark.asyncio
 async def test_search_contract_address(dex):
     address = await dex.search_contract_address("USDT")
@@ -239,12 +251,10 @@ async def test_search_contract_address(dex):
     print(address)
 
 
-
 @pytest.mark.asyncio
 async def test_invalid_search_contract_address(dex):
     with pytest.raises(ValueError, match='Invalid Token'):
         address = await dex.search_contract_address("NOTATHING")
-
 
 
 @pytest.mark.asyncio
@@ -304,7 +314,6 @@ async def test_get_account_balance(dex):
     balance = await dex.get_account_balance()
     assert balance is not None
     assert balance >= 0
-
 
 
 @pytest.mark.asyncio
