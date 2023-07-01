@@ -111,8 +111,7 @@ class DexSwap:
 
             signed_order = await self.get_sign(order)
             order_hash = str(self.w3.to_hex(signed_order))
-            receipt = self.w3.wait_for_transaction_receipt(
-                order_hash, timeout=120, poll_latency=0.1)
+            receipt = self.w3.wait_for_transaction_receipt(order_hash)
 
             if receipt["status"] != 1:
                 raise ValueError("receipt failed")
@@ -149,9 +148,8 @@ class DexSwap:
             if allowance == 0:
                 approval_tx = contract.functions.approve(dex_router_address, approved_amount)
                 approval_tx_hash = await self.get_sign(approval_tx.transact())
-                return self.w3.eth.wait_for_transaction_receipt(
-                    approval_tx_hash, timeout=120, poll_latency=0.1
-                )
+                approval_receipt = self.w3.eth.wait_for_transaction_receipt(approval_tx_hash)
+                return approval_receipt
         except Exception as error:
             raise ValueError(f"Approval failed {error}") 
 
