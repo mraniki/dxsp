@@ -97,6 +97,16 @@ async def test_get_swap(account) -> str:
     with patch("dxsp.config.settings", autospec=True):
         settings.dex_wallet_address = account
         dex = DexSwap()
-        swap = await dex.get_swap('USDT','wBTC',quantity=10)
+        swap = await dex.get_token_decimals('USDT','wBTC',quantity=10)
         print(swap)
         assert swap is not None
+
+# @pytest.mark.asyncio
+# async def test_get_swap(account) -> str:
+#     """test token account."""
+#     with patch("dxsp.config.settings", autospec=True):
+#         settings.dex_wallet_address = account
+#         dex = DexSwap()
+#         swap = await dex.get_swap('USDT','wBTC',quantity=10)
+#         print(swap)
+#         assert swap is not None

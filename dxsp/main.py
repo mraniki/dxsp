@@ -35,14 +35,12 @@ class DexSwap:
                     
         self.protocol_type = settings.dex_protocol_type
         self.dex_swap = None
-        # self.router = None
-        # self.quoter = None
+        self.router = None
+        self.quoter = None
 
 
     async def get_protocol(self):
-        """
-        setup protocol
-        """
+        """ setup protocol """
         from dxsp.protocols import DexSwapUniswapV2, DexSwapUniswapV3, DexSwapZeroX, DexSwapOneInch
         try:
             self.logger.info("get_protocol")
@@ -65,9 +63,8 @@ class DexSwap:
 
 
     async def execute_order(self, order_params):
-        """Execute swap function."""
+        """ Execute swap function. """
         try:
-            # await self.get_protocol()
             action = order_params.get('action')
             instrument = order_params.get('instrument')
             quantity = order_params.get('quantity', 1)
@@ -86,7 +83,7 @@ class DexSwap:
             return f"⚠️ order execution: {error}"
 
     async def get_swap(self, sell_token: str, buy_token: str, quantity: int) -> None:
-        """Main swap function"""
+        """ Main swap function """
         self.logger.debug("get_swap")
         try:
             await self.get_protocol()
@@ -165,39 +162,6 @@ class DexSwap:
             raise error
 
 
-    async def router(self):
-        try:
-            self.logger.debug("getting router")
-            router_abi = await self.get_abi(settings.dex_router_contract_addr)
-            if router_abi is None:
-                router_abi = await self.get(settings.dex_router_abi_url)
-            return self.w3.eth.contract(
-                address=self.w3.to_checksum_address(
-                    settings.dex_router_contract_addr
-                ),
-                abi=router_abi,
-            )
-        except Exception as error:
-            raise error
-
-    async def get_name(self):
-        return settings.dex_router_contract_addr[-8:]
-
-
-    async def quoter(self):
-        try:
-            quoter_abi = await self.get_abi(settings.dex_quoter_contract_addr)
-            if quoter_abi is None:
-                quoter_abi = await self.get(settings.dex_quoter_abi_url)
-            contract = self.w3.eth.contract(
-                address=self.w3.to_checksum_address(
-                    settings.dex_quoter_contract_addr),
-                abi=quoter_abi)
-            return contract
-        except Exception as error:
-            raise error
-
-#to be moved under protocol class
     async def get_sign(self, transaction):
         try:
             if self.protocol_type in ['uniswap_v2', 'uniswap_v3']:
@@ -369,6 +333,11 @@ class DexSwap:
 
 
 # 🔒 USER RELATED
+
+    async def get_name(self):
+        return settings.dex_router_contract_addr[-8:]
+
+
     async def get_token_balance(self, token_address: str) -> Optional[int]:
         """Get token balance"""
         contract = await self.get_token_contract(token_address)

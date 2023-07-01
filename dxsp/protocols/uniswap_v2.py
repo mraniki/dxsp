@@ -5,6 +5,23 @@ from dxsp.config import settings
 from dxsp.main import DexSwap
 
 class DexSwapUniswapV2(DexSwap):
+
+    async def router(self):
+        try:
+            # self.logger.debug("getting router")
+            # router_abi = await self.get_abi(settings.dex_router_contract_addr)
+            # if router_abi is None:
+            router_abi = await self.get(settings.dex_router_abi_url)
+            return self.w3.eth.contract(
+                address=self.w3.to_checksum_address(
+                    settings.dex_router_contract_addr
+                ),
+                abi=router_abi,
+            )
+        except Exception as error:
+            raise error
+
+
     async def get_quote(
         self,
         asset_in_address,
