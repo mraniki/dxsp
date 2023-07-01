@@ -18,12 +18,9 @@ class DexSwapUniswap(DexSwap):
                 path = [sell_address,buy_address]
                 print(path)
                 amount_out = self.router.functions.getAmountsOut(
-                    amount,
+                    amount * await self.get_token_decimals(buy_address),
                     path).call()[-1]
-                quote = int((
-                    amount_out * (10 ** await self.get_token_decimals(sell_address))) 
-                    // ((10 **await self.get_token_decimals(buy_address))
-                     + settings.dex_trading_slippage))
+                quote = int(amount_out / await self.get_token_decimals(sell_address))
                 return quote
 
             if self.protocol_type == "uniswap_v3":
