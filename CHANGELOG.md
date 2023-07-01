@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.1 (2023-07-01)
+
+### Fix
+
+* :recycle: Refactor TalkyTrader link in README.md ([`65a3c76`](https://github.com/mraniki/dxsp/commit/65a3c76654591c94e188746158d1edbf08fe1337))
+
+### Other
+
+* Merge pull request #287 from mraniki/dev ([`c8826e5`](https://github.com/mraniki/dxsp/commit/c8826e5055f131492788b15f92541ecc74a77d71))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`31225e0`](https://github.com/mraniki/dxsp/commit/31225e03140e936cdcd11cd6c3c422699222e29d))
+
 ## v3.0.0 (2023-07-01)
 
 ### Feature
