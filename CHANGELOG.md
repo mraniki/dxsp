@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.2 (2023-07-01)
+
+### Fix
+
+* 🚑 hot fix  for quote ([`44bce38`](https://github.com/mraniki/dxsp/commit/44bce38770b8ad2d6c2e5676f64410a5520f8896))
+* 🥅Refactor DexSwap class error handling ([`49235e0`](https://github.com/mraniki/dxsp/commit/49235e0434116270bd767e20207972104e41a58c))
+
+### Other
+
+* Merge pull request #288 from mraniki/dev ([`68584c4`](https://github.com/mraniki/dxsp/commit/68584c42bfc6548ba4f194d6f591f0d42e9414a6))
+
 ## v3.0.1 (2023-07-01)
 
 ### Fix
