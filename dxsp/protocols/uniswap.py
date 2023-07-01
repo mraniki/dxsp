@@ -29,7 +29,7 @@ class DexSwapUniswap(DexSwap):
                 await self.quoter_contract()
                 sqrtPriceLimitX96 = 0
                 fee = 3000
-                quote = quoter.functions.quoteExactInputSingle(
+                quote = self.quoter.functions.quoteExactInputSingle(
                     asset_in_address,
                     asset_out_address,
                     fee, amount, sqrtPriceLimitX96).call()
@@ -56,7 +56,6 @@ class DexSwapUniswap(DexSwap):
                     self.wallet_address,
                     deadline,
                 )
-                self.logger.debug("swap %s", swap)
                 return swap
             if self.protocol_type == "uniswap_v3":
                 return

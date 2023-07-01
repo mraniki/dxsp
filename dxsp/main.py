@@ -40,23 +40,15 @@ class DexSwap:
 
 
     async def get_protocol(self):
-        """ setup protocol """
+        """ protocol init """
         from dxsp.protocols import DexSwapUniswap, DexSwapZeroX, DexSwapOneInch
-        try:
-            self.dex_swap = DexSwapUniswap()
-            if self.protocol_type == "0x":
-                self.dex_swap = DexSwapZeroX()
-            elif self.protocol_type == "1inch":
-                self.dex_swap = DexSwapOneInch()
-        # approach for automated name class
-        #     protocol_class_name = f"DexSwap{self.protocol_type.capitalize()}"
-        #     protocol_class = globals().get(protocol_class_name)
-        #     if protocol_class:
-        #         self.dex_swap = protocol_class()
-        #     else:
-        #         raise ValueError(f"Invalid protocol type: {self.protocol_type}")
-        except Exception as error:
-            raise error
+        self.dex_swap = DexSwapUniswap()
+        if self.protocol_type == "0x":
+            self.dex_swap = DexSwapZeroX()
+        elif self.protocol_type == "1inch":
+            self.dex_swap = DexSwapOneInch()
+        else:
+            raise ValueError(f"Invalid protocol type")
 
 
     async def execute_order(self, order_params):
