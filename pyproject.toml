@@ -19,6 +19,8 @@ python = "^3.10"
 dynaconf = "^3.1.12"
 web3 = "^6.4.0"
 pycoingecko = "^3.1.0"
+#eip712 = "^0.2.1"
+#eth-ape'[recommended-plugins]' = "^0.6.11"
 
 [tool.poetry.dev-dependencies]
 python-semantic-release = "^7.34.3"

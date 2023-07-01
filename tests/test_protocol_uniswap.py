@@ -1,5 +1,5 @@
 """
- DEXSWAP Unit Test
+ DEXSWAP Uniswap  Test
 """
 import asyncio
 from unittest.mock import AsyncMock, Mock, patch, MagicMock
@@ -8,7 +8,6 @@ import pytest
 import time
 from dxsp.config import settings
 from dxsp import DexSwap
-#from dxsp.protocols import DexSwapUniswapV2
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
@@ -40,7 +39,8 @@ async def test_quoter(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_quote_uniswap(dex):
+async def test_get_quote_uniswap():
+    dex = Dexswap()
     quote = await dex.get_quote("WBTC")
     print(f"quote: {quote}")
     assert quote is not None

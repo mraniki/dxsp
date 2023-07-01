@@ -42,13 +42,12 @@ class DexSwap:
     async def get_protocol(self):
         """ protocol init """
         from dxsp.protocols import DexSwapUniswap, DexSwapZeroX, DexSwapOneInch
-        self.dex_swap = DexSwapUniswap()
         if self.protocol_type == "0x":
             self.dex_swap = DexSwapZeroX()
         elif self.protocol_type == "1inch":
             self.dex_swap = DexSwapOneInch()
         else:
-            raise ValueError("Invalid protocol type")
+            self.dex_swap = DexSwapUniswap()
 
 
     async def execute_order(self, order_params):
