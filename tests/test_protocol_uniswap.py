@@ -24,6 +24,20 @@ def test_dynaconf_is_in_testing():
     assert settings.VALUE == "On Testing"
     assert settings.dex_chain_id == 1
 
+@pytest.mark.asyncio
+async def test_router(dex):
+    router_setup = await dex.router_contract()
+    router = dex.router
+    print(f"router: {router}")
+    assert router is not None
+
+@pytest.mark.asyncio
+async def test_quoter(dex):
+    quoter_setup = await dex.quoter_contract()
+    quoter = dex.quoter
+    print(f"router: {quoter}")
+    assert quoter is not None
+
 
 @pytest.mark.asyncio
 async def test_get_quote_uniswap(dex):
@@ -31,15 +45,6 @@ async def test_get_quote_uniswap(dex):
     print(f"quote: {quote}")
     assert quote is not None
     assert quote.startswith("🦄")
-    #expected_quote_pattern = r"🦄 \d+ USDT"
-    #assert re.match(expected_quote_pattern, quote) is not None
-
-@pytest.mark.asyncio
-async def test_router(dex):
-    router_setup = await dex.router_contract()
-    router = dex.router
-    print(f"router: {router}")
-    assert router is not None
 
 
 # @pytest.mark.asyncio
@@ -70,15 +75,3 @@ async def test_router(dex):
     # print(f"swap_order: {swap_order}")
     # # Check the output
     # assert swap_order is not None
-
-
-
-# for uniswap_v3
-
-# @pytest.mark.asyncio
-# async def test_quoter(dex):
-#     """quoter Testing"""
-#     await dex.get_protocol()
-#     quoter = await dex.quoter()
-#     if quoter:
-#         assert quoter is not None

@@ -11,7 +11,6 @@ from dxsp.config import settings
 from dxsp import DexSwap
 
 
-
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="test_uniswap_chain_1")
@@ -25,23 +24,6 @@ def test_dynaconf_is_in_testing():
     print(settings.VALUE)
     assert settings.VALUE == "On Testing"
     assert settings.dex_chain_id == 1
-
-
-# @pytest.fixture(name="test_token")
-# def test_balance(web3, chain):
-#     erc20_token, _ = chain.provider.get_or_deploy_contract('ERC20Token')
-
-#     token_name = erc20_token.functions.name().call()
-#     token_symbol = erc20_token.functions.symbol().call()
-#     decimals = erc20_token.functions.decimals().call()
-#     total_supply = erc20_token.functions.totalSupply().call()
-#     balance = erc20_token.functions.balanceOf(web3.eth.coinbase).call()
-
-#     assert token_name == b"Haha Coin"
-#     assert token_symbol == b"HAH"
-#     assert decimals == 3
-#     assert total_supply == 1000000
-#     assert balance == 1000000
 
 
 @pytest.fixture(name="order")
@@ -100,14 +82,6 @@ async def test_dex(dex):
     assert dex.wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
     assert dex.private_key.startswith("0x")
     assert dex.account == "1 - 32BE35BC"
-
-
-@pytest.mark.asyncio
-async def test_router_object(dex):
-    return await dex.router()
-    print(router)
-    assert router is not None
-
 
 
 @pytest.mark.asyncio
@@ -288,6 +262,7 @@ async def test_get_decimals(dex):
 
 @pytest.mark.asyncio
 async def test_get_gas(dex):
+    """get_gas Testing"""
     mock_tx = {"to": "0x1234567890123456789012345678901234567890",
                 "value": "1000000000000000000"}
     result = await dex.get_gas(mock_tx)
@@ -296,7 +271,7 @@ async def test_get_gas(dex):
 
 @pytest.mark.asyncio
 async def test_get_gas_price(dex):
-    # Call the get_gasPrice method and check the result
+    # Call the get_gasPrice method
     result = await dex.get_gas_price()
     print(f"gas_price: {result}")
     assert result is not None
@@ -304,7 +279,7 @@ async def test_get_gas_price(dex):
 
 @pytest.mark.asyncio
 async def test_get_account_balance(dex):
-    # Call the get_account_balance method and check the result
+    # Call the get_account_balance method
     result = await dex.get_account_balance()
     assert result is not None
     assert result >= 0
@@ -312,7 +287,7 @@ async def test_get_account_balance(dex):
 
 @pytest.mark.asyncio
 async def test_get_token_balance(dex):
-    # Call the get_token_balance method and check the result
+    # Call the get_token_balance method
     result = await dex.get_token_balance("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
     print("balance ", result)
     assert result is not None
