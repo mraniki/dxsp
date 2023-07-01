@@ -49,14 +49,13 @@ class DexSwapUniswap(DexSwap):
                 await self.router_contract()
                 min_amount = await self.get_quote(
                     asset_in_address, asset_out_address, amount)
-                swap = self.router.functions.swapExactTokensForTokens(
+                return self.router.functions.swapExactTokensForTokens(
                     int(amount),
                     int(min_amount),
                     tuple(path),
                     self.wallet_address,
                     deadline,
                 )
-                return swap
             if self.protocol_type == "uniswap_v3":
                 return
         except Exception as error:
