@@ -379,7 +379,7 @@ class DexSwap:
         if contract is None or contract.functions is None:
             raise ValueError("No Balance")
         balance = contract.functions.balanceOf(self.wallet_address).call()
-        if balance is None or balance == 0:
+        if balance is None:
             raise ValueError("No Balance")
         return balance
 
@@ -394,6 +394,9 @@ class DexSwap:
             account_balance = self.w3.eth.get_balance(
                 self.w3.to_checksum_address(self.wallet_address))
             account_balance = self.w3.from_wei(account_balance, 'ether')
+            self.logger.debug(
+                "account balance: %s",
+            )
             trading_asset_balance = await self.get_trading_asset_balance()
             if trading_asset_balance:
                 account_balance += f"💵{trading_asset_balance}"

@@ -40,19 +40,18 @@ token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/t
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 trading_asset = "USDT"
 trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-trading_risk_amount = 10 # 10% of the position
-dex_trading_slippage = 2 # 2 % slippage
+trading_risk_amount = 10 
+dex_trading_slippage = 2
 dex_wallet_address = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC" 
 dex_private_key = "0xdeadbeet45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266" 
 dex_chain_id = 1
-dex_protocol_type = "uniswap_v2" #0x | 1inch | uniswap_v3
+dex_protocol_type = "uniswap_v2"
 dex_rpc = "https://rpc.ankr.com/eth"
-dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D" #UNI_V2
+dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
 dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
 dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
-dex_quoter_contract_addr = "0x61fFE014bA17989E743c5F6cB21bF9697530B21e" #UNI_V3_QUOTERV2
+dex_quoter_contract_addr = "0x61fFE014bA17989E743c5F6cB21bF9697530B21e"
 dex_quoter_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v3/quoter.abi"
-
 
 [test_zerox_chain_1]
 VALUE = "test_zerox"
@@ -76,7 +75,6 @@ dex_router_contract_addr = "0xdef1c0ded9bec7f1a1670819833240f027b25eff"
 dex_router_abi_url = "https://raw.githubusercontent.com/0xProject/protocol/development/packages/contract-artifacts/artifacts/Exchange.json"
 dex_erc20_abi_url = "https://raw.githubusercontent.com/0xProject/protocol/development/packages/contract-artifacts/artifacts/ERC20Token.json"
 
-
 [test_uniswap_chain5]
 VALUE = "On Testnet"
 loglevel = "DEBUG"
@@ -99,7 +97,6 @@ dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
 dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
 dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
 
-
 [test_pancake_chain_56]
 VALUE = "chain_56"
 dex_chain_id = 56
@@ -110,7 +107,7 @@ dex_block_explorer_url = "https://api.bscscan.com/api?"
 dex_block_explorer_api =  ""
 trading_asset = "BUSD"
 trading_asset_address = "0xe9e7cea3dedca5984780bafc599bd69add087d56"
-dex_protocol_type = "uniswap_v2"
+dex_protocol_type = "0x"
 dex_router_contract_addr = "0x10ED43C718714eb63d5aA57B78B54704E256024E"
 dex_0x_url = "https://bsc.api.0x.org/"
 

@@ -40,21 +40,43 @@ def w3():
 
 @pytest.fixture()
 def account(web3) -> str:
-  """Deploy account."""
+  """setup account."""
   return web3.eth.accounts[0]
 
 def test_account(account) -> str:
-  """Deploy account."""
+  """test account."""
   print(account)
   assert account is not None
 
-def test_account_balance(account) -> str:
-    """Deploy account."""
+@pytest.mark.asyncio
+async def test_account_balance(account) -> str:
+    """test balance account."""
     with patch("dxsp.config.settings", autospec=True):
-        settings.wallet_address = account
-
+        settings.dex_wallet_address = account
+        print(settings.dex_wallet_address)
         dex = DexSwap()
         print(dex.wallet_address)
-        balance = dex.get_account_balance()
+        balance = await dex.get_account_balance()
+        print(balance)
+        assert balance is not None
+
+@pytest.mark.asyncio
+async def test_token_balance(account) -> str:
+    """test token account."""
+    with patch("dxsp.config.settings", autospec=True):
+        settings.dex_wallet_address = account
+        with pytest.raises(ValueError, match='No Balance'):
+          dex = DexSwap()
+          balance = await dex.get_token_balance(settings.trading_asset_address)
+          print(balance)
+          assert balance is not None
+
+@pytest.mark.asyncio
+async def test_trading_asset_balance(account) -> str:
+    """test token account."""
+    with patch("dxsp.config.settings", autospec=True):
+        settings.dex_wallet_address = account
+        dex = DexSwap()
+        balance = await dex.get_trading_asset_balance()
         print(balance)
         assert balance is not None
