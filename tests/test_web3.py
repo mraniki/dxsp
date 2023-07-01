@@ -80,3 +80,23 @@ async def test_trading_asset_balance(account) -> str:
         balance = await dex.get_trading_asset_balance()
         print(balance)
         assert balance is not None
+
+@pytest.mark.asyncio
+async def test_get_quote(account) -> str:
+    """test token account."""
+    with patch("dxsp.config.settings", autospec=True):
+        settings.dex_wallet_address = account
+        dex = DexSwap()
+        quote = await dex.get_quote('WBTC')
+        print(quote)
+        assert quote is not None
+
+@pytest.mark.asyncio
+async def test_get_swap(account) -> str:
+    """test token account."""
+    with patch("dxsp.config.settings", autospec=True):
+        settings.dex_wallet_address = account
+        dex = DexSwap()
+        swap = await dex.get_swap('USDT','wBTC',quantity=10)
+        print(swap)
+        assert swap is not None

@@ -101,7 +101,7 @@ class DexSwap:
             sell_token_amount_wei = self.w3.to_wei(
                 sell_amount * 10 ** (await self.get_token_decimals(sell_token_address)), "ether")
 
-            self.get_approve(sell_token_address)
+            await self.get_approve(sell_token_address)
 
             order_amount = int(sell_token_amount_wei * (settings.dex_trading_slippage / 100))
             order = await self.dex_swap.get_swap(sell_token_address, buy_token_address, order_amount)
@@ -148,7 +148,7 @@ class DexSwap:
             allowance = contract.functions.allowance(owner_address, dex_router_address).call()
             if allowance == 0:
                 approval_tx = contract.functions.approve(dex_router_address, approved_amount)
-                approval_tx_hash = await self.get_sign(approval_tx)
+                approval_tx_hash = await self.get_sign(approval_tx.transact())
                 return self.w3.eth.wait_for_transaction_receipt(
                     approval_tx_hash, timeout=120, poll_latency=0.1
                 )
@@ -219,14 +219,12 @@ class DexSwap:
 
 
     async def calculate_sell_amount(self, sell_token_address, quantity):
-        """Calculates the sell amount based on the risk amount."""
+        """Returns amount based on risk percentage."""
         sell_balance = await self.get_token_balance(sell_token_address)
         sell_contract = await self.get_token_contract(sell_token_address)
-        sell_decimals = await sell_contract.functions.decimals().call() if sell_contract is not None else 18
+        sell_decimals = sell_contract.functions.decimals().call() if sell_contract is not None else 18
         risk_percentage = settings.trading_risk_amount
-        return (sell_balance / (risk_percentage**sell_decimals)) * (
-            float(quantity) / 100
-            )
+        return (sell_balance / (risk_percentage ** sell_decimals)) * (float(quantity) / 100)
 
 
     async def get_confirmation(self, transactionHash):
