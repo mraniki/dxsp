@@ -12,18 +12,18 @@ class DexSwapUniswapV3(DexSwap):
         asset_out_address,
         amount=1
     ):
-
-        try:
-            quoter = await self.quoter()
-            sqrtPriceLimitX96 = 0
-            fee = 3000
-            quote = quoter.functions.quoteExactInputSingle(
-                asset_in_address,
-                asset_out_address,
-                fee, amount, sqrtPriceLimitX96).call()
-            return f"🦄 {quote} {settings.trading_asset}"
-        except Exception as e:
-            return e
+        pass
+        # try:
+        #     quoter = await self.quoter()
+        #     sqrtPriceLimitX96 = 0
+        #     fee = 3000
+        #     quote = quoter.functions.quoteExactInputSingle(
+        #         asset_in_address,
+        #         asset_out_address,
+        #         fee, amount, sqrtPriceLimitX96).call()
+        #     return f"🦄 {quote} {settings.trading_asset}"
+        # except Exception as e:
+        #     return e
 
 
     # async def get_swap(self, asset_out_address, asset_in_address, amount):
