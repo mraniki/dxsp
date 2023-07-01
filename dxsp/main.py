@@ -299,14 +299,31 @@ class DexSwap:
 
     async def get_token_contract(self, token_address):
         """Given a token address, returns a contract object. """
-        token_abi = await self.get_abi(token_address)
+        token_abi = await self.get_explorer_abi(token_address)
         if token_abi is None:
             token_abi = await self.get(settings.dex_erc20_abi_url)
         return self.w3.eth.contract(
             address=token_address,
             abi=token_abi)
 
-    async def get_abi(self, address):
+
+    async def get_token_decimals(self, token_address: str) -> Optional[int]:
+        """Get token decimals"""
+        contract = await self.get_token_contract(token_address)
+        return 18 if not contract else contract.functions.decimals().call() or 18
+
+    async def get_token_balance(self, token_address: str) -> Optional[int]:
+        """Get token balance"""
+        contract = await self.get_token_contract(token_address)
+        if contract is None or contract.functions is None:
+            raise ValueError("No Balance")
+        balance = contract.functions.balanceOf(self.wallet_address).call()
+        if balance is None:
+            raise ValueError("No Balance")
+        return balance
+
+
+    async def get_explorer_abi(self, address):
         if not settings.dex_block_explorer_api:
             self.logger.warning("No block_explorer_api.")
             return None
@@ -328,7 +345,7 @@ class DexSwap:
                 self.logger.warning("No ABI identified")
                 return None
         except Exception as error:
-            self.logger.error("get_abi %s", error)
+            self.logger.error("get_explorer_abi %s", error)
             return None
 
 
@@ -337,22 +354,6 @@ class DexSwap:
     async def get_name(self):
         return settings.dex_router_contract_addr[-8:]
 
-
-    async def get_token_balance(self, token_address: str) -> Optional[int]:
-        """Get token balance"""
-        contract = await self.get_token_contract(token_address)
-        if contract is None or contract.functions is None:
-            raise ValueError("No Balance")
-        balance = contract.functions.balanceOf(self.wallet_address).call()
-        if balance is None:
-            raise ValueError("No Balance")
-        return balance
-
-
-    async def get_token_decimals(self, token_address: str) -> Optional[int]:
-        """Get token decimals"""
-        contract = await self.get_token_contract(token_address)
-        return 18 if not contract else contract.functions.decimals().call() or 18
 
     async def get_account_balance(self):
         try:

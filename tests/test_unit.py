@@ -305,13 +305,13 @@ async def test_invalid_search_contract_address(dex):
 async def test_get_abi(dex, mocker):
     mock_resp = {"status": "1", "result": "0x0123456789abcdef"}
     mocker.patch.object(dex, "get", return_value=mock_resp)
-    abi = await dex.get_abi("0x1234567890123456789012345678901234567890")
+    abi = await dex.get_explorer_abi("0x1234567890123456789012345678901234567890")
     assert abi == "0x0123456789abcdef"
 
 
 @pytest.mark.asyncio
 async def test_invalid_get_abi(dex):
-    abi = await dex.get_abi("0x1234567890123456789012345678901234567890")
+    abi = await dex.get_explorer_abi("0x1234567890123456789012345678901234567890")
     assert abi is None
 
 
