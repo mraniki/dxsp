@@ -26,14 +26,15 @@ class DexSwapUniswap(DexSwap):
                 return quote
 
             if self.protocol_type == "uniswap_v3":
-                await self.quoter_contract()
-                sqrtPriceLimitX96 = 0
-                fee = 3000
-                quote = self.quoter.functions.quoteExactInputSingle(
-                    asset_in_address,
-                    asset_out_address,
-                    fee, amount, sqrtPriceLimitX96).call()
-                return quote
+                pass
+                # await self.quoter_contract()
+                # sqrtPriceLimitX96 = 0
+                # fee = 3000
+                # quote = self.quoter.functions.quoteExactInputSingle(
+                #     asset_in_address,
+                #     asset_out_address,
+                #     fee, amount, sqrtPriceLimitX96).call()
+                # return quote
 
         except Exception as error:
             raise ValueError(f"Quote failed {error}") 

@@ -115,7 +115,7 @@ class DexSwap:
             quote = await self.dex_swap.get_quote(buy_address, sell_address)
             return f"🦄 {quote} {settings.trading_asset}"
         except Exception as error:
-            raise error
+            return f"⚠️ order execution: {error}"
 
 
     async def get_approve(self, token_address):
