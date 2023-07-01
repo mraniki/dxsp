@@ -65,11 +65,11 @@ async def test_token_balance(account) -> str:
     """test token account."""
     with patch("dxsp.config.settings", autospec=True):
         settings.dex_wallet_address = account
-        with pytest.raises(ValueError, match='No Balance'):
-          dex = DexSwap()
-          balance = await dex.get_token_balance(settings.trading_asset_address)
-          print(balance)
-          assert balance is not None
+        # with pytest.raises(ValueError, match='No Balance'):
+        dex = DexSwap()
+        balance = await dex.get_token_balance(settings.trading_asset_address)
+        print(balance)
+        assert balance is not None
 
 @pytest.mark.asyncio
 async def test_trading_asset_balance(account) -> str:

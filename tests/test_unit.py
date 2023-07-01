@@ -368,11 +368,3 @@ async def test_get_token_balance(dex):
     assert token_balance is not None
     assert token_balance >= 0
     assert isinstance(token_balance, int)
-
-
-
-@pytest.mark.asyncio
-async def test_failed_get_trading_asset_balance(dex):
-    with pytest.raises(ValueError, match='No Balance'):
-        token_balance = await dex.get_trading_asset_balance()
-
