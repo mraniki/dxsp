@@ -35,7 +35,7 @@ class DexSwapUniswapV2(DexSwap):
             deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
             await self.router_contract()
             min_amount = await self.get_quote(
-                asset_in_address, asset_out_address, amount)[0]
+                asset_in_address, asset_out_address, amount)
             swap = self.router.functions.swapExactTokensForTokens(
                 int(amount),
                 int(min_amount),
