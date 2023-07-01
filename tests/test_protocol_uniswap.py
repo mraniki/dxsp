@@ -40,7 +40,7 @@ async def test_quoter(dex):
 
 @pytest.mark.asyncio
 async def test_get_quote_uniswap(dex):
-    quote = await dex.get_quote("WBTC")
+    quote = await dex.get_quote("UNI")
     print(f"quote: {quote}")
     assert quote is not None
     assert quote.startswith("🦄")
