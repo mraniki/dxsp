@@ -145,8 +145,7 @@ class DexSwap:
             if allowance == 0:
                 approval_tx = contract.functions.approve(dex_router_address, approved_amount)
                 approval_tx_hash = await self.get_sign(approval_tx.transact())
-                approval_receipt = self.w3.eth.wait_for_transaction_receipt(approval_tx_hash)
-                return approval_receipt
+                return self.w3.eth.wait_for_transaction_receipt(approval_tx_hash)
         except Exception as error:
             raise ValueError(f"Approval failed {error}") 
 
