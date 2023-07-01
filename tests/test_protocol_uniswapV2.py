@@ -25,26 +25,14 @@ def test_dynaconf_is_in_testing():
     assert settings.dex_chain_id == 1
 
 
-# @pytest.mark.asyncio
-# async def test_get_quote_uniswap(dex):
-#     quote = await dex.get_quote("WBTC")
-#     print(f"quote: {quote}")
-#     assert quote is not None
-#     assert quote.startswith("🦄")
-#     expected_quote_pattern = r"🦄 \d+ USDT"
-#     assert re.match(expected_quote_pattern, quote) is not None
-
-
 @pytest.mark.asyncio
-async def test_get_approve_uniswap(dex):
-    symbol = "UNI"
-    approve_receipt = None
-    try:
-        approve_receipt = await dex.get_approve_uniswap(symbol)
-        print(approve_receipt)
-    except Exception as e:
-        print(f"Error getting approve receipt: {e}")
-    assert approve_receipt is None
+async def test_get_quote_uniswap(dex):
+    quote = await dex.get_quote("WBTC")
+    print(f"quote: {quote}")
+    assert quote is not None
+    assert quote.startswith("🦄")
+    expected_quote_pattern = r"🦄 \d+ USDT"
+    assert re.match(expected_quote_pattern, quote) is not None
 
 
 # @pytest.mark.asyncio

@@ -218,10 +218,17 @@ async def test_get_quote_invalid(dex):
 
 
 
-# @pytest.mark.asyncio
-# async def test_get_approve(dex):
-#    result = await dex.get_approve("0xdAC17F958D2ee523a2206206994597C13D831ec7")
-#    assert result is not None
+@pytest.mark.asyncio
+async def test_get_approve(dex):
+    symbol = "UNI"
+    approve_receipt = None
+    try:
+        approve_receipt = await dex.get_approve(symbol)
+        print(approve_receipt)
+    except Exception as e:
+        print(f"Error getting approve receipt: {e}")
+    assert approve_receipt is None
+
 
 @pytest.mark.asyncio
 async def test_failed_get_approve(dex):

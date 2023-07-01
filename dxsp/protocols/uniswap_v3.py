@@ -25,9 +25,6 @@ class DexSwapUniswapV3(DexSwap):
         except Exception as e:
             return e
 
-    # async def get_approve(self, token_address):
-    #     pass
-
 
     # async def get_swap(self, asset_out_address, asset_in_address, amount):
     #     pass
