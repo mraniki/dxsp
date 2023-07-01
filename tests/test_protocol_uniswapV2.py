@@ -16,7 +16,8 @@ def set_test_settings():
 
 @pytest.fixture(name="dex")
 def DexSwap_fixture():
-    return DexSwap()
+    dex=DexSwap()
+    return dex
 
 
 def test_dynaconf_is_in_testing():
@@ -33,6 +34,13 @@ async def test_get_quote_uniswap(dex):
     assert quote.startswith("🦄")
     #expected_quote_pattern = r"🦄 \d+ USDT"
     #assert re.match(expected_quote_pattern, quote) is not None
+
+@pytest.mark.asyncio
+async def test_router(dex):
+    router_setup = await dex.router_contract()
+    router = dex.router
+    print(f"router: {router}")
+    assert router is not None
 
 
 # @pytest.mark.asyncio
@@ -64,3 +72,14 @@ async def test_get_quote_uniswap(dex):
     # # Check the output
     # assert swap_order is not None
 
+
+
+# for uniswap_v3
+
+# @pytest.mark.asyncio
+# async def test_quoter(dex):
+#     """quoter Testing"""
+#     await dex.get_protocol()
+#     quoter = await dex.quoter()
+#     if quoter:
+#         assert quoter is not None

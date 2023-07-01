@@ -266,19 +266,6 @@ async def test_get(dex):
     assert result is not None
 
 
-@pytest.mark.asyncio
-async def test_router(dex):
-    router = await dex.router()
-    assert router is not None
-
-
-@pytest.mark.asyncio
-async def test_quoter(dex):
-    """quoter Testing"""
-    quoter = await dex.quoter()
-    if quoter:
-        assert quoter is not None
-
 
 @pytest.mark.asyncio
 async def test_get_name(dex):
