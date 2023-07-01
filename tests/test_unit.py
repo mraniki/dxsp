@@ -105,8 +105,6 @@ async def test_dex(dex):
 @pytest.mark.asyncio
 async def test_router_object(dex):
     return await dex.router()
-    print(router)
-    assert router is not None
 
 
 
