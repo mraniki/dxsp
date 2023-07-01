@@ -16,8 +16,7 @@ def set_test_settings():
 
 @pytest.fixture(name="dex")
 def DexSwap_fixture():
-    dex=DexSwap()
-    return dex
+    return DexSwap()
 
 
 def test_dynaconf_is_in_testing():
