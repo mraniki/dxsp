@@ -48,7 +48,7 @@ class DexSwap:
         elif self.protocol_type == "1inch":
             self.dex_swap = DexSwapOneInch()
         else:
-            raise ValueError(f"Invalid protocol type")
+            raise ValueError("Invalid protocol type")
 
 
     async def execute_order(self, order_params):
