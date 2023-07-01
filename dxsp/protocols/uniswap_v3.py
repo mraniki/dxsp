@@ -22,18 +22,18 @@ class DexSwapUniswapV3(DexSwap):
         except Exception as error:
             raise error
 
-    async def quoter(self):
-        try:
-            quoter_abi = await self.get_abi(settings.dex_quoter_contract_addr)
-            if quoter_abi is None:
-                quoter_abi = await self.get(settings.dex_quoter_abi_url)
-            contract = self.w3.eth.contract(
-                address=self.w3.to_checksum_address(
-                    settings.dex_quoter_contract_addr),
-                abi=quoter_abi)
-            return contract
-        except Exception as error:
-            raise error
+    # async def quoter(self):
+    #     try:
+    #         quoter_abi = await self.get_abi(settings.dex_quoter_contract_addr)
+    #         if quoter_abi is None:
+    #             quoter_abi = await self.get(settings.dex_quoter_abi_url)
+    #         contract = self.w3.eth.contract(
+    #             address=self.w3.to_checksum_address(
+    #                 settings.dex_quoter_contract_addr),
+    #             abi=quoter_abi)
+    #         return contract
+    #     except Exception as error:
+    #         raise error
 
     async def get_quote(
         self,
