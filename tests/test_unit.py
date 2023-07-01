@@ -153,9 +153,9 @@ async def test_get_quote(dex):
 
 @pytest.mark.asyncio
 async def test_get_quote_invalid(dex):
-    with pytest.raises(ValueError, match='Invalid Token'):
-        result = await dex.get_quote("THISISNOTATOKEN")
-
+    result = await dex.get_quote("THISISNOTATOKEN")
+    assert result is not None
+    assert result.startswith("⚠️")
 
 @pytest.mark.asyncio
 async def test_get_approve(dex):

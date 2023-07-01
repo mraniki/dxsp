@@ -30,7 +30,8 @@ class DexSwap:
             settings.dex_wallet_address)
         self.account = f"{str(self.chain_id)} - {str(self.wallet_address[-8:])}"
         self.private_key = settings.dex_private_key
-        
+        self.trading_asset_address = self.w3.to_checksum_address(
+            settings.trading_asset_address)
         self.cg = CoinGeckoAPI()
                     
         self.protocol_type = settings.dex_protocol_type
@@ -57,9 +58,9 @@ class DexSwap:
             instrument = order_params.get('instrument')
             quantity = order_params.get('quantity', 1)
             sell_token, buy_token = (
-                (settings.trading_asset_address, instrument)
+                (self.trading_asset_address, instrument)
                 if action == 'BUY'
-                else (instrument, settings.trading_asset_address))
+                else (instrument, self.trading_asset_address))
             order = await self.get_swap(sell_token, buy_token, quantity)
             if order:
                     trade_confirmation = (
@@ -110,12 +111,12 @@ class DexSwap:
         """ gets a quote for a token """
         try:
             await self.get_protocol()
-            buy_address = settings.trading_asset_address
+            buy_address = self.trading_asset_address
             sell_address = await self.search_contract_address(sell_token)
             quote = await self.dex_swap.get_quote(buy_address, sell_address)
             return f"🦄 {quote} {settings.trading_asset}"
         except Exception as error:
-            raise error
+            return f"⚠️: {error}"
 
 
     async def get_approve(self, token_address):
@@ -176,6 +177,8 @@ class DexSwap:
                 ),
                 abi=router_abi,
             )
+            if self.router.functions is None:
+                raise ValueError("Router/Chain setup incorrect")
         except Exception as error:
             raise error
 
@@ -241,17 +244,17 @@ class DexSwap:
             settings.token_mainnet_list,
         ]
         for contract_list in contract_lists:
-            token_contract = await self.get_token_address(
+            token_address = await self.get_token_address(
                 contract_list,
                 token
             )
-            if token_contract is not None:
-                return self.w3.to_checksum_address(token_contract)
+            if token_address is not None:
+                return self.w3.to_checksum_address(token_address)
 
-        token_contract = await self.search_cg_contract(token)
-        if token_contract is None:
+        token_address = await self.search_cg_contract(token)
+        if token_address is None:
             raise ValueError("Invalid Token")
-        return self.w3.to_checksum_address(token_contract)
+        return self.w3.to_checksum_address(token_address)
 
 
     async def search_cg_platform(self):
@@ -369,7 +372,7 @@ class DexSwap:
 
     async def get_trading_asset_balance(self):
         trading_asset_balance = await self.get_token_balance(
-            settings.trading_asset_address)
+            self.trading_asset_address)
         return trading_asset_balance if trading_asset_balance else 0
 
     async def get_account_position(self):

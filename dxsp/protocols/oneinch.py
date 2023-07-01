@@ -9,22 +9,22 @@ from dxsp.main import DexSwap
 class DexSwapOneInch(DexSwap):
     async def get_quote(
         self,
-        asset_in_address,
-        asset_out_address,
+        buy_address,
+        sell_address,
         amount=1
     ):
         #try:
         pass
-        #     asset_out_amount = self.w3.to_wei(amount, 'ether')
+        #     min_amount = self.w3.to_wei(amount, 'ether')
         #     quote_url = (
         #         settings.dex_1inch_url
         #         + str(self.chain_id)
         #         + "/quote?fromTokenAddress="
-        #         + str(asset_in_address)
+        #         + str(buy_address)
         #         + "&toTokenAddress="
-        #         + str(asset_out_address)
+        #         + str(sell_address)
         #         + "&amount="
-        #         + str(asset_out_amount))
+        #         + str(min_amount))
         #     quote_response = await self._get(
         #         url=quote_url,
         #         params=None,
@@ -48,7 +48,7 @@ class DexSwapOneInch(DexSwap):
             #     settings.dex_1inch_url
             #     + str(self.chain_id)
             #     + "/approve/allowance?tokenAddress="
-            #     + str(asset_out_address)
+            #     + str(sell_address)
             #     + "&walletAddress="
             #     + str(self.wallet_address))
             # approval_response = await self._get(
@@ -61,7 +61,7 @@ class DexSwapOneInch(DexSwap):
             #         settings.dex_1inch_url
             #         + str(self.chain_id)
             #         + "/approve/transaction?tokenAddress="
-            #         + str(asset_out_address))
+            #         + str(sell_address))
             #     approval_response = await self._get(approval_URL)
             #     return approval_response
     #     except Exception as error:
@@ -69,7 +69,7 @@ class DexSwapOneInch(DexSwap):
 
 
 
-    # async def get_swap(self, asset_out_address, asset_in_address, amount):
+    # async def get_swap(self, sell_address, buy_address, amount):
 
     #     try:
     #         pass
@@ -77,9 +77,9 @@ class DexSwapOneInch(DexSwap):
             #     settings.dex_1inch_url
             #     + str(self.chain_id)
             #     + "/swap?fromTokenAddress="
-            #     + asset_out_address
+            #     + sell_address
             #     + "&toTokenAddress="
-            #     + asset_in_address
+            #     + buy_address
             #     + "&amount="
             #     + amount
             #     + "&fromAddress="
