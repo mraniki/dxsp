@@ -2,6 +2,19 @@
 
 <!--next-version-placeholder-->
 
+## v3.1.1 (2023-07-02)
+
+### Fix
+
+* :rotating_light: linter ([`979155b`](https://github.com/mraniki/dxsp/commit/979155b29694d9ab5e83578106229f1a725fcc04))
+* :white_check_mark:unit test ([`831957a`](https://github.com/mraniki/dxsp/commit/831957a13a25019b68c3d35c9465aee66ed9c4e8))
+* :zap: getinfo method ([`6bfb149`](https://github.com/mraniki/dxsp/commit/6bfb149c5b61730ff4359e1e0e1c0801e242a2a4))
+* :art: Add position information to DexSwap class ([`af98a06`](https://github.com/mraniki/dxsp/commit/af98a06b15e9bec7813821808e6784227dc38078))
+
+### Other
+
+* Merge pull request #291 from mraniki/dev ([`589192e`](https://github.com/mraniki/dxsp/commit/589192efa5f77111ae49173a985d2ff3ac26f8b2))
+
 ## v3.1.0 (2023-07-02)
 
 ### Feature
