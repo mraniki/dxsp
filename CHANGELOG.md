@@ -2,6 +2,25 @@
 
 <!--next-version-placeholder-->
 
+## v3.1.3 (2023-07-02)
+
+### Fix
+
+* ✅ unit test ([`030983a`](https://github.com/mraniki/dxsp/commit/030983a10b4c1d021e7b07897df6267e049a1171))
+* ✅ unit test ([`9882b0e`](https://github.com/mraniki/dxsp/commit/9882b0ebcb79538257a38d0c9e3dfd0ef697c42e))
+* ♻️ refactor zerox ([`ede9b01`](https://github.com/mraniki/dxsp/commit/ede9b01af7550917ce75c920d78be78b38dd369b))
+* 🐛 bug for zerox fixed ([`73993cf`](https://github.com/mraniki/dxsp/commit/73993cf6f52e4ca39aaacabddfc8c02bd4c7ed65))
+* ♻️ refactor ([`897fcbe`](https://github.com/mraniki/dxsp/commit/897fcbee964ec2ace8ad1751642e0226d8e32f7f))
+* 🐛 bug zerox ([`aac0a03`](https://github.com/mraniki/dxsp/commit/aac0a03f8dbe761545305b7e37b50a77fca1540d))
+* ✅ unit test ([`7d8e1a4`](https://github.com/mraniki/dxsp/commit/7d8e1a4d86cacd229b3e02b50ed88ded15ebf615))
+
+### Other
+
+* Merge pull request #294 from mraniki/dev ([`296ad44`](https://github.com/mraniki/dxsp/commit/296ad44e90a50a8e600a6a20bc721152a56a62fe))
+* Merge pull request #296 from mraniki/sourcery/dev ([`ce0de87`](https://github.com/mraniki/dxsp/commit/ce0de87af5c48f98eb669a71d43d6335bf9900f3))
+* 'Refactored by Sourcery' ([`7dd0f8f`](https://github.com/mraniki/dxsp/commit/7dd0f8f9181fa467600f9e5821a9e171b577bb90))
+* Merge branch 'main' into dev ([`89735c6`](https://github.com/mraniki/dxsp/commit/89735c6ecb6c9131c9d44059234e0fc401c47fcf))
+
 ## v3.1.2 (2023-07-02)
 
 ### Fix
