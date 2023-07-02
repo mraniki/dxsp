@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v3.1.0 (2023-07-02)
+
+### Feature
+
+* 🥚 using uniswap-python for the uni class ([`7fc6543`](https://github.com/mraniki/dxsp/commit/7fc6543275f120e185109d25f592ddb2b39ad01a))
+
+### Other
+
+* Merge pull request #290 from mraniki/dev ([`c13c1d1`](https://github.com/mraniki/dxsp/commit/c13c1d1a960b66b9352ca90d45b3cd99dd5cfadb))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`d8eab01`](https://github.com/mraniki/dxsp/commit/d8eab01889a83586d28edab3fc62de2c2f1b0e14))
+
 ## v3.0.3 (2023-07-02)
 
 ### Fix
