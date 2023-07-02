@@ -2,6 +2,18 @@
 
 <!--next-version-placeholder-->
 
+## v3.1.2 (2023-07-02)
+
+### Fix
+
+* :art: var uniformed ([`469ae40`](https://github.com/mraniki/dxsp/commit/469ae4022e174356e8b507b2ed959b9681e41a65))
+* :art: added factory contract setting ([`996ae99`](https://github.com/mraniki/dxsp/commit/996ae99fe2227cda7b9316d1d207edd588bfb1de))
+* 🔧 config ([`1d50507`](https://github.com/mraniki/dxsp/commit/1d505073b0c2d45b93f67eb0c48c0b54c47bd938))
+
+### Other
+
+* Merge pull request #292 from mraniki/dev ([`4b35784`](https://github.com/mraniki/dxsp/commit/4b357845399262f9f3f447493a3370deec75603b))
+
 ## v3.1.1 (2023-07-02)
 
 ### Fix
