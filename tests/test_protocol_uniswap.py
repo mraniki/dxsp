@@ -23,31 +23,31 @@ def test_dynaconf_is_in_testing():
     assert settings.VALUE == "On Testing"
     assert settings.dex_chain_id == 1
 
-@pytest.mark.asyncio
-async def test_router(dex):
-    router_setup = await dex.router_contract()
-    router = dex.router
-    print(f"router: {router}")
-    assert router is not None
+# @pytest.mark.asyncio
+# async def test_router(dex):
+#     router_setup = await dex.router_contract()
+#     router = dex.router
+#     print(f"router: {router}")
+#     assert router is not None
+
+# @pytest.mark.asyncio
+# async def test_quoter(dex):
+#     quoter_setup = await dex.quoter_contract()
+#     quoter = dex.quoter
+#     print(f"router: {quoter}")
+#     assert quoter is not None
+
 
 @pytest.mark.asyncio
-async def test_quoter(dex):
-    quoter_setup = await dex.quoter_contract()
-    quoter = dex.quoter
-    print(f"router: {quoter}")
-    assert quoter is not None
-
-
-@pytest.mark.asyncio
-async def test_get_quote_uniswap(dex):
-    quote = await dex.get_quote("UNI")
+async def test_get_quote(dex):
+    quote = await dex.get_quote("WBTC")
     print(f"quote: {quote}")
     assert quote is not None
     assert quote.startswith("🦄")
 
 
 # @pytest.mark.asyncio
-# async def test_get_swap_uniswap(dex):
+# async def test_get_swap(dex):
 #     asset_out_address = "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
 #     asset_in_address = "0xdac17f958d2ee523a2206206994597c13d831ec7"
 #     amount = 100

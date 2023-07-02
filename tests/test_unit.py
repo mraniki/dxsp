@@ -213,6 +213,12 @@ async def test_get_name(dex):
 
 
 @pytest.mark.asyncio
+async def test_get_info(dex):
+    result = await dex.get_info()
+    assert result is not None
+
+
+@pytest.mark.asyncio
 async def test_search_contract_address(dex):
     result = await dex.search_contract_address("USDT")
     assert result is not None
