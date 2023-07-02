@@ -358,7 +358,7 @@ class DexSwap:
         return settings.dex_router_contract_addr[-8:]
         
     async def get_info(self):
-        return f"💱 {await self.exchange.get_name()}\n🪪 {self.account}"
+        return f"💱 {await self.get_name()}\n🪪 {self.account}"
 
     async def get_account_balance(self):
         try:
