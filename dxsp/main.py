@@ -39,7 +39,6 @@ class DexSwap:
         self.router = None
         self.quoter = None
 
-
     async def get_protocol(self):
         """ protocol init """
         from dxsp.protocols import DexSwapUniswap, DexSwapZeroX, DexSwapOneInch
@@ -49,7 +48,6 @@ class DexSwap:
             self.dex_swap = DexSwapOneInch()
         else:
             self.dex_swap = DexSwapUniswap()
-
 
     async def execute_order(self, order_params):
         """ Execute swap function. """
@@ -63,10 +61,10 @@ class DexSwap:
                 else (instrument, self.trading_asset_address))
             order = await self.get_swap(sell_token, buy_token, quantity)
             if order:
-                    trade_confirmation = (
-                        f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n")
-                    trade_confirmation += order
-                    return trade_confirmation
+                trade_confirmation = (
+                    f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n")
+                trade_confirmation += order
+                return trade_confirmation
 
         except Exception as error:
             return f"⚠️ order execution: {error}"
@@ -78,14 +76,12 @@ class DexSwap:
             sell_token_address = sell_token
             if not sell_token.startswith("0x"):
                 sell_token_address = await self.search_contract_address(sell_token)
-            sell_token_balance = await self.get_token_balance(sell_token_address)
             buy_token_address = buy_token
             if not buy_token_address.startswith("0x"):   
                 buy_token_address = await self.search_contract_address(buy_token)
             sell_amount = await self.calculate_sell_amount(sell_token_address, quantity)
-            sell_token_amount_wei = self.w3.to_wei(
-                sell_amount * 10 ** (await self.get_token_decimals(sell_token_address)), "ether")
-
+            sell_token_amount_wei = sell_amount * (10 ** (
+                await self.get_token_decimals(sell_token_address)))
             await self.get_approve(sell_token_address)
 
             order_amount = int(sell_token_amount_wei * (settings.dex_trading_slippage / 100))
@@ -106,7 +102,6 @@ class DexSwap:
         except ValueError as error:
             raise error
 
-
     async def get_quote(self, sell_token):
         """ gets a quote for a token """
         try:
@@ -118,7 +113,6 @@ class DexSwap:
         except Exception as error:
             return f"⚠️: {error}"
 
-
     async def get_approve(self, token_address):
         """ approve a token """
         try:
@@ -127,15 +121,18 @@ class DexSwap:
                 return
             approved_amount = self.w3.to_wei(2 ** 64 - 1, 'ether')
             owner_address = self.w3.to_checksum_address(self.wallet_address)
-            dex_router_address = self.w3.to_checksum_address(settings.dex_router_contract_addr)
-            allowance = contract.functions.allowance(owner_address, dex_router_address).call()
+            dex_router_address = self.w3.to_checksum_address(
+                settings.dex_router_contract_addr)
+            allowance = contract.functions.allowance(
+                owner_address, dex_router_address).call()
             if allowance == 0:
-                approval_tx = contract.functions.approve(dex_router_address, approved_amount)
+                approval_tx = contract.functions.approve(
+                    dex_router_address, approved_amount)
                 approval_tx_hash = await self.get_sign(approval_tx.transact())
-                return self.w3.eth.wait_for_transaction_receipt(approval_tx_hash)
+                return self.w3.eth.wait_for_transaction_receipt(
+                    approval_tx_hash)
         except Exception as error:
             raise ValueError(f"Approval failed {error}") 
-
 
     async def get_sign(self, transaction):
         """ sign a transaction """
@@ -151,7 +148,8 @@ class DexSwap:
                 transaction = transaction.build_transaction(transaction_params)
             signed_tx = self.w3.eth.account.sign_transaction(
                 transaction, self.private_key)
-            raw_tx_hash = self.w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+            raw_tx_hash = self.w3.eth.send_raw_transaction(
+                signed_tx.rawTransaction)
             return self.w3.to_hex(raw_tx_hash)
         except Exception as error:
             raise error
@@ -161,7 +159,8 @@ class DexSwap:
         """ gets a url payload """
         try:
             self.logger.debug(f"Requesting URL: {url}")
-            response = requests.get(url, params=params, headers=headers, timeout=10)
+            response = requests.get(
+                url, params=params, headers=headers, timeout=10)
             if response.status_code == 200:
                 return response.json()
 
@@ -257,7 +256,6 @@ class DexSwap:
             raise ValueError("Invalid Token")
         return self.w3.to_checksum_address(token_address)
 
-
     async def search_cg_platform(self):
         """search coingecko platform"""
         asset_platforms = self.cg.get_asset_platforms()
@@ -314,7 +312,6 @@ class DexSwap:
             address=token_address,
             abi=token_abi)
 
-
     async def get_token_decimals(self, token_address: str) -> Optional[int]:
         """Get token decimals"""
         contract = await self.get_token_contract(token_address)
@@ -330,7 +327,6 @@ class DexSwap:
             raise ValueError("No Balance")
         return balance
 
-
     async def get_explorer_abi(self, address):
         if not settings.dex_block_explorer_api:
             return None
@@ -341,20 +337,15 @@ class DexSwap:
             "address": address,
             "apikey": settings.dex_block_explorer_api
         }
-        try:
-            resp = await self.get(
-                url=settings.dex_block_explorer_url, params=params)
-            if resp['status'] == "1":
-                self.logger.debug("ABI found %s", resp)
-                return resp["result"]
-            else:
-                return None
-        except Exception as error:
+        resp = await self.get(
+            url=settings.dex_block_explorer_url, params=params)
+        if resp['status'] == "1":
+            self.logger.debug("ABI found %s", resp)
+            return resp["result"]
+        else:
             return None
 
-
 # 🔒 USER RELATED
-
     async def get_name(self):
         return settings.dex_router_contract_addr[-8:]
         
@@ -362,16 +353,13 @@ class DexSwap:
         return f"💱 {await self.get_name()}\n🪪 {self.account}"
 
     async def get_account_balance(self):
-        try:
-            account_balance = self.w3.eth.get_balance(
-                self.w3.to_checksum_address(self.wallet_address))
-            account_balance = self.w3.from_wei(account_balance, 'ether')
-            trading_asset_balance = await self.get_trading_asset_balance()
-            if trading_asset_balance:
-                account_balance += f"💵{trading_asset_balance}"
-            return round(account_balance, 5)
-        except Exception:
-            return 0
+        account_balance = self.w3.eth.get_balance(
+            self.w3.to_checksum_address(self.wallet_address))
+        account_balance = self.w3.from_wei(account_balance, 'ether')
+        trading_asset_balance = await self.get_trading_asset_balance()
+        if trading_asset_balance:
+            account_balance += f"💵{trading_asset_balance}"
+        return round(account_balance, 5)
 
     async def get_trading_asset_balance(self):
         trading_asset_balance = await self.get_token_balance(
@@ -379,10 +367,10 @@ class DexSwap:
         return trading_asset_balance if trading_asset_balance else 0
 
     async def get_account_position(self):
-        #position = "📊 Position\n" + str(open_positions)
-        #position += str(await self.get_account_margin())
-        #return position
-        return 0
+        open_positions = 0
+        position = "📊 Position\n" + str(open_positions)
+        position += str(await self.get_account_margin())
+        return position
 
     async def get_account_margin(self):
         return 0
