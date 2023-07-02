@@ -8,8 +8,8 @@ class DexSwapZeroX(DexSwap):
     async def get_quote(self, buy_address, sell_address, amount=1):
         #pass
         try:
-            out_amount = amount * (10 ** await self.get_token_decimals(buy_address)) ##1000000000
-            url = f"{settings.dex_0x_url}/swap/v1/quote?buyToken={str(sell_address)}&sellToken={str(buy_address)}&buyAmount={str(out_amount)}"
+            out_amount = amount * (10 ** await self.get_token_decimals(sell_address)) ##1000000000
+            url = f"{settings.dex_0x_url}/swap/v1/quote?buyToken={str(buy_address)}&sellToken={str(sell_address)}&sellAmount={str(out_amount)}"
             headers = {"0x-api-key": settings.dex_0x_api_key}
             response = await self.get(url, params=None, headers=headers)
             print(response)
