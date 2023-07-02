@@ -8,6 +8,9 @@ from uniswap import Uniswap
 
 
 class DexSwapUniswap(DexSwap):
+   # async def 
+    
+    
     async def get_quote(
         self,
         buy_address,
@@ -15,8 +18,8 @@ class DexSwapUniswap(DexSwap):
         amount=10
     ):
         try:
-            uniswap = Uniswap(address=self.wallet_address, private_key=self.private_key, version=2, web3=self.w3, router_contract_addr=settings.dex_router_contract_addr)
-            uniswap.get_price_input(sell_address, buy_address, amount ** await self.get_token_decimals(buy_address))
+            uniswap = Uniswap(address=self.wallet_address, private_key=self.private_key, version=2, web3=self.w3, factory_contract_addr=settings.dex_factory_contract, router_contract_addr=settings.dex_router_contract_addr)
+            quote = uniswap.get_price_input(sell_address, buy_address, amount ** await self.get_token_decimals(buy_address))
             # await self.router_contract()
             # if self.protocol_type == "uniswap_v2":
             #     await self.router_contract()
@@ -37,7 +40,7 @@ class DexSwapUniswap(DexSwap):
                 #     buy_address,
                 #     sell_address,
                 #     fee, amount, sqrtPriceLimitX96).call()
-                # return quote
+            return quote
 
         except Exception as error:
             raise ValueError(f"Quote failed {error}") 
