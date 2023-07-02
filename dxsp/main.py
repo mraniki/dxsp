@@ -182,16 +182,16 @@ class DexSwap:
         except Exception as error:
             raise error
 
-    async def quoter_contract(self):
-        """ create a quoter contract """
-        try:
-            quoter_abi = await self.get(settings.dex_quoter_abi_url)
-            self.quoter = self.w3.eth.contract(
-                address=self.w3.to_checksum_address(
-                    settings.dex_quoter_contract_addr),
-                abi=quoter_abi)
-        except Exception as error:
-            raise error
+    # async def quoter_contract(self):
+    #     """ create a quoter contract """
+    #     try:
+    #         quoter_abi = await self.get(settings.dex_quoter_abi_url)
+    #         self.quoter = self.w3.eth.contract(
+    #             address=self.w3.to_checksum_address(
+    #                 settings.dex_quoter_contract_addr),
+    #             abi=quoter_abi)
+    #     except Exception as error:
+    #         raise error
 
     async def calculate_sell_amount(self, sell_token_address, quantity):
         """Returns amount based on risk percentage."""
