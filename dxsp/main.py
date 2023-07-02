@@ -152,8 +152,7 @@ class DexSwap:
             signed_tx = self.w3.eth.account.sign_transaction(
                 transaction, self.private_key)
             raw_tx_hash = self.w3.eth.send_raw_transaction(signed_tx.rawTransaction)
-            tx_hash = self.w3.to_hex(raw_tx_hash)
-            return tx_hash
+            return self.w3.to_hex(raw_tx_hash)
         except Exception as error:
             raise error
 
