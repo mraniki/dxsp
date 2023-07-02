@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v3.0.3 (2023-07-02)
+
+### Fix
+
+* :ambulance: hot fix  for quote ([`1f783cc`](https://github.com/mraniki/dxsp/commit/1f783cc0edb4251ff4c9a7c74ce617e048a4bcdd))
+
+### Other
+
+* Merge pull request #289 from mraniki/dev ([`80b18a8`](https://github.com/mraniki/dxsp/commit/80b18a898965ba85d518589a8c990443afcf4b15))
+
 ## v3.0.2 (2023-07-01)
 
 ### Fix
