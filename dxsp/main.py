@@ -317,7 +317,7 @@ class DexSwap:
     async def get_token_decimals(self, token_address: str) -> Optional[int]:
         """Get token decimals"""
         contract = await self.get_token_contract(token_address)
-        return 18 if not contract else contract.functions.decimals().call() or 18
+        return 18 if not contract else contract.functions.decimals().call()
 
     async def get_token_balance(self, token_address: str) -> Optional[int]:
         """Get token balance"""
