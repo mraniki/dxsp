@@ -356,7 +356,9 @@ class DexSwap:
 
     async def get_name(self):
         return settings.dex_router_contract_addr[-8:]
-
+        
+    async def get_info(self):
+        return f"💱 {await self.get_name()}\n🪪 {self.account}"
 
     async def get_account_balance(self):
         try:
@@ -376,6 +378,9 @@ class DexSwap:
         return trading_asset_balance if trading_asset_balance else 0
 
     async def get_account_position(self):
+        #position = "📊 Position\n" + str(open_positions)
+        #position += str(await self.get_account_margin())
+        #return position
         return 0
 
     async def get_account_margin(self):
