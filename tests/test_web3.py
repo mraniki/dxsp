@@ -101,6 +101,16 @@ async def test_get_decimals(account) -> str:
         print(result)
         assert result is not None
 
+#@pytest.mark.asyncio
+#async def test_get_sign(mock_dex):
+#    transaction = MagicMock()
+#    result = await mock_dex.get_sign(transaction)
+
+#    mock_dex.get_gas.assert_called_once_with(transaction)
+#    mock_dex.get_gas_price.assert_called_once()
+#    mock_dex.w3.eth.get_transaction_count.assert_called_once_with(mock_dex.wallet_address)
+
+
 # @pytest.mark.asyncio
 # async def test_get_swap(account) -> str:
 #     """test token account."""

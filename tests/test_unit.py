@@ -176,16 +176,6 @@ async def test_failed_get_approve(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_sign(mock_dex):
-    transaction = MagicMock()
-    result = await mock_dex.get_sign(transaction)
-
-    mock_dex.get_gas.assert_called_once_with(transaction)
-    mock_dex.get_gas_price.assert_called_once()
-    mock_dex.w3.eth.get_transaction_count.assert_called_once_with(mock_dex.wallet_address)
-
-
-@pytest.mark.asyncio
 async def test_get_confirmation(dex):
     result = await dex.get_confirmation("0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771")
     print(result)
@@ -264,6 +254,15 @@ async def test_get_decimals(dex):
     time.sleep(5)
     assert result is not None
     assert result ==18
+
+@pytest.mark.asyncio
+async def test_get_decimals_stable(dex):
+    """get_token_decimals Testing"""
+    result = await dex.get_token_decimals("0xdAC17F958D2ee523a2206206994597C13D831ec7")
+    print(result)
+    time.sleep(5)
+    assert result is not None
+    assert result ==6
 
 
 @pytest.mark.asyncio

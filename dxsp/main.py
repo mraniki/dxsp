@@ -149,9 +149,10 @@ class DexSwap:
                         self.wallet_address),
                 }
                 transaction = transaction.build_transaction(transaction_params)
-            signed = self.w3.eth.account.sign_transaction(
+            signed_tx = self.w3.eth.account.sign_transaction(
                 transaction, self.private_key)
-            return self.w3.eth.send_raw_transaction(signed)
+            raw_tx_hash = self.w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+            return self.w3.to_hex(raw_tx_hash)
         except Exception as error:
             raise error
 
@@ -317,7 +318,7 @@ class DexSwap:
     async def get_token_decimals(self, token_address: str) -> Optional[int]:
         """Get token decimals"""
         contract = await self.get_token_contract(token_address)
-        return 18 if not contract else contract.functions.decimals().call() or 18
+        return 18 if not contract else contract.functions.decimals().call()
 
     async def get_token_balance(self, token_address: str) -> Optional[int]:
         """Get token balance"""
