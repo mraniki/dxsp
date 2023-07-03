@@ -3,15 +3,18 @@ DXSP Example
 """
 import asyncio
 import logging
-import random
 
 from fastapi import FastAPI
 import uvicorn
 
 from dxsp import DexSwap
+from dxsp.config import settings
+# settings.setenv('default')
 
 # DEBUG LEVEL
 logging.basicConfig(level=logging.DEBUG)
+logging.getLogger("urllib3").setLevel(logging.WARNING)
+
 
 
 async def main():
@@ -19,11 +22,10 @@ async def main():
         # SWAP HELPER
         dex = DexSwap()
         print(type(dex))
+        print(settings.VALUE)
+
+        # settings.setenv()
         print(dex.account)
-        # RANDOM SYMBOL
-        # symbol_lst = [
-        #     'WBTC', 'WETH', 'MATIC', 'UNI', 'DAI']
-        # symbol = random.sample(symbol_lst, 1)[0]
         symbol = 'WBTC'
         # print("symbol ", symbol)
 

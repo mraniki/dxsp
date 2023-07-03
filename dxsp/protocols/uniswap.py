@@ -29,12 +29,12 @@ class DexSwapUniswap(DexSwap):
     ):
         try:
             uniswap = Uniswap(
-            address=self.wallet_address,
-            private_key=self.private_key,
-            version=2, web3=self.w3,
-            factory_contract_addr=settings.dex_factory_contract_addr,
-            router_contract_addr=settings.dex_router_contract_addr
-            )
+                address=self.wallet_address,
+                private_key=self.private_key,
+                version=2, web3=self.w3,
+                factory_contract_addr=settings.dex_factory_contract_addr,
+                router_contract_addr=settings.dex_router_contract_addr
+                )
             amount_wei = amount * (10 ** (
                 await self.get_token_decimals(sell_address)))
             quote = uniswap.get_price_input(
