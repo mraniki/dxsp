@@ -118,7 +118,7 @@ trading_asset = "BUSD"
 trading_asset_address = "0xe9e7cea3dedca5984780bafc599bd69add087d56"
 
 [uniswap3]
-VALUE = "On Testing"
+VALUE = "On uniswap3"
 dxsp_enabled = true
 loglevel = "DEBUG"
 dex_wallet_address = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC" 
@@ -126,7 +126,8 @@ dex_private_key = "0xdeadbeet45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8
 dex_protocol_type = "uniswap"
 dex_protocol_version = 3
 dex_rpc = "https://rpc.ankr.com/eth"
-dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+dex_router_contract_addr = "0x1F98431c8aD98523631AE4a59f267346ea31F984"
+dex_factory_contract_addr = "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45"
 dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
 dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
 trading_asset = "USDT"
