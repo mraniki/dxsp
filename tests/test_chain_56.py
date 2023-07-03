@@ -153,14 +153,14 @@ def test_dynaconf_is_in_testing():
 # #         print(swap_order)
 
 
-# @pytest.mark.asyncio
-# async def test_get_quote(dex):
-#     """getquote Testing"""
-#     quote = await dex.get_quote("UNI")
-#     print(quote)
-#     if quote:
-#         assert quote is not None
-#         assert quote.startswith("🦄")
+@pytest.mark.asyncio
+async def test_get_quote(dex):
+    """getquote Testing"""
+    quote = await dex.get_quote("BTCB")
+    print(quote)
+    if quote:
+        assert quote is not None
+        assert quote.startswith("🦄")
 
 
 # @pytest.mark.asyncio
