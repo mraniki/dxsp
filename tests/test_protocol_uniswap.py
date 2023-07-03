@@ -23,20 +23,6 @@ def test_dynaconf_is_in_testing():
     assert settings.VALUE == "On Testing"
     assert settings.dex_chain_id == 1
 
-# @pytest.mark.asyncio
-# async def test_router(dex):
-#     router_setup = await dex.router_contract()
-#     router = dex.router
-#     print(f"router: {router}")
-#     assert router is not None
-
-# @pytest.mark.asyncio
-# async def test_quoter(dex):
-#     quoter_setup = await dex.quoter_contract()
-#     quoter = dex.quoter
-#     print(f"router: {quoter}")
-#     assert quoter is not None
-
 
 @pytest.mark.asyncio
 async def test_get_quote(dex):
