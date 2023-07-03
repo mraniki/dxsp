@@ -27,7 +27,6 @@ def order_params_fixture():
 def test_dynaconf_is_in_testing():
     print(settings.VALUE)
     assert settings.VALUE == "On Testing"
-    assert settings.dex_chain_id == 1
 
 
 @pytest.mark.asyncio

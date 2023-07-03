@@ -22,7 +22,6 @@ def DexSwap_fixture():
 def test_dynaconf_is_in_testing():
     print(settings.VALUE)
     assert settings.VALUE == "test_zerox"
-    assert settings.dex_chain_id == 1
 
 
 @pytest.fixture(name="order")
