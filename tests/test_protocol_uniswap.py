@@ -17,6 +17,15 @@ def set_test_settings():
 def DexSwap_fixture():
     return DexSwap()
 
+@pytest.fixture(name="order")
+def order_params_fixture():
+    """Return order parameters."""
+    return {
+        'action': 'BUY',
+        'instrument': 'WBTC',
+        'quantity': 1,
+    }
+
 
 def test_dynaconf_is_in_testing():
     print(settings.VALUE)
@@ -26,37 +35,13 @@ def test_dynaconf_is_in_testing():
 
 @pytest.mark.asyncio
 async def test_get_quote(dex):
-    quote = await dex.get_quote("WBTC")
-    print(f"quote: {quote}")
-    assert quote is not None
-    assert quote.startswith("🦄")
+    result = await dex.get_quote("WBTC")
+    print(f"result: {result}")
+    assert result is not None
+    assert result.startswith("🦄")
 
-
-# @pytest.mark.asyncio
-# async def test_get_swap(dex):
-#     asset_out_address = "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
-#     asset_in_address = "0xdac17f958d2ee523a2206206994597c13d831ec7"
-#     amount = 100
-
-#     # Create a mock object for self.get_quote_uniswap()
-#     get_quote_mock = AsyncMock()
-#     get_quote_mock.return_value = [50]
-
-#     # Create a mock object for self.w3.eth.get_block()
-#     get_block_mock = AsyncMock()
-#     get_block_mock.return_value = {"timestamp": 1000}
-
-#     # Set up the test instance
-#     dex.get_quote = get_quote_mock
-#     dex.w3.eth.get_block = get_block_mock
-#     dex.wallet_address = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
-#     dex.protocol_type = "uniswap_v2"
-
-    # Call the function being tested
-    # swap_order = await dex.get_swap(
-    #     dex.w3.to_checksum_address(asset_out_address),
-    #     dex.w3.to_checksum_address(asset_in_address),
-    #     amount)
-    # print(f"swap_order: {swap_order}")
-    # # Check the output
-    # assert swap_order is not None
+@pytest.mark.asyncio
+async def test_get_swap(dex, order):
+    result = await dex.execute_order(order)
+    print(f"result: {result}")
+    assert result is not None
