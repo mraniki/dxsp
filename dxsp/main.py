@@ -24,7 +24,7 @@ class DexSwap:
             self.chain_id = self.w3.net.version
             self.wallet_address = self.w3.to_checksum_address(
                 settings.dex_wallet_address)
-            self.account = f"{__version__}\n{str(self.w3.net.version)} - {str(self.wallet_address[-8:])}"
+            self.account = f"{str(self.w3.net.version)} - {str(self.wallet_address[-8:])}"
             self.private_key = settings.dex_private_key
             self.trading_asset_address = self.w3.to_checksum_address(
                 settings.trading_asset_address)
@@ -173,8 +173,7 @@ class DexSwap:
         sell_contract = await self.get_token_contract(sell_token_address)
         sell_decimals = sell_contract.functions.decimals().call() if sell_contract is not None else 18
         risk_percentage = settings.trading_risk_amount
-        return (sell_balance / (risk_percentage * 10 ** sell_decimals))
-        * (float(quantity) / 100)
+        return (sell_balance / (risk_percentage * 10 ** sell_decimals)) * (float(quantity) / 100)
 
     async def get_confirmation(self, transactionHash):
         """Returns trade confirmation."""
@@ -325,7 +324,7 @@ class DexSwap:
         return settings.dex_router_contract_addr[-8:]
 
     async def get_info(self):
-        return f"💱 {await self.get_name()}\n🪪 {self.account}"
+        return f"{__class__.__name__} {__version__}\n💱 {await self.get_name()}\n🪪 {self.account}"
 
     async def get_account_balance(self):
         account_balance = self.w3.eth.get_balance(
@@ -342,7 +341,7 @@ class DexSwap:
     async def get_account_position(self):
         open_positions = 0
         position = "📊 Position\n" + str(open_positions)
-        position += "\n"+ str(await self.get_account_margin())
+        position += "\n" + str(await self.get_account_margin())
         return position
 
     async def get_account_margin(self):

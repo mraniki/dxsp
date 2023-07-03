@@ -1,7 +1,6 @@
 """
  DEXSWAP Unit Test
 """
-
 import pytest
 from dxsp.config import settings
 from dxsp import DexSwap
@@ -9,7 +8,7 @@ from dxsp import DexSwap
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="bsc")
+    settings.configure(FORCE_ENV_FOR_DYNACONF="testnet")
 
 @pytest.fixture(name="dex")
 def DexSwap_fixture():
@@ -18,7 +17,7 @@ def DexSwap_fixture():
 
 def test_dynaconf_is_in_testing():
     print(settings.VALUE)
-    assert settings.VALUE == "chain_56"
+    assert settings.VALUE == "On Testnet"
     assert settings.dex_wallet_address == "0xf977814e90da44bfa03b6295a0616a897441acec"
 
 
@@ -30,6 +29,22 @@ async def test_get_quote(dex):
     print(quote)
     if quote:
         assert settings.VALUE
-        assert dex.w3.net.version == '56'
+        assert dex.w3.net.version == '5'
         assert quote is not None
         assert quote.startswith("🦄")
+
+
+# @pytest.mark.asyncio
+# async def test_get_swap(dex, account, order): 
+#     """test token account."""
+#     with patch("dxsp.config.settings", autospec=True):
+#         settings.dex_wallet_address = account
+#         dex = DexSwap()
+#         swap_order = await dex.execute_order(order)
+#         print(swap_order)
+
+
+# @pytest.mark.asyncio
+# async def test_get_swap_invalid(dex, order):
+#     with pytest.raises(ValueError):
+#         await dex.execute_order(order)
