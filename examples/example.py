@@ -24,7 +24,7 @@ async def main():
         # symbol_lst = [
         #     'WBTC', 'WETH', 'MATIC', 'UNI', 'DAI']
         # symbol = random.sample(symbol_lst, 1)[0]
-        # symbol = 'WBTC'
+        symbol = 'WBTC'
         # print("symbol ", symbol)
 
         # # Contract Address
