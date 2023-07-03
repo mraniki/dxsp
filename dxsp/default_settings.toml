@@ -4,8 +4,9 @@ dxsp_enabled = true
 loglevel = "INFO"
 dex_wallet_address = "0x1234567890123456789012345678901234567890"
 dex_private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266" 
-dex_protocol_type = "uniswap_v2" #0x
-dex_chain_id = 1
+dex_protocol_type = "uniswap" #0x
+dex_protocol_version = 2
+# dex_chain_id = 1
 dex_rpc = "https://rpc.ankr.com/eth"
 dex_0x_url = "https://api.0x.org/mainnet"
 dex_0x_api_key = "" 
@@ -13,8 +14,8 @@ dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
 dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
 dex_factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
 dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
-dex_quoter_contract_addr = "0x61fFE014bA17989E743c5F6cB21bF9697530B21e"
-dex_quoter_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v3/quoter.abi"
+# dex_quoter_contract_addr = "0x61fFE014bA17989E743c5F6cB21bF9697530B21e"
+# dex_quoter_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v3/quoter.abi"
 dex_block_explorer_url = "https://api.etherscan.io/api?"
 dex_block_explorer_api =  "798437294880920392"
 headers = {User-Agent= 'Mozilla/5.0'}
@@ -81,7 +82,6 @@ token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/a
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
-
 [testnet]
 VALUE = "On Testnet"
 loglevel = "DEBUG"
@@ -117,7 +117,6 @@ dex_block_explorer_url = "https://api.bscscan.com/api?"
 dex_block_explorer_api =  ""
 trading_asset = "BUSD"
 trading_asset_address = "0xe9e7cea3dedca5984780bafc599bd69add087d56"
-
 
 # [test_oneinch_chain_1]
 # VALUE = "1inchtesting"

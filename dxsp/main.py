@@ -25,16 +25,17 @@ class DexSwap:
         except Exception as error:
             raise error
 
-        self.chain_id = settings.dex_chain_id
+        self.chain_id = self.w3.net.version
         self.wallet_address = self.w3.to_checksum_address(
             settings.dex_wallet_address)
-        self.account = f"{str(self.w3.net.version)} - {str(self.wallet_address[-8:])}"
+        self.account = f"{__version__}\n{str(self.w3.net.version)} - {str(self.wallet_address[-8:])}"
         self.private_key = settings.dex_private_key
         self.trading_asset_address = self.w3.to_checksum_address(
             settings.trading_asset_address)
         self.cg = CoinGeckoAPI()
                     
         self.protocol_type = settings.dex_protocol_type
+        self.protocol_version = settings.dex_protocol_version
         self.dex_swap = None
         self.router = None
         self.quoter = None
@@ -154,7 +155,7 @@ class DexSwap:
         except Exception as error:
             raise error
 
-### ------🛠️ W3 UTILS ---------
+# ------🛠️ W3 UTILS ---------
     async def get(self, url, params=None, headers=None):
         """ gets a url payload """
         try:
@@ -166,32 +167,6 @@ class DexSwap:
 
         except Exception as error:
             raise error
-
-    # async def router_contract(self):
-    #     """ create a router contract """
-    #     try:
-    #         router_abi = await self.get(settings.dex_router_abi_url)
-    #         self.router = self.w3.eth.contract(
-    #             address=self.w3.to_checksum_address(
-    #                 settings.dex_router_contract_addr
-    #             ),
-    #             abi=router_abi,
-    #         )
-    #         if self.router.functions is None:
-    #             raise ValueError("Router/Chain setup incorrect")
-    #     except Exception as error:
-    #         raise error
-
-    # async def quoter_contract(self):
-    #     """ create a quoter contract """
-    #     try:
-    #         quoter_abi = await self.get(settings.dex_quoter_abi_url)
-    #         self.quoter = self.w3.eth.contract(
-    #             address=self.w3.to_checksum_address(
-    #                 settings.dex_quoter_contract_addr),
-    #             abi=quoter_abi)
-    #     except Exception as error:
-    #         raise error
 
     async def calculate_sell_amount(self, sell_token_address, quantity):
         """Returns amount based on risk percentage."""

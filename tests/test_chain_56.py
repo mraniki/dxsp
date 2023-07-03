@@ -22,7 +22,6 @@ def DexSwap_fixture():
 def test_dynaconf_is_in_testing():
     print(settings.VALUE)
     assert settings.VALUE == "chain_56"
-    assert settings.dex_chain_id == 56
     assert settings.dex_wallet_address == "0xf977814e90da44bfa03b6295a0616a897441acec"
 
 
@@ -30,7 +29,6 @@ def test_dynaconf_is_in_testing():
 async def test_get_quote(dex):
     """getquote Testing"""
     print(settings.VALUE)
-    print(dex.w3.net.version)
     quote = await dex.get_quote("BTCB")
     print(quote)
     if quote:

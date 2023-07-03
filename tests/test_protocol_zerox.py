@@ -40,14 +40,12 @@ async def test_dex(dex):
     """Init Testing"""
     assert isinstance(dex, DexSwap)
     assert dex.w3 is not None
-    assert dex.chain_id is not None
     assert dex.protocol_type is not None
     assert dex.protocol_type == "0x"
     assert dex.wallet_address.startswith("0x")
     assert dex.wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
     assert dex.private_key.startswith("0x")
-    assert dex.account == "1 - 32BE35BC"
-
+    assert "1 - 32BE35BC" in dex.account
 
 @pytest.mark.asyncio
 async def test_get_quote(dex):
