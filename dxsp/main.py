@@ -173,7 +173,8 @@ class DexSwap:
         sell_contract = await self.get_token_contract(sell_token_address)
         sell_decimals = sell_contract.functions.decimals().call() if sell_contract is not None else 18
         risk_percentage = settings.trading_risk_amount
-        return (sell_balance / (risk_percentage ** sell_decimals)) * (float(quantity) / 100)
+        return (sell_balance / (risk_percentage * 10 ** sell_decimals))
+        * (float(quantity) / 100)
 
     async def get_confirmation(self, transactionHash):
         """Returns trade confirmation."""
@@ -341,7 +342,7 @@ class DexSwap:
     async def get_account_position(self):
         open_positions = 0
         position = "📊 Position\n" + str(open_positions)
-        position += str(await self.get_account_margin())
+        position += "\n"+ str(await self.get_account_margin())
         return position
 
     async def get_account_margin(self):
