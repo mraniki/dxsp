@@ -302,8 +302,7 @@ async def test_get_account_balance(dex):
     # Call the get_account_balance method
     result = await dex.get_account_balance()
     assert result is not None
-    assert result >= 0
-
+    assert '₿' in result
 
 @pytest.mark.asyncio
 async def test_account_balance(account) -> str:
@@ -316,6 +315,8 @@ async def test_account_balance(account) -> str:
         result = await dex.get_account_balance()
         print(result)
         assert result is not None
+        assert '₿' in result
+        assert '💵' in result
 
 
 @pytest.mark.asyncio
