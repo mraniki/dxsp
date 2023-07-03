@@ -18,12 +18,11 @@ class DexSwap:
     def __init__(self, w3: Optional[Web3] = None):
         self.logger = logging.getLogger(name="DexSwap")
         self.w3 = w3 or Web3(Web3.HTTPProvider(settings.dex_rpc))
-        self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
-        try:
-            if self.w3.net.listening:
-                self.logger.info("connected %s",self.w3)
-        except Exception as error:
-            raise error
+        if self.w3.net.listening:
+                self.logger.info("connected %s", self.w3)
+                self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
+        else:
+            raise ValueError("w3 not connected")
 
         self.chain_id = self.w3.net.version
         self.wallet_address = self.w3.to_checksum_address(
@@ -32,8 +31,9 @@ class DexSwap:
         self.private_key = settings.dex_private_key
         self.trading_asset_address = self.w3.to_checksum_address(
             settings.trading_asset_address)
+
         self.cg = CoinGeckoAPI()
-                    
+
         self.protocol_type = settings.dex_protocol_type
         self.protocol_version = settings.dex_protocol_version
         self.dex_swap = None
@@ -78,7 +78,7 @@ class DexSwap:
             if not sell_token.startswith("0x"):
                 sell_token_address = await self.search_contract_address(sell_token)
             buy_token_address = buy_token
-            if not buy_token_address.startswith("0x"):   
+            if not buy_token_address.startswith("0x"):
                 buy_token_address = await self.search_contract_address(buy_token)
             sell_amount = await self.calculate_sell_amount(sell_token_address, quantity)
             sell_token_amount_wei = sell_amount * (10 ** (
@@ -133,7 +133,7 @@ class DexSwap:
                 return self.w3.eth.wait_for_transaction_receipt(
                     approval_tx_hash)
         except Exception as error:
-            raise ValueError(f"Approval failed {error}") 
+            raise ValueError(f"Approval failed {error}")
 
     async def get_sign(self, transaction):
         """ sign a transaction """
@@ -185,7 +185,7 @@ class DexSwap:
                 "timestamp": block["timestamp"],
                 "id": transactionHash,
                 "instrument": transaction["to"],
-                "contract": transaction["to"], # TBD To be determined.
+                "contract": transaction["to"],   # TBD To be determined.
                 "amount": transaction["value"],
                 "price": transaction["value"],  # TBD To be determined.
                 "fee": transaction["gas"],
@@ -323,7 +323,7 @@ class DexSwap:
 # 🔒 USER RELATED
     async def get_name(self):
         return settings.dex_router_contract_addr[-8:]
-        
+
     async def get_info(self):
         return f"💱 {await self.get_name()}\n🪪 {self.account}"
 
