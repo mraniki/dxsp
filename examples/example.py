@@ -16,7 +16,6 @@ logging.basicConfig(level=logging.DEBUG)
 logging.getLogger("urllib3").setLevel(logging.WARNING)
 
 
-
 async def main():
     while True:
         # SWAP HELPER
@@ -27,7 +26,6 @@ async def main():
         # settings.setenv()
         print(dex.account)
         symbol = 'WBTC'
-        # print("symbol ", symbol)
 
         # # Contract Address
         address = await dex.search_contract_address(symbol)
@@ -35,15 +33,15 @@ async def main():
         # # token_contract found 0x2260fac5e5542a773aa44fbcfedf7c193bc2c599
 
         # # getABI
-        # # addressABI = await dex.get_abi(address)
-        # # print("ABI ", addressABI)
+        # addressABI = await dex.get_abi(address)
+        # print("ABI ", addressABI)
 
         quote = await dex.get_quote(symbol)
         print("quote ", quote)
 
-        # BUY 10 USDC to SWAP with BITCOIN
-        #demo_tx = await dex.get_swap('USDT','WBTC',10)
-        #print("demo_tx ", demo_tx)
+        # # BUY 10 USDC to SWAP with BITCOIN
+        # demo_tx = await dex.get_swap('USDT','WBTC',10)
+        # print("demo_tx ", demo_tx)
 
         await asyncio.sleep(7200)
 

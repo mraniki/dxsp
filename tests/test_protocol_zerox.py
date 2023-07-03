@@ -52,9 +52,9 @@ async def test_dex(dex):
 @pytest.mark.asyncio
 async def test_get_quote(dex):
     result = await dex.get_quote("UNI")
-    print(result)
+    assert dex.w3.net.version == '1'
     assert result is not None
-
+    assert result.startswith("🦄")
 
 @pytest.mark.asyncio
 async def test_get_quote_fail(dex):

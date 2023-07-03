@@ -26,36 +26,6 @@ def test_dynaconf_is_in_testing():
     assert settings.dex_wallet_address == "0xf977814e90da44bfa03b6295a0616a897441acec"
 
 
-# @pytest.fixture(name="order")
-# def order_params_fixture():
-#     """Return order parameters."""
-#     return {
-#         'action': 'BUY',
-#         'instrument': 'BTCB',
-#         'quantity': 1,
-#     }
-
-
-# @pytest.fixture(name="wrong_order")
-# def wrong_order_fixture():
-#     """Return order parameters."""
-#     return {
-#         'action': 'BUY',
-#         'instrument': 'NOTATHING',
-#         'quantity': 1,
-#     }
-
-# @pytest.fixture
-# async def router(dex):
-#     """router"""
-#     return await dex.router()
-
-
-# @pytest.fixture
-# async def quoter(dex):
-#     """quoter"""
-#     return await dex.quoter()
-
 # @pytest.fixture
 # def mock_contract(dex):
 #     contract = MagicMock()
@@ -93,72 +63,16 @@ def test_dynaconf_is_in_testing():
 #     assert swap_order is not None
 
 
-# @pytest.mark.asyncio
-# async def test_nomoney_execute_order(order):
-#     dex = DexSwap()
-#     swap_order = await dex.execute_order(order)
-#     print(swap_order)
-#     assert swap_order == "No Money"
-
-# @pytest.mark.asyncio
-# async def test_get_swap():
-#     dex = DexSwap()
-#     order = await dex.get_swap("USDT", "BTCB", 1)
-#     assert order == "No Money"
-
-
-# # @pytest.mark.asyncio
-# # async def test_get_swap(dex, dex_1):
-# #     # with pytest.raises(ValueError,match="No Money"):
-# #     get_quote_mock = MagicMock()
-# #     get_quote_mock.return_value = [50]
-
-# #     get_block_mock = MagicMock()
-# #     get_block_mock.return_value = {"timestamp": 1000}
-# #     dex.get_approve = AsyncMock()
-# #     dex.get_sign = AsyncMock()
-# #     dex.w3.to_hex = Mock()
-# #     dex.w3.wait_for_transaction_receipt= MagicMock(return_value={"status": 1})
-# #     dex.get_confirmation = AsyncMock(return_value={
-# #         "confirmation": (
-# #             "➕ Size: 100\n"
-# #             "⚫️ Entry: 100\n"
-# #             "ℹ️ 0xxxx\n"
-# #             "🗓️ ---"
-# #         )
-# #     })
-# #     dex.get_quote_uniswap = get_quote_mock
-# #     dex.w3.eth.get_block = get_block_mock
-# #     sell_token = "USDT"
-# #     buy_token = "WBTC"
-# #     amount = 100
-
-# #     # Call the function being tested
-# #     swap_order = await dex.get_swap(
-# #         sell_token,
-# #         buy_token,
-# #         amount)
-# #     print(f"swap_order: {swap_order}")
-# # # Check the output
-# #     assert swap_order is not None
-
-
-# # @pytest.mark.asyncio
-# # async def test_get_swap_invalid(dex):
-# #     with pytest.raises(ValueError):
-# #         swap_order = await dex.get_swap(
-# #             "WBTC",
-# #             "USDT",
-# #             1)
-# #         print(swap_order)
-
-
 @pytest.mark.asyncio
 async def test_get_quote(dex):
     """getquote Testing"""
+    print(settings.VALUE)
+    print(dex.w3.net.version)
     quote = await dex.get_quote("BTCB")
     print(quote)
     if quote:
+        assert settings.VALUE
+        assert dex.w3.net.version == '56'
         assert quote is not None
         assert quote.startswith("🦄")
 
