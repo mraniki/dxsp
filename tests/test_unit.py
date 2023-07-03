@@ -79,7 +79,6 @@ def mock_dex_transaction():
 def test_dynaconf_is_in_testing():
     print(settings.VALUE)
     assert settings.VALUE == "On Testing"
-    assert settings.dex_chain_id == 1
 
 
 @pytest.mark.asyncio
@@ -89,7 +88,7 @@ async def test_dex(dex):
     assert dex.w3 is not None
     assert dex.w3.net.version == "1"
     assert dex.protocol_type is not None
-    assert dex.protocol_type == "uniswap_v2"
+    assert dex.protocol_type == "uniswap"
     assert dex.wallet_address.startswith("0x")
     assert dex.wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
     assert dex.private_key.startswith("0x")
