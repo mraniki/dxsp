@@ -79,10 +79,11 @@ class DexSwapUniswap(DexSwap):
                         )
             swap = uniswap.make_trade(
                 sell_address, buy_address, amount)
-            swap = round(
-                float((quote / 
-                       (10 ** 
-                        (await self.get_token_decimals(buy_address))))), 5)
+            return swap
+            # #swap = round(
+            #     float((quote / 
+            #            (10 ** 
+            #             (await self.get_token_decimals(buy_address))))), 5)
             # await self.router_contract()
             # if self.protocol_type == "uniswap_v2":
             #     path = [self.w3.to_checksum_address(sell_address),
