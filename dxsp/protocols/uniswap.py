@@ -21,7 +21,7 @@ class DexSwapUniswap(DexSwap):
             uniswap = Uniswap(
                 address=self.wallet_address,
                 private_key=self.private_key,
-                version=2, web3=self.w3,
+                version=self.protocol_version, web3=self.w3,
                 factory_contract_addr=settings.dex_factory_contract_addr,
                 router_contract_addr=settings.dex_router_contract_addr
                 )

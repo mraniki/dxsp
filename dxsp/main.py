@@ -138,7 +138,7 @@ class DexSwap:
     async def get_sign(self, transaction):
         """ sign a transaction """
         try:
-            if self.protocol_type in ['uniswap_v2', 'uniswap_v3']:
+            if self.protocol_type == 'uniswap':
                 transaction_params = {
                     'from': self.wallet_address,
                     'gas': await self.get_gas(transaction),

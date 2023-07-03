@@ -156,9 +156,10 @@ async def test_get_quote_BTC(account) -> str:
 
 @pytest.mark.asyncio
 async def test_get_quote_invalid(dex):
-    with pytest.raises(ValueError):
-        await dex.get_quote("THISISNOTATOKEN")
-
+    result = await dex.get_quote("THISISNOTATOKEN")
+    print(result)
+    assert result is not None
+    assert '⚠️' in result
 
 @pytest.mark.asyncio
 async def test_get_approve(dex):
@@ -359,3 +360,16 @@ async def test_get_decimals(account) -> str:
         result = await dex.get_token_decimals(settings.trading_asset_address)
         print(result)
         assert result is not None
+
+
+@pytest.mark.asyncio
+async def test_get_account_position(account) -> str:
+    """test token account."""
+    with patch("dxsp.config.settings", autospec=True):
+        settings.dex_wallet_address = account
+        # with pytest.raises(ValueError, match='No Balance'):
+        dex = DexSwap()
+        result = await dex.get_account_position()
+        print(result)
+        assert result is not None
+        assert '📊' in result
