@@ -2,6 +2,44 @@
 
 <!--next-version-placeholder-->
 
+## v3.2.0 (2023-07-03)
+
+### Feature
+
+* 💄 Version update with  a lot of fix and standardization ([`edc9ad3`](https://github.com/mraniki/dxsp/commit/edc9ad3fcf1892d8711ffe58c73b0ce7810f85c6))
+
+### Fix
+
+* 📝  added documentation ([`ddfecf9`](https://github.com/mraniki/dxsp/commit/ddfecf953541608f05654f240809d8091d1ef538))
+* 🎨 cleanup ([`f600615`](https://github.com/mraniki/dxsp/commit/f600615b7ae758111795816cbf6f1328f9d25e00))
+* ✅ getbalance fix ([`0e1b840`](https://github.com/mraniki/dxsp/commit/0e1b8401151ef56c83798aba83ada183cb0fa796))
+* ♻️  code cleanup ([`400a26b`](https://github.com/mraniki/dxsp/commit/400a26b4a099c68c620a110752b74f789c7c002e))
+* ♻️ code cleanup ([`97b731d`](https://github.com/mraniki/dxsp/commit/97b731dd9fc0e1545a180e13635a9a8d44fc1b44))
+* ✅ code cleanup ([`60e838e`](https://github.com/mraniki/dxsp/commit/60e838e1be9cc4592187933badace8049276e94a))
+* 🎨  balanace ([`675f68c`](https://github.com/mraniki/dxsp/commit/675f68cf30ca08ff316901b65a255dd9523aa939))
+* 🎨 improve balance structure ([`f5d52d5`](https://github.com/mraniki/dxsp/commit/f5d52d5ceed3682575bdd52b1e1ff6f5d1f9748e))
+* 🐛  get_account_balance ([`fa79c73`](https://github.com/mraniki/dxsp/commit/fa79c73a2485bfa2f638dc3b28e04b9694c9e6a4))
+* 🚨 ([`fb3f92c`](https://github.com/mraniki/dxsp/commit/fb3f92c33e0cd18caf798722f9068692ef6bb32b))
+* 🚨 readme linter ([`a07eaee`](https://github.com/mraniki/dxsp/commit/a07eaee677a3c47c0e23814ee231f97ea7582131))
+* ✅ unit test ([`c25ba45`](https://github.com/mraniki/dxsp/commit/c25ba4537fc77a683581778c93044fd6d1b7c609))
+* :white_check_mark:  refine unit test ([`c202088`](https://github.com/mraniki/dxsp/commit/c2020881da04a46b6e6a56640503d39bcf16c62f))
+* :white_check_mark:  refine unit test ([`27a8739`](https://github.com/mraniki/dxsp/commit/27a8739f3dddb238e064021ac6787546e894b03c))
+* :white_check_mark:  refine unit test ([`51a9880`](https://github.com/mraniki/dxsp/commit/51a9880ec755297bfd04a69a84042de6ded31991))
+* ✅  refine unit test ([`973fc3f`](https://github.com/mraniki/dxsp/commit/973fc3f82c034a19dcb06b560fec5e83c46439cb))
+* ✅ improving unit test ([`31c1cd1`](https://github.com/mraniki/dxsp/commit/31c1cd1ebb3f3c93e863c14762191abd59694ee2))
+* ✅ cleaning up test unit ([`7e5b574`](https://github.com/mraniki/dxsp/commit/7e5b5743093dac4ec3bbc3b169a4ea0119341572))
+* ✅  unit test ([`966f38c`](https://github.com/mraniki/dxsp/commit/966f38cd0df8d672c085f0333f34e7b3b5b21ae4))
+* ✅ ([`86e58d0`](https://github.com/mraniki/dxsp/commit/86e58d0a0fcab79e3dcffa6c0bbc67f35f6d18e3))
+* ✅ update unit test and refactor ([`a7cd009`](https://github.com/mraniki/dxsp/commit/a7cd00993c546d225b67a04db75a10500840f84a))
+* ♻️ ([`d3e1e4e`](https://github.com/mraniki/dxsp/commit/d3e1e4e1c3ad1d16b2fbbce7ccd6f14c13d57660))
+* ✅  and config ([`7b55566`](https://github.com/mraniki/dxsp/commit/7b55566cd87f034611627df2306a3c8ab833c972))
+* :white_check_mark: unit testing ([`1c8b56c`](https://github.com/mraniki/dxsp/commit/1c8b56cad75a2fa73632f6e19f0a7bb7040bf06b))
+
+### Other
+
+* Merge pull request #299 from mraniki/dev ([`469c55c`](https://github.com/mraniki/dxsp/commit/469c55cb011f540fb6858f5c92514b52af006d6e))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`6d18c22`](https://github.com/mraniki/dxsp/commit/6d18c22823e08e99c0b8276073be4af7a4f3303f))
+
 ## v3.1.4 (2023-07-03)
 
 ### Fix
