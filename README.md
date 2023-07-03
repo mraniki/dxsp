@@ -6,8 +6,7 @@
 
 Key features:
 
-- Any blockchains mainnet or testnet supported by web3py, uniswap type router (uniswap, pancakeswap) or 0x.
-
+- Any blockchains mainnet or testnet supported by web3py, for uniswap based router (e.g uniswap, pancakeswap) or 0x protocol.
 
 Other features:
 
@@ -28,7 +27,7 @@ Other features:
 from dxsp import DexSwap
 
  dex = DexSwap()
- #BUY 10 USDC to SWAP with BITCOIN
+ #BUY 10 USDT to SWAP with BITCOIN
  demo_tx = await dex.get_swap('USDT','wBTC',10)
  print("demo_tx ", demo_tx)
 ```

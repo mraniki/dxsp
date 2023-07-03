@@ -18,26 +18,26 @@ class DexSwap:
     def __init__(self, w3: Optional[Web3] = None):
         self.logger = logging.getLogger(name="DexSwap")
         self.w3 = w3 or Web3(Web3.HTTPProvider(settings.dex_rpc))
-        self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
-        try:
-            if self.w3.net.listening:
-                self.logger.info("connected %s",self.w3)
-        except Exception as error:
-            raise error
+        if self.w3.net.listening:
+            self.logger.info("connected %s", self.w3)
+            self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
+            self.chain_id = self.w3.net.version
+            self.wallet_address = self.w3.to_checksum_address(
+                settings.dex_wallet_address)
+            self.account = f"{str(self.w3.net.version)} - {str(self.wallet_address[-8:])}"
+            self.private_key = settings.dex_private_key
+            self.trading_asset_address = self.w3.to_checksum_address(
+                settings.trading_asset_address)
 
-        self.chain_id = settings.dex_chain_id
-        self.wallet_address = self.w3.to_checksum_address(
-            settings.dex_wallet_address)
-        self.account = f"{str(self.w3.net.version)} - {str(self.wallet_address[-8:])}"
-        self.private_key = settings.dex_private_key
-        self.trading_asset_address = self.w3.to_checksum_address(
-            settings.trading_asset_address)
+            self.protocol_type = settings.dex_protocol_type
+            self.protocol_version = settings.dex_protocol_version
+            self.dex_swap = None
+            self.router = None
+            self.quoter = None
+        else:
+            raise ValueError("w3 not connected")
+
         self.cg = CoinGeckoAPI()
-                    
-        self.protocol_type = settings.dex_protocol_type
-        self.dex_swap = None
-        self.router = None
-        self.quoter = None
 
     async def get_protocol(self):
         """ protocol init """
@@ -77,7 +77,7 @@ class DexSwap:
             if not sell_token.startswith("0x"):
                 sell_token_address = await self.search_contract_address(sell_token)
             buy_token_address = buy_token
-            if not buy_token_address.startswith("0x"):   
+            if not buy_token_address.startswith("0x"):
                 buy_token_address = await self.search_contract_address(buy_token)
             sell_amount = await self.calculate_sell_amount(sell_token_address, quantity)
             sell_token_amount_wei = sell_amount * (10 ** (
@@ -132,12 +132,12 @@ class DexSwap:
                 return self.w3.eth.wait_for_transaction_receipt(
                     approval_tx_hash)
         except Exception as error:
-            raise ValueError(f"Approval failed {error}") 
+            raise ValueError(f"Approval failed {error}")
 
     async def get_sign(self, transaction):
         """ sign a transaction """
         try:
-            if self.protocol_type in ['uniswap_v2', 'uniswap_v3']:
+            if self.protocol_type == 'uniswap':
                 transaction_params = {
                     'from': self.wallet_address,
                     'gas': await self.get_gas(transaction),
@@ -154,7 +154,7 @@ class DexSwap:
         except Exception as error:
             raise error
 
-### ------🛠️ W3 UTILS ---------
+# ------🛠️ W3 UTILS ---------
     async def get(self, url, params=None, headers=None):
         """ gets a url payload """
         try:
@@ -167,39 +167,13 @@ class DexSwap:
         except Exception as error:
             raise error
 
-    # async def router_contract(self):
-    #     """ create a router contract """
-    #     try:
-    #         router_abi = await self.get(settings.dex_router_abi_url)
-    #         self.router = self.w3.eth.contract(
-    #             address=self.w3.to_checksum_address(
-    #                 settings.dex_router_contract_addr
-    #             ),
-    #             abi=router_abi,
-    #         )
-    #         if self.router.functions is None:
-    #             raise ValueError("Router/Chain setup incorrect")
-    #     except Exception as error:
-    #         raise error
-
-    # async def quoter_contract(self):
-    #     """ create a quoter contract """
-    #     try:
-    #         quoter_abi = await self.get(settings.dex_quoter_abi_url)
-    #         self.quoter = self.w3.eth.contract(
-    #             address=self.w3.to_checksum_address(
-    #                 settings.dex_quoter_contract_addr),
-    #             abi=quoter_abi)
-    #     except Exception as error:
-    #         raise error
-
     async def calculate_sell_amount(self, sell_token_address, quantity):
         """Returns amount based on risk percentage."""
         sell_balance = await self.get_token_balance(sell_token_address)
         sell_contract = await self.get_token_contract(sell_token_address)
         sell_decimals = sell_contract.functions.decimals().call() if sell_contract is not None else 18
         risk_percentage = settings.trading_risk_amount
-        return (sell_balance / (risk_percentage ** sell_decimals)) * (float(quantity) / 100)
+        return (sell_balance / (risk_percentage * 10 ** sell_decimals)) * (float(quantity) / 100)
 
     async def get_confirmation(self, transactionHash):
         """Returns trade confirmation."""
@@ -210,7 +184,7 @@ class DexSwap:
                 "timestamp": block["timestamp"],
                 "id": transactionHash,
                 "instrument": transaction["to"],
-                "contract": transaction["to"], # TBD To be determined.
+                "contract": transaction["to"],   # TBD To be determined.
                 "amount": transaction["value"],
                 "price": transaction["value"],  # TBD To be determined.
                 "fee": transaction["gas"],
@@ -234,7 +208,7 @@ class DexSwap:
         """search get gas price"""
         return round(self.w3.from_wei(self.w3.eth.generate_gas_price(), 'gwei'), 2)
 
-### ------✍️ CONTRACT ---------
+# ## ------✍️ CONTRACT ---------
     async def search_contract_address(self, token):
         """search a contract function"""
 
@@ -348,18 +322,16 @@ class DexSwap:
 # 🔒 USER RELATED
     async def get_name(self):
         return settings.dex_router_contract_addr[-8:]
-        
+
     async def get_info(self):
-        return f"💱 {await self.get_name()}\n🪪 {self.account}"
+        return f"{__class__.__name__} {__version__}\n💱 {await self.get_name()}\n🪪 {self.account}"
 
     async def get_account_balance(self):
         account_balance = self.w3.eth.get_balance(
             self.w3.to_checksum_address(self.wallet_address))
-        account_balance = self.w3.from_wei(account_balance, 'ether')
-        trading_asset_balance = await self.get_trading_asset_balance()
-        if trading_asset_balance:
-            account_balance += f"💵{trading_asset_balance}"
-        return round(account_balance, 5)
+        account_balance = self.w3.from_wei(account_balance, 'ether') or 0
+        trading_asset_balance = await self.get_trading_asset_balance() or 0
+        return f"₿ {account_balance}\n💵 {trading_asset_balance}"
 
     async def get_trading_asset_balance(self):
         trading_asset_balance = await self.get_token_balance(
@@ -369,7 +341,7 @@ class DexSwap:
     async def get_account_position(self):
         open_positions = 0
         position = "📊 Position\n" + str(open_positions)
-        position += str(await self.get_account_margin())
+        position += "\n" + str(await self.get_account_margin())
         return position
 
     async def get_account_margin(self):

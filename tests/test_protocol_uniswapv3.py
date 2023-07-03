@@ -8,7 +8,7 @@ from dxsp import DexSwap
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="uniswap")
+    settings.configure(FORCE_ENV_FOR_DYNACONF="uniswap3")
 
 @pytest.fixture(name="dex")
 def DexSwap_fixture():
@@ -26,7 +26,7 @@ def order_params_fixture():
 
 def test_dynaconf_is_in_testing():
     print(settings.VALUE)
-    assert settings.VALUE == "On Testing"
+    assert settings.VALUE == "On uniswap3"
 
 
 @pytest.mark.asyncio

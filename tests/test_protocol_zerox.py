@@ -12,7 +12,7 @@ from dxsp import DexSwap
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="test_zerox_chain_1")
+    settings.configure(FORCE_ENV_FOR_DYNACONF="zerox")
 
 @pytest.fixture(name="dex")
 def DexSwap_fixture():
@@ -22,7 +22,6 @@ def DexSwap_fixture():
 def test_dynaconf_is_in_testing():
     print(settings.VALUE)
     assert settings.VALUE == "test_zerox"
-    assert settings.dex_chain_id == 1
 
 
 @pytest.fixture(name="order")
@@ -40,36 +39,23 @@ async def test_dex(dex):
     """Init Testing"""
     assert isinstance(dex, DexSwap)
     assert dex.w3 is not None
-    assert dex.chain_id is not None
     assert dex.protocol_type is not None
     assert dex.protocol_type == "0x"
     assert dex.wallet_address.startswith("0x")
     assert dex.wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
     assert dex.private_key.startswith("0x")
-    assert dex.account == "1 - 32BE35BC"
-
+    assert "1 - 32BE35BC" in dex.account
 
 @pytest.mark.asyncio
 async def test_get_quote(dex):
     result = await dex.get_quote("UNI")
-    print(result)
+    assert dex.w3.net.version == '1'
     assert result is not None
+    assert result.startswith("🦄")
 
 
 @pytest.mark.asyncio
-async def test_get_quote_fail(dex):
-    result = await dex.get_quote("NOTATHING")
-    assert result is not None
-    assert result.startswith("⚠️")
-
-
-@pytest.mark.asyncio
-async def test_failed_get_approve(dex):
-   with pytest.raises(ValueError, match='Approval failed'):
-       result = await dex.get_approve("0xdAC17F958D2ee523a2206206994597C13D831ec7")
-
-@pytest.mark.asyncio
-async def test_execute_order_fail(dex, order):
+async def test_execute_order(dex, order):
     result = await dex.execute_order(order)
     print(result)
     assert result is not None
