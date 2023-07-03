@@ -209,7 +209,7 @@ class DexSwap:
         """search get gas price"""
         return round(self.w3.from_wei(self.w3.eth.generate_gas_price(), 'gwei'), 2)
 
-### ------✍️ CONTRACT ---------
+# ## ------✍️ CONTRACT ---------
     async def search_contract_address(self, token):
         """search a contract function"""
 
@@ -330,10 +330,10 @@ class DexSwap:
     async def get_account_balance(self):
         account_balance = self.w3.eth.get_balance(
             self.w3.to_checksum_address(self.wallet_address))
-        account_balance = self.w3.from_wei(account_balance, 'ether')
+        account_balance = str(self.w3.from_wei(account_balance, 'ether'))
         trading_asset_balance = await self.get_trading_asset_balance()
         if trading_asset_balance:
-            account_balance += f"💵{trading_asset_balance}"
+            account_balance += f"\n💵{trading_asset_balance}"
         return round(account_balance, 5)
 
     async def get_trading_asset_balance(self):
