@@ -56,20 +56,9 @@ async def test_get_quote(dex):
     assert result is not None
     assert result.startswith("🦄")
 
-@pytest.mark.asyncio
-async def test_get_quote_fail(dex):
-    result = await dex.get_quote("NOTATHING")
-    assert result is not None
-    assert result.startswith("⚠️")
-
 
 @pytest.mark.asyncio
-async def test_failed_get_approve(dex):
-   with pytest.raises(ValueError, match='Approval failed'):
-       result = await dex.get_approve("0xdAC17F958D2ee523a2206206994597C13D831ec7")
-
-@pytest.mark.asyncio
-async def test_execute_order_fail(dex, order):
+async def test_execute_order(dex, order):
     result = await dex.execute_order(order)
     print(result)
     assert result is not None

@@ -99,37 +99,6 @@ async def test_execute_order_invalid(dex, invalid_order):
     print(result)
     assert result.startswith("⚠️")
 
-# @pytest.mark.asyncio
-# async def test_get_swap(dex):
-#     get_quote_mock = MagicMock()
-#     get_quote_mock.return_value = [50]
-#     get_block_mock = MagicMock()
-#     get_block_mock.return_value = {"timestamp": 1000}
-#     dex.get_approve = AsyncMock()
-#     dex.get_sign = AsyncMock()
-#     dex.w3.to_hex = Mock()
-#     dex.w3.wait_for_transaction_receipt= MagicMock(return_value={"status": 1})
-#     dex.get_confirmation = AsyncMock(return_value={
-#         "confirmation": (
-#             "➕ Size: 100\n"
-#             "⚫️ Entry: 100\n"
-#             "ℹ️ 0xxxx\n"
-#             "🗓️ ---"
-#         )
-#     })
-#     dex.get_quote_uniswap = get_quote_mock
-#     dex.w3.eth.get_block = get_block_mock
-#     sell_token = "USDT"
-#     buy_token = "WBTC"
-#     amount = 100
-
-#     swap_order = await dex.get_swap(
-#         sell_token,
-#         buy_token,
-#         amount)
-#     print(f"swap_order: {swap_order}")
-#     assert swap_order is not None
-
 
 @pytest.mark.asyncio
 async def test_get_swap_invalid(dex):
@@ -180,11 +149,13 @@ async def test_get_confirmation(dex):
     result = await dex.get_confirmation("0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771")
     print(result)
     assert result is not None
-    assert result['confirmation'] is not None
-    assert result['confirmation'].startswith('➕')
     assert result['timestamp'] is not None
     assert result['fee'] is not None
-
+    assert result['confirmation'] is not None
+    assert result['confirmation'].startswith('➕')
+    assert '⛽' in result['confirmation']
+    assert '🗓️' in result['confirmation']
+    assert 'ℹ️' in result['confirmation']
 
 @pytest.mark.asyncio
 async def test_get(dex):
@@ -219,7 +190,7 @@ async def test_search_contract_address(dex):
 @pytest.mark.asyncio
 async def test_invalid_search_contract_address(dex):
     with pytest.raises(ValueError, match='Invalid Token'):
-        address = await dex.search_contract_address("NOTATHING")
+        await dex.search_contract_address("NOTATHING")
 
 
 @pytest.mark.asyncio
@@ -253,7 +224,7 @@ async def test_get_decimals(dex):
     print(result)
     time.sleep(5)
     assert result is not None
-    assert result ==18
+    assert result == 18
 
 @pytest.mark.asyncio
 async def test_get_decimals_stable(dex):
@@ -262,7 +233,7 @@ async def test_get_decimals_stable(dex):
     print(result)
     time.sleep(5)
     assert result is not None
-    assert result ==6
+    assert result == 6
 
 
 @pytest.mark.asyncio

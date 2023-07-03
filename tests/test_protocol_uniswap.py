@@ -1,11 +1,8 @@
 """
  DEXSWAP Uniswap  Test
 """
-import asyncio
-from unittest.mock import AsyncMock, Mock, patch, MagicMock
-import re
+
 import pytest
-import time
 from dxsp.config import settings
 from dxsp import DexSwap
 
@@ -39,6 +36,7 @@ async def test_get_quote(dex):
     print(f"result: {result}")
     assert result is not None
     assert result.startswith("🦄")
+
 
 @pytest.mark.asyncio
 async def test_get_swap(dex, order):
