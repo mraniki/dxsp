@@ -36,7 +36,7 @@ dex_trading_slippage = 2 # 2% slippage
 ## SETTINGS ##
 ## FOR TEST ##
 ##############
-[test_uniswap_chain_1]
+[uniswap]
 VALUE = "On Testing"
 dxsp_enabled = true
 loglevel = "DEBUG"
@@ -59,7 +59,7 @@ token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/a
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
-[test_zerox_chain_1]
+[zerox]
 VALUE = "test_zerox"
 loglevel = "DEBUG"
 dxsp_enabled = true
@@ -82,7 +82,7 @@ token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/t
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
 
-[test_uniswap_chain5]
+[testnet]
 VALUE = "On Testnet"
 loglevel = "DEBUG"
 dxsp_enabled = true
@@ -104,7 +104,7 @@ token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/a
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
-[test_chain_56]
+[bsc]
 VALUE = "chain_56"
 dex_chain_id = 56
 dxsp_enabled = true

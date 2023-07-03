@@ -11,7 +11,7 @@ from dxsp import DexSwap
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="test_uniswap_chain_1")
+    settings.configure(FORCE_ENV_FOR_DYNACONF="uniswap")
 
 @pytest.fixture(name="dex")
 def DexSwap_fixture():
