@@ -39,7 +39,6 @@ class DexSwap:
 
         self.cg = CoinGeckoAPI()
 
-
     async def get_protocol(self):
         """ protocol init """
         from dxsp.protocols import DexSwapUniswap, DexSwapZeroX, DexSwapOneInch
