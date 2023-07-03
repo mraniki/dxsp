@@ -19,28 +19,29 @@ async def main():
         # SWAP HELPER
         dex = DexSwap()
         print(type(dex))
-
+        print(dex.account)
         # RANDOM SYMBOL
         # symbol_lst = [
         #     'WBTC', 'WETH', 'MATIC', 'UNI', 'DAI']
         # symbol = random.sample(symbol_lst, 1)[0]
         symbol = 'WBTC'
-        print("symbol ", symbol)
+        # print("symbol ", symbol)
 
-        # Contract Address
-        address = await dex.search_contract(symbol)
-        # token_contract found 0x2260fac5e5542a773aa44fbcfedf7c193bc2c599
+        # # Contract Address
+        address = await dex.search_contract_address(symbol)
+        print("address ", address)
+        # # token_contract found 0x2260fac5e5542a773aa44fbcfedf7c193bc2c599
 
-        # getABI
-        # addressABI = await dex.get_abi(address)
-        # print("ABI ", addressABI)
+        # # getABI
+        # # addressABI = await dex.get_abi(address)
+        # # print("ABI ", addressABI)
 
         quote = await dex.get_quote(symbol)
         print("quote ", quote)
 
         # BUY 10 USDC to SWAP with BITCOIN
-        # demo_tx = await dex.get_swap('USDT','wBTC',10)
-        # print("demo_tx ", demo_tx)
+        #demo_tx = await dex.get_swap('USDT','WBTC',10)
+        #print("demo_tx ", demo_tx)
 
         await asyncio.sleep(7200)
 
