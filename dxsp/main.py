@@ -330,11 +330,11 @@ class DexSwap:
     async def get_account_balance(self):
         account_balance = self.w3.eth.get_balance(
             self.w3.to_checksum_address(self.wallet_address))
-        account_balance = str(self.w3.from_wei(account_balance, 'ether'))
+        account_balance = self.w3.from_wei(account_balance, 'ether')
         trading_asset_balance = await self.get_trading_asset_balance()
         if trading_asset_balance:
-            account_balance += f"\n💵{trading_asset_balance}"
-        return round(account_balance, 5)
+            balance = f"₿{account_balance}\n💵{trading_asset_balance}"
+        return balance
 
     async def get_trading_asset_balance(self):
         trading_asset_balance = await self.get_token_balance(
