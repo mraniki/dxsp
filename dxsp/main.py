@@ -167,20 +167,20 @@ class DexSwap:
         except Exception as error:
             raise error
 
-    async def router_contract(self):
-        """ create a router contract """
-        try:
-            router_abi = await self.get(settings.dex_router_abi_url)
-            self.router = self.w3.eth.contract(
-                address=self.w3.to_checksum_address(
-                    settings.dex_router_contract_addr
-                ),
-                abi=router_abi,
-            )
-            if self.router.functions is None:
-                raise ValueError("Router/Chain setup incorrect")
-        except Exception as error:
-            raise error
+    # async def router_contract(self):
+    #     """ create a router contract """
+    #     try:
+    #         router_abi = await self.get(settings.dex_router_abi_url)
+    #         self.router = self.w3.eth.contract(
+    #             address=self.w3.to_checksum_address(
+    #                 settings.dex_router_contract_addr
+    #             ),
+    #             abi=router_abi,
+    #         )
+    #         if self.router.functions is None:
+    #             raise ValueError("Router/Chain setup incorrect")
+    #     except Exception as error:
+    #         raise error
 
     # async def quoter_contract(self):
     #     """ create a quoter contract """
