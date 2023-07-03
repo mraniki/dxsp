@@ -109,7 +109,7 @@ class DexSwap:
             buy_address = self.trading_asset_address
             sell_address = await self.search_contract_address(sell_token)
             quote = await self.dex_swap.get_quote(buy_address, sell_address)
-            return f"🦄 {quote} {settings.trading_asset}"
+            return f"🦄 {quote} {settings.trading_asset}" #settings to be reviewed and removed
         except Exception as error:
             return f"⚠️: {error}"
 
