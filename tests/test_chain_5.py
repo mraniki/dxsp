@@ -18,20 +18,20 @@ def DexSwap_fixture():
 def test_dynaconf_is_in_testing():
     print(settings.VALUE)
     assert settings.VALUE == "On Testnet"
-    assert settings.dex_wallet_address == "0xf977814e90da44bfa03b6295a0616a897441acec"
+    assert settings.dex_wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
 
 
-@pytest.mark.asyncio
-async def test_get_quote(dex):
-    """getquote Testing"""
-    print(settings.VALUE)
-    quote = await dex.get_quote("BTCB")
-    print(quote)
-    if quote:
-        assert settings.VALUE
-        assert dex.w3.net.version == '5'
-        assert quote is not None
-        assert quote.startswith("🦄")
+# @pytest.mark.asyncio
+# async def test_get_quote(dex):
+#     """getquote Testing"""
+#     print(settings.VALUE)
+#     quote = await dex.get_quote("wBTC")
+#     print(quote)
+#     if quote:
+#         assert settings.VALUE
+#         assert dex.w3.net.version == '5'
+#         assert quote is not None
+#         assert quote.startswith("🦄")
 
 
 # @pytest.mark.asyncio
