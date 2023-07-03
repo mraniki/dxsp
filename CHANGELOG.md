@@ -2,6 +2,22 @@
 
 <!--next-version-placeholder-->
 
+## v3.1.4 (2023-07-03)
+
+### Fix
+
+* :bug: Fix symbol assignment in main function ([`81ca77c`](https://github.com/mraniki/dxsp/commit/81ca77c3963e95746637193cd491e7f9655703a3))
+* :bug: Fix symbol assignment in main function ([`54dbba8`](https://github.com/mraniki/dxsp/commit/54dbba8bc71e0040fd5074ffa30282517df1459e))
+* 🔥  router setup ([`3152eaa`](https://github.com/mraniki/dxsp/commit/3152eaa3df30bc1530cc909bfa46d99b512cbbb4))
+* 🚑  fix for uni quote ([`8c9c3af`](https://github.com/mraniki/dxsp/commit/8c9c3af9480ac4a33a771060a689f1739c67ad61))
+* 🚑 uni quote ([`a7a8d6f`](https://github.com/mraniki/dxsp/commit/a7a8d6faa5e611e5de51e0f621ae0aabef167974))
+* :recycle:  Refactor account variable in DexSwap class ([`48466b3`](https://github.com/mraniki/dxsp/commit/48466b349ce018fb193f391dee99a9f64181421a))
+* :bug: Update Uniswap protocol with new amount calculation ([`6f60edf`](https://github.com/mraniki/dxsp/commit/6f60edf0ad4a8594a2bc357dcfea1d442066ab4c))
+
+### Other
+
+* Merge pull request #297 from mraniki/dev ([`8e0146b`](https://github.com/mraniki/dxsp/commit/8e0146bd88e9239f74908d0c9d836446b9f9b1cb))
+
 ## v3.1.3 (2023-07-02)
 
 ### Fix
