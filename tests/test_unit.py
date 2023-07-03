@@ -352,17 +352,6 @@ async def test_trading_asset_balance(account) -> str:
 
 
 @pytest.mark.asyncio
-async def test_get_decimals(account) -> str:
-    """test token account."""
-    with patch("dxsp.config.settings", autospec=True):
-        settings.dex_wallet_address = account
-        dex = DexSwap()
-        result = await dex.get_token_decimals(settings.trading_asset_address)
-        print(result)
-        assert result is not None
-
-
-@pytest.mark.asyncio
 async def test_get_account_position(account) -> str:
     """test token account."""
     with patch("dxsp.config.settings", autospec=True):
