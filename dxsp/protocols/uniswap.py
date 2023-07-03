@@ -77,28 +77,26 @@ class DexSwapUniswap(DexSwap):
                         factory_contract_addr=settings.dex_factory_contract_addr,
                         router_contract_addr=settings.dex_router_contract_addr
                         )
-            swap = uniswap.make_trade(
-                sell_address, buy_address, amount)
-            return swap
-            # #swap = round(
-            #     float((quote / 
-            #            (10 ** 
-            #             (await self.get_token_decimals(buy_address))))), 5)
-            # await self.router_contract()
-            # if self.protocol_type == "uniswap_v2":
-            #     path = [self.w3.to_checksum_address(sell_address),
-            #             self.w3.to_checksum_address(buy_address)]
-            #     deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
-            #     await self.router_contract()
-            #     min_amount = await self.get_quote(
-            #         buy_address, sell_address, amount)
-            #     return self.router.functions.swapExactTokensForTokens(
-            #         int(min_amount),
-            #         int(min_amount),
-            #         tuple(path),
-            #         self.wallet_address,
-            #         deadline,
-            #     )
+            return uniswap.make_trade(sell_address, buy_address, amount)
+                # #swap = round(
+                #     float((quote / 
+                #            (10 ** 
+                #             (await self.get_token_decimals(buy_address))))), 5)
+                # await self.router_contract()
+                # if self.protocol_type == "uniswap_v2":
+                #     path = [self.w3.to_checksum_address(sell_address),
+                #             self.w3.to_checksum_address(buy_address)]
+                #     deadline = self.w3.eth.get_block("latest")["timestamp"] + 3600
+                #     await self.router_contract()
+                #     min_amount = await self.get_quote(
+                #         buy_address, sell_address, amount)
+                #     return self.router.functions.swapExactTokensForTokens(
+                #         int(min_amount),
+                #         int(min_amount),
+                #         tuple(path),
+                #         self.wallet_address,
+                #         deadline,
+                #     )
 
         except Exception as error:
             raise ValueError(f"Swap failed {error}") 
