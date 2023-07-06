@@ -4,7 +4,7 @@
 
 import logging
 from typing import Optional
-
+from datetime import datetime, timedelta
 import requests
 from pycoingecko import CoinGeckoAPI
 from web3 import Web3
@@ -346,3 +346,53 @@ class DexSwap:
 
     async def get_account_margin(self):
         return 0
+
+    async def check_transaction_status(self, frequency="daily"):
+        # Get the transaction history for the given address
+        transactions = self.w3.eth.get_transaction_receipt('0xA4DDaFf0c5BcC41b11386AF4488a6AC5f2c3ab03')
+            # self.wallet_address)
+        if len(transactions) == 0:
+            return "No transactions found for the address."
+        
+        total_profit_loss = 0
+
+        for tx in transactions:
+            # Retrieve the transaction details
+            tx_hash = tx['hash']
+            tx_value = tx['value']
+            tx_status = tx['status']
+            tx_timestamp = datetime.fromtimestamp(tx['timestamp'])
+            
+            # Check if the transaction falls within the desired frequency
+            if frequency == "daily":
+                start_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+                end_date = datetime.now()
+            elif frequency == "weekly":
+                start_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=datetime.now().weekday())
+                end_date = datetime.now()
+            elif frequency == "monthly":
+                start_date = datetime.now().replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+                end_date = datetime.now()
+            elif frequency == "quarterly":
+                quarter = (datetime.now().month - 1) // 3
+                start_date = datetime(datetime.now().year, 3 * quarter + 1, 1).replace(hour=0, minute=0, second=0, microsecond=0)
+                end_date = datetime.now()
+            elif frequency == "yearly":
+                start_date = datetime(datetime.now().year, 1, 1).replace(hour=0, minute=0, second=0, microsecond=0)
+                end_date = datetime.now()
+            
+            if start_date <= tx_timestamp <= end_date:
+                # Check if the transaction was successful
+                if tx_status == 1:
+                    # Check if the transaction resulted in profit or loss
+                    if tx_value > 0:
+                        total_profit_loss += tx_value
+                    else:
+                        total_profit_loss -= tx_value
+        
+        if total_profit_loss > 0:
+            return f"Transactions made. Profit ({frequency}): {total_profit_loss}"
+        elif total_profit_loss < 0:
+            return f"Transactions made. Loss ({frequency}): {abs(total_profit_loss)}"
+        else:
+            return f"Transactions made ({frequency}), but no profit or loss."
