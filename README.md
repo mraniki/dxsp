@@ -1,47 +1,45 @@
-# DXSP (DeX SwaP)
 
-|<img width="200" alt="Logo" src="https://user-images.githubusercontent.com/8766259/231213427-63ea2752-13d5-4993-aee2-90671b57fc6e.png">  | A python defi swap helper package. Swap made easy |
-| ------------- | ------------- |
-|[![wiki](https://img.shields.io/badge/🪙🗿-wiki-0080ff)](https://talkytrader.gitbook.io/talky/) [![Pypi](https://badgen.net/badge/icon/dxsp?icon=pypi&label)](https://pypi.org/project/dxsp/) ![Version](https://img.shields.io/pypi/v/dxsp)<br>  ![Pypi](https://img.shields.io/pypi/dm/dxsp) <br>[![👷Flow](https://github.com/mraniki/dxsp/actions/workflows/%F0%9F%91%B7Flow.yml/badge.svg)](https://github.com/mraniki/dxsp/actions/workflows/%E2%9C%A8Flow.yml)<br>[![codebeat badge](https://codebeat.co/badges/b1376839-73bc-4b41-bfc1-2fb099f1fc2a)](https://codebeat.co/projects/github-com-mraniki-dxsp-main)<br>[![codecov](https://codecov.io/gh/mraniki/dxsp/branch/main/graph/badge.svg?token=39ED0ZA6IH)](https://codecov.io/gh/mraniki/dxsp) <br>[![Web3](https://badgen.net/badge/icon/web3/black?icon=libraries&label)](https://github.com/ethereum/web3.py) [![coingecko](https://badgen.net/badge/icon/coingecko/black?icon=libraries&label)](https://github.com/coingecko) [![uniswap](https://badgen.net/badge/icon/unipy/black?icon=libraries&label)](https://github.com/uniswap-python/uniswap-python)|Key blockchains (ETH, BSC, ARB, MATIC, OPT...)<br>Key swap protocol (Uni and 0x)
+<table style="border: 1px solid transparent">
+  <tr>
+    <td>
+<a href="https://talkytrader.github.io/wiki/"><img src="https://img.shields.io/badge/Wiki-%23000000.svg?style=for-the-badge&logo=wikipedia&logoColor=white"></a><br>
+<a href="https://github.com/mraniki/dxsp/"><img src="https://img.shields.io/badge/github-%23000000.svg?style=for-the-badge&logo=github&logoColor=white"></a>
+<a href="https://hub.docker.com/r/mraniki/tt"><img src="https://img.shields.io/docker/pulls/mraniki/tt?style=for-the-badge"></a><br>
+<a href="https://coindrop.to/mraniki"><img src="https://img.shields.io/badge/tips-000000?style=for-the-badge&logo=buymeacoffee&logoColor=white"></a>
+<a href="https://t.me/TTTalkyTraderChat/1"><img src="https://img.shields.io/badge/talky-blue?style=for-the-badge&logo=telegram&logoColor=white"></a>
+<a href="https://discord.gg/gMNERs5M9"><img src="https://img.shields.io/discord/1049307055867035648?style=for-the-badge&logo=discord&logoColor=white&label=%20%20&color=blue"></a>
+  </td>
+    <td align="center"><img width="200" alt="Logo" src="https://user-images.githubusercontent.com/8766259/231213427-63ea2752-13d5-4993-aee2-90671b57fc6e.png"></td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://pypi.org/project/dxsp/"><img src="https://img.shields.io/pypi/v/dxsp?style=for-the-badge&logo=PyPI&logoColor=white"></a><br>
+      <a href="https://pypi.org/project/dxsp/"><img src="https://img.shields.io/pypi/dm/dxsp?style=for-the-badge&logo=PyPI&logoColor=white&label=pypi&labelColor=grey"></a><br>
+      <a href="https://github.com/mraniki/dxsp/"><img src="https://img.shields.io/github/actions/workflow/status/mraniki/dxsp/%F0%9F%91%B7Flow.yml?style=for-the-badge&logo=GitHub&logoColor=white"></a><br>
+   <a href="https://talkyuniverse.readthedocs.io/projects/dxsp/"><img src="https://readthedocs.org/projects/dxsp/badge/?version=latest&style=for-the-badge"></a><br>
+   <a href="https://codebeat.co/projects/github-com-mraniki-dxsp-main"><img src="https://codebeat.co/badges/b1376839-73bc-4b41-bfc1-2fb099f1fc2a"/></a><br>
+   <a href="https://codecov.io/gh/mraniki/dxsp"><img src="https://codecov.io/gh/mraniki/dxsp/branch/main/graph/badge.svg?token=39ED0ZA6IH"/> </a><br>
+    </td>
+    <td align="left"> 
+Swap made easy<br>
+Trade on any blockchains with uniswap based router or 0x protocol.
+    </td>
+     
+  </tr>
+</table>
 
-Key features:
+<h5>How to use it</h5>
+<pre>
+<code>
+   from dxsp import DexSwap
+    dex = DexSwap()
+    #BUY 10 USDT to SWAP with BITCOIN
+    demo_tx = await dex.get_swap('USDT','wBTC',10)
+    print("demo_tx ", demo_tx)
+</code>
+</pre>
 
-- Any blockchains mainnet or testnet supported by web3py, for uniswap based router (e.g uniswap, pancakeswap) or 0x protocol.
+<h5>Example</h5>
 
-Other features:
-
-- Translate token symbol to contract address via user defined tokenlist format or coingecko API
-- Connect to web3 automatically or use your own w3
-- Approve contract and sign transaction
-- Quote a given token
-- Use Base trading symbol like stablecoin for risk management approach
-- Settings to use the module for your own setup
-
-## Install
-
-`pip install dxsp`
-
-## How to use it
-
-```
-from dxsp import DexSwap
-
- dex = DexSwap()
- #BUY 10 USDT to SWAP with BITCOIN
- demo_tx = await dex.get_swap('USDT','wBTC',10)
- print("demo_tx ", demo_tx)
-```
-
-### Example
-
-[example](https://github.com/mraniki/dxsp/blob/main/examples/example.py)
-
-
-### Real use case
-
-[TalkyTrader](https://github.com/mraniki/tt)
-
-## Documentation
-
-[![wiki](https://img.shields.io/badge/🪙🗿-wiki-0080ff)](https://talkytrader.gitbook.io/talky/)
+https://github.com/mraniki/dxsp/blob/f76fd035eddadc4de2a8509a7c26250c187b0658/examples/example.py#L1-L68
 
