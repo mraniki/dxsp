@@ -109,7 +109,9 @@ class DexSwap:
             buy_address = self.trading_asset_address
             sell_address = await self.search_contract_address(sell_token)
             quote = await self.dex_swap.get_quote(buy_address, sell_address)
-            return f"🦄 {quote} {settings.trading_asset}" #settings to be reviewed and removed
+            # settings to be reviewed and removed
+            # TODO
+            return f"🦄 {quote} {settings.trading_asset}"
         except Exception as error:
             return f"⚠️: {error}"
 
@@ -349,20 +351,20 @@ class DexSwap:
 
     async def check_transaction_status(self, frequency="daily"):
         # Get the transaction history for the given address
-        transactions = self.w3.eth.get_transaction_receipt('0xA4DDaFf0c5BcC41b11386AF4488a6AC5f2c3ab03')
-            # self.wallet_address)
+        transactions = self.w3.eth.get_transaction_receipt(
+            '0xA4DDaFf0c5BcC41b11386AF4488a6AC5f2c3ab03')
+        # self.wallet_address)
         if len(transactions) == 0:
             return "No transactions found for the address."
-        
+
         total_profit_loss = 0
 
         for tx in transactions:
             # Retrieve the transaction details
-            tx_hash = tx['hash']
             tx_value = tx['value']
             tx_status = tx['status']
             tx_timestamp = datetime.fromtimestamp(tx['timestamp'])
-            
+
             # Check if the transaction falls within the desired frequency
             if frequency == "daily":
                 start_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
@@ -380,7 +382,7 @@ class DexSwap:
             elif frequency == "yearly":
                 start_date = datetime(datetime.now().year, 1, 1).replace(hour=0, minute=0, second=0, microsecond=0)
                 end_date = datetime.now()
-            
+
             if start_date <= tx_timestamp <= end_date:
                 # Check if the transaction was successful
                 if tx_status == 1:
@@ -389,7 +391,7 @@ class DexSwap:
                         total_profit_loss += tx_value
                     else:
                         total_profit_loss -= tx_value
-        
+
         if total_profit_loss > 0:
             return f"Transactions made. Profit ({frequency}): {total_profit_loss}"
         elif total_profit_loss < 0:
