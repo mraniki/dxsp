@@ -212,7 +212,7 @@ class DexSwap:
 
     async def get_block_timestamp(self, block_num) -> datetime:
             """Get block timestamp"""
-            block_info = self.w3.eth.getBlock(block_num)
+            block_info = self.w3.eth.get_block(block_num)
             last_time = block_info["timestamp"]
             return datetime.utcfromtimestamp(last_time)
 
@@ -301,8 +301,11 @@ class DexSwap:
 
     async def get_token_symbol(self, token_address: str) -> Optional[int]:
         """Get token symbol"""
-        token_data = await self.search_cg(token_address)
+        contract = await get_token_contract(token_address)
         return token_data['symbol']
+        #token_name = contract.functions.name().call() 
+        return contract.functions.symbol().call() 
+
 
     async def get_token_balance(self, token_address: str) -> Optional[int]:
         """Get token balance"""
