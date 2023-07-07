@@ -1,3 +1,8 @@
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.poetry]
 name = "dxsp"
 version = "3.2.0"
@@ -20,16 +25,29 @@ dynaconf = "^3.1.12"
 web3 = "^6.4.0"
 pycoingecko = "^3.1.0"
 uniswap-python = "^0.7.0"
-#eip712 = "^0.2.1"
-#eth-ape'[recommended-plugins]' = "^0.6.11"
 
 [tool.poetry.dev-dependencies]
 python-semantic-release = "^7.34.3"
+
+
+[tool.poetry.group.test.dependencies]
 pytest = "^7.0"
 pytest-cov = "^4.1"
 pytest-asyncio = "^0.21.0"
 pytest-mock = "^3.11.1"
 eth_tester = "^0.9.0b2"
+
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^6.0.0"
+sphinx_bootstrap_theme = "^0.8.1"
+sphinx-autoapi = "^2.1.1"
+sphinx-copybutton= "^0.5.2"
+myst-parser = "^2.0.0"
+sphinx-notfound-page = "*"
+
 
 [tool.pytest.ini_options]
 pythonpath = "."
@@ -45,17 +63,6 @@ omit = [
     "docs/*",
     "*/config.py"
 ]
-
-[tool.poetry.group.docs.dependencies]
-sphinx = "^7.0.1"
-sphinx-autoapi = "^2.1.0"
-furo = "^2023.5.20"
-
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
 
 [tool.semantic_release]
 version_variable = ["pyproject.toml:version","dxsp/__init__.py:__version__"]
