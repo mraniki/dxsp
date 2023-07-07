@@ -299,7 +299,7 @@ class DexSwap:
         contract = await self.get_token_contract(token_address)
         return 18 if not contract else contract.functions.decimals().call()
 
-    async def get_token_symbol(self, token_address: str) -> Optional[int]:
+    async def get_token_symbol(self, token_address: str):
         """Get token symbol"""
         contract = await get_token_contract(token_address)
         #token_name = contract.functions.name().call() 
