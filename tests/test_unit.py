@@ -279,6 +279,15 @@ async def test_get_gas_price(dex):
     print(f"gas_price: {result}")
     assert result is not None
 
+
+@pytest.mark.asyncio
+async def test_get_block_timestamp(dex):
+    # Call the get_gasPrice method
+    result = await dex.get_block_timestamp('17643734')
+    print(f"timestamp: {result}")
+    assert result is not None
+
+
 @pytest.mark.asyncio
 async def test_get_name(dex):
     result = await dex.get_name()
