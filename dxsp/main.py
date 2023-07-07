@@ -210,7 +210,7 @@ class DexSwap:
         """search get gas price"""
         return round(self.w3.from_wei(self.w3.eth.generate_gas_price(), 'gwei'), 2)
 
-    async def get_block_timestamp(self, block_num) -> datetime.datetime:
+    async def get_block_timestamp(self, block_num) -> datetime:
             """Get block timestamp"""
             block_info = self.w3.eth.getBlock(block_num)
             last_time = block_info["timestamp"]
