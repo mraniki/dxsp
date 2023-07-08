@@ -302,7 +302,7 @@ class DexSwap:
     async def get_token_symbol(self, token_address: str):
         """Get token symbol"""
         contract = await get_token_contract(token_address)
-        #token_name = contract.functions.name().call() 
+        #token_name = contract.functions.name().call()
         return contract.functions.symbol().call() 
 
 
