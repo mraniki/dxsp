@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v3.3.1 (2023-07-08)
+
+### Fix
+
+* ⬆️(deps): update dependency sphinx to v7 ([`ba431f7`](https://github.com/mraniki/dxsp/commit/ba431f781f7ee3300141255c8c53733e47049299))
+
+### Other
+
+* Merge pull request #308 from mraniki/renovate/sphinx-7.x ([`a7dd2a6`](https://github.com/mraniki/dxsp/commit/a7dd2a649e92bffce0ab8c7feb2d5f5cad60f71b))
+
 ## v3.3.0 (2023-07-08)
 
 ### Feature
