@@ -255,6 +255,15 @@ async def test_get_decimals_stable(dex):
 
 
 @pytest.mark.asyncio
+async def test_get_token_symbol(dex):
+    """get_token_symbol Testing"""
+    result = await dex.get_token_symbol("0xdAC17F958D2ee523a2206206994597C13D831ec7")
+    print(result)
+    assert result is not None
+    assert result == 'USDT'
+
+
+@pytest.mark.asyncio
 async def test_get_gas(dex):
     """get_gas Testing"""
     mock_tx = {"to": "0x1234567890123456789012345678901234567890",
@@ -269,6 +278,15 @@ async def test_get_gas_price(dex):
     result = await dex.get_gas_price()
     print(f"gas_price: {result}")
     assert result is not None
+
+
+@pytest.mark.asyncio
+async def test_get_block_timestamp(dex):
+    # Call the get_gasPrice method
+    result = await dex.get_block_timestamp('17643734')
+    print(f"timestamp: {result}")
+    assert result is not None
+
 
 @pytest.mark.asyncio
 async def test_get_name(dex):

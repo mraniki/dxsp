@@ -4,7 +4,7 @@
 
 import logging
 from typing import Optional
-
+from datetime import datetime, timedelta
 import requests
 from pycoingecko import CoinGeckoAPI
 from web3 import Web3
@@ -109,7 +109,9 @@ class DexSwap:
             buy_address = self.trading_asset_address
             sell_address = await self.search_contract_address(sell_token)
             quote = await self.dex_swap.get_quote(buy_address, sell_address)
-            return f"🦄 {quote} {settings.trading_asset}" #settings to be reviewed and removed
+            # settings to be reviewed and removed
+            # TODO
+            return f"🦄 {quote} {settings.trading_asset}"
         except Exception as error:
             return f"⚠️: {error}"
 
@@ -208,6 +210,12 @@ class DexSwap:
         """search get gas price"""
         return round(self.w3.from_wei(self.w3.eth.generate_gas_price(), 'gwei'), 2)
 
+    async def get_block_timestamp(self, block_num) -> datetime:
+            """Get block timestamp"""
+            block_info = self.w3.eth.get_block(block_num)
+            last_time = block_info["timestamp"]
+            return datetime.utcfromtimestamp(last_time)
+
 # ## ------✍️ CONTRACT ---------
     async def search_contract_address(self, token):
         """search a contract function"""
@@ -291,6 +299,13 @@ class DexSwap:
         contract = await self.get_token_contract(token_address)
         return 18 if not contract else contract.functions.decimals().call()
 
+    async def get_token_symbol(self, token_address: str):
+        """Get token symbol"""
+        contract = await self.get_token_contract(token_address)
+        #token_name = contract.functions.name().call()
+        return contract.functions.symbol().call() 
+
+
     async def get_token_balance(self, token_address: str) -> Optional[int]:
         """Get token balance"""
         contract = await self.get_token_contract(token_address)
@@ -346,3 +361,49 @@ class DexSwap:
 
     async def get_account_margin(self):
         return 0
+
+    async def get_account_pnl(self, frequency="daily"):
+
+        latest_tx_date = await self.get_block_timestamp(self.w3.eth.get_block('latest'))
+
+        #total_profit_loss = 0
+
+        # for tx in transactions:
+        #     # Retrieve the transaction details
+        #     tx_value = tx['value']
+        #     tx_status = tx['status']
+        #     tx_timestamp = datetime.fromtimestamp(tx['timestamp'])
+
+        #     # Check if the transaction falls within the desired frequency
+        #     if frequency == "daily":
+        #         start_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        #         end_date = datetime.now()
+        #     elif frequency == "weekly":
+        #         start_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=datetime.now().weekday())
+        #         end_date = datetime.now()
+        #     elif frequency == "monthly":
+        #         start_date = datetime.now().replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+        #         end_date = datetime.now()
+        #     elif frequency == "quarterly":
+        #         quarter = (datetime.now().month - 1) // 3
+        #         start_date = datetime(datetime.now().year, 3 * quarter + 1, 1).replace(hour=0, minute=0, second=0, microsecond=0)
+        #         end_date = datetime.now()
+        #     elif frequency == "yearly":
+        #         start_date = datetime(datetime.now().year, 1, 1).replace(hour=0, minute=0, second=0, microsecond=0)
+        #         end_date = datetime.now()
+
+        #     if start_date <= tx_timestamp <= end_date:
+        #         # Check if the transaction was successful
+        #         if tx_status == 1:
+        #             # Check if the transaction resulted in profit or loss
+        #             if tx_value > 0:
+        #                 total_profit_loss += tx_value
+        #             else:
+        #                 total_profit_loss -= tx_value
+
+        # if total_profit_loss > 0:
+        #     return f"Transactions made. Profit ({frequency}): {total_profit_loss}"
+        # elif total_profit_loss < 0:
+        #     return f"Transactions made. Loss ({frequency}): {abs(total_profit_loss)}"
+        # else:
+        #     return f"Transactions made ({frequency}), but no profit or loss."
