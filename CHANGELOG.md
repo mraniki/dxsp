@@ -2,6 +2,40 @@
 
 <!--next-version-placeholder-->
 
+## v3.3.0 (2023-07-08)
+
+### Feature
+
+* 🥚 new get_block_timestamp method in DexSwap class ([`181b6a1`](https://github.com/mraniki/dxsp/commit/181b6a18537a0e6d900d50623894886f08a31465))
+* :lipstick: Add get_token_symbol method ([`0a30543`](https://github.com/mraniki/dxsp/commit/0a30543d9424c5854fc36006c9b14dc12160b02c))
+
+### Fix
+
+* :bug: Fix block_info retrieval and refactor token_data retrieval ([`e23c17b`](https://github.com/mraniki/dxsp/commit/e23c17bfddcf21b986cd9293f31448f54a23d164))
+* :bug: Fix block_info retrieval and refactor token_data retrieval ([`0187aaa`](https://github.com/mraniki/dxsp/commit/0187aaa7a141773d2250cc161ed1f19043b2d1b1))
+* :bug: Fix block_info retrieval and refactor token_data retrieval ([`4a88867`](https://github.com/mraniki/dxsp/commit/4a88867a2ef79f13dee1f80c401a4badbeb3a537))
+* :bug: Fix block_info retrieval and refactor token_data retrieval ([`1d79a15`](https://github.com/mraniki/dxsp/commit/1d79a15a38056b44d0464b47f5d1823ab948e13e))
+* :bug: Fix block_info retrieval and refactor token_data retrieval ([`3294293`](https://github.com/mraniki/dxsp/commit/32942931a30fac038bbdc3a69f657962f6afeb60))
+* :rotating_light: linter ([`5e1ca38`](https://github.com/mraniki/dxsp/commit/5e1ca38fd5ac8044ec698fc480452663f2300341))
+* :rotating_light: linter ([`b885407`](https://github.com/mraniki/dxsp/commit/b885407c7e59dfb62506cb71d908a1c12b2c8cf0))
+* :memo: pyproject doc related update ([`f06157b`](https://github.com/mraniki/dxsp/commit/f06157bd2d00ef4398d9658758346a5f98c640c4))
+* :memo: readmydocs updated config ([`62a5159`](https://github.com/mraniki/dxsp/commit/62a51596a4ab845a61258bc23c6f680b2b414f43))
+* 📝 readmydocs updated config ([`32702fc`](https://github.com/mraniki/dxsp/commit/32702fca4992103546d7fccfe9dc85e3c5cff28b))
+* 🚨 linter ([`e1bdb04`](https://github.com/mraniki/dxsp/commit/e1bdb04aa218927e562198f20686d1229a00ec30))
+* ⚗️ new function: check_transaction_status() ([`35cf7c5`](https://github.com/mraniki/dxsp/commit/35cf7c592f68fb620494e20e82e9290cf675e487))
+* Update README.md ([`134e89f`](https://github.com/mraniki/dxsp/commit/134e89f9176b2dbf960ddd8bfb5b63958f198942))
+* 💬 comments ([`ab4cb46`](https://github.com/mraniki/dxsp/commit/ab4cb466eec0e9ce7da08af6b00c489fede8c180))
+* 👷 CI Change ([`2c47465`](https://github.com/mraniki/dxsp/commit/2c47465d330d373d1fffe58aba74991711da3604))
+* 📝  Docs ([`bc46a90`](https://github.com/mraniki/dxsp/commit/bc46a908e334e2c8a463709661e5291dedaa2d85))
+
+### Other
+
+* Merge pull request #305 from mraniki/dev ([`8643a57`](https://github.com/mraniki/dxsp/commit/8643a5723a651946f6deacb92cbcf11171d5821d))
+* Merge pull request #306 from mraniki/sourcery/dev ([`2e77224`](https://github.com/mraniki/dxsp/commit/2e772246b4f8a62ba6943e1b7a79ca82a29280ea))
+* 'Refactored by Sourcery' ([`e0df975`](https://github.com/mraniki/dxsp/commit/e0df975af658cbe4a87274c6ef7b9c090aaea500))
+* Merge pull request #304 from mraniki/main ([`9fdaa16`](https://github.com/mraniki/dxsp/commit/9fdaa16c59869c87737a37b5a45874d1b3d4f4a9))
+* Merge pull request #303 from mraniki/dev ([`f76fd03`](https://github.com/mraniki/dxsp/commit/f76fd035eddadc4de2a8509a7c26250c187b0658))
+
 ## v3.2.0 (2023-07-03)
 
 ### Feature
