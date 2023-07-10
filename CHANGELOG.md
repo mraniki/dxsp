@@ -2,6 +2,18 @@
 
 <!--next-version-placeholder-->
 
+## v3.3.2 (2023-07-10)
+
+### Fix
+
+* 📝 doc badge udpate ([`e4ce4b8`](https://github.com/mraniki/dxsp/commit/e4ce4b875cb9ec1b27f434e60018d87010733fcf))
+* 📝 Documentation structure ([`a00146d`](https://github.com/mraniki/dxsp/commit/a00146d1d7bcd50eb238a430b0847fcba2dfd52e))
+* 📝 Documentation structure ([`217aa32`](https://github.com/mraniki/dxsp/commit/217aa32d9d444dc01afab4cb55020b3e8ee8f8d6))
+
+### Other
+
+* Merge pull request #309 from mraniki/dev ([`a0514af`](https://github.com/mraniki/dxsp/commit/a0514af217813a1b90a4af63fc259bb2a5156611))
+
 ## v3.3.1 (2023-07-08)
 
 ### Fix
