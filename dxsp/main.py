@@ -4,7 +4,7 @@
 
 import logging
 from typing import Optional
-from datetime import datetime, timedelta
+from datetime import datetime
 import requests
 from pycoingecko import CoinGeckoAPI
 from web3 import Web3
