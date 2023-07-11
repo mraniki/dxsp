@@ -2,6 +2,18 @@
 
 <!--next-version-placeholder-->
 
+## v3.5.0 (2023-07-11)
+
+### Feature
+
+* :sparkles: pnl report and transaction history method ([`d996c0e`](https://github.com/mraniki/dxsp/commit/d996c0efdb31a1928644827f12ece9f78749cf66))
+
+### Other
+
+* Merge pull request #312 from mraniki/dev ([`9c4cdf7`](https://github.com/mraniki/dxsp/commit/9c4cdf77393eb7b585ef9acd4f628a6708c86b6c))
+* Merge pull request #313 from mraniki/sourcery/dev ([`26c2d13`](https://github.com/mraniki/dxsp/commit/26c2d1307da60a8f11c80b6eff886751bcbe6d76))
+* 'Refactored by Sourcery' ([`238aec0`](https://github.com/mraniki/dxsp/commit/238aec0926040be78799e253a976c6e793764a30))
+
 ## v3.4.0 (2023-07-11)
 
 ### Feature
