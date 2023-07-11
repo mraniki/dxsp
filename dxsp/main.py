@@ -366,12 +366,15 @@ class DexSwap:
         return trading_asset_balance if trading_asset_balance else 0
 
     async def get_account_position(self):
-        open_positions = 0
-        position = "📊 Position\n" + str(open_positions)
-        position += "\n" + str(await self.get_account_margin())
+        position = "📊 Position\n" 
+        position += "Opened: " + str(await self.get_account_open_positions())
+        position += "Margin: " + str(await self.get_account_margin())
         return position
 
     async def get_account_margin(self):
+        return 0
+
+    async def get_account_open_positions(self):
         return 0
 
     async def get_account_pnl(self, period=24):
@@ -425,7 +428,8 @@ class DexSwap:
                 transaction_time = datetime.utcfromtimestamp(timestamp)
     
                 if transaction_time >= time_history_start and token_symbol:
-                    pnl_dict["tokenList"][token_symbol] = pnl_dict["tokenList"].get(token_symbol, 0) + value
+                    pnl_dict["tokenList"][token_symbol] = (
+                    pnl_dict["tokenList"].get(token_symbol, 0) + value)
                     pnl_dict["pnl"] += value
     
         return pnl_dict
