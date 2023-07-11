@@ -24,7 +24,8 @@ class DexSwap:
             self.chain_id = self.w3.net.version
             self.wallet_address = self.w3.to_checksum_address(
                 settings.dex_wallet_address)
-            self.account = f"{str(self.w3.net.version)} - {str(self.wallet_address[-8:])}"
+            self.account = (f"{str(self.w3.net.version)} - "
+                            f"{str(self.wallet_address[-8:])}")
             self.private_key = settings.dex_private_key
             self.trading_asset_address = self.w3.to_checksum_address(
                 settings.trading_asset_address)
@@ -175,7 +176,8 @@ class DexSwap:
         """Returns amount based on risk percentage."""
         sell_balance = await self.get_token_balance(sell_token_address)
         sell_contract = await self.get_token_contract(sell_token_address)
-        sell_decimals = sell_contract.functions.decimals().call() if sell_contract is not None else 18
+        sell_decimals = (sell_contract.functions.decimals().call() 
+        if sell_contract is not None else 18)
         risk_percentage = settings.trading_risk_amount
         return (sell_balance / 
         (risk_percentage * 10 ** sell_decimals)) * (float(quantity) / 100)
@@ -385,20 +387,20 @@ class DexSwap:
 
         #     # Check if the transaction falls within the desired frequency
         #     if frequency == "daily":
-        #         start_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        #         start_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)  # noqa: E501
         #         end_date = datetime.now()
         #     elif frequency == "weekly":
-        #         start_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=datetime.now().weekday())
+        #         start_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=datetime.now().weekday())  # noqa: E501
         #         end_date = datetime.now()
         #     elif frequency == "monthly":
-        #         start_date = datetime.now().replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+        #         start_date = datetime.now().replace(day=1, hour=0, minute=0, second=0, microsecond=0)  # noqa: E501
         #         end_date = datetime.now()
         #     elif frequency == "quarterly":
         #         quarter = (datetime.now().month - 1) // 3
-        #         start_date = datetime(datetime.now().year, 3 * quarter + 1, 1).replace(hour=0, minute=0, second=0, microsecond=0)
+        #         start_date = datetime(datetime.now().year, 3 * quarter + 1, 1).replace(hour=0, minute=0, second=0, microsecond=0)  # noqa: E501
         #         end_date = datetime.now()
         #     elif frequency == "yearly":
-        #         start_date = datetime(datetime.now().year, 1, 1).replace(hour=0, minute=0, second=0, microsecond=0)
+        #         start_date = datetime(datetime.now().year, 1, 1).replace(hour=0, minute=0, second=0, microsecond=0)  # noqa: E501
         #         end_date = datetime.now()
 
         #     if start_date <= tx_timestamp <= end_date:
