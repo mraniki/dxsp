@@ -380,3 +380,11 @@ async def test_get_account_pnl(dex):
     result = await dex.get_account_pnl()
     print(f"pnl: {result}")
     assert result is not None
+
+
+@pytest.mark.asyncio
+async def test_get_account_transactions(dex):
+    # Call the get_account_pnl method
+    result = await dex.get_account_transactions()
+    print(f"pnl: {result}")
+    assert result is not None
