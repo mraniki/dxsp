@@ -2,6 +2,29 @@
 
 <!--next-version-placeholder-->
 
+## v3.4.0 (2023-07-11)
+
+### Feature
+
+* 🥚 invalid token message as config on/off ([`a55f480`](https://github.com/mraniki/dxsp/commit/a55f4808e1757ae20c7721743e7ab1f997823ded))
+
+### Fix
+
+* 💬  added todo for transaction history ([`11699ac`](https://github.com/mraniki/dxsp/commit/11699ac7db7ec774a848a035d7d363b16b0177a6))
+* ✅ get_account_transactions ([`ffdc43f`](https://github.com/mraniki/dxsp/commit/ffdc43f83349b4e240b56598d3713ea2d39fa7d8))
+* ⚗️ ♻️ pnl and transaction history ([`25749ff`](https://github.com/mraniki/dxsp/commit/25749fffb6c24b6e20938fa5d6469446f08c34f7))
+* ✅ get_account_pnl ([`f6c5bd2`](https://github.com/mraniki/dxsp/commit/f6c5bd2c1baa8e2e243b22141f2832a5c9b6e749))
+* ✅ pnl unit test ([`45ec939`](https://github.com/mraniki/dxsp/commit/45ec939ad27d36698539a99f2ae32db4a78247b6))
+* ✅  Added unit test for the ignore config ([`a4a2564`](https://github.com/mraniki/dxsp/commit/a4a2564cc34f0236a65981044bb459e9668ea8e9))
+* 🚨  linter line char size. ([`1f9ea11`](https://github.com/mraniki/dxsp/commit/1f9ea110afdde2591e982166370a2428170844e2))
+* ♻️  refactor get_name and get_info ([`498cf08`](https://github.com/mraniki/dxsp/commit/498cf08bb8372638725ec84989dec8a253c13ed8))
+* 🚨 linter ([`748e4f4`](https://github.com/mraniki/dxsp/commit/748e4f4bef7e98019576ceb3bd07150e21121f85))
+* :art:rounding to 5 digits for displaying balance ([`b16a440`](https://github.com/mraniki/dxsp/commit/b16a4404eccd633ce56bc2204f136271ec7c1471))
+
+### Other
+
+* Merge pull request #310 from mraniki/dev ([`0b945bc`](https://github.com/mraniki/dxsp/commit/0b945bcfd09f9d35cc5d46e96afc39951d50cc10))
+
 ## v3.3.2 (2023-07-10)
 
 ### Fix
