@@ -386,5 +386,5 @@ async def test_get_account_pnl(dex):
 async def test_get_account_transactions(dex):
     # Call the get_account_pnl method
     result = await dex.get_account_transactions()
-    print(f"pnl: {result}")
+    print(f"history: {result}")
     assert result is not None
