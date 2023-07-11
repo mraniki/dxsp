@@ -380,13 +380,12 @@ class DexSwap:
         report for the account.
         """
         pnl_dict = await self.get_account_transactions(period)
-        pnl_report = ""
-    
-        for token, value in pnl_dict["tokenList"].items():
-            pnl_report += f"{token} {value}\n"
+        pnl_report = "".join(
+            f"{token} {value}\n" for token, value in pnl_dict["tokenList"].items()
+        )
         pnl_report += f"Total {pnl_dict['pnl']}\n"
         pnl_report += await self.get_account_position()
-    
+
         return pnl_report
 
     async def get_account_transactions(self, period=24):
