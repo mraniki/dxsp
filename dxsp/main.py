@@ -395,8 +395,12 @@ class DexSwap:
         latest_block = self.w3.eth.get_block_number()
         latest_transaction_timestamp = await self.get_block_timestamp(latest_block)
         time_difference = datetime.utcnow() - latest_transaction_timestamp
-        print(time_difference)
+        print(time_difference)        
         if time_difference <= timedelta(hours=period):
+            # TODO
+            # Get user transaction history
+            # for a given transaction withing the time period
+            # consolidate the pnl per instrument and return it
             return {
                     "latest block": latest_transaction_timestamp,
                     }
