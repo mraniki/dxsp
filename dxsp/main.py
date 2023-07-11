@@ -366,9 +366,9 @@ class DexSwap:
         return trading_asset_balance if trading_asset_balance else 0
 
     async def get_account_position(self):
-        position = "📊 Position\n" 
-        position += "Opened: " + str(await self.get_account_open_positions())
-        position += "Margin: " + str(await self.get_account_margin())
+        position = "📊 Position\n"
+        position += f"Opened: {str(await self.get_account_open_positions())}"
+        position += f"Margin: {str(await self.get_account_margin())}"
         return position
 
     async def get_account_margin(self):
