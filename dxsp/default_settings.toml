@@ -23,7 +23,7 @@ trading_asset = "USDT"
 trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 trading_risk_amount = 10 # 10% of the position
 dex_trading_slippage = 2 # 2% slippage
-
+dex_notify_invalid_token = true
 
 
 
@@ -51,6 +51,7 @@ trading_asset = "USDT"
 trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 trading_risk_amount = 10 
 dex_trading_slippage = 2
+dex_notify_invalid_token = true
 headers = {User-Agent= 'Mozilla/5.0'}
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
@@ -74,6 +75,7 @@ trading_asset = "USDT"
 trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 trading_risk_amount = 10
 dex_trading_slippage = 2
+dex_notify_invalid_token = true
 headers = {User-Agent= 'Mozilla/5.0'}
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
@@ -96,6 +98,7 @@ trading_asset = "USDC"
 trading_asset_address = "0xa3726f2e6423caF1824cD7721B543B29b621fB4f"
 trading_risk_amount = 10
 dex_trading_slippage = 2
+dex_notify_invalid_token = true
 headers = {User-Agent= 'Mozilla/5.0'}
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
@@ -115,6 +118,7 @@ trading_asset = "BUSD"
 trading_asset_address = "0xe9e7cea3dedca5984780bafc599bd69add087d56"
 trading_risk_amount = 10 
 dex_trading_slippage = 2
+dex_notify_invalid_token = false
 headers = {User-Agent= 'Mozilla/5.0'}
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
@@ -137,6 +141,7 @@ trading_asset = "USDT"
 trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 trading_risk_amount = 10 
 dex_trading_slippage = 2
+dex_notify_invalid_token = true
 headers = {User-Agent= 'Mozilla/5.0'}
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
@@ -159,6 +164,7 @@ trading_asset = "BUSD"
 trading_asset_address = "0xe9e7cea3dedca5984780bafc599bd69add087d56"
 trading_risk_amount = 10 
 dex_trading_slippage = 2
+dex_notify_invalid_token = true
 headers = {User-Agent= 'Mozilla/5.0'}
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"

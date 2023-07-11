@@ -4,7 +4,7 @@
 
 import logging
 from typing import Optional
-from datetime import datetime
+from datetime import datetime, timedelta
 import requests
 from pycoingecko import CoinGeckoAPI
 from web3 import Web3
@@ -24,7 +24,8 @@ class DexSwap:
             self.chain_id = self.w3.net.version
             self.wallet_address = self.w3.to_checksum_address(
                 settings.dex_wallet_address)
-            self.account = f"{str(self.w3.net.version)} - {str(self.wallet_address[-8:])}"
+            self.account = (f"{str(self.w3.net.version)} - "
+                            f"{str(self.wallet_address[-8:])}")
             self.private_key = settings.dex_private_key
             self.trading_asset_address = self.w3.to_checksum_address(
                 settings.trading_asset_address)
@@ -84,8 +85,10 @@ class DexSwap:
                 await self.get_token_decimals(sell_token_address)))
             await self.get_approve(sell_token_address)
 
-            order_amount = int(sell_token_amount_wei * (settings.dex_trading_slippage / 100))
-            order = await self.dex_swap.get_swap(sell_token_address, buy_token_address, order_amount)
+            order_amount = int(
+                sell_token_amount_wei * (settings.dex_trading_slippage / 100))
+            order = await self.dex_swap.get_swap(
+                sell_token_address, buy_token_address, order_amount)
 
             if not order:
                 raise ValueError("swap order not executed")
@@ -173,9 +176,11 @@ class DexSwap:
         """Returns amount based on risk percentage."""
         sell_balance = await self.get_token_balance(sell_token_address)
         sell_contract = await self.get_token_contract(sell_token_address)
-        sell_decimals = sell_contract.functions.decimals().call() if sell_contract is not None else 18
+        sell_decimals = (sell_contract.functions.decimals().call() 
+        if sell_contract is not None else 18)
         risk_percentage = settings.trading_risk_amount
-        return (sell_balance / (risk_percentage * 10 ** sell_decimals)) * (float(quantity) / 100)
+        return (sell_balance / 
+        (risk_percentage * 10 ** sell_decimals)) * (float(quantity) / 100)
 
     async def get_confirmation(self, transactionHash):
         """Returns trade confirmation."""
@@ -235,7 +240,9 @@ class DexSwap:
 
         token_address = await self.search_cg_contract(token)
         if token_address is None:
-            raise ValueError("Invalid Token")
+            if settings.dex_notify_invalid_token:
+                raise ValueError("Invalid Token")
+            return
         return self.w3.to_checksum_address(token_address)
 
     async def search_cg_platform(self):
@@ -314,7 +321,7 @@ class DexSwap:
         balance = contract.functions.balanceOf(self.wallet_address).call()
         if balance is None:
             raise ValueError("No Balance")
-        return balance
+        return round(balance,5)
 
     async def get_explorer_abi(self, address):
         if not settings.dex_block_explorer_api:
@@ -335,18 +342,23 @@ class DexSwap:
             return None
 
 # 🔒 USER RELATED
-    async def get_name(self):
-        return settings.dex_router_contract_addr[-8:]
-
     async def get_info(self):
-        return f"{__class__.__name__} {__version__}\n💱 {await self.get_name()}\n🪪 {self.account}"
+        return (f"ℹ️ {__class__.__name__} {__version__}\n"
+                f"💱 {await self.get_name()}\n"
+                f"🪪 {self.account}")
+
+    async def get_name(self):
+        if settings.dex_router_contract_addr:
+            return settings.dex_router_contract_addr[-8:]
+        else:
+            return self.protocol_type
 
     async def get_account_balance(self):
         account_balance = self.w3.eth.get_balance(
             self.w3.to_checksum_address(self.wallet_address))
         account_balance = self.w3.from_wei(account_balance, 'ether') or 0
         trading_asset_balance = await self.get_trading_asset_balance() or 0
-        return f"₿ {account_balance}\n💵 {trading_asset_balance}"
+        return f"₿ {round(account_balance,5)}\n💵 {trading_asset_balance}"
 
     async def get_trading_asset_balance(self):
         trading_asset_balance = await self.get_token_balance(
@@ -362,48 +374,34 @@ class DexSwap:
     async def get_account_margin(self):
         return 0
 
-    async def get_account_pnl(self, frequency="daily"):
+    async def get_account_pnl(self, period=24):
+        """
+        Retrieves the profit and loss (PnL) information for the account.
+        WIP not ready
+        """
+        transaction_list = await self.get_account_transactions(period)
+        return {
+            "latest block": transaction_list['latest block'],
+            "instrument": 0,
+            "Total PnL": 0,
+            "OpenPnl": 0
+            }
 
-        latest_tx_date = await self.get_block_timestamp(self.w3.eth.get_block('latest'))
-
-        #total_profit_loss = 0
-
-        # for tx in transactions:
-        #     # Retrieve the transaction details
-        #     tx_value = tx['value']
-        #     tx_status = tx['status']
-        #     tx_timestamp = datetime.fromtimestamp(tx['timestamp'])
-
-        #     # Check if the transaction falls within the desired frequency
-        #     if frequency == "daily":
-        #         start_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
-        #         end_date = datetime.now()
-        #     elif frequency == "weekly":
-        #         start_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=datetime.now().weekday())
-        #         end_date = datetime.now()
-        #     elif frequency == "monthly":
-        #         start_date = datetime.now().replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-        #         end_date = datetime.now()
-        #     elif frequency == "quarterly":
-        #         quarter = (datetime.now().month - 1) // 3
-        #         start_date = datetime(datetime.now().year, 3 * quarter + 1, 1).replace(hour=0, minute=0, second=0, microsecond=0)
-        #         end_date = datetime.now()
-        #     elif frequency == "yearly":
-        #         start_date = datetime(datetime.now().year, 1, 1).replace(hour=0, minute=0, second=0, microsecond=0)
-        #         end_date = datetime.now()
-
-        #     if start_date <= tx_timestamp <= end_date:
-        #         # Check if the transaction was successful
-        #         if tx_status == 1:
-        #             # Check if the transaction resulted in profit or loss
-        #             if tx_value > 0:
-        #                 total_profit_loss += tx_value
-        #             else:
-        #                 total_profit_loss -= tx_value
-
-        # if total_profit_loss > 0:
-        #     return f"Transactions made. Profit ({frequency}): {total_profit_loss}"
-        # elif total_profit_loss < 0:
-        #     return f"Transactions made. Loss ({frequency}): {abs(total_profit_loss)}"
-        # else:
-        #     return f"Transactions made ({frequency}), but no profit or loss."
+    async def get_account_transactions(self, period=24):
+        """
+        Retrieves the account transactions within a specified time period.
+        WIP not ready
+        """
+        latest_block = self.w3.eth.get_block_number()
+        latest_transaction_timestamp = await self.get_block_timestamp(latest_block)
+        time_difference = datetime.utcnow() - latest_transaction_timestamp
+        print(time_difference)        
+        if time_difference <= timedelta(hours=period):
+            # TODO
+            # Get user transaction history
+            # for a given transaction withing the time period
+            # consolidate the pnl per instrument and return it
+            return {
+                    "latest block": latest_transaction_timestamp,
+                    }
+        return None
