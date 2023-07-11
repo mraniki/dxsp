@@ -339,11 +339,16 @@ class DexSwap:
             return None
 
 # 🔒 USER RELATED
-    async def get_name(self):
-        return settings.dex_router_contract_addr[-8:]
-
     async def get_info(self):
-        return f"{__class__.__name__} {__version__}\n💱 {await self.get_name()}\n🪪 {self.account}"
+        return (f"ℹ️ {__class__.__name__} {__version__}\n"
+                f"💱 {await self.get_name()}\n"
+                f"🪪 {self.account}")
+
+    async def get_name(self):
+        if settings.dex_router_contract_addr:
+            return settings.dex_router_contract_addr[-8:]
+        else:
+            return self.protocol_type
 
     async def get_account_balance(self):
         account_balance = self.w3.eth.get_balance(
