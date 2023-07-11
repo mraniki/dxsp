@@ -315,7 +315,7 @@ class DexSwap:
         balance = contract.functions.balanceOf(self.wallet_address).call()
         if balance is None:
             raise ValueError("No Balance")
-        return balance
+        return round(balance,5)
 
     async def get_explorer_abi(self, address):
         if not settings.dex_block_explorer_api:
@@ -347,7 +347,7 @@ class DexSwap:
             self.w3.to_checksum_address(self.wallet_address))
         account_balance = self.w3.from_wei(account_balance, 'ether') or 0
         trading_asset_balance = await self.get_trading_asset_balance() or 0
-        return f"₿ {account_balance}\n💵 {trading_asset_balance}"
+        return f"₿ {round(account_balance,5)}\n💵 {trading_asset_balance}"
 
     async def get_trading_asset_balance(self):
         trading_asset_balance = await self.get_token_balance(
