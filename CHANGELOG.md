@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v3.5.1 (2023-07-11)
+
+### Fix
+
+* 🚨 pos ([`b88a79d`](https://github.com/mraniki/dxsp/commit/b88a79d059477fed7629d96393f9c8b31400a67c))
+* ✅ ♻️ update function for pnl report and unit test ([`ab52398`](https://github.com/mraniki/dxsp/commit/ab52398bd88b429a16e613ee86f3bbb973835347))
+
+### Other
+
+* Merge pull request #314 from mraniki/dev ([`6fbd7ad`](https://github.com/mraniki/dxsp/commit/6fbd7ad33a6c012dd4bad7ca334eab4429b465a4))
+
 ## v3.5.0 (2023-07-11)
 
 ### Feature
