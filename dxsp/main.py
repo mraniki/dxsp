@@ -84,8 +84,10 @@ class DexSwap:
                 await self.get_token_decimals(sell_token_address)))
             await self.get_approve(sell_token_address)
 
-            order_amount = int(sell_token_amount_wei * (settings.dex_trading_slippage / 100))
-            order = await self.dex_swap.get_swap(sell_token_address, buy_token_address, order_amount)
+            order_amount = int(
+                sell_token_amount_wei * (settings.dex_trading_slippage / 100))
+            order = await self.dex_swap.get_swap(
+                sell_token_address, buy_token_address, order_amount)
 
             if not order:
                 raise ValueError("swap order not executed")
@@ -175,7 +177,8 @@ class DexSwap:
         sell_contract = await self.get_token_contract(sell_token_address)
         sell_decimals = sell_contract.functions.decimals().call() if sell_contract is not None else 18
         risk_percentage = settings.trading_risk_amount
-        return (sell_balance / (risk_percentage * 10 ** sell_decimals)) * (float(quantity) / 100)
+        return (sell_balance / 
+        (risk_percentage * 10 ** sell_decimals)) * (float(quantity) / 100)
 
     async def get_confirmation(self, transactionHash):
         """Returns trade confirmation."""
@@ -235,7 +238,7 @@ class DexSwap:
 
         token_address = await self.search_cg_contract(token)
         if token_address is None:
-            if settings.dex_notify_invalid_token
+            if settings.dex_notify_invalid_token:
                 raise ValueError("Invalid Token")
         return self.w3.to_checksum_address(token_address)
 
@@ -366,7 +369,7 @@ class DexSwap:
     async def get_account_pnl(self, frequency="daily"):
 
         latest_tx_date = await self.get_block_timestamp(self.w3.eth.get_block('latest'))
-
+        return latest_tx_date
         #total_profit_loss = 0
 
         # for tx in transactions:
