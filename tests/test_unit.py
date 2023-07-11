@@ -73,7 +73,8 @@ def mock_dex_transaction():
     dex.w3.eth.get_transaction_count = AsyncMock(return_value=1)
     dex.get_gas = AsyncMock(return_value=21000)
     dex.get_gas_price = AsyncMock(return_value=1000000000)
-    dex.w3.eth.account.sign_transaction = AsyncMock(return_value=AsyncMock(rawTransaction=b'signed_transaction'))
+    dex.w3.eth.account.sign_transaction = (
+        AsyncMock(return_value=AsyncMock(rawTransaction=b'signed_transaction')))
     dex.w3.eth.send_raw_transaction = AsyncMock(return_value=b'transaction_hash')
     return dex
 
@@ -99,8 +100,8 @@ async def test_dex(dex):
 
 @pytest.mark.asyncio
 async def test_execute_order(dex, order):
-    sell_balance = AsyncMock()
-    dex.get_swap = AsyncMock()
+    # sell_balance = AsyncMock()
+    # dex.get_swap = AsyncMock()
     result = await dex.execute_order(order)
     print(f"swap_order: {result}")
     assert result is not None
@@ -125,7 +126,7 @@ async def test_get_quote(dex):
 @pytest.mark.asyncio
 async def test_get_quote_BTC(account) -> str:
     """test token account."""
-    with patch("dxsp.config.settings", :autospec=True):
+    with patch("dxsp.config.settings", autospec=True):
         settings.dex_wallet_address = account
         dex = DexSwap()
         result = await dex.get_quote('WBTC')
@@ -155,12 +156,13 @@ async def test_get_approve(dex):
 @pytest.mark.asyncio
 async def test_failed_get_approve(dex):
     with pytest.raises(ValueError, match='Approval failed'):
-        result = await dex.get_approve("0xdAC17F958D2ee523a2206206994597C13D831ec7")
+        await dex.get_approve("0xdAC17F958D2ee523a2206206994597C13D831ec7")
 
 
 @pytest.mark.asyncio
 async def test_get_confirmation(dex):
-    result = await dex.get_confirmation("0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771")
+    result = await dex.get_confirmation(
+        "0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771")
     print(result)
     assert result is not None
     assert result['timestamp'] is not None
@@ -180,7 +182,8 @@ async def test_get_sign(mock_dex):
 
 #    mock_dex.get_gas.assert_called_once_with(transaction)
 #    mock_dex.get_gas_price.assert_called_once()
-#    mock_dex.w3.eth.get_transaction_count.assert_called_once_with(mock_dex.wallet_address)
+#    mock_dex.w3.eth.get_transaction_count.assert_called_once_with(
+# mock_dex.wallet_address)
 
 
 @pytest.mark.asyncio
@@ -209,14 +212,6 @@ async def test_search_contract_address(dex):
 async def test_invalid_search_contract_address(dex):
     with pytest.raises(ValueError, match='Invalid Token'):
         await dex.search_contract_address("NOTATHING")
-
-
-@pytest.mark.asyncio
-async def test_no_notify_invalid_token_(dex):
-    with patch("dxsp.config.settings", :autospec=True):
-           settings.dex_notify_invalid_token = false
-        result = await dex.search_contract_address("NOTATHING")
-        assert result is None
 
 
 @pytest.mark.asyncio
@@ -354,6 +349,7 @@ async def test_token_balance(account) -> str:
         print(result)
         assert result is not None
 
+
 @pytest.mark.asyncio
 async def test_trading_asset_balance(account) -> str:
     """test token account."""
@@ -376,3 +372,11 @@ async def test_get_account_position(account) -> str:
         print(result)
         assert result is not None
         assert '📊' in result
+
+
+@pytest.mark.asyncio
+async def test_get_account_pnl(dex):
+    # Call the get_gasPrice method
+    result = await dex.get_account_pnl()
+    print(f"pnl: {result}")
+    assert result is not None

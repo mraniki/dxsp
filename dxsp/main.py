@@ -242,6 +242,7 @@ class DexSwap:
         if token_address is None:
             if settings.dex_notify_invalid_token:
                 raise ValueError("Invalid Token")
+            return
         return self.w3.to_checksum_address(token_address)
 
     async def search_cg_platform(self):

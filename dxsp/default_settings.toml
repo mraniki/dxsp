@@ -118,7 +118,7 @@ trading_asset = "BUSD"
 trading_asset_address = "0xe9e7cea3dedca5984780bafc599bd69add087d56"
 trading_risk_amount = 10 
 dex_trading_slippage = 2
-dex_notify_invalid_token = true
+dex_notify_invalid_token = false
 headers = {User-Agent= 'Mozilla/5.0'}
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
