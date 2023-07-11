@@ -125,7 +125,7 @@ async def test_get_quote(dex):
 @pytest.mark.asyncio
 async def test_get_quote_BTC(account) -> str:
     """test token account."""
-    with patch("dxsp.config.settings", autospec=True):
+    with patch("dxsp.config.settings", :autospec=True):
         settings.dex_wallet_address = account
         dex = DexSwap()
         result = await dex.get_quote('WBTC')
@@ -209,6 +209,14 @@ async def test_search_contract_address(dex):
 async def test_invalid_search_contract_address(dex):
     with pytest.raises(ValueError, match='Invalid Token'):
         await dex.search_contract_address("NOTATHING")
+
+
+@pytest.mark.asyncio
+async def test_no_notify_invalid_token_(dex):
+    with patch("dxsp.config.settings", :autospec=True):
+           settings.dex_notify_invalid_token = false
+        result = await dex.search_contract_address("NOTATHING")
+        assert result is None
 
 
 @pytest.mark.asyncio
