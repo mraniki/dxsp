@@ -376,32 +376,56 @@ class DexSwap:
 
     async def get_account_pnl(self, period=24):
         """
-        Retrieves the profit and loss (PnL) information for the account.
-        WIP not ready
+        Create a profit and loss (PnL) 
+        report for the account.
         """
-        transaction_list = await self.get_account_transactions(period)
-        return {
-            "latest block": transaction_list['latest block'],
-            "instrument": 0,
-            "Total PnL": 0,
-            "OpenPnl": 0
-            }
+        pnl_dict = await self.get_account_transactions(period)
+        pnl_report = "".join(
+            f"{token} {value}\n" for token, value in pnl_dict["tokenList"].items()
+        )
+        pnl_report += f"Total {pnl_dict['pnl']}\n"
+        pnl_report += await self.get_account_position()
+
+        return pnl_report
 
     async def get_account_transactions(self, period=24):
         """
-        Retrieves the account transactions within a specified time period.
-        WIP not ready
+        Retrieves the account transactions 
+        within a specified time period
+        for the main asset activity
         """
-        latest_block = self.w3.eth.get_block_number()
-        latest_transaction_timestamp = await self.get_block_timestamp(latest_block)
-        time_difference = datetime.utcnow() - latest_transaction_timestamp
-        print(time_difference)        
-        if time_difference <= timedelta(hours=period):
-            # TODO
-            # Get user transaction history
-            # for a given transaction withing the time period
-            # consolidate the pnl per instrument and return it
-            return {
-                    "latest block": latest_transaction_timestamp,
-                    }
-        return None
+        pnl_dict = {"pnl": 0, "tokenList": {}}
+        if not settings.dex_block_explorer_api:
+            return pnl_dict
+    
+        params = {
+            "module": "account",
+            "action": "tokentx",
+            "contractaddress": self.trading_asset_address,
+            "address": self.wallet_address,
+            "page": "1",
+            "offset": "100",
+            "startblock": "0",
+            "endblock": "99999999",
+            "sort": "desc",
+            "apikey": settings.dex_block_explorer_api
+        }
+    
+        response = await self.get(
+            url=settings.dex_block_explorer_url, params=params)
+    
+        if response.get('status') == "1" and "result" in response:
+            current_time = datetime.utcnow()
+            time_history_start = current_time - timedelta(hours=period)
+    
+            for entry in response["result"]:
+                token_symbol = entry.get("tokenSymbol")
+                value = int(entry.get("value", 0))
+                timestamp = int(entry.get("timeStamp", 0))
+                transaction_time = datetime.utcfromtimestamp(timestamp)
+    
+                if transaction_time >= time_history_start and token_symbol:
+                    pnl_dict["tokenList"][token_symbol] = pnl_dict["tokenList"].get(token_symbol, 0) + value
+                    pnl_dict["pnl"] += value
+    
+        return pnl_dict
