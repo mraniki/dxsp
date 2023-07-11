@@ -376,8 +376,7 @@ class DexSwap:
 
     async def get_account_pnl(self, frequency="daily"):
 
-        latest_tx_date = await self.get_block_timestamp(self.w3.eth.get_block('latest'))
-        return latest_tx_date
+        return await self.get_block_timestamp(self.w3.eth.get_block('latest'))
         #total_profit_loss = 0
 
         # for tx in transactions:
