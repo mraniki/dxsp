@@ -376,7 +376,7 @@ async def test_get_account_position(account) -> str:
 
 @pytest.mark.asyncio
 async def test_get_account_pnl(dex):
-    # Call the get_gasPrice method
+    # Call the get_account_pnl method
     result = await dex.get_account_pnl()
     print(f"pnl: {result}")
     assert result is not None
