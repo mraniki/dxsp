@@ -90,7 +90,8 @@ class DexSwap:
             await self.get_approve(sell_token_address)
 
             order_amount = int(
-                sell_token_amount_wei * decimal.Decimal((settings.dex_trading_slippage / 100)))
+                sell_token_amount_wei * decimal.Decimal(
+                    (settings.dex_trading_slippage / 100)))
             order = await self.dex_swap.get_swap(
                 sell_token_address, buy_token_address, order_amount)
 
