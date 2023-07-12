@@ -2,6 +2,18 @@
 
 <!--next-version-placeholder-->
 
+## v3.5.4 (2023-07-12)
+
+### Fix
+
+* 🔇  remove troubleshoot logs. ([`aa57118`](https://github.com/mraniki/dxsp/commit/aa57118e2ef6a0a82a3f3c145cdf65072cdad462))
+* 🚨 linter ([`714c23d`](https://github.com/mraniki/dxsp/commit/714c23d059d9801541080c633177a19460a35972))
+* 🩹 Fix incase the trading asset balance amount 0.00XX ([`309b8fb`](https://github.com/mraniki/dxsp/commit/309b8fb3ad8ccc0ce490037acb6b6c960394f9c3))
+
+### Other
+
+* Merge pull request #318 from mraniki/dev ([`79ce64d`](https://github.com/mraniki/dxsp/commit/79ce64d60b6379800f4f9d75064cb47367f0e3f6))
+
 ## v3.5.3 (2023-07-12)
 
 ### Fix
