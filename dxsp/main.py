@@ -5,6 +5,7 @@
 import logging
 from typing import Optional
 from datetime import datetime, timedelta
+import decimal
 import requests
 from pycoingecko import CoinGeckoAPI
 from web3 import Web3
@@ -73,6 +74,7 @@ class DexSwap:
     async def get_swap(self, sell_token: str, buy_token: str, quantity: int) -> None:
         """ Main swap function """
         try:
+            print("get_swap", quantity)
             await self.get_protocol()
             sell_token_address = sell_token
             if not sell_token.startswith("0x"):
@@ -86,7 +88,8 @@ class DexSwap:
             await self.get_approve(sell_token_address)
 
             order_amount = int(
-                sell_token_amount_wei * (settings.dex_trading_slippage / 100))
+                sell_token_amount_wei * decimal.Decimal(
+                    (settings.dex_trading_slippage / 100)))
             order = await self.dex_swap.get_swap(
                 sell_token_address, buy_token_address, order_amount)
 
@@ -172,6 +175,8 @@ class DexSwap:
         except Exception as error:
             raise error
 
+
+
     async def calculate_sell_amount(self, sell_token_address, quantity):
         """Returns amount based on risk percentage."""
         sell_balance = await self.get_token_balance(sell_token_address)
@@ -180,13 +185,8 @@ class DexSwap:
             sell_contract.functions.decimals().call()
             if sell_contract is not None else 18)
         risk_percentage = settings.trading_risk_amount
-
-        # Check for division by zero
-        if risk_percentage * 10 ** sell_decimals == 0:
-            return 0
-
         return ((sell_balance / (risk_percentage * 10 ** sell_decimals))
-         * (float(quantity) / 100))
+                * (decimal.Decimal(quantity)/ 100)) 
 
 
     async def get_confirmation(self, transactionHash):
