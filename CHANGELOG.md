@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v3.5.3 (2023-07-12)
+
+### Fix
+
+* 🐛 handle the division by zero error ([`6d88b4c`](https://github.com/mraniki/dxsp/commit/6d88b4cc73fd0e676d4223c620d77b719d4d30fd))
+
+### Other
+
+* Merge pull request #317 from mraniki/dev ([`db58f25`](https://github.com/mraniki/dxsp/commit/db58f25292e3c16506c5dc00133678a0adef67db))
+
 ## v3.5.2 (2023-07-12)
 
 ### Fix
