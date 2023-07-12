@@ -83,10 +83,8 @@ class DexSwap:
             if not buy_token_address.startswith("0x"):
                 buy_token_address = await self.search_contract_address(buy_token)
             sell_amount = await self.calculate_sell_amount(sell_token_address, quantity)
-            print("sell amount", sell_amount)
             sell_token_amount_wei = sell_amount * (10 ** (
                 await self.get_token_decimals(sell_token_address)))
-            print("sell sell_token_amount_wei", sell_token_amount_wei)
             await self.get_approve(sell_token_address)
 
             order_amount = int(
@@ -187,15 +185,9 @@ class DexSwap:
             sell_contract.functions.decimals().call()
             if sell_contract is not None else 18)
         risk_percentage = settings.trading_risk_amount
-
-        # Check for division by zero
-        if risk_percentage * 10 ** sell_decimals == 0:
-            return 0
-
-        sell_amount = ((sell_balance / (risk_percentage * 10 ** sell_decimals))
+        return ((sell_balance / (risk_percentage * 10 ** sell_decimals))
                 * (decimal.Decimal(quantity)/ 100)) 
-        print("sell amount", sell_amount)
-        return sell_amount
+
 
     async def get_confirmation(self, transactionHash):
         """Returns trade confirmation."""
