@@ -5,6 +5,7 @@
 import logging
 from typing import Optional
 from datetime import datetime, timedelta
+import decimal
 import requests
 from pycoingecko import CoinGeckoAPI
 from web3 import Web3
@@ -73,6 +74,7 @@ class DexSwap:
     async def get_swap(self, sell_token: str, buy_token: str, quantity: int) -> None:
         """ Main swap function """
         try:
+            print("get_swap", quantity)
             await self.get_protocol()
             sell_token_address = sell_token
             if not sell_token.startswith("0x"):
@@ -81,12 +83,14 @@ class DexSwap:
             if not buy_token_address.startswith("0x"):
                 buy_token_address = await self.search_contract_address(buy_token)
             sell_amount = await self.calculate_sell_amount(sell_token_address, quantity)
+            print("sell amount", sell_amount)
             sell_token_amount_wei = sell_amount * (10 ** (
                 await self.get_token_decimals(sell_token_address)))
+            print("sell sell_token_amount_wei", sell_token_amount_wei)
             await self.get_approve(sell_token_address)
 
             order_amount = int(
-                sell_token_amount_wei * (settings.dex_trading_slippage / 100))
+                sell_token_amount_wei * decimal.Decimal((settings.dex_trading_slippage / 100)))
             order = await self.dex_swap.get_swap(
                 sell_token_address, buy_token_address, order_amount)
 
@@ -172,6 +176,8 @@ class DexSwap:
         except Exception as error:
             raise error
 
+
+
     async def calculate_sell_amount(self, sell_token_address, quantity):
         """Returns amount based on risk percentage."""
         sell_balance = await self.get_token_balance(sell_token_address)
@@ -185,9 +191,10 @@ class DexSwap:
         if risk_percentage * 10 ** sell_decimals == 0:
             return 0
 
-        return ((sell_balance / (risk_percentage * 10 ** sell_decimals))
-         * (float(quantity) / 100))
-
+        sell_amount = ((sell_balance / (risk_percentage * 10 ** sell_decimals))
+                * (decimal.Decimal(quantity)/ 100)) 
+        print("sell amount", sell_amount)
+        return sell_amount
 
     async def get_confirmation(self, transactionHash):
         """Returns trade confirmation."""
