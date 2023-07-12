@@ -2,6 +2,18 @@
 
 <!--next-version-placeholder-->
 
+## v3.5.2 (2023-07-12)
+
+### Fix
+
+* ♻️ trading asset balance ([`3399fb2`](https://github.com/mraniki/dxsp/commit/3399fb2f234fb39dabaedf38e47249cc6ae27829))
+* 🩹 added rouding for trading balance ([`cb8c245`](https://github.com/mraniki/dxsp/commit/cb8c245b25b23970fcec0538a16998ac0000358a))
+* ⚡ updated the trading asset balance to be in ether value rather than wei ([`fb73b63`](https://github.com/mraniki/dxsp/commit/fb73b634739f500639f981b7bd3ad063539fe1b2))
+
+### Other
+
+* Merge pull request #316 from mraniki/dev ([`1b266e2`](https://github.com/mraniki/dxsp/commit/1b266e2d62bd8c32c075278380206f66db025a27))
+
 ## v3.5.1 (2023-07-11)
 
 ### Fix
