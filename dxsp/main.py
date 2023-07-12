@@ -176,11 +176,18 @@ class DexSwap:
         """Returns amount based on risk percentage."""
         sell_balance = await self.get_token_balance(sell_token_address)
         sell_contract = await self.get_token_contract(sell_token_address)
-        sell_decimals = (sell_contract.functions.decimals().call() 
-        if sell_contract is not None else 18)
+        sell_decimals = (
+            sell_contract.functions.decimals().call()
+            if sell_contract is not None else 18)
         risk_percentage = settings.trading_risk_amount
-        return (sell_balance / 
-        (risk_percentage * 10 ** sell_decimals)) * (float(quantity) / 100)
+
+        # Check for division by zero
+        if risk_percentage * 10 ** sell_decimals == 0:
+            return 0
+
+        return ((sell_balance / (risk_percentage * 10 ** sell_decimals))
+         * (float(quantity) / 100))
+
 
     async def get_confirmation(self, transactionHash):
         """Returns trade confirmation."""
