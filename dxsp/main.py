@@ -12,7 +12,7 @@ from web3 import Web3
 from web3.gas_strategies.time_based import medium_gas_price_strategy
 from dxsp import __version__
 from dxsp.config import settings
-
+from dxsp.contract_utils import ContractUtils
 
 class DexSwap:
     """swap  class"""
@@ -40,6 +40,7 @@ class DexSwap:
             raise ValueError("w3 not connected")
 
         self.cg = CoinGeckoAPI()
+        self.contract_utils = ContractUtils(w3=self.w3)
 
     async def get_protocol(self):
         """ protocol init """
