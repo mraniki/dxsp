@@ -375,7 +375,7 @@ class DexSwap:
 
     async def get_account_position(self):
         position = "📊 Position\n"
-        position += f"Opened: {str(await self.get_account_open_positions())}/n"
+        position += f"Opened: {str(await self.get_account_open_positions())}\n"
         position += f"Margin: {str(await self.get_account_margin())}"
         return position
 
