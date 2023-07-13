@@ -19,26 +19,25 @@ class DexSwap:
     def __init__(self, w3: Optional[Web3] = None):
         self.logger = logging.getLogger(name="DexSwap")
         self.w3 = w3 or Web3(Web3.HTTPProvider(settings.dex_rpc))
-        if self.w3.net.listening:
-            self.logger.info("connected %s", self.w3)
-            self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
-            self.chain_id = self.w3.net.version
-            self.wallet_address = self.w3.to_checksum_address(
-                settings.dex_wallet_address)
-            self.account = (f"{str(self.w3.net.version)} - "
-                            f"{str(self.wallet_address[-8:])}")
-            self.private_key = settings.dex_private_key
-            self.trading_asset_address = self.w3.to_checksum_address(
-                settings.trading_asset_address)
-
-            self.protocol_type = settings.dex_protocol_type
-            self.protocol_version = settings.dex_protocol_version
-            self.dex_swap = None
-            self.router = None
-            self.quoter = None
-        else:
+        if not self.w3.net.listening:
             raise ValueError("w3 not connected")
 
+        self.logger.info("connected %s", self.w3)
+        self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
+        self.chain_id = self.w3.net.version
+        self.wallet_address = self.w3.to_checksum_address(
+            settings.dex_wallet_address)
+        self.account = (f"{str(self.w3.net.version)} - "
+                        f"{str(self.wallet_address[-8:])}")
+        self.private_key = settings.dex_private_key
+        self.trading_asset_address = self.w3.to_checksum_address(
+            settings.trading_asset_address)
+
+        self.protocol_type = settings.dex_protocol_type
+        self.protocol_version = settings.dex_protocol_version
+        self.dex_swap = None
+        self.router = None
+        self.quoter = None
         self.cg = CoinGeckoAPI()
         self.contract_utils = ContractUtils(w3=self.w3)
 
