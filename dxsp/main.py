@@ -85,7 +85,8 @@ class DexSwap:
             sell_amount = await self.calculate_sell_amount(sell_token_address, quantity)
             sell_token_amount_wei = sell_amount * (10 ** (
                 await self.get_token_decimals(sell_token_address)))
-            await self.get_approve(sell_token_address)
+            if self.protocol_type == "0x":
+                await self.get_approve(sell_token_address)
 
             order_amount = int(
                 sell_token_amount_wei * decimal.Decimal(
