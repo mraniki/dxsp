@@ -13,6 +13,7 @@ from web3.gas_strategies.time_based import medium_gas_price_strategy
 from dxsp import __version__
 from dxsp.config import settings
 from dxsp.contract_utils import ContractUtils
+from dxsp.account_utils import AccountUtils
 
 class DexSwap:
     """swap  class"""
@@ -33,12 +34,13 @@ class DexSwap:
         self.trading_asset_address = self.w3.to_checksum_address(
             settings.trading_asset_address)
 
+        self.account = AccountUtils(w3=self.w3)
         self.protocol_type = settings.dex_protocol_type
         self.protocol_version = settings.dex_protocol_version
         self.dex_swap = None
         self.router = None
         self.quoter = None
-        self.cg = CoinGeckoAPI()
+
         self.contract_utils = ContractUtils(w3=self.w3)
 
     async def get_protocol(self):
