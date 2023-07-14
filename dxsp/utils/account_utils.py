@@ -5,10 +5,9 @@
 import logging
 from typing import Optional
 from web3 import Web3
-from datetime import datetime, timedelta
 from dxsp.config import settings
+from dxsp.utils.explorer_utils import get_account_transactions
 from dxsp import __version__
-from dxsp.utils.utils import get
 
 class AccountUtils:
 
@@ -72,46 +71,55 @@ class AccountUtils:
 
         return pnl_report
 
-    async def get_account_transactions(self, period=24):
-        """
-        Retrieves the account transactions 
-        within a specified time period
-        for the main asset activity
-        """
-        pnl_dict = {"pnl": 0, "tokenList": {}}
-        if not settings.dex_block_explorer_api:
-            return pnl_dict
-    
-        params = {
-            "module": "account",
-            "action": "tokentx",
-            "contractaddress": self.trading_asset_address,
-            "address": self.wallet_address,
-            "page": "1",
-            "offset": "100",
-            "startblock": "0",
-            "endblock": "99999999",
-            "sort": "desc",
-            "apikey": settings.dex_block_explorer_api
-        }
-    
-        response = await get(
-            url=settings.dex_block_explorer_url, params=params)
-    
-        if response.get('status') == "1" and "result" in response:
-            current_time = datetime.utcnow()
-            time_history_start = current_time - timedelta(hours=period)
-    
-            for entry in response["result"]:
-                token_symbol = entry.get("tokenSymbol")
-                value = int(entry.get("value", 0))
-                timestamp = int(entry.get("timeStamp", 0))
-                transaction_time = datetime.utcfromtimestamp(timestamp)
-    
-                if transaction_time >= time_history_start and token_symbol:
-                    pnl_dict["tokenList"][token_symbol] = (
-                    pnl_dict["tokenList"].get(token_symbol, 0) + value)
-                    pnl_dict["pnl"] += value
-    
-        return pnl_dict
-        
+    async def get_account_transactions(period=24):
+        return get_account_transactions(period)
+
+    async def get_approve(self, token_address):
+        """ approve a token """
+        try:
+            contract = await self.get_token_contract(token_address)
+            if contract is None:
+                return
+            approved_amount = self.w3.to_wei(2 ** 64 - 1, 'ether')
+            owner_address = self.w3.to_checksum_address(self.account.wallet_address)
+            dex_router_address = self.w3.to_checksum_address(
+                settings.dex_router_contract_addr)
+            allowance = contract.functions.allowance(
+                owner_address, dex_router_address).call()
+            if allowance == 0:
+                approval_tx = contract.functions.approve(
+                    dex_router_address, approved_amount)
+                approval_tx_hash = await self.get_sign(approval_tx.transact())
+                return self.w3.eth.wait_for_transaction_receipt(
+                    approval_tx_hash)
+        except Exception as error:
+            raise ValueError(f"Approval failed {error}")
+
+    async def get_sign(self, transaction):
+        """ sign a transaction """
+        try:
+            if self.protocol_type == 'uniswap':
+                transaction_params = {
+                    'from': self.account.wallet_address,
+                    'gas': await self.get_gas(transaction),
+                    'gasPrice': await self.get_gas_price(),
+                    'nonce': self.w3.eth.get_transaction_count(
+                        self.account.wallet_address),
+                }
+                transaction = transaction.build_transaction(transaction_params)
+            signed_tx = self.w3.eth.account.sign_transaction(
+                transaction, self.private_key)
+            raw_tx_hash = self.w3.eth.send_raw_transaction(
+                signed_tx.rawTransaction)
+            return self.w3.to_hex(raw_tx_hash)
+        except Exception as error:
+            raise error
+
+    async def get_gas(self, transaction):
+        """get gas estimate"""
+        gas_limit = self.w3.eth.estimate_gas(transaction) * 1.25
+        return int(self.w3.to_wei(gas_limit, 'wei'))
+
+    async def get_gas_price(self):
+        """search get gas price"""
+        return round(self.w3.from_wei(self.w3.eth.generate_gas_price(), 'gwei'), 2)

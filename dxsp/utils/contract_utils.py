@@ -7,8 +7,12 @@ from typing import Optional
 from web3 import Web3
 import requests
 from dxsp.config import settings
+from dxsp.utils.explorer_utils import get_explorer_abi
 from dxsp.utils.utils import get
 from pycoingecko import CoinGeckoAPI
+import decimal
+from datetime import datetime
+
 
 class ContractUtils:
 
@@ -89,7 +93,7 @@ class ContractUtils:
 
     async def get_token_contract(self, token_address):
         """Given a token address, returns a contract object. """
-        token_abi = await self.get_explorer_abi(token_address)
+        token_abi = await get_explorer_abi(token_address)
         if token_abi is None:
             token_abi = await get(settings.dex_erc20_abi_url)
         return self.w3.eth.contract(
@@ -118,20 +122,45 @@ class ContractUtils:
             raise ValueError("No Balance")
         return round(self.w3.from_wei(balance, 'ether'),5) or 0
 
-    async def get_explorer_abi(self, address):
-        if not settings.dex_block_explorer_api:
-            return None
 
-        params = {
-            "module": "contract",
-            "action": "getabi",
-            "address": address,
-            "apikey": settings.dex_block_explorer_api
-        }
-        resp = await get(
-            url=settings.dex_block_explorer_url, params=params)
-        if resp['status'] == "1":
-            self.logger.debug("ABI found %s", resp)
-            return resp["result"]
-        else:
-            return None
+    async def calculate_sell_amount(self, sell_token_address, quantity):
+        """Returns amount based on risk percentage."""
+        sell_balance = await self.get_token_balance(sell_token_address)
+        sell_contract = await self.get_token_contract(sell_token_address)
+        sell_decimals = (
+            sell_contract.functions.decimals().call()
+            if sell_contract is not None else 18)
+        risk_percentage = settings.trading_risk_amount
+        return ((sell_balance / (risk_percentage * 10 ** sell_decimals))
+                * (decimal.Decimal(quantity)/ 100)) 
+
+
+    async def get_confirmation(self, transactionHash):
+        """Returns trade confirmation."""
+        try:
+            transaction = self.w3.eth.get_transaction(transactionHash)
+            block = self.w3.eth.get_block(transaction["blockNumber"])
+            return {
+                "timestamp": block["timestamp"],
+                "id": transactionHash,
+                "instrument": transaction["to"],
+                "contract": transaction["to"],   # TBD To be determined.
+                "amount": transaction["value"],
+                "price": transaction["value"],  # TBD To be determined.
+                "fee": transaction["gas"],
+                "confirmation": (
+                    f"➕ Size: {round(transaction['value'], 4)}\n"
+                    f"⚫️ Entry: {round(transaction['value'], 4)}\n"
+                    f"ℹ️ {transactionHash}\n"
+                    f"⛽ {transaction['gas']}\n"
+                    f"🗓️ {block['timestamp']}"
+                ),
+            }
+        except Exception as error:
+            raise error
+
+    async def get_block_timestamp(self, block_num) -> datetime:
+            """Get block timestamp"""
+            block_info = self.w3.eth.get_block(block_num)
+            last_time = block_info["timestamp"]
+            return datetime.utcfromtimestamp(last_time)
