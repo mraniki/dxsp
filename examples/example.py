@@ -28,23 +28,22 @@ async def main():
         symbol = 'WBTC'
 
         # # Contract Address
-        # address = await dex.search_contract_address(symbol)
-        # print("address ", address)
+        address = await dex.contract_utils.search_contract_address(symbol)
+        print("address ", address)
         # # token_contract found 0x2260fac5e5542a773aa44fbcfedf7c193bc2c599
 
-        # # getABI
-        # addressABI = await dex.get_abi(address)
-        # print("ABI ", addressABI)
+        # # get contract and underlying ABI
+        token_contract = await dex.contract_utils.get_token_contract(address)
+        print("Contract ", token_contract)
+        # Contract  <web3._utils.datatypes.Contract object at 0x10acdb050>
 
         quote = await dex.get_quote(symbol)
         print("quote ", quote)
+        # quote  🦄 29761.19589 USDT
 
         # # BUY 10 USDC to SWAP with BITCOIN
         # demo_tx = await dex.get_swap('USDT','WBTC',10)
         # print("demo_tx ", demo_tx)
-
-
-        # reporting = await dex.check_transaction_status()
 
         await asyncio.sleep(7200)
 
