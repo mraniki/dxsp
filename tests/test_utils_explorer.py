@@ -1,11 +1,14 @@
 """
  DEXSWAP Unit Test
 """
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock
 import pytest
+import dxsp
 from dxsp.config import settings
 from dxsp import DexSwap
 from web3 import Web3, EthereumTesterProvider
+from dxsp.utils.utils import get
+from dxsp.utils.explorer_utils import get_explorer_abi, get_account_transactions
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -82,59 +85,37 @@ def test_dynaconf_is_in_testing():
     assert settings.VALUE == "On Testing"
 
 
-@pytest.mark.asyncio
-async def test_dex(dex):
-    """Init Testing"""
-    assert isinstance(dex, DexSwap)
-    assert dex.w3 is not None
-    assert dex.w3.net.version == "1"
-    assert dex.protocol_type is not None
-    assert dex.protocol_type == "uniswap"
-    assert dex.account.wallet_address.startswith("0x")
-    assert dex.account.wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
-    assert dex.account.private_key.startswith("0x")
-    assert "1 - 32BE35BC" in dex.account.account_number
-
 
 @pytest.mark.asyncio
-async def test_execute_order(dex, order):
-    # sell_balance = AsyncMock()
-    # dex.get_swap = AsyncMock()
-    result = await dex.execute_order(order)
-    print(f"swap_order: {result}")
+async def test_get():
+    result = await get(
+        "http://ip.jsontest.com",
+        params=None,
+        headers=None)
     assert result is not None
 
 
 @pytest.mark.asyncio
-async def test_execute_order_invalid(dex, invalid_order):
-    result = await dex.execute_order(invalid_order)
-    print(result)
-    assert result.startswith("⚠️")
+async def test_get_abi(dex, mocker):
+    mock_resp = {"status": "1", "result": "0x0123456789abcdef"}
+    mocker.patch.object(dxsp.utils.explorer_utils, "get", return_value=mock_resp)
+    result = await get_explorer_abi("0x1234567890123456789012345678901234567890")
+    assert result == "0x0123456789abcdef"
 
 
 @pytest.mark.asyncio
-async def test_get_quote(dex):
-    """getquote Testing"""
-    result = await dex.get_quote("UNI")
-    print(result)
+async def test_invalid_get_abi():
+    result = await get_explorer_abi("0x1234567890123456789012345678901234567890")
+    assert result is None
+
+
+@pytest.mark.asyncio
+async def test_get_account_transactions(dex):
+    # Call the get_account_transactions method
+    result = await get_account_transactions(
+        '0xdAC17F958D2ee523a2206206994597C13D831ec7',
+        dex.account.wallet_address)
+    print(f"history: {result}")
     assert result is not None
-    assert result.startswith("🦄")
-
-
-@pytest.mark.asyncio
-async def test_get_quote_BTC(account) -> str:
-    """test token account."""
-    with patch("dxsp.config.settings", autospec=True):
-        settings.dex_wallet_address = account
-        dex = DexSwap()
-        result = await dex.get_quote('WBTC')
-        print(result)
-        assert result is not None
-
-
-@pytest.mark.asyncio
-async def test_get_quote_invalid(dex):
-    result = await dex.get_quote("THISISNOTATOKEN")
-    print(result)
-    assert result is not None
-    assert '⚠️' in result
+    assert 'pnl' in result
+    assert 'tokenList' in result

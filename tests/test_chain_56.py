@@ -16,6 +16,16 @@ def DexSwap_fixture():
     return DexSwap()
 
 
+@pytest.fixture(name="order")
+def order_params_fixture():
+    """Return order parameters."""
+    return {
+        'action': 'BUY',
+        'instrument': 'WBTC',
+        'quantity': 1,
+    }
+
+
 def test_dynaconf_is_in_testing():
     print(settings.VALUE)
     assert settings.VALUE == "chain_56"
@@ -29,14 +39,14 @@ async def test_get_quote(dex):
     quote = await dex.get_quote("BTCB")
     print(quote)
     if quote:
-        assert settings.VALUE
+        assert settings.VALUE == "chain_56"
         assert dex.w3.net.version == '56'
         assert quote is not None
         assert quote.startswith("🦄")
 
 
 @pytest.mark.asyncio
-async def test_no_notify_invalid_token_(dex):
-    assert settings.VALUE == "chain_56"
-    result = await dex.search_contract_address("NOTATHING")
-    assert result is None
+async def test_execute_order(dex, order):
+    result = await dex.execute_order(order)
+    print(f"result: {result}")
+    assert result is not None

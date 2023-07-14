@@ -19,11 +19,11 @@ headers = {User-Agent= 'Mozilla/5.0'}
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
-trading_asset = "USDT"
 trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 trading_risk_amount = 10 # 10% of the position
 dex_trading_slippage = 2 # 2% slippage
 dex_notify_invalid_token = true
+
 
 
 
@@ -47,7 +47,6 @@ dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
 dex_factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
 dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
 dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
-trading_asset = "USDT"
 trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 trading_risk_amount = 10 
 dex_trading_slippage = 2
@@ -71,7 +70,6 @@ dex_router_contract_addr = "0xdef1c0ded9bec7f1a1670819833240f027b25eff"
 dex_factory_contract_addr = ""
 dex_router_abi_url = "https://raw.githubusercontent.com/0xProject/protocol/development/packages/contract-artifacts/artifacts/Exchange.json"
 dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
-trading_asset = "USDT"
 trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 trading_risk_amount = 10
 dex_trading_slippage = 2
@@ -94,7 +92,6 @@ dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
 dex_factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
 dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
 dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
-trading_asset = "USDC"
 trading_asset_address = "0xa3726f2e6423caF1824cD7721B543B29b621fB4f"
 trading_risk_amount = 10
 dex_trading_slippage = 2
@@ -114,7 +111,6 @@ dex_protocol_version = 2
 dex_rpc = "https://rpc.ankr.com/bsc"
 dex_router_contract_addr = "0x10ED43C718714eb63d5aA57B78B54704E256024E"
 dex_factory_contract_addr = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"
-trading_asset = "BUSD"
 trading_asset_address = "0xe9e7cea3dedca5984780bafc599bd69add087d56"
 trading_risk_amount = 10 
 dex_trading_slippage = 2
@@ -124,7 +120,7 @@ token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/a
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
-[uniswap3]
+[uniswapv3]
 VALUE = "On uniswap3"
 dxsp_enabled = true
 loglevel = "DEBUG"
@@ -137,7 +133,6 @@ dex_router_contract_addr = "0x1F98431c8aD98523631AE4a59f267346ea31F984"
 dex_factory_contract_addr = "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45"
 dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
 dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
-trading_asset = "USDT"
 trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 trading_risk_amount = 10 
 dex_trading_slippage = 2
@@ -160,7 +155,6 @@ dex_router_contract_addr = "0x1F98431c8aD98523631AE4a59f267346ea31F984"
 dex_factory_contract_addr = "0x13f4EA83D0bd40E75C8222255bc855a974568Dd4"
 dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
 dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
-trading_asset = "BUSD"
 trading_asset_address = "0xe9e7cea3dedca5984780bafc599bd69add087d56"
 trading_risk_amount = 10 
 dex_trading_slippage = 2
@@ -180,7 +174,6 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 # token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 # token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 # token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
-# trading_asset = "USDT"
 # trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 # trading_risk_amount = 10 # 10% of the position
 # dex_trading_slippage = 2 # 2 % slippage
