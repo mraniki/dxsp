@@ -112,6 +112,10 @@ class ContractUtils:
         #token_name = contract.functions.name().call()
         return contract.functions.symbol().call() 
 
+    async def get_token_name(self, token_address: str):
+        """Get token symbol"""
+        contract = await self.get_token_contract(token_address)
+        return contract.functions.name().call() 
 
     async def get_token_balance(self, token_address: str,wallet_address: str) -> Optional[int]:
         """Get token balance"""

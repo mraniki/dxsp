@@ -138,6 +138,15 @@ async def test_get_token_symbol(dex):
 
 
 @pytest.mark.asyncio
+async def test_get_token_name(dex):
+    """get_token_symbol Testing"""
+    result = await dex.contract_utils.get_token_name("0xdAC17F958D2ee523a2206206994597C13D831ec7")
+    print(result)
+    assert result is not None
+    assert result == 'Tether USD'
+
+
+@pytest.mark.asyncio
 async def test_get_token_balance(dex):
     # Call the get_token_balance method
     result = await dex.contract_utils.get_token_balance(
