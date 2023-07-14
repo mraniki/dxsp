@@ -1,11 +1,20 @@
+"""
+ DEX SWAP
+🔒 USER RELATED
+"""
+import logging
+from typing import Optional
+from web3 import Web3
+from datetime import datetime, timedelta
+from dxsp.config import settings
+from dxsp import __version__
 
-# 🔒 USER RELATED
 
 class AccountUtils:
 
     def __init__(self, w3: Optional[Web3] = None):
-    self.logger = logging.getLogger(name="DexSwap")
-    self.chain_id = self.w3.net.version
+        self.logger = logging.getLogger(name="DexSwap")
+        self.w3 = w3 or Web3(Web3.HTTPProvider(settings.dex_rpc))
         self.wallet_address = self.w3.to_checksum_address(
             settings.dex_wallet_address)
         self.account = (f"{str(self.w3.net.version)} - "

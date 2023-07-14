@@ -1,12 +1,21 @@
-
-# ## ------✍️ CONTRACT ---------
+"""
+ DEX SWAP
+✍️ CONTRACT
+"""
+import logging
+from typing import Optional
+from web3 import Web3
+import requests
+from dxsp.config import settings
+from dxsp.utils.utils import get, calculate_sell_amount, get_confirmation, get_gas, get_gas_price, get_block_timestamp
+from pycoingecko import CoinGeckoAPI
 
 class ContractUtils:
 
     def __init__(self, w3: Optional[Web3] = None):
-    self.logger = logging.getLogger(name="DexSwap")
-    self.w3 = w3 or Web3(Web3.HTTPProvider(settings.dex_rpc))
-    self.cg = CoinGeckoAPI()
+        self.logger = logging.getLogger(name="DexSwap")
+        self.w3 = w3 or Web3(Web3.HTTPProvider(settings.dex_rpc))
+        self.cg = CoinGeckoAPI()
 
     async def search_contract_address(self, token):
         """search a contract function"""
@@ -71,7 +80,7 @@ class ContractUtils:
 
     async def get_token_address(self, token_list_url, symbol):
         """Given a token symbol and json tokenlist, get token address"""
-        token_list = await self.get(token_list_url)
+        token_list = await get(token_list_url)
         token_search = token_list['tokens']
         for keyval in token_search:
             if (keyval['symbol'] == symbol and
@@ -82,7 +91,7 @@ class ContractUtils:
         """Given a token address, returns a contract object. """
         token_abi = await self.get_explorer_abi(token_address)
         if token_abi is None:
-            token_abi = await self.get(settings.dex_erc20_abi_url)
+            token_abi = await get(settings.dex_erc20_abi_url)
         return self.w3.eth.contract(
             address=token_address,
             abi=token_abi)
@@ -119,7 +128,7 @@ class ContractUtils:
             "address": address,
             "apikey": settings.dex_block_explorer_api
         }
-        resp = await self.get(
+        resp = await get(
             url=settings.dex_block_explorer_url, params=params)
         if resp['status'] == "1":
             self.logger.debug("ABI found %s", resp)
