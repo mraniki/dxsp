@@ -7,7 +7,7 @@ from typing import Optional
 from web3 import Web3
 import requests
 from dxsp.config import settings
-from dxsp.utils.utils import get, calculate_sell_amount, get_confirmation, get_gas, get_gas_price, get_block_timestamp
+from dxsp.utils.utils import get
 from pycoingecko import CoinGeckoAPI
 
 class ContractUtils:

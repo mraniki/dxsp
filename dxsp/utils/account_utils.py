@@ -8,7 +8,7 @@ from web3 import Web3
 from datetime import datetime, timedelta
 from dxsp.config import settings
 from dxsp import __version__
-
+from dxsp.utils.utils import get
 
 class AccountUtils:
 
@@ -95,7 +95,7 @@ class AccountUtils:
             "apikey": settings.dex_block_explorer_api
         }
     
-        response = await self.get(
+        response = await get(
             url=settings.dex_block_explorer_url, params=params)
     
         if response.get('status') == "1" and "result" in response:
