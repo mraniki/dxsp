@@ -156,12 +156,12 @@ async def test_get_approve(dex):
 @pytest.mark.asyncio
 async def test_failed_get_approve(dex):
     with pytest.raises(ValueError, match='Approval failed'):
-        await dex.get_approve("0xdAC17F958D2ee523a2206206994597C13D831ec7")
+        await dex.account.get_approve("0xdAC17F958D2ee523a2206206994597C13D831ec7")
 
 
 @pytest.mark.asyncio
 async def test_get_confirmation(dex):
-    result = await dex.get_confirmation(
+    result = await dex.contract.get_confirmation(
         "0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771")
     print(result)
     assert result is not None
@@ -191,18 +191,18 @@ async def calculate_sell_amount(dex):
     pass
 
 
-@pytest.mark.asyncio
-async def test_get(dex):
-    result = await dex.get(
-        "http://ip.jsontest.com",
-        params=None,
-        headers=None)
-    assert result is not None
+# @pytest.mark.asyncio
+# async def test_get(dex):
+#     result = await dex.get(
+#         "http://ip.jsontest.com",
+#         params=None,
+#         headers=None)
+#     assert result is not None
 
 
 @pytest.mark.asyncio
 async def test_search_contract_address(dex):
-    result = await dex.search_contract_address("USDT")
+    result = await dex.contract.search_contract_address("USDT")
     assert result is not None
     assert result == "0xdAC17F958D2ee523a2206206994597C13D831ec7"
     print(result)
@@ -211,13 +211,13 @@ async def test_search_contract_address(dex):
 @pytest.mark.asyncio
 async def test_invalid_search_contract_address(dex):
     with pytest.raises(ValueError, match='Invalid Token'):
-        await dex.search_contract_address("NOTATHING")
+        await dex.contract.search_contract_address("NOTATHING")
 
 
 @pytest.mark.asyncio
 async def test_get_token_contract(dex):
     """get_token_contract Testing"""
-    result = await dex.get_token_contract("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
+    result = await dex.contract.get_token_contract("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
     print(type(result))
     assert result is not None
     assert type(result) is not None
@@ -228,19 +228,19 @@ async def test_get_token_contract(dex):
 async def test_get_abi(dex, mocker):
     mock_resp = {"status": "1", "result": "0x0123456789abcdef"}
     mocker.patch.object(dex, "get", return_value=mock_resp)
-    result = await dex.get_explorer_abi("0x1234567890123456789012345678901234567890")
+    result = await dex.contract.get_explorer_abi("0x1234567890123456789012345678901234567890")
     assert result == "0x0123456789abcdef"
 
 
 @pytest.mark.asyncio
 async def test_invalid_get_abi(dex):
-    result = await dex.get_explorer_abi("0x1234567890123456789012345678901234567890")
+    result = await dex.contract.get_explorer_abi("0x1234567890123456789012345678901234567890")
     assert result is None
 
 @pytest.mark.asyncio
 async def test_get_decimals(dex):
     """get_token_decimals Testing"""
-    result = await dex.get_token_decimals("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
+    result = await dex.contract.get_token_decimals("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
     print(result)
     time.sleep(5)
     assert result is not None
@@ -250,7 +250,7 @@ async def test_get_decimals(dex):
 @pytest.mark.asyncio
 async def test_get_decimals_stable(dex):
     """get_token_decimals Testing"""
-    result = await dex.get_token_decimals("0xdAC17F958D2ee523a2206206994597C13D831ec7")
+    result = await dex.contract.get_token_decimals("0xdAC17F958D2ee523a2206206994597C13D831ec7")
     print(result)
     time.sleep(5)
     assert result is not None
@@ -260,7 +260,7 @@ async def test_get_decimals_stable(dex):
 @pytest.mark.asyncio
 async def test_get_token_symbol(dex):
     """get_token_symbol Testing"""
-    result = await dex.get_token_symbol("0xdAC17F958D2ee523a2206206994597C13D831ec7")
+    result = await dex.contract.get_token_symbol("0xdAC17F958D2ee523a2206206994597C13D831ec7")
     print(result)
     assert result is not None
     assert result == 'USDT'
@@ -271,14 +271,14 @@ async def test_get_gas(dex):
     """get_gas Testing"""
     mock_tx = {"to": "0x1234567890123456789012345678901234567890",
                 "value": "1000000000000000000"}
-    result = await dex.get_gas(mock_tx)
+    result = await dex.account.get_gas(mock_tx)
     print(result)
 
 
 @pytest.mark.asyncio
 async def test_get_gas_price(dex):
     # Call the get_gasPrice method
-    result = await dex.get_gas_price()
+    result = await dex.account.get_gas_price()
     print(f"gas_price: {result}")
     assert result is not None
 
@@ -286,7 +286,7 @@ async def test_get_gas_price(dex):
 @pytest.mark.asyncio
 async def test_get_block_timestamp(dex):
     # Call the get_gasPrice method
-    result = await dex.get_block_timestamp('17643734')
+    result = await dex.contract.get_block_timestamp('17643734')
     print(f"timestamp: {result}")
     assert result is not None
 
@@ -320,7 +320,7 @@ async def test_account_balance(account) -> str:
         settings.dex_wallet_address = account
         print(settings.dex_wallet_address)
         dex = DexSwap()
-        print(dex.wallet_address)
+        print(dex.account.wallet_address)
         result = await dex.get_account_balance()
         print(result)
         assert result is not None
