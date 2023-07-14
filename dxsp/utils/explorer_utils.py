@@ -20,10 +20,7 @@ async def get_explorer_abi(address):
     }
     resp = await get(
         url=settings.dex_block_explorer_url, params=params)
-    if resp['status'] == "1":
-        return resp["result"]
-    else:
-        return None
+    return resp["result"] if resp['status'] == "1" else None
 
 async def get_account_transactions(
     contract_address,

@@ -16,8 +16,7 @@ class DexSwapZeroX(DexSwap):
             headers = {"0x-api-key": settings.dex_0x_api_key}
             response = await get(url, params=None, headers=headers)
             if response:
-                quote = float(response['guaranteedPrice'])
-                return quote
+                return float(response['guaranteedPrice'])
         except Exception as error:
             raise ValueError(f"Quote failed {error}") 
 
