@@ -9,10 +9,6 @@ from web3 import Web3
 from web3.gas_strategies.time_based import medium_gas_price_strategy
 from dxsp.config import settings
 from dxsp.utils import ContractUtils, AccountUtils
-from dxsp.utils.utils import (
-    calculate_sell_amount, get_approve, 
-    get_sign, get_confirmation)
-
 
 class DexSwap:
     """swap  class"""
@@ -73,11 +69,11 @@ class DexSwap:
             buy_token_address = buy_token
             if not buy_token_address.startswith("0x"):
                 buy_token_address = await self.contract_utils.search_contract_address(buy_token)
-            sell_amount = await calculate_sell_amount(sell_token_address, quantity)
+            sell_amount = await self.contract_utilscalculate_sell_amount(sell_token_address, quantity)
             sell_token_amount_wei = sell_amount * (10 ** (
                 await self.get_token_decimals(sell_token_address)))
             if self.protocol_type == "0x":
-                await get_approve(sell_token_address)
+                await self.account.get_approve(sell_token_address)
 
             order_amount = int(
                 sell_token_amount_wei * decimal.Decimal(
@@ -88,14 +84,14 @@ class DexSwap:
             if not order:
                 raise ValueError("swap order not executed")
 
-            signed_order = await get_sign(order)
+            signed_order = await self.account.get_sign(order)
             order_hash = str(self.w3.to_hex(signed_order))
             receipt = self.w3.wait_for_transaction_receipt(order_hash)
 
             if receipt["status"] != 1:
                 raise ValueError("receipt failed")
 
-            return await get_confirmation(receipt['transactionHash'])
+            return await self.contract.get_confirmation(receipt['transactionHash'])
 
         except ValueError as error:
             raise error
