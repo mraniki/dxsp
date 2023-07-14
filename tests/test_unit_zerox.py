@@ -44,7 +44,7 @@ async def test_get_quote(dex):
     print("0x quote: ",result)
     assert dex.w3.net.version == '1'
     assert result is not None
-    # assert result.startswith("🦄")
+    assert result.startswith("🦄")
 
 
 @pytest.mark.asyncio
