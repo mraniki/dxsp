@@ -92,10 +92,10 @@ async def test_dex(dex):
     assert dex.w3.net.version == "1"
     assert dex.protocol_type is not None
     assert dex.protocol_type == "uniswap"
-    assert dex.wallet_address.startswith("0x")
-    assert dex.wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
-    assert dex.private_key.startswith("0x")
-    assert "1 - 32BE35BC" in dex.account
+    assert dex.account.wallet_address.startswith("0x")
+    assert dex.account.wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
+    assert dex.account.private_key.startswith("0x")
+    assert "1 - 32BE35BC" in dex.account.account
 
 
 @pytest.mark.asyncio
