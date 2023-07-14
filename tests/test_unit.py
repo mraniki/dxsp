@@ -7,6 +7,7 @@ import time
 from dxsp.config import settings
 from dxsp import DexSwap
 from web3 import Web3, EthereumTesterProvider
+from dxsp.utils.utils import get
 # from eth_tester import PyEVMBackend, EthereumTester
 
 
@@ -191,13 +192,13 @@ async def calculate_sell_amount(dex):
     pass
 
 
-# @pytest.mark.asyncio
-# async def test_get(dex):
-#     result = await dex.get(
-#         "http://ip.jsontest.com",
-#         params=None,
-#         headers=None)
-#     assert result is not None
+@pytest.mark.asyncio
+async def test_get():
+    result = await get(
+        "http://ip.jsontest.com",
+        params=None,
+        headers=None)
+    assert result is not None
 
 
 @pytest.mark.asyncio
