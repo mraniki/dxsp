@@ -39,7 +39,7 @@ class DexSwap:
             self.dex_swap = DexSwapUniswap()
 
     async def execute_order(self, order_params):
-        """ Execute swap function. """
+        """ Execute an order function. """
         try:
             action = order_params.get('action')
             instrument = order_params.get('instrument')
@@ -59,7 +59,7 @@ class DexSwap:
             return f"⚠️ order execution: {error}"
 
     async def get_swap(self, sell_token: str, buy_token: str, quantity: int) -> None:
-        """ Main swap function """
+        """ Execute a swap  """
         try:
             print("get_swap", quantity)
             await self.get_protocol()
@@ -91,7 +91,8 @@ class DexSwap:
             if receipt["status"] != 1:
                 raise ValueError("receipt failed")
 
-            return await self.contract.get_confirmation(receipt['transactionHash'])
+            return await self.contract.get_confirmation(
+                receipt['transactionHash'])
 
         except ValueError as error:
             raise error
@@ -103,9 +104,11 @@ class DexSwap:
             buy_address = self.account.trading_asset_address
             sell_address = await self.contract_utils.search_contract_address(sell_token)
             quote = await self.dex_swap.get_quote(buy_address, sell_address)
-            # settings to be reviewed and removed
-            # TODO
-            return f"🦄 {quote} {settings.trading_asset}"
+            quote = f"🦄 {quote}"
+            symbol = await self.contract_utils.get_token_symbol(
+                self.account.trading_asset_address)
+            return f"{quote} {symbol}"
+
         except Exception as error:
             return f"⚠️: {error}"
 

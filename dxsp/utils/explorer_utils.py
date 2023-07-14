@@ -3,7 +3,6 @@
 EXPLORER
 """
 
-import requests
 from datetime import datetime, timedelta
 from dxsp.config import settings
 from dxsp.utils.utils import get
@@ -26,7 +25,11 @@ async def get_explorer_abi(address):
     else:
         return None
 
-async def get_account_transactions(self, period=24):
+async def get_account_transactions(
+    self, 
+    contract_address,
+    wallet_address,
+    period=24):
     """
     Retrieves the account transactions 
     within a specified time period
@@ -39,8 +42,8 @@ async def get_account_transactions(self, period=24):
     params = {
         "module": "account",
         "action": "tokentx",
-        "contractaddress": self.account.trading_asset_address,
-        "address": self.account.wallet_address,
+        "contractaddress": contract_address,
+        "address": wallet_address,
         "page": "1",
         "offset": "100",
         "startblock": "0",

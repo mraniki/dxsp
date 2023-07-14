@@ -59,12 +59,19 @@ class AccountUtils:
     async def get_account_open_positions(self):
         return 0
 
+    async def get_account_transactions(period=24):
+        return await get_account_transactions(period)
+
     async def get_account_pnl(self, period=24):
         """
         Create a profit and loss (PnL) 
         report for the account.
         """
-        pnl_dict = await self.get_account_transactions(period)
+        pnl_dict = await get_account_transactions(
+            period,
+            self.trading_asset_address,
+            self.wallet_address
+            )
         pnl_report = "".join(
             f"{token} {value}\n" for token, value in pnl_dict["tokenList"].items()
         )
@@ -73,9 +80,6 @@ class AccountUtils:
 
         return pnl_report
 
-    async def get_account_transactions(period=24):
-        return get_account_transactions(period)
-
     async def get_approve(self, token_address):
         """ approve a token """
         try:
@@ -83,7 +87,7 @@ class AccountUtils:
             if contract is None:
                 return
             approved_amount = self.w3.to_wei(2 ** 64 - 1, 'ether')
-            owner_address = self.w3.to_checksum_address(self.account.wallet_address)
+            owner_address = self.w3.to_checksum_address(self.wallet_address)
             dex_router_address = self.w3.to_checksum_address(
                 settings.dex_router_contract_addr)
             allowance = contract.functions.allowance(
@@ -91,7 +95,7 @@ class AccountUtils:
             if allowance == 0:
                 approval_tx = contract.functions.approve(
                     dex_router_address, approved_amount)
-                approval_tx_hash = await self.account.get_sign(approval_tx.transact())
+                approval_tx_hash = await self.get_sign(approval_tx.transact())
                 return self.w3.eth.wait_for_transaction_receipt(
                     approval_tx_hash)
         except Exception as error:
@@ -102,11 +106,11 @@ class AccountUtils:
         try:
             if self.protocol_type == 'uniswap':
                 transaction_params = {
-                    'from': self.account.wallet_address,
+                    'from': self.wallet_address,
                     'gas': await self.get_gas(transaction),
                     'gasPrice': await self.get_gas_price(),
                     'nonce': self.w3.eth.get_transaction_count(
-                        self.account.wallet_address),
+                        self.wallet_address),
                 }
                 transaction = transaction.build_transaction(transaction_params)
             signed_tx = self.w3.eth.account.sign_transaction(

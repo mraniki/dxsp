@@ -8,7 +8,7 @@ from dxsp import DexSwap
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="uniswap3")
+    settings.configure(FORCE_ENV_FOR_DYNACONF="uniswapv3")
 
 @pytest.fixture(name="dex")
 def DexSwap_fixture():
@@ -38,7 +38,7 @@ async def test_get_quote(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_swap(dex, order):
+async def test_execute_order(dex, order):
     result = await dex.execute_order(order)
     print(f"result: {result}")
     assert result is not None

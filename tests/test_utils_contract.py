@@ -3,6 +3,7 @@
 """
 from unittest.mock import AsyncMock, patch
 import pytest
+import time
 from dxsp.config import settings
 from dxsp import DexSwap
 from web3 import Web3, EthereumTesterProvider
@@ -83,58 +84,95 @@ def test_dynaconf_is_in_testing():
 
 
 @pytest.mark.asyncio
-async def test_dex(dex):
-    """Init Testing"""
-    assert isinstance(dex, DexSwap)
-    assert dex.w3 is not None
-    assert dex.w3.net.version == "1"
-    assert dex.protocol_type is not None
-    assert dex.protocol_type == "uniswap"
-    assert dex.account.wallet_address.startswith("0x")
-    assert dex.account.wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
-    assert dex.account.private_key.startswith("0x")
-    assert "1 - 32BE35BC" in dex.account.account
-
-
-@pytest.mark.asyncio
-async def test_execute_order(dex, order):
-    # sell_balance = AsyncMock()
-    # dex.get_swap = AsyncMock()
-    result = await dex.execute_order(order)
-    print(f"swap_order: {result}")
+async def test_search_contract_address(dex):
+    result = await dex.contract_utils.search_contract_address("USDT")
     assert result is not None
-
-
-@pytest.mark.asyncio
-async def test_execute_order_invalid(dex, invalid_order):
-    result = await dex.execute_order(invalid_order)
+    assert result == "0xdAC17F958D2ee523a2206206994597C13D831ec7"
     print(result)
-    assert result.startswith("⚠️")
 
 
 @pytest.mark.asyncio
-async def test_get_quote(dex):
-    """getquote Testing"""
-    result = await dex.get_quote("UNI")
+async def test_invalid_search_contract_address(dex):
+    with pytest.raises(ValueError, match='Invalid Token'):
+        await dex.contract_utils.search_contract_address("NOTATHING")
+
+
+@pytest.mark.asyncio
+async def test_get_token_contract(dex):
+    """get_token_contract Testing"""
+    result = await dex.contract_utils.get_token_contract("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
+    print(type(result))
+    assert result is not None
+    assert type(result) is not None
+    assert result.functions is not None
+
+
+@pytest.mark.asyncio
+async def test_get_decimals(dex):
+    """get_token_decimals Testing"""
+    result = await dex.contract_utils.get_token_decimals("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
+    print(result)
+    time.sleep(5)
+    assert result is not None
+    assert result == 18
+
+
+@pytest.mark.asyncio
+async def test_get_decimals_stable(dex):
+    """get_token_decimals Testing"""
+    result = await dex.contract_utils.get_token_decimals("0xdAC17F958D2ee523a2206206994597C13D831ec7")
+    print(result)
+    time.sleep(5)
+    assert result is not None
+    assert result == 6
+
+
+@pytest.mark.asyncio
+async def test_get_token_symbol(dex):
+    """get_token_symbol Testing"""
+    result = await dex.contract_utils.get_token_symbol("0xdAC17F958D2ee523a2206206994597C13D831ec7")
     print(result)
     assert result is not None
-    assert result.startswith("🦄")
+    assert result == 'USDT'
 
 
 @pytest.mark.asyncio
-async def test_get_quote_BTC(account) -> str:
+async def test_get_token_balance(dex):
+    # Call the get_token_balance method
+    result = await dex.get_token_balance("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
+    print("balance ", result)
+    assert result is not None
+    assert result >= 0
+    assert isinstance(result, int)
+
+
+@pytest.mark.asyncio
+async def test_token_balance(account) -> str:
     """test token account."""
     with patch("dxsp.config.settings", autospec=True):
         settings.dex_wallet_address = account
+        # with pytest.raises(ValueError, match='No Balance'):
         dex = DexSwap()
-        result = await dex.get_quote('WBTC')
+        result = await dex.get_token_balance(settings.trading_asset_address)
         print(result)
         assert result is not None
 
 
 @pytest.mark.asyncio
-async def test_get_quote_invalid(dex):
-    result = await dex.get_quote("THISISNOTATOKEN")
+async def calculate_sell_amount(dex):
+    pass
+
+
+@pytest.mark.asyncio
+async def test_get_confirmation(dex):
+    result = await dex.contract_utils.get_confirmation(
+        "0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771")
     print(result)
     assert result is not None
-    assert '⚠️' in result
+    assert result['timestamp'] is not None
+    assert result['fee'] is not None
+    assert result['confirmation'] is not None
+    assert result['confirmation'].startswith('➕')
+    assert '⛽' in result['confirmation']
+    assert '🗓️' in result['confirmation']
+    assert 'ℹ️' in result['confirmation']

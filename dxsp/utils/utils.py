@@ -5,7 +5,6 @@
 """
 
 import requests
-from dxsp.config import settings
 
 
 async def get(url, params=None, headers=None):

@@ -91,7 +91,7 @@ class ContractUtils:
             if (keyval['symbol'] == symbol and
                 keyval['chainId'] == int(self.w3.net.version)):
                 return keyval['address']
-
+ 
     async def get_token_contract(self, token_address):
         """Given a token address, returns a contract object. """
         token_abi = await get_explorer_abi(token_address)
@@ -140,9 +140,9 @@ class ContractUtils:
         """Returns trade confirmation."""
         try:
             transaction = self.w3.eth.get_transaction(transactionHash)
-            block = self.w3.eth.get_block(transaction["blockNumber"])
+            block_info = self.w3.eth.get_block(transaction["blockNumber"])
             return {
-                "timestamp": block["timestamp"],
+                "timestamp": datetime.utcfromtimestamp(block_info['timestamp']),
                 "id": transactionHash,
                 "instrument": transaction["to"],
                 "contract": transaction["to"],   # TBD To be determined.
@@ -154,14 +154,8 @@ class ContractUtils:
                     f"⚫️ Entry: {round(transaction['value'], 4)}\n"
                     f"ℹ️ {transactionHash}\n"
                     f"⛽ {transaction['gas']}\n"
-                    f"🗓️ {block['timestamp']}"
+                    f"🗓️ {datetime.utcfromtimestamp(block_info['timestamp'])}"
                 ),
             }
         except Exception as error:
             raise error
-
-    async def get_block_timestamp(self, block_num) -> datetime:
-            """Get block timestamp"""
-            block_info = self.w3.eth.get_block(block_num)
-            last_time = block_info["timestamp"]
-            return datetime.utcfromtimestamp(last_time)
