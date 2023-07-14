@@ -32,8 +32,6 @@ class AccountUtils:
     async def get_name(self):
         if settings.dex_router_contract_addr:
             return settings.dex_router_contract_addr[-8:]
-        else:
-            return self.protocol_type
 
     async def get_account_balance(self):
         account_balance = self.w3.eth.get_balance(
@@ -103,20 +101,10 @@ class AccountUtils:
     async def get_sign(self, transaction):
         """ sign a transaction """
         try:
-            if self.protocol_type == 'uniswap':
-                transaction_params = {
-                    'from': self.wallet_address,
-                    'gas': await self.get_gas(transaction),
-                    'gasPrice': await self.get_gas_price(),
-                    'nonce': self.w3.eth.get_transaction_count(
-                        self.wallet_address),
-                }
-                transaction = transaction.build_transaction(transaction_params)
             signed_tx = self.w3.eth.account.sign_transaction(
                 transaction, self.private_key)
-            raw_tx_hash = self.w3.eth.send_raw_transaction(
+            return self.w3.eth.send_raw_transaction(
                 signed_tx.rawTransaction)
-            return self.w3.to_hex(raw_tx_hash)
         except Exception as error:
             raise error
 
