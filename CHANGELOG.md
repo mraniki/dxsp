@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v4.0.1 (2023-07-14)
+
+### Fix
+
+* Update README.md ([`822cc96`](https://github.com/mraniki/dxsp/commit/822cc96df0878782ca059b6dbf44bd451ccd32fa))
+
 ## v4.0.0 (2023-07-14)
 
 ### Feature
