@@ -76,7 +76,7 @@ class DexSwap:
             sell_amount = await self.contract_utils.calculate_sell_amount(
                 sell_token_address, self.account.wallet_address, quantity)
             sell_token_amount_wei = sell_amount * (10 ** (
-                await self.get_token_decimals(sell_token_address)))
+                await self.contract_utils.get_token_decimals(sell_token_address)))
             if self.protocol_type == "0x":
                 await self.account.get_approve(sell_token_address)
 
@@ -96,7 +96,7 @@ class DexSwap:
             if receipt["status"] != 1:
                 raise ValueError("receipt failed")
 
-            return await self.contract.get_confirmation(
+            return await self.contract_utils.get_confirmation(
                 receipt['transactionHash'])
 
         except ValueError as error:
