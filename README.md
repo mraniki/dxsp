@@ -19,6 +19,7 @@
    <a href="https://talky.readthedocs.io/projects/findmyorder/index.html"><img src="https://readthedocs.org/projects/dxsp/badge/?version=latest&style=for-the-badge"></a><br>
    <a href="https://codebeat.co/projects/github-com-mraniki-dxsp-main"><img src="https://codebeat.co/badges/b1376839-73bc-4b41-bfc1-2fb099f1fc2a"/></a><br>
    <a href="https://codecov.io/gh/mraniki/dxsp"><img src="https://codecov.io/gh/mraniki/dxsp/branch/main/graph/badge.svg?token=39ED0ZA6IH"/> </a><br>
+  <a href="https://codeclimate.com/github/mraniki/dxsp/maintainability"><img src="https://api.codeclimate.com/v1/badges/ec80e827d5878e60ba12/maintainability" /></a>
     </td>
     <td align="left"> 
 Swap made easy<br>
