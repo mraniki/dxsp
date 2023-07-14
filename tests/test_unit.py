@@ -161,7 +161,7 @@ async def test_failed_get_approve(dex):
 
 @pytest.mark.asyncio
 async def test_get_confirmation(dex):
-    result = await dex.contract.get_confirmation(
+    result = await dex.contract_utils.get_confirmation(
         "0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771")
     print(result)
     assert result is not None
@@ -202,7 +202,7 @@ async def calculate_sell_amount(dex):
 
 @pytest.mark.asyncio
 async def test_search_contract_address(dex):
-    result = await dex.contract.search_contract_address("USDT")
+    result = await dex.contract_utils.search_contract_address("USDT")
     assert result is not None
     assert result == "0xdAC17F958D2ee523a2206206994597C13D831ec7"
     print(result)
@@ -211,13 +211,13 @@ async def test_search_contract_address(dex):
 @pytest.mark.asyncio
 async def test_invalid_search_contract_address(dex):
     with pytest.raises(ValueError, match='Invalid Token'):
-        await dex.contract.search_contract_address("NOTATHING")
+        await dex.contract_utils.search_contract_address("NOTATHING")
 
 
 @pytest.mark.asyncio
 async def test_get_token_contract(dex):
     """get_token_contract Testing"""
-    result = await dex.contract.get_token_contract("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
+    result = await dex.contract_utils.get_token_contract("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
     print(type(result))
     assert result is not None
     assert type(result) is not None
@@ -228,19 +228,19 @@ async def test_get_token_contract(dex):
 async def test_get_abi(dex, mocker):
     mock_resp = {"status": "1", "result": "0x0123456789abcdef"}
     mocker.patch.object(dex, "get", return_value=mock_resp)
-    result = await dex.contract.get_explorer_abi("0x1234567890123456789012345678901234567890")
+    result = await dex.contract_utils.get_explorer_abi("0x1234567890123456789012345678901234567890")
     assert result == "0x0123456789abcdef"
 
 
 @pytest.mark.asyncio
 async def test_invalid_get_abi(dex):
-    result = await dex.contract.get_explorer_abi("0x1234567890123456789012345678901234567890")
+    result = await dex.contract_utils.get_explorer_abi("0x1234567890123456789012345678901234567890")
     assert result is None
 
 @pytest.mark.asyncio
 async def test_get_decimals(dex):
     """get_token_decimals Testing"""
-    result = await dex.contract.get_token_decimals("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
+    result = await dex.contract_utils.get_token_decimals("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
     print(result)
     time.sleep(5)
     assert result is not None
@@ -250,7 +250,7 @@ async def test_get_decimals(dex):
 @pytest.mark.asyncio
 async def test_get_decimals_stable(dex):
     """get_token_decimals Testing"""
-    result = await dex.contract.get_token_decimals("0xdAC17F958D2ee523a2206206994597C13D831ec7")
+    result = await dex.contract_utils.get_token_decimals("0xdAC17F958D2ee523a2206206994597C13D831ec7")
     print(result)
     time.sleep(5)
     assert result is not None
@@ -260,7 +260,7 @@ async def test_get_decimals_stable(dex):
 @pytest.mark.asyncio
 async def test_get_token_symbol(dex):
     """get_token_symbol Testing"""
-    result = await dex.contract.get_token_symbol("0xdAC17F958D2ee523a2206206994597C13D831ec7")
+    result = await dex.contract_utils.get_token_symbol("0xdAC17F958D2ee523a2206206994597C13D831ec7")
     print(result)
     assert result is not None
     assert result == 'USDT'

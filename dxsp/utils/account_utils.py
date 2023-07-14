@@ -7,6 +7,7 @@ from typing import Optional
 from web3 import Web3
 from dxsp.config import settings
 from dxsp.utils.explorer_utils import get_account_transactions
+from dxsp.utils.contract_utils import ContractUtils
 from dxsp import __version__
 
 class AccountUtils:
@@ -21,6 +22,7 @@ class AccountUtils:
         self.private_key = settings.dex_private_key
         self.trading_asset_address = self.w3.to_checksum_address(
         settings.trading_asset_address)
+        self.contract_utils = ContractUtils(w3=self.w3)
 
     async def get_info(self):
         return (f"ℹ️ {__class__.__name__} {__version__}\n"
@@ -41,7 +43,7 @@ class AccountUtils:
         return f"₿ {round(account_balance,5)}\n💵 {trading_asset_balance}"
 
     async def get_trading_asset_balance(self):
-        trading_asset_balance = await self.get_token_balance(
+        trading_asset_balance = await self.contract_utils.get_token_balance(
             self.trading_asset_address)
         return trading_asset_balance if trading_asset_balance else 0
 
@@ -77,7 +79,7 @@ class AccountUtils:
     async def get_approve(self, token_address):
         """ approve a token """
         try:
-            contract = await self.get_token_contract(token_address)
+            contract = await self.contract_utils.get_token_contract(token_address)
             if contract is None:
                 return
             approved_amount = self.w3.to_wei(2 ** 64 - 1, 'ether')
@@ -89,7 +91,7 @@ class AccountUtils:
             if allowance == 0:
                 approval_tx = contract.functions.approve(
                     dex_router_address, approved_amount)
-                approval_tx_hash = await self.get_sign(approval_tx.transact())
+                approval_tx_hash = await self.account.get_sign(approval_tx.transact())
                 return self.w3.eth.wait_for_transaction_receipt(
                     approval_tx_hash)
         except Exception as error:
