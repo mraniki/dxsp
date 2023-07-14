@@ -112,7 +112,9 @@ async def test_invalid_get_abi():
 @pytest.mark.asyncio
 async def test_get_account_transactions(dex):
     # Call the get_account_transactions method
-    result = await get_account_transactions()
+    result = await get_account_transactions(
+        '0xdAC17F958D2ee523a2206206994597C13D831ec7',
+        dex.account.wallet_address)
     print(f"history: {result}")
     assert result is not None
     assert 'pnl' in result

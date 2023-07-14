@@ -17,7 +17,7 @@ class AccountUtils:
         self.w3 = w3 or Web3(Web3.HTTPProvider(settings.dex_rpc))
         self.wallet_address = self.w3.to_checksum_address(
             settings.dex_wallet_address)
-        self.account = (f"{str(self.w3.net.version)} - "
+        self.account_number = (f"{str(self.w3.net.version)} - "
                         f"{str(self.wallet_address[-8:])}")
         self.private_key = settings.dex_private_key
         self.trading_asset_address = self.w3.to_checksum_address(
@@ -27,7 +27,7 @@ class AccountUtils:
     async def get_info(self):
         return (f"ℹ️ {__class__.__name__} {__version__}\n"
                 f"💱 {await self.get_name()}\n"
-                f"🪪 {self.account}")
+                f"🪪 {self.account_number}")
 
     async def get_name(self):
         if settings.dex_router_contract_addr:
@@ -44,7 +44,7 @@ class AccountUtils:
 
     async def get_trading_asset_balance(self):
         trading_asset_balance = await self.contract_utils.get_token_balance(
-            self.trading_asset_address)
+            self.trading_asset_address, self.wallet_address)
         return trading_asset_balance if trading_asset_balance else 0
 
     async def get_account_position(self):
@@ -59,19 +59,18 @@ class AccountUtils:
     async def get_account_open_positions(self):
         return 0
 
-    async def get_account_transactions(period=24):
-        return await get_account_transactions(period)
+    async def get_account_transactions(self, period=24):
+        return await get_account_transactions(
+            period,
+            self.trading_asset_address,
+            self.wallet_address)
 
     async def get_account_pnl(self, period=24):
         """
         Create a profit and loss (PnL) 
         report for the account.
         """
-        pnl_dict = await get_account_transactions(
-            period,
-            self.trading_asset_address,
-            self.wallet_address
-            )
+        pnl_dict = await self.get_account_transactions(period)
         pnl_report = "".join(
             f"{token} {value}\n" for token, value in pnl_dict["tokenList"].items()
         )

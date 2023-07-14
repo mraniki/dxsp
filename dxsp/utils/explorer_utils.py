@@ -26,7 +26,6 @@ async def get_explorer_abi(address):
         return None
 
 async def get_account_transactions(
-    self, 
     contract_address,
     wallet_address,
     period=24):

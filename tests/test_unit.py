@@ -93,7 +93,7 @@ async def test_dex(dex):
     assert dex.account.wallet_address.startswith("0x")
     assert dex.account.wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
     assert dex.account.private_key.startswith("0x")
-    assert "1 - 32BE35BC" in dex.account.account
+    assert "1 - 32BE35BC" in dex.account.account_number
 
 
 @pytest.mark.asyncio

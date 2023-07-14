@@ -69,7 +69,8 @@ class DexSwap:
             buy_token_address = buy_token
             if not buy_token_address.startswith("0x"):
                 buy_token_address = await self.contract_utils.search_contract_address(buy_token)
-            sell_amount = await self.contract_utils.calculate_sell_amount(sell_token_address, quantity)
+            sell_amount = await self.contract_utils.calculate_sell_amount(
+                sell_token_address, self.account.wallet_address, quantity)
             sell_token_amount_wei = sell_amount * (10 ** (
                 await self.get_token_decimals(sell_token_address)))
             if self.protocol_type == "0x":
@@ -134,8 +135,8 @@ class DexSwap:
     async def get_account_open_positions(self):
         return await self.account.get_account_open_positions()
 
-    async def get_account_pnl(self, period=24):
-        return await self.account.get_account_pnl()
-
     async def get_account_transactions(self, period=24):
         return await self.account.get_account_transactions(period)
+
+    async def get_account_pnl(self, period=24):
+        return await self.account.get_account_pnl(period)

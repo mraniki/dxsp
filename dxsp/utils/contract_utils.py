@@ -113,20 +113,21 @@ class ContractUtils:
         return contract.functions.symbol().call() 
 
 
-    async def get_token_balance(self, token_address: str) -> Optional[int]:
+    async def get_token_balance(self, token_address: str,wallet_address: str) -> Optional[int]:
         """Get token balance"""
         contract = await self.get_token_contract(token_address)
         if contract is None or contract.functions is None:
             raise ValueError("No Balance")
-        balance = contract.functions.balanceOf(self.wallet_address).call()
+        balance = contract.functions.balanceOf(wallet_address).call()
         if balance is None:
             raise ValueError("No Balance")
         return round(self.w3.from_wei(balance, 'ether'),5) or 0
 
 
-    async def calculate_sell_amount(self, sell_token_address, quantity):
+    async def calculate_sell_amount(self, sell_token_address, wallet_address, quantity):
         """Returns amount based on risk percentage."""
-        sell_balance = await self.get_token_balance(sell_token_address)
+        sell_balance = await self.get_token_balance(
+            sell_token_address, wallet_address)
         sell_contract = await self.get_token_contract(sell_token_address)
         sell_decimals = (
             sell_contract.functions.decimals().call()

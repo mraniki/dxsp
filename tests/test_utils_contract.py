@@ -4,6 +4,7 @@
 from unittest.mock import AsyncMock, patch
 import pytest
 import time
+import decimal
 from dxsp.config import settings
 from dxsp import DexSwap
 from web3 import Web3, EthereumTesterProvider
@@ -139,11 +140,14 @@ async def test_get_token_symbol(dex):
 @pytest.mark.asyncio
 async def test_get_token_balance(dex):
     # Call the get_token_balance method
-    result = await dex.get_token_balance("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
+    result = await dex.contract_utils.get_token_balance(
+        "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
+        dex.account.wallet_address)
     print("balance ", result)
+    print("balance ", type(result))
     assert result is not None
     assert result >= 0
-    assert isinstance(result, int)
+    assert isinstance(result, decimal.Decimal)
 
 
 @pytest.mark.asyncio
@@ -153,7 +157,9 @@ async def test_token_balance(account) -> str:
         settings.dex_wallet_address = account
         # with pytest.raises(ValueError, match='No Balance'):
         dex = DexSwap()
-        result = await dex.get_token_balance(settings.trading_asset_address)
+        result = await dex.contract_utils.get_token_balance(
+            settings.trading_asset_address,
+            account)
         print(result)
         assert result is not None
 
