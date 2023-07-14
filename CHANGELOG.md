@@ -2,6 +2,48 @@
 
 <!--next-version-placeholder-->
 
+## v4.0.0 (2023-07-14)
+
+### Feature
+
+* ✨ adding token name function and test ([`e596c00`](https://github.com/mraniki/dxsp/commit/e596c006dd39afce9cb918d1563bcb32fedc789e))
+* 🥚  account utils for easier readibility and maintenance ([`26200aa`](https://github.com/mraniki/dxsp/commit/26200aae115293837b54806bf6754849dca2d22d))
+* 🥚  contract utils for easier readibility and maintenance ([`198ed3d`](https://github.com/mraniki/dxsp/commit/198ed3d531a8edf74dd8bdb594d6808d579cebbc))
+
+### Fix
+
+* :bug: sign function cleanup ([`67250d0`](https://github.com/mraniki/dxsp/commit/67250d0abecdd56cceb2385afa72c4abc144860e))
+* :rotating_light: linter ([`6d15a0e`](https://github.com/mraniki/dxsp/commit/6d15a0e52a96e3fb9c5f94436abfd2fda84a3569))
+* 💬 updated example ([`a3942cb`](https://github.com/mraniki/dxsp/commit/a3942cbac7abe3d22a5d5ad567ccf37c7ddc7d50))
+* 🚨 linter ([`2657bd6`](https://github.com/mraniki/dxsp/commit/2657bd6cc2651e7de1e9cb42d03859bc0f87844d))
+* ✅ 0x quote ([`64b2c47`](https://github.com/mraniki/dxsp/commit/64b2c47f4ab5a8cf903c8078467f2a774c9b87fd))
+* ✅  unit test passed ([`98cb9e5`](https://github.com/mraniki/dxsp/commit/98cb9e57f7ba074981890d6d36164d322b549ed8))
+* ♻️ trading_asset symbol deprecated to use only address ([`636db8c`](https://github.com/mraniki/dxsp/commit/636db8c9904a17ad7734fb53d73fe69774a77a47))
+* ✅ unit test reorganized ([`6ddcc46`](https://github.com/mraniki/dxsp/commit/6ddcc46bdcd16b98a36f93ce84a306d12de73523))
+* ✅ get unit test ([`c96210d`](https://github.com/mraniki/dxsp/commit/c96210de5ae2e04abb8e42f674608deae27d9d30))
+* ✅  unit test ([`15407c3`](https://github.com/mraniki/dxsp/commit/15407c3f25e9d2d302a6c0aa9df03ed6b4cb5d9e))
+* ✅ unit test fix ([`7766063`](https://github.com/mraniki/dxsp/commit/7766063102465a261d138e121f0568eed180a4ec))
+* ✅ unit test fix ([`ad0510c`](https://github.com/mraniki/dxsp/commit/ad0510ceea15a602ef2980ca3bbe34b338525100))
+* ♻️ initial shakeout. ([`5597b4c`](https://github.com/mraniki/dxsp/commit/5597b4c8d1f33da29320dc771d3488786c16f867))
+* ♻️ added explorer utils ([`35ab3d1`](https://github.com/mraniki/dxsp/commit/35ab3d15b817a545cdecb33793453a8e653388ea))
+* 🐛  fix various miss ([`ef0b3c2`](https://github.com/mraniki/dxsp/commit/ef0b3c21b8055fc340af10a67a1ea2ccbbb76d67))
+* ♻️ further refactoring for utils setup ([`53b1103`](https://github.com/mraniki/dxsp/commit/53b1103a5ecb0fd8f8ec26f544a73d7d0e20af7e))
+* 🐛 missing \n for position format ([`232da72`](https://github.com/mraniki/dxsp/commit/232da729534727066c93166639d46ee8fa240794))
+* 🐛 leveraging on uniswap lib for approval ([`fac5ced`](https://github.com/mraniki/dxsp/commit/fac5ced01456edb7461b3b672f713763c8a4db0e))
+
+### Breaking
+
+* 💥 breaking Utils module for easier maintenance ([`dde21ff`](https://github.com/mraniki/dxsp/commit/dde21ff7f20683318ac99e3473df36f2956c5599))
+* 💥 breaking Utils module for easier maintenance ([`dde21ff`](https://github.com/mraniki/dxsp/commit/dde21ff7f20683318ac99e3473df36f2956c5599))
+
+### Other
+
+* Merge pull request #319 from mraniki/dev ([`3b2f851`](https://github.com/mraniki/dxsp/commit/3b2f8515019bc199feb0cba5fca4436d04750fcd))
+* Merge pull request #321 from mraniki/sourcery/dev ([`2cbe1aa`](https://github.com/mraniki/dxsp/commit/2cbe1aa215c7ce90896076947bf87b013c8d930e))
+* 'Refactored by Sourcery' ([`e93dd0d`](https://github.com/mraniki/dxsp/commit/e93dd0dc28803dfd72c99b04faf36e3dcf48ce5f))
+* Merge pull request #320 from mraniki/sourcery/dev ([`5f1873c`](https://github.com/mraniki/dxsp/commit/5f1873c1fc3c003b1a7ebfc2e1f0ac472cb0fc19))
+* 'Refactored by Sourcery' ([`a31f361`](https://github.com/mraniki/dxsp/commit/a31f36139634e2a8f13cc8c3ac156b4d5883edf7))
+
 ## v3.5.4 (2023-07-12)
 
 ### Fix
