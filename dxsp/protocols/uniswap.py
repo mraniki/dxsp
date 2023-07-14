@@ -19,8 +19,8 @@ class DexSwapUniswap(DexSwap):
     ):
         try:
             uniswap = Uniswap(
-                address=self.wallet_address,
-                private_key=self.private_key,
+                address=self.account.wallet_address,
+                private_key=self.account.private_key,
                 version=self.protocol_version, web3=self.w3,
                 factory_contract_addr=settings.dex_factory_contract_addr,
                 router_contract_addr=settings.dex_router_contract_addr
@@ -40,8 +40,8 @@ class DexSwapUniswap(DexSwap):
     async def get_swap(self, sell_address, buy_address, amount):
         try:
             uniswap = Uniswap(
-                        address=self.wallet_address,
-                        private_key=self.private_key,
+                        address=self.account.wallet_address,
+                        private_key=self.account.private_key,
                         version=2, web3=self.w3,
                         factory_contract_addr=settings.dex_factory_contract_addr,
                         router_contract_addr=settings.dex_router_contract_addr

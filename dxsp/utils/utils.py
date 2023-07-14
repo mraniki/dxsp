@@ -5,10 +5,9 @@ from datetime import datetime
 from dxsp.config import settings
 
 # ------🛠️ W3 UTILS ---------
-async def get(self, url, params=None, headers=None):
+async def get(url, params=None, headers=None):
     """ gets a url payload """
     try:
-        self.logger.debug(f"Requesting URL: {url}")
         response = requests.get(
             url, params=params, headers=headers, timeout=10)
         if response.status_code == 200:

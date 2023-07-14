@@ -14,7 +14,7 @@ class ContractUtils:
 
     def __init__(self, w3: Optional[Web3] = None):
         self.logger = logging.getLogger(name="DexSwap")
-        self.w3 = w3 or Web3(Web3.HTTPProvider(settings.dex_rpc))
+        self.w3 = w3
         self.cg = CoinGeckoAPI()
 
     async def search_contract_address(self, token):
@@ -45,7 +45,7 @@ class ContractUtils:
         asset_platforms = self.cg.get_asset_platforms()
         output_dict = next(
             x for x in asset_platforms
-            if x["chain_identifier"] == int(self.chain_id)
+            if x["chain_identifier"] == int(self.w3.net.version)
         )
         return output_dict["id"] or None
 
@@ -84,7 +84,7 @@ class ContractUtils:
         token_search = token_list['tokens']
         for keyval in token_search:
             if (keyval['symbol'] == symbol and
-                keyval['chainId'] == self.chain_id):
+                keyval['chainId'] == int(self.w3.net.version)):
                 return keyval['address']
 
     async def get_token_contract(self, token_address):
