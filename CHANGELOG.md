@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v4.0.3 (2023-07-16)
+
+### Fix
+
+* ⬆️(deps): update dependency python-semantic-release to v8 ([`5fa72ab`](https://github.com/mraniki/dxsp/commit/5fa72ab3e04e6f00a858247ffa8d3e11ea1a0536))
+
+### Other
+
+* Merge pull request #322 from mraniki/renovate/python-semantic-release-8.x ([`d1a553a`](https://github.com/mraniki/dxsp/commit/d1a553acdcade07abd912ccf45536acaf100e584))
+
 ## v4.0.2 (2023-07-14)
 
 ### Fix
