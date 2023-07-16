@@ -26,7 +26,7 @@ class AccountUtils:
 
     async def get_info(self):
         try:
-            return (f"ℹ️ {__package__.__name__} {__version__}\n"
+            return (f"ℹ️ {__version__}\n"
                     f"💱 {await self.get_name()}\n"
                     f"🪪 {self.account_number}")
         except Exception as error:
