@@ -2,6 +2,28 @@
 
 <!--next-version-placeholder-->
 
+## v4.0.4 (2023-07-16)
+
+### Fix
+
+* :bug: Fix wallet address formatting in AccountUtils ([`b419ddf`](https://github.com/mraniki/dxsp/commit/b419ddf4932d79eefb8768f69360df2e74527bbf))
+
+### Other
+
+* Merge pull request #323 from mraniki/dev ([`a286f6c`](https://github.com/mraniki/dxsp/commit/a286f6c9b5944308e473f2a09b80a19d1defe3c1))
+* Merge branch 'main' into dev ([`f48f801`](https://github.com/mraniki/dxsp/commit/f48f801721fee0cbb27734b7387c954945411af1))
+* Merge branch 'main' into dev ([`b7850f2`](https://github.com/mraniki/dxsp/commit/b7850f2186366785e6384e2c995d974ddc61eaec))
+
+## v4.0.3 (2023-07-16)
+
+### Fix
+
+* ⬆️(deps): update dependency python-semantic-release to v8 ([`5fa72ab`](https://github.com/mraniki/dxsp/commit/5fa72ab3e04e6f00a858247ffa8d3e11ea1a0536))
+
+### Other
+
+* Merge pull request #322 from mraniki/renovate/python-semantic-release-8.x ([`d1a553a`](https://github.com/mraniki/dxsp/commit/d1a553acdcade07abd912ccf45536acaf100e584))
+
 ## v4.0.2 (2023-07-14)
 
 ### Fix
