@@ -18,20 +18,23 @@ class AccountUtils:
         self.wallet_address = self.w3.to_checksum_address(
             settings.dex_wallet_address)
         self.account_number = (f"{str(self.w3.net.version)} - "
-                        f"{str(self.wallet_address[-8:])}")
+                        f"{str(self.wallet_address)[-8:]}")
         self.private_key = settings.dex_private_key
         self.trading_asset_address = self.w3.to_checksum_address(
         settings.trading_asset_address)
         self.contract_utils = ContractUtils(w3=self.w3)
 
     async def get_info(self):
-        return (f"ℹ️ {__class__.__name__} {__version__}\n"
-                f"💱 {await self.get_name()}\n"
-                f"🪪 {self.account_number}")
+        try:
+            return (f"ℹ️ {__package__.__name__} {__version__}\n"
+                    f"💱 {await self.get_name()}\n"
+                    f"🪪 {self.account_number}")
+        except Exception as error:
+            return error
 
     async def get_name(self):
         if settings.dex_router_contract_addr:
-            return settings.dex_router_contract_addr[-8:]
+            return str(settings.dex_router_contract_addr)[-8:]
 
     async def get_account_balance(self):
         account_balance = self.w3.eth.get_balance(
