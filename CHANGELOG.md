@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v4.0.5 (2023-07-16)
+
+### Fix
+
+* :bug: Refactor AccountUtils class for improved readability and performance ([`0e03929`](https://github.com/mraniki/dxsp/commit/0e03929029bbdd6c60abfbba587dd8d4e498395b))
+
+### Other
+
+* Merge pull request #324 from mraniki/dev ([`86aa0af`](https://github.com/mraniki/dxsp/commit/86aa0af972f46c22d3224483ee0192740b9a809d))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`efa4075`](https://github.com/mraniki/dxsp/commit/efa4075c42ac3da6bf7983d398c0df7048ffa78a))
+
 ## v4.0.4 (2023-07-16)
 
 ### Fix
