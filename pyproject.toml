@@ -26,8 +26,29 @@ web3 = "^6.4.0"
 pycoingecko = "^3.1.0"
 uniswap-python = "^0.7.0"
 
-[tool.poetry.dev-dependencies]
-python-semantic-release = "^8.0.0"
+[tool.poetry.group.dev.dependencies]
+python-semantic-release = "^8.0.1"
+ruff = "^0.0.278"
+
+[tool.ruff]
+select = [
+  "E",  # pycodestyle
+  "F",  # pyflakes
+  "I",  # isort
+]
+exclude = [
+  ".github/*",
+  "docs/*",
+]
+ignore = ["E401","F401","F811"]
+format = "github"
+
+[tool.pylint.exceptions]
+overgeneral-exceptions = [
+    "builtins.BaseException",
+    "builtins.Exception",
+    "builtins.RuntimeError",
+]
 
 
 [tool.poetry.group.test.dependencies]
