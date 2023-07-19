@@ -89,8 +89,11 @@ omit = [
 ]
 
 [tool.semantic_release]
+#tag_format = "v{version}"
 upload_to_vcs_release = true
-version_variables = ["pyproject.toml:version","dxsp/__init__.py:__version__"]
+version_variables = ["dxsp/__init__.py:__version__"]
+version_toml = ["pyproject.toml:tool.poetry.version"]
+
 build_command = "pip install poetry && poetry build"
 commit_parser = "emoji"
 
