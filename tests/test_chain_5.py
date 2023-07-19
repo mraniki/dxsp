@@ -2,8 +2,9 @@
  DEXSWAP Unit Test
 """
 import pytest
-from dxsp.config import settings
+
 from dxsp import DexSwap
+from dxsp.config import settings
 
 
 @pytest.fixture(scope="session", autouse=True)
