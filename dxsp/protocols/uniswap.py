@@ -1,10 +1,10 @@
 """
 uniswap  🦄
 """
-from dxsp.config import settings
-from dxsp.main import DexSwap
 from uniswap import Uniswap
 
+from dxsp.config import settings
+from dxsp.main import DexSwap
 
 
 class DexSwapUniswap(DexSwap):
@@ -32,7 +32,8 @@ class DexSwapUniswap(DexSwap):
             return round(
                 float((quote /
                        (10 **
-                        (await self.contract_utils.get_token_decimals(buy_address))))), 5)
+                        (await self.contract_utils.get_token_decimals(
+                            buy_address))))), 5)
 
         except Exception as error:
             raise ValueError(f"Quote failed {error}") 

@@ -2,13 +2,16 @@
  DEX SWAP Main
 """
 
+import decimal
 import logging
 from typing import Optional
-import decimal
+
 from web3 import Web3
 from web3.gas_strategies.time_based import medium_gas_price_strategy
+
 from dxsp.config import settings
-from dxsp.utils import ContractUtils, AccountUtils
+from dxsp.utils import AccountUtils, ContractUtils
+
 
 class DexSwap:
     """swap  class"""
@@ -30,7 +33,7 @@ class DexSwap:
 
     async def get_protocol(self):
         """ protocol init """
-        from dxsp.protocols import DexSwapUniswap, DexSwapZeroX, DexSwapOneInch
+        from dxsp.protocols import DexSwapOneInch, DexSwapUniswap, DexSwapZeroX
         if self.protocol_type == "0x":
             self.dex_swap = DexSwapZeroX()
         elif self.protocol_type == "1inch":

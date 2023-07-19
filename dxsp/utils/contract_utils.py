@@ -3,16 +3,18 @@
 ✍️ CONTRACT
 """
 
+import decimal
 import logging
+from datetime import datetime
 from typing import Optional
-from web3 import Web3
+
 import requests
+from pycoingecko import CoinGeckoAPI
+from web3 import Web3
+
 from dxsp.config import settings
 from dxsp.utils.explorer_utils import get_explorer_abi
 from dxsp.utils.utils import get
-from pycoingecko import CoinGeckoAPI
-import decimal
-from datetime import datetime
 
 
 class ContractUtils:
@@ -117,7 +119,10 @@ class ContractUtils:
         contract = await self.get_token_contract(token_address)
         return contract.functions.name().call() 
 
-    async def get_token_balance(self, token_address: str,wallet_address: str) -> Optional[int]:
+    async def get_token_balance(
+        self, token_address: str,
+        wallet_address: str
+        ) -> Optional[int]:
         """Get token balance"""
         contract = await self.get_token_contract(token_address)
         if contract is None or contract.functions is None:

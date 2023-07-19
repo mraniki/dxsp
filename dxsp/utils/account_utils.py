@@ -4,11 +4,14 @@
 """
 import logging
 from typing import Optional
+
 from web3 import Web3
-from dxsp.config import settings
-from dxsp.utils.explorer_utils import get_account_transactions
-from dxsp.utils.contract_utils import ContractUtils
+
 from dxsp import __version__
+from dxsp.config import settings
+from dxsp.utils.contract_utils import ContractUtils
+from dxsp.utils.explorer_utils import get_account_transactions
+
 
 class AccountUtils:
 
