@@ -4,11 +4,12 @@ DXSP Example
 import asyncio
 import logging
 
-from fastapi import FastAPI
 import uvicorn
+from fastapi import FastAPI
 
 from dxsp import DexSwap
 from dxsp.config import settings
+
 # settings.setenv('default')
  
 # DEBUG LEVEL

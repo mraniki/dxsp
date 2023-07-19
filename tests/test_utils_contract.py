@@ -1,13 +1,15 @@
 """
  DEXSWAP Unit Test
 """
-from unittest.mock import AsyncMock, patch
-import pytest
-import time
 import decimal
-from dxsp.config import settings
+import time
+from unittest.mock import AsyncMock, patch
+
+import pytest
+from web3 import EthereumTesterProvider, Web3
+
 from dxsp import DexSwap
-from web3 import Web3, EthereumTesterProvider
+from dxsp.config import settings
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -101,7 +103,8 @@ async def test_invalid_search_contract_address(dex):
 @pytest.mark.asyncio
 async def test_get_token_contract(dex):
     """get_token_contract Testing"""
-    result = await dex.contract_utils.get_token_contract("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
+    result = await dex.contract_utils.get_token_contract(
+        "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
     print(type(result))
     assert result is not None
     assert type(result) is not None
@@ -111,7 +114,8 @@ async def test_get_token_contract(dex):
 @pytest.mark.asyncio
 async def test_get_decimals(dex):
     """get_token_decimals Testing"""
-    result = await dex.contract_utils.get_token_decimals("0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
+    result = await dex.contract_utils.get_token_decimals(
+        "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984")
     print(result)
     time.sleep(5)
     assert result is not None
@@ -121,7 +125,8 @@ async def test_get_decimals(dex):
 @pytest.mark.asyncio
 async def test_get_decimals_stable(dex):
     """get_token_decimals Testing"""
-    result = await dex.contract_utils.get_token_decimals("0xdAC17F958D2ee523a2206206994597C13D831ec7")
+    result = await dex.contract_utils.get_token_decimals(
+        "0xdAC17F958D2ee523a2206206994597C13D831ec7")
     print(result)
     time.sleep(5)
     assert result is not None
@@ -131,7 +136,8 @@ async def test_get_decimals_stable(dex):
 @pytest.mark.asyncio
 async def test_get_token_symbol(dex):
     """get_token_symbol Testing"""
-    result = await dex.contract_utils.get_token_symbol("0xdAC17F958D2ee523a2206206994597C13D831ec7")
+    result = await dex.contract_utils.get_token_symbol(
+        "0xdAC17F958D2ee523a2206206994597C13D831ec7")
     print(result)
     assert result is not None
     assert result == 'USDT'
@@ -140,7 +146,8 @@ async def test_get_token_symbol(dex):
 @pytest.mark.asyncio
 async def test_get_token_name(dex):
     """get_token_symbol Testing"""
-    result = await dex.contract_utils.get_token_name("0xdAC17F958D2ee523a2206206994597C13D831ec7")
+    result = await dex.contract_utils.get_token_name(
+        "0xdAC17F958D2ee523a2206206994597C13D831ec7")
     print(result)
     assert result is not None
     assert result == 'Tether USD'
