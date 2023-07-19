@@ -29,7 +29,7 @@ uniswap-python = "^0.7.0"
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = "^8.0.1"
 ruff = "^0.0.278"
-
+ 
 [tool.ruff]
 select = [
   "E",  # pycodestyle
@@ -93,6 +93,8 @@ upload_to_vcs_release = true
 version_variables = ["pyproject.toml:version","dxsp/__init__.py:__version__"]
 build_command = "pip install poetry && poetry build"
 commit_parser = "emoji"
+
+[tool.semantic_release.commit_parser_options]
 major_tags = [
     "BREAKING",
     "💥",
