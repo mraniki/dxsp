@@ -40,7 +40,7 @@ exclude = [
   ".github/*",
   "docs/*",
 ]
-ignore = ["E401","F401","F811"]
+ignore = ["E401","F401"]
 format = "github"
 fixable = ["ALL"]
 
