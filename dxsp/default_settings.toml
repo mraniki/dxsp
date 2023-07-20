@@ -1,6 +1,21 @@
+########################################
+###          DEFAULT SETTINGS        ###
+########################################
+
+# Any of those settings can be changed
+# by the user. To overwrite a setting, 
+# create a settings.toml or load the 
+# settings from .env file or vars.
+# As an example, to disable the 
+# dxsp object:
+# settings.toml
+# [default]
+# dxsp_enabled = false
+
 [default]
 VALUE = "On default"
 dxsp_enabled = true
+dxsp_commands = "🎯 BUY WBTC\n🎯 /q WBTC\n 🏦 /bal\n 🏦 /pos\n"
 loglevel = "INFO"
 dex_wallet_address = "0x1234567890123456789012345678901234567890"
 dex_private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266" 
@@ -27,7 +42,30 @@ dex_notify_invalid_token = true
 
 
 
+########################################
+###     END OF DEFAULT SETTINGS      ###
+########################################
 
+
+
+
+                                        
+# _   _                           _   ___  
+#| | | |                         | | |__ \ 
+#| |_| |__   ___    ___ _ __   __| |    )|
+#| __| '_ \ / _ \  / _ \ '_ \ / _` |   / / 
+#| |_| | | |  __/ |  __/ | | | (_| |  |_|  
+# \__|_| |_|\___|  \___|_| |_|\__,_|  (_)  
+########################################                                                                                      
+
+
+
+
+
+
+########################################
+###         TESTING SETTINGS         ###
+########################################
 
 
 ##############
@@ -37,6 +75,7 @@ dex_notify_invalid_token = true
 [uniswap]
 VALUE = "On Testing"
 dxsp_enabled = true
+dxsp_commands = "🎯 BUY WBTC\n🎯 /q WBTC\n 🏦 /bal\n 🏦 /pos\n"
 loglevel = "DEBUG"
 dex_wallet_address = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC" 
 dex_private_key = "0xdeadbeet45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266" 
@@ -60,6 +99,7 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 VALUE = "test_zerox"
 loglevel = "DEBUG"
 dxsp_enabled = true
+dxsp_commands = "🎯 BUY WBTC\n🎯 /q WBTC\n 🏦 /bal\n 🏦 /pos\n"
 dex_wallet_address = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC" 
 dex_private_key = "0xdeadbeet45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266" 
 dex_protocol_type = "0x"
@@ -79,10 +119,12 @@ token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/a
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
+
 [testnet]
 VALUE = "On Testnet"
 loglevel = "DEBUG"
 dxsp_enabled = true
+dxsp_commands = "🎯 BUY WBTC\n🎯 /q WBTC\n 🏦 /bal\n 🏦 /pos\n"
 dex_wallet_address = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC" 
 dex_private_key = "0xdeadbeet45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266" 
 dex_protocol_type = "uniswap"
@@ -101,9 +143,11 @@ token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/a
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
+
 [bsc]
 VALUE = "chain_56"
 dxsp_enabled = true
+dxsp_commands = "🎯 BUY WBTC\n🎯 /q WBTC\n 🏦 /bal\n 🏦 /pos\n"
 dex_wallet_address = "0xf977814e90da44bfa03b6295a0616a897441acec"
 dex_private_key = "0xdeadbeet45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266" 
 dex_protocol_type = "uniswap"
@@ -120,9 +164,11 @@ token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/a
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
+
 [uniswapv3]
 VALUE = "On uniswap3"
 dxsp_enabled = true
+dxsp_commands = "🎯 BUY WBTC\n🎯 /q WBTC\n 🏦 /bal\n 🏦 /pos\n"
 loglevel = "DEBUG"
 dex_wallet_address = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC" 
 dex_private_key = "0xdeadbeet45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266" 
@@ -142,9 +188,11 @@ token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/a
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
+
 [pancake3]
 VALUE = "On pancake3"
 dxsp_enabled = true
+dxsp_commands = "🎯 BUY WBTC\n🎯 /q WBTC\n 🏦 /bal\n 🏦 /pos\n"
 loglevel = "DEBUG"
 dex_wallet_address = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC" 
 dex_private_key = "0xdeadbeet45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266" 
@@ -165,7 +213,7 @@ token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/t
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
 
-
+ 
 # [oneinch]
 # VALUE = "1inchtesting"
 # loglevel = "DEBUG"

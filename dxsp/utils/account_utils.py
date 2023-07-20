@@ -26,14 +26,19 @@ class AccountUtils:
         self.trading_asset_address = self.w3.to_checksum_address(
         settings.trading_asset_address)
         self.contract_utils = ContractUtils(w3=self.w3)
+        self.commands = settings.dxsp_commands
 
     async def get_info(self):
         try:
-            return (f"ℹ️ {__version__}\n"
+            return (f"ℹ️ DexSwap v{__version__}\n"
                     f"💱 {await self.get_name()}\n"
                     f"🪪 {self.account_number}")
         except Exception as error:
             return error
+
+    async def get_help(self):
+        return (f"{self.commands}\n")
+
 
     async def get_name(self):
         if settings.dex_router_contract_addr:
