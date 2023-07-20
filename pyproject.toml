@@ -40,16 +40,10 @@ exclude = [
   ".github/*",
   "docs/*",
 ]
-# ignore = ["E401","F401"]
+ignore = ["F401"]
 format = "github"
 fixable = ["ALL"]
 
-# [tool.pylint.exceptions]
-# overgeneral-exceptions = [
-#     "builtins.BaseException",
-#     "builtins.Exception",
-#     "builtins.RuntimeError",
-# ]
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.0"
