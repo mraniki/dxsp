@@ -40,16 +40,9 @@ exclude = [
   ".github/*",
   "docs/*",
 ]
-ignore = ["E401","F401"]
+ignore = ["F401"]
 format = "github"
 fixable = ["ALL"]
-
-[tool.pylint.exceptions]
-overgeneral-exceptions = [
-    "builtins.BaseException",
-    "builtins.Exception",
-    "builtins.RuntimeError",
-]
 
 
 [tool.poetry.group.test.dependencies]
@@ -58,20 +51,6 @@ pytest-cov = "^4.1"
 pytest-asyncio = "^0.21.0"
 pytest-mock = "^3.11.1"
 eth_tester = "^0.9.0b2"
-
-[tool.poetry.group.docs]
-optional = true
-
-[tool.poetry.group.docs.dependencies]
-sphinx = "^7.0.0"
-sphinx_bootstrap_theme = "^0.8.1"
-sphinx-autoapi = "^2.1.1"
-sphinx-copybutton= "^0.5.2"
-myst-parser = "^2.0.0"
-sphinx-notfound-page = "^0.8.3"
-sphinxext-remoteliteralinclude = "^0.4.0"
-sphinx-togglebutton = "*"
-
 
 [tool.pytest.ini_options]
 pythonpath = "."
@@ -88,15 +67,31 @@ omit = [
     "*/config.py"
 ]
 
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^7.0.0"
+sphinx_bootstrap_theme = "^0.8.1"
+sphinx-autoapi = "^2.1.1"
+sphinx-copybutton= "^0.5.2"
+myst-parser = "^2.0.0"
+sphinx-notfound-page = "^0.8.3"
+sphinxext-remoteliteralinclude = "^0.4.0"
+sphinx-togglebutton = "*"
+
+
 [tool.semantic_release]
-#tag_format = "v{version}"
-upload_to_vcs_release = true
-version_variables = ["dxsp/__init__.py:__version__"]
+tag_format = "v{version}"
+commit_parser = "emoji"
+build_command = "pip install poetry && poetry build"
+version_variable = [
+    "dxsp/__init__.py:__version__",
+    # "docs/conf.py:version",
+]
 version_toml = [
    "pyproject.toml:tool.poetry.version",
 ]
-build_command = "pip install poetry && poetry build"
-commit_parser = "emoji"
 
 [tool.semantic_release.commit_parser_options]
 major_tags = [
@@ -136,3 +131,18 @@ patch_tags = ["fix","bump","Update",
     "🔇",":mute:",
     "🔊",":volume:",
 ]
+
+[tool.semantic_release.changelog]
+# template_dir = "templates"
+changelog_file = "CHANGELOG.md"
+exclude_commit_patterns = []
+
+[tool.semantic_release.branches.main]
+match = "(main|master)"
+prerelease_token = "rc"
+prerelease = false
+
+[tool.semantic_release.publish]
+dist_glob_patterns = ["dist/*"]
+upload_to_vcs_release = true
+
