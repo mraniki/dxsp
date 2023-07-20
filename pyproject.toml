@@ -29,7 +29,7 @@ uniswap-python = "^0.7.0"
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = "^8.0.2"
 ruff = "^0.0.278"
- 
+  
 [tool.ruff]
 select = [
   "E",  # pycodestyle
@@ -82,67 +82,79 @@ sphinx-togglebutton = "*"
 
 
 [tool.semantic_release]
-tag_format = "v{version}"
-commit_parser = "emoji"
+version_variable = ["pyproject.toml:version","dxsp/__init__.py:__version__"]
+branch = "main"
+upload_to_pypi = true
+upload_to_release = true
 build_command = "pip install poetry && poetry build"
-version_variable = [
-    "dxsp/__init__.py:__version__",
-    # "docs/conf.py:version",
-]
-version_toml = [
-   "pyproject.toml:tool.poetry.version",
-]
+commit_parser = "semantic_release.history.emoji_parser"
+use_textual_changelog_sections = true
+major_emoji = "BREAKING,💥,:boom:"
+minor_emoji = "feat,🥚,:egg:,🚀,:rocket:,💄,:lipstick:,✨,:sparkles:"
+patch_emoji = "fix,bump,Update,🎨,:art:,🐛,:bug:,🚑,:ambulance:,⚡,:zap:,🔥,:fire:,🚨,:rotating_light:,♻️,:recycle:,🔧,:wrench:,⬆️,:arrow_up:,🩹,:adhesive_bandage:,👷,:construction_worker:,📝,:memo:,🔒,:lock:,👽,:alien:,💬,:speech_balloon:,🥅,:goal_net:,✅,:white_check_mark:,🐳,:whale:,🙈,:see_no_evil:,⚗️,:alembic:,🧐,:monocle_face:,🔇,:mute:,🔊:volume:"
 
-[tool.semantic_release.commit_parser_options]
-major_tags = [
-    "BREAKING",
-    "💥",
-    ":boom:",
-  ]
-minor_tags = ["feat",
-    "🥚",":egg:",
-    "🚀",":rocket:",
-    "💄",":lipstick:",
-    "✨",":sparkles:",
-]
+# [tool.semantic_release]
+# tag_format = "v{version}"
+# commit_parser = "emoji"
+# build_command = "pip install poetry && poetry build"
+# version_variable = [
+#     "dxsp/__init__.py:__version__",
+#     # "docs/conf.py:version",
+# ]
+# version_toml = [
+#    "pyproject.toml:tool.poetry.version",
+# ]
 
-patch_tags = ["fix","bump","Update",
-    "🎨",":art:",
-    "🐛",":bug:",
-    "🚑",":ambulance:",
-    "⚡",":zap:",
-    "🔥",":fire:",
-    "🚨",":rotating_light:",
-    "♻️",":recycle:",
-    "🔧",":wrench:",
-    "⬆️",":arrow_up:",
-    "🩹",":adhesive_bandage:",
-    "👷",":construction_worker:",
-    "📝",":memo:",
-    "🔒",":lock:",
-    "👽",":alien:",
-    "💬",":speech_balloon:",
-    "🥅",":goal_net:",
-    "✅",":white_check_mark:",
-    "🐳",":whale:",
-    "🙈",":see_no_evil:",
-    "⚗️",":alembic:",
-    "🧐",":monocle_face:",
-    "🔇",":mute:",
-    "🔊",":volume:",
-]
+# [tool.semantic_release.commit_parser_options]
+# major_tags = [
+#     "BREAKING",
+#     "💥",
+#     ":boom:",
+#   ]
+# minor_tags = ["feat",
+#     "🥚",":egg:",
+#     "🚀",":rocket:",
+#     "💄",":lipstick:",
+#     "✨",":sparkles:",
+# ]
 
-[tool.semantic_release.changelog]
-# template_dir = "templates"
-changelog_file = "CHANGELOG.md"
-exclude_commit_patterns = []
+# patch_tags = ["fix","bump","Update",
+#     "🎨",":art:",
+#     "🐛",":bug:",
+#     "🚑",":ambulance:",
+#     "⚡",":zap:",
+#     "🔥",":fire:",
+#     "🚨",":rotating_light:",
+#     "♻️",":recycle:",
+#     "🔧",":wrench:",
+#     "⬆️",":arrow_up:",
+#     "🩹",":adhesive_bandage:",
+#     "👷",":construction_worker:",
+#     "📝",":memo:",
+#     "🔒",":lock:",
+#     "👽",":alien:",
+#     "💬",":speech_balloon:",
+#     "🥅",":goal_net:",
+#     "✅",":white_check_mark:",
+#     "🐳",":whale:",
+#     "🙈",":see_no_evil:",
+#     "⚗️",":alembic:",
+#     "🧐",":monocle_face:",
+#     "🔇",":mute:",
+#     "🔊",":volume:",
+# ]
 
-[tool.semantic_release.branches.main]
-match = "(main|master)"
-prerelease_token = "rc"
-prerelease = false
+# [tool.semantic_release.changelog]
+# # template_dir = "templates"
+# changelog_file = "CHANGELOG.md"
+# exclude_commit_patterns = []
 
-[tool.semantic_release.publish]
-dist_glob_patterns = ["dist/*"]
-upload_to_vcs_release = true
+# [tool.semantic_release.branches.main]
+# match = "(main|master)"
+# prerelease_token = "rc"
+# prerelease = false
+
+# [tool.semantic_release.publish]
+# dist_glob_patterns = ["dist/*"]
+# upload_to_vcs_release = true
 
