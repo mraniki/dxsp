@@ -124,6 +124,9 @@ class DexSwap:
     async def get_info(self):
         return await self.account.get_info()
 
+    async def get_help(self):
+        return await self.account.get_help()
+
     async def get_name(self):
         return await self.account.get_name()
 

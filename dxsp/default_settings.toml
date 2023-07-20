@@ -23,7 +23,7 @@ trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 trading_risk_amount = 10 # 10% of the position
 dex_trading_slippage = 2 # 2% slippage
 dex_notify_invalid_token = true
-
+dxsp_commands = "/bal /pos /help"
 
 
 
@@ -55,6 +55,7 @@ headers = {User-Agent= 'Mozilla/5.0'}
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
+dxsp_commands = "/bal /pos /help"
 
 [zerox]
 VALUE = "test_zerox"
@@ -78,6 +79,7 @@ headers = {User-Agent= 'Mozilla/5.0'}
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
+dxsp_commands = "/bal /pos /help"
 
 [testnet]
 VALUE = "On Testnet"
@@ -100,6 +102,7 @@ headers = {User-Agent= 'Mozilla/5.0'}
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
+dxsp_commands = "/bal /pos /help"
 
 [bsc]
 VALUE = "chain_56"
@@ -119,6 +122,7 @@ headers = {User-Agent= 'Mozilla/5.0'}
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
+dxsp_commands = "/bal /pos /help"
 
 [uniswapv3]
 VALUE = "On uniswap3"
@@ -141,6 +145,7 @@ headers = {User-Agent= 'Mozilla/5.0'}
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
+dxsp_commands = "/bal /pos /help"
 
 [pancake3]
 VALUE = "On pancake3"
@@ -163,7 +168,7 @@ headers = {User-Agent= 'Mozilla/5.0'}
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
-
+dxsp_commands = "/bal /pos /help"
 
 
 # [oneinch]
