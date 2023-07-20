@@ -2,6 +2,61 @@
 
 <!--next-version-placeholder-->
 
+## v4.0.6 (2023-07-20)
+
+### Fix
+
+* 👷 CI Change revert to v7 semantic ([`730ea26`](https://github.com/mraniki/dxsp/commit/730ea26ba9ae4d0be4f6f9ca4150d048bdc880d0))
+* 👷 CI Change ([`c81d86e`](https://github.com/mraniki/dxsp/commit/c81d86ef8de106922c0e17c2b317e897013e607e))
+* 👷 CI Change test ([`cb70d1b`](https://github.com/mraniki/dxsp/commit/cb70d1bef913c98b6108ecbfd19a37ba9e8cb251))
+* 👷 CI Change test ([`a1c8221`](https://github.com/mraniki/dxsp/commit/a1c8221756366daf95ee691ef5011386cf2f9f4e))
+* Update Requirements ([`6a9a3f4`](https://github.com/mraniki/dxsp/commit/6a9a3f4592c537334fd44a8729825d8e659619e4))
+* Update Requirements ([`6f43f6d`](https://github.com/mraniki/dxsp/commit/6f43f6d1881e49bb18b1a1af0eb3eb49a9751f7b))
+* 👷 CI Change fetch-depth ([`261b233`](https://github.com/mraniki/dxsp/commit/261b233404511a1830e7850fd6bc652eb150730a))
+* Update pyproject.toml ([`885f520`](https://github.com/mraniki/dxsp/commit/885f5202a2ef4cd18879b5677b82b1bce2884f27))
+* 👷 CI Change for semantic ([`1598818`](https://github.com/mraniki/dxsp/commit/15988182566e5a65f832d8b408d50f683b367f04))
+* 📝 ([`a321425`](https://github.com/mraniki/dxsp/commit/a321425c675c4bcdd863ae078f943baa4f0b20f9))
+* 👷 CI Change ([`1d62abe`](https://github.com/mraniki/dxsp/commit/1d62abef7527d02d36b20563d8d301f153e078e4))
+* ⬆️ renovate exclude req ([`2d74b0c`](https://github.com/mraniki/dxsp/commit/2d74b0cc4bcc43aedb9f76bedb9f76ad7e03bd37))
+* Update Requirements ([`df49f73`](https://github.com/mraniki/dxsp/commit/df49f735773aa196f43127c284930651c7a6e306))
+* ⬆️(deps): update dependency parsimonious to v0.10.0 ([`ceac117`](https://github.com/mraniki/dxsp/commit/ceac1170af6d666d81bf552c878d79f686787070))
+* Update Requirements ([`589bbcd`](https://github.com/mraniki/dxsp/commit/589bbcd340b8d49e4833d2062b847864be2f4e91))
+* ⬆️(deps): update dependency parsimonious to v0.10.0 ([`a0178d9`](https://github.com/mraniki/dxsp/commit/a0178d9f4f85998ef9787be18d3a6f89bbfdb5da))
+* Update Requirements ([`0daefa9`](https://github.com/mraniki/dxsp/commit/0daefa9f72b4c7578be3f7a82100f30a5ea8491b))
+* 🚨 linter sorting ([`77d8ba9`](https://github.com/mraniki/dxsp/commit/77d8ba92f7ad7adc2d401d37e5d6c3392149718d))
+* 🚨 linter ([`b859812`](https://github.com/mraniki/dxsp/commit/b8598120166d4516c31d3ced60bcf1e4fadb9519))
+* 🚨 linter ([`3a210f3`](https://github.com/mraniki/dxsp/commit/3a210f3602e8361f773073b2d906f462c4ad02cd))
+* 🚨 linter sorting ([`aaafcfa`](https://github.com/mraniki/dxsp/commit/aaafcfafc7b1fd2ea09b32b033e68540a722027f))
+* 🚨 linter config ([`6d0a76d`](https://github.com/mraniki/dxsp/commit/6d0a76ddee7b704bf32b50e1f9212d7f968c7a1f))
+* ⬆️ 👷 CI Change ([`e7c3a56`](https://github.com/mraniki/dxsp/commit/e7c3a56e4dc04ee2e17f6b9d977b13606cbbbd5e))
+* 👷 CI Change in pytoml + ruff ([`2ad5ea5`](https://github.com/mraniki/dxsp/commit/2ad5ea596ae21e7cf0ca18a2f3e773adb54f37d4))
+
+### Other
+
+* Merge pull request #345 from mraniki/dev ([`76787bc`](https://github.com/mraniki/dxsp/commit/76787bc8a3d4e8a56f805ea786cc0ad48528d578))
+* Merge pull request #344 from mraniki/dev ([`e8bf454`](https://github.com/mraniki/dxsp/commit/e8bf4542e2cfbd2c622967a3aafdd92053711a3d))
+* Merge pull request #343 from mraniki/dev ([`0b7e0ad`](https://github.com/mraniki/dxsp/commit/0b7e0ad5713bce5fad40025449ecb7d862b9593c))
+* :construction_worker_man: CI Change test ([`ef66e18`](https://github.com/mraniki/dxsp/commit/ef66e1859586beac6dc0e5f32af9bd6fa88cb706))
+* Merge pull request #342 from mraniki/dev ([`ea46a11`](https://github.com/mraniki/dxsp/commit/ea46a11ee5cc8d652e7dd471e9ad6240b91f5f44))
+* :construction_worker_man: CI Change test ([`9ecb8ed`](https://github.com/mraniki/dxsp/commit/9ecb8edf09ac31cf087b69da59c98ec2a7153f9a))
+* Merge pull request #341 from mraniki/dev ([`3d77c0c`](https://github.com/mraniki/dxsp/commit/3d77c0cf7b6f79998abbfd04292f55d6c6b110fe))
+* Merge pull request #340 from mraniki/dev ([`0af16c2`](https://github.com/mraniki/dxsp/commit/0af16c295cef110e67a62c73c3da8cc13458388e))
+* Merge branch 'main' into dev ([`46c720d`](https://github.com/mraniki/dxsp/commit/46c720de8e4fe724df637bed76fefb02e95a0c3c))
+* Merge pull request #339 from mraniki/main ([`62213a5`](https://github.com/mraniki/dxsp/commit/62213a5aa09d106914c5126f47cf2df8ac8b230b))
+* Merge pull request #338 from mraniki/main ([`943e782`](https://github.com/mraniki/dxsp/commit/943e78272c34c3b99f234cf919e04e24101722d5))
+* Merge pull request #337 from mraniki/dev ([`f4e7558`](https://github.com/mraniki/dxsp/commit/f4e75585cd5221395c6b1790cd1bf59d58de37c0))
+* Merge pull request #336 from mraniki/dev ([`7ad6e05`](https://github.com/mraniki/dxsp/commit/7ad6e0513c6868ccb8179613abdb596a9f558111))
+* Merge pull request #335 from mraniki/main ([`a9fe830`](https://github.com/mraniki/dxsp/commit/a9fe8304e286929dbc8467ac198b6cc7b383ab88))
+* Merge pull request #334 from mraniki/dev ([`6c581a9`](https://github.com/mraniki/dxsp/commit/6c581a95b51df994f3c574c0066229e474454f8e))
+* Merge pull request #333 from mraniki/main ([`f16982f`](https://github.com/mraniki/dxsp/commit/f16982f010bd60dd1298b33f1b465dbb7fd153bf))
+* Merge pull request #332 from mraniki/dev ([`9fb704d`](https://github.com/mraniki/dxsp/commit/9fb704dccef3381be7d8423b70584eca2e0acfe9))
+* Merge pull request #331 from mraniki/main ([`d2a742b`](https://github.com/mraniki/dxsp/commit/d2a742bdcac32d5075430ddbaa677586f8985b27))
+* Merge pull request #330 from mraniki/dev ([`8423f0d`](https://github.com/mraniki/dxsp/commit/8423f0ddd5a6518db4b7816d93a2238750605a89))
+* Merge pull request #329 from mraniki/dev ([`9c9d4ab`](https://github.com/mraniki/dxsp/commit/9c9d4abd721739723415b6d5fc7c525f5feb2fda))
+* Merge pull request #327 from mraniki/renovate/parsimonious-0.x ([`18c1b0a`](https://github.com/mraniki/dxsp/commit/18c1b0a85f2e22a764b010b05b14260d154b4f38))
+* Merge pull request #326 from mraniki/renovate/parsimonious-0.x ([`ee07701`](https://github.com/mraniki/dxsp/commit/ee077017d90608cabf6aa6126bef20f3b36f13af))
+* Merge pull request #325 from mraniki/dev ([`069f031`](https://github.com/mraniki/dxsp/commit/069f03186a8990f5b9ab2d62af3aff4f1085c74f))
+
 ## v4.0.5 (2023-07-16)
 
 ### Fix
