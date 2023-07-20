@@ -2,6 +2,20 @@
 
 <!--next-version-placeholder-->
 
+## v4.1.0 (2023-07-20)
+
+### Feature
+
+* 🥚 adding command add module level ([`2f47acb`](https://github.com/mraniki/dxsp/commit/2f47acbb6d0f491f0fe23eb709076c4bfb21105a))
+
+### Fix
+
+* 🔧  config alignment ([`e6358ab`](https://github.com/mraniki/dxsp/commit/e6358ab86dd29d768f361603b2f6bdd5835a270e))
+
+### Other
+
+* Merge pull request #346 from mraniki/dev ([`229f0ea`](https://github.com/mraniki/dxsp/commit/229f0ea32f1b0f2a9faac277e7975f216de6e8ed))
+
 ## v4.0.6 (2023-07-20)
 
 ### Fix
