@@ -30,14 +30,14 @@ class AccountUtils:
 
     async def get_info(self):
         try:
-            return (f"ℹ️ {__version__}\n"
+            return (f"ℹ️ DexSwap v{__version__}\n"
                     f"💱 {await self.get_name()}\n"
                     f"🪪 {self.account_number}")
         except Exception as error:
             return error
 
     async def get_help(self):
-        return (f"🆘\n{await self.get_info(self)}\n{self.commands}")
+        return (f"{self.commands}\n")
 
 
     async def get_name(self):
