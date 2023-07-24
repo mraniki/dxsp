@@ -72,7 +72,7 @@ class ContractUtils:
                 except (KeyError, requests.exceptions.HTTPError):
                     pass
         except Exception as e:
-            self.logger.error("search_cg %s", e)
+            self.logger.error("search_cg {}", e)
             return
 
     async def search_cg_contract(self, token):
@@ -82,7 +82,7 @@ class ContractUtils:
             return (coin_info['platforms'][f'{await self.search_cg_platform()}']
                     if coin_info is not None else None)
         except Exception as e:
-            self.logger.error(" search_cg_contract: %s", e)
+            self.logger.error(" search_cg_contract: {}", e)
             return
 
     async def get_token_address(self, token_list_url, symbol):

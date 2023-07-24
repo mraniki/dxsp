@@ -3,9 +3,9 @@
 """
 
 import decimal
-import logging
 from typing import Optional
 
+from loguru import logger
 from web3 import Web3
 from web3.gas_strategies.time_based import medium_gas_price_strategy
 
@@ -16,7 +16,8 @@ from dxsp.utils import AccountUtils, ContractUtils
 class DexSwap:
     """swap  class"""
     def __init__(self, w3: Optional[Web3] = None):
-        self.logger = logging.getLogger(name="DexSwap")
+        # self.logger = logging.getLogger(name="DexSwap")
+        self.logger = logger
         self.w3 = w3 or Web3(Web3.HTTPProvider(settings.dex_rpc))
         if not self.w3.net.listening:
             raise ValueError("w3 not connected")
