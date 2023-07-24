@@ -2,6 +2,33 @@
 
 
 
+## v4.2.0 (2023-07-24)
+
+### Other
+
+* Merge pull request #351 from mraniki/dev
+
+🥚 🔊 loguru implementation ([`dda865f`](https://github.com/mraniki/dxsp/commit/dda865f7b786fa39f5c6194e066dc905f1baca0a))
+
+* Merge pull request #350 from mraniki/renovate/ruff-0.x
+
+⬆️(deps): update dependency ruff to ^0.0.280 ([`e5a5b77`](https://github.com/mraniki/dxsp/commit/e5a5b77b4edb8418e3517c7ff855df7cf5a3fbad))
+
+### Update
+
+* Update Requirements ([`408b94e`](https://github.com/mraniki/dxsp/commit/408b94e87b2069aee72ac9eae4720fc7c7b1080f))
+
+* Update Requirements ([`a8549fd`](https://github.com/mraniki/dxsp/commit/a8549fdbfddfd195f3b4e7eca776d23eba5b5fe9))
+
+### ⬆️
+
+* ⬆️(deps): update dependency ruff to ^0.0.280 ([`3c459bf`](https://github.com/mraniki/dxsp/commit/3c459bf24aa38ed44407519f952276d2d5a21da5))
+
+### 🥚
+
+* 🥚 🔊 loguru implementation ([`2ad49ec`](https://github.com/mraniki/dxsp/commit/2ad49ec0392d577863484c0701c8d384808bda7e))
+
+
 ## v4.1.2 (2023-07-21)
 
 ### Other
