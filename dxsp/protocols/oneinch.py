@@ -29,10 +29,10 @@ class DexSwapOneInch(DexSwap):
         #         url=quote_url,
         #         params=None,
         #         headers=settings.headers)
-        #     self.logger.debug("quote_response %s", quote_response)
+        #     self.logger.debug("quote_response {}", quote_response)
         #     if quote_response:
         #         quote_amount = quote_response['toTokenAmount']
-        #         self.logger.debug("quote_amount %s", quote_amount)
+        #         self.logger.debug("quote_amount {}", quote_amount)
         #         # quote_decimals = quote_response['fromToken']['decimals']
         #         quote = self.w3.from_wei(int(quote_amount), 'ether')
         #         # /(10 ** quote_decimals))
