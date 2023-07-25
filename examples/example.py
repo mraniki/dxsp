@@ -2,19 +2,18 @@
 DXSP Example
 """
 import asyncio
-import logging
+import sys
 
 import uvicorn
 from fastapi import FastAPI
+from loguru import logger
 
 from dxsp import DexSwap
 from dxsp.config import settings
 
-# settings.setenv('default')
+logger.remove()
+logger.add(sys.stderr, level="INFO")
  
-# DEBUG LEVEL
-logging.basicConfig(level=logging.DEBUG)
-logging.getLogger("urllib3").setLevel(logging.WARNING)
 
 
 async def main():
