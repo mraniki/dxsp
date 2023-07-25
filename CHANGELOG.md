@@ -2,6 +2,19 @@
 
 
 
+## v4.2.2 (2023-07-25)
+
+### Other
+
+* Merge pull request #352 from mraniki/dev
+
+✅ loguru pytest ([`be16617`](https://github.com/mraniki/dxsp/commit/be166174e0e668e848b9ca297259ca7c4b315c21))
+
+### ✅
+
+* ✅ loguru pytest ([`094f075`](https://github.com/mraniki/dxsp/commit/094f07540c8876bd13160def44fed48795d79402))
+
+
 ## v4.2.1 (2023-07-24)
 
 ### Update
