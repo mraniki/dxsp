@@ -106,6 +106,7 @@ dex_protocol_type = "0x"
 dex_protocol_version = 2
 dex_rpc = "https://rpc.ankr.com/eth"
 dex_0x_url = "https://api.0x.org/"
+dex_0x_api_key = "123" 
 dex_router_contract_addr = "0xdef1c0ded9bec7f1a1670819833240f027b25eff"
 dex_factory_contract_addr = ""
 dex_router_abi_url = "https://raw.githubusercontent.com/0xProject/protocol/development/packages/contract-artifacts/artifacts/Exchange.json"
