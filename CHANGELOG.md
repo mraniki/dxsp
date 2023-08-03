@@ -2,6 +2,33 @@
 
 
 
+## v4.2.3 (2023-08-03)
+
+### Other
+
+* Merge pull request #355 from mraniki/dev
+
+📝 RTD initial release ([`fe9a3b4`](https://github.com/mraniki/dxsp/commit/fe9a3b45021a18815eb70a084ca91280255723ab))
+
+### Update
+
+* Update Requirements ([`c2d42a6`](https://github.com/mraniki/dxsp/commit/c2d42a6a50569851c685eace0e4a31e938e5a46a))
+
+### 📝
+
+* 📝 ([`865196e`](https://github.com/mraniki/dxsp/commit/865196ea1cec37510617bade1f1991268d664058))
+
+* 📝 RTD ([`6d21c0d`](https://github.com/mraniki/dxsp/commit/6d21c0d93ceb0bdea40db99d634a8d7e39b667f9))
+
+* 📝 RTD update ([`9d6d8ea`](https://github.com/mraniki/dxsp/commit/9d6d8ea9a247845452b6ec0809397accb99b315a))
+
+* 📝 RTD initial release ([`331506c`](https://github.com/mraniki/dxsp/commit/331506c9b0f34fe2b2926e3670cccdf6adb9ffa4))
+
+### 🔧
+
+* 🔧 config update ([`9aae8ad`](https://github.com/mraniki/dxsp/commit/9aae8ad31b400ab6d12a7d8e3881bbd22323637b))
+
+
 ## v4.2.2 (2023-07-25)
 
 ### Other
