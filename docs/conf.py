@@ -25,8 +25,6 @@ extensions = [
     'sphinxext.remoteliteralinclude',
 ]
 
-
-
 # -- Extension configuration ---------------------------------------------------
 
 napoleon_google_docstring = True
@@ -42,15 +40,6 @@ source_suffix = ['.rst', '.md']
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
-intersphinx_mapping = {
-    "python": ("http://docs.python.org/", None),
-    "sphinx": ("https://www.sphinx-doc.org/en/master/", None),
-    "talkytrader": ("https://talky.readthedocs.io", None),
-    "findmyorder": ("https://findmyorder.readthedocs.io", None),
-    "dxsp": ("https://dxsp.readthedocs.io", None),
-    "iamlistening": ("https://iamlistening.rtfd.io/", None),
-    "talkytrend": ("https://talkytrend.readthedocs.io", None),
-}
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -87,10 +76,10 @@ html_theme_options = {
         ("_menu",  "🔌 Plugins",[
             ("👂 IamListening",  "https://iamlistening.rtfd.io/", True),
             ("🔎 FindMyOrder",  "https://findmyorder.rtfd.io/", True),
-            ("⛓️ DXSP", "https://dxsp.rtfd.io/00_index_dxsp", True),
+            ("⛓️ DXSP", "https://dxsp.rtfd.io/", True),
             ("💱 CEX",  "index",True),
             ("💁 Helper",  "index",True),
-            ("📰 Talkytrend",  "https://talkytrend.rtfd.io/00_index_talkytrend", True),
+            ("📰 Talkytrend",  "https://talkytrend.rtfd.io/", True),
         ]),
         ("_menu",  "➕ More",[
             ("🆕 What's new?",  "https://github.com/mraniki/tt",True),
