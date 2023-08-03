@@ -17,7 +17,7 @@ Example
 The following example illustrate how to use the module
 
 
-.. rli:: https://raw.githubusercontent.com/mraniki/dxsp/main/dxsp/example.py
+.. rli:: https://raw.githubusercontent.com/mraniki/dxsp/main/examples/example.py
     :language: python
 
        
