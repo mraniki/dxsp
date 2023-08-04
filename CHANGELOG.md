@@ -2,6 +2,27 @@
 
 
 
+## v4.2.4 (2023-08-04)
+
+### :bug:
+
+* :memo::bug: ([`9d74a15`](https://github.com/mraniki/dxsp/commit/9d74a15b62dcc3b1822ffd599cc4d43a0738b942))
+
+### Other
+
+* Merge pull request #360 from mraniki/dev
+
+:memo::bug: ([`96c2efb`](https://github.com/mraniki/dxsp/commit/96c2efba42dae04f64396b5d4a62867318a77952))
+
+### Update
+
+* Update Requirements ([`67c53ae`](https://github.com/mraniki/dxsp/commit/67c53ae5496dd3b4d2f2ba347bbe5d492dd804d2))
+
+### 📝
+
+* 📝 RTD update ([`aa6a9a1`](https://github.com/mraniki/dxsp/commit/aa6a9a15474aaf0d10fa34e588d6363b534e5971))
+
+
 ## v4.2.3 (2023-08-03)
 
 ### Other
