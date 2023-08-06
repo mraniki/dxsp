@@ -2,6 +2,17 @@
 
 
 
+## v4.2.5 (2023-08-06)
+
+### Update
+
+* Update README.md ([`8d0fce5`](https://github.com/mraniki/dxsp/commit/8d0fce544ca42408605bb7fe3a444a98148addbb))
+
+* Update Requirements ([`f7a8e72`](https://github.com/mraniki/dxsp/commit/f7a8e726e1ca10d3f0fa96e35335b59aeb6660a3))
+
+* Update README.md ([`8eb506a`](https://github.com/mraniki/dxsp/commit/8eb506ae6d71430c59b9a5235e6153f09c4ca9b5))
+
+
 ## v4.2.4 (2023-08-04)
 
 ### :bug:
