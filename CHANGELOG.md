@@ -2,6 +2,19 @@
 
 
 
+## v4.2.6 (2023-08-06)
+
+### Other
+
+* Merge pull request #361 from mraniki/dev
+
+📝 intersphinx setup ([`d6c6418`](https://github.com/mraniki/dxsp/commit/d6c6418af5fd4541050b85c3a2acd4296f61b38b))
+
+### 📝
+
+* 📝 intersphinx setup ([`9f4ac88`](https://github.com/mraniki/dxsp/commit/9f4ac88368ac9be3661b61c8e1ef76dda1454463))
+
+
 ## v4.2.5 (2023-08-06)
 
 ### Update
