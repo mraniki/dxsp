@@ -15,14 +15,14 @@
       <a href="https://pypi.org/project/dxsp/"><img src="https://img.shields.io/pypi/v/dxsp?style=for-the-badge&logo=PyPI&logoColor=white"></a><br>
       <a href="https://pypi.org/project/dxsp/"><img src="https://img.shields.io/pypi/dm/dxsp?style=for-the-badge&logo=PyPI&logoColor=white&label=pypi&labelColor=grey"></a><br>
       <a href="https://github.com/mraniki/dxsp/"><img src="https://img.shields.io/github/actions/workflow/status/mraniki/dxsp/%F0%9F%91%B7Flow.yml?style=for-the-badge&logo=GitHub&logoColor=white"></a><br>
-   <a href="https://talky.readthedocs.io/projects/findmyorder/index.html"><img src="https://readthedocs.org/projects/dxsp/badge/?version=latest&style=for-the-badge"></a><br>
+   <a href="https://talky.readthedocs.io/projects/dxsp/"><img src="https://readthedocs.org/projects/dxsp/badge/?version=latest&style=for-the-badge"></a><br>
    <a href="https://codebeat.co/projects/github-com-mraniki-dxsp-main"><img src="https://codebeat.co/badges/b1376839-73bc-4b41-bfc1-2fb099f1fc2a"/></a><br>
    <a href="https://codecov.io/gh/mraniki/dxsp"><img src="https://codecov.io/gh/mraniki/dxsp/branch/main/graph/badge.svg?token=39ED0ZA6IH"/> </a><br>
   <a href="https://codeclimate.com/github/mraniki/dxsp/maintainability"><img src="https://api.codeclimate.com/v1/badges/ec80e827d5878e60ba12/maintainability" /></a>
     </td>
     <td align="left"> 
 Swap made easy<br>
-Trade on any blockchains with uniswap based router or 0x protocol.
+Trade on any blockchains <br>with uniswap based router or 0x protocol.
     </td> 
   </tr>
 </table>
@@ -38,7 +38,6 @@ Trade on any blockchains with uniswap based router or 0x protocol.
 </code>
 </pre>
 
-<h5>Example</h5>
 
-https://github.com/mraniki/dxsp/blob/822cc96df0878782ca059b6dbf44bd451ccd32fa/examples/example.py#L1-L68
-
+<h5>Documentation</h5>
+<a href="https://talky.readthedocs.io/projects/dxsp/"><img src="https://img.shields.io/badge/Documentation-000000?style=for-the-badge&logo=readthedocs&logoColor=white"></a><br>
