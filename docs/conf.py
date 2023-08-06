@@ -17,39 +17,42 @@ author = 'mraniki'
 
 # -- General configuration ---------------------------------------------------
 
-extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary',
-    'sphinx.ext.napoleon',
-    'sphinx.ext.viewcode',  
-    "sphinx.ext.intersphinx",
-    "hoverxref.extension",
-    "sphinx.ext.extlinks",
-]
-
 # -- Extension configuration ---------------------------------------------------
+
+# -- intersphinx ------------
 
 intersphinx_mapping = {
     "sphinx": ("https://www.sphinx-doc.org/en/master/", None),
     # - :doc:`sphinx:usage/extensions/intersphinx`
     "dynaconf": ("https://www.dynaconf.com", None),
     "python": ("https://docs.python.org/3", None),
-    "talky": ("https://talky.readthedocs.io/en/latest/", None),
+    "talky": ("https://talky.readthedocs.io/en/latest", None),
     "talky-dev": ("https://talky.readthedocs.io/en/dev/", None),
-    "findmyorder": ("https://talky.readthedocs.io/projects/findmyorder/en/latest", None),
+    "findmyorder": (
+        "https://talky.readthedocs.io/projects/findmyorder/en/latest", None),
     "dxsp": ("https://talky.readthedocs.io/projects/dxsp/en/latest", None),
-    "iamlistening": ("https://talky.readthedocs.io/projects/iamlistening/en/latest", None),
+    "iamlistening": (
+        "https://iamlistening.readthedocs.io/en/latest", None),
     "talkytrend": ("https://talky.readthedocs.io/projects/talkytrend/en/latest", None),
     "myllm": ("https://talky.readthedocs.io/projects/myllm/en/latest", None),
 }
 
-
 intersphinx_disabled_reftypes = ["*"]
+
+
+# -- hoverxref ----------------
 
 hoverxref_intersphinx = [
     'readthedocs',
     'sphinx',
     'python',
+    'talky',
+    'findmyorder',
+    'dxsp',
+    'iamlistening',
+    'talkytrend',
+    'myllm',
+
 ]
 napoleon_google_docstring = True
 autosummary_generate = True
