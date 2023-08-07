@@ -2,6 +2,19 @@
 
 
 
+## v4.2.10 (2023-08-07)
+
+### Other
+
+* Merge pull request #366 from mraniki/dev
+
+📝 conf update for intersphinx ([`341c5a8`](https://github.com/mraniki/dxsp/commit/341c5a86f478e5eb0769410a7267a75b6ab0f67c))
+
+### 📝
+
+* 📝 conf update for intersphinx ([`13618cc`](https://github.com/mraniki/dxsp/commit/13618cc890d5dac931ded0b823a18c335061af5c))
+
+
 ## v4.2.9 (2023-08-07)
 
 ### Other
