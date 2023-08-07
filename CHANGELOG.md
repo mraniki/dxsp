@@ -2,6 +2,47 @@
 
 
 
+## v4.2.7 (2023-08-07)
+
+### Fix
+
+* 📝 intersphinx fix ([`d8bdc3a`](https://github.com/mraniki/dxsp/commit/d8bdc3a1f24fb0e7d92ba40b98d9d39ce74087ef))
+
+* 📝  fix ([`0bece27`](https://github.com/mraniki/dxsp/commit/0bece27f5d80d572be295371ec06663e936e648c))
+
+### Other
+
+* Merge pull request #363 from mraniki/dev
+
+Update Requirements ([`a6986f8`](https://github.com/mraniki/dxsp/commit/a6986f8c0d90f914844ea6af7a01adc44dcebf79))
+
+* Merge branch &#39;main&#39; into dev ([`38cfab0`](https://github.com/mraniki/dxsp/commit/38cfab06dfcd5a264dc17f1a21ea66903463128c))
+
+* Merge branch &#39;main&#39; into dev ([`dda1582`](https://github.com/mraniki/dxsp/commit/dda15821b0f02ea985db730106d5d0e3b53094e9))
+
+* Merge pull request #362 from mraniki/dev
+
+📝  sphinx.ext.extlinks ([`0e8d0a5`](https://github.com/mraniki/dxsp/commit/0e8d0a5929d94019dcd877c92a082917a8c514ec))
+
+### Update
+
+* Update Requirements ([`1ff4e86`](https://github.com/mraniki/dxsp/commit/1ff4e8634a58619c6545c842969d36a6490d3b6f))
+
+* Update Requirements ([`4fc82a9`](https://github.com/mraniki/dxsp/commit/4fc82a98e69a61dd523c5140227e23f91e7410a9))
+
+* Update Requirements ([`f452490`](https://github.com/mraniki/dxsp/commit/f452490749d51c3ed7ba9de922011f5078802233))
+
+### 🎨
+
+* 🎨 improve docs with hovering ([`550c615`](https://github.com/mraniki/dxsp/commit/550c615fd1e2ac785ba9dd443643b5651a06bc2f))
+
+### 📝
+
+* 📝 updating docs template and sphinx ([`0f11cc0`](https://github.com/mraniki/dxsp/commit/0f11cc017ef0681f158f1a00c7c24fc06dd1487b))
+
+* 📝  sphinx.ext.extlinks ([`5decd0f`](https://github.com/mraniki/dxsp/commit/5decd0f0cd7f3d076dc63db7dbc80e00944f22d4))
+
+
 ## v4.2.6 (2023-08-06)
 
 ### Other
