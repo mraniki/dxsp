@@ -2,6 +2,17 @@
 
 
 
+## v4.2.9 (2023-08-07)
+
+### Other
+
+* Merge pull request #365 from mraniki/dev
+
+💬 readme update ([`fb351cd`](https://github.com/mraniki/dxsp/commit/fb351cd252d7151ee823402ad76c21b7e0465a8c))
+
+* Merge branch &#39;main&#39; into dev ([`736dba0`](https://github.com/mraniki/dxsp/commit/736dba0625d5db0cdc7bf0ab0f60cd65274dd073))
+
+
 ## v4.2.8 (2023-08-07)
 
 ### Other
@@ -9,6 +20,10 @@
 * Merge pull request #364 from mraniki/dev
 
 📝 logo ([`13cf29e`](https://github.com/mraniki/dxsp/commit/13cf29e5d5cc329f2df359a9805e795853d6792c))
+
+### 💬
+
+* 💬 readme update ([`ff8aaf0`](https://github.com/mraniki/dxsp/commit/ff8aaf05b6f4481c6b4d90946394538dacf5ccc3))
 
 ### 📝
 
