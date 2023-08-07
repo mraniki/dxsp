@@ -2,6 +2,19 @@
 
 
 
+## v4.2.8 (2023-08-07)
+
+### Other
+
+* Merge pull request #364 from mraniki/dev
+
+📝 logo ([`13cf29e`](https://github.com/mraniki/dxsp/commit/13cf29e5d5cc329f2df359a9805e795853d6792c))
+
+### 📝
+
+* 📝 logo ([`ca8efcd`](https://github.com/mraniki/dxsp/commit/ca8efcdcc736b21633288e194fca2378cf2d384e))
+
+
 ## v4.2.7 (2023-08-07)
 
 ### Fix
