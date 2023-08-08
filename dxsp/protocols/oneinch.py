@@ -7,12 +7,28 @@ from dxsp.main import DexSwap
 #https://github.com/mraniki/dxsp/issues/189 
 
 class DexSwapOneInch(DexSwap):
+    """ 
+    A DEXSwap sub class using 0x protocol
+    
+    """
     async def get_quote(
         self,
         buy_address,
         sell_address,
         amount=1
     ):
+        """
+        Retrieves a quote for the 
+        given buy and sell addresses and amount.
+
+        Args:
+            buy_address (str): The address of the token to buy.
+            sell_address (str): The address of the token to sell.
+            amount (int, optional): The amount of tokens to buy. Defaults to 1.
+
+        Returns:
+            float: The quote amount rounded to 2 decimal places.
+        """
         #try:
         pass
         #     min_amount = self.w3.to_wei(amount, 'ether')

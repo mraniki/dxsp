@@ -10,6 +10,16 @@ from dxsp.utils.utils import get
 
 
 async def get_explorer_abi(address):
+    """
+    Retrieves the ABI (Application Binary Interface)
+    for the contract at the given address.
+
+    :param address: The address of the contract.
+    :type address: str
+
+    :return: The ABI of the contract if it exists, else None.
+    :rtype: str or None
+    """
     if not settings.dex_block_explorer_api:
         return None
 
@@ -31,6 +41,16 @@ async def get_account_transactions(
     Retrieves the account transactions 
     within a specified time period
     for the main asset activity
+    Not yet implemented
+
+    :param contract_address: The address of the contract.
+    :type contract_address: str
+    :param wallet_address: The address of the wallet.
+    :type wallet_address: str
+    :param period: The time period in hours
+    :type period: int
+
+    :return: The transactions for the account.
     """
     pnl_dict = {"pnl": 0, "tokenList": {}}
     if not settings.dex_block_explorer_api:

@@ -27,7 +27,11 @@ class DexSwap:
     
     """
     def __init__(self, w3: Optional[Web3] = None):
-        # self.logger = logging.getLogger(name="DexSwap")
+        """ 
+        Initialize the DexSwap object to interact with
+        w3 contracts.
+
+        """
         self.logger = logger
         self.w3 = w3 or Web3(Web3.HTTPProvider(settings.dex_rpc))
         if not self.w3.net.listening:

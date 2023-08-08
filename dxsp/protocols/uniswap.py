@@ -17,6 +17,17 @@ class DexSwapUniswap(DexSwap):
         sell_address,
         amount=1
     ):
+        """
+        Retrieves a quote for the given buy and sell addresses.
+
+        Args:
+            buy_address (str): The address of the token to buy.
+            sell_address (str): The address of the token to sell.
+            amount (int, optional): The amount of tokens to sell. Defaults to 1.
+
+        Returns:
+            float: The calculated quote for the given buy and sell addresses.
+        """
         try:
             uniswap = Uniswap(
                 address=self.account.wallet_address,
@@ -39,6 +50,20 @@ class DexSwapUniswap(DexSwap):
             raise ValueError(f"Quote failed {error}") 
 
     async def get_swap(self, sell_address, buy_address, amount):
+        """
+        Asynchronously gets the swap 
+        for the specified sell address, buy address, and amount.
+
+        :param sell_address: The address of the token being sold.
+        :type sell_address: str
+        :param buy_address: The address of the token being bought.
+        :type buy_address: str
+        :param amount: The amount of tokens to be swapped.
+        :type amount: int
+        :return: The result of the swap.
+        :rtype: Any
+        :raises ValueError: If the swap fails.
+        """
         try:
             uniswap = Uniswap(
                         address=self.account.wallet_address,

@@ -8,7 +8,22 @@ import requests
 
 
 async def get(url, params=None, headers=None):
-    """ gets a url payload """
+    """
+    Asynchronously gets a url payload 
+    and returns the response
+
+    Args:
+        url (str): The url to get
+        params (dict, optional): The params to send. Defaults to None.
+        headers (dict, optional): The headers to send. Defaults to None.
+
+    Returns:
+        dict: The response
+
+    Raises:
+        Exception: Error
+
+    """
     try:
         response = requests.get(
             url, params=params, headers=headers, timeout=10)
