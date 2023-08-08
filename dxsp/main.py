@@ -14,9 +14,24 @@ from dxsp.utils import AccountUtils, ContractUtils
 
 
 class DexSwap:
-    """swap  class"""
+    """
+    DEXswap  class to build a DexSwap Object 
+    use to interact with the dex protocol
+    
+    Args:
+        w3 (Optional[Web3]): Web3
+    
+    Returns:
+        DexSwap
+
+    
+    """
     def __init__(self, w3: Optional[Web3] = None):
-        # self.logger = logging.getLogger(name="DexSwap")
+        """ 
+        Initialize the DexSwap object to interact with
+        w3 contracts.
+
+        """
         self.logger = logger
         self.w3 = w3 or Web3(Web3.HTTPProvider(settings.dex_rpc))
         if not self.w3.net.listening:
@@ -33,7 +48,19 @@ class DexSwap:
         self.contract_utils = ContractUtils(w3=self.w3)
 
     async def get_protocol(self):
-        """ protocol init """
+        """ 
+        Set the dex_swap object based 
+        on the protocol type.
+        Currently supports:
+            1inch: currently blocked
+            0x
+            Uniswap V2 and V3
+
+        Returns:
+            dex_swap
+
+        
+        """
         from dxsp.protocols import DexSwapOneInch, DexSwapUniswap, DexSwapZeroX
         if self.protocol_type == "0x":
             self.dex_swap = DexSwapZeroX()
@@ -43,7 +70,16 @@ class DexSwap:
             self.dex_swap = DexSwapUniswap()
 
     async def execute_order(self, order_params):
-        """ Execute an order function. """
+        """ 
+        Execute an order function.
+
+        Args:
+            order_params (dict): The order parameters.
+
+        Returns:
+            str: The trade confirmation
+
+        """
         try:
             action = order_params.get('action')
             instrument = order_params.get('instrument')
@@ -63,7 +99,19 @@ class DexSwap:
             return f"⚠️ order execution: {error}"
 
     async def get_swap(self, sell_token: str, buy_token: str, quantity: int) -> None:
-        """ Execute a swap  """
+        """ 
+        Execute a swap  
+        
+        Args:
+            sell_token (str): The sell token.
+            buy_token (str): The buy token.
+            quantity (int): The quantity of tokens.
+
+        Returns:
+            transactionHash
+
+        
+        """
         try:
             print("get_swap", quantity)
             await self.get_protocol()
@@ -107,7 +155,16 @@ class DexSwap:
             raise error
 
     async def get_quote(self, sell_token):
-        """ gets a quote for a token """
+        """ 
+        gets a quote for a token 
+        
+        Args:
+            sell_token (str): The sell token.
+
+        Returns:
+            str: The quote with the trading symbol
+        
+        """
         try:
             await self.get_protocol()
             buy_address = self.account.trading_asset_address
@@ -122,10 +179,23 @@ class DexSwap:
             return f"⚠️: {error}"
 
 # 🔒 USER RELATED
+
     async def get_info(self):
+        """
+        Get information from the account.
+
+        :return: The information retrieved from the account.
+        """
         return await self.account.get_info()
 
     async def get_help(self):
+        """
+        Retrieves help information 
+        using the `account.get_help()` method.
+
+        :return: The help information.
+        :rtype: Any
+        """
         return await self.account.get_help()
 
     async def get_name(self):

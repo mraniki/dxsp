@@ -19,6 +19,30 @@ from dxsp.utils.utils import get
 
 class ContractUtils:
 
+    """ 
+    ContractUtils class to interact with w3 contracts
+    and with coingecko API
+
+    Args:
+        w3 (Optional[Web3]): Web3
+
+    Methods:
+        search_contract_address(self, token)
+        search_cg_platform(self)
+        search_cg(self, token)
+        search_cg_contract(token)
+        get_token_address(self, contract_list, token)
+        get_token_contract(self, token)
+        get_token_decimals(self, token_address)
+        get_token_symbol(self, token_address)
+        get_token_name(self, token_address)
+        get_token_balance(self, token_address)
+        calculate_sell_amount(self,
+            sell_token_address, wallet_address, quantity)
+        get_confirmation(self, tx_hash)
+    
+    """
+
     def __init__(self, w3: Optional[Web3] = None):
         self.logger = logging.getLogger(name="DexSwap")
         self.w3 = w3
