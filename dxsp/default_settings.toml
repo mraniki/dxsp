@@ -13,255 +13,73 @@
 # dxsp_enabled = false
 
 [default]
+# Dynaconf settings verification
 VALUE = "On default"
+
+# Module Enable/Disable
 dxsp_enabled = true
+
+# help message listing the commands
+# available
 dxsp_commands = "🎯 BUY WBTC\n🎯 /q WBTC\n 🏦 /bal\n 🏦 /pos\n"
-loglevel = "INFO"
+
+# Your public wallet address
 dex_wallet_address = "0x1234567890123456789012345678901234567890"
-dex_private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266" 
+# Your private wallet key
+dex_private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
+
+# Protocol used option are uniswap, 0x and 1inch
 dex_protocol_type = "uniswap"
+# Version of the protocol
 dex_protocol_version = 2
+
+# RPC connectivity
 dex_rpc = "https://rpc.ankr.com/eth"
+
+# 0x API required only if
+# dex_protocol_type = "0x"
 dex_0x_url = "https://api.0x.org/mainnet"
 dex_0x_api_key = "" 
+
+# DEX router address to use
 dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+# DEX ABI to use in case you have no explorer setup
 dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
+# DEX factory address to use
 dex_factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
+# DEX ABI to use in case you have no explorer setup
 dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
+
+# Block Explorer API for ABI search 
 dex_block_explorer_url = "https://api.etherscan.io/api?"
 dex_block_explorer_api =  "798437294880920392"
 headers = {User-Agent= 'Mozilla/5.0'}
+
+# token list using uniswap tokenlist format
+# https://github.com/mraniki/tokenlist
+# this can be used to avoid using coingecko
+# or be used for niche token not listed anywhere
+# or for testnet
 token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
+
+# Address of your trading asset for your trading - USDT
 trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-trading_risk_amount = 10 # 10% of the position
-dex_trading_slippage = 2 # 2% slippage
+
+# Trading % of your position to risk per order
+# 10 = 10% of the position
+trading_risk_amount = 10
+
+# Slippage %
+# 2 = 2% slippage
+dex_trading_slippage = 2
+
+# Toggle to remove notification if 
+# a token doesn't exist in the token list
+# or in coingecko
 dex_notify_invalid_token = true
-
-
-
 
 ########################################
 ###     END OF DEFAULT SETTINGS      ###
 ########################################
-
-
-
-
-                                        
-# _   _                           _   ___  
-#| | | |                         | | |__ \ 
-#| |_| |__   ___    ___ _ __   __| |    )|
-#| __| '_ \ / _ \  / _ \ '_ \ / _` |   / / 
-#| |_| | | |  __/ |  __/ | | | (_| |  |_|  
-# \__|_| |_|\___|  \___|_| |_|\__,_|  (_)  
-########################################                                                                                      
-
-
-
-
-
-
-########################################
-###         TESTING SETTINGS         ###
-########################################
-
-
-##############
-## SETTINGS ##
-## FOR TEST ##
-##############
-[uniswap]
-VALUE = "On Testing"
-dxsp_enabled = true
-dxsp_commands = "🎯 BUY WBTC\n🎯 /q WBTC\n 🏦 /bal\n 🏦 /pos\n"
-loglevel = "DEBUG"
-dex_wallet_address = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC" 
-dex_private_key = "0xdeadbeet45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266" 
-dex_protocol_type = "uniswap"
-dex_protocol_version = 2
-dex_rpc = "https://rpc.ankr.com/eth"
-dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
-dex_factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
-dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
-dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
-trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-trading_risk_amount = 10 
-dex_trading_slippage = 2
-dex_notify_invalid_token = true
-headers = {User-Agent= 'Mozilla/5.0'}
-token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
-token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
-token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
-
-[zerox]
-VALUE = "test_zerox"
-loglevel = "DEBUG"
-dxsp_enabled = true
-dxsp_commands = "🎯 BUY WBTC\n🎯 /q WBTC\n 🏦 /bal\n 🏦 /pos\n"
-dex_wallet_address = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC" 
-dex_private_key = "0xdeadbeet45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266" 
-dex_protocol_type = "0x"
-dex_protocol_version = 2
-dex_rpc = "https://rpc.ankr.com/eth"
-dex_0x_url = "https://api.0x.org/"
-dex_0x_api_key = "123" 
-dex_router_contract_addr = "0xdef1c0ded9bec7f1a1670819833240f027b25eff"
-dex_factory_contract_addr = ""
-dex_router_abi_url = "https://raw.githubusercontent.com/0xProject/protocol/development/packages/contract-artifacts/artifacts/Exchange.json"
-dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
-trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-trading_risk_amount = 10
-dex_trading_slippage = 2
-dex_notify_invalid_token = true
-headers = {User-Agent= 'Mozilla/5.0'}
-token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
-token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
-token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
-
-
-[testnet]
-VALUE = "On Testnet"
-loglevel = "DEBUG"
-dxsp_enabled = true
-dxsp_commands = "🎯 BUY WBTC\n🎯 /q WBTC\n 🏦 /bal\n 🏦 /pos\n"
-dex_wallet_address = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC" 
-dex_private_key = "0xdeadbeet45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266" 
-dex_protocol_type = "uniswap"
-dex_protocol_version = 2
-dex_rpc = "https://rpc.ankr.com/eth_goerli"
-dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
-dex_factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
-dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
-dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
-trading_asset_address = "0xa3726f2e6423caF1824cD7721B543B29b621fB4f"
-trading_risk_amount = 10
-dex_trading_slippage = 2
-dex_notify_invalid_token = true
-headers = {User-Agent= 'Mozilla/5.0'}
-token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
-token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
-token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
-
-
-[bsc]
-VALUE = "chain_56"
-dxsp_enabled = true
-dxsp_commands = "🎯 BUY WBTC\n🎯 /q WBTC\n 🏦 /bal\n 🏦 /pos\n"
-dex_wallet_address = "0xf977814e90da44bfa03b6295a0616a897441acec"
-dex_private_key = "0xdeadbeet45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266" 
-dex_protocol_type = "uniswap"
-dex_protocol_version = 2
-dex_rpc = "https://rpc.ankr.com/bsc"
-dex_router_contract_addr = "0x10ED43C718714eb63d5aA57B78B54704E256024E"
-dex_factory_contract_addr = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"
-trading_asset_address = "0xe9e7cea3dedca5984780bafc599bd69add087d56"
-trading_risk_amount = 10 
-dex_trading_slippage = 2
-dex_notify_invalid_token = false
-headers = {User-Agent= 'Mozilla/5.0'}
-token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
-token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
-token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
-
-
-[uniswapv3]
-VALUE = "On uniswap3"
-dxsp_enabled = true
-dxsp_commands = "🎯 BUY WBTC\n🎯 /q WBTC\n 🏦 /bal\n 🏦 /pos\n"
-loglevel = "DEBUG"
-dex_wallet_address = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC" 
-dex_private_key = "0xdeadbeet45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266" 
-dex_protocol_type = "uniswap"
-dex_protocol_version = 3
-dex_rpc = "https://rpc.ankr.com/eth"
-dex_router_contract_addr = "0x1F98431c8aD98523631AE4a59f267346ea31F984"
-dex_factory_contract_addr = "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45"
-dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
-dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
-trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-trading_risk_amount = 10 
-dex_trading_slippage = 2
-dex_notify_invalid_token = true
-headers = {User-Agent= 'Mozilla/5.0'}
-token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
-token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
-token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
-
-
-[pancake3]
-VALUE = "On pancake3"
-dxsp_enabled = true
-dxsp_commands = "🎯 BUY WBTC\n🎯 /q WBTC\n 🏦 /bal\n 🏦 /pos\n"
-loglevel = "DEBUG"
-dex_wallet_address = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC" 
-dex_private_key = "0xdeadbeet45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266" 
-dex_protocol_type = "uniswap"
-dex_protocol_version = 3
-dex_rpc = "https://rpc.ankr.com/bsc"
-dex_router_contract_addr = "0x1F98431c8aD98523631AE4a59f267346ea31F984"
-dex_factory_contract_addr = "0x13f4EA83D0bd40E75C8222255bc855a974568Dd4"
-dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
-dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
-trading_asset_address = "0xe9e7cea3dedca5984780bafc599bd69add087d56"
-trading_risk_amount = 10 
-dex_trading_slippage = 2
-dex_notify_invalid_token = true
-headers = {User-Agent= 'Mozilla/5.0'}
-token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
-token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
-token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
-
-
- 
-# [oneinch]
-# VALUE = "1inchtesting"
-# loglevel = "DEBUG"
-# dxsp_enabled = true
-# headers = {User-Agent= 'Mozilla/5.0'}
-# token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/all.json"
-# token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
-# token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
-# trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-# trading_risk_amount = 10 # 10% of the position
-# dex_trading_slippage = 2 # 2 % slippage
-# dex_wallet_address = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC" 
-# dex_private_key = "0xdeadbeet45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266" 
-# dex_chain_id = 1
-# dex_rpc = "https://rpc.ankr.com/eth"
-# dex_protocol_type = "1inch"
-# dex_1inch_url = "https://api.1inch.exchange/v5.0/"
-# dex_1inch_limit_url = "https://limit-orders.1inch.io/v3.0/"
-# dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D" #UNI_V2
-# dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
-# dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
-
-# [sepolia]
-# VALUE = "SEPOLIA"
-# loglevel = "DEBUG"
-# dxsp_enabled = true
-# dex_chain_id = 11155111
-# dex_rpc = "https://rpc.ankr.com/eth_sepolia"
-# dex_block_explorer_url = "https://api-Sepolia.etherscan.io/api?"
-# dex_protocol_type = "0x"
-# dex_router_contract_addr = "0x1f98431c8ad98523631ae4a59f267346ea31f984"
-# dex_0x_url = "https://sepolia.api.0x.org/"
-
-# [bsctesnet]
-# VALUE = "DEX chain_97"
-# loglevel = "DEBUG"
-# dxsp_enabled = true
-# dex_chain_id = 97
-# dex_rpc = "https://rpc.ankr.com/bsc_testnet_chapel"
-# dex_block_explorer_url = "https://api-testnet.bscscan.com/api?"
-# dex_router_contract_addr = ""
-
-# [arbitrum]
-# VALUE = "DEX chain_42161"
-# loglevel = "DEBUG"
-# dex_chain_id = 42161
-# dex_rpc = "https://rpc.ankr.com/arbitrum"
-# dex_block_explorer_url = "https://api-testnet.bscscan.com/api?"
-# dex_router_contract_addr = "0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f"
-# dex_0x_url = "https://arbitrum.api.0x.org/"

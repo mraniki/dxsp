@@ -1,6 +1,8 @@
 """
  DEXSWAP Unit Test
 """
+from unittest.mock import AsyncMock, patch
+
 import pytest
 
 from dxsp import DexSwap
@@ -16,14 +18,16 @@ def set_test_settings():
 def DexSwap_fixture():
     return DexSwap()
 
+
 @pytest.fixture(name="order")
 def order_params_fixture():
     """Return order parameters."""
     return {
-        'action': 'BUY',
-        'instrument': 'WBTC',
-        'quantity': 1,
+        "action": "BUY",
+        "instrument": "WBTC",
+        "quantity": 1,
     }
+
 
 def test_dynaconf_is_in_testing():
     print(settings.VALUE)
@@ -42,10 +46,11 @@ async def test_dex(dex):
 @pytest.mark.asyncio
 async def test_get_quote(dex):
     result = await dex.get_quote("UNI")
-    print("0x quote: ",result)
-    assert dex.w3.net.version == '1'
+    print("0x quote: ", result)
+    assert dex.w3.net.version == "1"
     assert result is not None
     assert result.startswith("🦄")
+
 
 
 @pytest.mark.asyncio
