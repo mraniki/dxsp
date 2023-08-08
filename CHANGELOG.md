@@ -2,6 +2,23 @@
 
 
 
+## v4.2.11 (2023-08-08)
+
+### Other
+
+* Merge pull request #367 from mraniki/dev
+
+📝 🔧  settings documentation ([`b3ec6b5`](https://github.com/mraniki/dxsp/commit/b3ec6b5d3f20219d861720b5b53aa60f4a37db3e))
+
+### 📝
+
+* 📝 Docstring update ([`a0f1a8a`](https://github.com/mraniki/dxsp/commit/a0f1a8aacd1ad70921ef15c82cc7e0d4765a0f54))
+
+### 🔧
+
+* 📝 🔧  settings documentation ([`661a7e4`](https://github.com/mraniki/dxsp/commit/661a7e4c777fd98363bf0d01de29f380069d00c4))
+
+
 ## v4.2.10 (2023-08-07)
 
 ### Other
