@@ -53,7 +53,9 @@ class DexSwap:
         on the protocol type.
         Currently supports:
             1inch: currently blocked
+            
             0x
+            
             Uniswap V2 and V3
 
         Returns:
@@ -81,6 +83,7 @@ class DexSwap:
 
         """
         try:
+            self.logger.debug("execute order")
             action = order_params.get('action')
             instrument = order_params.get('instrument')
             quantity = order_params.get('quantity', 1)
@@ -113,7 +116,7 @@ class DexSwap:
         
         """
         try:
-            print("get_swap", quantity)
+            self.logger.debug("get swap")
             await self.get_protocol()
             sell_token_address = sell_token
             if not sell_token.startswith("0x"):
@@ -151,7 +154,8 @@ class DexSwap:
             return await self.contract_utils.get_confirmation(
                 receipt['transactionHash'])
 
-        except ValueError as error:
+        except Exception as error:
+            self.logger.debug(error)
             raise error
 
     async def get_quote(self, sell_token):
