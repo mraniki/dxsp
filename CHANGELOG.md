@@ -2,6 +2,17 @@
 
 
 
+## v4.2.14 (2023-08-10)
+
+### Other
+
+* Merge pull request #371 from mraniki/dependabot/pip/ruff-gte-0.0.283-and-lt-0.0.285
+
+⬆️ Dep: Update ruff requirement from ^0.0.283 to &gt;=0.0.283,&lt;0.0.285 ([`1fbcb70`](https://github.com/mraniki/dxsp/commit/1fbcb7067c6cfbe07e91bbcb5395cd3aee620d2b))
+
+* Merge branch &#39;main&#39; into dependabot/pip/ruff-gte-0.0.283-and-lt-0.0.285 ([`71a3f49`](https://github.com/mraniki/dxsp/commit/71a3f49ecb291ee471d5cf35187e06b285ca8eac))
+
+
 ## v4.2.13 (2023-08-10)
 
 ### Other
@@ -12,7 +23,24 @@
 
 ### Update
 
+* Update Requirements ([`d1147d1`](https://github.com/mraniki/dxsp/commit/d1147d1caea0a3560b04926388af8ef9235c7f94))
+
 * Update Requirements ([`5f73ee8`](https://github.com/mraniki/dxsp/commit/5f73ee89525dccf5be0bcf4f8e0e601483b6010f))
+
+* :arrow_up: Dep: Update ruff requirement
+
+Updates the requirements on [ruff](https://github.com/astral-sh/ruff) to permit the latest version.
+- [Release notes](https://github.com/astral-sh/ruff/releases)
+- [Changelog](https://github.com/astral-sh/ruff/blob/main/BREAKING_CHANGES.md)
+- [Commits](https://github.com/astral-sh/ruff/compare/v0.0.283...v0.0.284)
+
+---
+updated-dependencies:
+- dependency-name: ruff
+  dependency-type: direct:development
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`f6d5532`](https://github.com/mraniki/dxsp/commit/f6d5532af127dc8ac1aefce8a48066cca61f5541))
 
 ### ⬆️
 
