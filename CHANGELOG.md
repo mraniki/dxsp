@@ -2,15 +2,38 @@
 
 
 
+## v4.2.15 (2023-08-10)
+
+### :bug:
+
+* :bug: exception handling ([`0db5afa`](https://github.com/mraniki/dxsp/commit/0db5afad11eeefb68d93538460428b3fcedca6d0))
+
+### Other
+
+* Merge pull request #372 from mraniki/dev
+
+🐛 exception handling ([`81077bc`](https://github.com/mraniki/dxsp/commit/81077bc0c46c0ff3bf216bdcd265fe9faed85147))
+
+* Merge branch &#39;main&#39; into dev ([`cbc2116`](https://github.com/mraniki/dxsp/commit/cbc21163c752325de374c8913f6f71fa24f85981))
+
+### Update
+
+* Update Requirements ([`e5ac595`](https://github.com/mraniki/dxsp/commit/e5ac59564562029706f5477d68855e40c66ec523))
+
+
 ## v4.2.14 (2023-08-10)
 
 ### Other
+
+* Merge branch &#39;main&#39; into dev ([`590c8f2`](https://github.com/mraniki/dxsp/commit/590c8f292afadf3d30e2832e83f29b64a31c506a))
 
 * Merge pull request #371 from mraniki/dependabot/pip/ruff-gte-0.0.283-and-lt-0.0.285
 
 ⬆️ Dep: Update ruff requirement from ^0.0.283 to &gt;=0.0.283,&lt;0.0.285 ([`1fbcb70`](https://github.com/mraniki/dxsp/commit/1fbcb7067c6cfbe07e91bbcb5395cd3aee620d2b))
 
 * Merge branch &#39;main&#39; into dependabot/pip/ruff-gte-0.0.283-and-lt-0.0.285 ([`71a3f49`](https://github.com/mraniki/dxsp/commit/71a3f49ecb291ee471d5cf35187e06b285ca8eac))
+
+* Merge branch &#39;main&#39; into dev ([`91515e3`](https://github.com/mraniki/dxsp/commit/91515e3295c149e1c55e7d15f0f09951fc76e28f))
 
 
 ## v4.2.13 (2023-08-10)
@@ -20,6 +43,8 @@
 * Merge pull request #370 from mraniki/renovate/ruff-0.x
 
 ⬆️(deps): update dependency ruff to ^0.0.284 ([`eacfd2c`](https://github.com/mraniki/dxsp/commit/eacfd2ca383fdcd02910b59bfd80609db9e8cc20))
+
+* Merge branch &#39;main&#39; into dev ([`bf9509f`](https://github.com/mraniki/dxsp/commit/bf9509f96d5b30dc4446b248d6d70a9780522e9e))
 
 ### Update
 
@@ -46,8 +71,16 @@ Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`f6d5532`](https://g
 
 * ⬆️(deps): update dependency ruff to ^0.0.284 ([`ed20482`](https://github.com/mraniki/dxsp/commit/ed2048226698ece51e3c90bd83984e0d0e35af87))
 
+### 👷
+
+* 👷 CI Change ([`87595fe`](https://github.com/mraniki/dxsp/commit/87595fe1edd1f2d0b3e7687ca3cd66b98834e428))
+
 
 ## v4.2.12 (2023-08-09)
+
+### :memo:
+
+* :memo:  doc update ([`1b64b86`](https://github.com/mraniki/dxsp/commit/1b64b869866e7b5280752bd390fd6a552a94cdca))
 
 ### Other
 
