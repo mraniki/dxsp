@@ -5,7 +5,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "dxsp"
-version = "4.2.12"
+version = "4.2.13"
 description = "DXSP (DeX SwaP), A defi swap helper package. Swap made easy."
 authors = ["mraniki <8766259+mraniki@users.noreply.github.com>"]
 license = "MIT License"
@@ -31,7 +31,7 @@ uniswap-python = "^0.7.0"
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = "^8.0.2"
-ruff = "^0.0.283"
+ruff = "^0.0.284"
 
 
   
@@ -48,6 +48,7 @@ exclude = [
 ignore = ["F401"]
 format = "github"
 fixable = ["ALL"]
+
 
 
 
@@ -79,6 +80,7 @@ omit = [
     "docs/*",
     "*/config.py"
 ]
+
 
 
 
