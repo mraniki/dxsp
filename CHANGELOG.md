@@ -2,6 +2,23 @@
 
 
 
+## v4.2.13 (2023-08-10)
+
+### Other
+
+* Merge pull request #370 from mraniki/renovate/ruff-0.x
+
+⬆️(deps): update dependency ruff to ^0.0.284 ([`eacfd2c`](https://github.com/mraniki/dxsp/commit/eacfd2ca383fdcd02910b59bfd80609db9e8cc20))
+
+### Update
+
+* Update Requirements ([`5f73ee8`](https://github.com/mraniki/dxsp/commit/5f73ee89525dccf5be0bcf4f8e0e601483b6010f))
+
+### ⬆️
+
+* ⬆️(deps): update dependency ruff to ^0.0.284 ([`ed20482`](https://github.com/mraniki/dxsp/commit/ed2048226698ece51e3c90bd83984e0d0e35af87))
+
+
 ## v4.2.12 (2023-08-09)
 
 ### Other
