@@ -2,6 +2,19 @@
 
 
 
+## v4.2.18 (2023-08-11)
+
+### :bug:
+
+* :bug: ([`ab03c55`](https://github.com/mraniki/dxsp/commit/ab03c55500e28b4843ce3167917297def9c3783f))
+
+### Other
+
+* Merge pull request #375 from mraniki/dev
+
+:bug: ([`2e2d03f`](https://github.com/mraniki/dxsp/commit/2e2d03f5f00c6ad5fa9f1e277b5461d0d0ae12ed))
+
+
 ## v4.2.17 (2023-08-11)
 
 ### Other
