@@ -51,7 +51,7 @@ class ContractUtils:
     async def search_contract_address(self, token):
         """search a contract function"""
         try:
-            self.logger.debug("checking tokenlist")
+            self.logger.debug("Searching Token Address")
             contract_lists = [
                 settings.token_personal_list,
                 settings.token_testnet_list,
@@ -59,20 +59,19 @@ class ContractUtils:
             ]
             for contract_list in contract_lists:
                 token_address = await self.get_token_address(contract_list, token)
-                self.logger.debug("token_address {}", token_address)
+                self.logger.debug("Searching Locally {}", token_address)
                 if token_address is not None:
                     return self.w3.to_checksum_address(token_address)
 
-            self.logger.debug("checking coingecko")
+            self.logger.debug("Searching on Coingecko")
             token_address = await self.search_cg_contract(token)
             if token_address is None:
-                if settings.dex_notify_invalid_token:
-                    self.logger.error("search_contract_address Invalid Token")
-                    raise ValueError("Invalid Token")
-                return
+                self.logger.warning("Invalid Token")
+                raise ValueError("Invalid Token")
             return self.w3.to_checksum_address(token_address)
         except Exception as e:
-            self.logger.error(" search_contract_address: {}", e)
+            self.logger.error(": {}", e)
+            raise ValueError("Invalid Token")
 
     async def search_cg_platform(self):
         """search coingecko platform"""
@@ -105,6 +104,7 @@ class ContractUtils:
     async def search_cg_contract(self, token):
         """search coingecko contract"""
         try:
+            self.logger.debug("coingecko search for {}", token)
             coin_info = await self.search_cg(token)
             return (
                 coin_info["platforms"][f"{await self.search_cg_platform()}"]
@@ -117,14 +117,18 @@ class ContractUtils:
 
     async def get_token_address(self, token_list_url, symbol):
         """Given a token symbol and json tokenlist, get token address"""
-        token_list = await get(token_list_url)
-        token_search = token_list["tokens"]
-        for keyval in token_search:
-            if keyval["symbol"] == symbol and keyval["chainId"] == int(
-                self.w3.net.version
-            ):
-                self.logger.debug("token identified")
-                return keyval["address"]
+        try:
+            token_list = await get(token_list_url)
+            token_search = token_list["tokens"]
+            for keyval in token_search:
+                if keyval["symbol"] == symbol and keyval["chainId"] == int(
+                    self.w3.net.version
+                ):
+                    self.logger.debug("token identified")
+                    return keyval["address"]
+        except Exception as e:
+            self.logger.error("get_token_address: {}", e)
+            return
 
     async def get_token_contract(self, token_address):
         """Given a token address, returns a contract object."""
