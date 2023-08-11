@@ -58,7 +58,7 @@ class ContractUtils:
         The token list can be modified for your needs.
         The list are defined in settings. Default settings
         are using list under https://github.com/mraniki/tokenlist
-        
+
         Args:
             token (str): The token address
 
@@ -78,11 +78,18 @@ class ContractUtils:
             ]
             for contract_list in contract_lists:
                 self.logger.debug("Searching {} on {}", token, contract_list)
-                token_address = await self.get_token_address(contract_list, token)
-                if token_address is not None:
-                    self.logger.debug("Found {} on {}", token_address, contract_list)
-                    return self.w3.to_checksum_address(token_address)
-
+                try:
+                    token_address = await self.get_token_address(contract_list, token)
+                    if token_address is not None:
+                        self.logger.debug(
+                            "Found {} on {}", token_address, contract_list
+                        )
+                        found_token_address = token_address
+                        break
+                except ValueError:
+                    pass
+            if found_token_address is not None:
+                return self.w3.to_checksum_address(token_address)
             self.logger.debug("Searching on Coingecko")
             token_address = await self.search_cg_contract(token)
             if token_address is None:
@@ -97,10 +104,10 @@ class ContractUtils:
     async def search_cg_platform(self):
         """
         Search coingecko platform
-        
+
         Returns:
             str: The platform
-        
+
         """
         asset_platforms = self.cg.get_asset_platforms()
         output_dict = next(
@@ -122,7 +129,7 @@ class ContractUtils:
         Returns:
             str: The token dictionary for the platform
 
-        
+
         """
         try:
             search_results = self.cg.search(query=token)
@@ -162,16 +169,16 @@ class ContractUtils:
 
     async def get_token_address(self, token_list_url, symbol):
         """
-        
+
         Given a token symbol and json tokenlist, get token address
-        
+
         Args:
             token_list_url (str): The token list url
             symbol (str): The token symbol
 
         Returns:
             str: The token address
-        
+
         """
         try:
             self.logger.debug("Token address search in {}", token_list_url)
@@ -183,37 +190,84 @@ class ContractUtils:
                 ):
                     self.logger.debug("token identified")
                     return keyval["address"]
+            raise ValueError("Token not found")
         except Exception as e:
             self.logger.error("get_token_address: {}", e)
             return None
 
     async def get_token_contract(self, token_address):
-        """Given a token address, returns a contract object."""
+        """
+        Given a token address, returns a contract object.
+
+        Args:
+            token_address (str): The token address
+
+        Returns:
+            Contract: The token contract
+
+        """
         token_abi = await get_explorer_abi(token_address)
         if token_abi is None:
             token_abi = await get(settings.dex_erc20_abi_url)
         return self.w3.eth.contract(address=token_address, abi=token_abi)
 
     async def get_token_decimals(self, token_address: str) -> Optional[int]:
-        """Get token decimals"""
+        """
+        Get token decimals
+
+        Args:
+            token_address (str): The token address
+
+        Returns:
+            int: The token decimals
+
+        """
         contract = await self.get_token_contract(token_address)
         return 18 if not contract else contract.functions.decimals().call()
 
     async def get_token_symbol(self, token_address: str):
-        """Get token symbol"""
+        """
+        Get token symbol
+
+        Args:
+            token_address (str): The token address
+
+        Returns:
+            str: The token symbol
+
+        """
         contract = await self.get_token_contract(token_address)
         # token_name = contract.functions.name().call()
         return contract.functions.symbol().call()
 
     async def get_token_name(self, token_address: str):
-        """Get token symbol"""
+        """
+        Get token symbol
+
+        Args:
+            token_address (str): The token address
+
+        Returns:
+            str: The token name
+
+        """
         contract = await self.get_token_contract(token_address)
         return contract.functions.name().call()
 
     async def get_token_balance(
         self, token_address: str, wallet_address: str
     ) -> Optional[int]:
-        """Get token balance"""
+        """
+        Get token balance
+
+        Args:
+            token_address (str): The token address
+            wallet_address (str): The wallet address
+
+        Returns:
+            int: The token balance
+
+        """
         contract = await self.get_token_contract(token_address)
         if contract is None or contract.functions is None:
             raise ValueError("No Balance")
@@ -223,7 +277,18 @@ class ContractUtils:
         return round(self.w3.from_wei(balance, "ether"), 5) or 0
 
     async def calculate_sell_amount(self, sell_token_address, wallet_address, quantity):
-        """Returns amount based on risk percentage."""
+        """
+        Returns amount based on risk percentage.
+
+        Args:
+            sell_token_address (str): The sell token address
+            wallet_address (str): The wallet address
+            quantity (int): The quantity
+
+        Returns:
+            float: The sell amount
+
+        """
         sell_balance = await self.get_token_balance(sell_token_address, wallet_address)
         sell_contract = await self.get_token_contract(sell_token_address)
         sell_decimals = (
@@ -237,7 +302,20 @@ class ContractUtils:
         )
 
     async def get_confirmation(self, transactionHash):
-        """Returns trade confirmation."""
+        """
+
+        Returns trade confirmation.
+
+        Args:
+            transactionHash (str): The transaction hash
+
+        Returns:
+            dict: The trade confirmation
+
+        Raises:
+            Exception: Error
+
+        """
         try:
             transaction = self.w3.eth.get_transaction(transactionHash)
             block_info = self.w3.eth.get_block(transaction["blockNumber"])

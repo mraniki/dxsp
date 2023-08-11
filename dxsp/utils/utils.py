@@ -1,17 +1,15 @@
-
 """
  DEX SWAP
 🛠️ W3 UTILS
 """
 
 import requests
-
 from loguru import logger
 
 
 async def get(url, params=None, headers=None):
     """
-    Asynchronously gets a url payload 
+    Asynchronously gets a url payload
     and returns the response
 
     Args:
@@ -27,8 +25,7 @@ async def get(url, params=None, headers=None):
 
     """
     try:
-        response = requests.get(
-            url, params=params, headers=headers, timeout=10)
+        response = requests.get(url, params=params, headers=headers, timeout=10)
         logger.debug(response)
         if response.status_code == 200:
             return response.json()
