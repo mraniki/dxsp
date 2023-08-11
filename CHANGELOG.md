@@ -2,6 +2,27 @@
 
 
 
+## v4.2.20 (2023-08-11)
+
+### Other
+
+* Merge pull request #377 from mraniki/dev
+
+🚑 updated search_contract_address ([`b1f65c2`](https://github.com/mraniki/dxsp/commit/b1f65c2d980bf1767a0b960e4200e6c1d83d6533))
+
+### ✅
+
+* ✅ Unit Test improved for execute_order_invalid ([`23e16e4`](https://github.com/mraniki/dxsp/commit/23e16e47b485ac709353e0e2a949c12ea659d543))
+
+### 🔧
+
+* 🔧 remove dex_notify_invalid_token ([`ea78d84`](https://github.com/mraniki/dxsp/commit/ea78d84734748a73c6864ef58199191f9334455d))
+
+### 🚑
+
+* 🚑 updated search_contract_address ([`bb0c3fc`](https://github.com/mraniki/dxsp/commit/bb0c3fce562b7af2c791fe27f9b649f82dbb7a37))
+
+
 ## v4.2.19 (2023-08-11)
 
 ### Other
