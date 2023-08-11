@@ -21,7 +21,9 @@ class ContractUtils:
 
     """
     ContractUtils class to interact with w3 contracts
-    and with coingecko API
+    and with coingecko API.
+    Coingecko data is retrieve via pycoingecko
+    More info: https://github.com/man-c/pycoingecko
 
     Args:
         w3 (Optional[Web3]): Web3
@@ -49,7 +51,24 @@ class ContractUtils:
         self.cg = CoinGeckoAPI()
 
     async def search_contract_address(self, token):
-        """search a contract function"""
+        """
+        Search a contract function on json file
+        using tokenlist format https://github.com/Uniswap/token-lists
+        or if not in the list verify with coingecko.
+        The token list can be modified for your needs.
+        The list are defined in settings. Default settings
+        are using list under https://github.com/mraniki/tokenlist
+        
+        Args:
+            token (str): The token address
+
+        Returns:
+            str: The token address in w3 checksum format
+
+        Raises:
+            ValueError: Invalid Token
+
+        """
         try:
             self.logger.debug("Searching Token Address")
             contract_lists = [
@@ -58,9 +77,10 @@ class ContractUtils:
                 settings.token_mainnet_list,
             ]
             for contract_list in contract_lists:
+                self.logger.debug("Searching {} on {}", token, contract_list)
                 token_address = await self.get_token_address(contract_list, token)
-                self.logger.debug("Searching Locally {}", token_address)
                 if token_address is not None:
+                    self.logger.debug("Found {} on {}", token_address, contract_list)
                     return self.w3.to_checksum_address(token_address)
 
             self.logger.debug("Searching on Coingecko")
@@ -68,23 +88,42 @@ class ContractUtils:
             if token_address is None:
                 self.logger.warning("Invalid Token")
                 raise ValueError("Invalid Token")
+            self.logger.debug("Found on Coingecko {}", token_address)
             return self.w3.to_checksum_address(token_address)
         except Exception as e:
             self.logger.error(": {}", e)
             raise ValueError("Invalid Token")
 
     async def search_cg_platform(self):
-        """search coingecko platform"""
+        """
+        Search coingecko platform
+        
+        Returns:
+            str: The platform
+        
+        """
         asset_platforms = self.cg.get_asset_platforms()
         output_dict = next(
             x
             for x in asset_platforms
             if x["chain_identifier"] == int(self.w3.net.version)
         )
-        return output_dict["id"] or None
+        platform = output_dict["id"] or None
+        self.logger.debug("coingecko platform identified {}", platform)
+        return platform
 
     async def search_cg(self, token):
-        """search coingecko"""
+        """
+        Search Coingecko
+
+        Args:
+            token (str): The token symbol
+
+        Returns:
+            str: The token dictionary for the platform
+
+        
+        """
         try:
             search_results = self.cg.search(query=token)
             search_dict = search_results["coins"]
@@ -102,9 +141,17 @@ class ContractUtils:
             return
 
     async def search_cg_contract(self, token):
-        """search coingecko contract"""
+        """
+        search for a token address on coingecko
+
+        Args:
+            token (str): The token symbol
+
+        Returns:
+            str: The token address
+        """
         try:
-            self.logger.debug("coingecko search for {}", token)
+            self.logger.debug("Coingecko Address search for {}", token)
             coin_info = await self.search_cg(token)
             return (
                 coin_info["platforms"][f"{await self.search_cg_platform()}"]
@@ -118,6 +165,7 @@ class ContractUtils:
     async def get_token_address(self, token_list_url, symbol):
         """Given a token symbol and json tokenlist, get token address"""
         try:
+            self.logger.debug("Token address search in {}", token_list_url)
             token_list = await get(token_list_url)
             token_search = token_list["tokens"]
             for keyval in token_search:
