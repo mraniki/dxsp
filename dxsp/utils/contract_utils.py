@@ -138,7 +138,6 @@ class ContractUtils:
                     pass
         except Exception as e:
             self.logger.error("search_cg {}", e)
-            return
 
     async def search_cg_contract(self, token):
         """
@@ -160,10 +159,20 @@ class ContractUtils:
             )
         except Exception as e:
             self.logger.error(" search_cg_contract: {}", e)
-            return
 
     async def get_token_address(self, token_list_url, symbol):
-        """Given a token symbol and json tokenlist, get token address"""
+        """
+        
+        Given a token symbol and json tokenlist, get token address
+        
+        Args:
+            token_list_url (str): The token list url
+            symbol (str): The token symbol
+
+        Returns:
+            str: The token address
+        
+        """
         try:
             self.logger.debug("Token address search in {}", token_list_url)
             token_list = await get(token_list_url)
@@ -176,7 +185,6 @@ class ContractUtils:
                     return keyval["address"]
         except Exception as e:
             self.logger.error("get_token_address: {}", e)
-            return
 
     async def get_token_contract(self, token_address):
         """Given a token address, returns a contract object."""
