@@ -2,6 +2,19 @@
 
 
 
+## v4.2.23 (2023-08-11)
+
+### Other
+
+* Merge pull request #380 from mraniki/dev
+
+♻️ 📝 Improve doc and refactor token search failure ([`64e7fab`](https://github.com/mraniki/dxsp/commit/64e7fab91ad924cd737641096685171af89a6bd3))
+
+### ♻️
+
+* ♻️ 📝 Improve doc and refactor token search failure ([`33facc6`](https://github.com/mraniki/dxsp/commit/33facc6110b571b58599c5324348708cb53c1830))
+
+
 ## v4.2.22 (2023-08-11)
 
 ### Other
