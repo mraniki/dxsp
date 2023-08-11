@@ -2,6 +2,25 @@
 
 
 
+## v4.2.16 (2023-08-11)
+
+### Other
+
+* Merge pull request #373 from mraniki/dev ([`26e5d40`](https://github.com/mraniki/dxsp/commit/26e5d40c304afdb343832b878b7639f2214f6b40))
+
+### 🎨
+
+* 🎨 ([`b63e221`](https://github.com/mraniki/dxsp/commit/b63e22151b5b9593fd6da33fc026fd02c8477ff4))
+
+### 🔊
+
+* 🔊 for better troubleshooting ([`750a024`](https://github.com/mraniki/dxsp/commit/750a024b63151a5d65b7b6909941f495987c06b0))
+
+### 🧐
+
+* 🧐 Fix debug logging in main.py and uniswap.py ([`abedf5a`](https://github.com/mraniki/dxsp/commit/abedf5ab8a34c45ad4d60ea2d0afabd846b4869a))
+
+
 ## v4.2.15 (2023-08-10)
 
 ### :bug:
