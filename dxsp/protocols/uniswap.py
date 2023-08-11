@@ -68,7 +68,7 @@ class DexSwapUniswap(DexSwap):
             uniswap = Uniswap(
                         address=self.account.wallet_address,
                         private_key=self.account.private_key,
-                        version=2, web3=self.w3,
+                        version=self.protocol_version, web3=self.w3,
                         factory_contract_addr=settings.dex_factory_contract_addr,
                         router_contract_addr=settings.dex_router_contract_addr
                         )
@@ -76,4 +76,5 @@ class DexSwapUniswap(DexSwap):
                 sell_address, buy_address, amount)
 
         except Exception as error:
+            self.logger.debug(error)
             raise ValueError(f"Swap failed {error}") 

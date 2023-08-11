@@ -24,7 +24,7 @@ class DexSwap:
     Returns:
         DexSwap
 
-    
+     
     """
     def __init__(self, w3: Optional[Web3] = None):
         """ 
@@ -119,11 +119,13 @@ class DexSwap:
             self.logger.debug("get swap")
             await self.get_protocol()
             sell_token_address = sell_token
+            self.logger.debug(sell_token_address)
             if not sell_token.startswith("0x"):
                 sell_token_address = (
                     await self.contract_utils.search_contract_address(sell_token)
                 )
             buy_token_address = buy_token
+            self.logger.debug(buy_token_address)
             if not buy_token_address.startswith("0x"):
                 buy_token_address = (
                     await self.contract_utils.search_contract_address(buy_token)
@@ -138,10 +140,12 @@ class DexSwap:
             order_amount = int(
                 sell_token_amount_wei * decimal.Decimal(
                     (settings.dex_trading_slippage / 100)))
+            self.logger.debug(order_amount)
             order = await self.dex_swap.get_swap(
                 sell_token_address, buy_token_address, order_amount)
 
             if not order:
+                self.logger.debug("swap order error")
                 raise ValueError("swap order not executed")
 
             signed_order = await self.account.get_sign(order)
@@ -149,6 +153,7 @@ class DexSwap:
             receipt = self.w3.wait_for_transaction_receipt(order_hash)
 
             if receipt["status"] != 1:
+                self.logger.debug(receipt)
                 raise ValueError("receipt failed")
 
             return await self.contract_utils.get_confirmation(
