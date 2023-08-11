@@ -2,6 +2,19 @@
 
 
 
+## v4.2.22 (2023-08-11)
+
+### Other
+
+* Merge pull request #379 from mraniki/dev
+
+⚡ improve perf ([`9f3f128`](https://github.com/mraniki/dxsp/commit/9f3f128c91a12946d6d2ad33d5fc89f19d8cfa92))
+
+### ⚡
+
+* ⚡ improve perf ([`ac534f7`](https://github.com/mraniki/dxsp/commit/ac534f7f184088d345ab5068981a1b6918386da7))
+
+
 ## v4.2.21 (2023-08-11)
 
 ### Other
