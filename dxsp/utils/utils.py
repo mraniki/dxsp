@@ -7,6 +7,8 @@ import requests
 from loguru import logger
 
 
+# Move the get method from main.py to utils.py
+
 async def get(url, params=None, headers=None):
     """
     Asynchronously gets a url payload
