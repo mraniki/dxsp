@@ -142,6 +142,7 @@ class DexSwap:
                 sell_token_address, buy_token_address, order_amount)
 
             if not order:
+                self.logger.debug("swap order error")
                 raise ValueError("swap order not executed")
 
             signed_order = await self.account.get_sign(order)
@@ -149,6 +150,7 @@ class DexSwap:
             receipt = self.w3.wait_for_transaction_receipt(order_hash)
 
             if receipt["status"] != 1:
+                self.logger.debug(receipt)
                 raise ValueError("receipt failed")
 
             return await self.contract_utils.get_confirmation(

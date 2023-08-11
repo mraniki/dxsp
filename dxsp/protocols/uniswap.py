@@ -76,4 +76,5 @@ class DexSwapUniswap(DexSwap):
                 sell_address, buy_address, amount)
 
         except Exception as error:
+            self.logger.debug(error)
             raise ValueError(f"Swap failed {error}") 
