@@ -78,7 +78,7 @@ dex_trading_slippage = 2
 # Toggle to remove notification if 
 # a token doesn't exist in the token list
 # or in coingecko
-dex_notify_invalid_token = true
+# dex_notify_invalid_token = true
 
 ########################################
 ###     END OF DEFAULT SETTINGS      ###
