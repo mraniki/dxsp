@@ -2,13 +2,38 @@
 
 
 
+## v4.2.21 (2023-08-11)
+
+### Other
+
+* Merge pull request #378 from mraniki/dev
+
+📝 Improve logging and documentation ([`95cb746`](https://github.com/mraniki/dxsp/commit/95cb7464f8683ba2a453c77763cca8e8c738cd9c))
+
+* Merge branch &#39;main&#39; into dev ([`809b73e`](https://github.com/mraniki/dxsp/commit/809b73e5344c838dae9505cec42a4d4d83561bb9))
+
+### ⚡
+
+* ⚡ improve perf ([`61451dd`](https://github.com/mraniki/dxsp/commit/61451dd31d5375ced76c4c02c5df4e64b4f71586))
+
+### 📝
+
+* 📝 Improve logging and documentation ([`10562d4`](https://github.com/mraniki/dxsp/commit/10562d4c1fd73dc314ec5c970f3639c83c060021))
+
+
 ## v4.2.20 (2023-08-11)
 
 ### Other
 
+* Merge branch &#39;main&#39; into dev ([`78fb4b2`](https://github.com/mraniki/dxsp/commit/78fb4b27fc9079cca31bdf4fc84d807a3e871866))
+
 * Merge pull request #377 from mraniki/dev
 
 🚑 updated search_contract_address ([`b1f65c2`](https://github.com/mraniki/dxsp/commit/b1f65c2d980bf1767a0b960e4200e6c1d83d6533))
+
+### Update
+
+* Update Requirements ([`bfb1de8`](https://github.com/mraniki/dxsp/commit/bfb1de8bc157a40ee88066951b14d4433440113b))
 
 ### ✅
 
