@@ -2,6 +2,19 @@
 
 
 
+## v4.2.17 (2023-08-11)
+
+### Other
+
+* Merge pull request #374 from mraniki/dev
+
+🐛 loguru missing ([`1918b14`](https://github.com/mraniki/dxsp/commit/1918b147b8847fd97e8477605777d2f02d85f90d))
+
+### 🐛
+
+* 🐛 loguru missing ([`6da823f`](https://github.com/mraniki/dxsp/commit/6da823fafc65bf55179d22fdca06b24426b3902d))
+
+
 ## v4.2.16 (2023-08-11)
 
 ### Other
