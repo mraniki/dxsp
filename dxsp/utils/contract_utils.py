@@ -50,26 +50,29 @@ class ContractUtils:
 
     async def search_contract_address(self, token):
         """search a contract function"""
-        self.logger.debug("checking tokenlist")
-        contract_lists = [
-            settings.token_personal_list,
-            settings.token_testnet_list,
-            settings.token_mainnet_list,
-        ]
-        for contract_list in contract_lists:
-            token_address = await self.get_token_address(contract_list, token)
-            self.logger.debug("token_address {}", token_address)
-            if token_address is not None:
-                return self.w3.to_checksum_address(token_address)
+        try:
+            self.logger.debug("checking tokenlist")
+            contract_lists = [
+                settings.token_personal_list,
+                settings.token_testnet_list,
+                settings.token_mainnet_list,
+            ]
+            for contract_list in contract_lists:
+                token_address = await self.get_token_address(contract_list, token)
+                self.logger.debug("token_address {}", token_address)
+                if token_address is not None:
+                    return self.w3.to_checksum_address(token_address)
 
-        self.logger.debug("checking coingecko")
-        token_address = await self.search_cg_contract(token)
-        if token_address is None:
-            if settings.dex_notify_invalid_token:
-                self.logger.error("search_contract_address Invalid Token")
-                raise ValueError("Invalid Token")
-            return
-        return self.w3.to_checksum_address(token_address)
+            self.logger.debug("checking coingecko")
+            token_address = await self.search_cg_contract(token)
+            if token_address is None:
+                if settings.dex_notify_invalid_token:
+                    self.logger.error("search_contract_address Invalid Token")
+                    raise ValueError("Invalid Token")
+                return
+            return self.w3.to_checksum_address(token_address)
+        except Exception as e:
+            self.logger.error(" search_contract_address: {}", e)
 
     async def search_cg_platform(self):
         """search coingecko platform"""
