@@ -50,7 +50,7 @@ class ContractUtils:
 
     async def search_contract_address(self, token):
         """search a contract function"""
-        self.logger.debug("search_contract_address")
+        self.logger.debug("checking tokenlist")
         contract_lists = [
             settings.token_personal_list,
             settings.token_testnet_list,
@@ -58,9 +58,11 @@ class ContractUtils:
         ]
         for contract_list in contract_lists:
             token_address = await self.get_token_address(contract_list, token)
+            self.logger.debug("token_address {}", token_address)
             if token_address is not None:
                 return self.w3.to_checksum_address(token_address)
 
+        self.logger.debug("checking coingecko")
         token_address = await self.search_cg_contract(token)
         if token_address is None:
             if settings.dex_notify_invalid_token:
@@ -118,6 +120,7 @@ class ContractUtils:
             if keyval["symbol"] == symbol and keyval["chainId"] == int(
                 self.w3.net.version
             ):
+                self.logger.debug("token identified")
                 return keyval["address"]
 
     async def get_token_contract(self, token_address):
