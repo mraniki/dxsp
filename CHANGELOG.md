@@ -2,6 +2,19 @@
 
 
 
+## v4.2.19 (2023-08-11)
+
+### Other
+
+* Merge pull request #376 from mraniki/dev
+
+🐛 troubleshoot ([`3287694`](https://github.com/mraniki/dxsp/commit/32876945eecd7da147763abb470c7af2761c1511))
+
+### 🐛
+
+* 🐛 troubleshoot ([`392818d`](https://github.com/mraniki/dxsp/commit/392818dd0dc0400875f67635d88a8d94f96191f0))
+
+
 ## v4.2.18 (2023-08-11)
 
 ### :bug:
