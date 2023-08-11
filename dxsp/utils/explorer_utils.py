@@ -5,6 +5,8 @@ EXPLORER
 
 from datetime import datetime, timedelta
 
+from loguru import logger
+
 from dxsp.config import settings
 from dxsp.utils.utils import get
 
@@ -27,18 +29,15 @@ async def get_explorer_abi(address):
         "module": "contract",
         "action": "getabi",
         "address": address,
-        "apikey": settings.dex_block_explorer_api
+        "apikey": settings.dex_block_explorer_api,
     }
-    resp = await get(
-        url=settings.dex_block_explorer_url, params=params)
-    return resp["result"] if resp['status'] == "1" else None
+    resp = await get(url=settings.dex_block_explorer_url, params=params)
+    return resp["result"] if resp["status"] == "1" else None
 
-async def get_account_transactions(
-    contract_address,
-    wallet_address,
-    period=24):
+
+async def get_account_transactions(contract_address, wallet_address, period=24):
     """
-    Retrieves the account transactions 
+    Retrieves the account transactions
     within a specified time period
     for the main asset activity
     Not yet implemented
@@ -66,13 +65,12 @@ async def get_account_transactions(
         "startblock": "0",
         "endblock": "99999999",
         "sort": "desc",
-        "apikey": settings.dex_block_explorer_api
+        "apikey": settings.dex_block_explorer_api,
     }
 
-    response = await get(
-        url=settings.dex_block_explorer_url, params=params)
+    response = await get(url=settings.dex_block_explorer_url, params=params)
 
-    if response.get('status') == "1" and "result" in response:
+    if response.get("status") == "1" and "result" in response:
         current_time = datetime.utcnow()
         time_history_start = current_time - timedelta(hours=period)
 
@@ -84,7 +82,8 @@ async def get_account_transactions(
 
             if transaction_time >= time_history_start and token_symbol:
                 pnl_dict["tokenList"][token_symbol] = (
-                pnl_dict["tokenList"].get(token_symbol, 0) + value)
+                    pnl_dict["tokenList"].get(token_symbol, 0) + value
+                )
                 pnl_dict["pnl"] += value
 
     return pnl_dict
