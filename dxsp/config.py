@@ -12,9 +12,9 @@ settings = Dynaconf(
     root_path=os.path.dirname(ROOT),
     settings_files=[
         os.path.join(ROOT, "default_settings.toml"),
-        'talky_settings.toml',
-        'settings.toml',
-        '.secrets.toml'
+        "talky_settings.toml",
+        "settings.toml",
+        ".secrets.toml",
     ],
     load_dotenv=True,
     environments=True,
