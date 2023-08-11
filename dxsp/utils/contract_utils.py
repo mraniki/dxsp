@@ -185,6 +185,7 @@ class ContractUtils:
                     return keyval["address"]
         except Exception as e:
             self.logger.error("get_token_address: {}", e)
+            return None
 
     async def get_token_contract(self, token_address):
         """Given a token address, returns a contract object."""
