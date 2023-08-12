@@ -34,8 +34,6 @@ python-semantic-release = "^8.0.2"
 ruff = "^0.0.284"
 
 
-
-  
 [tool.ruff]
 select = [
   "E",  # pycodestyle
@@ -49,23 +47,6 @@ exclude = [
 ignore = ["F401"]
 format = "github"
 fixable = ["ALL"]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -91,22 +72,6 @@ omit = [
     "docs/*",
     "*/config.py"
 ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -141,7 +106,6 @@ commit_parser = "emoji"
 build_command = "pip install poetry && poetry build"
 version_variable = [
     "dxsp/__init__.py:__version__",
-    # "docs/conf.py:version",
 ]
 version_toml = [
    "pyproject.toml:tool.poetry.version",
