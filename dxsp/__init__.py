@@ -1,4 +1,4 @@
-__version__ = "4.2.24"
+__version__ = "4.2.25"
 
 from dxsp.config import settings
 from dxsp.main import DexSwap

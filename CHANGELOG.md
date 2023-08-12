@@ -2,6 +2,19 @@
 
 
 
+## v4.2.25 (2023-08-12)
+
+### :bug:
+
+* :bug:typo in pyproject version variable ([`edccbb3`](https://github.com/mraniki/dxsp/commit/edccbb31669608e1de41dc6c85fc3932658e9aa5))
+
+### Other
+
+* Merge pull request #386 from mraniki/dev
+
+:bug:typo in pyproject version variable ([`9d492c7`](https://github.com/mraniki/dxsp/commit/9d492c77d37a0101fcdf4f55bde3bc9780052aa6))
+
+
 ## v4.2.24 (2023-08-12)
 
 ### Other
