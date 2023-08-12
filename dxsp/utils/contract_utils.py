@@ -78,18 +78,13 @@ class ContractUtils:
             ]
             for contract_list in contract_lists:
                 self.logger.debug("Searching {} on {}", token, contract_list)
-                try:
-                    token_address = await self.get_token_address(contract_list, token)
-                    if token_address is not None:
-                        self.logger.debug(
-                            "Found {} on {}", token_address, contract_list
-                        )
-                        found_token_address = token_address
-                        break
-                except ValueError:
-                    pass
-            if found_token_address is not None:
-                return self.w3.to_checksum_address(token_address)
+                token_address = await self.get_token_address(contract_list, token)
+                if token_address is not None:
+                    self.logger.debug(
+                        "Found {} on {}", token_address, contract_list
+                    )
+                    return self.w3.to_checksum_address(token_address)
+
             self.logger.debug("Searching on Coingecko")
             token_address = await self.search_cg_contract(token)
             if token_address is None:
