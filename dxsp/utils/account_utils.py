@@ -66,7 +66,7 @@ class AccountUtils:
         """
         try:
             return (
-                f"ℹ️ DexSwap v{dxsp.__version__}\n"
+                f"ℹ️ DexSwap v{__version__}\n"
                 f"💱 {await self.get_name()}\n"
                 f"🪪 {self.account_number}"
             )
