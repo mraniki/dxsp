@@ -2,6 +2,41 @@
 
 
 
+## v4.2.24 (2023-08-12)
+
+### Other
+
+* Merge pull request #381 from mraniki/dev
+
+⚡ update get for memory safe approach ([`d000329`](https://github.com/mraniki/dxsp/commit/d000329809d67f7c9493cda98756346fe6171914))
+
+### Update
+
+* Update contract_utils.py ([`6f15ccb`](https://github.com/mraniki/dxsp/commit/6f15ccb5c39a8854432c63d72e87f6eaad3f7e4f))
+
+* Update contract_utils.py ([`9dfab17`](https://github.com/mraniki/dxsp/commit/9dfab17ff03f7f78d4ce54c047c7cf600b72835c))
+
+* Update utils.py ([`22b7c07`](https://github.com/mraniki/dxsp/commit/22b7c070ac1bd11532646dea079d896c93d51164))
+
+* Update utils.py ([`57c463d`](https://github.com/mraniki/dxsp/commit/57c463dd564d5a18f222164b836492540eb83be8))
+
+* Update main.py ([`c5b698f`](https://github.com/mraniki/dxsp/commit/c5b698f9b8984364e42bd0fa3a418748042f6053))
+
+* Update pyproject.toml ([`55e3dc2`](https://github.com/mraniki/dxsp/commit/55e3dc25a9f13ac2d809bbfe187fa06450cdd8f5))
+
+* Update __init__.py ([`ac65d36`](https://github.com/mraniki/dxsp/commit/ac65d36ac52f7417d217de0770737b650d8f7d59))
+
+* Update account_utils.py ([`f688c09`](https://github.com/mraniki/dxsp/commit/f688c0965e1a90e1d7368d9be838b7eefdee3201))
+
+* Update account_utils.py for better readability ([`e4ae9ad`](https://github.com/mraniki/dxsp/commit/e4ae9adbecc81269ef93f1fc29dd60e74737f146))
+
+### ⚡
+
+* ⚡ update get for memory safe approach ([`b5ade78`](https://github.com/mraniki/dxsp/commit/b5ade782482c6320658ab73d5abe80a045f027d5))
+
+* ⚡ improve perf ([`49abc2e`](https://github.com/mraniki/dxsp/commit/49abc2e70c01dbd04ec8a43524a17cdf88fd6598))
+
+
 ## v4.2.23 (2023-08-11)
 
 ### Other
