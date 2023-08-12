@@ -106,7 +106,7 @@ sphinx_design = "^0.5.0"
 tag_format = "v{version}"
 commit_parser = "emoji"
 build_command = "pip install poetry && poetry build"
-version_variable = [
+version_variables = [
     "dxsp/__init__.py:__version__",
 ]
 version_toml = [
