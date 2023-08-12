@@ -48,7 +48,7 @@ async def get(url, params=None, headers=None):
                     if response.content_length > MAX_RESPONSE_SIZE:
                         logger.warning("Response content too large, skipping...")
                         return None  # Return None for large responses
-                    return await response.json()
+                    return await response.json(content_type=None)
 
     except Exception as error:
         logger.error("get: {}", error)
