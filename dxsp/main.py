@@ -123,7 +123,7 @@ class DexSwap:
             self.logger.debug("get swap")
             await self.get_protocol()
             sell_token_address = sell_token
-            self.logger.debug("sell token {}, sell_token_address)
+            self.logger.debug("sell token {}", sell_token_address)
             if not sell_token.startswith("0x"):
                 sell_token_address = await self.contract_utils.search_contract_address(
                     sell_token
