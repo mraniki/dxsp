@@ -7,7 +7,7 @@ import requests
 from loguru import logger
 
 
-def get(url, params=None, headers=None):
+async def get(url, params=None, headers=None):
     """
     Asynchronously gets a url payload
     and returns the response
@@ -25,7 +25,7 @@ def get(url, params=None, headers=None):
 
     """
     try:
-        response = await requests.get(url, params=params, headers=headers, timeout=10)
+        response = requests.get(url, params=params, headers=headers, timeout=10)
         logger.debug(response)
         if response.status_code == 200:
             return response.json()
