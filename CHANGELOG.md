@@ -2,6 +2,23 @@
 
 
 
+## v4.2.26 (2023-08-18)
+
+### :recycle:
+
+* :recycle::arrow_up:dep downgrade ([`60b2b3d`](https://github.com/mraniki/dxsp/commit/60b2b3d37eef9ff9880701ebed0b957e45f4ee67))
+
+### Other
+
+* Merge pull request #388 from mraniki/dev
+
+:recycle::arrow_up:dep downgrade ([`902a535`](https://github.com/mraniki/dxsp/commit/902a53593eaa3ee21cd4a59e32a669cf94fd0361))
+
+### Update
+
+* Update Requirements ([`d0564a0`](https://github.com/mraniki/dxsp/commit/d0564a0d96589b5acd3551434c854abdbe1f2db1))
+
+
 ## v4.2.25 (2023-08-12)
 
 ### :bug:
