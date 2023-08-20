@@ -2,6 +2,13 @@
 
 
 
+## v4.2.27 (2023-08-20)
+
+### Update
+
+* Update pyproject.toml ([`8c07b6e`](https://github.com/mraniki/dxsp/commit/8c07b6e76c8321c99421886769444498f3f2739a))
+
+
 ## v4.2.26 (2023-08-18)
 
 ### :recycle:
