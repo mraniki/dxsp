@@ -2,6 +2,13 @@
 
 
 
+## v4.2.28 (2023-08-20)
+
+### Update
+
+* Update renovate.json ([`2cad75a`](https://github.com/mraniki/dxsp/commit/2cad75a5fedfe8c6716291f6b51bb730a4d68a95))
+
+
 ## v4.2.27 (2023-08-20)
 
 ### Update
