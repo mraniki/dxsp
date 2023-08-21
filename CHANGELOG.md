@@ -2,7 +2,28 @@
 
 
 
+## v4.2.29 (2023-08-21)
+
+### Other
+
+* Merge pull request #393 from mraniki/dev
+
+👷‍♂️Flow.yml ([`f5b0256`](https://github.com/mraniki/dxsp/commit/f5b02561ff1c7da1ee84494b4836fde4ac32d028))
+
+* :construction_worker_man:Flow.yml ([`7726137`](https://github.com/mraniki/dxsp/commit/7726137f42a85ea4be906d96faa9acea34f479ea))
+
+* Merge branch &#39;main&#39; into dev ([`1d9bf39`](https://github.com/mraniki/dxsp/commit/1d9bf3912122ebaf7aa54e2a158faafb5f91c33a))
+
+### Update
+
+* Update Requirements ([`1f5eb3c`](https://github.com/mraniki/dxsp/commit/1f5eb3ce444e989d834f3b4ed23469b8f566bde6))
+
+
 ## v4.2.28 (2023-08-20)
+
+### Other
+
+* Merge branch &#39;main&#39; into dev ([`5be53c2`](https://github.com/mraniki/dxsp/commit/5be53c24a467beb05d68880cbf0c0a32ecc3cbfc))
 
 ### Update
 
@@ -10,6 +31,14 @@
 
 
 ## v4.2.27 (2023-08-20)
+
+### :fire:
+
+* :fire: ([`1dfcb56`](https://github.com/mraniki/dxsp/commit/1dfcb56a344b289cbe23739b908d7dea9cb5c729))
+
+### Other
+
+* Merge branch &#39;main&#39; into dev ([`9cb28db`](https://github.com/mraniki/dxsp/commit/9cb28dbecaf94aa6ca270b0bfc9c427567e914ed))
 
 ### Update
 
