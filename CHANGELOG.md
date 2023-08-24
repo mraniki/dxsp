@@ -2,6 +2,25 @@
 
 
 
+## v4.2.30 (2023-08-24)
+
+### Other
+
+* Merge pull request #395 from mraniki/dev ([`31843d3`](https://github.com/mraniki/dxsp/commit/31843d387016a6ac0f8e36a7bf41a7240c60b20d))
+
+### Update
+
+* Update Requirements ([`a31a98e`](https://github.com/mraniki/dxsp/commit/a31a98eca46e6085b5b5a70f85952b82a25fc09d))
+
+### 👷
+
+* 👷 CI cleanup ([`b01b54a`](https://github.com/mraniki/dxsp/commit/b01b54a0a01137da12a394325a92549e0173112b))
+
+### 🔥
+
+* 🔥 cleanup ([`699c91f`](https://github.com/mraniki/dxsp/commit/699c91fda4c017b02818e6b59e8c15a2ff4ef6c6))
+
+
 ## v4.2.29 (2023-08-21)
 
 ### Other
