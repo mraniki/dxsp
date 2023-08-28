@@ -2,6 +2,25 @@
 
 
 
+## v4.2.33 (2023-08-28)
+
+### Other
+
+* Merge pull request #402 from mraniki/dev ([`f06e03f`](https://github.com/mraniki/dxsp/commit/f06e03fc760e75ec640f64ff68ec40d4f8938158))
+
+### Update
+
+* Update Requirements ([`ce896b1`](https://github.com/mraniki/dxsp/commit/ce896b1f6fabba0ec1621d53910f4a4a9fb6f45b))
+
+### 🐛
+
+* 🐛 📝  extension error ([`dda50fa`](https://github.com/mraniki/dxsp/commit/dda50fa1dc8f39788b579b821a9995c4a25c815b))
+
+### 📝
+
+* 📝 ([`59cb2e1`](https://github.com/mraniki/dxsp/commit/59cb2e1a458169a7c708c5f632677ce925e9cd38))
+
+
 ## v4.2.32 (2023-08-27)
 
 ### Other
