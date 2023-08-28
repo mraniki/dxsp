@@ -97,26 +97,12 @@ omit = [
 optional = true
 
 [tool.poetry.group.docs.dependencies]
-sphinx = "7.1.0"
+sphinx = "7.2.4"
 pydata-sphinx-theme = "^0.13.3"
 sphinx-hoverxref = "^1.3.0"
-sphinx-notfound-page = "^0.8.3"
 sphinx_copybutton = "0.5.2"
 myst_parser = "^2.0.0"
 sphinx_design = "^0.5.0"
-
-
-# [tool.semantic_release]
-# version_variable = ["pyproject.toml:version","dxsp/__init__.py:__version__"]
-# branch = "main"
-# upload_to_pypi = true
-# upload_to_release = true
-# build_command = "pip install poetry && poetry build"
-# commit_parser = "semantic_release.history.emoji_parser"
-# use_textual_changelog_sections = true
-# major_emoji = "BREAKING,💥,:boom:"
-# minor_emoji = "feat,🥚,:egg:,🚀,:rocket:,💄,:lipstick:,✨,:sparkles:"
-# patch_emoji = "fix,bump,Update,🎨,:art:,🐛,:bug:,🚑,:ambulance:,⚡,:zap:,🔥,:fire:,🚨,:rotating_light:,♻️,:recycle:,🔧,:wrench:,⬆️,:arrow_up:,🩹,:adhesive_bandage:,👷,:construction_worker:,📝,:memo:,🔒,:lock:,👽,:alien:,💬,:speech_balloon:,🥅,:goal_net:,✅,:white_check_mark:,🐳,:whale:,🙈,:see_no_evil:,⚗️,:alembic:,🧐,:monocle_face:,🔇,:mute:,🔊:volume:"
 
 [tool.semantic_release]
 tag_format = "v{version}"
