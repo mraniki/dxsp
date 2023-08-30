@@ -80,21 +80,19 @@ class ContractUtils:
                 self.logger.debug("Searching {} on {}", token, contract_list)
                 token_address = await self.get_token_address(contract_list, token)
                 if token_address is not None:
-                    self.logger.debug(
-                        "Found {} on {}", token_address, contract_list
-                    )
+                    self.logger.debug("Found {} on {}", token_address, contract_list)
                     return self.w3.to_checksum_address(token_address)
 
             self.logger.debug("Searching on Coingecko")
             token_address = await self.search_cg_contract(token)
             if token_address is None:
-                self.logger.warning("Invalid Token")
-                raise ValueError("Invalid Token")
+                self.logger.warning("Invalid Token {}", token)
+                raise ValueError(f"Invalid Token {token}")
             self.logger.debug("Found on Coingecko {}", token_address)
             return self.w3.to_checksum_address(token_address)
         except Exception as e:
             self.logger.error(": {}", e)
-            raise ValueError("Invalid Token")
+            raise ValueError(f"Invalid Token {token}")
 
     async def search_cg_platform(self):
         """
@@ -185,7 +183,7 @@ class ContractUtils:
                 ):
                     self.logger.debug("token identified")
                     return keyval["address"]
-            raise ValueError("Token not found")
+            raise ValueError(f"Token not found {symbol}")
         except Exception as e:
             self.logger.error("get_token_address: {}", e)
             return None
