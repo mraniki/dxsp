@@ -2,6 +2,23 @@
 
 
 
+## v4.2.34 (2023-08-30)
+
+### Other
+
+* Merge pull request #403 from mraniki/dev
+
+🥅 Improve error message for invalid token ([`0ca99b6`](https://github.com/mraniki/dxsp/commit/0ca99b6f677a4574b50cb6a78202811b0bdf257a))
+
+### Update
+
+* Update Requirements ([`c385e10`](https://github.com/mraniki/dxsp/commit/c385e100c601c6a18bbd57dfed8ff17d94527853))
+
+### 🥅
+
+* 🥅 Improve error message for invalid token ([`2f45f1b`](https://github.com/mraniki/dxsp/commit/2f45f1b63bf3145b11d870bd73f158f50c858efe))
+
+
 ## v4.2.33 (2023-08-28)
 
 ### Other
