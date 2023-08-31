@@ -2,6 +2,19 @@
 
 
 
+## v4.2.36 (2023-08-31)
+
+### Other
+
+* Merge pull request #404 from mraniki/renovate/sphinx-7.x
+
+⬆️ 🛠️(deps): update dependency sphinx to v7.2.5 ([`f783d55`](https://github.com/mraniki/dxsp/commit/f783d557bfedaf83cd8f48184bc52120fc08967b))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.2.5 ([`318ecb8`](https://github.com/mraniki/dxsp/commit/318ecb867e84e544cb046bc7754d67654711e7fe))
+
+
 ## v4.2.35 (2023-08-30)
 
 ### Update
