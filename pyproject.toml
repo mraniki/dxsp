@@ -103,7 +103,7 @@ omit = [
 optional = true
 
 [tool.poetry.group.docs.dependencies]
-sphinx = "7.2.4"
+sphinx = "7.2.5"
 pydata-sphinx-theme = "^0.13.3"
 sphinx-hoverxref = "^1.3.0"
 sphinx_copybutton = "0.5.2"
