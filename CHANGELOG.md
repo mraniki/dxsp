@@ -2,6 +2,23 @@
 
 
 
+## v4.2.39 (2023-09-07)
+
+### Other
+
+* Merge pull request #410 from mraniki/dev
+
+Merge pull request #409 from mraniki/main ([`8d13f92`](https://github.com/mraniki/dxsp/commit/8d13f9275333ed817f240e6c12e18340d3289ddb))
+
+* Merge pull request #409 from mraniki/main
+
+Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a55b58a561733fce517dea346dcb67117df6))
+
+### Update
+
+* Update pyproject.toml ([`bc3aa44`](https://github.com/mraniki/dxsp/commit/bc3aa4488d170e98200221797b8d086107e8b319))
+
+
 ## v4.2.38 (2023-09-07)
 
 ### Other
