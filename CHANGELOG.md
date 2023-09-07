@@ -2,6 +2,23 @@
 
 
 
+## v4.2.38 (2023-09-07)
+
+### Other
+
+* Merge pull request #408 from mraniki/dev
+
+⬆️ ([`dabfc1d`](https://github.com/mraniki/dxsp/commit/dabfc1dd53048a6928221f396d7bd27e82dfd6a4))
+
+### Update
+
+* Update Requirements ([`e3612ad`](https://github.com/mraniki/dxsp/commit/e3612add98aa5f8d980d172227f274f5df08147e))
+
+### ⬆️
+
+* ⬆️ ([`fd989aa`](https://github.com/mraniki/dxsp/commit/fd989aaf2d54b7d5505dc2153994f5776ac2b29b))
+
+
 ## v4.2.37 (2023-09-03)
 
 ### Other
