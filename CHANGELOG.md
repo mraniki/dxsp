@@ -2,6 +2,23 @@
 
 
 
+## v4.2.41 (2023-09-09)
+
+### Other
+
+* Merge pull request #411 from mraniki/dev
+
+👷 CI Change ([`4d37905`](https://github.com/mraniki/dxsp/commit/4d379058d3f7fee066a232147b06e6392f3af04c))
+
+### Update
+
+* Update Requirements ([`e1b0249`](https://github.com/mraniki/dxsp/commit/e1b0249c2fcd1a99cc78f46fe40c6a877134daf9))
+
+### 👷
+
+* 👷 CI Change ([`d321ebb`](https://github.com/mraniki/dxsp/commit/d321ebb7a98895d0c2aacf1ee2949638deb41dca))
+
+
 ## v4.2.40 (2023-09-07)
 
 ### Update
