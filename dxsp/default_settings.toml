@@ -11,57 +11,56 @@
 # settings.toml
 # [default]
 # dxsp_enabled = false
-
 [default]
 # Dynaconf settings verification
 VALUE = "On default"
-
-# Module Enable/Disable
-dxsp_enabled = true
-
-# help message listing the commands
-# available
-dxsp_commands = "🎯 BUY WBTC\n🎯 /q WBTC\n 🏦 /bal\n 🏦 /pos\n"
-
-
-# Your public wallet address
 dex_wallet_address = "0x1234567890123456789012345678901234567890"
-# Your private wallet key
 dex_private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
 
-
-exchanges = [
-    { dex_rpc ="https://rpc.ankr.com/eth",dex_protocol_type = "uniswap", dex_protocol_version = 2, dex_api_endpoint='', dex_api_key = "",  dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D", trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7", dex_block_explorer_url = "https://api.etherscan.io/api?", dex_block_explorer_api = "798437294880920392" },
-    { dex_rpc ="https://rpc.ankr.com/bsc", dex_protocol_type = "uniswap", dex_protocol_version = 2, dex_api_endpoint='', dex_api_key = "", dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D", trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7", dex_block_explorer_url = "https://api.bscscan.com/api?", dex_block_explorer_api = "798437294880920392" },
-    { dex_rpc ="https://rpc.ankr.com/polygon", dex_protocol_type = "0x", dex_protocol_version = 4,dex_api_endpoint='https://polygon.api.0x.org/', dex_api_key = "",  dex_router_contract_addr = "0xdef1c0ded9bec7f1a1670819833240f027b25eff",trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7", dex_block_explorer_url = "https://api.polygonscan.com/api?", dex_block_explorer_api = "798437294880920392" },
-    ]
-
-# Protocol used option are uniswap, 0x and 1inch
-dex_protocol_type = "uniswap"
-# Version of the protocol
-dex_protocol_version = 2
-
-# RPC connectivity
+[default.exchanges.uniswap_eth]
 dex_rpc = "https://rpc.ankr.com/eth"
-
-# 0x API required only if
-# dex_protocol_type = "0x"
-dex_api_endpoint = "https://api.0x.org/mainnet"
-dex_api_key = "" 
-
-# DEX router address to use
+dex_protocol_type = "uniswap"
+dex_protocol_version = 2
+dex_api_endpoint = ''
+dex_api_key = ""
 dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+dex_block_explorer_url = "https://api.etherscan.io/api?"
+dex_block_explorer_api = "798437294880920392"
+
+[default.exchanges.uniswap_bsc]
+dex_rpc = "https://rpc.ankr.com/bsc"
+dex_protocol_type = "uniswap"
+dex_protocol_version = 2
+dex_api_endpoint = ''
+dex_api_key = ""
+dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+dex_block_explorer_url = "https://api.bscscan.com/api?"
+dex_block_explorer_api = "798437294880920392"
+
+[default.exchanges.zerox_polygon]
+dex_rpc = "https://rpc.ankr.com/polygon"
+dex_protocol_type = "0x"
+dex_protocol_version = 4
+dex_api_endpoint = "https://polygon.api.0x.org/"
+dex_api_key = ""
+dex_router_contract_addr = "0xdef1c0ded9bec7f1a1670819833240f027b25eff"
+trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+trading_risk_amount = 10
+dex_trading_slippage = 2
+dex_block_explorer_url = "https://api.polygonscan.com/api?"
+dex_block_explorer_api = "798437294880920392"
+
+# Header to use for retrieving urls content below
+headers = {User-Agent= 'Mozilla/5.0'}
+
 # DEX ABI to use in case you have no explorer setup
 dex_router_abi_url = "https://raw.githubusercontent.com/uniswap-python/uniswap-python/master/uniswap/assets/uniswap-v2/router02.abi"
 # DEX factory address to use
 dex_factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
 # DEX ABI to use in case you have no explorer setup
 dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
-
-# Block Explorer API for ABI search 
-dex_block_explorer_url = "https://api.etherscan.io/api?"
-dex_block_explorer_api =  "798437294880920392"
-headers = {User-Agent= 'Mozilla/5.0'}
 
 # token list using uniswap tokenlist format
 # https://github.com/mraniki/tokenlist
@@ -72,21 +71,18 @@ token_mainnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/a
 token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/testnet.json"
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
-# Address of your trading asset for your trading - USDT
-trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 
-# Trading % of your position to risk per order
-# 10 = 10% of the position
-trading_risk_amount = 10
+# Talky App Related Settings
+# Enable/Disable DXSP
+dxsp_enabled = true
 
-# Slippage %
-# 2 = 2% slippage
-dex_trading_slippage = 2
-
-# Toggle to remove notification if 
-# a token doesn't exist in the token list
-# or in coingecko
-# dex_notify_invalid_token = true
+# help message used in talky app
+dxsp_commands = """
+🎯 BUY WBTC
+🎯 /q WBTC
+🏦 /bal
+🏦 /pos
+"""
 
 ########################################
 ###     END OF DEFAULT SETTINGS      ###
