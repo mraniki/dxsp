@@ -1,7 +1,7 @@
 """
  DEX SWAP Main
 """
-
+ 
 import decimal
 from typing import Optional
 
@@ -45,7 +45,6 @@ class DexSwap:
         self.protocol_version = settings.dex_protocol_version
         self.dex_swap = None
         self.router = None
-        self.quoter = None
         self.contract_utils = ContractUtils(w3=self.w3)
 
     async def get_protocol(self):

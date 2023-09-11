@@ -23,10 +23,18 @@ dxsp_enabled = true
 # available
 dxsp_commands = "🎯 BUY WBTC\n🎯 /q WBTC\n 🏦 /bal\n 🏦 /pos\n"
 
+
 # Your public wallet address
 dex_wallet_address = "0x1234567890123456789012345678901234567890"
 # Your private wallet key
 dex_private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
+
+
+exchanges = [
+    { dex_rpc ="https://rpc.ankr.com/eth",dex_protocol_type = "uniswap", dex_protocol_version = 2, dex_api_endpoint='', dex_api_key = "",  dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D", trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7", dex_block_explorer_url = "https://api.etherscan.io/api?", dex_block_explorer_api = "798437294880920392" },
+    { dex_rpc ="https://rpc.ankr.com/bsc", dex_protocol_type = "uniswap", dex_protocol_version = 2, dex_api_endpoint='', dex_api_key = "", dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D", trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7", dex_block_explorer_url = "https://api.bscscan.com/api?", dex_block_explorer_api = "798437294880920392" },
+    { dex_rpc ="https://rpc.ankr.com/polygon", dex_protocol_type = "0x", dex_protocol_version = 4,dex_api_endpoint='https://polygon.api.0x.org/', dex_api_key = "",  dex_router_contract_addr = "0xdef1c0ded9bec7f1a1670819833240f027b25eff",trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7", dex_block_explorer_url = "https://api.polygonscan.com/api?", dex_block_explorer_api = "798437294880920392" },
+    ]
 
 # Protocol used option are uniswap, 0x and 1inch
 dex_protocol_type = "uniswap"
@@ -38,8 +46,8 @@ dex_rpc = "https://rpc.ankr.com/eth"
 
 # 0x API required only if
 # dex_protocol_type = "0x"
-dex_0x_url = "https://api.0x.org/mainnet"
-dex_0x_api_key = "" 
+dex_api_endpoint = "https://api.0x.org/mainnet"
+dex_api_key = "" 
 
 # DEX router address to use
 dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
