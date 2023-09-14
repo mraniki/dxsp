@@ -97,6 +97,8 @@ class DexSwap:
 
 
     """
+    def __init__(self, w3: Optional[Web3] = None, protocol_type: Optional[str]None, protocol_version):
+
 
     async def execute_order(self, order_params):
         """
