@@ -13,7 +13,7 @@ from dxsp.config import settings
 from dxsp.utils import AccountUtils, ContractUtils
 
 
-class DexSwap:
+class DexTrader:
     """
     DEXswap  class to build a DexSwap Object
     use to interact with the dex protocol
@@ -37,16 +37,15 @@ class DexSwap:
         self.dex_info = []
         try:
             for exchange in exchanges:
-                dex_client = self.get_client(self)
                 self.dex_info.append(
                     {
                         "rpc": exchanges[exchange]["dex_rpc"],
                         "w3": Web3(Web3.HTTPProvider(settings.dex_rpc)),
                         "protocol_type": exchanges[exchange]["protocol_type"],
                         "protocol_version": exchanges[exchange]["protocol_version"],
-                        "dex_client": dex_client,
                         "router": None,
                         "account": AccountUtils(w3),
+                        "dex_client": DexSwap(w3, protocol_type, protocol_version),
                         "contract_utils": ContractUtils(w3),
                         "gas_strategy": w3.eth.set_gas_price_strategy(
                             medium_gas_price_strategy
@@ -83,6 +82,21 @@ class DexSwap:
             self.dex_swap = DexSwapOneInch()
         else:
             self.dex_swap = DexSwapUniswap()
+
+
+class DexSwap:
+    """
+    DEXswap  class to build a DexSwap Object
+    use to interact with the dex protocol
+
+    Args:
+        w3 (Optional[Web3]): Web3
+
+    Returns:
+        DexSwap
+
+
+    """
 
     async def execute_order(self, order_params):
         """
