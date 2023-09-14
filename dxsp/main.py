@@ -33,68 +33,56 @@ class DexSwap:
         w3 contracts.
 
         """
-        self.logger = logger
-        self.account = AccountUtils()
         exchanges = settings.dex
-        self.contract_utils = ContractUtils()
         self.dex_info = []
         try:
             for exchange in exchanges:
-                logger.debug(f"Loading {exchange}")
-                w3 = Web3(Web3.HTTPProvider(exchanges[exchange]["rpc"]))
-                if not w3.net.listening:
-                    logger.error(f"w3 error with {exchange}")
-                    continue
-
-                w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
-
-                protocol_type = exchanges[exchange]["protocol_type"]
-                protocol_version = exchanges[exchange]["protocol_version"]
-                api_endpoint = exchanges[exchange]["api_endpoint"]
-                api_key = exchanges[exchange]["api_key"]
-                router_contract_addr = exchanges[exchange]["router_contract_addr"]
-                block_explorer_url = exchanges[exchange]["block_explorer_url"]
-                block_explorer_api = exchanges[exchange]["block_explorer_api"]
-                trading_asset_address = exchanges[exchange]["trading_asset_address"]
-                trading_risk_amount = exchanges[exchange]["trading_risk_amount"]
-
-                contract_utils = ContractUtils(w3)
-                account = AccountUtils(w3)
-                dex_client = DexSwapExchange
+                dex_client = self.get_client(self)
                 self.dex_info.append(
                     {
-                        "dex_client": cx_client,
-                        "account": account,
-                        "exchange_name": exchange_name,
-                        "exchange_defaulttype": exchange_defaulttype,
-                        "exchange_ordertype": exchange_ordertype,
-                        "trading_asset": trading_asset,
-                        "trading_risk_amount": trading_risk_amount,
+                        "rpc": exchanges[exchange]["dex_rpc"],
+                        "w3": Web3(Web3.HTTPProvider(settings.dex_rpc)),
+                        "protocol_type": exchanges[exchange]["protocol_type"],
+                        "protocol_version": exchanges[exchange]["protocol_version"],
+                        "dex_client": dex_client,
+                        "router": None,
+                        "account": AccountUtils(w3),
+                        "contract_utils": ContractUtils(w3),
+                        "gas_strategy": w3.eth.set_gas_price_strategy(
+                            medium_gas_price_strategy
+                        ),
                     }
                 )
+                if not w3.net.listening:
+                    logger.debug("w3 not connected {}", rpc)
+
         except Exception as e:
             logger.error(e)
-            continue
 
-    def load_exchanges(self):
+    def get_client(self):
         """
-        Load the exchanges based on the settings in the config file.
-        Create a DexSwap object for each exchange and add it to the list.
-        """
-        exchanges = getattr(settings, "exchanges", [])
-        for exchange in exchanges:
-            exchange = DexSwapExchange(exchange)
-            self.exchanges.append(exchange)
+        Set the dex_swap object based
+        on the protocol type.
+        Currently supports:
+            1inch: currently blocked
 
-    async def get_protocol(self):
-        """
-        Return the dex_client object based
-        on the protocol type specified in the config file.
-        """
+            0x
 
-        for exchange in self.exchanges:
-            if exchange.protocol_type == settings.dex_protocol_type:
-                return exchange
+            Uniswap V2 and V3
+
+        Returns:
+            dex_swap
+
+
+        """
+        from dxsp.protocols import DexSwapOneInch, DexSwapUniswap, DexSwapZeroX
+
+        if self.protocol_type == "0x":
+            self.dex_swap = DexSwapZeroX()
+        elif self.protocol_type == "1inch":
+            self.dex_swap = DexSwapOneInch()
+        else:
+            self.dex_swap = DexSwapUniswap()
 
     async def execute_order(self, order_params):
         """
@@ -144,9 +132,7 @@ class DexSwap:
         """
         try:
             self.logger.debug("get swap")
-            dex_client = await self.get_protocol()
-            if dex_client is None:
-                raise ValueError("No matching protocol found")
+            await self.get_protocol()
             sell_token_address = sell_token
             self.logger.debug("sell token {}", sell_token_address)
             if not sell_token.startswith("0x"):
@@ -173,7 +159,7 @@ class DexSwap:
                 * decimal.Decimal((settings.dex_trading_slippage / 100))
             )
             self.logger.debug(order_amount)
-            order = await self.dex_client.get_swap(
+            order = await self.dex_swap.get_swap(
                 sell_token_address, buy_token_address, order_amount
             )
 
@@ -209,17 +195,13 @@ class DexSwap:
 
         """
         try:
-            dex_client = await self.get_protocol()
-            if dex_client is None:
-                raise ValueError("No matching protocol found")
-            buy_address = dex_client.trading_asset_address
+            await self.get_protocol()
+            buy_address = self.account.trading_asset_address
             sell_address = await self.contract_utils.search_contract_address(sell_token)
-            quote = await dex_client.dex_client_impl.get_quote(
-                buy_address, sell_address
-            )
+            quote = await self.dex_swap.get_quote(buy_address, sell_address)
             quote = f"🦄 {quote}"
             symbol = await self.contract_utils.get_token_symbol(
-                dex_client.trading_asset_address
+                self.account.trading_asset_address
             )
             return f"{quote} {symbol}"
 
@@ -331,36 +313,3 @@ class DexSwap:
             for the account within the specified period.
         """
         return await self.account.get_account_pnl(period)
-
-
-class DexSwapExchange:
-    def __init__(self, config):
-        self.dex_wallet_address = config.get("dex_wallet_address")
-        self.dex_private_key = config.get("dex_private_key")
-        self.dex_rpc = config.get("dex_rpc")
-        self.dex_protocol_type = config.get("dex_protocol_type")
-        self.dex_protocol_version = config.get("dex_protocol_version")
-        self.dex_api_endpoint = config.get("dex_api_endpoint")
-        self.dex_api_key = config.get("dex_api_key")
-        self.dex_router_contract_addr = config.get("dex_router_contract_addr")
-        self.trading_asset_address = config.get("trading_asset_address")
-        self.dex_block_explorer_url = config.get("dex_block_explorer_url")
-        self.dex_block_explorer_api = config.get("dex_block_explorer_api")
-
-        self.w3 = Web3(Web3.HTTPProvider(self.dex_rpc))
-        if not self.w3.net.listening:
-            raise ValueError(f"{self.dex_rpc} not connected")
-        self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
-
-        if self.protocol_type == "0x":
-            from dxsp.protocols import DexSwapZeroX
-
-            self.dex_client = DexSwapZeroX()
-        elif self.protocol_type == "1inch":
-            from dxsp.protocols import DexSwapOneInch
-
-            self.dex_client = DexSwapOneInch()
-        else:
-            from dxsp.protocols import DexSwapUniswap
-
-            self.dex_client = DexSwapUniswap()
