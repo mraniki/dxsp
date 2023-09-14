@@ -35,15 +35,46 @@ class DexSwap:
         """
         self.logger = logger
         self.account = AccountUtils()
-        exchanges = settings.exchanges.dex
+        exchanges = settings.dex
         self.contract_utils = ContractUtils()
         self.dex_info = []
         try:
             for exchange in exchanges:
                 logger.debug(f"Loading {exchange}")
+                w3 = Web3(Web3.HTTPProvider(exchanges[exchange]["rpc"]))
+                if not w3.net.listening:
+                    logger.error(f"w3 error with {exchange}")
+                    continue
+
+                w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
+
+                protocol_type = exchanges[exchange]["protocol_type"]
+                protocol_version = exchanges[exchange]["protocol_version"]
+                api_endpoint = exchanges[exchange]["api_endpoint"]
+                api_key = exchanges[exchange]["api_key"]
+                router_contract_addr = exchanges[exchange]["router_contract_addr"]
+                block_explorer_url = exchanges[exchange]["block_explorer_url"]
+                block_explorer_api = exchanges[exchange]["block_explorer_api"]
+                trading_asset_address = exchanges[exchange]["trading_asset_address"]
+                trading_risk_amount = exchanges[exchange]["trading_risk_amount"]
+
+                contract_utils = ContractUtils(w3)
+                account = AccountUtils(w3)
+                dex_client = DexSwapExchange
+                self.dex_info.append(
+                    {
+                        "dex_client": cx_client,
+                        "account": account,
+                        "exchange_name": exchange_name,
+                        "exchange_defaulttype": exchange_defaulttype,
+                        "exchange_ordertype": exchange_ordertype,
+                        "trading_asset": trading_asset,
+                        "trading_risk_amount": trading_risk_amount,
+                    }
+                )
         except Exception as e:
             logger.error(e)
-
+            continue
 
     def load_exchanges(self):
         """
@@ -57,7 +88,7 @@ class DexSwap:
 
     async def get_protocol(self):
         """
-        Return the dex_swap object based
+        Return the dex_client object based
         on the protocol type specified in the config file.
         """
 
@@ -113,8 +144,8 @@ class DexSwap:
         """
         try:
             self.logger.debug("get swap")
-            dex_swap = await self.get_protocol()
-            if dex_swap is None:
+            dex_client = await self.get_protocol()
+            if dex_client is None:
                 raise ValueError("No matching protocol found")
             sell_token_address = sell_token
             self.logger.debug("sell token {}", sell_token_address)
@@ -142,7 +173,7 @@ class DexSwap:
                 * decimal.Decimal((settings.dex_trading_slippage / 100))
             )
             self.logger.debug(order_amount)
-            order = await self.dex_swap.get_swap(
+            order = await self.dex_client.get_swap(
                 sell_token_address, buy_token_address, order_amount
             )
 
@@ -178,15 +209,17 @@ class DexSwap:
 
         """
         try:
-            dex_swap = await self.get_protocol()
-            if dex_swap is None:
+            dex_client = await self.get_protocol()
+            if dex_client is None:
                 raise ValueError("No matching protocol found")
-            buy_address = dex_swap.trading_asset_address
+            buy_address = dex_client.trading_asset_address
             sell_address = await self.contract_utils.search_contract_address(sell_token)
-            quote = await dex_swap.dex_swap_impl.get_quote(buy_address, sell_address)
+            quote = await dex_client.dex_client_impl.get_quote(
+                buy_address, sell_address
+            )
             quote = f"🦄 {quote}"
             symbol = await self.contract_utils.get_token_symbol(
-                dex_swap.trading_asset_address
+                dex_client.trading_asset_address
             )
             return f"{quote} {symbol}"
 
@@ -322,12 +355,12 @@ class DexSwapExchange:
         if self.protocol_type == "0x":
             from dxsp.protocols import DexSwapZeroX
 
-            self.dex_swap = DexSwapZeroX()
+            self.dex_client = DexSwapZeroX()
         elif self.protocol_type == "1inch":
             from dxsp.protocols import DexSwapOneInch
 
-            self.dex_swap = DexSwapOneInch()
+            self.dex_client = DexSwapOneInch()
         else:
             from dxsp.protocols import DexSwapUniswap
 
-            self.dex_swap = DexSwapUniswap()
+            self.dex_client = DexSwapUniswap()

@@ -47,18 +47,18 @@ token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/t
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
 
-[default.exchanges.dex.eth]
-dex_rpc = "https://rpc.ankr.com/eth"
-dex_protocol_type = "uniswap"
-dex_protocol_version = 2
-dex_api_endpoint = ''
-dex_api_key = ""
-dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+[default.dex.eth]
+rpc = "https://rpc.ankr.com/eth"
+protocol_type = "uniswap"
+protocol_version = 2
+api_endpoint = ''
+api_key = ""
+router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
 trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-dex_block_explorer_url = "https://api.etherscan.io/api?"
-dex_block_explorer_api = "798437294880920392"
+block_explorer_url = "https://api.etherscan.io/api?"
+block_explorer_api = "798437294880920392"
 
-[default.exchanges.dex.bsc]
+[default.dex.bsc]
 rpc = "https://rpc.ankr.com/bsc"
 protocol_type = "uniswap"
 protocol_version = 2
@@ -69,7 +69,7 @@ trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 block_explorer_url = "https://api.bscscan.com/api?"
 block_explorer_api = "798437294880920392"
 
-[default.exchanges.dex.polygon]
+[default.dex.polygon]
 rpc = "https://rpc.ankr.com/polygon"
 protocol_type = "0x"
 protocol_version = 4
