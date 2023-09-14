@@ -16,42 +16,17 @@
 VALUE = "On default"
 dex_wallet_address = "0x1234567890123456789012345678901234567890"
 dex_private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
+# Talky App Related Settings
+# Enable/Disable DXSP
+dxsp_enabled = true
 
-[default.exchanges.uniswap_eth]
-dex_rpc = "https://rpc.ankr.com/eth"
-dex_protocol_type = "uniswap"
-dex_protocol_version = 2
-dex_api_endpoint = ''
-dex_api_key = ""
-dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
-trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-dex_block_explorer_url = "https://api.etherscan.io/api?"
-dex_block_explorer_api = "798437294880920392"
-
-[default.exchanges.uniswap_bsc]
-dex_rpc = "https://rpc.ankr.com/bsc"
-dex_protocol_type = "uniswap"
-dex_protocol_version = 2
-dex_api_endpoint = ''
-dex_api_key = ""
-dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
-trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-dex_block_explorer_url = "https://api.bscscan.com/api?"
-dex_block_explorer_api = "798437294880920392"
-
-[default.exchanges.zerox_polygon]
-dex_rpc = "https://rpc.ankr.com/polygon"
-dex_protocol_type = "0x"
-dex_protocol_version = 4
-dex_api_endpoint = "https://polygon.api.0x.org/"
-dex_api_key = ""
-dex_router_contract_addr = "0xdef1c0ded9bec7f1a1670819833240f027b25eff"
-trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-trading_risk_amount = 10
-dex_trading_slippage = 2
-dex_block_explorer_url = "https://api.polygonscan.com/api?"
-dex_block_explorer_api = "798437294880920392"
-
+# help message used in talky app
+dxsp_commands = """
+🎯 BUY WBTC
+🎯 /q WBTC
+🏦 /bal
+🏦 /pos
+"""
 # Header to use for retrieving urls content below
 headers = {User-Agent= 'Mozilla/5.0'}
 
@@ -72,17 +47,41 @@ token_testnet_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/t
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
 
-# Talky App Related Settings
-# Enable/Disable DXSP
-dxsp_enabled = true
+[default.exchanges.dex.eth]
+dex_rpc = "https://rpc.ankr.com/eth"
+dex_protocol_type = "uniswap"
+dex_protocol_version = 2
+dex_api_endpoint = ''
+dex_api_key = ""
+dex_router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+dex_block_explorer_url = "https://api.etherscan.io/api?"
+dex_block_explorer_api = "798437294880920392"
 
-# help message used in talky app
-dxsp_commands = """
-🎯 BUY WBTC
-🎯 /q WBTC
-🏦 /bal
-🏦 /pos
-"""
+[default.exchanges.dex.bsc]
+rpc = "https://rpc.ankr.com/bsc"
+protocol_type = "uniswap"
+protocol_version = 2
+api_endpoint = ''
+api_key = ""
+router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+block_explorer_url = "https://api.bscscan.com/api?"
+block_explorer_api = "798437294880920392"
+
+[default.exchanges.dex.polygon]
+rpc = "https://rpc.ankr.com/polygon"
+protocol_type = "0x"
+protocol_version = 4
+api_endpoint = "https://polygon.api.0x.org/"
+api_key = ""
+router_contract_addr = "0xdef1c0ded9bec7f1a1670819833240f027b25eff"
+trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+trading_risk_amount = 10
+trading_slippage = 2
+block_explorer_url = "https://api.polygonscan.com/api?"
+block_explorer_api = "798437294880920392"
+
 
 ########################################
 ###     END OF DEFAULT SETTINGS      ###

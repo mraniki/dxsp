@@ -35,18 +35,24 @@ class DexSwap:
         """
         self.logger = logger
         self.account = AccountUtils()
-        self.exchanges = []
+        exchanges = settings.exchanges.dex
         self.contract_utils = ContractUtils()
-        self.load_exchanges()
+        self.dex_info = []
+        try:
+            for exchange in exchanges:
+                logger.debug(f"Loading {exchange}")
+        except Exception as e:
+            logger.error(e)
+
 
     def load_exchanges(self):
         """
         Load the exchanges based on the settings in the config file.
         Create a DexSwap object for each exchange and add it to the list.
         """
-        exchange_configs = getattr(settings, "exchanges", [])
-        for exchange_config in exchange_configs:
-            exchange = DexSwapExchange(exchange_config)
+        exchanges = getattr(settings, "exchanges", [])
+        for exchange in exchanges:
+            exchange = DexSwapExchange(exchange)
             self.exchanges.append(exchange)
 
     async def get_protocol(self):
