@@ -23,7 +23,7 @@ def DexTrader_fixture():
 
 @pytest.fixture(name="dex")
 def DexClient_fixture(dextrader):
-    return dextrader.dex_info[0].client
+    return dextrader.dex_info[0]["client"]
 
 
 @pytest.fixture
