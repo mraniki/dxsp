@@ -10,6 +10,7 @@ from web3 import Web3
 from web3.gas_strategies.time_based import medium_gas_price_strategy
 
 from dxsp.config import settings
+from dxsp.protocols.client import DexClient
 from dxsp.utils import AccountUtils, ContractUtils
 
 
@@ -36,69 +37,50 @@ class DexTrader:
         exchanges = settings.dex
         self.dex_info = []
         try:
-            for exchange in exchanges:
+            self.commands = settings.dxsp_commands
+            for cx in exchanges:
+                logger.debug(f"Loading {cx}")
+                w3 = w3 or Web3(Web3.HTTPProvider(exchanges[cx]["rpc"]))
+                protocol_type = exchanges[cx]["protocol_type"]
+                protocol_version= exchanges[cx]["protocol_version"]
+                api_endpoint= exchanges[cx]["api_endpoint"]
+                api_key= exchanges[cx]["api_key"]
+                router= exchanges[cx]["router_contract_addr"]
+                trading_asset_address= exchanges[cx]["trading_asset_address"]
+                block_explorer_url= exchanges[cx]["block_explorer_url"]
+                block_explorer_api= exchanges[cx]["block_explorer_api"]
+                account_utils= AccountUtils(w3)
+                contract_utils= ContractUtils(w3)
+                gas_strategy= w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
+                client = DexClient(w3=w3,
+                                   protocol_type=protocol_type,
+                                   protocol_version=protocol_version,
+                                   api_endpoint=api_endpoint,
+                                   api_key=api_key,
+                                   router=router,
+                                   trading_asset_address=trading_asset_address,
+                                   block_explorer_url=block_explorer_url,
+                                   block_explorer_api=block_explorer_api)
                 self.dex_info.append(
                     {
-                        "rpc": exchanges[exchange]["dex_rpc"],
-                        "w3": Web3(Web3.HTTPProvider(settings.dex_rpc)),
-                        "protocol_type": exchanges[exchange]["protocol_type"],
-                        "protocol_version": exchanges[exchange]["protocol_version"],
-                        "router": None,
-                        "account": AccountUtils(w3),
-                        "dex_client": DexSwap(w3, protocol_type, protocol_version),
-                        "contract_utils": ContractUtils(w3),
-                        "gas_strategy": w3.eth.set_gas_price_strategy(
-                            medium_gas_price_strategy
-                        ),
+                        "w3": w3,
+                        "protocol_type": protocol_type,
+                        "protocol_version": protocol_version,
+                        "api_endpoint": api_endpoint,
+                        "api_key": api_key,
+                        "router": router,
+                        "client": client,
+                        "trading_asset_address": trading_asset_address,
+                        "block_explorer_url": block_explorer_url,
+                        "block_explorer_api": block_explorer_api,
+                        "account_utils": account_utils,
+                        "contract_utils": contract_utils,
+                        "gas_strategy": gas_strategy
                     }
                 )
-                if not w3.net.listening:
-                    logger.debug("w3 not connected {}", rpc)
 
         except Exception as e:
             logger.error(e)
-
-    def get_client(self):
-        """
-        Set the dex_swap object based
-        on the protocol type.
-        Currently supports:
-            1inch: currently blocked
-
-            0x
-
-            Uniswap V2 and V3
-
-        Returns:
-            dex_swap
-
-
-        """
-        from dxsp.protocols import DexSwapOneInch, DexSwapUniswap, DexSwapZeroX
-
-        if self.protocol_type == "0x":
-            self.dex_swap = DexSwapZeroX()
-        elif self.protocol_type == "1inch":
-            self.dex_swap = DexSwapOneInch()
-        else:
-            self.dex_swap = DexSwapUniswap()
-
-
-class DexSwap:
-    """
-    DEXswap  class to build a DexSwap Object
-    use to interact with the dex protocol
-
-    Args:
-        w3 (Optional[Web3]): Web3
-
-    Returns:
-        DexSwap
-
-
-    """
-    def __init__(self, w3: Optional[Web3] = None, protocol_type: Optional[str]None, protocol_version):
-
 
     async def execute_order(self, order_params):
         """
@@ -112,25 +94,27 @@ class DexSwap:
 
         """
         try:
-            self.logger.debug("execute order")
-            action = order_params.get("action")
-            instrument = order_params.get("instrument")
-            quantity = order_params.get("quantity", 1)
-            sell_token, buy_token = (
-                (self.account.trading_asset_address, instrument)
-                if action == "BUY"
-                else (instrument, self.account.trading_asset_address)
-            )
-            order = await self.get_swap(sell_token, buy_token, quantity)
-            if order:
-                trade_confirmation = (
-                    f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n"
+            for exchange in self.dex_info:
+                logger.debug("execute order")
+                action = order_params.get("action")
+                instrument = order_params.get("instrument")
+                quantity = order_params.get("quantity", 1)
+                sell_token, buy_token = (
+                    (self.account.trading_asset_address, instrument)
+                    if action == "BUY"
+                    else (instrument, self.account.trading_asset_address)
                 )
-                trade_confirmation += order
-                return trade_confirmation
+                order = await self.get_swap(sell_token, buy_token, quantity)
+                if order:
+                    trade_confirmation = (
+                        f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n"
+                    )
+                    trade_confirmation += order
+                    return trade_confirmation
 
         except Exception as error:
             return f"⚠️ order execution: {error}"
+
 
     async def get_swap(self, sell_token: str, buy_token: str, quantity: int) -> None:
         """
@@ -147,16 +131,17 @@ class DexSwap:
 
         """
         try:
-            self.logger.debug("get swap")
+
+            logger.debug("get swap")
             await self.get_protocol()
             sell_token_address = sell_token
-            self.logger.debug("sell token {}", sell_token_address)
+            logger.debug("sell token {}", sell_token_address)
             if not sell_token.startswith("0x"):
                 sell_token_address = await self.contract_utils.search_contract_address(
                     sell_token
                 )
             buy_token_address = buy_token
-            self.logger.debug("buy token {}", buy_token_address)
+            logger.debug("buy token {}", buy_token_address)
             if not buy_token_address.startswith("0x"):
                 buy_token_address = await self.contract_utils.search_contract_address(
                     buy_token
@@ -174,13 +159,13 @@ class DexSwap:
                 sell_token_amount_wei
                 * decimal.Decimal((settings.dex_trading_slippage / 100))
             )
-            self.logger.debug(order_amount)
+            logger.debug(order_amount)
             order = await self.dex_swap.get_swap(
                 sell_token_address, buy_token_address, order_amount
             )
 
             if not order:
-                self.logger.debug("swap order error")
+                logger.debug("swap order error")
                 raise ValueError("swap order not executed")
 
             signed_order = await self.account.get_sign(order)
@@ -188,7 +173,7 @@ class DexSwap:
             receipt = self.w3.wait_for_transaction_receipt(order_hash)
 
             if receipt["status"] != 1:
-                self.logger.debug(receipt)
+                logger.debug(receipt)
                 raise ValueError("receipt failed")
 
             return await self.contract_utils.get_confirmation(
@@ -196,7 +181,7 @@ class DexSwap:
             )
 
         except Exception as error:
-            self.logger.debug(error)
+            logger.debug(error)
             raise error
 
     async def get_quote(self, sell_token):
@@ -211,15 +196,15 @@ class DexSwap:
 
         """
         try:
-            await self.get_protocol()
-            buy_address = self.account.trading_asset_address
-            sell_address = await self.contract_utils.search_contract_address(sell_token)
-            quote = await self.dex_swap.get_quote(buy_address, sell_address)
-            quote = f"🦄 {quote}"
-            symbol = await self.contract_utils.get_token_symbol(
-                self.account.trading_asset_address
-            )
-            return f"{quote} {symbol}"
+            for cx in self.dex_info:
+                buy_address = cx["trading_asset_address"]
+                sell_address = await cx["contract_utils"](sell_token)
+                quote = await cx["client"].get_quote(buy_address, sell_address)
+                quote = f"🦄 {quote}"
+                symbol = await cx["contract_utils"].get_token_symbol(
+                    cx["trading_asset_address"]
+                )
+                return f"{quote} {symbol}"
 
         except Exception as error:
             return f"⚠️: {error}"
@@ -232,17 +217,20 @@ class DexSwap:
 
         :return: The information retrieved from the account.
         """
-        return await self.account.get_info()
+        info = ""
+        for item in self.dex_info:
+            info += await item["account_utils"].get_info()
+        return info.strip()
+
 
     async def get_help(self):
         """
-        Retrieves help information
-        using the `account.get_help()` method.
+        Get the help information for the current instance.
 
-        :return: The help information.
-        :rtype: Any
+        Returns:
+            A string containing the available commands.
         """
-        return await self.account.get_help()
+        return f"{self.commands}\n"
 
     async def get_name(self):
         """
@@ -329,3 +317,4 @@ class DexSwap:
             for the account within the specified period.
         """
         return await self.account.get_account_pnl(period)
+
