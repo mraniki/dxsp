@@ -78,8 +78,7 @@ class DexTrader:
                 }
                 logger.debug(dex_info)
                 client = DexClient(dex_info)
-                dex_info["client"] = client
-                self.dex_info.append(dex_info)
+                self.dex_info.append(client)
             logger.debug("init complete")
 
         except Exception as e:
