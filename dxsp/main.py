@@ -56,7 +56,9 @@ class DexTrader:
                 block_explorer_api = exchanges[dx]["block_explorer_api"]
                 trading_risk_amount = exchanges[dx]["trading_risk_amount"]
                 trading_slippage = exchanges[dx]["trading_slippage"]
+                logger.debug(trading_slippage)
                 gas_strategy = w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
+                logger.debug(gas_strategy)
                 dex_info = {
                     "wallet_address": wallet_address,
                     "private_key": private_key,
@@ -74,9 +76,11 @@ class DexTrader:
                     "block_explorer_api": block_explorer_api,
                     "gas_strategy": gas_strategy,
                 }
+                logger.debug(dex_info)
                 client = DexClient(**dex_info)
                 dex_info["client"] = client
                 self.dex_info.append(dex_info)
+            logger.debug("init complete")
 
         except Exception as e:
             logger.error(e)
