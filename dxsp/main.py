@@ -195,7 +195,9 @@ class DexTrader:
 
         """
         try:
+            logger.debug(self.dex_info)
             for dx in self.dex_info:
+                logger.debug(dx)
                 client = dx["client"]
                 buy_address = client.trading_asset_address
                 sell_address = await client.contract_utils.search_contract_address(
