@@ -3,11 +3,11 @@
 
 """
 from dxsp.config import settings
-from dxsp.main import DexSwap
+from dxsp.protocols import DexClient
 from dxsp.utils.utils import get
 
 
-class DexSwapZeroX(DexSwap):
+class DexZeroX(DexClient):
     """
     A DEXSwap sub class using 0x protocol
     Implementation of 0x swap protocol
