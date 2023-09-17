@@ -255,7 +255,6 @@ class DexTrader:
             A string containing the available commands.
         """
         return f"{self.commands}\n"
-        return f"{self.commands}\n"
 
     async def get_name(self):
         """
