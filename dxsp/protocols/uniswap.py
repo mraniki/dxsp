@@ -4,10 +4,10 @@ uniswap  🦄
 from uniswap import Uniswap
 
 from dxsp.config import settings
-from dxsp.main import DexSwap
+from dxsp.protocols import DexClient
 
 
-class DexSwapUniswap(DexSwap):
+class DexUniswap(DexClient):
     """
     A DEXSwap sub class using uniswap-python library
 
