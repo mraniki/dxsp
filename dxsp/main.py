@@ -38,54 +38,37 @@ class DexTrader:
         self.dex_info = []
         self.commands = settings.dxsp_commands
         try:
-            for cx in exchanges:
-                logger.debug(f"Loading {cx}")
-                w3 = w3 or Web3(Web3.HTTPProvider(exchanges[cx]["rpc"]))
-                protocol_type = exchanges[cx]["protocol_type"]
-                protocol_version = exchanges[cx]["protocol_version"]
-                api_endpoint = exchanges[cx]["api_endpoint"]
-                api_key = exchanges[cx]["api_key"]
-                router = exchanges[cx]["router_contract_addr"]
-                trading_asset_address = exchanges[cx]["trading_asset_address"]
-                block_explorer_url = exchanges[cx]["block_explorer_url"]
-                block_explorer_api = exchanges[cx]["block_explorer_api"]
-                trading_risk_amount = exchanges[cx]["trading_risk_amount"]
-                trading_slippage = exchanges[cx]["trading_slippage"]
-                account_utils = AccountUtils(w3)
-                contract_utils = ContractUtils(w3)
+            for dx in exchanges:
+                logger.debug(f"Loading {dx}")
+                w3 = w3 or Web3(Web3.HTTPProvider(exchanges[dx]["rpc"]))
+                protocol_type = exchanges[dx]["protocol_type"]
+                protocol_version = exchanges[dx]["protocol_version"]
+                api_endpoint = exchanges[dx]["api_endpoint"]
+                api_key = exchanges[dx]["api_key"]
+                router = exchanges[dx]["router_contract_addr"]
+                trading_asset_address = exchanges[dx]["trading_asset_address"]
+                block_explorer_url = exchanges[dx]["block_explorer_url"]
+                block_explorer_api = exchanges[dx]["block_explorer_api"]
+                trading_risk_amount = exchanges[dx]["trading_risk_amount"]
+                trading_slippage = exchanges[dx]["trading_slippage"]
                 gas_strategy = w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
-                client = DexClient(
-                    w3=w3,
-                    protocol_type=protocol_type,
-                    protocol_version=protocol_version,
-                    api_endpoint=api_endpoint,
-                    api_key=api_key,
-                    router=router,
-                    trading_asset_address=trading_asset_address,
-                    trading_risk_amount = trading_risk_amount,
-                    trading_slippage = trading_slippage,
-                    block_explorer_url=block_explorer_url,
-                    block_explorer_api=block_explorer_api,
-                )
-                self.dex_info.append(
-                    {
-                        "w3": w3,
-                        "protocol_type": protocol_type,
-                        "protocol_version": protocol_version,
-                        "api_endpoint": api_endpoint,
-                        "api_key": api_key,
-                        "router": router,
-                        "client": client,
-                        "trading_asset_address": trading_asset_address,
-                        "trading_risk_amount": trading_risk_amount,
-                        "trading_slippage": trading_slippage,
-                        "block_explorer_url": block_explorer_url,
-                        "block_explorer_api": block_explorer_api,
-                        "account_utils": account_utils,
-                        "contract_utils": contract_utils,
-                        "gas_strategy": gas_strategy,
-                    }
-                )
+                dex_info = {
+                    "w3": w3,
+                    "protocol_type": protocol_type,
+                    "protocol_version": protocol_version,
+                    "api_endpoint": api_endpoint,
+                    "api_key": api_key,
+                    "router": router,
+                    "trading_asset_address": trading_asset_address,
+                    "trading_risk_amount": trading_risk_amount,
+                    "trading_slippage": trading_slippage,
+                    "block_explorer_url": block_explorer_url,
+                    "block_explorer_api": block_explorer_api,
+                    "gas_strategy": gas_strategy,
+                }
+                client = DexClient(**dex_info)
+                dex_info["client"] = client
+                self.dex_info.append(dex_info)
 
         except Exception as e:
             logger.error(e)
@@ -112,7 +95,9 @@ class DexTrader:
                     if action == "BUY"
                     else (instrument, dx["trading_asset_address"])
                 )
-                order = await self.get_swap(dx["client"],sell_token, buy_token, quantity)
+                order = await self.get_swap(
+                    dx["client"], sell_token, buy_token, quantity
+                )
                 if order:
                     trade_confirmation = (
                         f"⬇️ {instrument}"
@@ -125,7 +110,9 @@ class DexTrader:
         except Exception as error:
             return f"⚠️ order execution: {error}"
 
-    async def get_swap(self, dex_client, sell_token: str, buy_token: str, quantity: int) -> None: 
+    async def get_swap(
+        self, dex_client, sell_token: str, buy_token: str, quantity: int
+    ) -> None:
         """
         Execute a swap
 
@@ -143,39 +130,35 @@ class DexTrader:
             logger.debug("get swap")
             sell_token_address = sell_token
             logger.debug("sell token {}", sell_token_address)
-            logger.debug("sell token {}", sell_token_address)
             if not sell_token.startswith("0x"):
-                sell_token_address = await dex_client.search_contract_address(
-                    sell_token
+                sell_token_address = (
+                    await dex_client.contract_utils.search_contract_address(sell_token)
                 )
             buy_token_address = buy_token
             logger.debug("buy token {}", buy_token_address)
-            logger.debug("buy token {}", buy_token_address)
             if not buy_token_address.startswith("0x"):
-                buy_token_address = await dex_client.["contract_utils"].search_contract_address(
-                    buy_token
+                buy_token_address = (
+                    await dex_client.contract_utils.search_contract_address(buy_token)
                 )
-            sell_amount = await dex_client.["contract_utils"].calculate_sell_amount(
-                sell_token_address, dex_client.["account_utils"].wallet_address, quantity
+            sell_amount = await dex_client.contract_utils.calculate_sell_amount(
+                sell_token_address, dex_client.account.wallet_address, quantity
             )
             sell_token_amount_wei = sell_amount * (
-                10 ** (await dex_client.["account_utils"].get_token_decimals(sell_token_address))
+                10 ** (await dex_client.account.get_token_decimals(sell_token_address))
             )
-            if self.protocol_type == "0x":
-                await dex_client.["account_utils"].get_approve(sell_token_address)
+            if dex_client.protocol_type == "0x":
+                await dex_client.account.get_approve(sell_token_address)
 
             order_amount = int(
                 sell_token_amount_wei
-                * decimal.Decimal((dx["trading_slippage"] / 100))
+                * decimal.Decimal((dex_client.trading_slippage / 100))
             )
-            logger.debug(order_amount)
             logger.debug(order_amount)
             order = await dex_client.get_swap(
                 sell_token_address, buy_token_address, order_amount
             )
 
             if not order:
-                logger.debug("swap order error")
                 logger.debug("swap order error")
                 raise ValueError("swap order not executed")
 
@@ -185,15 +168,11 @@ class DexTrader:
 
             if receipt["status"] != 1:
                 logger.debug(receipt)
-                logger.debug(receipt)
                 raise ValueError("receipt failed")
 
-            return await dex_client.["account_utils"].get_confirmation(
-                receipt["transactionHash"]
-            )
+            return await dex_client.account.get_confirmation(receipt["transactionHash"])
 
         except Exception as error:
-            logger.debug(error)
             logger.debug(error)
             raise error
 
@@ -209,27 +188,29 @@ class DexTrader:
 
         """
         try:
-            for cx in self.dex_info:
-                buy_address = cx["trading_asset_address"]
-                sell_address = await cx["contract_utils"](sell_token)
-                quote = await cx["client"].get_quote(buy_address, sell_address)
-                quote = f"🦄 {quote}"
-                symbol = await cx["contract_utils"].get_token_symbol(
-                    cx["trading_asset_address"]
+            for dx in self.dex_info:
+                client = dx["client"]
+                buy_address = client.trading_asset_address
+                sell_address = await client.contract_utils.search_contract_address(
+                    sell_token
                 )
-                return f"{quote} {symbol}"
-            for cx in self.dex_info:
-                buy_address = cx["trading_asset_address"]
-                sell_address = await cx["contract_utils"](sell_token)
-                quote = await cx["client"].get_quote(buy_address, sell_address)
+                quote = await client.get_quote(buy_address, sell_address)
                 quote = f"🦄 {quote}"
-                symbol = await cx["contract_utils"].get_token_symbol(
-                    cx["trading_asset_address"]
+                symbol = await client.contract_utils.get_token_symbol(
+                    client.trading_asset_address
                 )
                 return f"{quote} {symbol}"
 
         except Exception as error:
             return f"⚠️: {error}"
+
+    async def get_help(self):
+        """
+        Get the help information for the current instance.
+        Returns:
+            A string containing the available commands.
+        """
+        return f"{self.commands}\n"
 
     # 🔒 USER RELATED
 
@@ -241,21 +222,8 @@ class DexTrader:
         """
         info = ""
         for item in self.dex_info:
-            info += await item["account_utils"].get_info()
+            info += await item["client"].account.get_info()
         return info.strip()
-
-    async def get_help(self):
-        """
-        Get the help information for the current instance.
-        Get the help information for the current instance.
-
-        Returns:
-            A string containing the available commands.
-        Returns:
-            A string containing the available commands.
-        """
-        return f"{self.commands}\n"
-        return f"{self.commands}\n"
 
     async def get_name(self):
         """
@@ -263,7 +231,10 @@ class DexTrader:
 
         :return: The name of the account.
         """
-        return await self.account.get_name()
+        info = ""
+        for item in self.dex_info:
+            info += await item["client"].get_name()
+        return info.strip()
 
     async def get_account_balance(self):
         """
@@ -272,7 +243,10 @@ class DexTrader:
         :return: The account balance.
         :rtype: float
         """
-        return await self.account.get_account_balance()
+        info = ""
+        for item in self.dex_info:
+            info += await item["client"].get_account_balance()
+        return info.strip()
 
     async def get_trading_asset_balance(self):
         """
@@ -284,7 +258,10 @@ class DexTrader:
                  - 'free': The free balance of the asset.
                  - 'locked': The locked balance of the asset.
         """
-        return await self.account.get_trading_asset_balance()
+        info = ""
+        for item in self.dex_info:
+            info += await item["client"].get_trading_asset_balance()
+        return info.strip()
 
     async def get_account_position(self):
         """
@@ -293,7 +270,10 @@ class DexTrader:
         :return: The account position.
         :rtype: AccountPosition
         """
-        return await self.account.get_account_position()
+        info = ""
+        for item in self.dex_info:
+            info += await item["client"].get_account_position()
+        return info.strip()
 
     async def get_account_margin(self):
         """
@@ -302,7 +282,10 @@ class DexTrader:
         :return: The account margin.
         :rtype: float
         """
-        return await self.account.get_account_margin()
+        info = ""
+        for item in self.dex_info:
+            info += await item["client"].get_account_margin()
+        return info.strip()
 
     async def get_account_open_positions(self):
         """
@@ -310,7 +293,10 @@ class DexTrader:
 
         :return: A list of open positions in the account.
         """
-        return await self.account.get_account_open_positions()
+        info = ""
+        for item in self.dex_info:
+            info += await item["client"].get_account_open_positions()
+        return info.strip()
 
     async def get_account_transactions(self, period=24):
         """
@@ -325,7 +311,10 @@ class DexTrader:
             List[Transaction]: A list of
             transaction objects representing the account transactions.
         """
-        return await self.account.get_account_transactions(period)
+        info = ""
+        for item in self.dex_info:
+            info += await item["client"].get_account_transactions(period)
+        return info.strip()
 
     async def get_account_pnl(self, period=24):
         """
@@ -341,4 +330,7 @@ class DexTrader:
             float: The profit and loss (PnL)
             for the account within the specified period.
         """
-        return await self.account.get_account_pnl(period)
+        info = ""
+        for item in self.dex_info:
+            info += await item["client"].get_account_pnl(period)
+        return info.strip()
