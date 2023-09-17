@@ -30,8 +30,8 @@ class DexTrader:
 
     def __init__(self, w3: Optional[Web3] = None):
         """
-        Initialize the DexSwap object to interact with
-        w3 contracts.
+        Initialize the DexTrader object
+        to interact with exchanges
 
         """
         exchanges = settings.dex

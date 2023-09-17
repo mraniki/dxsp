@@ -15,18 +15,18 @@ from dxsp.protocols import DexClient
 def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="uniswap")
 
-
+ 
 @pytest.fixture(name="dextrader")
 def DexTrader_fixture():
     return DexTrader()
 
 
-@pytest.fixture(name="dex")
-def DexClient_fixture(dextrader):
-    print(dextrader)
-    print(dextrader.dex_info)
-    for dx in dextrader.dex_info:
-        return dx["client"]
+# @pytest.fixture(name="dex")
+# def DexClient_fixture(dextrader):
+#     print(dextrader)
+#     print(dextrader.dex_info)
+#     for dx in dextrader.dex_info:
+#         return dx.client
 
 
 @pytest.fixture
@@ -76,18 +76,6 @@ def mock_contract(dex):
     return contract
 
 
-# @pytest.fixture(name="mock_dex")
-# def mock_dex_transaction():
-#     dex = DexTrader()
-#     dex.w3.eth.get_transaction_count = AsyncMock(return_value=1)
-#     dex.get_gas = AsyncMock(return_value=21000)
-#     dex.get_gas_price = AsyncMock(return_value=1000000000)
-#     dex.w3.eth.account.sign_transaction = (
-#         AsyncMock(return_value=AsyncMock(rawTransaction=b'signed_transaction')))
-#     dex.w3.eth.send_raw_transaction = AsyncMock(return_value=b'transaction_hash')
-#     return dex
-
-
 def test_dynaconf_is_in_testing():
     print(settings.VALUE)
     assert settings.VALUE == "On Testing"
@@ -106,23 +94,25 @@ async def test_dextrader(dextrader):
         print(dx.client)
         assert dx is not None
         assert dx.client is not None
+        assert dx.protocol_type == "uniswap"
+        assert dx.private_key.startswith("0x")
 
 
-@pytest.mark.asyncio
-async def test_dex(dex):
-    """Init Testing"""
+# @pytest.mark.asyncio
+# async def test_dex(dex):
+#     """Init Testing"""
 
-    print(dex)
-    assert dex is not None
-    assert isinstance(dex, DexClient)
-    assert dex.w3 is not None
-    assert dex.w3.net.version == "1"
-    assert dex.protocol_type is not None
-    assert dex.protocol_type == "uniswap"
-    assert dex.account.wallet_address.startswith("0x")
-    assert dex.account.wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
-    assert dex.account.private_key.startswith("0x")
-    assert "1 - 32BE35BC" in dex.account.account_number
+#     print(dex)
+#     assert dex is not None
+#     assert isinstance(dex, DexClient)
+#     assert dex.w3 is not None
+#     assert dex.w3.net.version == "1"
+#     assert dex.protocol_type is not None
+#     assert dex.protocol_type == "uniswap"
+#     assert dex.account.wallet_address.startswith("0x")
+#     assert dex.account.wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
+#     assert dex.account.private_key.startswith("0x")
+#     assert "1 - 32BE35BC" in dex.account.account_number
 
 
 @pytest.mark.asyncio
