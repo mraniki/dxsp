@@ -107,7 +107,9 @@ class DexTrader:
                 order = await self.get_swap(sell_token, buy_token, quantity)
                 if order:
                     trade_confirmation = (
-                        f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n"
+                        f"⬇️ {instrument}"
+                        if (action == "SELL")
+                        else f"⬆️ {instrument}\n"
                     )
                     trade_confirmation += order
                     return trade_confirmation
@@ -131,16 +133,17 @@ class DexTrader:
 
         """
         try:
-
             logger.debug("get swap")
             await self.get_protocol()
             sell_token_address = sell_token
+            logger.debug("sell token {}", sell_token_address)
             logger.debug("sell token {}", sell_token_address)
             if not sell_token.startswith("0x"):
                 sell_token_address = await self.contract_utils.search_contract_address(
                     sell_token
                 )
             buy_token_address = buy_token
+            logger.debug("buy token {}", buy_token_address)
             logger.debug("buy token {}", buy_token_address)
             if not buy_token_address.startswith("0x"):
                 buy_token_address = await self.contract_utils.search_contract_address(
@@ -160,11 +163,13 @@ class DexTrader:
                 * decimal.Decimal((settings.dex_trading_slippage / 100))
             )
             logger.debug(order_amount)
+            logger.debug(order_amount)
             order = await self.dex_swap.get_swap(
                 sell_token_address, buy_token_address, order_amount
             )
 
             if not order:
+                logger.debug("swap order error")
                 logger.debug("swap order error")
                 raise ValueError("swap order not executed")
 
@@ -174,6 +179,7 @@ class DexTrader:
 
             if receipt["status"] != 1:
                 logger.debug(receipt)
+                logger.debug(receipt)
                 raise ValueError("receipt failed")
 
             return await self.contract_utils.get_confirmation(
@@ -181,6 +187,7 @@ class DexTrader:
             )
 
         except Exception as error:
+            logger.debug(error)
             logger.debug(error)
             raise error
 
@@ -196,6 +203,15 @@ class DexTrader:
 
         """
         try:
+            for cx in self.dex_info:
+                buy_address = cx["trading_asset_address"]
+                sell_address = await cx["contract_utils"](sell_token)
+                quote = await cx["client"].get_quote(buy_address, sell_address)
+                quote = f"🦄 {quote}"
+                symbol = await cx["contract_utils"].get_token_symbol(
+                    cx["trading_asset_address"]
+                )
+                return f"{quote} {symbol}"
             for cx in self.dex_info:
                 buy_address = cx["trading_asset_address"]
                 sell_address = await cx["contract_utils"](sell_token)
@@ -222,14 +238,17 @@ class DexTrader:
             info += await item["account_utils"].get_info()
         return info.strip()
 
-
     async def get_help(self):
         """
+        Get the help information for the current instance.
         Get the help information for the current instance.
 
         Returns:
             A string containing the available commands.
+        Returns:
+            A string containing the available commands.
         """
+        return f"{self.commands}\n"
         return f"{self.commands}\n"
 
     async def get_name(self):
