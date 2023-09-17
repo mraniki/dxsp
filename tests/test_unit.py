@@ -132,7 +132,7 @@ async def test_dextrader(dextrader):
 @pytest.mark.asyncio
 async def test_get_quote(dextrader):
     """getquote Testing"""
-    print(dextrader)
+    print(dextrader.dex_info)
     result = await dextrader.get_quote("UNI")
     print(result)
     assert result is not None

@@ -35,6 +35,7 @@ class DexTrader:
 
         """
         exchanges = settings.dex
+        logger.debug(exchanges)
         self.dex_info = []
         self.commands = settings.dxsp_commands
         try:
