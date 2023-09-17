@@ -55,6 +55,8 @@ api_endpoint = ''
 api_key = ""
 router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
 trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+trading_risk_amount = 10
+trading_slippage = 2
 block_explorer_url = "https://api.etherscan.io/api?"
 block_explorer_api = "798437294880920392"
 
@@ -66,6 +68,8 @@ api_endpoint = ''
 api_key = ""
 router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
 trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+trading_risk_amount = 10
+trading_slippage = 2
 block_explorer_url = "https://api.bscscan.com/api?"
 block_explorer_api = "798437294880920392"
 
