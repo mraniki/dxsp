@@ -44,6 +44,7 @@ class DexTrader:
                 wallet_address = exchanges[dx]["wallet_address"]
                 private_key = exchanges[dx]["private_key"]
                 w3 = Web3(Web3.HTTPProvider(exchanges[dx]["rpc"]))
+                logger.debug(w3)
                 protocol_type = exchanges[dx]["protocol_type"]
                 protocol_version = exchanges[dx]["protocol_version"]
                 api_endpoint = exchanges[dx]["api_endpoint"]
