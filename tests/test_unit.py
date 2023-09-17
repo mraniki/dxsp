@@ -23,7 +23,10 @@ def DexTrader_fixture():
 
 @pytest.fixture(name="dex")
 def DexClient_fixture(dextrader):
-    return dextrader.dex_info[0]["client"]
+    print(dextrader)
+    print(dextrader.dex_info)
+    for dx in dextrader.dex_info:
+        return dx["client"]
 
 
 @pytest.fixture
@@ -98,6 +101,11 @@ async def test_dextrader(dextrader):
     assert isinstance(dextrader, DexTrader)
     assert dextrader.commands is not None
     assert dextrader.dex_info is not None
+    for dx in dextrader.dex_info:
+        print(dx)
+        print(dx.client)
+        assert dx is not None
+        assert dx.client is not None
 
 
 @pytest.mark.asyncio
