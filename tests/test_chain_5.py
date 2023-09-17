@@ -3,7 +3,7 @@
 """
 import pytest
 
-from dxsp import DexSwap
+from dxsp import DexTrader
 from dxsp.config import settings
 
 
@@ -13,7 +13,7 @@ def set_test_settings():
 
 @pytest.fixture(name="dex")
 def DexSwap_fixture():
-    return DexSwap()
+    return DexTrader()
 
 
 def test_dynaconf_is_in_testing():

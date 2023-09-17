@@ -6,7 +6,7 @@ from unittest.mock import AsyncMock, patch
 import pytest
 from web3 import EthereumTesterProvider, Web3
 
-from dxsp import DexSwap
+from dxsp import DexTrader
 from dxsp.config import settings
 
 
@@ -17,7 +17,7 @@ def set_test_settings():
 
 @pytest.fixture(name="dex")
 def DexSwap_fixture():
-    return DexSwap()
+    return DexTrader()
 
 
 @pytest.fixture
@@ -69,7 +69,7 @@ def mock_contract(dex):
 
 @pytest.fixture(name="mock_dex")
 def mock_dex_transaction():
-    dex = DexSwap()
+    dex = DexTrader()
     dex.w3.eth.get_transaction_count = AsyncMock(return_value=1)
     dex.get_gas = AsyncMock(return_value=21000)
     dex.get_gas_price = AsyncMock(return_value=1000000000)
@@ -87,7 +87,7 @@ def test_dynaconf_is_in_testing():
 @pytest.mark.asyncio
 async def test_dex(dex):
     """Init Testing"""
-    assert isinstance(dex, DexSwap)
+    assert isinstance(dex, DexTrader)
     assert dex.w3 is not None
     assert dex.w3.net.version == "1"
     assert dex.protocol_type is not None
@@ -128,7 +128,7 @@ async def test_get_quote_BTC(account) -> str:
     """test token account."""
     with patch("dxsp.config.settings", autospec=True):
         settings.dex_wallet_address = account
-        dex = DexSwap()
+        dex = DexTrader()
         result = await dex.get_quote('WBTC')
         print(result)
         assert result is not None

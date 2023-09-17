@@ -6,7 +6,7 @@ from unittest.mock import AsyncMock, patch
 import pytest
 from web3 import EthereumTesterProvider, Web3
 
-from dxsp import DexSwap
+from dxsp import DexTrader
 from dxsp.config import settings
 
 
@@ -17,7 +17,7 @@ def set_test_settings():
 
 @pytest.fixture(name="dex")
 def DexSwap_fixture():
-    return DexSwap()
+    return DexTrader()
 
 
 @pytest.fixture
@@ -69,7 +69,7 @@ def mock_contract(dex):
 
 @pytest.fixture(name="mock_dex")
 def mock_dex_transaction():
-    dex = DexSwap()
+    dex = DexTrader()
     dex.w3.eth.get_transaction_count = AsyncMock(return_value=1)
     dex.get_gas = AsyncMock(return_value=21000)
     dex.get_gas_price = AsyncMock(return_value=1000000000)
@@ -111,7 +111,7 @@ async def test_account_balance(account) -> str:
     with patch("dxsp.config.settings", autospec=True):
         settings.dex_wallet_address = account
         print(settings.dex_wallet_address)
-        dex = DexSwap()
+        dex = DexTrader()
         print(dex.account.wallet_address)
         result = await dex.get_account_balance()
         print(result)
@@ -125,7 +125,7 @@ async def test_trading_asset_balance(account) -> str:
     """test token account."""
     with patch("dxsp.config.settings", autospec=True):
         settings.dex_wallet_address = account
-        dex = DexSwap()
+        dex = DexTrader()
         result = await dex.get_trading_asset_balance()
         print(result)
         assert result is not None
@@ -137,7 +137,7 @@ async def test_get_account_position(account) -> str:
     with patch("dxsp.config.settings", autospec=True):
         settings.dex_wallet_address = account
         # with pytest.raises(ValueError, match='No Balance'):
-        dex = DexSwap()
+        dex = DexTrader()
         result = await dex.get_account_position()
         print(result)
         assert result is not None

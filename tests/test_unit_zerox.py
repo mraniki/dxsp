@@ -5,7 +5,7 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from dxsp import DexSwap
+from dxsp import DexTrader
 from dxsp.config import settings
 
 
@@ -16,7 +16,7 @@ def set_test_settings():
 
 @pytest.fixture(name="dex")
 def DexSwap_fixture():
-    return DexSwap()
+    return DexTrader()
 
 
 @pytest.fixture(name="order")
@@ -37,7 +37,7 @@ def test_dynaconf_is_in_testing():
 @pytest.mark.asyncio
 async def test_dex(dex):
     """Init Testing"""
-    assert isinstance(dex, DexSwap)
+    assert isinstance(dex, DexTrader)
     assert dex.w3 is not None
     assert dex.protocol_type is not None
     assert dex.protocol_type == "0x"

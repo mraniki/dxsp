@@ -7,7 +7,7 @@ import pytest
 from web3 import EthereumTesterProvider, Web3
 
 import dxsp
-from dxsp import DexSwap
+from dxsp import DexTrader
 from dxsp.config import settings
 from dxsp.utils.explorer_utils import get_account_transactions, get_explorer_abi
 from dxsp.utils.utils import get
@@ -20,7 +20,7 @@ def set_test_settings():
 
 @pytest.fixture(name="dex")
 def DexSwap_fixture():
-    return DexSwap()
+    return DexTrader()
 
 
 @pytest.fixture
@@ -72,7 +72,7 @@ def mock_contract(dex):
 
 @pytest.fixture(name="mock_dex")
 def mock_dex_transaction():
-    dex = DexSwap()
+    dex = DexTrader()
     dex.w3.eth.get_transaction_count = AsyncMock(return_value=1)
     dex.get_gas = AsyncMock(return_value=21000)
     dex.get_gas_price = AsyncMock(return_value=1000000000)
