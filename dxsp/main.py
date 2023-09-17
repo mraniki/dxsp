@@ -57,8 +57,8 @@ class DexTrader:
                 trading_risk_amount = exchanges[dx]["trading_risk_amount"]
                 trading_slippage = exchanges[dx]["trading_slippage"]
                 logger.debug(trading_slippage)
-                gas_strategy = w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
-                logger.debug(gas_strategy)
+                #gas_strategy = w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
+                #logger.debug(gas_strategy)
                 dex_info = {
                     "wallet_address": wallet_address,
                     "private_key": private_key,
@@ -74,7 +74,7 @@ class DexTrader:
                     "trading_slippage": trading_slippage,
                     "block_explorer_url": block_explorer_url,
                     "block_explorer_api": block_explorer_api,
-                    "gas_strategy": gas_strategy,
+                    #"gas_strategy": gas_strategy,
                 }
                 logger.debug(dex_info)
                 client = DexClient(**dex_info)
