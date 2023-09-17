@@ -18,9 +18,15 @@ def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="uniswap")
 
 
-@pytest.fixture(name="dex")
-def DexSwap_fixture():
+@pytest.fixture(name="dextrader")
+def DexTrader_fixture():
     return DexTrader()
+
+
+@pytest.fixture(name="dex")
+def DexClient_fixture(dextrader):
+    for dx in dextrader.dex_info:
+        yield dx.client
 
 
 @pytest.fixture
@@ -44,9 +50,9 @@ def account_fixture(web3) -> str:
 def order_params_fixture():
     """Return order parameters."""
     return {
-        'action': 'BUY',
-        'instrument': 'WBTC',
-        'quantity': 1,
+        "action": "BUY",
+        "instrument": "WBTC",
+        "quantity": 1,
     }
 
 
@@ -54,9 +60,9 @@ def order_params_fixture():
 def invalid_order_fixture():
     """Return order parameters."""
     return {
-        'action': 'BUY',
-        'instrument': 'NOTATHING',
-        'quantity': 1,
+        "action": "BUY",
+        "instrument": "NOTATHING",
+        "quantity": 1,
     }
 
 
@@ -71,14 +77,14 @@ def mock_contract(dex):
 
 
 @pytest.fixture(name="mock_dex")
-def mock_dex_transaction():
-    dex = DexTrader()
+def mock_dex_transaction(dex):
     dex.w3.eth.get_transaction_count = AsyncMock(return_value=1)
     dex.get_gas = AsyncMock(return_value=21000)
     dex.get_gas_price = AsyncMock(return_value=1000000000)
-    dex.w3.eth.account.sign_transaction = (
-        AsyncMock(return_value=AsyncMock(rawTransaction=b'signed_transaction')))
-    dex.w3.eth.send_raw_transaction = AsyncMock(return_value=b'transaction_hash')
+    dex.w3.eth.account.sign_transaction = AsyncMock(
+        return_value=AsyncMock(rawTransaction=b"signed_transaction")
+    )
+    dex.w3.eth.send_raw_transaction = AsyncMock(return_value=b"transaction_hash")
     return dex
 
 
@@ -87,13 +93,9 @@ def test_dynaconf_is_in_testing():
     assert settings.VALUE == "On Testing"
 
 
-
 @pytest.mark.asyncio
 async def test_get():
-    result = await get(
-        "http://ip.jsontest.com",
-        params=None,
-        headers=None)
+    result = await get("http://ip.jsontest.com", params=None, headers=None)
     assert result is not None
 
 
@@ -115,9 +117,9 @@ async def test_invalid_get_abi():
 async def test_get_account_transactions(dex):
     # Call the get_account_transactions method
     result = await get_account_transactions(
-        '0xdAC17F958D2ee523a2206206994597C13D831ec7',
-        dex.account.wallet_address)
+        "0xdAC17F958D2ee523a2206206994597C13D831ec7", dex.account.wallet_address
+    )
     print(f"history: {result}")
     assert result is not None
-    assert 'pnl' in result
-    assert 'tokenList' in result
+    assert "pnl" in result
+    assert "tokenList" in result
