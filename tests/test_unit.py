@@ -21,12 +21,12 @@ def DexTrader_fixture():
     return DexTrader()
 
 
-# @pytest.fixture(name="dex")
-# def DexClient_fixture(dextrader):
-#     print(dextrader)
-#     print(dextrader.dex_info)
-#     for dx in dextrader.dex_info:
-#         return dx.client
+@pytest.fixture(name="dex")
+def DexClient_fixture(dextrader):
+    print(dextrader)
+    print(dextrader.dex_info)
+    exchange = dextrader["eth"]
+    return exchange.client
 
 
 @pytest.fixture
@@ -98,21 +98,21 @@ async def test_dextrader(dextrader):
         assert dx.private_key.startswith("0x")
 
 
-# @pytest.mark.asyncio
-# async def test_dex(dex):
-#     """Init Testing"""
+@pytest.mark.asyncio
+async def test_dex(dex):
+    """Init Testing"""
 
-#     print(dex)
-#     assert dex is not None
-#     assert isinstance(dex, DexClient)
-#     assert dex.w3 is not None
-#     assert dex.w3.net.version == "1"
-#     assert dex.protocol_type is not None
-#     assert dex.protocol_type == "uniswap"
-#     assert dex.account.wallet_address.startswith("0x")
-#     assert dex.account.wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
-#     assert dex.account.private_key.startswith("0x")
-#     assert "1 - 32BE35BC" in dex.account.account_number
+    print(dex)
+    assert dex is not None
+    assert isinstance(dex, DexClient)
+    assert dex.w3 is not None
+    assert dex.w3.net.version == "1"
+    assert dex.protocol_type is not None
+    assert dex.protocol_type == "uniswap"
+    assert dex.account.wallet_address.startswith("0x")
+    assert dex.account.wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
+    assert dex.account.private_key.startswith("0x")
+    assert "1 - 32BE35BC" in dex.account.account_number
 
 
 @pytest.mark.asyncio

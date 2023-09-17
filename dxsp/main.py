@@ -16,7 +16,7 @@ from dxsp.utils import AccountUtils, ContractUtils
 
 class DexTrader:
     """
-    DEXswap  class to build a DexSwap Object
+   class to build a DexTrader Object
     use to interact with the dex protocol
 
     Args:
@@ -42,7 +42,7 @@ class DexTrader:
                 logger.debug(f"Loading {dx}")
                 wallet_address = exchanges[dx]["wallet_address"]
                 private_key = exchanges[dx]["private_key"]
-                w3 = w3 or Web3(Web3.HTTPProvider(exchanges[dx]["rpc"]))
+                w3 = Web3(Web3.HTTPProvider(exchanges[dx]["rpc"]))
                 protocol_type = exchanges[dx]["protocol_type"]
                 protocol_version = exchanges[dx]["protocol_version"]
                 api_endpoint = exchanges[dx]["api_endpoint"]
@@ -54,7 +54,7 @@ class DexTrader:
                 block_explorer_api = exchanges[dx]["block_explorer_api"]
                 trading_risk_amount = exchanges[dx]["trading_risk_amount"]
                 trading_slippage = exchanges[dx]["trading_slippage"]
-                gas_strategy = w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
+                #gas_strategy = w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
                 dex_info = {
                     "wallet_address": wallet_address,
                     "private_key": private_key,
@@ -92,7 +92,7 @@ class DexTrader:
         """
         try:
             for dx in self.dex_info:
-                logger.debug("execute order")
+                logger.debug("execute order {}", dx)
                 action = order_params.get("action")
                 instrument = order_params.get("instrument")
                 quantity = order_params.get("quantity", 1)
