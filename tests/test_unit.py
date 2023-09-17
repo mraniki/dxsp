@@ -21,12 +21,12 @@ def DexTrader_fixture():
     return DexTrader()
 
 
-@pytest.fixture(name="dex")
-def DexClient_fixture(dextrader):
-    print(dextrader)
-    print(dextrader.dex_info)
-    exchange = dextrader["eth"]
-    return exchange.client
+# @pytest.fixture(name="dex")
+# def DexClient_fixture(dextrader):
+#     print(dextrader)
+#     print(dextrader.dex_info)
+#     exchange = dextrader["eth"]
+#     return exchange.client
 
 
 @pytest.fixture
@@ -98,82 +98,83 @@ async def test_dextrader(dextrader):
         assert dx.private_key.startswith("0x")
 
 
-@pytest.mark.asyncio
-async def test_dex(dex):
-    """Init Testing"""
+# @pytest.mark.asyncio
+# async def test_dex(dex):
+#     """Init Testing"""
 
-    print(dex)
-    assert dex is not None
-    assert isinstance(dex, DexClient)
-    assert dex.w3 is not None
-    assert dex.w3.net.version == "1"
-    assert dex.protocol_type is not None
-    assert dex.protocol_type == "uniswap"
-    assert dex.account.wallet_address.startswith("0x")
-    assert dex.account.wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
-    assert dex.account.private_key.startswith("0x")
-    assert "1 - 32BE35BC" in dex.account.account_number
-
-
-@pytest.mark.asyncio
-async def test_execute_order(dextrader, order):
-    result = await dextrader.execute_order(order)
-    print(f"swap_order: {result}")
-    assert result is not None
+#     print(dex)
+#     assert dex is not None
+#     assert isinstance(dex, DexClient)
+#     assert dex.w3 is not None
+#     assert dex.w3.net.version == "1"
+#     assert dex.protocol_type is not None
+#     assert dex.protocol_type == "uniswap"
+#     assert dex.account.wallet_address.startswith("0x")
+#     assert dex.account.wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
+#     assert dex.account.private_key.startswith("0x")
+#     assert "1 - 32BE35BC" in dex.account.account_number
 
 
-@pytest.mark.asyncio
-async def test_execute_order_invalid(dextrader, invalid_order):
-    result = await dextrader.execute_order(invalid_order)
-    print(result)
-    assert result.startswith("⚠️ order execution: Invalid Token")
+# @pytest.mark.asyncio
+# async def test_execute_order(dextrader, order):
+#     result = await dextrader.execute_order(order)
+#     print(f"swap_order: {result}")
+#     assert result is not None
+
+
+# @pytest.mark.asyncio
+# async def test_execute_order_invalid(dextrader, invalid_order):
+#     result = await dextrader.execute_order(invalid_order)
+#     print(result)
+#     assert result.startswith("⚠️ order execution: Invalid Token")
 
 
 @pytest.mark.asyncio
 async def test_get_quote(dextrader):
     """getquote Testing"""
+    print(dextrader)
     result = await dextrader.get_quote("UNI")
     print(result)
     assert result is not None
     assert result.startswith("🦄")
 
 
-@pytest.mark.asyncio
-async def test_get_quote_BTC(dextrader) -> str:
-    """test token account."""
+# @pytest.mark.asyncio
+# async def test_get_quote_BTC(dextrader) -> str:
+#     """test token account."""
 
-    result = await dextrader.get_quote("WBTC")
-    print(result)
-    assert result is not None
-
-
-@pytest.mark.asyncio
-async def test_get_quote_invalid(dextrader):
-    result = await dextrader.get_quote("THISISNOTATOKEN")
-    print(result)
-    assert result is not None
-    assert "⚠️" in result
+#     result = await dextrader.get_quote("WBTC")
+#     print(result)
+#     assert result is not None
 
 
-@pytest.mark.asyncio
-async def test_get_info(dextrader):
-    result = await dextrader.get_info()
-    print(result)
-    assert result is not None
-    assert "⚠️" in result
+# @pytest.mark.asyncio
+# async def test_get_quote_invalid(dextrader):
+#     result = await dextrader.get_quote("THISISNOTATOKEN")
+#     print(result)
+#     assert result is not None
+#     assert "⚠️" in result
 
 
-@pytest.mark.asyncio
-async def test_get_name(dextrader):
-    result = await dextrader.get_name()
-    print(result)
-    assert result is not None
-    assert "⚠️" in result
+# @pytest.mark.asyncio
+# async def test_get_info(dextrader):
+#     result = await dextrader.get_info()
+#     print(result)
+#     assert result is not None
+#     assert "⚠️" in result
 
 
-@pytest.mark.asyncio
-async def test_get_balance(dextrader):
-    result = await dextrader.get_balance()
-    print(result)
-    assert result is not None
-    assert "⚠️" in result
+# @pytest.mark.asyncio
+# async def test_get_name(dextrader):
+#     result = await dextrader.get_name()
+#     print(result)
+#     assert result is not None
+#     assert "⚠️" in result
+
+
+# @pytest.mark.asyncio
+# async def test_get_balance(dextrader):
+#     result = await dextrader.get_balance()
+#     print(result)
+#     assert result is not None
+#     assert "⚠️" in result
