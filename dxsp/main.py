@@ -48,6 +48,7 @@ class DexTrader:
                 api_endpoint = exchanges[dx]["api_endpoint"]
                 api_key = exchanges[dx]["api_key"]
                 router = exchanges[dx]["router_contract_addr"]
+                factory_contract_addr = exchanges[dx]["factory_contract_addr"]
                 trading_asset_address = exchanges[dx]["trading_asset_address"]
                 block_explorer_url = exchanges[dx]["block_explorer_url"]
                 block_explorer_api = exchanges[dx]["block_explorer_api"]
@@ -63,6 +64,7 @@ class DexTrader:
                     "api_endpoint": api_endpoint,
                     "api_key": api_key,
                     "router": router,
+                    "factory_contract_addr": factory_contract_addr,
                     "trading_asset_address": trading_asset_address,
                     "trading_risk_amount": trading_risk_amount,
                     "trading_slippage": trading_slippage,
@@ -144,6 +146,7 @@ class DexTrader:
                 buy_token_address = (
                     await dex_client.contract_utils.search_contract_address(buy_token)
                 )
+
             sell_amount = await dex_client.contract_utils.calculate_sell_amount(
                 sell_token_address, dex_client.account.wallet_address, quantity
             )

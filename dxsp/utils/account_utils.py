@@ -5,7 +5,6 @@
 from typing import Optional
 
 from loguru import logger
-from web3 import Web3
 
 from dxsp import __version__
 from dxsp.config import settings
@@ -24,7 +23,6 @@ class AccountUtils:
 
     Methods:
         get_info()
-        get_name()
         get_help()
         get_account_balance()
         get_trading_asset_balance()
@@ -40,9 +38,7 @@ class AccountUtils:
 
     """
 
-    def __init__(
-        self, w3: Optional[Web3], wallet_address, private_key, trading_asset_address
-    ):
+    def __init__(self, w3, wallet_address, private_key, trading_asset_address):
         self.w3 = w3
         self.wallet_address = self.w3.to_checksum_address(wallet_address)
         self.account_number = (
@@ -64,24 +60,12 @@ class AccountUtils:
         """
         try:
             return (
-                f"ℹ️ DexSwap v{__version__}\n"
-                f"💱 {await self.get_name()}\n"
+                f"ℹ️  v{__version__}\n"
+                # f"💱 {await self.get_name()}\n"
                 f"🪪 {self.account_number}"
             )
         except Exception as error:
             return error
-
-    async def get_name(self):
-        """
-        Retrieves the name of the object being the
-        last 8 characters of the router contract address.
-
-        :return: A string representing
-        the name of the object.
-        """
-        if settings.dex_router_contract_addr:
-            return str(settings.dex_router_contract_addr)[-8:]
-
 
     async def get_account_balance(self):
         """

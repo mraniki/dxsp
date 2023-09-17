@@ -7,6 +7,7 @@ from typing import Optional
 
 from web3 import Web3
 
+from dxsp import __version__
 from dxsp.utils import AccountUtils, ContractUtils
 
 
@@ -22,7 +23,8 @@ class DexClient:
         self.protocol_version = kwargs.get("protocol_version", 2)
         self.api_endpoint = kwargs.get("api_endpoint", "https://api.0x.org/")
         self.api_key = kwargs.get("api_key")
-        self.router = kwargs.get("router")
+        self.router_contract_addr = kwargs.get("router_contract_addr")
+        self.factory_contract_addr = kwargs.get("factory_contract_addr")
         self.trading_asset_address = kwargs.get("trading_asset_address")
         self.trading_slippage = kwargs.get("trading_slippage")
         self.block_explorer_url = kwargs.get(
@@ -36,7 +38,9 @@ class DexClient:
         self.account = AccountUtils(
             self.w3, self.wallet_address, self.private_key, self.trading_asset_address
         )
-        self.contract_utils = ContractUtils(self.w3)
+        self.contract_utils = ContractUtils(
+            self.w3, self.block_explorer_url, self.block_explorer_api
+        )
 
     def _get_dex_swap_instance(self):
         if self.protocol_type == "0x":
@@ -52,6 +56,25 @@ class DexClient:
 
             return DexUniswap()
 
+    async def get_info(self):
+        """
+        Get the information about the DexSwap API.
+
+        Returns:
+            str: A string containing the version of DexSwap, the name obtained from
+                 `get_name()`, and the account number.
+        Raises:
+            Exception: If there is an error while retrieving the information.
+        """
+        try:
+            return (
+                f"ℹ️  v{__version__}\n"
+                # f"💱 {await self.get_name()}\n"
+                f"🪪 {self.account_number}"
+            )
+        except Exception as error:
+            return error
+
     async def get_quote(self, buy_address, sell_address, amount=1):
         """ """
         pass
@@ -66,7 +89,7 @@ class DexClient:
 
         :return: The name of the account.
         """
-        return await self.account.get_name()
+        return str(self.router_contract_addr)[-8:]
 
     async def get_account_balance(self):
         """

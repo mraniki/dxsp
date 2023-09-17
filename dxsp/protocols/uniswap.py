@@ -1,9 +1,9 @@
 """
 uniswap  🦄
 """
+from loguru import logger
 from uniswap import Uniswap
 
-from dxsp.config import settings
 from dxsp.protocols import DexClient
 
 
@@ -34,8 +34,8 @@ class DexUniswap(DexClient):
                 private_key=self.account.private_key,
                 version=self.protocol_version,
                 web3=self.w3,
-                factory_contract_addr=settings.dex_factory_contract_addr,
-                router_contract_addr=settings.dex_router_contract_addr,
+                factory_contract_addr=self.factory_contract_addr,
+                router_contract_addr=self.router_contract_addr,
             )
             amount_wei = amount * (
                 10 ** (await self.contract_utils.get_token_decimals(sell_address))
@@ -82,11 +82,11 @@ class DexUniswap(DexClient):
                 private_key=self.account.private_key,
                 version=self.protocol_version,
                 web3=self.w3,
-                factory_contract_addr=settings.dex_factory_contract_addr,
-                router_contract_addr=settings.dex_router_contract_addr,
+                factory_contract_addr=self.factory_contract_addr,
+                router_contract_addr=self.router_contract_addr,
             )
             return uniswap.make_trade(sell_address, buy_address, amount)
 
         except Exception as error:
-            self.logger.debug(error)
+            logger.debug(error)
             raise ValueError(f"Swap failed {error}")

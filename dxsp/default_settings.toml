@@ -14,8 +14,6 @@
 [default]
 # Dynaconf settings verification
 VALUE = "On default"
-dex_wallet_address = "0x1234567890123456789012345678901234567890"
-dex_private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
 # Talky App Related Settings
 # Enable/Disable DXSP
 dxsp_enabled = true
@@ -48,12 +46,15 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 
 
 [default.dex.eth]
+dex_wallet_address = "0x1234567890123456789012345678901234567890"
+dex_private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
 rpc = "https://rpc.ankr.com/eth"
 protocol_type = "uniswap"
 protocol_version = 2
 api_endpoint = ''
 api_key = ""
 router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
 trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 trading_risk_amount = 10
 trading_slippage = 2
@@ -61,12 +62,15 @@ block_explorer_url = "https://api.etherscan.io/api?"
 block_explorer_api = "798437294880920392"
 
 [default.dex.bsc]
+dex_wallet_address = "0x1234567890123456789012345678901234567890"
+dex_private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
 rpc = "https://rpc.ankr.com/bsc"
 protocol_type = "uniswap"
 protocol_version = 2
 api_endpoint = ''
 api_key = ""
 router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+factory_contract_addr = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"
 trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 trading_risk_amount = 10
 trading_slippage = 2
@@ -74,12 +78,15 @@ block_explorer_url = "https://api.bscscan.com/api?"
 block_explorer_api = "798437294880920392"
 
 [default.dex.polygon]
+dex_wallet_address = "0x1234567890123456789012345678901234567890"
+dex_private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
 rpc = "https://rpc.ankr.com/polygon"
 protocol_type = "0x"
 protocol_version = 4
 api_endpoint = "https://polygon.api.0x.org/"
 api_key = ""
 router_contract_addr = "0xdef1c0ded9bec7f1a1670819833240f027b25eff"
+factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
 trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 trading_risk_amount = 10
 trading_slippage = 2

@@ -23,8 +23,7 @@ def DexTrader_fixture():
 
 @pytest.fixture(name="dex")
 def DexClient_fixture(dextrader):
-    for dx in dextrader.dex_info:
-        yield dx.client
+    return dextrader.dex_info[0].client
 
 
 @pytest.fixture
@@ -92,8 +91,21 @@ def test_dynaconf_is_in_testing():
 
 
 @pytest.mark.asyncio
+async def test_dextrader(dextrader):
+    """Init Testing"""
+    print(dextrader)
+    print(dextrader.dex_info)
+    assert isinstance(dextrader, DexTrader)
+    assert dextrader.commands is not None
+    assert dextrader.dex_info is not None
+
+
+@pytest.mark.asyncio
 async def test_dex(dex):
     """Init Testing"""
+
+    print(dex)
+    assert dex is not None
     assert isinstance(dex, DexClient)
     assert dex.w3 is not None
     assert dex.w3.net.version == "1"
@@ -106,44 +118,64 @@ async def test_dex(dex):
 
 
 @pytest.mark.asyncio
-async def test_execute_order(dex, order):
-    # sell_balance = AsyncMock()
-    # dex.get_swap = AsyncMock()
-    result = await dex.execute_order(order)
+async def test_execute_order(dextrader, order):
+    result = await dextrader.execute_order(order)
     print(f"swap_order: {result}")
     assert result is not None
 
 
 @pytest.mark.asyncio
-async def test_execute_order_invalid(dex, invalid_order):
-    result = await dex.execute_order(invalid_order)
+async def test_execute_order_invalid(dextrader, invalid_order):
+    result = await dextrader.execute_order(invalid_order)
     print(result)
     assert result.startswith("⚠️ order execution: Invalid Token")
 
 
 @pytest.mark.asyncio
-async def test_get_quote(dex):
+async def test_get_quote(dextrader):
     """getquote Testing"""
-    result = await dex.get_quote("UNI")
+    result = await dextrader.get_quote("UNI")
     print(result)
     assert result is not None
     assert result.startswith("🦄")
 
 
 @pytest.mark.asyncio
-async def test_get_quote_BTC(account) -> str:
+async def test_get_quote_BTC(dextrader) -> str:
     """test token account."""
-    with patch("dxsp.config.settings", autospec=True):
-        settings.dex_wallet_address = account
-        dex = DexTrader()
-        result = await dex.get_quote("WBTC")
-        print(result)
-        assert result is not None
+
+    result = await dextrader.get_quote("WBTC")
+    print(result)
+    assert result is not None
 
 
 @pytest.mark.asyncio
-async def test_get_quote_invalid(dex):
-    result = await dex.get_quote("THISISNOTATOKEN")
+async def test_get_quote_invalid(dextrader):
+    result = await dextrader.get_quote("THISISNOTATOKEN")
+    print(result)
+    assert result is not None
+    assert "⚠️" in result
+
+
+@pytest.mark.asyncio
+async def test_get_info(dextrader):
+    result = await dextrader.get_info()
+    print(result)
+    assert result is not None
+    assert "⚠️" in result
+
+
+@pytest.mark.asyncio
+async def test_get_name(dextrader):
+    result = await dextrader.get_name()
+    print(result)
+    assert result is not None
+    assert "⚠️" in result
+
+
+@pytest.mark.asyncio
+async def test_get_balance(dextrader):
+    result = await dextrader.get_balance()
     print(result)
     assert result is not None
     assert "⚠️" in result

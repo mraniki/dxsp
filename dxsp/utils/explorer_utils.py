@@ -11,7 +11,7 @@ from dxsp.config import settings
 from dxsp.utils.utils import get
 
 
-async def get_explorer_abi(address):
+async def get_explorer_abi(address, block_explorer_url=None, block_explorer_api=None):
     """
     Retrieves the ABI (Application Binary Interface)
     for the contract at the given address.
@@ -29,9 +29,9 @@ async def get_explorer_abi(address):
         "module": "contract",
         "action": "getabi",
         "address": address,
-        "apikey": settings.dex_block_explorer_api,
+        "apikey": block_explorer_api,
     }
-    resp = await get(url=settings.dex_block_explorer_url, params=params)
+    resp = await get(url=block_explorer_url, params=params)
     return resp["result"] if resp["status"] == "1" else None
 
 
