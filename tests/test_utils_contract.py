@@ -17,10 +17,15 @@ def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="uniswap")
 
 
-@pytest.fixture(name="dex")
-def DexSwap_fixture():
+@pytest.fixture(name="dextrader")
+def DexTrader_fixture():
     return DexTrader()
 
+
+@pytest.fixture(name="dex")
+def DexClient_fixture(dextrader):
+    for dx in dextrader.dex_info:
+        yield dx.client
 
 @pytest.fixture
 def tester_provider():
@@ -68,17 +73,6 @@ def mock_contract(dex):
     contract.wait_for_transaction_receipt.return_value = {"status": 1}
     return contract
 
-
-@pytest.fixture(name="mock_dex")
-def mock_dex_transaction():
-    dex = DexTrader()
-    dex.w3.eth.get_transaction_count = AsyncMock(return_value=1)
-    dex.get_gas = AsyncMock(return_value=21000)
-    dex.get_gas_price = AsyncMock(return_value=1000000000)
-    dex.w3.eth.account.sign_transaction = (
-        AsyncMock(return_value=AsyncMock(rawTransaction=b'signed_transaction')))
-    dex.w3.eth.send_raw_transaction = AsyncMock(return_value=b'transaction_hash')
-    return dex
 
 
 def test_dynaconf_is_in_testing():

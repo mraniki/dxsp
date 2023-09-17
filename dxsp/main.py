@@ -40,6 +40,8 @@ class DexTrader:
         try:
             for dx in exchanges:
                 logger.debug(f"Loading {dx}")
+                wallet_address = exchanges[dx]["wallet_address"]
+                private_key = exchanges[dx]["private_key"]
                 w3 = w3 or Web3(Web3.HTTPProvider(exchanges[dx]["rpc"]))
                 protocol_type = exchanges[dx]["protocol_type"]
                 protocol_version = exchanges[dx]["protocol_version"]
@@ -53,6 +55,8 @@ class DexTrader:
                 trading_slippage = exchanges[dx]["trading_slippage"]
                 gas_strategy = w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
                 dex_info = {
+                    "wallet_address": wallet_address,
+                    "private_key": private_key,
                     "w3": w3,
                     "protocol_type": protocol_type,
                     "protocol_version": protocol_version,

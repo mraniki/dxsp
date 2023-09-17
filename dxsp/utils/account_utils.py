@@ -40,19 +40,17 @@ class AccountUtils:
 
     """
 
-    def __init__(self, w3: Optional[Web3] = None):
-        self.logger = logger
-        self.w3 = w3 or Web3(Web3.HTTPProvider(settings.dex_rpc))
-        self.wallet_address = self.w3.to_checksum_address(settings.dex_wallet_address)
+    def __init__(
+        self, w3: Optional[Web3], wallet_address, private_key, trading_asset_address
+    ):
+        self.w3 = w3
+        self.wallet_address = self.w3.to_checksum_address(wallet_address)
         self.account_number = (
             f"{str(self.w3.net.version)} - " f"{str(self.wallet_address)[-8:]}"
         )
-        self.private_key = settings.dex_private_key
-        self.trading_asset_address = self.w3.to_checksum_address(
-            settings.trading_asset_address
-        )
+        self.private_key = private_key
+        self.trading_asset_address = self.w3.to_checksum_address(trading_asset_address)
         self.contract_utils = ContractUtils(w3=self.w3)
-        self.commands = settings.dxsp_commands
 
     async def get_info(self):
         """
@@ -84,15 +82,6 @@ class AccountUtils:
         if settings.dex_router_contract_addr:
             return str(settings.dex_router_contract_addr)[-8:]
 
-    async def get_help(self):
-        """
-        Asynchronously retrieves the help information.
-
-        Returns:
-            str: The help information,
-            including the available commands.
-        """
-        return f"{self.commands}\n"
 
     async def get_account_balance(self):
         """

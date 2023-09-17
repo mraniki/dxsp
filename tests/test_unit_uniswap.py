@@ -12,17 +12,25 @@ from dxsp.config import settings
 def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="uniswap")
 
-@pytest.fixture(name="dex")
-def DexSwap_fixture():
+
+@pytest.fixture(name="dextrader")
+def DexTrader_fixture():
     return DexTrader()
+
+
+@pytest.fixture(name="dex")
+def DexClient_fixture(dextrader):
+    for dx in dextrader.dex_info:
+        yield dx.client
+
 
 @pytest.fixture(name="order")
 def order_params_fixture():
     """Return order parameters."""
     return {
-        'action': 'BUY',
-        'instrument': 'WBTC',
-        'quantity': 1,
+        "action": "BUY",
+        "instrument": "WBTC",
+        "quantity": 1,
     }
 
 

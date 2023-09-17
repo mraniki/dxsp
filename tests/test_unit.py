@@ -8,6 +8,7 @@ from web3 import EthereumTesterProvider, Web3
 
 from dxsp import DexTrader
 from dxsp.config import settings
+from dxsp.protocols import DexClient
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -15,9 +16,15 @@ def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="uniswap")
 
 
-@pytest.fixture(name="dex")
-def DexSwap_fixture():
+@pytest.fixture(name="dextrader")
+def DexTrader_fixture():
     return DexTrader()
+
+
+@pytest.fixture(name="dex")
+def DexClient_fixture(dextrader):
+    for dx in dextrader.dex_info:
+        yield dx.client
 
 
 @pytest.fixture
@@ -41,9 +48,9 @@ def account_fixture(web3) -> str:
 def order_params_fixture():
     """Return order parameters."""
     return {
-        'action': 'BUY',
-        'instrument': 'WBTC',
-        'quantity': 1,
+        "action": "BUY",
+        "instrument": "WBTC",
+        "quantity": 1,
     }
 
 
@@ -51,9 +58,9 @@ def order_params_fixture():
 def invalid_order_fixture():
     """Return order parameters."""
     return {
-        'action': 'BUY',
-        'instrument': 'NOTATHING',
-        'quantity': 1,
+        "action": "BUY",
+        "instrument": "NOTATHING",
+        "quantity": 1,
     }
 
 
@@ -67,16 +74,16 @@ def mock_contract(dex):
     return contract
 
 
-@pytest.fixture(name="mock_dex")
-def mock_dex_transaction():
-    dex = DexTrader()
-    dex.w3.eth.get_transaction_count = AsyncMock(return_value=1)
-    dex.get_gas = AsyncMock(return_value=21000)
-    dex.get_gas_price = AsyncMock(return_value=1000000000)
-    dex.w3.eth.account.sign_transaction = (
-        AsyncMock(return_value=AsyncMock(rawTransaction=b'signed_transaction')))
-    dex.w3.eth.send_raw_transaction = AsyncMock(return_value=b'transaction_hash')
-    return dex
+# @pytest.fixture(name="mock_dex")
+# def mock_dex_transaction():
+#     dex = DexTrader()
+#     dex.w3.eth.get_transaction_count = AsyncMock(return_value=1)
+#     dex.get_gas = AsyncMock(return_value=21000)
+#     dex.get_gas_price = AsyncMock(return_value=1000000000)
+#     dex.w3.eth.account.sign_transaction = (
+#         AsyncMock(return_value=AsyncMock(rawTransaction=b'signed_transaction')))
+#     dex.w3.eth.send_raw_transaction = AsyncMock(return_value=b'transaction_hash')
+#     return dex
 
 
 def test_dynaconf_is_in_testing():
@@ -87,7 +94,7 @@ def test_dynaconf_is_in_testing():
 @pytest.mark.asyncio
 async def test_dex(dex):
     """Init Testing"""
-    assert isinstance(dex, DexTrader)
+    assert isinstance(dex, DexClient)
     assert dex.w3 is not None
     assert dex.w3.net.version == "1"
     assert dex.protocol_type is not None
@@ -129,7 +136,7 @@ async def test_get_quote_BTC(account) -> str:
     with patch("dxsp.config.settings", autospec=True):
         settings.dex_wallet_address = account
         dex = DexTrader()
-        result = await dex.get_quote('WBTC')
+        result = await dex.get_quote("WBTC")
         print(result)
         assert result is not None
 
@@ -139,4 +146,4 @@ async def test_get_quote_invalid(dex):
     result = await dex.get_quote("THISISNOTATOKEN")
     print(result)
     assert result is not None
-    assert '⚠️' in result
+    assert "⚠️" in result

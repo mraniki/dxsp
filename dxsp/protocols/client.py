@@ -14,23 +14,29 @@ class DexClient:
     def __init__(
         self,
         w3: Optional[Web3] = None,
-        protocol_type="uniswap",
-        protocol_version=2,
-        api_endpoint="https://api.0x.org/",
-        api_key=None,
-        router=None,
-        trading_asset_address=None,
-        trading_slippage=None,
-        block_explorer_url="https://api.etherscan.io/api?",
-        block_explorer_api=None,
+        **kwargs,
     ):
-        self.protocol_type = protocol_type
+        self.wallet_address = kwargs.get("wallet_address")
+        self.private_key = kwargs.get("private_key")
+        self.protocol_type = kwargs.get("protocol_type", "uniswap")
+        self.protocol_version = kwargs.get("protocol_version", 2)
+        self.api_endpoint = kwargs.get("api_endpoint", "https://api.0x.org/")
+        self.api_key = kwargs.get("api_key")
+        self.router = kwargs.get("router")
+        self.trading_asset_address = kwargs.get("trading_asset_address")
+        self.trading_slippage = kwargs.get("trading_slippage")
+        self.block_explorer_url = kwargs.get(
+            "block_explorer_url", "https://api.etherscan.io/api?"
+        )
+        self.block_explorer_api = kwargs.get("block_explorer_api")
+
         self.w3 = w3
         self.dex_swap = self._get_dex_swap_instance()
-        self.account = AccountUtils(self.w3)
+        self.wallet_address = self.dex_swap.wallet_address
+        self.account = AccountUtils(
+            self.w3, self.wallet_address, self.private_key, self.trading_asset_address
+        )
         self.contract_utils = ContractUtils(self.w3)
-        self.trading_asset_address = trading_asset_address
-        self.trading_slippage = trading_slippage
 
     def _get_dex_swap_instance(self):
         if self.protocol_type == "0x":
