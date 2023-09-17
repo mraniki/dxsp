@@ -36,8 +36,8 @@ class DexTrader:
         """
         exchanges = settings.dex
         self.dex_info = []
+        self.commands = settings.dxsp_commands
         try:
-            self.commands = settings.dxsp_commands
             for cx in exchanges:
                 logger.debug(f"Loading {cx}")
                 w3 = w3 or Web3(Web3.HTTPProvider(exchanges[cx]["rpc"]))
@@ -134,7 +134,6 @@ class DexTrader:
         """
         try:
             logger.debug("get swap")
-            await self.get_protocol()
             sell_token_address = sell_token
             logger.debug("sell token {}", sell_token_address)
             logger.debug("sell token {}", sell_token_address)
