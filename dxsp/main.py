@@ -77,7 +77,7 @@ class DexTrader:
                     #"gas_strategy": gas_strategy,
                 }
                 logger.debug(dex_info)
-                client = DexClient(**dex_info)
+                client = DexClient(dex_info)
                 dex_info["client"] = client
                 self.dex_info.append(dex_info)
             logger.debug("init complete")
