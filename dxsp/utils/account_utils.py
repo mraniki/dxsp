@@ -143,7 +143,11 @@ class AccountUtils:
             List[Transaction]: A list of transactions for the account.
         """
         return await get_account_transactions(
-            period, self.trading_asset_address, self.wallet_address
+            self.block_explorer_api,
+            self.block_explorer_url,
+            self.contract_address,
+            self.wallet_address,
+            period=period,
         )
 
     async def get_account_pnl(self, period=24):

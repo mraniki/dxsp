@@ -97,42 +97,35 @@ class DexTrader:
         except Exception as e:
             logger.error(e)
 
-    async def execute_order(self, order_params):
+    async def get_help(self):
         """
-        Execute an order function.
+        Get the help information for the current instance.
+        Returns:
+            A string containing the available commands.
+        """
+        return f"{self.commands}\n"
+
+    async def get_quote(self, sell_token):
+        """
+        gets a quote for a token
 
         Args:
-            order_params (dict): The order parameters.
+            sell_token (str): The sell token.
 
         Returns:
-            str: The trade confirmation
+            str: The quote with the trading symbol
 
         """
-        try:
-            for dx in self.dex_info:
-                logger.debug("execute order {}", dx)
-                action = order_params.get("action")
-                instrument = order_params.get("instrument")
-                quantity = order_params.get("quantity", 1)
-                sell_token, buy_token = (
-                    (dx["trading_asset_address"], instrument)
-                    if action == "BUY"
-                    else (instrument, dx["trading_asset_address"])
-                )
-                order = await self.get_swap(
-                    dx["client"], sell_token, buy_token, quantity
-                )
-                if order:
-                    trade_confirmation = (
-                        f"⬇️ {instrument}"
-                        if (action == "SELL")
-                        else f"⬆️ {instrument}\n"
-                    )
-                    trade_confirmation += order
-                    return trade_confirmation
-
-        except Exception as error:
-            return f"⚠️ order execution: {error}"
+        logger.debug("get quote", sell_token)
+        info = "🦄\n"
+        for dx in self.dex_info:
+            logger.debug("get quote {}", dx)
+            buy_address = dx.trading_asset_address
+            sell_address = await dx.contract_utils.search_contract_address(sell_token)
+            quote = await dx.get_quote(buy_address, sell_address) or "Quote failed"
+            symbol = await dx.contract_utils.get_token_symbol(dx.trading_asset_address)
+            info += f"{dx.name}: {quote} {symbol}\n"
+        return info.strip()
 
     async def get_swap(
         self, dex_client, sell_token: str, buy_token: str, quantity: int
@@ -201,36 +194,40 @@ class DexTrader:
             logger.debug(error)
             raise error
 
-    async def get_quote(self, sell_token):
+    async def execute_order(self, order_params):
         """
-        gets a quote for a token
+        Execute an order function.
 
         Args:
-            sell_token (str): The sell token.
+            order_params (dict): The order parameters.
 
         Returns:
-            str: The quote with the trading symbol
+            str: The trade confirmation
 
         """
-        logger.debug("get quote", sell_token)
-        info = ""
-        for dx in self.dex_info:
-            logger.debug("get quote {}", dx)
-            buy_address = dx.trading_asset_address
-            sell_address = await dx.contract_utils.search_contract_address(sell_token)
-            quote = await dx.get_quote(buy_address, sell_address) or "Quote failed"
-            quote = f"🦄 {quote}"
-            symbol = await dx.contract_utils.get_token_symbol(dx.trading_asset_address)
-            info += f"{dx.name}: {quote} {symbol}"
-        return info.strip()
+        try:
+            for dx in self.dex_info:
+                logger.debug("execute order {}", dx)
+                action = order_params.get("action")
+                instrument = order_params.get("instrument")
+                quantity = order_params.get("quantity", 1)
+                sell_token, buy_token = (
+                    (dx["trading_asset_address"], instrument)
+                    if action == "BUY"
+                    else (instrument, dx["trading_asset_address"])
+                )
+                order = await self.get_swap(dx, sell_token, buy_token, quantity)
+                if order:
+                    trade_confirmation = (
+                        f"⬇️ {instrument}"
+                        if (action == "SELL")
+                        else f"⬆️ {instrument}\n"
+                    )
+                    trade_confirmation += order
+                    return trade_confirmation
 
-    async def get_help(self):
-        """
-        Get the help information for the current instance.
-        Returns:
-            A string containing the available commands.
-        """
-        return f"{self.commands}\n"
+        except Exception as error:
+            return f"⚠️ order execution: {error}"
 
     # 🔒 USER RELATED
 
@@ -241,8 +238,8 @@ class DexTrader:
         :return: The information retrieved from the account.
         """
         info = ""
-        for item in self.dex_info:
-            info += await item["client"].account.get_info()
+        for dx in self.dex_info:
+            info += await dx.account.get_info()
         return info.strip()
 
     async def get_name(self):
@@ -252,8 +249,8 @@ class DexTrader:
         :return: The name of the account.
         """
         info = ""
-        for item in self.dex_info:
-            info += await item["client"].get_name()
+        for dx in self.dex_info:
+            info += await dx.get_name()
         return info.strip()
 
     async def get_account_balance(self):
@@ -264,8 +261,8 @@ class DexTrader:
         :rtype: float
         """
         info = ""
-        for item in self.dex_info:
-            info += await item["client"].get_account_balance()
+        for dx in self.dex_info:
+            info += await dx.get_account_balance()
         return info.strip()
 
     async def get_trading_asset_balance(self):
@@ -279,8 +276,8 @@ class DexTrader:
                  - 'locked': The locked balance of the asset.
         """
         info = ""
-        for item in self.dex_info:
-            info += await item["client"].get_trading_asset_balance()
+        for dx in self.dex_info:
+            info += await dx.get_trading_asset_balance()
         return info.strip()
 
     async def get_account_position(self):
@@ -291,8 +288,8 @@ class DexTrader:
         :rtype: AccountPosition
         """
         info = ""
-        for item in self.dex_info:
-            info += await item["client"].get_account_position()
+        for dx in self.dex_info:
+            info += await dx.get_account_position()
         return info.strip()
 
     async def get_account_margin(self):
@@ -303,8 +300,8 @@ class DexTrader:
         :rtype: float
         """
         info = ""
-        for item in self.dex_info:
-            info += await item["client"].get_account_margin()
+        for dx in self.dex_info:
+            info += await dx.get_account_margin()
         return info.strip()
 
     async def get_account_open_positions(self):
@@ -314,8 +311,8 @@ class DexTrader:
         :return: A list of open positions in the account.
         """
         info = ""
-        for item in self.dex_info:
-            info += await item["client"].get_account_open_positions()
+        for dx in self.dex_info:
+            info += await dx.get_account_open_positions()
         return info.strip()
 
     async def get_account_transactions(self, period=24):
@@ -332,8 +329,8 @@ class DexTrader:
             transaction objects representing the account transactions.
         """
         info = ""
-        for item in self.dex_info:
-            info += await item["client"].get_account_transactions(period)
+        for dx in self.dex_info:
+            info += await dx.get_account_transactions(period)
         return info.strip()
 
     async def get_account_pnl(self, period=24):
@@ -351,6 +348,6 @@ class DexTrader:
             for the account within the specified period.
         """
         info = ""
-        for item in self.dex_info:
-            info += await item["client"].get_account_pnl(period)
+        for dx in self.dex_info:
+            info += await dx.get_account_pnl(period)
         return info.strip()
