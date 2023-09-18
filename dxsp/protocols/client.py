@@ -144,7 +144,7 @@ class DexClient:
 
             signed_order = await self.account.get_sign(order)
             order_hash = str(self.w3.to_hex(signed_order))
-            receipt self.w3.wait_for_transaction_receipt(order_hash)
+            receipt = self.w3.wait_for_transaction_receipt(order_hash)
 
             if receipt["status"] != 1:
                 logger.error("receipt failed")

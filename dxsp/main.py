@@ -132,7 +132,7 @@ class DexSwap:
                     if action == "BUY"
                     else (instrument, dx["trading_asset_address"])
                 )
-                order = await self.get_swap(dx sell_token, buy_token, quantity)
+                order = await dx.get_swap( sell_token, buy_token, quantity)
                 if order:
                     trade_confirmation = (
                         f"⬇️ {instrument}"
