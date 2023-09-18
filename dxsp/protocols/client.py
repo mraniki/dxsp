@@ -100,7 +100,7 @@ class DexClient:
         try:
             return (
                 f"ℹ️  v{__version__}\n"
-                f"💱 {await self.name()}\n"
+                f"💱 {self.name()}\n"
                 f"🪪 {self.account.account_number}"
             )
         except Exception as error:
