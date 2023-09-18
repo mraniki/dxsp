@@ -66,8 +66,6 @@ def test_dynaconf_is_in_testing():
 @pytest.mark.asyncio
 async def test_dextrader(dextrader):
     """Init Testing"""
-    print(dextrader)
-    print(dextrader.dex_info)
     assert isinstance(dextrader, DexTrader)
     assert dextrader.commands is not None
     assert dextrader.dex_info is not None
