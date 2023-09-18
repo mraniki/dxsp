@@ -48,24 +48,6 @@ class AccountUtils:
         self.trading_asset_address = self.w3.to_checksum_address(trading_asset_address)
         self.contract_utils = ContractUtils(w3=self.w3)
 
-    async def get_info(self):
-        """
-        Get the information about the DexSwap API.
-
-        Returns:
-            str: A string containing the version of DexSwap, the name obtained from
-                 `get_name()`, and the account number.
-        Raises:
-            Exception: If there is an error while retrieving the information.
-        """
-        try:
-            return (
-                f"ℹ️  v{__version__}\n"
-                f"💱 {await self.get_name()}\n"
-                f"🪪 {self.account_number}"
-            )
-        except Exception as error:
-            return error
 
     async def get_account_balance(self):
         """

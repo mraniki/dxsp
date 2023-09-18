@@ -13,6 +13,30 @@ from dxsp.utils import AccountUtils, ContractUtils
 
 
 class DexClient:
+    """
+    Base DexClient Class
+
+    Args:
+        name (str): The name of the dex
+        wallet_address (str): The wallet address
+        private_key (str): The private key
+        protocol_type (str): The protocol type
+        protocol_version (int): The protocol version
+        api_endpoint (str): The api endpoint
+        api_key (str): The api key
+        router_contract_addr (str): The router contract address
+        factory_contract_addr (str): The factory contract address
+        trading_asset_address (str): The trading asset address
+        trading_risk_amount (int): The trading risk amount
+        trading_slippage (int): The trading slippage
+        block_explorer_url (str): The block explorer url
+        block_explorer_api (str): The block explorer api
+        w3 (Optional[Web3]): Web3
+
+
+
+    """
+
     def __init__(
         self,
         name,
@@ -56,6 +80,14 @@ class DexClient:
             self.w3, self.block_explorer_url, self.block_explorer_api
         )
 
+    async def get_quote(self, buy_address, sell_address, amount=1):
+        """ """
+        # return await self.dex_swap.get_quote(buy_address, sell_address, amount)
+
+    async def get_swap(self, sell_address, buy_address, amount):
+        """ """
+        # return await self.dex_swap.get_swap(sell_address, buy_address, amount)
+
     async def get_info(self):
         """
         Get the information about the DexSwap API.
@@ -69,27 +101,19 @@ class DexClient:
         try:
             return (
                 f"ℹ️  v{__version__}\n"
-                f"💱 {await self.get_name()}\n"
+                f"💱 {await self.name()}\n"
                 f"🪪 {self.account.account_number}"
             )
         except Exception as error:
-            return error
+            logger.error("info {}", error)
 
-    async def get_quote(self, buy_address, sell_address, amount=1):
-        """ """
-        # return await self.dex_swap.get_quote(buy_address, sell_address, amount)
+    # async def get_name(self):
+    #     """
+    #     Retrieves the name of the account.
 
-    async def get_swap(self, sell_address, buy_address, amount):
-        """ """
-        # return await self.dex_swap.get_swap(sell_address, buy_address, amount)
-
-    async def get_name(self):
-        """
-        Retrieves the name of the account.
-
-        :return: The name of the account.
-        """
-        return str(self.router_contract_addr)[-8:]
+    #     :return: The name of the account.
+    #     """
+    #     return str(self.router_contract_addr)[-8:]
 
     async def get_account_balance(self):
         """

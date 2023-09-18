@@ -7,7 +7,7 @@
 
 # class DexOneInch(DexClient):
 #     """
-#     A DEXSwap sub class using 1inch protocol
+#     DexClient using 1inch protocol
 #     https://github.com/mraniki/dxsp/issues/189
 
 #     """

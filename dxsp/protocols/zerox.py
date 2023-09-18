@@ -3,13 +3,14 @@
 
 """
 from loguru import logger
+
 from dxsp.protocols import DexClient
 from dxsp.utils.utils import get
 
 
 class DexZeroX(DexClient):
     """
-    A DEXSwap sub class using 0x protocol
+    A DexClient class using 0x protocol
     Implementation of 0x swap protocol
     https://0x.org/docs/0x-swap-api/introduction
 

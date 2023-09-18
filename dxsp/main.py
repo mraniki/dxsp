@@ -14,9 +14,9 @@ from dxsp.protocols import DexUniswap, DexZeroX
 from dxsp.utils import AccountUtils, ContractUtils
 
 
-class DexTrader:
+class DexSwap:
     """
-    class to build a DexTrader Object
+    class to build a DexSwap Object
      use to interact with the dex protocol
 
      Args:
@@ -55,55 +55,73 @@ class DexTrader:
                 trading_slippage = exchanges[dx]["trading_slippage"]
                 block_explorer_url = exchanges[dx]["block_explorer_url"]
                 block_explorer_api = exchanges[dx]["block_explorer_api"]
-                if protocol_type == "uniswap":
-                    client = DexUniswap(
-                        name=name,
-                        wallet_address=wallet_address,
-                        private_key=private_key,
-                        w3=w3,
-                        protocol_type=protocol_type,
-                        protocol_version=protocol_version,
-                        api_endpoint=api_endpoint,
-                        api_key=api_key,
-                        router_contract_addr=router_contract_addr,
-                        factory_contract_addr=factory_contract_addr,
-                        trading_asset_address=trading_asset_address,
-                        trading_risk_amount=trading_risk_amount,
-                        trading_slippage=trading_slippage,
-                        block_explorer_url=block_explorer_url,
-                        block_explorer_api=block_explorer_api,
-                    )
-                if protocol_type == "0x":
-                    client = DexZeroX(
-                        name=name,
-                        wallet_address=wallet_address,
-                        private_key=private_key,
-                        w3=w3,
-                        protocol_type=protocol_type,
-                        protocol_version=protocol_version,
-                        api_endpoint=api_endpoint,
-                        api_key=api_key,
-                        router_contract_addr=router_contract_addr,
-                        factory_contract_addr=factory_contract_addr,
-                        trading_asset_address=trading_asset_address,
-                        trading_risk_amount=trading_risk_amount,
-                        trading_slippage=trading_slippage,
-                        block_explorer_url=block_explorer_url,
-                        block_explorer_api=block_explorer_api,
-                    )
+                client = self._create_client(
+                    name=name,
+                    wallet_address=wallet_address,
+                    private_key=private_key,
+                    w3=w3,
+                    protocol_type=protocol_type,
+                    protocol_version=protocol_version,
+                    api_endpoint=api_endpoint,
+                    api_key=api_key,
+                    router_contract_addr=router_contract_addr,
+                    factory_contract_addr=factory_contract_addr,
+                    trading_asset_address=trading_asset_address,
+                    trading_risk_amount=trading_risk_amount,
+                    trading_slippage=trading_slippage,
+                    block_explorer_url=block_explorer_url,
+                    block_explorer_api=block_explorer_api,
+                )
+                # if protocol_type == "uniswap":
+                #     client = DexUniswap(
+                #         name=name,
+                #         wallet_address=wallet_address,
+                #         private_key=private_key,
+                #         w3=w3,
+                #         protocol_type=protocol_type,
+                #         protocol_version=protocol_version,
+                #         api_endpoint=api_endpoint,
+                #         api_key=api_key,
+                #         router_contract_addr=router_contract_addr,
+                #         factory_contract_addr=factory_contract_addr,
+                #         trading_asset_address=trading_asset_address,
+                #         trading_risk_amount=trading_risk_amount,
+                #         trading_slippage=trading_slippage,
+                #         block_explorer_url=block_explorer_url,
+                #         block_explorer_api=block_explorer_api,
+                #     )
+                # if protocol_type == "0x":
+                #     client = DexZeroX(
+                #         name=name,
+                #         wallet_address=wallet_address,
+                #         private_key=private_key,
+                #         w3=w3,
+                #         protocol_type=protocol_type,
+                #         protocol_version=protocol_version,
+                #         api_endpoint=api_endpoint,
+                #         api_key=api_key,
+                #         router_contract_addr=router_contract_addr,
+                #         factory_contract_addr=factory_contract_addr,
+                #         trading_asset_address=trading_asset_address,
+                #         trading_risk_amount=trading_risk_amount,
+                #         trading_slippage=trading_slippage,
+                #         block_explorer_url=block_explorer_url,
+                #         block_explorer_api=block_explorer_api,
+                #     )
                 self.dex_info.append(client)
             logger.debug("init complete")
 
         except Exception as e:
             logger.error(e)
 
-    async def get_help(self):
-        """
-        Get the help information for the current instance.
-        Returns:
-            A string containing the available commands.
-        """
-        return f"{self.commands}\n"
+    def _create_client(self, **kwargs):
+        protocol_type = kwargs["protocol_type"]
+        if protocol_type == "uniswap":
+            return DexUniswap(**kwargs)
+        elif protocol_type == "0x":
+            return DexZeroX(**kwargs)
+        else:
+            raise ValueError(f"Unsupported protocol type: {protocol_type}")
 
     async def get_quote(self, sell_token):
         """
@@ -125,6 +143,7 @@ class DexTrader:
             quote = await dx.get_quote(buy_address, sell_address) or "Quote failed"
             symbol = await dx.contract_utils.get_token_symbol(dx.trading_asset_address)
             info += f"{dx.name}: {quote} {symbol}\n"
+
         return info.strip()
 
     async def get_swap(
@@ -229,7 +248,13 @@ class DexTrader:
         except Exception as error:
             return f"⚠️ order execution: {error}"
 
-    # 🔒 USER RELATED
+    async def get_help(self):
+        """
+        Get the help information for the current instance.
+        Returns:
+            A string containing the available commands.
+        """
+        return f"{self.commands}\n"
 
     async def get_info(self):
         """
@@ -253,6 +278,7 @@ class DexTrader:
             info += await dx.get_name()
         return info.strip()
 
+    # 🔒 USER RELATED
     async def get_account_balance(self):
         """
         Retrieves the account balance.

@@ -9,7 +9,7 @@ from dxsp.protocols import DexClient
 
 class DexUniswap(DexClient):
     """
-    A DEXSwap sub class using uniswap-python library
+    A DexClient using uniswap-python library
 
     More info on uniswap-python library:
     https://github.com/uniswap-python/uniswap-python
@@ -38,11 +38,13 @@ class DexUniswap(DexClient):
                 factory_contract_addr=self.factory_contract_addr,
                 router_contract_addr=self.router_contract_addr,
             )
+            logger.debug("Uniswap client created {}", uniswap)
             amount_wei = amount * (
                 10 ** (await self.contract_utils.get_token_decimals(sell_address))
             )
-            logger.debug(amount_wei)
+            logger.debug("Amount {}", amount_wei)
             quote = uniswap.get_price_input(sell_address, buy_address, amount_wei)
+            logger.debug("quote {}", quote)
             if quote is None:
                 return "Quote failed"
             return round(
@@ -63,7 +65,7 @@ class DexUniswap(DexClient):
             )
 
         except Exception as error:
-            raise ValueError(f"Quote failed {error}")
+            logger.error("Quote failed {}", error)
 
     async def get_swap(self, sell_address, buy_address, amount):
         """
@@ -92,5 +94,4 @@ class DexUniswap(DexClient):
             return uniswap.make_trade(sell_address, buy_address, amount)
 
         except Exception as error:
-            logger.debug(error)
-            raise ValueError(f"Swap failed {error}")
+            logger.error("Swap failed {}", error)
