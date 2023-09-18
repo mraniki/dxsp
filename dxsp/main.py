@@ -10,7 +10,7 @@ from web3 import Web3
 from web3.gas_strategies.time_based import medium_gas_price_strategy
 
 from dxsp.config import settings
-from dxsp.protocols.client import DexClient
+from dxsp.protocols.client import DexUniswap, DexZeroX
 from dxsp.utils import AccountUtils, ContractUtils
 
 
@@ -55,23 +55,42 @@ class DexTrader:
                 trading_slippage = exchanges[dx]["trading_slippage"]
                 block_explorer_url = exchanges[dx]["block_explorer_url"]
                 block_explorer_api = exchanges[dx]["block_explorer_api"]
-                client = DexClient(
-                    name=name,
-                    wallet_address=wallet_address,
-                    private_key=private_key,
-                    w3=w3,
-                    protocol_type=protocol_type,
-                    protocol_version=protocol_version,
-                    api_endpoint=api_endpoint,
-                    api_key=api_key,
-                    router_contract_addr=router_contract_addr,
-                    factory_contract_addr=factory_contract_addr,
-                    trading_asset_address=trading_asset_address,
-                    trading_risk_amount=trading_risk_amount,
-                    trading_slippage=trading_slippage,
-                    block_explorer_url=block_explorer_url,
-                    block_explorer_api=block_explorer_api,
-                )
+                if protocol_type == "uniswap":
+                    client = DexUniswap(
+                        name=name,
+                        wallet_address=wallet_address,
+                        private_key=private_key,
+                        w3=w3,
+                        protocol_type=protocol_type,
+                        protocol_version=protocol_version,
+                        api_endpoint=api_endpoint,
+                        api_key=api_key,
+                        router_contract_addr=router_contract_addr,
+                        factory_contract_addr=factory_contract_addr,
+                        trading_asset_address=trading_asset_address,
+                        trading_risk_amount=trading_risk_amount,
+                        trading_slippage=trading_slippage,
+                        block_explorer_url=block_explorer_url,
+                        block_explorer_api=block_explorer_api,
+                    )
+                if protocol_type == "0x":
+                    client = DexZeroX(
+                        name=name,
+                        wallet_address=wallet_address,
+                        private_key=private_key,
+                        w3=w3,
+                        protocol_type=protocol_type,
+                        protocol_version=protocol_version,
+                        api_endpoint=api_endpoint,
+                        api_key=api_key,
+                        router_contract_addr=router_contract_addr,
+                        factory_contract_addr=factory_contract_addr,
+                        trading_asset_address=trading_asset_address,
+                        trading_risk_amount=trading_risk_amount,
+                        trading_slippage=trading_slippage,
+                        block_explorer_url=block_explorer_url,
+                        block_explorer_api=block_explorer_api,
+                    )
                 self.dex_info.append(client)
             logger.debug("init complete")
 

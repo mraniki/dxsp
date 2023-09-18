@@ -57,26 +57,26 @@ class DexClient:
             self.w3, self.block_explorer_url, self.block_explorer_api
         )
 
-    def _get_dex_swap_instance(self):
-        """
-        Retrieves the DexSwap instance.
-        Returns:
-            DexClient: The DexSwap instance
+    # def _get_dex_swap_instance(self):
+    #     """
+    #     Retrieves the DexSwap instance.
+    #     Returns:
+    #         DexClient: The DexSwap instance
 
-        """
-        logger.debug("protocol_type: {}", self.protocol_type)
-        if self.protocol_type == "0x":
-            from dxsp.protocols.zerox import DexZeroX
+    #     """
+    #     logger.debug("protocol_type: {}", self.protocol_type)
+    #     if self.protocol_type == "0x":
+    #         from dxsp.protocols.zerox import DexZeroX
 
-            return DexZeroX()
-        # elif self.protocol_type == "1inch":
-        #     from dxsp.protocols.oneinch import DexOneInch
+    #         return DexZeroX()
+    #     # elif self.protocol_type == "1inch":
+    #     #     from dxsp.protocols.oneinch import DexOneInch
 
-        #     return DexOneInch()
-        else:
-            from dxsp.protocols.uniswap import DexUniswap
+    #     #     return DexOneInch()
+    #     else:
+    #         from dxsp.protocols.uniswap import DexUniswap
 
-            return DexUniswap()
+    #         return DexUniswap()
 
     async def get_info(self):
         """
@@ -99,11 +99,11 @@ class DexClient:
 
     async def get_quote(self, buy_address, sell_address, amount=1):
         """ """
-        return await self.dex_swap.get_quote(buy_address, sell_address, amount)
+        # return await self.dex_swap.get_quote(buy_address, sell_address, amount)
 
     async def get_swap(self, sell_address, buy_address, amount):
         """ """
-        return await self.dex_swap.get_swap(sell_address, buy_address, amount)
+        # return await self.dex_swap.get_swap(sell_address, buy_address, amount)
 
     async def get_name(self):
         """
