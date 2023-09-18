@@ -5,6 +5,7 @@ Base DexClient Class   🦄
 
 from typing import Optional
 
+from loguru import logger
 from web3 import Web3
 
 from dxsp import __version__
@@ -14,27 +15,35 @@ from dxsp.utils import AccountUtils, ContractUtils
 class DexClient:
     def __init__(
         self,
-        w3: Optional[Web3] = None,
-        **kwargs,
+        wallet_address,
+        private_key,
+        protocol_type="uniswap",
+        protocol_version=2,
+        api_endpoint="https://api.0x.org/",
+        api_key=None,
+        router_contract_addr=None,
+        factory_contract_addr=None,
+        trading_asset_address=None,
+        trading_slippage=None,
+        block_explorer_url="https://api.etherscan.io/api?",
+        block_explorer_api=None,
+        w3=None,
     ):
-        self.wallet_address = kwargs.get("wallet_address")
-        self.private_key = kwargs.get("private_key")
-        self.protocol_type = kwargs.get("protocol_type", "uniswap")
-        self.protocol_version = kwargs.get("protocol_version", 2)
-        self.api_endpoint = kwargs.get("api_endpoint", "https://api.0x.org/")
-        self.api_key = kwargs.get("api_key")
-        self.router_contract_addr = kwargs.get("router_contract_addr")
-        self.factory_contract_addr = kwargs.get("factory_contract_addr")
-        self.trading_asset_address = kwargs.get("trading_asset_address")
-        self.trading_slippage = kwargs.get("trading_slippage")
-        self.block_explorer_url = kwargs.get(
-            "block_explorer_url", "https://api.etherscan.io/api?"
-        )
-        self.block_explorer_api = kwargs.get("block_explorer_api")
+        self.wallet_address = wallet_address
+        self.private_key = private_key
+        self.protocol_type = protocol_type
+        self.protocol_version = protocol_version
+        self.api_endpoint = api_endpoint
+        self.api_key = api_key
+        self.router_contract_addr = router_contract_addr
+        self.factory_contract_addr = factory_contract_addr
+        self.trading_asset_address = trading_asset_address
+        self.trading_slippage = trading_slippage
+        self.block_explorer_url = block_explorer_url
+        self.block_explorer_api = block_explorer_api
 
         self.w3 = w3
         self.dex_swap = self._get_dex_swap_instance()
-        self.wallet_address = self.dex_swap.wallet_address
         self.account = AccountUtils(
             self.w3, self.wallet_address, self.private_key, self.trading_asset_address
         )
@@ -43,14 +52,21 @@ class DexClient:
         )
 
     def _get_dex_swap_instance(self):
+        """
+        Retrieves the DexSwap instance.
+        Returns:
+            DexClient: The DexSwap instance
+
+        """
+        logger.debug("protocol_type: {}", self.protocol_type)
         if self.protocol_type == "0x":
             from dxsp.protocols.zerox import DexZeroX
 
             return DexZeroX()
-        elif self.protocol_type == "1inch":
-            from dxsp.protocols.oneinch import DexOneInch
+        # elif self.protocol_type == "1inch":
+        #     from dxsp.protocols.oneinch import DexOneInch
 
-            return DexOneInch()
+        #     return DexOneInch()
         else:
             from dxsp.protocols.uniswap import DexUniswap
 
@@ -70,7 +86,7 @@ class DexClient:
             return (
                 f"ℹ️  v{__version__}\n"
                 # f"💱 {await self.get_name()}\n"
-                f"🪪 {self.account_number}"
+                f"🪪 {self.account.account_number}"
             )
         except Exception as error:
             return error

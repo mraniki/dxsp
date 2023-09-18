@@ -20,15 +20,6 @@ def set_test_settings():
 def DexTrader_fixture():
     return DexTrader()
 
-
-# @pytest.fixture(name="dex")
-# def DexClient_fixture(dextrader):
-#     print(dextrader)
-#     print(dextrader.dex_info)
-#     exchange = dextrader["eth"]
-#     return exchange.client
-
-
 @pytest.fixture
 def tester_provider():
     return EthereumTesterProvider()
@@ -64,16 +55,6 @@ def invalid_order_fixture():
         "instrument": "NOTATHING",
         "quantity": 1,
     }
-
-
-@pytest.fixture(name="test_contract")
-def mock_contract(dex):
-    contract = AsyncMock()
-    contract.get_token_decimals.return_value = 18
-    contract.to_wei.return_value = 1000000000000000000
-    contract.functions.balanceOf = AsyncMock(return_value=100)
-    contract.wait_for_transaction_receipt.return_value = {"status": 1}
-    return contract
 
 
 def test_dynaconf_is_in_testing():

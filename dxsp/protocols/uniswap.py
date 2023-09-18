@@ -29,9 +29,10 @@ class DexUniswap(DexClient):
             float: The calculated quote for the given buy and sell addresses.
         """
         try:
+            logger.debug(f"Uniswap quote {buy_address} {sell_address} {amount}")
             uniswap = Uniswap(
-                address=self.account.wallet_address,
-                private_key=self.account.private_key,
+                address=self.wallet_address,
+                private_key=self.private_key,
                 version=self.protocol_version,
                 web3=self.w3,
                 factory_contract_addr=self.factory_contract_addr,
@@ -78,8 +79,8 @@ class DexUniswap(DexClient):
         """
         try:
             uniswap = Uniswap(
-                address=self.account.wallet_address,
-                private_key=self.account.private_key,
+                address=self.wallet_address,
+                private_key=self.private_key,
                 version=self.protocol_version,
                 web3=self.w3,
                 factory_contract_addr=self.factory_contract_addr,
