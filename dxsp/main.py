@@ -52,10 +52,10 @@ class DexTrader:
                 router_contract_addr = exchanges[dx]["router_contract_addr"]
                 factory_contract_addr = exchanges[dx]["factory_contract_addr"]
                 trading_asset_address = exchanges[dx]["trading_asset_address"]
-                block_explorer_url = exchanges[dx]["block_explorer_url"]
-                block_explorer_api = exchanges[dx]["block_explorer_api"]
                 trading_risk_amount = exchanges[dx]["trading_risk_amount"]
                 trading_slippage = exchanges[dx]["trading_slippage"]
+                block_explorer_url = exchanges[dx]["block_explorer_url"]
+                block_explorer_api = exchanges[dx]["block_explorer_api"]
                 client = DexClient(
                     name=name,
                     wallet_address=wallet_address,

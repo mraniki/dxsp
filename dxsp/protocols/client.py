@@ -26,6 +26,7 @@ class DexClient:
         factory_contract_addr=None,
         trading_asset_address=None,
         trading_slippage=None,
+        trading_risk_amount=None,
         block_explorer_url="https://api.etherscan.io/api?",
         block_explorer_api=None,
         w3=None,
@@ -40,6 +41,7 @@ class DexClient:
         self.router_contract_addr = router_contract_addr
         self.factory_contract_addr = factory_contract_addr
         self.trading_asset_address = trading_asset_address
+        self.trading_risk_amount = trading_risk_amount
         self.trading_slippage = trading_slippage
         self.block_explorer_url = block_explorer_url
         self.block_explorer_api = block_explorer_api
