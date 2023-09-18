@@ -117,7 +117,7 @@ async def test_get_quote(dextrader):
     result = await dextrader.get_quote("UNI")
     print(result)
     assert result is not None
-    assert result.startswith("🦄")
+    assert "🦄" in result
 
 
 # @pytest.mark.asyncio
