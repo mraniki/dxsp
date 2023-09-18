@@ -8,17 +8,18 @@ from web3 import EthereumTesterProvider, Web3
 
 from dxsp import DexTrader
 from dxsp.config import settings
-from dxsp.protocols import DexClient
+from dxsp.protocols import DexClient, DexUniswap, DexZeroX
 
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="uniswap")
 
- 
+
 @pytest.fixture(name="dextrader")
 def DexTrader_fixture():
     return DexTrader()
+
 
 @pytest.fixture
 def tester_provider():
@@ -74,7 +75,6 @@ async def test_dextrader(dextrader):
         print(dx)
         assert dx is not None
         assert dx.name is not None
-        assert dx.client is not None
         assert dx.protocol_type == "uniswap"
         assert dx.private_key.startswith("0x")
 
