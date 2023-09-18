@@ -125,19 +125,12 @@ async def test_get_quote(dex):
 #     assert "⚠️" in result
 
 
-# @pytest.mark.asyncio
-# async def test_get_info(dex):
-#     result = await dex.get_info()
-#     print(result)
-#     assert result is not None
-#     assert "ℹ️" in result
-
-
 @pytest.mark.asyncio
-async def test_get_name(dex):
-    result = await dex.get_name()
+async def test_get_info(dex):
+    result = await dex.get_info()
     print(result)
     assert result is not None
+    assert "ℹ️" in result
 
 
 # @pytest.mark.asyncio
