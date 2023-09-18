@@ -61,7 +61,7 @@ class AccountUtils:
         try:
             return (
                 f"ℹ️  v{__version__}\n"
-                # f"💱 {await self.get_name()}\n"
+                f"💱 {await self.get_name()}\n"
                 f"🪪 {self.account_number}"
             )
         except Exception as error:

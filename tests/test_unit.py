@@ -118,37 +118,27 @@ async def test_get_quote(dextrader):
     assert "🦄" in result
 
 
-# @pytest.mark.asyncio
-# async def test_get_quote_BTC(dextrader) -> str:
-#     """test token account."""
-
-#     result = await dextrader.get_quote("WBTC")
-#     print(result)
-#     assert result is not None
-
-
-# @pytest.mark.asyncio
-# async def test_get_quote_invalid(dextrader):
-#     result = await dextrader.get_quote("THISISNOTATOKEN")
-#     print(result)
-#     assert result is not None
-#     assert "⚠️" in result
+@pytest.mark.asyncio
+async def test_get_quote_invalid(dextrader):
+    result = await dextrader.get_quote("THISISNOTATOKEN")
+    print(result)
+    assert result is not None
+    assert "⚠️" in result
 
 
-# @pytest.mark.asyncio
-# async def test_get_info(dextrader):
-#     result = await dextrader.get_info()
-#     print(result)
-#     assert result is not None
-#     assert "⚠️" in result
+@pytest.mark.asyncio
+async def test_get_info(dextrader):
+    result = await dextrader.get_info()
+    print(result)
+    assert result is not None
+    assert "ℹ️" in result
 
 
-# @pytest.mark.asyncio
-# async def test_get_name(dextrader):
-#     result = await dextrader.get_name()
-#     print(result)
-#     assert result is not None
-#     assert "⚠️" in result
+@pytest.mark.asyncio
+async def test_get_name(dextrader):
+    result = await dextrader.get_name()
+    print(result)
+    assert result is not None
 
 
 # @pytest.mark.asyncio

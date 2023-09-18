@@ -239,7 +239,7 @@ class DexTrader:
         """
         info = ""
         for dx in self.dex_info:
-            info += await dx.account.get_info()
+            info += await dx.get_info()
         return info.strip()
 
     async def get_name(self):
