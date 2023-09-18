@@ -264,7 +264,7 @@ class DexSwap:
         """
         info = ""
         for dx in self.dex_info:
-            info += await dx.get_info()
+            info += await dx.get_info() or "Info failed"
         return info.strip()
 
     async def get_name(self):
@@ -275,7 +275,7 @@ class DexSwap:
         """
         info = ""
         for dx in self.dex_info:
-            info += await dx.get_name()
+            info += await dx.get_name() or "Name failed"
         return info.strip()
 
     # 🔒 USER RELATED
@@ -288,7 +288,7 @@ class DexSwap:
         """
         info = ""
         for dx in self.dex_info:
-            info += await dx.get_account_balance()
+            info += await dx.get_account_balance() or "Account balance failed"
         return info.strip()
 
     async def get_trading_asset_balance(self):
@@ -303,7 +303,9 @@ class DexSwap:
         """
         info = ""
         for dx in self.dex_info:
-            info += await dx.get_trading_asset_balance()
+            info += (
+                await dx.get_trading_asset_balance() or "Trading asset balance failed"
+            )
         return info.strip()
 
     async def get_account_position(self):
@@ -315,7 +317,7 @@ class DexSwap:
         """
         info = ""
         for dx in self.dex_info:
-            info += await dx.get_account_position()
+            info += await dx.get_account_position() or "Account position failed"
         return info.strip()
 
     async def get_account_margin(self):
@@ -327,7 +329,7 @@ class DexSwap:
         """
         info = ""
         for dx in self.dex_info:
-            info += await dx.get_account_margin()
+            info += await dx.get_account_margin() or "Account margin failed"
         return info.strip()
 
     async def get_account_open_positions(self):
@@ -338,7 +340,9 @@ class DexSwap:
         """
         info = ""
         for dx in self.dex_info:
-            info += await dx.get_account_open_positions()
+            info += (
+                await dx.get_account_open_positions() or "Account open positions failed"
+            )
         return info.strip()
 
     async def get_account_transactions(self, period=24):
@@ -356,7 +360,10 @@ class DexSwap:
         """
         info = ""
         for dx in self.dex_info:
-            info += await dx.get_account_transactions(period)
+            info += (
+                await dx.get_account_transactions(period)
+                or "Account transactions failed"
+            )
         return info.strip()
 
     async def get_account_pnl(self, period=24):
@@ -375,5 +382,5 @@ class DexSwap:
         """
         info = ""
         for dx in self.dex_info:
-            info += await dx.get_account_pnl(period)
+            info += await dx.get_account_pnl(period) or "Account PnL failed"
         return info.strip()
