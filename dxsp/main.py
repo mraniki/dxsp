@@ -195,19 +195,20 @@ class DexTrader:
         """
         try:
             logger.debug("get quote", sell_token)
+            info = ""
             for dx in self.dex_info:
                 logger.debug("get quote {}", dx)
-                client = dx["client"]
-                buy_address = client.trading_asset_address
-                sell_address = await client.contract_utils.search_contract_address(
+                buy_address = dx.trading_asset_address
+                sell_address = await dx.contract_utils.search_contract_address(
                     sell_token
                 )
-                quote = await client.get_quote(buy_address, sell_address)
+                quote = await dx.get_quote(buy_address, sell_address)
                 quote = f"🦄 {quote}"
-                symbol = await client.contract_utils.get_token_symbol(
-                    client.trading_asset_address
+                symbol = await dx.contract_utils.get_token_symbol(
+                    dx.trading_asset_address
                 )
-                return f"{quote} {symbol}"
+                info += f"{dx.name}: {quote} {symbol}"
+            return info.strip()
 
         except Exception as error:
             logger.debug("quote error {}", error)
