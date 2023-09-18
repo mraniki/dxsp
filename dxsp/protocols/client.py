@@ -31,7 +31,8 @@ class DexClient:
         block_explorer_api=None,
         w3=None,
     ):
-        logger.debug(f"setting up DexClient: {name}")
+        self.name = name
+        logger.debug(f"setting up DexClient: {self.name}")
         self.wallet_address = wallet_address
         self.private_key = private_key
         self.protocol_type = protocol_type
