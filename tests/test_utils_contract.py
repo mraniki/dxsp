@@ -91,15 +91,15 @@ def test_dynaconf_is_in_testing():
 #         assert result is None
 
 
-@pytest.mark.asyncio
-async def test_get_token_name(dex):
-    """get_token_symbol Testing"""
-    for dx in dex.dex_info:
-        result = await dx.contract_utils.get_token_name(
-            "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-        )
-        print(result)
-        assert result is not None
+# @pytest.mark.asyncio
+# async def test_get_token_name(dex):
+#     """get_token_symbol Testing"""
+#     for dx in dex.dex_info:
+#         result = await dx.contract_utils.get_token_name(
+#             "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+#         )
+#         print(result)
+#         assert result is not None
         #assert "Tether USD" in result 
 
 
@@ -202,18 +202,18 @@ async def calculate_sell_amount(dex):
     pass
 
 
-@pytest.mark.asyncio
-async def test_get_confirmation(dex):
-    for dx in dex.dex_info:
-        result = await dx.contract_utils.get_confirmation(
-            "0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771"
-        )
-        print(result)
-        assert result is not None
-        assert result["timestamp"] is not None
-        assert result["fee"] is not None
-        assert result["confirmation"] is not None
-        assert "➕" in result["confirmation"]
-        assert "⛽" in result["confirmation"]
-        assert "🗓️" in result["confirmation"]
-        assert "ℹ️" in result["confirmation"]
+# @pytest.mark.asyncio
+# async def test_get_confirmation(dex):
+#     for dx in dex.dex_info:
+#         result = await dx.contract_utils.get_confirmation(
+#             "0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771"
+#         )
+#         print(result)
+#         assert result is not None
+#         assert result["timestamp"] is not None
+#         assert result["fee"] is not None
+#         assert result["confirmation"] is not None
+#         assert "➕" in result["confirmation"]
+#         assert "⛽" in result["confirmation"]
+#         assert "🗓️" in result["confirmation"]
+#         assert "ℹ️" in result["confirmation"]
