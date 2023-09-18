@@ -6,8 +6,9 @@
 # import pytest
 # from web3 import EthereumTesterProvider, Web3
 
-# from dxsp import DexTrader
+# from dxsp import DexSwap
 # from dxsp.config import settings
+# from dxsp.protocols import DexUniswap, DexZeroX
 
 
 # @pytest.fixture(scope="session", autouse=True)
@@ -15,15 +16,9 @@
 #     settings.configure(FORCE_ENV_FOR_DYNACONF="uniswap")
 
 
-# @pytest.fixture(name="dextrader")
-# def DexTrader_fixture():
-#     return DexTrader()
-
-
 # @pytest.fixture(name="dex")
-# def DexClient_fixture(dextrader):
-#     for dx in dextrader.dex_info:
-#         yield dx.client
+# def DexTrader_fixture():
+#     return DexSwap()
 
 
 # @pytest.fixture
@@ -71,7 +66,6 @@
 #     contract.functions.balanceOf = AsyncMock(return_value=100)
 #     contract.wait_for_transaction_receipt.return_value = {"status": 1}
 #     return contract
-
 
 
 # def test_dynaconf_is_in_testing():
@@ -181,7 +175,6 @@
 # @pytest.mark.asyncio
 # async def test_get_sign():
 #     pass
-
 
 
 # @pytest.mark.asyncio

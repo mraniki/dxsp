@@ -28,15 +28,6 @@ async def get(url, params=None, headers=None):
 
     """
 
-    # try:
-    #     response = requests.get(url, params=params, headers=headers, timeout=20)
-    #     logger.debug(response)
-    #     if response.status_code == 200:
-    #         return response.json()
-
-    # except Exception as error:
-    #     logger.error("get: {}", error)
-
     try:
         async with aiohttp.ClientSession() as session:
             async with session.get(

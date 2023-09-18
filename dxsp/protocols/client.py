@@ -7,6 +7,7 @@ from typing import Optional
 
 from loguru import logger
 from web3 import Web3
+from web3.gas_strategies.time_based import medium_gas_price_strategy
 
 from dxsp.utils import AccountUtils, ContractUtils
 
@@ -54,6 +55,7 @@ class DexClient:
         w3=None,
     ):
         self.w3 = w3
+        self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
         self.name = name
         logger.debug(f"setting up DexClient: {self.name}")
         self.wallet_address = wallet_address
@@ -70,11 +72,15 @@ class DexClient:
         self.block_explorer_url = block_explorer_url
         self.block_explorer_api = block_explorer_api
 
-        self.account = AccountUtils(
-            self.w3, self.wallet_address, self.private_key, self.trading_asset_address
-        )
         self.contract_utils = ContractUtils(
             self.w3, self.block_explorer_url, self.block_explorer_api
+        )
+        self.account = AccountUtils(
+            self.w3,
+            self.contract_utils,
+            self.wallet_address,
+            self.private_key,
+            self.trading_asset_address,
         )
 
     async def get_quote(self, buy_address, sell_address, amount=1):

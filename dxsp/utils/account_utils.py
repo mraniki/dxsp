@@ -2,13 +2,16 @@
  DEX SWAP
 🔒 USER RELATED
 """
+from datetime import datetime, timedelta
 from typing import Optional
 
 from loguru import logger
 
 from dxsp.config import settings
 from dxsp.utils.contract_utils import ContractUtils
-from dxsp.utils.explorer_utils import get_account_transactions
+
+# from dxsp.utils.explorer_utils import get_account_transactions
+from dxsp.utils.utils import get
 
 
 class AccountUtils:
@@ -37,7 +40,9 @@ class AccountUtils:
 
     """
 
-    def __init__(self, w3, wallet_address, private_key, trading_asset_address):
+    def __init__(
+        self, w3, contract_utils, wallet_address, private_key, trading_asset_address
+    ):
         self.w3 = w3
         self.wallet_address = self.w3.to_checksum_address(wallet_address)
         self.account_number = (
@@ -46,7 +51,7 @@ class AccountUtils:
         logger.debug(f"account number: {self.account_number}")
         self.private_key = private_key
         self.trading_asset_address = self.w3.to_checksum_address(trading_asset_address)
-        self.contract_utils = ContractUtils(w3=self.w3) 
+        self.contract_utils = contract_utils
 
     async def get_account_balance(self):
         """
@@ -110,26 +115,62 @@ class AccountUtils:
         """
         return 0
 
-    async def get_account_transactions(self, period=24):
+    async def get_account_transactions(
+        self,
+        contract_address,
+        period=24,
+    ):
         """
-        Retrieve the account transactions for a given period.
+        Retrieves the account transactions
+        within a specified time period
+        for the main asset activity
         Not yet implemented
 
-        Args:
-            period (int): The time period in hours
-            to retrieve the transactions for.
-            Default is 24 hours.
+        :param contract_address: The address of the contract.
+        :type contract_address: str
+        :param wallet_address: The address of the wallet.
+        :type wallet_address: str
+        :param period: The time period in hours
+        :type period: int
 
-        Returns:
-            List[Transaction]: A list of transactions for the account.
+        :return: The transactions for the account.
         """
-        return await get_account_transactions(
-            self.block_explorer_api,
-            self.block_explorer_url,
-            self.contract_address,
-            self.wallet_address,
-            period=period,
-        )
+        pnl_dict = {"pnl": 0, "tokenList": {}}
+        if not self.block_explorer_api:
+            return pnl_dict
+
+        params = {
+            "module": "account",
+            "action": "tokentx",
+            "contractaddress": contract_address,
+            "address": self.wallet_address,
+            "page": "1",
+            "offset": "100",
+            "startblock": "0",
+            "endblock": "99999999",
+            "sort": "desc",
+            "apikey": self.block_explorer_api,
+        }
+
+        response = await get(url=self.block_explorer_url, params=params)
+
+        if response.get("status") == "1" and "result" in response:
+            current_time = datetime.utcnow()
+            time_history_start = current_time - timedelta(hours=period)
+
+            for entry in response["result"]:
+                token_symbol = entry.get("tokenSymbol")
+                value = int(entry.get("value", 0))
+                timestamp = int(entry.get("timeStamp", 0))
+                transaction_time = datetime.utcfromtimestamp(timestamp)
+
+                if transaction_time >= time_history_start and token_symbol:
+                    pnl_dict["tokenList"][token_symbol] = (
+                        pnl_dict["tokenList"].get(token_symbol, 0) + value
+                    )
+                    pnl_dict["pnl"] += value
+
+        return pnl_dict
 
     async def get_account_pnl(self, period=24):
         """
@@ -229,3 +270,5 @@ class AccountUtils:
 
         """
         return round(self.w3.from_wei(self.w3.eth.generate_gas_price(), "gwei"), 2)
+
+

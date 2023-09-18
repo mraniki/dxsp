@@ -12,7 +12,6 @@ from loguru import logger
 from pycoingecko import CoinGeckoAPI
 
 from dxsp.config import settings
-from dxsp.utils.explorer_utils import get_explorer_abi
 from dxsp.utils.utils import get
 
 
@@ -28,19 +27,21 @@ class ContractUtils:
         w3 (Optional[Web3]): Web3
 
     Methods:
-        search_contract_address(self, token)
-        search_cg_platform(self)
-        search_cg(self, token)
-        search_cg_contract(token)
-        get_token_address(self, contract_list, token)
-        get_token_contract(self, token)
-        get_token_decimals(self, token_address)
-        get_token_symbol(self, token_address)
-        get_token_name(self, token_address)
-        get_token_balance(self, token_address)
-        calculate_sell_amount(self,
-            sell_token_address, wallet_address, quantity)
-        get_confirmation(self, tx_hash)
+        search_contract_address()
+        search_cg_contract()
+        search_cg_platform()
+        search_cg_contract()
+        get_token_address()
+        get_token_symbol()
+        get_token_name()
+        get_token_decimals()
+        get_token_contract()
+        get_token_balance()
+        calculate_sell_amount()
+        get_confirmation()
+
+
+
 
     """
 
@@ -87,12 +88,10 @@ class ContractUtils:
             token_address = await self.search_cg_contract(token)
             if token_address is None:
                 logger.warning("Invalid Token {}", token)
-                raise ValueError(f"Invalid Token {token}")
             logger.debug("Found on Coingecko {}", token_address)
             return self.w3.to_checksum_address(token_address)
         except Exception as e:
-            logger.error(": {}", e)
-            raise ValueError(f"Invalid Token {token}")
+            logger.error("Invalid Token {}: {}", token, e)
 
     async def search_cg_platform(self):
         """
@@ -188,38 +187,6 @@ class ContractUtils:
             logger.error("get_token_address: {}", e)
             return None
 
-    async def get_token_contract(self, token_address):
-        """
-        Given a token address, returns a contract object.
-
-        Args:
-            token_address (str): The token address
-
-        Returns:
-            Contract: The token contract
-
-        """
-        token_abi = await get_explorer_abi(
-            token_address, self.block_explorer_url, self.block_explorer_api
-        )
-        if token_abi is None:
-            token_abi = await get(settings.dex_erc20_abi_url)
-        return self.w3.eth.contract(address=token_address, abi=token_abi)
-
-    async def get_token_decimals(self, token_address: str) -> Optional[int]:
-        """
-        Get token decimals
-
-        Args:
-            token_address (str): The token address
-
-        Returns:
-            int: The token decimals
-
-        """
-        contract = await self.get_token_contract(token_address)
-        return 18 if not contract else contract.functions.decimals().call()
-
     async def get_token_symbol(self, token_address: str):
         """
         Get token symbol
@@ -247,6 +214,61 @@ class ContractUtils:
         """
         contract = await self.get_token_contract(token_address)
         return contract.functions.name().call()
+
+    async def get_token_decimals(self, token_address: str) -> Optional[int]:
+        """
+        Get token decimals
+
+        Args:
+            token_address (str): The token address
+
+        Returns:
+            int: The token decimals
+
+        """
+        contract = await self.get_token_contract(token_address)
+        return 18 if not contract else contract.functions.decimals().call()
+
+    async def get_token_contract(self, token_address):
+        """
+        Given a token address, returns a contract object.
+
+        Args:
+            token_address (str): The token address
+
+        Returns:
+            Contract: The token contract
+
+        """
+        token_abi = await self.get_token_abi(
+            token_address, self.block_explorer_url, self.block_explorer_api
+        )
+        if token_abi is None:
+            token_abi = await get(settings.dex_erc20_abi_url)
+        return self.w3.eth.contract(address=token_address, abi=token_abi)
+
+    async def get_token_abi(self, address):
+        """
+        Retrieves the ABI (Application Binary Interface)
+        for the contract at the given address.
+
+        :param address: The address of the contract.
+        :type address: str
+
+        :return: The ABI of the contract if it exists, else None.
+        :rtype: str or None
+        """
+        if not self.block_explorer_api:
+            return None
+
+        params = {
+            "module": "contract",
+            "action": "getabi",
+            "address": address,
+            "apikey": self.block_explorer_api,
+        }
+        resp = await get(url=self.block_explorer_url, params=params)
+        return resp["result"] if resp["status"] == "1" else None
 
     async def get_token_balance(
         self, token_address: str, wallet_address: str
