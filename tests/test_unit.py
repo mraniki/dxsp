@@ -75,36 +75,20 @@ async def test_dextrader(dex):
         assert dx.name is not None
         assert dx.protocol_type == "uniswap"
         assert dx.private_key.startswith("0x")
+        assert dx.account.wallet_address.startswith("0x")
+
+@pytest.mark.asyncio
+async def test_execute_order(dex, order):
+    result = await dex.execute_order(order)
+    print(f"swap_order: {result}")
+    assert result is not None
 
 
-# @pytest.mark.asyncio
-# async def test_dex(dex):
-#     """Init Testing"""
-#     print(dex)
-#     assert dex is not None
-#     assert isinstance(dex, DexClient)
-#     assert dex.w3 is not None
-#     assert dex.w3.net.version == "1"
-#     assert dex.protocol_type is not None
-#     assert dex.protocol_type == "uniswap"
-#     assert dex.account.wallet_address.startswith("0x")
-#     assert dex.account.wallet_address == "0x1a9C8182C09F50C8318d769245beA52c32BE35BC"
-#     assert dex.account.private_key.startswith("0x")
-#     assert "1 - 32BE35BC" in dex.account.account_number
-
-
-# @pytest.mark.asyncio
-# async def test_execute_order(dex, order):
-#     result = await dex.execute_order(order)
-#     print(f"swap_order: {result}")
-#     assert result is not None
-
-
-# @pytest.mark.asyncio
-# async def test_execute_order_invalid(dex, invalid_order):
-#     result = await dex.execute_order(invalid_order)
-#     print(result)
-#     assert result.startswith("⚠️ order execution: Invalid Token")
+@pytest.mark.asyncio
+async def test_execute_order_invalid(dex, invalid_order):
+    result = await dex.execute_order(invalid_order)
+    print(result)
+    assert result.startswith("⚠️ order execution: Invalid Token")
 
 
 @pytest.mark.asyncio
@@ -117,12 +101,12 @@ async def test_get_quote(dex):
     assert "🦄" in result
 
 
-# @pytest.mark.asyncio
-# async def test_get_quote_invalid(dex):
-#     result = await dex.get_quote("THISISNOTATOKEN")
-#     print(result)
-#     assert result is not None
-#     assert "⚠️" in result
+@pytest.mark.asyncio
+async def test_get_quote_invalid(dex):
+    result = await dex.get_quote("THISISNOTATOKEN")
+    print(result)
+    assert result is not None
+    assert "⚠️" in result
 
 
 @pytest.mark.asyncio
@@ -133,9 +117,9 @@ async def test_get_info(dex):
     assert "ℹ️" in result
 
 
-# @pytest.mark.asyncio
-# async def test_get_balance(dex):
-#     result = await dex.get_balance()
-#     print(result)
-#     assert result is not None
-#     assert "⚠️" in result
+@pytest.mark.asyncio
+async def test_get_balance(dex):
+    result = await dex.get_balance()
+    print(result)
+    assert result is not None
+    assert "⚠️" in result
