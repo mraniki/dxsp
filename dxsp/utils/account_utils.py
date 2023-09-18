@@ -6,7 +6,6 @@ from typing import Optional
 
 from loguru import logger
 
-from dxsp import __version__
 from dxsp.config import settings
 from dxsp.utils.contract_utils import ContractUtils
 from dxsp.utils.explorer_utils import get_account_transactions

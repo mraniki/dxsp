@@ -8,7 +8,6 @@ from typing import Optional
 from loguru import logger
 from web3 import Web3
 
-from dxsp import __version__
 from dxsp.utils import AccountUtils, ContractUtils
 
 
@@ -99,9 +98,8 @@ class DexClient:
         """
         try:
             return (
-                f"ℹ️  v{__version__}\n"
                 f"💱 {self.name()}\n"
-                f"🪪 {self.account.account_number}"
+                # f"🪪 {self.account.account_number}"
             )
         except Exception as error:
             logger.error("info {}", error)

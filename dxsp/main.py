@@ -9,6 +9,7 @@ from loguru import logger
 from web3 import Web3
 from web3.gas_strategies.time_based import medium_gas_price_strategy
 
+from dxsp import __version__
 from dxsp.config import settings
 from dxsp.protocols import DexUniswap, DexZeroX
 from dxsp.utils import AccountUtils, ContractUtils
@@ -262,7 +263,7 @@ class DexSwap:
 
         :return: The information retrieved from the account.
         """
-        info = ""
+        info = "ℹ️  v{__version__}\n"
         for dx in self.dex_info:
             info += await dx.get_info() or "Info failed\n"
         return info.strip()
