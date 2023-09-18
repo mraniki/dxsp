@@ -2,7 +2,7 @@
 Base DexClient Class   🦄
 """
 
-
+import decimal
 from typing import Optional
 
 from loguru import logger
@@ -131,7 +131,7 @@ class DexClient:
 
             order_amount = int(
                 sell_token_amount_wei
-                * decimal.Decimal((dex_client.trading_slippage / 100))
+                * decimal.Decimal((self.trading_slippage / 100))
             )
             logger.debug(order_amount)
             order = await self.make_swap(
