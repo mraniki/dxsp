@@ -75,8 +75,8 @@ async def test_dextrader(dextrader):
         print(dx.client)
         assert dx is not None
         assert dx.client is not None
-        assert dx.protocol_type == "uniswap"
-        assert dx.private_key.startswith("0x")
+        assert dx.client.protocol_type == "uniswap"
+        assert dx.client.private_key.startswith("0x")
 
 
 # @pytest.mark.asyncio

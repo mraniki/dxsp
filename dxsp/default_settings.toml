@@ -46,8 +46,8 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 
 
 [default.dex.eth]
-dex_wallet_address = "0x1234567890123456789012345678901234567890"
-dex_private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
+wallet_address = "0x1234567890123456789012345678901234567890"
+private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
 rpc = "https://rpc.ankr.com/eth"
 protocol_type = "uniswap"
 protocol_version = 2
@@ -62,8 +62,8 @@ block_explorer_url = "https://api.etherscan.io/api?"
 block_explorer_api = "798437294880920392"
 
 [default.dex.bsc]
-dex_wallet_address = "0x1234567890123456789012345678901234567890"
-dex_private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
+wallet_address = "0x1234567890123456789012345678901234567890"
+private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
 rpc = "https://rpc.ankr.com/bsc"
 protocol_type = "uniswap"
 protocol_version = 2
@@ -78,8 +78,8 @@ block_explorer_url = "https://api.bscscan.com/api?"
 block_explorer_api = "798437294880920392"
 
 [default.dex.polygon]
-dex_wallet_address = "0x1234567890123456789012345678901234567890"
-dex_private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
+wallet_address = "0x1234567890123456789012345678901234567890"
+private_key = "0xdeadbeef45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266"
 rpc = "https://rpc.ankr.com/polygon"
 protocol_type = "0x"
 protocol_version = 4
