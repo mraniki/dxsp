@@ -73,7 +73,6 @@ def test_dynaconf_is_in_testing():
     assert settings.VALUE == "On Testing"
 
 
-
 @pytest.mark.asyncio
 async def test_get_account_balance(dex):
     # Call the get_account_balance method
@@ -133,43 +132,43 @@ async def test_get_account_pnl(dex):
     assert "Margin" in result
 
 
-@pytest.mark.asyncio
-async def test_get_approve(dex):
-    symbol = "UNI"
-    approve_receipt = None
-    try:
-        approve_receipt = await dex.get_approve(symbol)
-        print(approve_receipt)
-    except Exception as e:
-        print(f"Error getting approve receipt: {e}")
-    assert approve_receipt is None
+# @pytest.mark.asyncio
+# async def test_get_approve(dex):
+#     symbol = "UNI"
+#     approve_receipt = None
+#     try:
+#         approve_receipt = await dex.get_approve(symbol)
+#         print(approve_receipt)
+#     except Exception as e:
+#         print(f"Error getting approve receipt: {e}")
+#     assert approve_receipt is None
 
 
-@pytest.mark.asyncio
-async def test_failed_get_approve(dex):
-    with pytest.raises(ValueError, match="Approval failed"):
-        await dex.account.get_approve("0xdAC17F958D2ee523a2206206994597C13D831ec7")
+# @pytest.mark.asyncio
+# async def test_failed_get_approve(dex):
+#     with pytest.raises(ValueError, match="Approval failed"):
+#         await dex.account.get_approve("0xdAC17F958D2ee523a2206206994597C13D831ec7")
 
 
-@pytest.mark.asyncio
-async def test_get_sign():
-    pass
+# @pytest.mark.asyncio
+# async def test_get_sign():
+#     pass
 
 
-@pytest.mark.asyncio
-async def test_get_gas(dex):
-    """get_gas Testing"""
-    mock_tx = {
-        "to": "0x1234567890123456789012345678901234567890",
-        "value": "1000000000000000000",
-    }
-    result = await dex.account.get_gas(mock_tx)
-    print(result)
+# @pytest.mark.asyncio
+# async def test_get_gas(dex):
+#     """get_gas Testing"""
+#     mock_tx = {
+#         "to": "0x1234567890123456789012345678901234567890",
+#         "value": "1000000000000000000",
+#     }
+#     result = await dex.account.get_gas(mock_tx)
+#     print(result)
 
 
-@pytest.mark.asyncio
-async def test_get_gas_price(dex):
-    # Call the get_gasPrice method
-    result = await dex.account.get_gas_price()
-    print(f"gas_price: {result}")
-    assert result is not None
+# @pytest.mark.asyncio
+# async def test_get_gas_price(dex):
+#     # Call the get_gasPrice method
+#     result = await dex.account.get_gas_price()
+#     print(f"gas_price: {result}")
+#     assert result is not None

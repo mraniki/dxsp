@@ -39,7 +39,14 @@ class AccountUtils:
     """
 
     def __init__(
-        self, w3, contract_utils, wallet_address, private_key, trading_asset_address
+        self,
+        w3,
+        contract_utils,
+        wallet_address,
+        private_key,
+        trading_asset_address,
+        block_explorer_url,
+        block_explorer_api,
     ):
         self.w3 = w3
         self.wallet_address = self.w3.to_checksum_address(wallet_address)
@@ -50,6 +57,8 @@ class AccountUtils:
         self.private_key = private_key
         self.trading_asset_address = self.w3.to_checksum_address(trading_asset_address)
         self.contract_utils = contract_utils
+        self.block_explorer_url = block_explorer_url
+        self.block_explorer_api = block_explorer_api
 
     async def get_account_balance(self):
         """
@@ -170,101 +179,101 @@ class AccountUtils:
 
         return pnl_dict
 
-    async def get_account_pnl(self, period=24):
-        """
-        Create a profit and loss (PnL)
-        report for the account.
-        Not yet implemented
+    # async def get_account_pnl(self, period=24):
+    #     """
+    #     Create a profit and loss (PnL)
+    #     report for the account.
+    #     Not yet implemented
 
-        Args:
-            period (int): The time period in hours
-            to retrieve the PnL for. Default is 24 hours.
+    #     Args:
+    #         period (int): The time period in hours
+    #         to retrieve the PnL for. Default is 24 hours.
 
-        Returns:
-            str: A string containing the PnL report.
+    #     Returns:
+    #         str: A string containing the PnL report.
 
 
-        """
-        pnl_dict = await self.get_account_transactions(period)
-        pnl_report = "".join(
-            f"{token} {value}\n" for token, value in pnl_dict["tokenList"].items()
-        )
-        pnl_report += f"Total {pnl_dict['pnl']}\n"
-        pnl_report += await self.get_account_position()
+    #     """
+    #     pnl_dict = await self.get_account_transactions(period)
+    #     pnl_report = "".join(
+    #         f"{token} {value}\n" for token, value in pnl_dict["tokenList"].items()
+    #     )
+    #     pnl_report += f"Total {pnl_dict['pnl']}\n"
+    #     pnl_report += await self.get_account_position()
 
-        return pnl_report
+    #     return pnl_report
 
-    async def get_approve(self, token_address):
-        """
-        Given a token address, approve a token
+    # async def get_approve(self, token_address):
+    #     """
+    #     Given a token address, approve a token
 
-        Args:
-            token_address (str): The token address
+    #     Args:
+    #         token_address (str): The token address
 
-        Returns:
-            approval_tx_hash
+    #     Returns:
+    #         approval_tx_hash
 
-        """
-        try:
-            contract = await self.contract_utils.get_token_contract(token_address)
-            if contract is None:
-                return
-            approved_amount = self.w3.to_wei(2**64 - 1, "ether")
-            owner_address = self.w3.to_checksum_address(self.wallet_address)
-            dex_router_address = self.w3.to_checksum_address(
-                settings.dex_router_contract_addr
-            )
-            allowance = contract.functions.allowance(
-                owner_address, dex_router_address
-            ).call()
-            if allowance == 0:
-                approval_tx = contract.functions.approve(
-                    dex_router_address, approved_amount
-                )
-                approval_tx_hash = await self.get_sign(approval_tx.transact())
-                return self.w3.eth.wait_for_transaction_receipt(approval_tx_hash)
-        except Exception as error:
-            logger.error("Approval failed {}", error)
+    #     """
+    #     try:
+    #         contract = await self.contract_utils.get_token_contract(token_address)
+    #         if contract is None:
+    #             return
+    #         approved_amount = self.w3.to_wei(2**64 - 1, "ether")
+    #         owner_address = self.w3.to_checksum_address(self.wallet_address)
+    #         dex_router_address = self.w3.to_checksum_address(
+    #             settings.dex_router_contract_addr
+    #         )
+    #         allowance = contract.functions.allowance(
+    #             owner_address, dex_router_address
+    #         ).call()
+    #         if allowance == 0:
+    #             approval_tx = contract.functions.approve(
+    #                 dex_router_address, approved_amount
+    #             )
+    #             approval_tx_hash = await self.get_sign(approval_tx.transact())
+    #             return self.w3.eth.wait_for_transaction_receipt(approval_tx_hash)
+    #     except Exception as error:
+    #         logger.error("Approval failed {}", error)
 
-    async def get_sign(self, transaction):
-        """
-        Given a transaction, sign a transaction
+    # async def get_sign(self, transaction):
+    #     """
+    #     Given a transaction, sign a transaction
 
-        Args:
-            transaction (Transaction): The transaction
+    #     Args:
+    #         transaction (Transaction): The transaction
 
-        Returns:
-            signed_tx_hash
+    #     Returns:
+    #         signed_tx_hash
 
-        """
-        try:
-            signed_tx = self.w3.eth.account.sign_transaction(
-                transaction, self.private_key
-            )
-            return self.w3.eth.send_raw_transaction(signed_tx.rawTransaction)
-        except Exception as error:
-            logger.error("Sign failed {}", error)
+    #     """
+    #     try:
+    #         signed_tx = self.w3.eth.account.sign_transaction(
+    #             transaction, self.private_key
+    #         )
+    #         return self.w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+    #     except Exception as error:
+    #         logger.error("Sign failed {}", error)
 
-    async def get_gas(self, transaction):
-        """
-        Given a transaction, get gas estimate
+    # async def get_gas(self, transaction):
+    #     """
+    #     Given a transaction, get gas estimate
 
-        Args:
-            transaction (Transaction): The transaction
+    #     Args:
+    #         transaction (Transaction): The transaction
 
-        Returns:
-            int: The gas estimate
+    #     Returns:
+    #         int: The gas estimate
 
-        """
-        gas_limit = self.w3.eth.estimate_gas(transaction) * 1.25
-        return int(self.w3.to_wei(gas_limit, "wei"))
+    #     """
+    #     gas_limit = self.w3.eth.estimate_gas(transaction) * 1.25
+    #     return int(self.w3.to_wei(gas_limit, "wei"))
 
-    async def get_gas_price(self):
-        """
-        search get gas price
+    # async def get_gas_price(self):
+    #     """
+    #     search get gas price
 
-        Returns:
-            int: The gas price
+    #     Returns:
+    #         int: The gas price
 
-        """
-        return round(self.w3.from_wei(self.w3.eth.generate_gas_price(), "gwei"), 2)
+    #     """
+    #     return round(self.w3.from_wei(self.w3.eth.generate_gas_price(), "gwei"), 2)

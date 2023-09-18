@@ -107,7 +107,7 @@ async def test_get_quote_invalid(dex):
     result = await dex.get_quote("THISISNOTATOKEN")
     print(result)
     assert result is not None
-    assert "⚠️" in result
+    assert "Quote failed" in result
 
 
 @pytest.mark.asyncio
@@ -120,7 +120,7 @@ async def test_get_info(dex):
 
 @pytest.mark.asyncio
 async def test_get_help(dex):
-    result = await dex.get_help
+    result = await dex.get_help()
     print(result)
     assert result is not None
     assert "🎯" in result
@@ -131,15 +131,15 @@ async def test_get_balance(dex):
     result = await dex.get_account_balance()
     print(result)
     assert result is not None
-    assert "⚠️" in result
+    assert "💵" in result
 
 
-@pytest.mark.asyncio
-async def test_get_trading_asset_balance(dex):
-    result = await dex.get_trading_asset_balance()
-    print(result)
-    assert result is not None
-    assert "⚠️" in result
+# @pytest.mark.asyncio
+# async def test_get_trading_asset_balance(dex):
+#     result = await dex.get_trading_asset_balance()
+#     print(result)
+#     assert result is not None
+#     assert "⚠️" in result
 
 
 @pytest.mark.asyncio

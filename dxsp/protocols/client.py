@@ -81,6 +81,8 @@ class DexClient:
             self.wallet_address,
             self.private_key,
             self.trading_asset_address,
+            self.block_explorer_url,
+            self.block_explorer_api,
         )
 
     async def get_quote(self, buy_address, sell_address, amount=1):
