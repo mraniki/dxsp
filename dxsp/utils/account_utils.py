@@ -9,8 +9,6 @@ from loguru import logger
 
 from dxsp.config import settings
 from dxsp.utils.contract_utils import ContractUtils
-
-# from dxsp.utils.explorer_utils import get_account_transactions
 from dxsp.utils.utils import get
 
 
@@ -270,5 +268,3 @@ class AccountUtils:
 
         """
         return round(self.w3.from_wei(self.w3.eth.generate_gas_price(), "gwei"), 2)
-
-

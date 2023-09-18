@@ -8,6 +8,7 @@ from unittest.mock import AsyncMock, patch
 import pytest
 from web3 import EthereumTesterProvider, Web3
 
+import dxsp
 from dxsp import DexSwap
 from dxsp.config import settings
 
@@ -144,6 +145,24 @@ async def test_get_token_contract(dex):
     assert result is not None
     assert type(result) is not None
     assert result.functions is not None
+
+
+@pytest.mark.asyncio
+async def test_get_abi(dex, mocker):
+    mock_resp = {"status": "1", "result": "0x0123456789abcdef"}
+    mocker.patch.object(dxsp.utils.explorer_utils, "get", return_value=mock_resp)
+    result = await dex.contract_utils.get_explorer_abi(
+        "0x1234567890123456789012345678901234567890"
+    )
+    assert result == "0x0123456789abcdef"
+
+
+@pytest.mark.asyncio
+async def test_invalid_get_abi(dex):
+    result = await dex.contract_utils.get_explorer_abi(
+        "0x1234567890123456789012345678901234567890"
+    )
+    assert result is None
 
 
 @pytest.mark.asyncio

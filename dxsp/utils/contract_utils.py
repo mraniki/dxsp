@@ -36,6 +36,7 @@ class ContractUtils:
         get_token_name()
         get_token_decimals()
         get_token_contract()
+        get_token_abi()
         get_token_balance()
         calculate_sell_amount()
         get_confirmation()
@@ -182,7 +183,7 @@ class ContractUtils:
                 ):
                     logger.debug("token identified")
                     return keyval["address"]
-            raise ValueError(f"Token not found {symbol}")
+            logger.warning("Token not found {symbol}")
         except Exception as e:
             logger.error("get_token_address: {}", e)
             return None
@@ -286,10 +287,12 @@ class ContractUtils:
         """
         contract = await self.get_token_contract(token_address)
         if contract is None or contract.functions is None:
-            raise ValueError("No Balance")
+            logger.warning("No Balance")
+            return 0
         balance = contract.functions.balanceOf(wallet_address).call()
         if balance is None:
-            raise ValueError("No Balance")
+            logger.warning("No Balance")
+            return 0
         return round(self.w3.from_wei(balance, "ether"), 5) or 0
 
     async def calculate_sell_amount(self, sell_token_address, wallet_address, quantity):
@@ -352,4 +355,4 @@ class ContractUtils:
                 ),
             }
         except Exception as error:
-            raise error
+            logger.error("get_confirmation {}", error)
