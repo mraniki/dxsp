@@ -22,7 +22,7 @@ async def get_explorer_abi(address, block_explorer_url=None, block_explorer_api=
     :return: The ABI of the contract if it exists, else None.
     :rtype: str or None
     """
-    if not settings.dex_block_explorer_api:
+    if not block_explorer_api:
         return None
 
     params = {
@@ -35,7 +35,9 @@ async def get_explorer_abi(address, block_explorer_url=None, block_explorer_api=
     return resp["result"] if resp["status"] == "1" else None
 
 
-async def get_account_transactions(contract_address, wallet_address, period=24):
+async def get_account_transactions(
+    block_explorer_api, block_explorer_url, contract_address, wallet_address, period=24
+):
     """
     Retrieves the account transactions
     within a specified time period
@@ -52,7 +54,7 @@ async def get_account_transactions(contract_address, wallet_address, period=24):
     :return: The transactions for the account.
     """
     pnl_dict = {"pnl": 0, "tokenList": {}}
-    if not settings.dex_block_explorer_api:
+    if not block_explorer_api:
         return pnl_dict
 
     params = {
@@ -65,10 +67,10 @@ async def get_account_transactions(contract_address, wallet_address, period=24):
         "startblock": "0",
         "endblock": "99999999",
         "sort": "desc",
-        "apikey": settings.dex_block_explorer_api,
+        "apikey": block_explorer_api,
     }
 
-    response = await get(url=settings.dex_block_explorer_url, params=params)
+    response = await get(url=block_explorer_url, params=params)
 
     if response.get("status") == "1" and "result" in response:
         current_time = datetime.utcnow()
