@@ -41,7 +41,10 @@ class DexUniswap(DexClient):
             amount_wei = amount * (
                 10 ** (await self.contract_utils.get_token_decimals(sell_address))
             )
+            logger.debug(amount_wei)
             quote = uniswap.get_price_input(sell_address, buy_address, amount_wei)
+            if quote is None:
+                return "Quote failed"
             return round(
                 float(
                     (
