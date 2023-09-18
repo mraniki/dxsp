@@ -241,9 +241,7 @@ class ContractUtils:
             Contract: The token contract
 
         """
-        token_abi = await self.get_token_abi(
-            token_address, self.block_explorer_url, self.block_explorer_api
-        )
+        token_abi = await self.get_token_abi(token_address)
         if token_abi is None:
             token_abi = await get(settings.dex_erc20_abi_url)
         return self.w3.eth.contract(address=token_address, abi=token_abi)

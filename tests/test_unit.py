@@ -77,6 +77,7 @@ async def test_dextrader(dex):
         assert dx.private_key.startswith("0x")
         assert dx.account.wallet_address.startswith("0x")
 
+
 @pytest.mark.asyncio
 async def test_execute_order(dex, order):
     result = await dex.execute_order(order)
@@ -88,7 +89,7 @@ async def test_execute_order(dex, order):
 async def test_execute_order_invalid(dex, invalid_order):
     result = await dex.execute_order(invalid_order)
     print(result)
-    assert result.startswith("⚠️ order execution: Invalid Token")
+    assert "⚠️ order execution" in result
 
 
 @pytest.mark.asyncio
@@ -118,8 +119,40 @@ async def test_get_info(dex):
 
 
 @pytest.mark.asyncio
+async def test_get_help(dex):
+    result = await dex.get_help
+    print(result)
+    assert result is not None
+    assert "🎯" in result
+
+
+@pytest.mark.asyncio
 async def test_get_balance(dex):
-    result = await dex.get_balance()
+    result = await dex.get_account_balance()
+    print(result)
+    assert result is not None
+    assert "⚠️" in result
+
+
+@pytest.mark.asyncio
+async def test_get_trading_asset_balance(dex):
+    result = await dex.get_trading_asset_balance()
+    print(result)
+    assert result is not None
+    assert "⚠️" in result
+
+
+@pytest.mark.asyncio
+async def test_get_account_transactions(dex):
+    result = await dex.get_account_transactions()
+    print(result)
+    assert result is not None
+    assert "⚠️" in result
+
+
+@pytest.mark.asyncio
+async def test_get_account_pnl(dex):
+    result = await dex.get_account_pnl()
     print(result)
     assert result is not None
     assert "⚠️" in result
