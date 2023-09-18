@@ -53,6 +53,7 @@ class DexClient:
         block_explorer_api=None,
         w3=None,
     ):
+        self.w3 = w3
         self.name = name
         logger.debug(f"setting up DexClient: {self.name}")
         self.wallet_address = wallet_address
@@ -63,13 +64,11 @@ class DexClient:
         self.api_key = api_key
         self.router_contract_addr = router_contract_addr
         self.factory_contract_addr = factory_contract_addr
-        self.trading_asset_address = trading_asset_address
+        self.trading_asset_address = self.w3.to_checksum_address(trading_asset_address)
         self.trading_risk_amount = trading_risk_amount
         self.trading_slippage = trading_slippage
         self.block_explorer_url = block_explorer_url
         self.block_explorer_api = block_explorer_api
-
-        self.w3 = w3
 
         self.account = AccountUtils(
             self.w3, self.wallet_address, self.private_key, self.trading_asset_address
