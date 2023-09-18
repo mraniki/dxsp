@@ -49,6 +49,7 @@ class DexClient:
 
         self.w3 = w3
         self.dex_swap = self._get_dex_swap_instance()
+        logger.debug(f"self.dex_swap: {self.dex_swap}")
         self.account = AccountUtils(
             self.w3, self.wallet_address, self.private_key, self.trading_asset_address
         )

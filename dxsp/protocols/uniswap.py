@@ -4,10 +4,10 @@ uniswap  🦄
 from loguru import logger
 from uniswap import Uniswap
 
-from dxsp.protocols import DexClient
+# from dxsp.protocols import DexClient
 
 
-class DexUniswap(DexClient):
+class DexUniswap:
     """
     A DEXSwap sub class using uniswap-python library
 
