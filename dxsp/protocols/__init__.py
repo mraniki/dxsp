@@ -1,4 +1,4 @@
-# from dxsp.protocols.client import DexClient
+from dxsp.protocols.client import DexClient
 
 # from .oneinch import DexOneInch
 from dxsp.protocols.uniswap import DexUniswap
