@@ -10,7 +10,7 @@ from web3 import Web3
 from web3.gas_strategies.time_based import medium_gas_price_strategy
 
 from dxsp.config import settings
-from dxsp.protocols.client import DexUniswap, DexZeroX
+from dxsp.protocols import DexUniswap, DexZeroX
 from dxsp.utils import AccountUtils, ContractUtils
 
 
