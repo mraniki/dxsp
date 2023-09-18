@@ -43,9 +43,10 @@ class AccountUtils:
         self.account_number = (
             f"{str(self.w3.net.version)} - " f"{str(self.wallet_address)[-8:]}"
         )
+        logger.debug(f"account number: {self.account_number}")
         self.private_key = private_key
         self.trading_asset_address = self.w3.to_checksum_address(trading_asset_address)
-        self.contract_utils = ContractUtils(w3=self.w3)
+        self.contract_utils = ContractUtils(w3=self.w3) 
 
     async def get_account_balance(self):
         """
