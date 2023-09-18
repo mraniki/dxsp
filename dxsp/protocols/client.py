@@ -48,35 +48,13 @@ class DexClient:
         self.block_explorer_api = block_explorer_api
 
         self.w3 = w3
-        self.dex_swap = self._get_dex_swap_instance()
-        logger.debug(f"self.dex_swap: {self.dex_swap}")
+
         self.account = AccountUtils(
             self.w3, self.wallet_address, self.private_key, self.trading_asset_address
         )
         self.contract_utils = ContractUtils(
             self.w3, self.block_explorer_url, self.block_explorer_api
         )
-
-    # def _get_dex_swap_instance(self):
-    #     """
-    #     Retrieves the DexSwap instance.
-    #     Returns:
-    #         DexClient: The DexSwap instance
-
-    #     """
-    #     logger.debug("protocol_type: {}", self.protocol_type)
-    #     if self.protocol_type == "0x":
-    #         from dxsp.protocols.zerox import DexZeroX
-
-    #         return DexZeroX()
-    #     # elif self.protocol_type == "1inch":
-    #     #     from dxsp.protocols.oneinch import DexOneInch
-
-    #     #     return DexOneInch()
-    #     else:
-    #         from dxsp.protocols.uniswap import DexUniswap
-
-    #         return DexUniswap()
 
     async def get_info(self):
         """
