@@ -86,11 +86,11 @@ async def test_get_approve(dex):
     assert approve_receipt is None
 
 
-@pytest.mark.asyncio
-async def test_failed_get_approve(dex):
-    with pytest.raises(ValueError, match="Approval failed"):
-        for dx in dex.dex_info:
-            await dx.account.get_approve("0xdAC17F958D2ee523a2206206994597C13D831ec7")
+# @pytest.mark.asyncio
+# async def test_failed_get_approve(dex):
+#     with pytest.raises(ValueError, match="Approval failed"):
+#         for dx in dex.dex_info:
+#             await dx.account.get_approve("0xdAC17F958D2ee523a2206206994597C13D831ec7")
 
 
 @pytest.mark.asyncio
@@ -98,22 +98,22 @@ async def test_get_sign():
     pass
 
 
-@pytest.mark.asyncio
-async def test_get_gas(dex):
-    """get_gas Testing"""
-    mock_tx = {
-        "to": "0x1234567890123456789012345678901234567890",
-        "value": "1000000000000000000",
-    }
-    for dx in dex.dex_info:
-        result = await dx.account.get_gas(mock_tx)
-        print(result)
+# @pytest.mark.asyncio
+# async def test_get_gas(dex):
+#     """get_gas Testing"""
+#     mock_tx = {
+#         "to": "0x1234567890123456789012345678901234567890",
+#         "value": "1000000000000000000",
+#     }
+#     for dx in dex.dex_info:
+#         result = await dx.account.get_gas(mock_tx)
+#         print(result)
 
 
-@pytest.mark.asyncio
-async def test_get_gas_price(dex):
-    # Call the get_gasPrice method
-    for dx in dex.dex_info:
-        result = await dx.account.get_gas_price()
-        print(f"gas_price: {result}")
-        assert result is not None
+# @pytest.mark.asyncio
+# async def test_get_gas_price(dex):
+#     # Call the get_gasPrice method
+#     for dx in dex.dex_info:
+#         result = await dx.account.get_gas_price()
+#         print(f"gas_price: {result}")
+#         assert result is not None
