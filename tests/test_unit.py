@@ -146,7 +146,7 @@ async def test_get_account_position(dex):
     result = await dex.get_account_position()
     print(result)
     assert result is not None
-    assert "💵" in result
+    assert "📊" in result
 
 
 # @pytest.mark.asyncio
