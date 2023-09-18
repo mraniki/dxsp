@@ -67,7 +67,7 @@ class DexUniswap(DexClient):
         except Exception as error:
             logger.error("Quote failed {}", error)
 
-    async def get_swap(self, sell_address, buy_address, amount):
+    async def make_swap(self, sell_address, buy_address, amount):
         """
         Asynchronously gets the swap
         for the specified sell address, buy address, and amount.

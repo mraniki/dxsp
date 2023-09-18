@@ -11,7 +11,6 @@ from web3 import Web3
 from dxsp import __version__
 from dxsp.config import settings
 from dxsp.protocols import DexUniswap, DexZeroX
-from dxsp.utils import AccountUtils, ContractUtils
 
 
 class DexSwap:
@@ -72,42 +71,6 @@ class DexSwap:
                     block_explorer_url=block_explorer_url,
                     block_explorer_api=block_explorer_api,
                 )
-                # if protocol_type == "uniswap":
-                #     client = DexUniswap(
-                #         name=name,
-                #         wallet_address=wallet_address,
-                #         private_key=private_key,
-                #         w3=w3,
-                #         protocol_type=protocol_type,
-                #         protocol_version=protocol_version,
-                #         api_endpoint=api_endpoint,
-                #         api_key=api_key,
-                #         router_contract_addr=router_contract_addr,
-                #         factory_contract_addr=factory_contract_addr,
-                #         trading_asset_address=trading_asset_address,
-                #         trading_risk_amount=trading_risk_amount,
-                #         trading_slippage=trading_slippage,
-                #         block_explorer_url=block_explorer_url,
-                #         block_explorer_api=block_explorer_api,
-                #     )
-                # if protocol_type == "0x":
-                #     client = DexZeroX(
-                #         name=name,
-                #         wallet_address=wallet_address,
-                #         private_key=private_key,
-                #         w3=w3,
-                #         protocol_type=protocol_type,
-                #         protocol_version=protocol_version,
-                #         api_endpoint=api_endpoint,
-                #         api_key=api_key,
-                #         router_contract_addr=router_contract_addr,
-                #         factory_contract_addr=factory_contract_addr,
-                #         trading_asset_address=trading_asset_address,
-                #         trading_risk_amount=trading_risk_amount,
-                #         trading_slippage=trading_slippage,
-                #         block_explorer_url=block_explorer_url,
-                #         block_explorer_api=block_explorer_api,
-                #     )
                 self.dex_info.append(client)
             logger.debug("init complete")
 
@@ -146,72 +109,6 @@ class DexSwap:
 
         return info.strip()
 
-    async def get_swap(
-        self, dex_client, sell_token: str, buy_token: str, quantity: int
-    ) -> None:
-        """
-        Execute a swap
-
-        Args:
-            sell_token (str): The sell token.
-            buy_token (str): The buy token.
-            quantity (int): The quantity of tokens.
-
-        Returns:
-            transactionHash
-
-
-        """
-        try:
-            logger.debug("get swap")
-            sell_token_address = sell_token
-            logger.debug("sell token {}", sell_token_address)
-            if not sell_token.startswith("0x"):
-                sell_token_address = (
-                    await dex_client.contract_utils.search_contract_address(sell_token)
-                )
-            buy_token_address = buy_token
-            logger.debug("buy token {}", buy_token_address)
-            if not buy_token_address.startswith("0x"):
-                buy_token_address = (
-                    await dex_client.contract_utils.search_contract_address(buy_token)
-                )
-
-            sell_amount = await dex_client.contract_utils.calculate_sell_amount(
-                sell_token_address, dex_client.account.wallet_address, quantity
-            )
-            sell_token_amount_wei = sell_amount * (
-                10 ** (await dex_client.account.get_token_decimals(sell_token_address))
-            )
-            if dex_client.protocol_type == "0x":
-                await dex_client.account.get_approve(sell_token_address)
-
-            order_amount = int(
-                sell_token_amount_wei
-                * decimal.Decimal((dex_client.trading_slippage / 100))
-            )
-            logger.debug(order_amount)
-            order = await dex_client.get_swap(
-                sell_token_address, buy_token_address, order_amount
-            )
-
-            if not order:
-                logger.debug("swap order error")
-                raise ValueError("swap order not executed")
-
-            signed_order = await dex_client.account.get_sign(order)
-            order_hash = str(dex_client.w3.to_hex(signed_order))
-            receipt = dex_client.w3.wait_for_transaction_receipt(order_hash)
-
-            if receipt["status"] != 1:
-                logger.debug(receipt)
-                raise ValueError("receipt failed")
-
-            return await dex_client.account.get_confirmation(receipt["transactionHash"])
-
-        except Exception as error:
-            logger.debug(error)
-            raise error
 
     async def execute_order(self, order_params):
         """
@@ -235,7 +132,7 @@ class DexSwap:
                     if action == "BUY"
                     else (instrument, dx["trading_asset_address"])
                 )
-                order = await self.get_swap(dx, sell_token, buy_token, quantity)
+                order = await self.get_swap(dx sell_token, buy_token, quantity)
                 if order:
                     trade_confirmation = (
                         f"⬇️ {instrument}"
@@ -320,42 +217,3 @@ class DexSwap:
             info += await dx.get_account_position() or "Account position failed"
         return info.strip()
 
-    # async def get_account_transactions(self, period=24):
-    #     """
-    #     Get the account transactions
-    #     for a specific period.
-
-    #     Args:
-    #         period (int): The number of hours
-    #         for which to retrieve the transactions. Defaults to 24.
-
-    #     Returns:
-    #         List[Transaction]: A list of
-    #         transaction objects representing the account transactions.
-    #     """
-    #     info = ""
-    #     for dx in self.dex_info:
-    #         info += (
-    #             await dx.get_account_transactions(period)
-    #             or "Account transactions failed"
-    #         )
-    #     return info.strip()
-
-    # async def get_account_pnl(self, period=24):
-    #     """
-    #     Get the profit and loss (PnL)
-    #     for the account within a specified period.
-
-    #     Args:
-    #         period (int, optional):
-    #         The period in hours for which to calculate the PnL.
-    #         Defaults to 24.
-
-    #     Returns:
-    #         float: The profit and loss (PnL)
-    #         for the account within the specified period.
-    #     """
-    #     info = ""
-    #     for dx in self.dex_info:
-    #         info += await dx.get_account_pnl(period) or "Account PnL failed"
-    #     return info.strip()

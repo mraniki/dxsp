@@ -89,9 +89,75 @@ class DexClient:
         """ """
         # return await self.dex_swap.get_quote(buy_address, sell_address, amount)
 
-    async def get_swap(self, sell_address, buy_address, amount):
+    async def get_swap(
+        self, sell_token: str, buy_token: str, quantity: int
+    ) -> None:
+        """
+        Execute a swap
+
+        Args:
+            sell_token (str): The sell token.
+            buy_token (str): The buy token.
+            quantity (int): The quantity of tokens.
+
+        Returns:
+            transactionHash
+
+
+        """
+        try:
+            logger.debug("get swap")
+            sell_token_address = sell_token
+            logger.debug("sell token {}", sell_token_address)
+            if not sell_token.startswith("0x"):
+                sell_token_address = (
+                    await self.contract_utils.search_contract_address(sell_token)
+                )
+            buy_token_address = buy_token
+            logger.debug("buy token {}", buy_token_address)
+            if not buy_token_address.startswith("0x"):
+                buy_token_address = (
+                    await self.contract_utils.search_contract_address(buy_token)
+                )
+
+            sell_amount = await self.contract_utils.calculate_sell_amount(
+                sell_token_address, self.account.wallet_address, quantity
+            )
+            sell_token_amount_wei = sell_amount * (
+                10 ** (await self.account.get_token_decimals(sell_token_address))
+            )
+            if self.protocol_type == "0x":
+                await self.account.get_approve(sell_token_address)
+
+            order_amount = int(
+                sell_token_amount_wei
+                * decimal.Decimal((dex_client.trading_slippage / 100))
+            )
+            logger.debug(order_amount)
+            order = await self.make_swap(
+                sell_token_address, buy_token_address, order_amount
+            )
+
+            if not order:
+                logger.debug("swap order error")
+                raise ValueError("swap order not executed")
+
+            signed_order = await self.account.get_sign(order)
+            order_hash = str(self.w3.to_hex(signed_order))
+            receipt self.w3.wait_for_transaction_receipt(order_hash)
+
+            if receipt["status"] != 1:
+                logger.error("receipt failed")
+
+            return await self.account.get_confirmation(receipt["transactionHash"])
+
+        except Exception as error:
+            logger.debug(error)
+            raise error
+
+    async def make_swap(self, sell_address, buy_address, amount):
         """ """
-        # return await self.dex_swap.get_swap(sell_address, buy_address, amount)
+
 
     async def get_info(self):
         """
@@ -158,33 +224,3 @@ class DexClient:
         """
         return await self.account.get_account_open_positions()
 
-    # async def get_account_transactions(self, period=24):
-    #     """
-    #     Get the account transactions
-    #     for a specific period.
-
-    #     Args:
-    #         period (int): The number of hours
-    #         for which to retrieve the transactions. Defaults to 24.
-
-    #     Returns:
-    #         List[Transaction]: A list of
-    #         transaction objects representing the account transactions.
-    #     """
-    #     return await self.account.get_account_transactions(period)
-
-    # async def get_account_pnl(self, period=24):
-    #     """
-    #     Get the profit and loss (PnL)
-    #     for the account within a specified period.
-
-    #     Args:
-    #         period (int, optional):
-    #         The period in hours for which to calculate the PnL.
-    #         Defaults to 24.
-
-    #     Returns:
-    #         float: The profit and loss (PnL)
-    #         for the account within the specified period.
-    #     """
-    #     return await self.account.get_account_pnl(period)

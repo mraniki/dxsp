@@ -39,7 +39,7 @@ class DexZeroX(DexClient):
         if response:
             return float(response["guaranteedPrice"])
 
-    async def get_swap(self, buy_address, sell_address, amount):
+    async def make_swap(self, buy_address, sell_address, amount):
         """
         Asynchronously gets a swap order by calling the `get_quote`
         method with the specified `buy_address`,
