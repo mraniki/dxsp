@@ -4,9 +4,7 @@
 from unittest.mock import AsyncMock, patch
 
 import pytest
-
 from web3 import EthereumTesterProvider, Web3
-
 
 from dxsp import DexSwap
 from dxsp.config import settings
@@ -136,12 +134,19 @@ async def test_get_balance(dex):
     assert "💵" in result
 
 
-# @pytest.mark.asyncio
-# async def test_get_trading_asset_balance(dex):
-#     result = await dex.get_trading_asset_balance()
-#     print(result)
-#     assert result is not None
-#     assert "⚠️" in result
+@pytest.mark.asyncio
+async def test_get_trading_asset_balance(dex):
+    result = await dex.get_trading_asset_balance()
+    print(result)
+    assert result is not None
+
+
+@pytest.mark.asyncio
+async def test_get_account_position(dex):
+    result = await dex.get_account_position()
+    print(result)
+    assert result is not None
+    assert "💵" in result
 
 
 # @pytest.mark.asyncio
@@ -149,7 +154,6 @@ async def test_get_balance(dex):
 #     result = await dex.get_account_transactions()
 #     print(result)
 #     assert result is not None
-#     assert "⚠️" in result
 
 
 # @pytest.mark.asyncio
@@ -157,4 +161,3 @@ async def test_get_balance(dex):
 #     result = await dex.get_account_pnl()
 #     print(result)
 #     assert result is not None
-#     assert "⚠️" in result

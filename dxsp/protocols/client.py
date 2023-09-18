@@ -158,33 +158,33 @@ class DexClient:
         """
         return await self.account.get_account_open_positions()
 
-    async def get_account_transactions(self, period=24):
-        """
-        Get the account transactions
-        for a specific period.
+    # async def get_account_transactions(self, period=24):
+    #     """
+    #     Get the account transactions
+    #     for a specific period.
 
-        Args:
-            period (int): The number of hours
-            for which to retrieve the transactions. Defaults to 24.
+    #     Args:
+    #         period (int): The number of hours
+    #         for which to retrieve the transactions. Defaults to 24.
 
-        Returns:
-            List[Transaction]: A list of
-            transaction objects representing the account transactions.
-        """
-        return await self.account.get_account_transactions(period)
+    #     Returns:
+    #         List[Transaction]: A list of
+    #         transaction objects representing the account transactions.
+    #     """
+    #     return await self.account.get_account_transactions(period)
 
-    async def get_account_pnl(self, period=24):
-        """
-        Get the profit and loss (PnL)
-        for the account within a specified period.
+    # async def get_account_pnl(self, period=24):
+    #     """
+    #     Get the profit and loss (PnL)
+    #     for the account within a specified period.
 
-        Args:
-            period (int, optional):
-            The period in hours for which to calculate the PnL.
-            Defaults to 24.
+    #     Args:
+    #         period (int, optional):
+    #         The period in hours for which to calculate the PnL.
+    #         Defaults to 24.
 
-        Returns:
-            float: The profit and loss (PnL)
-            for the account within the specified period.
-        """
-        return await self.account.get_account_pnl(period)
+    #     Returns:
+    #         float: The profit and loss (PnL)
+    #         for the account within the specified period.
+    #     """
+    #     return await self.account.get_account_pnl(period)

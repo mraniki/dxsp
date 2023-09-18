@@ -320,68 +320,42 @@ class DexSwap:
             info += await dx.get_account_position() or "Account position failed"
         return info.strip()
 
-    async def get_account_margin(self):
-        """
-        Retrieves the account margin.
+    # async def get_account_transactions(self, period=24):
+    #     """
+    #     Get the account transactions
+    #     for a specific period.
 
-        :return: The account margin.
-        :rtype: float
-        """
-        info = ""
-        for dx in self.dex_info:
-            info += await dx.get_account_margin() or "Account margin failed"
-        return info.strip()
+    #     Args:
+    #         period (int): The number of hours
+    #         for which to retrieve the transactions. Defaults to 24.
 
-    async def get_account_open_positions(self):
-        """
-        Retrieves the open positions of the account.
+    #     Returns:
+    #         List[Transaction]: A list of
+    #         transaction objects representing the account transactions.
+    #     """
+    #     info = ""
+    #     for dx in self.dex_info:
+    #         info += (
+    #             await dx.get_account_transactions(period)
+    #             or "Account transactions failed"
+    #         )
+    #     return info.strip()
 
-        :return: A list of open positions in the account.
-        """
-        info = ""
-        for dx in self.dex_info:
-            info += (
-                await dx.get_account_open_positions() or "Account open positions failed"
-            )
-        return info.strip()
+    # async def get_account_pnl(self, period=24):
+    #     """
+    #     Get the profit and loss (PnL)
+    #     for the account within a specified period.
 
-    async def get_account_transactions(self, period=24):
-        """
-        Get the account transactions
-        for a specific period.
+    #     Args:
+    #         period (int, optional):
+    #         The period in hours for which to calculate the PnL.
+    #         Defaults to 24.
 
-        Args:
-            period (int): The number of hours
-            for which to retrieve the transactions. Defaults to 24.
-
-        Returns:
-            List[Transaction]: A list of
-            transaction objects representing the account transactions.
-        """
-        info = ""
-        for dx in self.dex_info:
-            info += (
-                await dx.get_account_transactions(period)
-                or "Account transactions failed"
-            )
-        return info.strip()
-
-    async def get_account_pnl(self, period=24):
-        """
-        Get the profit and loss (PnL)
-        for the account within a specified period.
-
-        Args:
-            period (int, optional):
-            The period in hours for which to calculate the PnL.
-            Defaults to 24.
-
-        Returns:
-            float: The profit and loss (PnL)
-            for the account within the specified period.
-        """
-        info = ""
-        for dx in self.dex_info:
-            info += await dx.get_account_pnl(period) or "Account PnL failed"
-        return info.strip()
- 
+    #     Returns:
+    #         float: The profit and loss (PnL)
+    #         for the account within the specified period.
+    #     """
+    #     info = ""
+    #     for dx in self.dex_info:
+    #         info += await dx.get_account_pnl(period) or "Account PnL failed"
+    #     return info.strip()
