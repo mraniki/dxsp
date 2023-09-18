@@ -98,11 +98,11 @@ class DexClient:
 
     async def get_quote(self, buy_address, sell_address, amount=1):
         """ """
-        pass
+        return await self.dex_swap.get_quote(buy_address, sell_address, amount)
 
     async def get_swap(self, sell_address, buy_address, amount):
         """ """
-        pass
+        return await self.dex_swap.get_swap(sell_address, buy_address, amount)
 
     async def get_name(self):
         """
