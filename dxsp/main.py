@@ -16,14 +16,14 @@ from dxsp.utils import AccountUtils, ContractUtils
 
 class DexTrader:
     """
-   class to build a DexTrader Object
-    use to interact with the dex protocol
+    class to build a DexTrader Object
+     use to interact with the dex protocol
 
-    Args:
-        w3 (Optional[Web3]): Web3
+     Args:
+         w3 (Optional[Web3]): Web3
 
-    Returns:
-        DexSwap
+     Returns:
+         DexSwap
 
 
     """
@@ -57,27 +57,22 @@ class DexTrader:
                 trading_risk_amount = exchanges[dx]["trading_risk_amount"]
                 trading_slippage = exchanges[dx]["trading_slippage"]
                 logger.debug(trading_slippage)
-                #gas_strategy = w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
-                #logger.debug(gas_strategy)
-                dex_info = {
-                    "wallet_address": wallet_address,
-                    "private_key": private_key,
-                    "w3": w3,
-                    "protocol_type": protocol_type,
-                    "protocol_version": protocol_version,
-                    "api_endpoint": api_endpoint,
-                    "api_key": api_key,
-                    "router": router,
-                    "factory_contract_addr": factory_contract_addr,
-                    "trading_asset_address": trading_asset_address,
-                    "trading_risk_amount": trading_risk_amount,
-                    "trading_slippage": trading_slippage,
-                    "block_explorer_url": block_explorer_url,
-                    "block_explorer_api": block_explorer_api,
-                    #"gas_strategy": gas_strategy,
-                }
-                logger.debug(dex_info)
-                client = DexClient(dex_info)
+                client = DexClient(
+                    wallet_address=wallet_address,
+                    private_key=private_key,
+                    w3=w3,
+                    protocol_type=protocol_type,
+                    protocol_version=protocol_version,
+                    api_endpoint=api_endpoint,
+                    api_key=api_key,
+                    router=router,
+                    factory_contract_addr=factory_contract_addr,
+                    trading_asset_address=trading_asset_address,
+                    trading_risk_amount=trading_risk_amount,
+                    trading_slippage=trading_slippage,
+                    block_explorer_url=block_explorer_url,
+                    block_explorer_api=block_explorer_api,
+                )
                 self.dex_info.append(client)
             logger.debug("init complete")
 
