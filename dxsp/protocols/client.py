@@ -15,6 +15,7 @@ from dxsp.utils import AccountUtils, ContractUtils
 class DexClient:
     def __init__(
         self,
+        name,
         wallet_address,
         private_key,
         protocol_type="uniswap",
@@ -29,6 +30,7 @@ class DexClient:
         block_explorer_api=None,
         w3=None,
     ):
+        logger.debug(f"setting up DexClient: {name}")
         self.wallet_address = wallet_address
         self.private_key = private_key
         self.protocol_type = protocol_type

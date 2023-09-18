@@ -35,12 +35,12 @@ class DexTrader:
 
         """
         exchanges = settings.dex
-        logger.debug(exchanges)
         self.dex_info = []
         self.commands = settings.dxsp_commands
         try:
             for dx in exchanges:
                 logger.debug(f"Loading {dx}")
+                name = dx
                 wallet_address = exchanges[dx]["wallet_address"]
                 private_key = exchanges[dx]["private_key"]
                 w3 = Web3(Web3.HTTPProvider(exchanges[dx]["rpc"]))
@@ -49,15 +49,15 @@ class DexTrader:
                 protocol_version = exchanges[dx]["protocol_version"]
                 api_endpoint = exchanges[dx]["api_endpoint"]
                 api_key = exchanges[dx]["api_key"]
-                router = exchanges[dx]["router_contract_addr"]
+                router_contract_addr = exchanges[dx]["router_contract_addr"]
                 factory_contract_addr = exchanges[dx]["factory_contract_addr"]
                 trading_asset_address = exchanges[dx]["trading_asset_address"]
                 block_explorer_url = exchanges[dx]["block_explorer_url"]
                 block_explorer_api = exchanges[dx]["block_explorer_api"]
                 trading_risk_amount = exchanges[dx]["trading_risk_amount"]
                 trading_slippage = exchanges[dx]["trading_slippage"]
-                logger.debug(trading_slippage)
                 client = DexClient(
+                    name=name,
                     wallet_address=wallet_address,
                     private_key=private_key,
                     w3=w3,
@@ -65,7 +65,7 @@ class DexTrader:
                     protocol_version=protocol_version,
                     api_endpoint=api_endpoint,
                     api_key=api_key,
-                    router=router,
+                    router_contract_addr=router_contract_addr,
                     factory_contract_addr=factory_contract_addr,
                     trading_asset_address=trading_asset_address,
                     trading_risk_amount=trading_risk_amount,
