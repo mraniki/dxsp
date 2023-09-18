@@ -34,7 +34,6 @@ class DexClient:
         w3 (Optional[Web3]): Web3
 
 
-
     """
 
     def __init__(
@@ -106,14 +105,6 @@ class DexClient:
             )
         except Exception as error:
             logger.error("info {}", error)
-
-    # async def get_name(self):
-    #     """
-    #     Retrieves the name of the account.
-
-    #     :return: The name of the account.
-    #     """
-    #     return str(self.router_contract_addr)[-8:]
 
     async def get_account_balance(self):
         """

@@ -48,7 +48,6 @@ class AccountUtils:
         self.trading_asset_address = self.w3.to_checksum_address(trading_asset_address)
         self.contract_utils = ContractUtils(w3=self.w3)
 
-
     async def get_account_balance(self):
         """
         Retrieves the account balance of the user.
@@ -186,7 +185,7 @@ class AccountUtils:
                 approval_tx_hash = await self.get_sign(approval_tx.transact())
                 return self.w3.eth.wait_for_transaction_receipt(approval_tx_hash)
         except Exception as error:
-            raise ValueError(f"Approval failed {error}")
+            logger.error("Approval failed {}", error)
 
     async def get_sign(self, transaction):
         """
@@ -205,7 +204,7 @@ class AccountUtils:
             )
             return self.w3.eth.send_raw_transaction(signed_tx.rawTransaction)
         except Exception as error:
-            raise error
+            logger.error("Sign failed {}", error)
 
     async def get_gas(self, transaction):
         """

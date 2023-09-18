@@ -232,7 +232,6 @@ class ContractUtils:
 
         """
         contract = await self.get_token_contract(token_address)
-        # token_name = contract.functions.name().call()
         return contract.functions.symbol().call()
 
     async def get_token_name(self, token_address: str):
