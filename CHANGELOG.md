@@ -2,6 +2,269 @@
 
 
 
+## v5.0.0 (2023-09-19)
+
+### :recycle:
+
+* :recycle: ([`46ac052`](https://github.com/mraniki/dxsp/commit/46ac0528529a88d7e794e061061d83c9bf13d304))
+
+* :recycle: ([`0e93dc8`](https://github.com/mraniki/dxsp/commit/0e93dc83a80606107372a1977d50ac3e7de8fb72))
+
+* :recycle: ([`06550af`](https://github.com/mraniki/dxsp/commit/06550afc3140f05a0720de0ce65cddb67414784c))
+
+* :recycle: ([`e1a7265`](https://github.com/mraniki/dxsp/commit/e1a726534f190f51e62b27e3ac09b7d43eb9f755))
+
+* :recycle: ([`d42dd0a`](https://github.com/mraniki/dxsp/commit/d42dd0a949730da1094d93918c68d3ed2007c40f))
+
+* :recycle: ([`c19dfec`](https://github.com/mraniki/dxsp/commit/c19dfecdb5f51e57eef04edb5a38e71a7b854361))
+
+* :recycle: ([`ca8f65c`](https://github.com/mraniki/dxsp/commit/ca8f65ca46b24a16efc9b944fc16c1371e5eabb8))
+
+* :recycle: ([`0858850`](https://github.com/mraniki/dxsp/commit/0858850c59a5ce8dce319aece16e953f222b60fd))
+
+### :white_check_mark:
+
+* :white_check_mark: Unit Test ([`f1e3b53`](https://github.com/mraniki/dxsp/commit/f1e3b538fa2c37907eade1aba6cc8008c732263c))
+
+* :white_check_mark: ([`2f96d7b`](https://github.com/mraniki/dxsp/commit/2f96d7bf18c952b83e1aac1d5bad20331203e0fe))
+
+* :white_check_mark: Unit Test ([`01f92a9`](https://github.com/mraniki/dxsp/commit/01f92a9106b1e7843aa9605948076be3c6045b02))
+
+* :white_check_mark: Unit Test ([`73a3d8b`](https://github.com/mraniki/dxsp/commit/73a3d8b5adc25b2f7090868c6dc4944ad592ec22))
+
+* :white_check_mark: Unit Test ([`933a2a6`](https://github.com/mraniki/dxsp/commit/933a2a60810bf4052909f8fd160a0a7a8a7ea73f))
+
+* :white_check_mark: Unit Test ([`6564474`](https://github.com/mraniki/dxsp/commit/6564474286afc1e6600459cd0cb152d0d179a3db))
+
+* :white_check_mark: Unit Test ([`aef415e`](https://github.com/mraniki/dxsp/commit/aef415ee9a112d404c327410248b16f823739064))
+
+* :white_check_mark: Unit Test ([`d460f9b`](https://github.com/mraniki/dxsp/commit/d460f9b81f9cf05df0615d9b0fc17b5160b5a56a))
+
+### Fix
+
+* Refactor DexTrader and DexClient fixtures in test_unit.py ([`4d23072`](https://github.com/mraniki/dxsp/commit/4d230724f36fb85d92931457e8dbaa0dc8915522))
+
+### Other
+
+* Merge pull request #412 from mraniki/dev
+
+💥 breaking multi exchange support framework ([`794f901`](https://github.com/mraniki/dxsp/commit/794f9015f81f5899c35f7f74fedbdf6ffcad4abd))
+
+* Merge pull request #418 from mraniki/sourcery/dev
+
+💥 breaking multi exchange support framework (Sourcery refactored) ([`eac3d2c`](https://github.com/mraniki/dxsp/commit/eac3d2c0517bd203f6a875e323eefa7292a97279))
+
+* &#39;Refactored by Sourcery&#39; ([`ffc3b98`](https://github.com/mraniki/dxsp/commit/ffc3b985966ba7f6bb662dc0fd5690fa57e1f1cc))
+
+* Refactor test_get_gas and test_get_gas_price ([`cc50557`](https://github.com/mraniki/dxsp/commit/cc50557a598616f1c5f27aa52fc907a0a8b4d6b2))
+
+* Refactor test_get_token_name function in test_utils_contract.py ([`db4dd72`](https://github.com/mraniki/dxsp/commit/db4dd727b5ff5c881223ad93f0e73c64b9ae5826))
+
+* Refactor DexTrader class in main.py ([`3313dad`](https://github.com/mraniki/dxsp/commit/3313dad06d2679a11d44187921d79e7370efcab7))
+
+* Refactor DexTrader class constructor ([`5e0c6ed`](https://github.com/mraniki/dxsp/commit/5e0c6ed0e2676bf2ca4b77ddf3e7038105be1a2c))
+
+* Refactor gas strategy in DexTrader class ([`0d1e19b`](https://github.com/mraniki/dxsp/commit/0d1e19bd804a3c68427b1a87e8166a7af004ad7f))
+
+* Added debug logs for trading slippage, gas strategy, dex info, and initialization completion. ([`4762dd7`](https://github.com/mraniki/dxsp/commit/4762dd71d7d23b40c94a4e32cd960a9e3a5d9da8))
+
+* Add debug logging for w3 in DexTrader class ([`9cab991`](https://github.com/mraniki/dxsp/commit/9cab99174952757ee53a295e9267e36371067e92))
+
+* Refactor code and update unit test ([`7feb134`](https://github.com/mraniki/dxsp/commit/7feb1349b887c6c58bde4d1ef1548c7f47248b65))
+
+* Add debug logging for dex info and dx in DexTrader ([`cd4558a`](https://github.com/mraniki/dxsp/commit/cd4558a5374aa9f1d6ad1358058522c7b403245f))
+
+* Refactor gas strategy in DexTrader class ([`235e393`](https://github.com/mraniki/dxsp/commit/235e3939e08dd3ca075be2d98917b4464b028cb9))
+
+* Create client.py ([`96ad3ea`](https://github.com/mraniki/dxsp/commit/96ad3eabd1d6db31ee41784c119aa88f6e0ef992))
+
+### Update
+
+* Update dxsp/utils/contract_utils.py
+
+Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@users.noreply.github.com&gt; ([`9e97314`](https://github.com/mraniki/dxsp/commit/9e973145032fc4ba6deed8dd02d8bb4055283ea6))
+
+* Update main.py
+
+Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@users.noreply.github.com&gt; ([`10cdeb9`](https://github.com/mraniki/dxsp/commit/10cdeb9f12a1053217804efb467556956ef06173))
+
+* Update pyproject.toml and test_unit.py ([`608234b`](https://github.com/mraniki/dxsp/commit/608234b7b8ccd06d5674b18d62dc8fac794a79fb))
+
+* Update main.py ([`6e033bf`](https://github.com/mraniki/dxsp/commit/6e033bfef8b0d66c73225a94ba99c956923a7ced))
+
+* Update __init__.py ([`878e5aa`](https://github.com/mraniki/dxsp/commit/878e5aaf57207959e22b087320c4607e33d38574))
+
+* Update __init__.py ([`2baa1df`](https://github.com/mraniki/dxsp/commit/2baa1df14a663aa21dd0a4f7fc1747d1ff02b444))
+
+* Update zerox.py ([`76a51ce`](https://github.com/mraniki/dxsp/commit/76a51cedadc3d9ef0c23d226240508abf146338c))
+
+* Update uniswap.py ([`fca9183`](https://github.com/mraniki/dxsp/commit/fca918338d593cfe9e9114011ca3db7aa4175cd4))
+
+* Update oneinch.py ([`01c2266`](https://github.com/mraniki/dxsp/commit/01c2266f8a5bc274e06af5f9e55f002544c993dc))
+
+### ♻️
+
+* ♻️ ([`796b0ba`](https://github.com/mraniki/dxsp/commit/796b0ba15f709b817b20d3d034a8c5af9910410e))
+
+* ♻️ ([`cf42d9c`](https://github.com/mraniki/dxsp/commit/cf42d9c917ed490285e30276327a5ddb5dc873fb))
+
+* ♻️ ([`d9bd70a`](https://github.com/mraniki/dxsp/commit/d9bd70a8664049558501f80ef9a7d07907ba1ac7))
+
+* ♻️ ([`47d1dac`](https://github.com/mraniki/dxsp/commit/47d1dac4cede7ed97240f97217363350758524b8))
+
+* ♻️ ([`a0b6dd9`](https://github.com/mraniki/dxsp/commit/a0b6dd9ebea5418b7d68f3fa98d6cc28a22098a7))
+
+* ♻️ ([`9a12f25`](https://github.com/mraniki/dxsp/commit/9a12f25cc018f99b261c223b5d2dd2ff9b3fc358))
+
+* ♻️ ([`1da53f6`](https://github.com/mraniki/dxsp/commit/1da53f69676feb8840ef63fc1eb17bb3045cca76))
+
+* ♻️ ([`a7e745c`](https://github.com/mraniki/dxsp/commit/a7e745c1de962020cf6de50c94b3e246fd21965d))
+
+* ♻️ ([`4c67f4a`](https://github.com/mraniki/dxsp/commit/4c67f4a32b6048de6b3c936143ffe9b7fd54ce6d))
+
+* ✅ Unit Test ♻️ ([`d91d761`](https://github.com/mraniki/dxsp/commit/d91d7612127abb0954d539d2c8b18671f83a0847))
+
+* ♻️ ([`ad2ab1c`](https://github.com/mraniki/dxsp/commit/ad2ab1c21ce4e548489a2d035cbbe6e6e158252d))
+
+* ♻️ ([`e24a3d1`](https://github.com/mraniki/dxsp/commit/e24a3d10b2dac1931ed555a909266e41cb28ed37))
+
+* ♻️ ([`78267ec`](https://github.com/mraniki/dxsp/commit/78267ec7abea4cebcc24c0b6b5e4086bb78d485a))
+
+* ♻️ ([`b635f92`](https://github.com/mraniki/dxsp/commit/b635f923f2c319266a449ff6aa0895d39e7d00cb))
+
+* ♻️ ([`ac4bb59`](https://github.com/mraniki/dxsp/commit/ac4bb591b7698b128b0168def79baee84788aa23))
+
+* ♻️ ([`7d3cfcb`](https://github.com/mraniki/dxsp/commit/7d3cfcb5ed26be5121ec3d08ac2c7403c9bdc899))
+
+* ♻️ ([`015453f`](https://github.com/mraniki/dxsp/commit/015453f17c79e87153d84c4e92e67385311f66ae))
+
+* ♻️ ([`aa380b7`](https://github.com/mraniki/dxsp/commit/aa380b73b25bd6536f99d62ebc3001d45a77f9f6))
+
+* ♻️ ([`fe4803c`](https://github.com/mraniki/dxsp/commit/fe4803c385252977c6a79cf5b6f3d451b6eaf902))
+
+* ♻️ ([`dfed760`](https://github.com/mraniki/dxsp/commit/dfed7606fb11015578aa4c3fb266f8e1da47fccb))
+
+* ♻️ ([`8b303a3`](https://github.com/mraniki/dxsp/commit/8b303a3e41c0046377fe1582d19e3f754ac70be7))
+
+* ♻️ ([`b4c812c`](https://github.com/mraniki/dxsp/commit/b4c812c16b472ac15d2d44478a3856a5819ada20))
+
+* ♻️ ([`dce6156`](https://github.com/mraniki/dxsp/commit/dce6156f3dd787e65acb3d2f3e12f8a6dda1b9ea))
+
+* ♻️ ([`c60e334`](https://github.com/mraniki/dxsp/commit/c60e334ab55806fb82a94034a100454f38849d4e))
+
+* ♻️ ([`54628f3`](https://github.com/mraniki/dxsp/commit/54628f35f9e851876b3793e4e99b8bb83fd814f6))
+
+* ♻️ ([`a953316`](https://github.com/mraniki/dxsp/commit/a953316aea6358323e3c0673dcad50f8fbf5a410))
+
+* ♻️ ([`161c9ab`](https://github.com/mraniki/dxsp/commit/161c9ab5364a6256dd872f53ef9aff8e1fca369c))
+
+* ♻️ ([`efdd440`](https://github.com/mraniki/dxsp/commit/efdd4400c93c6f570eac6931b2a311404363fe64))
+
+* ♻️ ([`19b6e0b`](https://github.com/mraniki/dxsp/commit/19b6e0bd92e3259ea53f81cd211ba5786f10cd51))
+
+* ♻️ ([`27dd6c3`](https://github.com/mraniki/dxsp/commit/27dd6c39b5c3f9456f95c3399a04e0c8cd643dfd))
+
+* ♻️ ([`f8e89ac`](https://github.com/mraniki/dxsp/commit/f8e89accff01a1bddaef07cdaed3da9684c6a8ad))
+
+* ♻️ ([`64ff294`](https://github.com/mraniki/dxsp/commit/64ff2945c39a774ec4c60ef9e6bd59ee7ad53426))
+
+* ♻️ ([`8ff0d22`](https://github.com/mraniki/dxsp/commit/8ff0d22ecb9f5e60e5b4ca1231ab5d7b04dd265d))
+
+* ♻️ ([`d2293e3`](https://github.com/mraniki/dxsp/commit/d2293e3dfd05ebcb901738520ecf8fdd7c4ee6db))
+
+* ♻️ ([`a6c5012`](https://github.com/mraniki/dxsp/commit/a6c5012d5a662abbcaf51b08cfe2cfb2a2407c5c))
+
+* ♻️ ([`ae561d0`](https://github.com/mraniki/dxsp/commit/ae561d04f003c787a9fc8d63854fab35e154ba5c))
+
+* ♻️ WIP ([`9361b5e`](https://github.com/mraniki/dxsp/commit/9361b5e629e92431491027ab83aacc7aef57f0c6))
+
+* ♻️ ([`2033139`](https://github.com/mraniki/dxsp/commit/203313942962ce9ad79384a74649297bf892ddd1))
+
+### ⚗️
+
+* ⚗️ WIP ([`1a030a0`](https://github.com/mraniki/dxsp/commit/1a030a0977fcf2d89625ce2edf2244a20e4ef668))
+
+### ✅
+
+* ✅ Unit Test ([`2b5654f`](https://github.com/mraniki/dxsp/commit/2b5654f398f289286ebbc8ac44abbd083dec3eb3))
+
+* ✅ Unit Test ([`4a48139`](https://github.com/mraniki/dxsp/commit/4a481399b6ad921139c4e832d6497ad194ff5fb6))
+
+* ✅ Unit Test ([`7c6561f`](https://github.com/mraniki/dxsp/commit/7c6561fa94d11b89a023077b8cee27e5791614de))
+
+* ✅ Unit Test ([`a4f0cbf`](https://github.com/mraniki/dxsp/commit/a4f0cbf4c52d31aa42c6fb5ef9d1ecee3a169ea2))
+
+* ✅ Unit Test ([`5dca0d4`](https://github.com/mraniki/dxsp/commit/5dca0d47d7d66f2191025040299f5668513b1773))
+
+* ✅ Unit Test ([`760c861`](https://github.com/mraniki/dxsp/commit/760c861345e6ea677e4711d067a97797db2888e7))
+
+* ✅ Unit Test ([`c96baf8`](https://github.com/mraniki/dxsp/commit/c96baf8057ff1ffa1b7a9c90809bef8ed14f397f))
+
+* ✅ Unit Test ([`aa57f6a`](https://github.com/mraniki/dxsp/commit/aa57f6a067a9a2e52f8433c4953671bc3625828b))
+
+* ✅ Unit Test ([`66b9af0`](https://github.com/mraniki/dxsp/commit/66b9af0ee7255c2b568d6f16db6fe1d7a513cba3))
+
+* ✅ Unit Test ([`308aca3`](https://github.com/mraniki/dxsp/commit/308aca374c9e8fc59c6260ddb0d85bcaa16a08ec))
+
+* ✅ Unit Test ([`a8e34ca`](https://github.com/mraniki/dxsp/commit/a8e34ca8943fd0d3ecaf25d4362b590910ada3f9))
+
+* ✅ Unit Test ([`e27bff7`](https://github.com/mraniki/dxsp/commit/e27bff7f7c4f01a5619d744f6206221682e69735))
+
+* ✅ Unit Test ([`cc4184b`](https://github.com/mraniki/dxsp/commit/cc4184beccc49b226403749a11aeab954bfb108a))
+
+* ✅ Unit Test ([`b14790c`](https://github.com/mraniki/dxsp/commit/b14790cfc6d9029854ce3d02ac4c72766f3b41b2))
+
+* ✅ Unit Test ([`1b1b2ad`](https://github.com/mraniki/dxsp/commit/1b1b2add11b5798f9ca53118e8c7c9bd05c994fc))
+
+* ✅ Unit Test ([`f47736d`](https://github.com/mraniki/dxsp/commit/f47736df7cacbc7cc2ed274b23cc71e16718a802))
+
+* ✅ Unit Test ([`6b3116b`](https://github.com/mraniki/dxsp/commit/6b3116b1b82354156529443be0d2483d3078dd6d))
+
+* ✅ Unit Test ([`0f9d126`](https://github.com/mraniki/dxsp/commit/0f9d12634f5e3b21ac6b970d48e2ce2b01b2ac00))
+
+* ✅ Unit Test ([`dc5264c`](https://github.com/mraniki/dxsp/commit/dc5264c77e6879317d8bfce9288c18470fcc29e1))
+
+* ✅ Unit Test ([`f1002ff`](https://github.com/mraniki/dxsp/commit/f1002ffa8553ec7a6b019c1eac9add0b4e5c3df4))
+
+* ✅ Unit Test ([`42f0f84`](https://github.com/mraniki/dxsp/commit/42f0f84c122059c4967fd3b9eca67aeb5c6b7b90))
+
+* ✅ Unit Test ([`93466a6`](https://github.com/mraniki/dxsp/commit/93466a69b373a677bce016a62310bbd6efcc4631))
+
+* ✅ Unit Test ([`95a5595`](https://github.com/mraniki/dxsp/commit/95a55953677d7cc7c6841eb82c1016407ce17a65))
+
+* ✅ Unit Test ([`2babc4f`](https://github.com/mraniki/dxsp/commit/2babc4f6ca8165051d82762fc5202693398d7de4))
+
+### 🎨
+
+* 🎨 ([`ef4b4db`](https://github.com/mraniki/dxsp/commit/ef4b4db9d7d0afdb5a1a765a93c7b00fa50b1b46))
+
+### 🐛
+
+* 🐛 ([`3eb2831`](https://github.com/mraniki/dxsp/commit/3eb283127bc0563cefafe7cedd885de8381f32ff))
+
+* 🐛 quote ([`5b29d66`](https://github.com/mraniki/dxsp/commit/5b29d662464e4e898e227b1dc17538644a41ffac))
+
+### 💥
+
+* 💥 breaking for multi dex support ([`cb7a6bc`](https://github.com/mraniki/dxsp/commit/cb7a6bc2c1d9880fc9c1e5e6c4003aa341429e79))
+
+* 💥 breaking multi exchange support framework ([`8cc6976`](https://github.com/mraniki/dxsp/commit/8cc6976d22d3bb2d113b105e6b3ef065c481da5a))
+
+### 🔊
+
+* 🔊 ([`6d02957`](https://github.com/mraniki/dxsp/commit/6d029574f33ff0f6ecbe901b66e4ac487046dce3))
+
+### 🔥
+
+* 🔥 ([`16ff615`](https://github.com/mraniki/dxsp/commit/16ff6152c527d780b0a0e760756ceb15544563dc))
+
+* 🔥 ([`73aa867`](https://github.com/mraniki/dxsp/commit/73aa8670f2e97955cc58eac4c59f601bf3e68e34))
+
+### 🚨
+
+* 🚨 ([`ec31925`](https://github.com/mraniki/dxsp/commit/ec3192566f8f16bb4696eb3565368c2c948c8a74))
+
+
 ## v4.2.41 (2023-09-09)
 
 ### Other
