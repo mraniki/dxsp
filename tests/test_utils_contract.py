@@ -24,9 +24,9 @@ def set_test_settings():
 def DexTrader_fixture():
     return DexSwap()
 
+
 @pytest.fixture(name="dex_client")
 def mock_dex_client():
-
     return DexUniswap(
         name="uniswap",
         wallet_address="0x1a9C8182C09F50C8318d769245beA52c32BE35BC",
@@ -44,6 +44,7 @@ def mock_dex_client():
         block_explorer_api=None,
         w3=Web3(Web3.HTTPProvider("https://rpc.ankr.com/eth")),
     )
+
 
 @pytest.fixture
 def tester_provider():
@@ -119,7 +120,7 @@ async def test_get_token_name(dex_client):
     )
     print(result)
     assert result is not None
-    assert "Tether USD" in result 
+    assert "Tether USD" in result
 
 
 @pytest.mark.asyncio
@@ -208,8 +209,14 @@ async def test_token_balance(account, dex_client) -> str:
 
 
 @pytest.mark.asyncio
-async def calculate_sell_amount(dex):
-    pass
+async def test_calculate_sell_amount(dex_client):
+    result = await dex_client.calculate_sell_amount(
+        "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
+        dex_client.wallet_address,
+        1,
+    )
+    print(result)
+    assert result is not None
 
 
 @pytest.mark.asyncio

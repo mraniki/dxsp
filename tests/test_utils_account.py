@@ -21,6 +21,7 @@ def set_test_settings():
 def DexTrader_fixture():
     return DexSwap()
 
+
 @pytest.fixture(name="dex_client")
 def mock_dex_client():
     return DexUniswap(
@@ -40,6 +41,7 @@ def mock_dex_client():
         block_explorer_api=None,
         w3=Web3(Web3.HTTPProvider("https://rpc.ankr.com/eth")),
     )
+
 
 @pytest.fixture
 def tester_provider():
@@ -98,18 +100,19 @@ async def test_get_approve(dex_client):
     symbol = "UNI"
     approve_receipt = None
     try:
-            approve_receipt = await dex_client.get_approve(symbol)
-            print(approve_receipt)
+        approve_receipt = await dex_client.get_approve(symbol)
+        print(approve_receipt)
     except Exception as e:
         print(f"Error getting approve receipt: {e}")
     assert approve_receipt is None
 
 
-# @pytest.mark.asyncio
-# async def test_failed_get_approve(dex):
-#     with pytest.raises(ValueError, match="Approval failed"):
-#         for dx in dex.dex_info:
-#             await dx.account.get_approve("0xdAC17F958D2ee523a2206206994597C13D831ec7")
+@pytest.mark.asyncio
+async def test_failed_get_approve(dex_client):
+    with pytest.raises(ValueError, match="Approval failed"):
+        await dex_client.account.get_approve(
+            "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+        )
 
 
 @pytest.mark.asyncio
