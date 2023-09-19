@@ -136,8 +136,8 @@ class DexClient:
             )
 
             if not order:
-                logger.debug("swap order error")
-                raise ValueError("swap order not executed")
+                logger.error("swap order not executed")
+                return "swap order not executed"
 
             signed_order = await self.account.get_sign(order)
             order_hash = str(self.w3.to_hex(signed_order))
@@ -166,17 +166,16 @@ class DexClient:
 
         """
         sell_balance = await self.contract_utils.get_token_balance(
-            sell_token_address,
-            wallet_address)
-        sell_contract = await self.contract_utils.get_token_contract(
-            sell_token_address)
+            sell_token_address, wallet_address
+        )
+        sell_contract = await self.contract_utils.get_token_contract(sell_token_address)
         sell_decimals = (
             sell_contract.functions.decimals().call()
             if sell_contract is not None
             else 18
         )
         risk_percentage = self.trading_risk_amount
-        return (sell_balance / (risk_percentage * 10**sell_decimals)) * (
+        return (sell_balance / (risk_percentage * 10**sell_decimals)) * float(
             decimal.Decimal(quantity) / 100
         )
 
