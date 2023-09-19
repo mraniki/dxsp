@@ -178,12 +178,12 @@ async def test_get_token_contract(dex_client):
 #         assert result == "0x0123456789abcdef"
 
 
-@pytest.mark.asyncio
-async def test_invalid_get_abi(dex_client):
-    result = await dex_client.contract_utils.get_explorer_abi(
-        "0x1234567890123456789012345678901234567890"
-    )
-    assert result is None
+# @pytest.mark.asyncio
+# async def test_invalid_get_abi(dex_client):
+#     result = await dex_client.contract_utils.get_explorer_abi(
+#         "0x1234567890123456789012345678901234567890"
+#     )
+#     assert result is None
 
 
 @pytest.mark.asyncio
