@@ -98,20 +98,6 @@ async def test_dextrader(dex):
 
 
 @pytest.mark.asyncio
-async def test_execute_order(dex, order):
-    result = await dex.execute_order(order)
-    print(f"swap_order: {result}")
-    assert result is not None
-
-
-@pytest.mark.asyncio
-async def test_execute_order_invalid(dex, invalid_order):
-    result = await dex.execute_order(invalid_order)
-    print(result)
-    assert "⚠️ order execution" in result
-
-
-@pytest.mark.asyncio
 async def test_get_quote(dex):
     """getquote Testing"""
     print(dex.dex_info)
@@ -127,6 +113,29 @@ async def test_get_quote_invalid(dex):
     print(result)
     assert result is not None
     assert "Quote failed" in result
+
+
+@pytest.mark.asyncio
+async def test_get_swap(dex_client):
+    result = await dex_client.get_swap("USDT", "UNI", 1)
+    print(f"swap_order: {result}")
+    assert result is not None
+
+
+@pytest.mark.asyncio
+async def test_execute_order(dex, order):
+    result = await dex.execute_order(order)
+    print(f"swap_order: {result}")
+    assert result is not None
+
+
+@pytest.mark.asyncio
+async def test_execute_order_invalid(dex, invalid_order):
+    result = await dex.execute_order(invalid_order)
+    print(result)
+    assert "⚠️ order execution" in result
+
+
 
 
 @pytest.mark.asyncio
