@@ -5,11 +5,12 @@ from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 from web3 import EthereumTesterProvider, Web3
-from web3 import Web3
+
 from dxsp import DexSwap
 from dxsp.config import settings
 from dxsp.protocols import DexClient, DexUniswap, DexZeroX
 from dxsp.utils import AccountUtils, ContractUtils
+
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():

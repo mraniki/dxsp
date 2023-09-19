@@ -7,7 +7,7 @@ from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 from web3 import EthereumTesterProvider, Web3
-from web3 import Web3
+
 import dxsp
 from dxsp import DexSwap
 from dxsp.config import settings
@@ -26,6 +26,7 @@ def DexTrader_fixture():
 
 @pytest.fixture(name="dex_client")
 def mock_dex_client():
+
     return DexUniswap(
         name="uniswap",
         wallet_address="0x1a9C8182C09F50C8318d769245beA52c32BE35BC",
