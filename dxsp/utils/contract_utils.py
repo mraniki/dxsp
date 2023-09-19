@@ -293,7 +293,6 @@ class ContractUtils:
             return 0
         return round(self.w3.from_wei(balance, "ether"), 5) or 0
 
-
     async def get_confirmation(self, transactionHash):
         """
 

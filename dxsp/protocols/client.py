@@ -122,7 +122,7 @@ class DexClient:
                 sell_token_address, self.account.wallet_address, quantity
             )
             sell_token_amount_wei = sell_amount * (
-                10 ** (await self.account.get_token_decimals(sell_token_address))
+                10 ** (await self.contract_utils.get_token_decimals(sell_token_address))
             )
             if self.protocol_type == "0x":
                 await self.account.get_approve(sell_token_address)
