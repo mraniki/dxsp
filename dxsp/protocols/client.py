@@ -165,8 +165,8 @@ class DexClient:
             float: The sell amount
 
         """
-        sell_balance = await self.get_token_balance(sell_token_address, wallet_address)
-        sell_contract = await self.get_token_contract(sell_token_address)
+        sell_balance = await self.contract_utils.get_token_balance(sell_token_address, wallet_address)
+        sell_contract = await self.contract_utils.get_token_contract(sell_token_address)
         sell_decimals = (
             sell_contract.functions.decimals().call()
             if sell_contract is not None
