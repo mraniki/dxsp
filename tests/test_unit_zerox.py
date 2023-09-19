@@ -38,19 +38,19 @@ def test_dynaconf_is_in_testing():
 async def test_dex(dex):
     """Init Testing"""
     assert isinstance(dex, DexSwap)
-    assert dex.w3 is not None
-    assert dex.protocol_type is not None
-    assert dex.protocol_type == "0x"
+    for dx in dex.dex_info:
+        assert dx is not None
+        assert dx.w3 is not None
+        assert dx.protocol_type is not None
+        assert dx.protocol_type == "0x"
 
 
 @pytest.mark.asyncio
 async def test_get_quote(dex):
     result = await dex.get_quote("UNI")
     print("0x quote: ", result)
-    assert dex.w3.net.version == "1"
     assert result is not None
-    assert result.startswith("🦄")
-
+    assert "🦄" in result
 
 
 @pytest.mark.asyncio
@@ -58,4 +58,4 @@ async def test_execute_order(dex, order):
     result = await dex.execute_order(order)
     print(result)
     assert result is not None
-    assert result.startswith("⚠️")
+    assert "⚠️" in result

@@ -1,15 +1,15 @@
 """
 uniswap  🦄
 """
+from loguru import logger
 from uniswap import Uniswap
 
-from dxsp.config import settings
-from dxsp.main import DexSwap
+from dxsp.protocols import DexClient
 
 
-class DexSwapUniswap(DexSwap):
+class DexUniswap(DexClient):
     """
-    A DEXSwap sub class using uniswap-python library
+    A DexClient using uniswap-python library
 
     More info on uniswap-python library:
     https://github.com/uniswap-python/uniswap-python
@@ -29,18 +29,24 @@ class DexSwapUniswap(DexSwap):
             float: The calculated quote for the given buy and sell addresses.
         """
         try:
+            logger.debug(f"Uniswap quote {buy_address} {sell_address} {amount}")
             uniswap = Uniswap(
-                address=self.account.wallet_address,
-                private_key=self.account.private_key,
+                address=self.wallet_address,
+                private_key=self.private_key,
                 version=self.protocol_version,
                 web3=self.w3,
-                factory_contract_addr=settings.dex_factory_contract_addr,
-                router_contract_addr=settings.dex_router_contract_addr,
+                factory_contract_addr=self.factory_contract_addr,
+                router_contract_addr=self.router_contract_addr,
             )
+            logger.debug("Uniswap client created {}", uniswap)
             amount_wei = amount * (
                 10 ** (await self.contract_utils.get_token_decimals(sell_address))
             )
+            logger.debug("Amount {}", amount_wei)
             quote = uniswap.get_price_input(sell_address, buy_address, amount_wei)
+            logger.debug("quote {}", quote)
+            if quote is None:
+                return "Quote failed"
             return round(
                 float(
                     (
@@ -59,9 +65,9 @@ class DexSwapUniswap(DexSwap):
             )
 
         except Exception as error:
-            raise ValueError(f"Quote failed {error}")
+            logger.error("Quote failed {}", error)
 
-    async def get_swap(self, sell_address, buy_address, amount):
+    async def make_swap(self, sell_address, buy_address, amount):
         """
         Asynchronously gets the swap
         for the specified sell address, buy address, and amount.
@@ -78,15 +84,14 @@ class DexSwapUniswap(DexSwap):
         """
         try:
             uniswap = Uniswap(
-                address=self.account.wallet_address,
-                private_key=self.account.private_key,
+                address=self.wallet_address,
+                private_key=self.private_key,
                 version=self.protocol_version,
                 web3=self.w3,
-                factory_contract_addr=settings.dex_factory_contract_addr,
-                router_contract_addr=settings.dex_router_contract_addr,
+                factory_contract_addr=self.factory_contract_addr,
+                router_contract_addr=self.router_contract_addr,
             )
             return uniswap.make_trade(sell_address, buy_address, amount)
 
         except Exception as error:
-            self.logger.debug(error)
-            raise ValueError(f"Swap failed {error}")
+            logger.error("Swap failed {}", error)

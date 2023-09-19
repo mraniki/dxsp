@@ -13,7 +13,6 @@ from dxsp.config import settings
 
 logger.remove()
 logger.add(sys.stderr, level="INFO")
- 
 
 
 async def main():
@@ -25,7 +24,7 @@ async def main():
 
         # settings.setenv()
         print(dex.account)
-        symbol = 'WBTC'
+        symbol = "WBTC"
 
         # # Contract Address
         address = await dex.contract_utils.search_contract_address(symbol)
@@ -51,7 +50,7 @@ async def main():
 app = FastAPI()
 
 
-@app.on_event('startup')
+@app.on_event("startup")
 async def start():
     asyncio.create_task(main())
 
@@ -67,4 +66,4 @@ def health_check():
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host='0.0.0.0', port=8080)
+    uvicorn.run(app, host="0.0.0.0", port=8080)

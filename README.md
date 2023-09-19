@@ -30,7 +30,7 @@ Trade on any blockchains <br>with uniswap based router or 0x protocol.
    from dxsp import DexSwap
     dex = DexSwap()
     #BUY 10 USDT to SWAP with BITCOIN
-    demo_tx = await dex.get_swap('USDT','wBTC',10)
+    #demo_tx = await dex.get_swap('USDT','wBTC',10)
     print("demo_tx ", demo_tx)
 </code>
 </pre>

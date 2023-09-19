@@ -2,14 +2,15 @@
 0️⃣x
 
 """
-from dxsp.config import settings
-from dxsp.main import DexSwap
+from loguru import logger
+
+from dxsp.protocols import DexClient
 from dxsp.utils.utils import get
 
 
-class DexSwapZeroX(DexSwap):
+class DexZeroX(DexClient):
     """
-    A DEXSwap sub class using 0x protocol
+    A DexClient class using 0x protocol
     Implementation of 0x swap protocol
     https://0x.org/docs/0x-swap-api/introduction
 
@@ -30,15 +31,15 @@ class DexSwapZeroX(DexSwap):
         token_decimals = await self.contract_utils.get_token_decimals(sell_address)
         out_amount = amount * (10**token_decimals)
         url = (
-            f"{settings.dex_0x_url}/swap/v1/quote"
+            f"{self.api_endpoint}/swap/v1/quote"
             f"?buyToken={str(buy_address)}&sellToken={str(sell_address)}&sellAmount={str(out_amount)}"
         )
-        headers = {"0x-api-key": settings.dex_0x_api_key}
+        headers = {"0x-api-key": self.api_key}
         response = await get(url, params=None, headers=headers)
         if response:
             return float(response["guaranteedPrice"])
 
-    async def get_swap(self, buy_address, sell_address, amount):
+    async def make_swap(self, buy_address, sell_address, amount):
         """
         Asynchronously gets a swap order by calling the `get_quote`
         method with the specified `buy_address`,

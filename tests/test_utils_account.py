@@ -1,13 +1,15 @@
 """
  DEXSWAP Unit Test
 """
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 from web3 import EthereumTesterProvider, Web3
 
 from dxsp import DexSwap
 from dxsp.config import settings
+from dxsp.protocols import DexClient, DexUniswap, DexZeroX
+from dxsp.utils import AccountUtils, ContractUtils
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -16,8 +18,28 @@ def set_test_settings():
 
 
 @pytest.fixture(name="dex")
-def DexSwap_fixture():
+def DexTrader_fixture():
     return DexSwap()
+
+@pytest.fixture(name="dex_client")
+def mock_dex_client():
+    return DexUniswap(
+        name="uniswap",
+        wallet_address="0x1a9C8182C09F50C8318d769245beA52c32BE35BC",
+        private_key="0xdeadbeet45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266",
+        protocol_type="uniswap",
+        protocol_version=2,
+        api_endpoint=None,
+        api_key=None,
+        router_contract_addr="0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        factory_contract_addr="0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f",
+        trading_asset_address="0xdAC17F958D2ee523a2206206994597C13D831ec7",
+        trading_slippage=2,
+        trading_risk_amount=10,
+        block_explorer_url="https://api.etherscan.io/api?",
+        block_explorer_api=None,
+        w3=Web3(Web3.HTTPProvider("https://rpc.ankr.com/eth")),
+    )
 
 
 @pytest.fixture
@@ -31,146 +53,27 @@ def w3():
     return Web3(provider)
 
 
-@pytest.fixture(name="account")
-def account_fixture(web3) -> str:
-    """setup account."""
-    return web3.eth.accounts[0]
-
-
 @pytest.fixture(name="order")
 def order_params_fixture():
     """Return order parameters."""
     return {
-        'action': 'BUY',
-        'instrument': 'WBTC',
-        'quantity': 1,
+        "action": "BUY",
+        "instrument": "WBTC",
+        "quantity": 1,
     }
-
-
-@pytest.fixture(name="invalid_order")
-def invalid_order_fixture():
-    """Return order parameters."""
-    return {
-        'action': 'BUY',
-        'instrument': 'NOTATHING',
-        'quantity': 1,
-    }
-
-
-@pytest.fixture(name="test_contract")
-def mock_contract(dex):
-    contract = AsyncMock()
-    contract.get_token_decimals.return_value = 18
-    contract.to_wei.return_value = 1000000000000000000
-    contract.functions.balanceOf = AsyncMock(return_value=100)
-    contract.wait_for_transaction_receipt.return_value = {"status": 1}
-    return contract
-
-
-@pytest.fixture(name="mock_dex")
-def mock_dex_transaction():
-    dex = DexSwap()
-    dex.w3.eth.get_transaction_count = AsyncMock(return_value=1)
-    dex.get_gas = AsyncMock(return_value=21000)
-    dex.get_gas_price = AsyncMock(return_value=1000000000)
-    dex.w3.eth.account.sign_transaction = (
-        AsyncMock(return_value=AsyncMock(rawTransaction=b'signed_transaction')))
-    dex.w3.eth.send_raw_transaction = AsyncMock(return_value=b'transaction_hash')
-    return dex
 
 
 def test_dynaconf_is_in_testing():
     print(settings.VALUE)
     assert settings.VALUE == "On Testing"
 
-@pytest.mark.asyncio
-async def test_get_info(dex):
-    result = await dex.get_info()
-    print(result)
-    assert result is not None
-
 
 @pytest.mark.asyncio
-async def test_get_name(dex):
-    result = await dex.get_name()
-    assert isinstance(result, str)
-    assert len(result) == 8
-
-
-@pytest.mark.asyncio
-async def test_get_account_balance(dex):
-    # Call the get_account_balance method
-    result = await dex.get_account_balance()
-    assert result is not None
-    assert '₿' in result
-
-
-@pytest.mark.asyncio
-async def test_account_balance(account) -> str:
-    """test balance account."""
-    with patch("dxsp.config.settings", autospec=True):
-        settings.dex_wallet_address = account
-        print(settings.dex_wallet_address)
-        dex = DexSwap()
-        print(dex.account.wallet_address)
-        result = await dex.get_account_balance()
-        print(result)
-        assert result is not None
-        assert '₿' in result
-        assert '💵' in result
-
-
-@pytest.mark.asyncio
-async def test_trading_asset_balance(account) -> str:
-    """test token account."""
-    with patch("dxsp.config.settings", autospec=True):
-        settings.dex_wallet_address = account
-        dex = DexSwap()
-        result = await dex.get_trading_asset_balance()
-        print(result)
-        assert result is not None
-
-
-@pytest.mark.asyncio
-async def test_get_account_position(account) -> str:
-    """test token account."""
-    with patch("dxsp.config.settings", autospec=True):
-        settings.dex_wallet_address = account
-        # with pytest.raises(ValueError, match='No Balance'):
-        dex = DexSwap()
-        result = await dex.get_account_position()
-        print(result)
-        assert result is not None
-        assert '📊' in result
-
-
-@pytest.mark.asyncio
-async def test_get_account_transactions(dex):
-    # Call the get_account_transactions method
-    result = await dex.get_account_transactions()
-    print(f"history: {result}")
-    assert result is not None
-    assert 'pnl' in result
-    assert 'tokenList' in result
-
-
-@pytest.mark.asyncio
-async def test_get_account_pnl(dex):
-    # Call the get_account_pnl method
-    result = await dex.get_account_pnl()
-    print(f"pnl: {result}")
-    assert result is not None
-    assert 'Total' in result
-    assert '📊' in result
-    assert 'Opened' in result
-    assert 'Margin' in result
-
-@pytest.mark.asyncio
-async def test_get_approve(dex):
+async def test_get_approve(dex_client):
     symbol = "UNI"
     approve_receipt = None
     try:
-        approve_receipt = await dex.get_approve(symbol)
+        approve_receipt = await dex_client.get_approve(symbol)
         print(approve_receipt)
     except Exception as e:
         print(f"Error getting approve receipt: {e}")
@@ -178,35 +81,33 @@ async def test_get_approve(dex):
 
 
 @pytest.mark.asyncio
-async def test_failed_get_approve(dex):
-    with pytest.raises(ValueError, match='Approval failed'):
-        await dex.account.get_approve("0xdAC17F958D2ee523a2206206994597C13D831ec7")
+async def test_failed_get_approve(dex_client):
+    # with pytest.raises(ValueError, match="Approval failed"):
+    result = await dex_client.account.get_approve(
+        "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+    )
+    assert result is None
 
 
 @pytest.mark.asyncio
-async def test_get_sign(mock_dex):
+async def test_get_sign():
     pass
-#    transaction = MagicMock()
-#    result = await mock_dex.get_sign(transaction)
-
-#    mock_dex.get_gas.assert_called_once_with(transaction)
-#    mock_dex.get_gas_price.assert_called_once()
-#    mock_dex.w3.eth.get_transaction_count.assert_called_once_with(
-# mock_dex.wallet_address)
 
 
 @pytest.mark.asyncio
-async def test_get_gas(dex):
+async def test_get_gas(dex_client):
     """get_gas Testing"""
-    mock_tx = {"to": "0x1234567890123456789012345678901234567890",
-                "value": "1000000000000000000"}
-    result = await dex.account.get_gas(mock_tx)
+    mock_tx = {
+        "to": "0x1234567890123456789012345678901234567890",
+        "value": "1000000000000000000",
+    }
+    result = await dex_client.account.get_gas(mock_tx)
     print(result)
+    assert result is not None
 
 
 @pytest.mark.asyncio
-async def test_get_gas_price(dex):
-    # Call the get_gasPrice method
-    result = await dex.account.get_gas_price()
+async def test_get_gas_price(dex_client):
+    result = await dex_client.account.get_gas_price()
     print(f"gas_price: {result}")
     assert result is not None

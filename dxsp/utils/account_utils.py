@@ -2,15 +2,14 @@
  DEX SWAP
 🔒 USER RELATED
 """
+from datetime import datetime, timedelta
 from typing import Optional
 
 from loguru import logger
-from web3 import Web3
 
-from dxsp import __version__
 from dxsp.config import settings
 from dxsp.utils.contract_utils import ContractUtils
-from dxsp.utils.explorer_utils import get_account_transactions
+from dxsp.utils.utils import get
 
 
 class AccountUtils:
@@ -24,7 +23,6 @@ class AccountUtils:
 
     Methods:
         get_info()
-        get_name()
         get_help()
         get_account_balance()
         get_trading_asset_balance()
@@ -40,59 +38,27 @@ class AccountUtils:
 
     """
 
-    def __init__(self, w3: Optional[Web3] = None):
-        self.logger = logger
-        self.w3 = w3 or Web3(Web3.HTTPProvider(settings.dex_rpc))
-        self.wallet_address = self.w3.to_checksum_address(settings.dex_wallet_address)
+    def __init__(
+        self,
+        w3,
+        contract_utils,
+        wallet_address,
+        private_key,
+        trading_asset_address,
+        block_explorer_url,
+        block_explorer_api,
+    ):
+        self.w3 = w3
+        self.wallet_address = self.w3.to_checksum_address(wallet_address)
         self.account_number = (
             f"{str(self.w3.net.version)} - " f"{str(self.wallet_address)[-8:]}"
         )
-        self.private_key = settings.dex_private_key
-        self.trading_asset_address = self.w3.to_checksum_address(
-            settings.trading_asset_address
-        )
-        self.contract_utils = ContractUtils(w3=self.w3)
-        self.commands = settings.dxsp_commands
-
-    async def get_info(self):
-        """
-        Get the information about the DexSwap API.
-
-        Returns:
-            str: A string containing the version of DexSwap, the name obtained from
-                 `get_name()`, and the account number.
-        Raises:
-            Exception: If there is an error while retrieving the information.
-        """
-        try:
-            return (
-                f"ℹ️ DexSwap v{__version__}\n"
-                f"💱 {await self.get_name()}\n"
-                f"🪪 {self.account_number}"
-            )
-        except Exception as error:
-            return error
-
-    async def get_name(self):
-        """
-        Retrieves the name of the object being the
-        last 8 characters of the router contract address.
-
-        :return: A string representing
-        the name of the object.
-        """
-        if settings.dex_router_contract_addr:
-            return str(settings.dex_router_contract_addr)[-8:]
-
-    async def get_help(self):
-        """
-        Asynchronously retrieves the help information.
-
-        Returns:
-            str: The help information,
-            including the available commands.
-        """
-        return f"{self.commands}\n"
+        logger.debug(f"account number: {self.account_number}")
+        self.private_key = private_key
+        self.trading_asset_address = self.w3.to_checksum_address(trading_asset_address)
+        self.contract_utils = contract_utils
+        self.block_explorer_url = block_explorer_url
+        self.block_explorer_api = block_explorer_api
 
     async def get_account_balance(self):
         """
@@ -108,7 +74,9 @@ class AccountUtils:
         )
         account_balance = self.w3.from_wei(account_balance, "ether") or 0
         trading_asset_balance = await self.get_trading_asset_balance()
-        return f"₿ {round(account_balance,5)}\n💵 {trading_asset_balance}"
+        balance = f"🏦 Balance {self.account_number} \n"
+        balance += f"₿ {round(account_balance,5)}\n💵 {trading_asset_balance}"
+        return balance
 
     async def get_trading_asset_balance(self):
         """
@@ -132,7 +100,7 @@ class AccountUtils:
         Returns:
             str: A string representing the account position.
         """
-        position = "📊 Position\n"
+        position = f"📊 Position {self.account_number} \n"
         position += f"Opened: {str(await self.get_account_open_positions())}\n"
         position += f"Margin: {str(await self.get_account_margin())}"
         return position
@@ -156,46 +124,85 @@ class AccountUtils:
         """
         return 0
 
-    async def get_account_transactions(self, period=24):
-        """
-        Retrieve the account transactions for a given period.
-        Not yet implemented
+    # async def get_account_transactions(
+    #     self,
+    #     contract_address,
+    #     period=24,
+    # ):
+    #     """
+    #     Retrieves the account transactions
+    #     within a specified time period
+    #     for the main asset activity
+    #     Not yet implemented
 
-        Args:
-            period (int): The time period in hours
-            to retrieve the transactions for.
-            Default is 24 hours.
+    #     :param contract_address: The address of the contract.
+    #     :type contract_address: str
+    #     :param wallet_address: The address of the wallet.
+    #     :type wallet_address: str
+    #     :param period: The time period in hours
+    #     :type period: int
 
-        Returns:
-            List[Transaction]: A list of transactions for the account.
-        """
-        return await get_account_transactions(
-            period, self.trading_asset_address, self.wallet_address
-        )
+    #     :return: The transactions for the account.
+    #     """
+    #     pnl_dict = {"pnl": 0, "tokenList": {}}
+    #     if not self.block_explorer_api:
+    #         return pnl_dict
 
-    async def get_account_pnl(self, period=24):
-        """
-        Create a profit and loss (PnL)
-        report for the account.
-        Not yet implemented
+    #     params = {
+    #         "module": "account",
+    #         "action": "tokentx",
+    #         "contractaddress": contract_address,
+    #         "address": self.wallet_address,
+    #         "page": "1",
+    #         "offset": "100",
+    #         "startblock": "0",
+    #         "endblock": "99999999",
+    #         "sort": "desc",
+    #         "apikey": self.block_explorer_api,
+    #     }
 
-        Args:
-            period (int): The time period in hours
-            to retrieve the PnL for. Default is 24 hours.
+    #     response = await get(url=self.block_explorer_url, params=params)
 
-        Returns:
-            str: A string containing the PnL report.
+    #     if response.get("status") == "1" and "result" in response:
+    #         current_time = datetime.utcnow()
+    #         time_history_start = current_time - timedelta(hours=period)
 
+    #         for entry in response["result"]:
+    #             token_symbol = entry.get("tokenSymbol")
+    #             value = int(entry.get("value", 0))
+    #             timestamp = int(entry.get("timeStamp", 0))
+    #             transaction_time = datetime.utcfromtimestamp(timestamp)
 
-        """
-        pnl_dict = await self.get_account_transactions(period)
-        pnl_report = "".join(
-            f"{token} {value}\n" for token, value in pnl_dict["tokenList"].items()
-        )
-        pnl_report += f"Total {pnl_dict['pnl']}\n"
-        pnl_report += await self.get_account_position()
+    #             if transaction_time >= time_history_start and token_symbol:
+    #                 pnl_dict["tokenList"][token_symbol] = (
+    #                     pnl_dict["tokenList"].get(token_symbol, 0) + value
+    #                 )
+    #                 pnl_dict["pnl"] += value
 
-        return pnl_report
+    #     return pnl_dict
+
+    # async def get_account_pnl(self, period=24):
+    #     """
+    #     Create a profit and loss (PnL)
+    #     report for the account.
+    #     Not yet implemented
+
+    #     Args:
+    #         period (int): The time period in hours
+    #         to retrieve the PnL for. Default is 24 hours.
+
+    #     Returns:
+    #         str: A string containing the PnL report.
+
+    #     """
+    #     pnl_dict = await self.get_account_transactions(period)
+    #     pnl_report = "".join(
+    #         f"{token} {value}\n" for token, value in pnl_dict["tokenList"].items()
+    #     )
+    #     pnl_report += f"{self.name}: {pnl_dict['pnl']}\n"
+    #     pnl_report += await self.get_account_position()
+
+    #     return pnl_report
 
     async def get_approve(self, token_address):
         """
@@ -227,7 +234,7 @@ class AccountUtils:
                 approval_tx_hash = await self.get_sign(approval_tx.transact())
                 return self.w3.eth.wait_for_transaction_receipt(approval_tx_hash)
         except Exception as error:
-            raise ValueError(f"Approval failed {error}")
+            logger.error("Approval failed {}", error)
 
     async def get_sign(self, transaction):
         """
@@ -246,7 +253,7 @@ class AccountUtils:
             )
             return self.w3.eth.send_raw_transaction(signed_tx.rawTransaction)
         except Exception as error:
-            raise error
+            logger.error("Sign failed {}", error)
 
     async def get_gas(self, transaction):
         """
