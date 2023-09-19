@@ -23,6 +23,17 @@ class DexSwap:
      Returns:
          DexSwap
 
+     Methods:
+        _create_client()
+        get_quote()
+        execute_order()
+        get_help()
+        get_info()
+        get_name()
+        get_account_balance()
+        get_account_position()
+
+
 
     """
 
@@ -108,7 +119,6 @@ class DexSwap:
 
         return info.strip()
 
-
     async def execute_order(self, order_params):
         """
         Execute an order function.
@@ -131,7 +141,7 @@ class DexSwap:
                     if action == "BUY"
                     else (instrument, dx["trading_asset_address"])
                 )
-                order = await dx.get_swap( sell_token, buy_token, quantity)
+                order = await dx.get_swap(sell_token, buy_token, quantity)
                 if order:
                     trade_confirmation = (
                         f"⬇️ {instrument}"
@@ -187,23 +197,6 @@ class DexSwap:
             info += await dx.get_account_balance() or "Account balance failed"
         return info.strip()
 
-    async def get_trading_asset_balance(self):
-        """
-        Retrieves the trading asset balance for the current account.
-
-        :return: A dictionary containing the trading asset balance.
-                 The dictionary has the following keys:
-                 - 'asset': The asset symbol.
-                 - 'free': The free balance of the asset.
-                 - 'locked': The locked balance of the asset.
-        """
-        info = ""
-        for dx in self.dex_info:
-            info += (
-                await dx.get_trading_asset_balance() or "Trading asset balance failed"
-            )
-        return info.strip()
-
     async def get_account_position(self):
         """
         Retrieves the account position.
@@ -215,4 +208,3 @@ class DexSwap:
         for dx in self.dex_info:
             info += await dx.get_account_position() or "Account position failed"
         return info.strip()
-

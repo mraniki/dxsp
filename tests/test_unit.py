@@ -173,11 +173,11 @@ async def test_get_balance(dex):
     assert "💵" in result
 
 
-@pytest.mark.asyncio
-async def test_get_trading_asset_balance(dex):
-    result = await dex.get_trading_asset_balance()
-    print(result)
-    assert result is not None
+# @pytest.mark.asyncio
+# async def test_get_trading_asset_balance(dex):
+#     result = await dex.get_trading_asset_balance()
+#     print(result)
+#     assert result is not None
 
 
 @pytest.mark.asyncio
