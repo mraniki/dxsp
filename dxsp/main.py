@@ -170,7 +170,7 @@ class DexSwap:
         """
         info = f"ℹ️  v{__version__}\n"
         for dx in self.dex_info:
-            info += await dx.get_info() or "Info failed\n"
+            info += f"\n{await dx.get_info()}" or "Info failed\n"
         return info.strip()
 
     async def get_name(self):
@@ -181,7 +181,7 @@ class DexSwap:
         """
         info = ""
         for dx in self.dex_info:
-            info += await dx.get_name() or "Name failed"
+            info += f"\n{await dx.get_name()}" or "Name failed"
         return info.strip()
 
     # 🔒 USER RELATED
@@ -194,7 +194,7 @@ class DexSwap:
         """
         info = ""
         for dx in self.dex_info:
-            info += await dx.get_account_balance() or "Account balance failed"
+            info += f"\n{await dx.get_account_balance()}" or "Account balance failed"
         return info.strip()
 
     async def get_account_position(self):
@@ -206,5 +206,5 @@ class DexSwap:
         """
         info = ""
         for dx in self.dex_info:
-            info += await dx.get_account_position() or "Account position failed"
+            info += f"\n{await dx.get_account_position()}" or "Account position failed"
         return info.strip()
