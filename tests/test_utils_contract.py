@@ -73,26 +73,6 @@ def order_params_fixture():
     }
 
 
-@pytest.fixture(name="invalid_order")
-def invalid_order_fixture():
-    """Return order parameters."""
-    return {
-        "action": "BUY",
-        "instrument": "NOTATHING",
-        "quantity": 1,
-    }
-
-
-@pytest.fixture(name="test_contract")
-def mock_contract(dex):
-    contract = AsyncMock()
-    contract.get_token_decimals.return_value = 18
-    contract.to_wei.return_value = 1000000000000000000
-    contract.functions.balanceOf = AsyncMock(return_value=100)
-    contract.wait_for_transaction_receipt.return_value = {"status": 1}
-    return contract
-
-
 def test_dynaconf_is_in_testing():
     print(settings.VALUE)
     assert settings.VALUE == "On Testing"
@@ -210,7 +190,7 @@ async def test_token_balance(account, dex_client) -> str:
 
 @pytest.mark.asyncio
 async def test_calculate_sell_amount(dex_client):
-    result = await dex_client.calculate_sell_amount(
+    result = await dex_client.contract_utils.calculate_sell_amount(
         "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
         dex_client.wallet_address,
         1,

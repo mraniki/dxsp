@@ -54,12 +54,6 @@ def w3():
     return Web3(provider)
 
 
-@pytest.fixture(name="account")
-def account_fixture(web3) -> str:
-    """setup account."""
-    return web3.eth.accounts[0]
-
-
 @pytest.fixture(name="order")
 def order_params_fixture():
     """Return order parameters."""
@@ -68,26 +62,6 @@ def order_params_fixture():
         "instrument": "WBTC",
         "quantity": 1,
     }
-
-
-@pytest.fixture(name="invalid_order")
-def invalid_order_fixture():
-    """Return order parameters."""
-    return {
-        "action": "BUY",
-        "instrument": "NOTATHING",
-        "quantity": 1,
-    }
-
-
-@pytest.fixture(name="test_contract")
-def mock_contract(dex):
-    contract = AsyncMock()
-    contract.get_token_decimals.return_value = 18
-    contract.to_wei.return_value = 1000000000000000000
-    contract.functions.balanceOf = AsyncMock(return_value=100)
-    contract.wait_for_transaction_receipt.return_value = {"status": 1}
-    return contract
 
 
 def test_dynaconf_is_in_testing():
@@ -129,6 +103,7 @@ async def test_get_gas(dex_client):
     }
     result = await dex_client.account.get_gas(mock_tx)
     print(result)
+    assert result is not None
 
 
 @pytest.mark.asyncio
