@@ -180,7 +180,10 @@ class DexClient:
         )
 
     async def make_swap(self, sell_address, buy_address, amount):
-        """ """
+        """
+        Make a swap method for specific protocol
+
+        """
 
     async def get_info(self):
         """
