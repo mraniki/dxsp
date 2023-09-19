@@ -189,17 +189,6 @@ async def test_token_balance(account, dex_client) -> str:
 
 
 @pytest.mark.asyncio
-async def test_calculate_sell_amount(dex_client):
-    result = await dex_client.contract_utils.calculate_sell_amount(
-        "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
-        dex_client.wallet_address,
-        1,
-    )
-    print(result)
-    assert result is not None
-
-
-@pytest.mark.asyncio
 async def test_get_confirmation(dex_client):
     result = await dex_client.contract_utils.get_confirmation(
         "0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771"

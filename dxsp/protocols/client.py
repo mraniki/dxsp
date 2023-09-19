@@ -89,9 +89,7 @@ class DexClient:
         """ """
         # return await self.dex_swap.get_quote(buy_address, sell_address, amount)
 
-    async def get_swap(
-        self, sell_token: str, buy_token: str, quantity: int
-    ) -> None:
+    async def get_swap(self, sell_token: str, buy_token: str, quantity: int) -> None:
         """
         Execute a swap
 
@@ -110,17 +108,17 @@ class DexClient:
             sell_token_address = sell_token
             logger.debug("sell token {}", sell_token_address)
             if not sell_token.startswith("0x"):
-                sell_token_address = (
-                    await self.contract_utils.search_contract_address(sell_token)
+                sell_token_address = await self.contract_utils.search_contract_address(
+                    sell_token
                 )
             buy_token_address = buy_token
             logger.debug("buy token {}", buy_token_address)
             if not buy_token_address.startswith("0x"):
-                buy_token_address = (
-                    await self.contract_utils.search_contract_address(buy_token)
+                buy_token_address = await self.contract_utils.search_contract_address(
+                    buy_token
                 )
 
-            sell_amount = await self.contract_utils.calculate_sell_amount(
+            sell_amount = await self.calculate_sell_amount(
                 sell_token_address, self.account.wallet_address, quantity
             )
             sell_token_amount_wei = sell_amount * (
@@ -130,8 +128,7 @@ class DexClient:
                 await self.account.get_approve(sell_token_address)
 
             order_amount = int(
-                sell_token_amount_wei
-                * decimal.Decimal((self.trading_slippage / 100))
+                sell_token_amount_wei * decimal.Decimal((self.trading_slippage / 100))
             )
             logger.debug(order_amount)
             order = await self.make_swap(
@@ -155,9 +152,33 @@ class DexClient:
             logger.debug(error)
             raise error
 
+    async def calculate_sell_amount(self, sell_token_address, wallet_address, quantity):
+        """
+        Returns amount based on risk percentage.
+
+        Args:
+            sell_token_address (str): The sell token address
+            wallet_address (str): The wallet address
+            quantity (int): The quantity
+
+        Returns:
+            float: The sell amount
+
+        """
+        sell_balance = await self.get_token_balance(sell_token_address, wallet_address)
+        sell_contract = await self.get_token_contract(sell_token_address)
+        sell_decimals = (
+            sell_contract.functions.decimals().call()
+            if sell_contract is not None
+            else 18
+        )
+        risk_percentage = self.trading_risk_amount
+        return (sell_balance / (risk_percentage * 10**sell_decimals)) * (
+            decimal.Decimal(quantity) / 100
+        )
+
     async def make_swap(self, sell_address, buy_address, amount):
         """ """
-
 
     async def get_info(self):
         """
@@ -223,4 +244,3 @@ class DexClient:
         :return: A list of open positions in the account.
         """
         return await self.account.get_account_open_positions()
-

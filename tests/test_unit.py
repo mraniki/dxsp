@@ -127,6 +127,17 @@ async def test_get_help(dex):
 
 
 @pytest.mark.asyncio
+async def test_calculate_sell_amount(dex_client):
+    result = await dex_client.calculate_sell_amount(
+        "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
+        dex_client.wallet_address,
+        1,
+    )
+    print(result)
+    assert result is not None
+
+
+@pytest.mark.asyncio
 async def test_get_balance(dex):
     result = await dex.get_account_balance()
     print(result)

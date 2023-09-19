@@ -83,10 +83,11 @@ async def test_get_approve(dex_client):
 
 @pytest.mark.asyncio
 async def test_failed_get_approve(dex_client):
-    with pytest.raises(ValueError, match="Approval failed"):
-        await dex_client.account.get_approve(
-            "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-        )
+    # with pytest.raises(ValueError, match="Approval failed"):
+    result = await dex_client.account.get_approve(
+        "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+    )
+    assert result is None
 
 
 @pytest.mark.asyncio

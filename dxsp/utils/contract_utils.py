@@ -293,30 +293,6 @@ class ContractUtils:
             return 0
         return round(self.w3.from_wei(balance, "ether"), 5) or 0
 
-    async def calculate_sell_amount(self, sell_token_address, wallet_address, quantity):
-        """
-        Returns amount based on risk percentage.
-
-        Args:
-            sell_token_address (str): The sell token address
-            wallet_address (str): The wallet address
-            quantity (int): The quantity
-
-        Returns:
-            float: The sell amount
-
-        """
-        sell_balance = await self.get_token_balance(sell_token_address, wallet_address)
-        sell_contract = await self.get_token_contract(sell_token_address)
-        sell_decimals = (
-            sell_contract.functions.decimals().call()
-            if sell_contract is not None
-            else 18
-        )
-        risk_percentage = settings.trading_risk_amount
-        return (sell_balance / (risk_percentage * 10**sell_decimals)) * (
-            decimal.Decimal(quantity) / 100
-        )
 
     async def get_confirmation(self, transactionHash):
         """
