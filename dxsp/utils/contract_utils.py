@@ -183,7 +183,7 @@ class ContractUtils:
                 ):
                     logger.debug("token identified")
                     return keyval["address"]
-            logger.warning("Token not found {symbol}")
+            logger.warning(f"Token not found {symbol}")
         except Exception as e:
             logger.error("get_token_address: {}", e)
             return None
