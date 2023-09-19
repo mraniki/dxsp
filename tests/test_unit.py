@@ -20,6 +20,7 @@ def set_test_settings():
 def DexSwap_fixture():
     return DexSwap()
 
+
 @pytest.fixture(name="dex_client")
 def mock_dex_client():
     return DexUniswap(
@@ -38,7 +39,8 @@ def mock_dex_client():
         block_explorer_url="https://api.etherscan.io/api?",
         block_explorer_api=None,
         w3=Web3(Web3.HTTPProvider("https://rpc.ankr.com/eth")),
-        )
+    )
+
 
 @pytest.fixture
 def tester_provider():
@@ -134,8 +136,6 @@ async def test_execute_order_invalid(dex, invalid_order):
     result = await dex.execute_order(invalid_order)
     print(result)
     assert "⚠️ order execution" in result
-
-
 
 
 @pytest.mark.asyncio
