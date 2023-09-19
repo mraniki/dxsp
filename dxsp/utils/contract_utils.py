@@ -43,7 +43,6 @@ class ContractUtils:
 
 
 
-
     """
 
     def __init__(self, w3=None, block_explorer_url=None, block_explorer_api=None):
