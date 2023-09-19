@@ -175,9 +175,9 @@ class DexClient:
             else 18
         )
         risk_percentage = self.trading_risk_amount
-        return (sell_balance / (risk_percentage * 10**sell_decimals)) * float(
-            decimal.Decimal(quantity) / 100
-        )
+        return (
+            sell_balance / (decimal.Decimal(risk_percentage) * 10**sell_decimals)
+        ) * (decimal.Decimal(quantity) / 100)
 
     async def make_swap(self, sell_address, buy_address, amount):
         """
