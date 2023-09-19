@@ -158,7 +158,7 @@ class DexSwap:
 
         :return: The information retrieved from the account.
         """
-        info = "ℹ️  v{__version__}\n"
+        info = f"ℹ️  v{__version__}\n"
         for dx in self.dex_info:
             info += await dx.get_info() or "Info failed\n"
         return info.strip()
