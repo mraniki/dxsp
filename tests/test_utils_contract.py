@@ -3,7 +3,7 @@
 # """
 import decimal
 import time
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 from web3 import EthereumTesterProvider, Web3
@@ -11,6 +11,7 @@ from web3 import EthereumTesterProvider, Web3
 import dxsp
 from dxsp import DexSwap
 from dxsp.config import settings
+from dxsp.protocols import DexClient, DexUniswap, DexZeroX
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -22,6 +23,17 @@ def set_test_settings():
 def DexTrader_fixture():
     return DexSwap()
 
+@pytest.fixture(name="dex_client")
+def mock_dex_client():
+    # Create a mock DexClient object
+    dex_client = Mock(spec=DexClient)
+    
+    # Set any desired return values or side effects for the DexClient methods
+    dex_client.get_quote.return_value = 100
+    dex_client.get_swap.side_effect = (
+        lambda sell_address, buy_address, amount: amount * 2)
+    
+    return dex_client
 
 @pytest.fixture
 def tester_provider():
@@ -75,13 +87,12 @@ def test_dynaconf_is_in_testing():
     assert settings.VALUE == "On Testing"
 
 
-# @pytest.mark.asyncio
-# async def test_search_contract_address(dex):
-#     for dx in dex.dex_info:
-#         result = await dx.contract_utils.search_contract_address("USDT")
-#         assert result is not None
-#         assert result == "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-#         print(result)
+@pytest.mark.asyncio
+async def test_search_contract_address(dex_client):
+    result = await dex_client.contract_utils.search_contract_address("USDT")
+    assert result is not None
+    assert result == "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+    print(result)
 
 
 # @pytest.mark.asyncio
