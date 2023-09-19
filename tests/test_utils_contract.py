@@ -7,11 +7,12 @@ from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 from web3 import EthereumTesterProvider, Web3
-
+from web3 import Web3
 import dxsp
 from dxsp import DexSwap
 from dxsp.config import settings
 from dxsp.protocols import DexClient, DexUniswap, DexZeroX
+from dxsp.utils import AccountUtils, ContractUtils
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -25,15 +26,24 @@ def DexTrader_fixture():
 
 @pytest.fixture(name="dex_client")
 def mock_dex_client():
-    # Create a mock DexClient object
-    dex_client = Mock(spec=DexClient)
+    dex_client= DexUniswap(name="uniswap",
+        dex_wallet_address = "0x1a9C8182C09F50C8318d769245beA52c32BE35BC",
+        dex_private_key = "0xdeadbeet45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266",
+        protocol_type="uniswap",
+        protocol_version=2,
+        api_endpoint=None,
+        api_key=None,
+        router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+factory_contract_addr = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f",
+trading_asset_address = "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+        trading_slippage=2,
+        trading_risk_amount=10,
+        block_explorer_url="https://api.etherscan.io/api?",
+        block_explorer_api=None,
+        w3=Web3(Web3.HTTPProvider("https://rpc.ankr.com/eth"))
+        )
     
-    # Set any desired return values or side effects for the DexClient methods
-    dex_client.get_quote.return_value = 100
-    dex_client.get_swap.side_effect = (
-        lambda sell_address, buy_address, amount: amount * 2)
-    
-    return dex_client
+        return dex_client
 
 @pytest.fixture
 def tester_provider():
