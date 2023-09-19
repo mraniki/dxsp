@@ -21,7 +21,6 @@ def set_test_settings():
 def DexTrader_fixture():
     return DexSwap()
 
-
 @pytest.fixture(name="dex_client")
 def mock_dex_client():
     return DexUniswap(
