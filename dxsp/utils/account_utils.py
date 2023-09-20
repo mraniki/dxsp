@@ -2,14 +2,12 @@
  DEX SWAP
 🔒 USER RELATED
 """
-from datetime import datetime, timedelta
+
 from typing import Optional
 
 from loguru import logger
 
 from dxsp.config import settings
-from dxsp.utils.contract_utils import ContractUtils
-from dxsp.utils.utils import get
 
 
 class AccountUtils:

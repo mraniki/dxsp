@@ -3,10 +3,8 @@ Base DexClient Class   🦄
 """
 
 import decimal
-from typing import Optional
 
 from loguru import logger
-from web3 import Web3
 from web3.gas_strategies.time_based import medium_gas_price_strategy
 
 from dxsp.utils import AccountUtils, ContractUtils
