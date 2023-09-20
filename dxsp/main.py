@@ -149,7 +149,10 @@ class DexSwap:
                         else f"⬆️ {instrument}\n"
                     )
                     trade_confirmation += order
-                    return trade_confirmation
+                #else:
+                #trade_confirmation += f"⚠️ {dx.name}: execution failed"
+            return trade_confirmation
+
 
         except Exception as error:
             return f"⚠️ order execution: {error}"

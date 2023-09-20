@@ -135,7 +135,7 @@ class DexClient:
 
             if not order:
                 logger.error("swap order not executed")
-                return "swap order not executed"
+                return "⚠️ order execution failed"
 
             signed_order = await self.account.get_sign(order)
             order_hash = str(self.w3.to_hex(signed_order))

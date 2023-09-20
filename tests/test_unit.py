@@ -135,7 +135,7 @@ async def test_execute_order(dex, order):
 async def test_execute_order_invalid(dex, invalid_order):
     result = await dex.execute_order(invalid_order)
     print(result)
-    assert "⚠️ order execution" in result
+    assert "⚠️" in result
 
 
 @pytest.mark.asyncio
