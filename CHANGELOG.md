@@ -2,6 +2,19 @@
 
 
 
+## v5.0.1 (2023-09-20)
+
+### :art:
+
+* :art: Refactor main.py to use f-strings for concatenation ([`0d2805f`](https://github.com/mraniki/dxsp/commit/0d2805fca787b618cb46928c41209e19112a9ae6))
+
+### Other
+
+* Merge pull request #419 from mraniki/dev
+
+:art: Refactor main.py to use f-strings for concatenation ([`65b3208`](https://github.com/mraniki/dxsp/commit/65b32081815c0b206de040b5bc8d41bf62b48658))
+
+
 ## v5.0.0 (2023-09-19)
 
 ### :recycle:
