@@ -28,6 +28,7 @@ class DexZeroX(DexClient):
         Returns:
             float: The guaranteed price for the token swap.
         """
+        logger.debug(f"0x quote {buy_address} {sell_address} {amount}")
         token_decimals = await self.contract_utils.get_token_decimals(sell_address)
         out_amount = amount * (10**token_decimals)
         url = (
@@ -56,5 +57,6 @@ class DexZeroX(DexClient):
         of the `account` object with the `swap_order`
         as an argument.
         """
+        logger.debug(f"0x swap {buy_address} {sell_address} {amount}")
         swap_order = await self.get_quote(buy_address, sell_address, amount)
         return await self.account.get_sign(swap_order)

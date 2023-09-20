@@ -9,6 +9,7 @@ DXSP
 
 | Swap made easy
 | Trade on any blockchains with uniswap based router or 0x protocol.
+| Support multiple exchanges on diffent chains and protocols at the same time.
 
 
 User Guide
