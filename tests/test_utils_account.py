@@ -14,7 +14,7 @@ from dxsp.utils import AccountUtils, ContractUtils
 
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
-    settings.configure(FORCE_ENV_FOR_DYNACONF="uniswap")
+    settings.configure(FORCE_ENV_FOR_DYNACONF="dxsp")
 
 
 @pytest.fixture(name="dex")

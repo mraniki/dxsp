@@ -122,7 +122,7 @@ class DexSwap:
     async def execute_order(self, order_params):
         """
         Execute an order function.
-
+ 
         Args:
             order_params (dict): The order parameters.
 
@@ -149,7 +149,10 @@ class DexSwap:
                         else f"⬆️ {instrument}\n"
                     )
                     trade_confirmation += order
-                    return trade_confirmation
+                #else:
+                #trade_confirmation += f"⚠️ {dx.name}: execution failed"
+            return trade_confirmation
+
 
         except Exception as error:
             return f"⚠️ order execution: {error}"
