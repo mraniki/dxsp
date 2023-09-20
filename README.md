@@ -19,7 +19,7 @@
     </td>
     <td align="left"> 
 Swap made easy<br>
-Trade on any blockchains <br>with uniswap based router or 0x protocol.
+Trade on any blockchains <br>with uniswap based router or 0x protocol. 
     </td> 
   </tr>
 </table>

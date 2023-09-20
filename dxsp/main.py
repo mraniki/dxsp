@@ -137,9 +137,9 @@ class DexSwap:
                 instrument = order_params.get("instrument")
                 quantity = order_params.get("quantity", 1)
                 sell_token, buy_token = (
-                    (dx["trading_asset_address"], instrument)
+                    (dx.trading_asset_address, instrument)
                     if action == "BUY"
-                    else (instrument, dx["trading_asset_address"])
+                    else (instrument, dx.trading_asset_address)
                 )
                 order = await dx.get_swap(sell_token, buy_token, quantity)
                 if order:
