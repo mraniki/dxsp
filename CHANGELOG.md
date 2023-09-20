@@ -2,6 +2,29 @@
 
 
 
+## v5.0.2 (2023-09-20)
+
+### Other
+
+* Merge pull request #421 from mraniki/dev ([`dadd1ca`](https://github.com/mraniki/dxsp/commit/dadd1ca263a3443508cefeb0eef1868c07971704))
+
+* Merge pull request #420 from mraniki/dev
+
+Refactor trading asset address in DexSwap class ([`41e3066`](https://github.com/mraniki/dxsp/commit/41e306632ca27f0cd418806cfae9459de88488f1))
+
+* update readme ([`4668a4d`](https://github.com/mraniki/dxsp/commit/4668a4de5151a2f27d510315b2efdfbac8d3959f))
+
+* Refactor trading asset address in DexSwap class ([`d990db9`](https://github.com/mraniki/dxsp/commit/d990db99ed7dcf0bd0bdd644fb036ceb2eb640ea))
+
+### ♻️
+
+* ♻️ ([`c24dc7f`](https://github.com/mraniki/dxsp/commit/c24dc7f70bda5b81ba549b3b04474abb32e1b1c8))
+
+### 💬
+
+* 💬 ([`186e9b8`](https://github.com/mraniki/dxsp/commit/186e9b84917c2208246c6f861a0ffb835d71c156))
+
+
 ## v5.0.1 (2023-09-20)
 
 ### :art:
