@@ -2,6 +2,19 @@
 
 
 
+## v5.0.5 (2023-09-23)
+
+### Other
+
+* Merge pull request #424 from mraniki/dev
+
+🔊 ([`e3e0944`](https://github.com/mraniki/dxsp/commit/e3e094440cda777a69c2b3c3cfd32a86aa05d725))
+
+### 🔊
+
+* 🔊 ([`bc37f94`](https://github.com/mraniki/dxsp/commit/bc37f943a335c77ba028bebc8135a7cf2cd07d6e))
+
+
 ## v5.0.4 (2023-09-23)
 
 ### Other
