@@ -1,7 +1,6 @@
 """
  DEXSWAP Unit Test
 """
-from unittest.mock import AsyncMock, patch
 
 import pytest
 

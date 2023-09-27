@@ -1,7 +1,7 @@
 """
  DEX SWAP CONFIG
 """
-import os 
+import os
 
 from dynaconf import Dynaconf
 

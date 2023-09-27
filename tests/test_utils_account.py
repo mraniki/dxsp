@@ -1,7 +1,6 @@
 """
  DEXSWAP Unit Test
 """
-from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 from web3 import EthereumTesterProvider, Web3
@@ -20,6 +19,7 @@ def set_test_settings():
 @pytest.fixture(name="dex")
 def DexTrader_fixture():
     return DexSwap()
+
 
 @pytest.fixture(name="dex_client")
 def mock_dex_client():

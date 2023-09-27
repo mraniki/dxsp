@@ -3,7 +3,6 @@
 🔒 USER RELATED
 """
 
-from typing import Optional
 
 from loguru import logger
 
@@ -17,7 +16,7 @@ class AccountUtils:
     such as account balance, signing transactions, etc.
 
     Args:
-        w3 (Optional[Web3]): Web3
+        None
 
     Methods:
         get_info()
