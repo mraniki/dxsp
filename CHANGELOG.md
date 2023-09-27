@@ -2,6 +2,19 @@
 
 
 
+## v5.0.6 (2023-09-27)
+
+### Other
+
+* Merge pull request #425 from mraniki/dev
+
+👷 CI Change ([`6fdb603`](https://github.com/mraniki/dxsp/commit/6fdb60339ceced1f5a6591103dea320ec34ea9b5))
+
+### 👷
+
+* 👷 CI Change ([`d6f67f8`](https://github.com/mraniki/dxsp/commit/d6f67f8aa99e130483af4f83fba37edda0513ad4))
+
+
 ## v5.0.5 (2023-09-23)
 
 ### Other
