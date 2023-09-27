@@ -4,7 +4,6 @@
 """
 
 import aiohttp
-import requests
 from loguru import logger
 
 MAX_RESPONSE_SIZE = 5 * 1024 * 1024  # Maximum response size in bytes (e.g., 5 MB)

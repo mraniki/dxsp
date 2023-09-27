@@ -1,14 +1,13 @@
 """
  DEXSWAP Unit Test
 """
-from unittest.mock import AsyncMock, patch
 
 import pytest
 from web3 import EthereumTesterProvider, Web3
 
 from dxsp import DexSwap
 from dxsp.config import settings
-from dxsp.protocols import DexUniswap, DexZeroX
+from dxsp.protocols import DexUniswap
 
 
 @pytest.fixture(scope="session", autouse=True)
