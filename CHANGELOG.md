@@ -2,6 +2,19 @@
 
 
 
+## v5.0.7 (2023-09-27)
+
+### Other
+
+* Merge pull request #427 from mraniki/dev
+
+🚨 Linter cleanup ([`5bac9b0`](https://github.com/mraniki/dxsp/commit/5bac9b0713f57bf1c8064da9b17d9ab971375c9e))
+
+### 🚨
+
+* 🚨 ([`679f6a3`](https://github.com/mraniki/dxsp/commit/679f6a38dd1874fd1d9dea889d9e03c4e9800f45))
+
+
 ## v5.0.6 (2023-09-27)
 
 ### Other
