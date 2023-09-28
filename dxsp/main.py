@@ -64,6 +64,7 @@ class DexSwap:
                 trading_slippage = exchanges[dx]["trading_slippage"]
                 block_explorer_url = exchanges[dx]["block_explorer_url"]
                 block_explorer_api = exchanges[dx]["block_explorer_api"]
+                mapping = exchanges[dx]["mapping"]
                 client = self._create_client(
                     name=name,
                     wallet_address=wallet_address,
@@ -80,6 +81,7 @@ class DexSwap:
                     trading_slippage=trading_slippage,
                     block_explorer_url=block_explorer_url,
                     block_explorer_api=block_explorer_api,
+                    mapping=mapping,
                 )
                 self.dex_info.append(client)
             logger.debug("init complete")
@@ -112,6 +114,7 @@ class DexSwap:
         for dx in self.dex_info:
             logger.debug("get quote {}", dx)
             buy_address = dx.trading_asset_address
+            sell_token = await dx.replace_instrument(sell_token)
             sell_address = await dx.contract_utils.search_contract_address(sell_token)
             quote = await dx.get_quote(buy_address, sell_address) or "Quote failed"
             symbol = await dx.contract_utils.get_token_symbol(dx.trading_asset_address)
@@ -134,7 +137,7 @@ class DexSwap:
             for dx in self.dex_info:
                 logger.debug("execute order {}", dx)
                 action = order_params.get("action")
-                instrument = order_params.get("instrument")
+                instrument = await dx.replace_instrument(order_params.get("instrument"))
                 quantity = order_params.get("quantity", 1)
                 sell_token, buy_token = (
                     (dx.trading_asset_address, instrument)

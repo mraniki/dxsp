@@ -50,6 +50,7 @@ class DexClient:
         trading_risk_amount=None,
         block_explorer_url="https://api.etherscan.io/api?",
         block_explorer_api=None,
+        mapping=None,
         w3=None,
     ):
         self.w3 = w3
@@ -69,6 +70,7 @@ class DexClient:
         self.trading_slippage = trading_slippage
         self.block_explorer_url = block_explorer_url
         self.block_explorer_api = block_explorer_api
+        self.mapping = mapping
 
         self.contract_utils = ContractUtils(
             self.w3, self.block_explorer_url, self.block_explorer_api
@@ -247,3 +249,22 @@ class DexClient:
         :return: A list of open positions in the account.
         """
         return await self.account.get_account_open_positions()
+
+    async def replace_instrument(self, instrument):
+        """
+        Replace instrument by an alternative instrument, if the
+        instrument is not in the mapping, it will be ignored.
+
+        Args:
+            order (dict):
+
+        Returns:
+            dict
+        """
+        for item in self.mapping:
+            if item["id"] == instrument:
+                instrument = item["alt"]
+                self.logger.debug("Instrument symbol changed", instrument)
+                break
+
+        return instrument
