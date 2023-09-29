@@ -64,7 +64,7 @@ class DexSwap:
                 trading_slippage = exchanges[dx]["trading_slippage"]
                 block_explorer_url = exchanges[dx]["block_explorer_url"]
                 block_explorer_api = exchanges[dx]["block_explorer_api"]
-                mapping = exchanges[dx]["mapping"]
+                mapping = [] or exchanges[dx]["mapping"]
                 client = self._create_client(
                     name=name,
                     wallet_address=wallet_address,
