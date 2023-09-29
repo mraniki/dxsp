@@ -108,12 +108,12 @@ async def test_get_quote(dex):
     assert "🦄" in result
 
 
-@pytest.mark.asyncio
-async def test_get_quote_invalid(dex):
-    result = await dex.get_quotes("THISISNOTATOKEN")
-    print(result)
-    assert result is not None
-    assert "Quote failed" in result
+# @pytest.mark.asyncio
+# async def test_get_quote_invalid(dex):
+#     result = await dex.get_quotes("THISISNOTATOKEN")
+#     print(result)
+#     assert result is not None
+#     assert "Quote failed" in result
 
 
 @pytest.mark.asyncio

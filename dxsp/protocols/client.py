@@ -174,6 +174,7 @@ class DexClient:
 
             if amount >= 1:
                 return amount
+        return 0
 
     async def make_swap(self, sell_address, buy_address, amount):
         """
