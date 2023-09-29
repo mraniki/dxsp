@@ -89,7 +89,7 @@ class DexClient:
         """ """
         # return await self.dex_swap.get_quote(buy_address, sell_address, amount)
 
-    async def get_swap(self, sell_token: str, buy_token: str, quantity: int) -> None:
+    async def get_swap(self, sell_token=None, buy_token=None, quantity=1):
         """
         Execute a swap
 
@@ -118,7 +118,7 @@ class DexClient:
                     buy_token
                 )
 
-            sell_amount = await self.calculate_sell_amount(
+            sell_amount = await self.get_order_amount(
                 sell_token_address, self.account.wallet_address, quantity
             )
             sell_token_amount_wei = sell_amount * (
@@ -152,32 +152,28 @@ class DexClient:
             logger.debug(error)
             raise error
 
-    async def calculate_sell_amount(self, sell_token_address, wallet_address, quantity):
-        """
-        Returns amount based on risk percentage.
-
-        Args:
-            sell_token_address (str): The sell token address
-            wallet_address (str): The wallet address
-            quantity (int): The quantity
-
-        Returns:
-            float: The sell amount
-
-        """
-        sell_balance = await self.contract_utils.get_token_balance(
+    async def get_order_amount(
+        self, sell_token_address, wallet_address, quantity, is_percentage=True
+    ):
+        balance = await self.contract_utils.get_token_balance(
             sell_token_address, wallet_address
         )
         sell_contract = await self.contract_utils.get_token_contract(sell_token_address)
         sell_decimals = (
-            sell_contract.functions.decimals().call()
-            if sell_contract is not None
-            else 18
+            sell_contract.functions.decimals().call() if sell_contract else 18
         )
-        risk_percentage = self.trading_risk_amount
-        return (
-            sell_balance / (decimal.Decimal(risk_percentage) * 10**sell_decimals)
-        ) * (decimal.Decimal(quantity) / 100)
+
+        if not is_percentage and balance:
+            return quantity
+
+        if balance:
+            risk_percentage = float(quantity) / 100
+            amount = (
+                balance / (decimal.Decimal(risk_percentage) * 10**sell_decimals)
+            ) * (decimal.Decimal(quantity) / 100)
+
+            if amount >= 1:
+                return amount
 
     async def make_swap(self, sell_address, buy_address, amount):
         """

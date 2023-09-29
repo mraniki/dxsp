@@ -102,7 +102,7 @@ async def test_dextrader(dex):
 async def test_get_quote(dex):
     """getquote Testing"""
     print(dex.dex_info)
-    result = await dex.get_quote("UNI")
+    result = await dex.get_quotes("UNI")
     print(result)
     assert result is not None
     assert "🦄" in result
@@ -110,7 +110,7 @@ async def test_get_quote(dex):
 
 @pytest.mark.asyncio
 async def test_get_quote_invalid(dex):
-    result = await dex.get_quote("THISISNOTATOKEN")
+    result = await dex.get_quotes("THISISNOTATOKEN")
     print(result)
     assert result is not None
     assert "Quote failed" in result
@@ -125,14 +125,14 @@ async def test_get_swap(dex_client):
 
 @pytest.mark.asyncio
 async def test_execute_order(dex, order):
-    result = await dex.execute_order(order)
+    result = await dex.submit_order(order)
     print(f"swap_order: {result}")
     assert result is not None
 
 
 @pytest.mark.asyncio
 async def test_execute_order_invalid(dex, invalid_order):
-    result = await dex.execute_order(invalid_order)
+    result = await dex.submit_order(invalid_order)
     print(result)
     assert "⚠️" in result
 
@@ -154,7 +154,7 @@ async def test_get_help(dex):
 
 
 @pytest.mark.asyncio
-async def test_calculate_sell_amount(dex_client):
+async def test_get_order_amount(dex_client):
     result = await dex_client.calculate_sell_amount(
         "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
         dex_client.wallet_address,
@@ -165,23 +165,16 @@ async def test_calculate_sell_amount(dex_client):
 
 
 @pytest.mark.asyncio
-async def test_get_balance(dex):
-    result = await dex.get_account_balance()
+async def test_get_balances(dex):
+    result = await dex.get_balances()
     print(result)
     assert result is not None
     assert "💵" in result
 
 
-# @pytest.mark.asyncio
-# async def test_get_trading_asset_balance(dex):
-#     result = await dex.get_trading_asset_balance()
-#     print(result)
-#     assert result is not None
-
-
 @pytest.mark.asyncio
-async def test_get_account_position(dex):
-    result = await dex.get_account_position()
+async def test_get_positions(dex):
+    result = await dex.get_positions()
     print(result)
     assert result is not None
     assert "📊" in result
@@ -189,13 +182,13 @@ async def test_get_account_position(dex):
 
 # @pytest.mark.asyncio
 # async def test_get_account_transactions(dex):
-#     result = await dex.get_account_transactions()
+#     result = await dex.get_transactions()
 #     print(result)
 #     assert result is not None
 
 
 # @pytest.mark.asyncio
 # async def test_get_account_pnl(dex):
-#     result = await dex.get_account_pnl()
+#     result = await dex.get_pnls()
 #     print(result)
 #     assert result is not None
