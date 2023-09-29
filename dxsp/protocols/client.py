@@ -261,7 +261,7 @@ class DexClient:
         for item in self.mapping:
             if item["id"] == instrument:
                 instrument = item["alt"]
-                self.logger.debug("Instrument symbol changed", instrument)
+                self.logger.debug("Instrument symbol changed {}", instrument)
                 break
 
         return instrument
