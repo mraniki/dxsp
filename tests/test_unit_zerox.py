@@ -46,15 +46,15 @@ async def test_dex(dex):
 
 @pytest.mark.asyncio
 async def test_get_quote(dex):
-    result = await dex.get_quote("UNI")
+    result = await dex.get_quotes("UNI")
     print("0x quote: ", result)
     assert result is not None
     assert "🦄" in result
 
 
 @pytest.mark.asyncio
-async def test_execute_order(dex, order):
-    result = await dex.execute_order(order)
+async def test_submit_order(dex, order):
+    result = await dex.submit_order(order)
     print(result)
     assert result is not None
     assert "⚠️" in result

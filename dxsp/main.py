@@ -64,6 +64,7 @@ class DexSwap:
                 trading_slippage = exchanges[dx]["trading_slippage"]
                 block_explorer_url = exchanges[dx]["block_explorer_url"]
                 block_explorer_api = exchanges[dx]["block_explorer_api"]
+                mapping = exchanges[dx]["mapping"]
                 client = self._create_client(
                     name=name,
                     wallet_address=wallet_address,
@@ -80,6 +81,7 @@ class DexSwap:
                     trading_slippage=trading_slippage,
                     block_explorer_url=block_explorer_url,
                     block_explorer_api=block_explorer_api,
+                    mapping=mapping,
                 )
                 self.dex_info.append(client)
             logger.debug("init complete")
@@ -96,7 +98,7 @@ class DexSwap:
         else:
             logger.error(f"protocol type {protocol_type} not supported")
 
-    async def get_quote(self, sell_token):
+    async def get_quotes(self, sell_token):
         """
         gets a quote for a token
 
@@ -112,6 +114,7 @@ class DexSwap:
         for dx in self.dex_info:
             logger.debug("get quote {}", dx)
             buy_address = dx.trading_asset_address
+            sell_token = await dx.replace_instrument(sell_token)
             sell_address = await dx.contract_utils.search_contract_address(sell_token)
             quote = await dx.get_quote(buy_address, sell_address) or "Quote failed"
             symbol = await dx.contract_utils.get_token_symbol(dx.trading_asset_address)
@@ -119,7 +122,7 @@ class DexSwap:
 
         return info.strip()
 
-    async def execute_order(self, order_params):
+    async def submit_order(self, order_params):
         """
         Execute an order function.
 
@@ -132,9 +135,9 @@ class DexSwap:
         """
         try:
             for dx in self.dex_info:
-                logger.debug("execute order {}", dx)
+                logger.debug("submit order {}", dx)
                 action = order_params.get("action")
-                instrument = order_params.get("instrument")
+                instrument = await dx.replace_instrument(order_params.get("instrument"))
                 quantity = order_params.get("quantity", 1)
                 sell_token, buy_token = (
                     (dx.trading_asset_address, instrument)
@@ -149,20 +152,18 @@ class DexSwap:
                         else f"⬆️ {instrument}\n"
                     )
                     trade_confirmation += order
-                # else:
-                # trade_confirmation += f"⚠️ {dx.name}: execution failed"
             return trade_confirmation
 
         except Exception as error:
             return f"⚠️ order execution: {error}"
 
-    async def get_help(self):
-        """
-        Get the help information for the current instance.
-        Returns:
-            A string containing the available commands.
-        """
-        return f"{self.commands}\n"
+    # async def get_help(self):
+    #     """
+    #     Get the help information for the current instance.
+    #     Returns:
+    #         A string containing the available commands.
+    #     """
+    #     return f"{self.commands}\n"
 
     async def get_info(self):
         """
@@ -175,19 +176,19 @@ class DexSwap:
             info += f"\n{await dx.get_info()}" or "Info failed\n"
         return info.strip()
 
-    async def get_name(self):
-        """
-        Retrieves the name of the account.
+    # async def get_name(self):
+    #     """
+    #     Retrieves the name of the account.
 
-        :return: The name of the account.
-        """
-        info = ""
-        for dx in self.dex_info:
-            info += f"\n{await dx.get_name()}" or "Name failed"
-        return info.strip()
+    #     :return: The name of the account.
+    #     """
+    #     info = ""
+    #     for dx in self.dex_info:
+    #         info += f"\n{await dx.get_name()}" or "Name failed"
+    #     return info.strip()
 
     # 🔒 USER RELATED
-    async def get_account_balance(self):
+    async def get_balances(self):
         """
         Retrieves the account balance.
 
@@ -199,7 +200,7 @@ class DexSwap:
             info += f"\n{await dx.get_account_balance()}" or "Account balance failed"
         return info.strip()
 
-    async def get_account_position(self):
+    async def get_positions(self):
         """
         Retrieves the account position.
 

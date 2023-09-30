@@ -59,7 +59,9 @@ trading_risk_amount = 10
 trading_slippage = 2
 block_explorer_url = ""
 block_explorer_api = ""
-
+mapping = [
+    { id = "BTC", alt = "WBTC" },
+]
 
 # [default.dex.eth]
 # wallet_address = "0x1234567890123456789012345678901234567890"
