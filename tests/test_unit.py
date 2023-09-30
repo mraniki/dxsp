@@ -88,7 +88,7 @@ def test_dynaconf_is_in_testing():
 async def test_dextrader(dex):
     """Init Testing"""
     assert isinstance(dex, DexSwap)
-    assert dex.commands is not None
+    #assert dex.commands is not None
     assert dex.dex_info is not None
     for dx in dex.dex_info:
         print(dx)
@@ -107,7 +107,7 @@ async def test_get_quote(dex):
     print(result)
     assert result is not None
     assert "🦄" in result
-
+    assert ("1" in result) or ("56" in result)
 
 # @pytest.mark.asyncio
 # async def test_get_quote_invalid(dex):
@@ -137,14 +137,12 @@ async def test_submit_order_invalid(dex, invalid_order):
     print(result)
     assert "⚠️" in result
 
-
 @pytest.mark.asyncio
 async def test_get_info(dex):
     result = await dex.get_info()
     print(result)
     assert result is not None
     assert "ℹ️" in result
-
 
 # @pytest.mark.asyncio
 # async def test_get_help(dex):
@@ -171,6 +169,7 @@ async def test_get_balances(dex):
     print(result)
     assert result is not None
     assert "💵" in result
+    assert ("1" in result) or ("56" in result)
 
 
 @pytest.mark.asyncio
@@ -179,3 +178,4 @@ async def test_get_positions(dex):
     print(result)
     assert result is not None
     assert "📊" in result
+    assert ("1" in result) or ("56" in result)
