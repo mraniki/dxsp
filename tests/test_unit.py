@@ -83,6 +83,7 @@ def test_dynaconf_is_in_testing():
     print(settings.VALUE)
     assert settings.VALUE == "On Testing"
 
+    
 
 @pytest.mark.asyncio
 async def test_dextrader(dex):
