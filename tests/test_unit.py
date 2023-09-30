@@ -125,14 +125,14 @@ async def test_get_swap(dex_client):
 
 
 @pytest.mark.asyncio
-async def test_execute_order(dex, order):
+async def test_submit_order(dex, order):
     result = await dex.submit_order(order)
     print(f"swap_order: {result}")
     assert result is not None
 
 
 @pytest.mark.asyncio
-async def test_execute_order_invalid(dex, invalid_order):
+async def test_submit_order_invalid(dex, invalid_order):
     result = await dex.submit_order(invalid_order)
     print(result)
     assert "⚠️" in result

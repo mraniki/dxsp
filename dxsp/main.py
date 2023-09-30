@@ -197,7 +197,7 @@ class DexSwap:
         :return: The account balance.
         :rtype: float
         """
-        info = ""
+        info = "💵\n"
         for dx in self.dex_info:
             info += f"\n{await dx.get_account_balance()}" or "Account balance failed"
         return info.strip()
@@ -209,7 +209,7 @@ class DexSwap:
         :return: The account position.
         :rtype: AccountPosition
         """
-        info = ""
+        info = "📊\n"
         for dx in self.dex_info:
             info += f"\n{await dx.get_account_position()}" or "Account position failed"
         return info.strip()
