@@ -2,6 +2,39 @@
 
 
 
+## v5.1.0 (2023-09-30)
+
+### :white_check_mark:
+
+* :white_check_mark:unit test ([`4889e80`](https://github.com/mraniki/dxsp/commit/4889e8054b3389bce8df1e9ee7ddbc1cfd44e5c3))
+
+### Other
+
+* Merge pull request #429 from mraniki/dev
+
+✨ instrument mapping per exchange ([`bd27ece`](https://github.com/mraniki/dxsp/commit/bd27ece357f52f901e448f250e6751b58e265796))
+
+* Refactor mapping assignment in DexSwap class ([`b17dadf`](https://github.com/mraniki/dxsp/commit/b17dadf53f6ff75dd1993b1662232f0c12fccaf7))
+
+* Refactor instrument symbol logging ([`e6a16c8`](https://github.com/mraniki/dxsp/commit/e6a16c8559829bdbc46dbe4d59aed464a03f16cc))
+
+* Refactor mapping assignment in DexSwap class ([`d5bab83`](https://github.com/mraniki/dxsp/commit/d5bab83c09f4249789dd56689e49443af59c35d3))
+
+* Refactor test_get_quote_invalid function ([`a27917b`](https://github.com/mraniki/dxsp/commit/a27917b7d4ddb3685ac2c039b3202384d73ec686))
+
+### ♻️
+
+* ♻️ ([`4d2a654`](https://github.com/mraniki/dxsp/commit/4d2a65463409cb266619dc4be7c3c6324b585ab6))
+
+### ✨
+
+* ✨ instrument mapping per exchange ([`4e6f87a`](https://github.com/mraniki/dxsp/commit/4e6f87ad323d78154f5308c8a95d434a3f5c5891))
+
+### 🔧
+
+* 🔧 ([`e303a93`](https://github.com/mraniki/dxsp/commit/e303a93aa335b60bb85548bb47a7b799485a0adb))
+
+
 ## v5.0.7 (2023-09-27)
 
 ### Other
