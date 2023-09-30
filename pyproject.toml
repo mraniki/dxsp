@@ -21,16 +21,16 @@ packages = [
 
 
 [tool.poetry.dependencies]
-python = "^3.10"
-dynaconf = "^3.2.0"
-loguru = "^0.6.0"
-web3 = "^6.9.0"
-pycoingecko = "^3.1.0"
-uniswap-python = "^0.7.0"
-
+python = ">=3.10"
+dynaconf = ">=3.2.0"
+loguru = ">=0.6.0"
+web3 = "6.9.0"
+pycoingecko = "3.1.0"
+uniswap-python = "0.7.0"
+aiohttp = "4.0.0a1"
 
 [tool.poetry.group.dev.dependencies]
-python-semantic-release = "^8.0.7"
+python-semantic-release = ">=8.0.8"
 ruff = "*"
 
 
