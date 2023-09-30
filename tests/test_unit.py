@@ -38,6 +38,7 @@ def mock_dex_client():
         block_explorer_url="https://api.etherscan.io/api?",
         block_explorer_api=None,
         w3=Web3(Web3.HTTPProvider("https://rpc.ankr.com/eth")),
+        mapping=None,
     )
 
 
@@ -178,5 +179,3 @@ async def test_get_positions(dex):
     print(result)
     assert result is not None
     assert "📊" in result
-
-
