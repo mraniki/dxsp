@@ -91,13 +91,21 @@ async def test_dextrader(dex):
     assert isinstance(dex, DexSwap)
     #assert dex.commands is not None
     assert dex.dex_info is not None
+    assert isinstance(dex, DexSwap)
+    assert callable(dex.get_balances)
+    assert callable(dex.get_positions)
+    assert callable(dex.submit_order)
+
     for dx in dex.dex_info:
-        print(dx)
+        #print(dx)
         assert dx is not None
         assert dx.name is not None
         assert dx.protocol_type == "uniswap"
         assert dx.private_key.startswith("0x")
         assert dx.account.wallet_address.startswith("0x")
+        assert callable(dx.get_account_balance)
+        assert callable(dx.get_account_position)
+        assert callable(dx.execute_order)
 
 
 @pytest.mark.asyncio
