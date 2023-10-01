@@ -55,7 +55,7 @@ class DexSwap:
                 w3 = Web3(Web3.HTTPProvider(exchanges[dx]["rpc"]))
                 protocol_type = exchanges[dx]["protocol_type"]
                 protocol_version = exchanges[dx]["protocol_version"]
-                api_endpoint =  exchanges[dx]["api_endpoint"]
+                api_endpoint = exchanges[dx]["api_endpoint"]
                 api_key = exchanges[dx]["api_key"]
                 router_contract_addr = exchanges[dx]["router_contract_addr"]
                 factory_contract_addr = exchanges[dx]["factory_contract_addr"]
@@ -196,7 +196,7 @@ class DexSwap:
         info = "💵\n"
         for dx in self.dex_info:
             info += f"\n{dx.name}:"
-            info += {await dx.get_account_balance()}
+            info += f"{await dx.get_account_balance()}"
         return info.strip()
 
     async def get_positions(self):
@@ -209,5 +209,5 @@ class DexSwap:
         info = "📊\n"
         for dx in self.dex_info:
             info += f"\n{dx.name}:"
-            info += {await dx.get_account_position()}
+            info += f"{await dx.get_account_position()}"
         return info.strip()
