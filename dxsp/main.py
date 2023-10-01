@@ -59,9 +59,13 @@ class DexSwap:
                 api_key = exchanges[dx]["api_key"]
                 router_contract_addr = exchanges[dx]["router_contract_addr"]
                 factory_contract_addr = exchanges[dx]["factory_contract_addr"]
-                trading_asset_address = exchanges[dx]["trading_asset_address"]
-                trading_risk_amount = exchanges[dx]["trading_risk_amount"]
-                trading_slippage = exchanges[dx]["trading_slippage"]
+                trading_risk_percentage = (
+                    True or exchanges[dx]["trading_risk_percentage"]
+                )
+                trading_risk_amount = 1 or exchanges[dx]["trading_risk_amount"]
+                trading_slippage = 2 or exchanges[dx]["trading_slippage"]
+                trading_asset_address = "" or exchanges[dx]["trading_asset_address"]
+                trading_asset_separator = "" or exchanges[dx]["trading_asset_separator"]
                 block_explorer_url = exchanges[dx]["block_explorer_url"]
                 block_explorer_api = exchanges[dx]["block_explorer_api"]
                 mapping = exchanges[dx]["mapping"]
@@ -77,8 +81,10 @@ class DexSwap:
                     router_contract_addr=router_contract_addr,
                     factory_contract_addr=factory_contract_addr,
                     trading_asset_address=trading_asset_address,
+                    trading_risk_percentage=trading_risk_percentage,
                     trading_risk_amount=trading_risk_amount,
                     trading_slippage=trading_slippage,
+                    trading_asset_separator=trading_asset_separator,
                     block_explorer_url=block_explorer_url,
                     block_explorer_api=block_explorer_api,
                     mapping=mapping,
@@ -157,14 +163,6 @@ class DexSwap:
         except Exception as error:
             return f"⚠️ order execution: {error}"
 
-    # async def get_help(self):
-    #     """
-    #     Get the help information for the current instance.
-    #     Returns:
-    #         A string containing the available commands.
-    #     """
-    #     return f"{self.commands}\n"
-
     async def get_info(self):
         """
         Get information from the account.
@@ -195,9 +193,10 @@ class DexSwap:
         :return: The account balance.
         :rtype: float
         """
-        info = ""
+        info = "💵\n"
         for dx in self.dex_info:
-            info += f"\n{await dx.get_account_balance()}" or "Account balance failed"
+            info += f"\n{dx.name}:"
+            info += f"{await dx.get_account_balance()}"
         return info.strip()
 
     async def get_positions(self):
@@ -207,7 +206,8 @@ class DexSwap:
         :return: The account position.
         :rtype: AccountPosition
         """
-        info = ""
+        info = "📊\n"
         for dx in self.dex_info:
-            info += f"\n{await dx.get_account_position()}" or "Account position failed"
+            info += f"\n{dx.name}:"
+            info += f"{await dx.get_account_position()}"
         return info.strip()

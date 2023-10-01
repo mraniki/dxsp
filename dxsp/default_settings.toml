@@ -55,6 +55,7 @@ api_key = ""
 router_contract_addr = ""
 factory_contract_addr = ""
 trading_asset_address = ""
+trading_risk_percentage = true
 trading_risk_amount = 10
 trading_slippage = 2
 block_explorer_url = ""
