@@ -265,7 +265,8 @@ class ContractUtils:
             "apikey": self.block_explorer_api,
         }
         resp = await get(url=self.block_explorer_url, params=params)
-        return resp["result"] if resp["status"] == "1" else None
+        if resp:
+            return resp["result"] if resp["status"] == "1" else None
 
     async def get_token_balance(
         self, token_address: str, wallet_address: str
