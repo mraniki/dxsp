@@ -2,6 +2,21 @@
 
 
 
+## v5.1.2 (2023-10-01)
+
+### Other
+
+* Merge pull request #433 from mraniki/dev
+
+Update README.md ([`d68341c`](https://github.com/mraniki/dxsp/commit/d68341c2c48c2a98c372f2e7a7d70ede8e503e0e))
+
+### Update
+
+* Update Requirements ([`7cbcbfc`](https://github.com/mraniki/dxsp/commit/7cbcbfce29836e1dd4ad12d879a326e22524f17f))
+
+* Update README.md ([`d399f36`](https://github.com/mraniki/dxsp/commit/d399f3627235a1fe00934dd2d8d885d9bdf554e9))
+
+
 ## v5.1.1 (2023-10-01)
 
 ### :white_check_mark:
