@@ -2,6 +2,89 @@
 
 
 
+## v5.1.1 (2023-10-01)
+
+### :white_check_mark:
+
+* :white_check_mark: ([`6474e56`](https://github.com/mraniki/dxsp/commit/6474e5679ad0cfe1bce777f43c059e08883887e9))
+
+### Other
+
+* Merge pull request #430 from mraniki/dev
+
+Adding more Unit Test ([`4f55e1c`](https://github.com/mraniki/dxsp/commit/4f55e1c2cc6f03e0eb889b0b7582b2375dba747b))
+
+* Refactor account balance and position retrieval in DexSwap class ([`34f2a74`](https://github.com/mraniki/dxsp/commit/34f2a744bf70c9ecaa9a22931e81110cb406775e))
+
+* Refactor account balance and position display in DexSwap class ([`e4bc648`](https://github.com/mraniki/dxsp/commit/e4bc648cd26437e36ec04fa20e05f7bb2af054a2))
+
+* Refactor exchange configuration and test assertions ([`a051854`](https://github.com/mraniki/dxsp/commit/a0518543f68102328c32550cfd54a10bb01e7e0d))
+
+* Refactor contract_utils.py to handle empty response ([`e956a98`](https://github.com/mraniki/dxsp/commit/e956a9859cb125b1d20b5193c8a651bb94706a31))
+
+* Refactor test_unit.py for DexSwap class and add new assertions ([`5eeb2bf`](https://github.com/mraniki/dxsp/commit/5eeb2bf19604486f58d62ff720a5ee3b862c2f8e))
+
+* Add test case for get_quote function ([`95989f2`](https://github.com/mraniki/dxsp/commit/95989f26b2e33d7f732f19267db1f31446f52a4a))
+
+* Remove unnecessary flake8 dependencies ([`12a368f`](https://github.com/mraniki/dxsp/commit/12a368f5175a0290ffe7ca6fe4d1af8c73041d1d))
+
+* Add Ruff pre-commit hook and update pre-commit hooks version ([`509be85`](https://github.com/mraniki/dxsp/commit/509be854ad16cd547b6287e71747bb9059826b8b))
+
+* Refactor test_unit.py by commenting out assertions ([`d542246`](https://github.com/mraniki/dxsp/commit/d5422467122fdefdd94dcdad839c06bfe1bf9fb1))
+
+* Add test for dynaconf in testing environment ([`237057d`](https://github.com/mraniki/dxsp/commit/237057da841fb898e71a4cdafbcee073163e1cbc))
+
+* Fix tests and add assertions for get_quote, get_balances, and get_positions functions. ([`dd7f0fc`](https://github.com/mraniki/dxsp/commit/dd7f0fcd67d0f34987c42286816856d17e20d03f))
+
+### Update
+
+* Update Web3 provider URL in test_unit.py ([`819a979`](https://github.com/mraniki/dxsp/commit/819a979ca1c152f2fa4cf2850592a76ca481b898))
+
+* Update pre-commit config for Ruff version ([`35d7fa5`](https://github.com/mraniki/dxsp/commit/35d7fa51c86d8d5030a20594d6c85bca8577d862))
+
+* Update python-semantic-release version ([`f237b10`](https://github.com/mraniki/dxsp/commit/f237b109b259bef7a2f20c62a5e3bfe5270d9920))
+
+* Update Python version to 3.10 ([`9bdf7b4`](https://github.com/mraniki/dxsp/commit/9bdf7b45f23d8bb3961ea576af0ed5849826e558))
+
+* Update pyproject.toml file ([`8b923c5`](https://github.com/mraniki/dxsp/commit/8b923c54e1d1f550b61b110d3fe3750bfd5a1c9f))
+
+* Update pyproject.toml file ([`e7662bd`](https://github.com/mraniki/dxsp/commit/e7662bd7d93129795d95e51dfb7a6dee4e481bb0))
+
+* Update pyproject.toml file ([`e1e1014`](https://github.com/mraniki/dxsp/commit/e1e1014df7c081a8b40bc131114472196b8d5fe5))
+
+* Update pyproject.toml file ([`3cb8d12`](https://github.com/mraniki/dxsp/commit/3cb8d1224ec526cb2508415e00dac4635c72107a))
+
+* Update pyproject.toml with new dependencies ([`a417062`](https://github.com/mraniki/dxsp/commit/a4170622a0f805e08a1b0f7863e6ef25f6c9f0a8))
+
+* Update main.py ([`59e95f6`](https://github.com/mraniki/dxsp/commit/59e95f622ff2be4fe72f37b24f959306ed6500dd))
+
+* Update client.py ([`dc0ec34`](https://github.com/mraniki/dxsp/commit/dc0ec34ad9eb06a21afc8e9fa25b8e6ee2fb2899))
+
+### ✅
+
+* ✅ Unit Test ([`8cde436`](https://github.com/mraniki/dxsp/commit/8cde4366b4dc5ada05ff5a2368bd28171ccec958))
+
+* ✅ Unit Test ([`413c276`](https://github.com/mraniki/dxsp/commit/413c2761bcca74879a5d3acd653a084ccd0e9b0e))
+
+### 🎨
+
+* 🎨 ([`46fb8a9`](https://github.com/mraniki/dxsp/commit/46fb8a94ac761316b68b871c1b1e97dc75f61911))
+
+### 👷
+
+* 👷 CI Change ([`440d0b9`](https://github.com/mraniki/dxsp/commit/440d0b9acc89e4bbd7b4269fd97933ed1cc89ff5))
+
+### 🔧
+
+* 🔧 ([`33ff43b`](https://github.com/mraniki/dxsp/commit/33ff43b5cd4a0afc7942b85d2e5fa839dd22038b))
+
+### 🚨
+
+* 🚨 ([`097405a`](https://github.com/mraniki/dxsp/commit/097405a1e828ae4c2a253c014599f925057ec625))
+
+* 🚨 ([`59e7008`](https://github.com/mraniki/dxsp/commit/59e70089370d95f37c3c8169e7b89fcafa76c3df))
+
+
 ## v5.1.0 (2023-09-30)
 
 ### :white_check_mark:
