@@ -59,13 +59,13 @@ class DexSwap:
                 api_key = "" or exchanges[dx]["api_key"]
                 router_contract_addr = "" or exchanges[dx]["router_contract_addr"]
                 factory_contract_addr = "" or exchanges[dx]["factory_contract_addr"]
-                trading_asset_address = "" or exchanges[dx]["trading_asset_address"]
-                trading_asset_separator = "" or exchanges[dx]["trading_asset_separator"]
                 trading_risk_percentage = (
                     True or exchanges[dx]["trading_risk_percentage"]
                 )
                 trading_risk_amount = 1 or exchanges[dx]["trading_risk_amount"]
                 trading_slippage = 2 or exchanges[dx]["trading_slippage"]
+                trading_asset_address = "" or exchanges[dx]["trading_asset_address"]
+                trading_asset_separator = "" or exchanges[dx]["trading_asset_separator"]
                 block_explorer_url = exchanges[dx]["block_explorer_url"]
                 block_explorer_api = exchanges[dx]["block_explorer_api"]
                 mapping = exchanges[dx]["mapping"]
