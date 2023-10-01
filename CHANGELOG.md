@@ -2,6 +2,19 @@
 
 
 
+## v5.1.3 (2023-10-01)
+
+### Other
+
+* Merge pull request #434 from mraniki/dev
+
+♻️ Cleanup and refactoring ([`c41b4af`](https://github.com/mraniki/dxsp/commit/c41b4af0262053132f9c2f029d8317334238f5d7))
+
+### ♻️
+
+* ♻️ Cleanup and refactoring ([`056125a`](https://github.com/mraniki/dxsp/commit/056125a529a6da9209aca243eac0dbf5d76a45b5))
+
+
 ## v5.1.2 (2023-10-01)
 
 ### Other
