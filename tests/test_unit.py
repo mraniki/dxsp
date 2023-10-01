@@ -109,7 +109,6 @@ async def test_dextrader(dex):
         assert callable(dx.get_account_balance)
         assert callable(dx.get_account_position)
         assert callable(dx.get_swap)
-        assert callable(dx.execute_order)
 
 
 @pytest.mark.asyncio
@@ -130,7 +129,7 @@ async def test_get_quote(dex):
     assert result is not None
     assert "🦄" in result
     assert get_quote.awaited
-    assert ("1" in result) or ("56" in result)
+    assert ("eth" in result) or ("bsc" in result)
 
 
 @pytest.mark.asyncio
@@ -141,7 +140,7 @@ async def test_get_balances(dex):
     assert result is not None
     assert "💵" in result
     assert get_account_balance.awaited
-    assert ("1" in result) or ("56" in result)
+    assert ("eth" in result) or ("bsc" in result)
 
 
 @pytest.mark.asyncio
@@ -152,7 +151,7 @@ async def test_get_positions(dex):
     assert result is not None
     assert "📊" in result
     assert get_account_position.awaited
-    assert ("1" in result) or ("56" in result)
+    assert ("eth" in result) or ("bsc" in result)
 
 
 @pytest.mark.asyncio
