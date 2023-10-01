@@ -53,12 +53,12 @@ class DexSwap:
                 wallet_address = exchanges[dx]["wallet_address"]
                 private_key = exchanges[dx]["private_key"]
                 w3 = Web3(Web3.HTTPProvider(exchanges[dx]["rpc"]))
-                protocol_type = "uniswap" or exchanges[dx]["protocol_type"]
-                protocol_version = 2 or exchanges[dx]["protocol_version"]
-                api_endpoint = "" or exchanges[dx]["api_endpoint"]
-                api_key = "" or exchanges[dx]["api_key"]
-                router_contract_addr = "" or exchanges[dx]["router_contract_addr"]
-                factory_contract_addr = "" or exchanges[dx]["factory_contract_addr"]
+                protocol_type = exchanges[dx]["protocol_type"]
+                protocol_version = exchanges[dx]["protocol_version"]
+                api_endpoint =  exchanges[dx]["api_endpoint"]
+                api_key = exchanges[dx]["api_key"]
+                router_contract_addr = exchanges[dx]["router_contract_addr"]
+                factory_contract_addr = exchanges[dx]["factory_contract_addr"]
                 trading_risk_percentage = (
                     True or exchanges[dx]["trading_risk_percentage"]
                 )
