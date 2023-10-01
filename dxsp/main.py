@@ -195,7 +195,7 @@ class DexSwap:
         """
         info = "💵\n"
         for dx in self.dex_info:
-            info += f"\n{await dx.get_account_balance()}" or "Account balance failed"
+            info += f"\n{dx.name}: {await dx.get_account_balance()}" or "Account balance failed"
         return info.strip()
 
     async def get_positions(self):
@@ -207,5 +207,5 @@ class DexSwap:
         """
         info = "📊\n"
         for dx in self.dex_info:
-            info += f"\n{await dx.get_account_position()}" or "Account position failed"
+            info += f"\n{dx.name}: {await dx.get_account_position()}" or "Account position failed"
         return info.strip()
