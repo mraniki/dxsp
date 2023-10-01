@@ -2,6 +2,8 @@
  DEXSWAP Unit Test
 """
 
+from unittest.mock import AsyncMock
+
 import pytest
 from web3 import EthereumTesterProvider, Web3
 
@@ -35,6 +37,8 @@ def mock_dex_client():
         trading_asset_address="0xdAC17F958D2ee523a2206206994597C13D831ec7",
         trading_slippage=2,
         trading_risk_amount=10,
+        trading_risk_percentage=True,
+        trading_asset_separator="",
         block_explorer_url="https://api.etherscan.io/api?",
         block_explorer_api=None,
         w3=Web3(Web3.HTTPProvider("https://rpc.ankr.com/eth")),
@@ -83,13 +87,11 @@ def test_dynaconf_is_in_testing():
     print(settings.VALUE)
     assert settings.VALUE == "On Testing"
 
-    
 
 @pytest.mark.asyncio
 async def test_dextrader(dex):
     """Init Testing"""
     assert isinstance(dex, DexSwap)
-    #assert dex.commands is not None
     assert dex.dex_info is not None
     assert isinstance(dex, DexSwap)
     assert callable(dex.get_balances)
@@ -97,40 +99,70 @@ async def test_dextrader(dex):
     assert callable(dex.submit_order)
 
     for dx in dex.dex_info:
-        #print(dx)
         assert dx is not None
         assert dx.name is not None
         assert dx.protocol_type == "uniswap"
         assert dx.private_key.startswith("0x")
         assert dx.account.wallet_address.startswith("0x")
+        assert callable(dx.get_info)
+        assert callable(dx.get_quote)
         assert callable(dx.get_account_balance)
         assert callable(dx.get_account_position)
+        assert callable(dx.get_swap)
         assert callable(dx.execute_order)
+
+
+@pytest.mark.asyncio
+async def test_get_info(dex):
+    result = await dex.get_info()
+    print(result)
+    assert result is not None
+    assert "ℹ️" in result
 
 
 @pytest.mark.asyncio
 async def test_get_quote(dex):
     """getquote Testing"""
     print(dex.dex_info)
+    get_quote = AsyncMock()
     result = await dex.get_quotes("UNI")
     print(result)
     assert result is not None
     assert "🦄" in result
-    #assert ("1" in result) or ("56" in result)
-
-    
-# @pytest.mark.asyncio
-# async def test_get_quote_invalid(dex):
-#     result = await dex.get_quotes("THISISNOTATOKEN")
-#     print(result)
-#     assert result is not None
-#     assert "Quote failed" in result
+    assert get_quote.awaited
+    assert ("1" in result) or ("56" in result)
 
 
 @pytest.mark.asyncio
-async def test_get_swap(dex_client):
-    result = await dex_client.get_swap("USDT", "UNI", 1)
-    print(f"swap_order: {result}")
+async def test_get_balances(dex):
+    get_account_balance = AsyncMock()
+    result = await dex.get_balances()
+    print(result)
+    assert result is not None
+    assert "💵" in result
+    assert get_account_balance.awaited
+    assert ("1" in result) or ("56" in result)
+
+
+@pytest.mark.asyncio
+async def test_get_positions(dex):
+    get_account_position = AsyncMock()
+    result = await dex.get_positions()
+    print(result)
+    assert result is not None
+    assert "📊" in result
+    assert get_account_position.awaited
+    assert ("1" in result) or ("56" in result)
+
+
+@pytest.mark.asyncio
+async def test_get_order_amount(dex_client):
+    result = await dex_client.get_order_amount(
+        "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
+        dex_client.wallet_address,
+        1,
+    )
+    print(result)
     assert result is not None
 
 
@@ -147,45 +179,9 @@ async def test_submit_order_invalid(dex, invalid_order):
     print(result)
     assert "⚠️" in result
 
-@pytest.mark.asyncio
-async def test_get_info(dex):
-    result = await dex.get_info()
-    print(result)
-    assert result is not None
-    assert "ℹ️" in result
-
-# @pytest.mark.asyncio
-# async def test_get_help(dex):
-#     result = await dex.get_help()
-#     print(result)
-#     assert result is not None
-#     assert "🎯" in result
-
 
 @pytest.mark.asyncio
-async def test_get_order_amount(dex_client):
-    result = await dex_client.get_order_amount(
-        "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
-        dex_client.wallet_address,
-        1,
-    )
-    print(result)
+async def test_get_swap(dex_client):
+    result = await dex_client.get_swap("USDT", "UNI", 1)
+    print(f"swap_order: {result}")
     assert result is not None
-
-
-@pytest.mark.asyncio
-async def test_get_balances(dex):
-    result = await dex.get_balances()
-    print(result)
-    assert result is not None
-    assert "💵" in result
-    #assert ("1" in result) or ("56" in result)
-
-
-@pytest.mark.asyncio
-async def test_get_positions(dex):
-    result = await dex.get_positions()
-    print(result)
-    assert result is not None
-    assert "📊" in result
-    #assert ("1" in result) or ("56" in result)

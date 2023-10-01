@@ -58,10 +58,12 @@ class DexSwap:
                 api_endpoint = "" or exchanges[dx]["api_endpoint"]
                 api_key = "" or exchanges[dx]["api_key"]
                 router_contract_addr = "" or exchanges[dx]["router_contract_addr"]
-                factory_contract_addr = ""or exchanges[dx]["factory_contract_addr"]
+                factory_contract_addr = "" or exchanges[dx]["factory_contract_addr"]
                 trading_asset_address = "" or exchanges[dx]["trading_asset_address"]
                 trading_asset_separator = "" or exchanges[dx]["trading_asset_separator"]
-                trading_risk_percentage = True or exchanges[dx]["trading_risk_percentage"]
+                trading_risk_percentage = (
+                    True or exchanges[dx]["trading_risk_percentage"]
+                )
                 trading_risk_amount = 1 or exchanges[dx]["trading_risk_amount"]
                 trading_slippage = 2 or exchanges[dx]["trading_slippage"]
                 block_explorer_url = exchanges[dx]["block_explorer_url"]
@@ -79,8 +81,10 @@ class DexSwap:
                     router_contract_addr=router_contract_addr,
                     factory_contract_addr=factory_contract_addr,
                     trading_asset_address=trading_asset_address,
+                    trading_risk_percentage=trading_risk_percentage,
                     trading_risk_amount=trading_risk_amount,
                     trading_slippage=trading_slippage,
+                    trading_asset_separator=trading_asset_separator,
                     block_explorer_url=block_explorer_url,
                     block_explorer_api=block_explorer_api,
                     mapping=mapping,
@@ -158,14 +162,6 @@ class DexSwap:
 
         except Exception as error:
             return f"⚠️ order execution: {error}"
-
-    # async def get_help(self):
-    #     """
-    #     Get the help information for the current instance.
-    #     Returns:
-    #         A string containing the available commands.
-    #     """
-    #     return f"{self.commands}\n"
 
     async def get_info(self):
         """
