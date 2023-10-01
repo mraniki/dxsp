@@ -19,12 +19,8 @@ VALUE = "On default"
 dxsp_enabled = true
 
 # help message used in talky app
-dxsp_commands = """
-🎯 BUY WBTC
-🎯 /q WBTC
-🏦 /bal
-🏦 /pos
-"""
+dxsp_commands = ""
+
 # Header to use for retrieving urls content below
 headers = {User-Agent= 'Mozilla/5.0'}
 

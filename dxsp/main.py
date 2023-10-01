@@ -45,7 +45,6 @@ class DexSwap:
         """
         exchanges = settings.dex
         self.dex_info = []
-        self.commands = settings.dxsp_commands
         try:
             for dx in exchanges:
                 logger.debug(f"Loading {dx}")
