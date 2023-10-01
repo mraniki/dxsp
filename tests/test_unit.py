@@ -41,7 +41,7 @@ def mock_dex_client():
         trading_asset_separator="",
         block_explorer_url="https://api.etherscan.io/api?",
         block_explorer_api=None,
-        w3=Web3(Web3.HTTPProvider("https://rpc.ankr.com/eth")),
+        w3=Web3(Web3.HTTPProvider("https://eth.llamarpc.com")),
         mapping=None,
     )
 
