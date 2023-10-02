@@ -48,7 +48,7 @@ async def test_dex(dex):
 async def test_get_quote(dex):
     assert isinstance(dex, DexSwap)
     for dx in dex.dex_info:
-        result = await dx.get_quote("BTC")
+        result = await dx.get_quote("BTC","test")
         assert result is not None
         assert "🦄" in result
 
@@ -57,7 +57,7 @@ async def test_get_quote(dex):
 async def test_submit_order(dex, order):
     for dx in dex.dex_info:
         assert dx is not None
-        result = await dx.make_swap(order)
+        result = await dx.make_swap("BTC",1)
         print(result)
         assert result is not None
         assert "⚠️" in result
