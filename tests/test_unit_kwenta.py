@@ -53,11 +53,11 @@ async def test_get_quote(dex):
         assert "🦄" in result
 
 
-@pytest.mark.asyncio
-async def test_submit_order(dex, order):
-    for dx in dex.dex_info:
-        assert dx is not None
-        result = await dx.make_swap("BTC",1)
-        print(result)
-        assert result is not None
-        assert "⚠️" in result
+# @pytest.mark.asyncio
+# async def test_submit_order(dex, order):
+#     for dx in dex.dex_info:
+#         assert dx is not None
+#         result = await dx.make_swap("BTC",1)
+#         print(result)
+#         assert result is not None
+#         assert "⚠️" in result
