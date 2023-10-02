@@ -28,9 +28,12 @@ class DexKwenta(DexClient):
             wallet_address=self.wallet_address,
             private_key=self.private_key,
         )
-        symbol = kwenta.contract_utils.get_token_symbol(buy_address)
+        symbol = self.contract_utils.get_token_symbol(buy_address)
+        logger.debug(f"Symbol: {symbol}\n")
         market = kwenta.markets[symbol]
-        logger.debug(f"{symbol} Market: {market}\n")
+        # get the market info for the asset
+        market = kwenta.markets[symbol]
+        logger.debug(f"Market: {market}\n")
         return kwenta.get_current_asset_price(symbol)
 
     async def make_swap(self, sell_address, buy_address, amount):
@@ -42,10 +45,11 @@ class DexKwenta(DexClient):
             wallet_address=self.wallet_address,
             private_key=self.private_key,
         )
-        symbol = kwenta.contract_utils.get_token_symbol(buy_address)
+        symbol = self.contract_utils.get_token_symbol(buy_address)
+        logger.debug(f"Symbol: {symbol}\n")
         # get the market info for the asset
         market = kwenta.markets[symbol]
-        logger.debug(f"{symbol} Market: {market}\n")
+        logger.debug(f"Market: {market}\n")
 
         # check margin balance
         margin_balance_before = kwenta.get_accessible_margin(symbol)
