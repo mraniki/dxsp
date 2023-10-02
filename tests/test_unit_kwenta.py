@@ -46,14 +46,18 @@ async def test_dex(dex):
 
 @pytest.mark.asyncio
 async def test_get_quote(dex):
-    result = await dex.get_quotes("BTC")
-    assert result is not None
-    assert "🦄" in result
+    assert isinstance(dex, DexSwap)
+    for dx in dex.dex_info:
+        result = await dx.get_quote("BTC")
+        assert result is not None
+        assert "🦄" in result
 
 
 @pytest.mark.asyncio
 async def test_submit_order(dex, order):
-    result = await dex.submit_order(order)
-    print(result)
-    assert result is not None
-    assert "⚠️" in result
+    for dx in dex.dex_info:
+        assert dx is not None
+        result = await dx.make_swap(order)
+        print(result)
+        assert result is not None
+        assert "⚠️" in result
