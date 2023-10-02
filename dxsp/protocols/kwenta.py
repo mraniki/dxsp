@@ -28,11 +28,11 @@ class DexKwenta(DexClient):
             wallet_address=self.wallet_address,
             private_key=self.private_key,
         )
-        symbol = self.contract_utils.get_token_symbol(buy_address)
-        logger.info(f"Symbol: {symbol}\n")
+        logger.info(f"kwenta client: {kwenta}")
+        symbol = "BTC"
         # fetch sUSD balance
         balance = kwenta.get_susd_balance()
-        logger.info(f'Balance {balance}\n')
+        logger.info(f"Balance {balance}\n")
 
         # display the perps markets
         assets = kwenta.markets.keys()
@@ -41,10 +41,10 @@ class DexKwenta(DexClient):
         for asset in assets:
             market = kwenta.markets[asset]
             logger.info(f"{asset} Market: {market}\n")
-        
-        # market = kwenta.markets[symbol]
-        # # get the market info for the asset
-        # market = kwenta.markets[symbol]
+
+        market = kwenta.markets[symbol]
+        # # symbol = self.contract_utils.get_token_symbol(buy_address)
+        # # logger.debug(f"Symbol: {symbol}\n")
         # logger.debug(f"Market: {market}\n")
         # return kwenta.get_current_asset_price(symbol)
 

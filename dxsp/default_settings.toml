@@ -123,7 +123,7 @@ mapping = [ # mapping to use to change instrument per exchange
 #     { id = "BTC", alt = "WBTC" },
 # ]
 
-# # uniswap v2 protocol type and router velodrome on OPTIMISM chain 10
+# # kwenta protocol type on OPTIMISM chain 10
 # [default.dex.opt]
 # wallet_address = "0x1234567890123456789012345678901234567890"
 # private_key = "0xdeadbeef88"
@@ -142,7 +142,9 @@ mapping = [ # mapping to use to change instrument per exchange
 # block_explorer_url = "https://optimistic.etherscan.com/api?"
 # block_explorer_api = "123123123123123"
 # mapping = [
-#     { id = "BTC", alt = "WBTC" },
+#     { id = "EURUSD", alt = "EUR" },
+#     { id = "GOLD", alt = "XAU" },
+#     { id = "BTC", alt = "BTC" },
 # ]
 
 ########################################
