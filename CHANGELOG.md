@@ -2,6 +2,70 @@
 
 
 
+## v5.1.4 (2023-10-04)
+
+### :white_check_mark:
+
+* :white_check_mark: Unit Test ([`88fd12e`](https://github.com/mraniki/dxsp/commit/88fd12eb66fe0599939159a1ccc8ad961a676c77))
+
+### :wrench:
+
+* :wrench: ([`ba80eee`](https://github.com/mraniki/dxsp/commit/ba80eee69dfefcb80be8f257bb93722eb053e78f))
+
+### Other
+
+* Merge pull request #435 from mraniki/dev
+
+🥚 Kwenta SDK ([`f40c965`](https://github.com/mraniki/dxsp/commit/f40c9650db3214b95e50d4cddd5f4ff8cdd900a6))
+
+* Refactor modify_position method in DexKwenta class ([`3733ba0`](https://github.com/mraniki/dxsp/commit/3733ba0b1920b70a7f998772577028a62b79d1f7))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`150aea7`](https://github.com/mraniki/dxsp/commit/150aea7028a75f64f27ffcc535db52762c607000))
+
+* Refactor DexKwenta class in kwenta.py ([`66b1069`](https://github.com/mraniki/dxsp/commit/66b10698d16a5d19b44f86589ea954c2a6c663c4))
+
+* Refactor DexKwenta class and test_unit_kwenta.py
+
+- Removed the lines that get the sUSD balance and log it in DexKwenta cl
+ass.
+- Uncommented the lines that log the market and return the current
+asset
+price in DexKwenta class.
+- Removed the test_submit_order function in test_unit_kwenta.py.
+
+This commit addresses the above changes. ([`a87aa8b`](https://github.com/mraniki/dxsp/commit/a87aa8b124fa9cb0831305d57af7c7c2ce729add))
+
+* Refactor debug log statement in DexClient class ([`f55d5bb`](https://github.com/mraniki/dxsp/commit/f55d5bb581cd2240862d402fd05acd3f98c04fb9))
+
+* Refactor DexKwenta class in kwenta.py file ([`26d3a7c`](https://github.com/mraniki/dxsp/commit/26d3a7cd93ab8bbcb1269ea6b4fc66605849fdbd))
+
+### Update
+
+* Update Requirements ([`f9965fb`](https://github.com/mraniki/dxsp/commit/f9965fbfb4cf4c42a4ee9f40a4c9911f89c0a29e))
+
+* Update Requirements ([`1a3b408`](https://github.com/mraniki/dxsp/commit/1a3b408da84730d4f29a861ee2d2428dccc8771d))
+
+* Update Requirements ([`2efb1c7`](https://github.com/mraniki/dxsp/commit/2efb1c7225acf3a2bd1c467cd2df9725d257683b))
+
+### ⚗️
+
+* ⚗️ ([`bffc4a8`](https://github.com/mraniki/dxsp/commit/bffc4a83869bd4377f0cbc96676f2026b9cc7ce7))
+
+### ✅
+
+* ✅ Unit Test ([`ca0fb52`](https://github.com/mraniki/dxsp/commit/ca0fb529713d653f3683014ec43e4b26a405439a))
+
+* ✅ Unit Test ([`f7fde07`](https://github.com/mraniki/dxsp/commit/f7fde07b6ab7f65c3c859befcb350aa023a6da35))
+
+### 🐛
+
+* 🐛 ([`d6280a9`](https://github.com/mraniki/dxsp/commit/d6280a9597ffdb27968f897f7a0c936542889167))
+
+### 🔧
+
+* 🔧 ([`493dd04`](https://github.com/mraniki/dxsp/commit/493dd04f79bab7604ef675aa46ff698f4d4f0e98))
+
+
 ## v5.1.3 (2023-10-01)
 
 ### Other
