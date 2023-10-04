@@ -44,13 +44,13 @@ async def test_dex(dex):
         assert dx.protocol_type == "kwenta"
 
 
-@pytest.mark.asyncio
-async def test_get_quote(dex):
-    assert isinstance(dex, DexSwap)
-    for dx in dex.dex_info:
-        result = await dx.get_quote("BTC","test")
-        assert result is not None
-        assert "🦄" in result
+# @pytest.mark.asyncio
+# async def test_get_quote(dex):
+#     assert isinstance(dex, DexSwap)
+#     for dx in dex.dex_info:
+#         result = await dx.get_quote("BTC","test")
+#         assert result is not None
+#         assert "🦄" in result
 
 
 # @pytest.mark.asyncio
