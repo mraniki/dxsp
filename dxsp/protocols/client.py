@@ -68,7 +68,7 @@ class DexClient:
         self.router_contract_addr = router_contract_addr
         self.factory_contract_addr = factory_contract_addr
         self.trading_asset_address = self.w3.to_checksum_address(trading_asset_address)
-        self.trading_risk_percentage =  trading_risk_percentage
+        self.trading_risk_percentage = trading_risk_percentage
         self.trading_asset_separator = trading_asset_separator
         self.trading_risk_amount = trading_risk_amount
         self.trading_slippage = trading_slippage
@@ -265,7 +265,7 @@ class DexClient:
         for item in self.mapping:
             if item["id"] == instrument:
                 instrument = item["alt"]
-                self.logger.debug("Instrument symbol changed {}", instrument)
+                logger.debug("Instrument symbol changed {}", instrument)
                 break
 
         return instrument

@@ -9,7 +9,7 @@ from web3 import Web3
 
 from dxsp import __version__
 from dxsp.config import settings
-from dxsp.protocols import DexUniswap, DexZeroX
+from dxsp.protocols import DexKwenta, DexUniswap, DexZeroX
 
 
 class DexSwap:
@@ -100,6 +100,8 @@ class DexSwap:
             return DexUniswap(**kwargs)
         elif protocol_type == "0x":
             return DexZeroX(**kwargs)
+        elif protocol_type == "kwenta":
+            return DexKwenta(**kwargs)
         else:
             logger.error(f"protocol type {protocol_type} not supported")
 
@@ -172,17 +174,6 @@ class DexSwap:
         for dx in self.dex_info:
             info += f"\n{await dx.get_info()}" or "Info failed\n"
         return info.strip()
-
-    # async def get_name(self):
-    #     """
-    #     Retrieves the name of the account.
-
-    #     :return: The name of the account.
-    #     """
-    #     info = ""
-    #     for dx in self.dex_info:
-    #         info += f"\n{await dx.get_name()}" or "Name failed"
-    #     return info.strip()
 
     # 🔒 USER RELATED
     async def get_balances(self):
