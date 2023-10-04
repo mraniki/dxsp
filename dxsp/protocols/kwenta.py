@@ -78,7 +78,10 @@ class DexKwenta(DexClient):
         # logger.debug(f"Ending margin balance: {margin_balance_after}\n")
 
         # # submit an order
-        # open_position = kwenta.modify_position(symbol, size_delta=0.5, execute_now=True)
+        # open_position = kwenta.modify_position(
+        #symbol,
+        #size_delta=0.5,
+        #execute_now=True)
         # logger.debug(f"Open position tx: {open_position}\n")
 
         # # wait for the transfer to be mined
