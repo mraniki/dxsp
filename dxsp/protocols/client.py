@@ -36,24 +36,24 @@ class DexClient:
 
     def __init__(
         self,
-        name,
-        wallet_address,
-        private_key,
-        protocol="uniswap",
-        protocol_version=2,
-        api_endpoint="https://api.0x.org/",
+        w3=None,
+        name=None,
+        wallet_address=None,
+        private_key=None,
+        protocol=None,
+        protocol_version=None,
+        api_endpoint=None,
         api_key=None,
         router_contract_addr=None,
         factory_contract_addr=None,
         trading_asset_address=None,
-        trading_asset_separator="",
+        trading_asset_separator=None,
         trading_risk_percentage=True,
         trading_risk_amount=1,
         trading_slippage=2,
-        block_explorer_url="https://api.etherscan.io/api?",
+        block_explorer_url=None,
         block_explorer_api=None,
         mapping=None,
-        w3=None,
     ):
         self.w3 = w3
         self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
@@ -61,6 +61,9 @@ class DexClient:
         logger.debug(f"setting up DexClient: {self.name}")
         self.wallet_address = wallet_address
         self.private_key = private_key
+        self.account_number = (
+            f"{str(self.w3.net.version)} - " f"{str(self.wallet_address)[-8:]}"
+        )
         self.protocol = protocol
         self.protocol_version = protocol_version
         self.api_endpoint = api_endpoint
@@ -89,9 +92,54 @@ class DexClient:
             self.block_explorer_api,
         )
 
-    async def get_quote(self, buy_address, sell_address, amount=1):
-        """ """
-        # return await self.dex_swap.get_quote(buy_address, sell_address, amount)
+    async def replace_instrument(self, instrument):
+        """
+        Replace instrument by an alternative instrument, if the
+        instrument is not in the mapping, it will be ignored.
+
+        Args:
+            order (dict):
+
+        Returns:
+            dict
+        """
+        for item in self.mapping:
+            if item["id"] == instrument:
+                instrument = item["alt"]
+                logger.debug("Instrument symbol changed {}", instrument)
+                break
+
+        return instrument
+
+    async def get_instrument_address(self, instrument):
+        instrument = await self.replace_instrument(instrument)
+        address = await self.contract_utils.search_contract_address(instrument)
+        logger.debug("Instrument {}", address)
+        return address
+
+    async def get_order_amount(
+        self, sell_token_address, wallet_address, quantity, is_percentage=True
+    ):
+        balance = await self.contract_utils.get_token_balance(
+            sell_token_address, wallet_address
+        )
+        sell_contract = await self.contract_utils.get_token_contract(sell_token_address)
+        sell_decimals = (
+            sell_contract.functions.decimals().call() if sell_contract else 18
+        )
+
+        if not is_percentage and balance:
+            return quantity
+
+        if balance:
+            risk_percentage = float(quantity) / 100
+            amount = (
+                balance / (decimal.Decimal(risk_percentage) * 10**sell_decimals)
+            ) * (decimal.Decimal(quantity) / 100)
+
+            if amount >= 1:
+                return amount
+        return 0
 
     async def get_swap(self, sell_token=None, buy_token=None, quantity=1):
         """
@@ -156,53 +204,11 @@ class DexClient:
             logger.debug(error)
             raise error
 
-    async def get_order_amount(
-        self, sell_token_address, wallet_address, quantity, is_percentage=True
-    ):
-        balance = await self.contract_utils.get_token_balance(
-            sell_token_address, wallet_address
-        )
-        sell_contract = await self.contract_utils.get_token_contract(sell_token_address)
-        sell_decimals = (
-            sell_contract.functions.decimals().call() if sell_contract else 18
-        )
-
-        if not is_percentage and balance:
-            return quantity
-
-        if balance:
-            risk_percentage = float(quantity) / 100
-            amount = (
-                balance / (decimal.Decimal(risk_percentage) * 10**sell_decimals)
-            ) * (decimal.Decimal(quantity) / 100)
-
-            if amount >= 1:
-                return amount
-        return 0
-
     async def make_swap(self, sell_address, buy_address, amount):
         """
         Make a swap method for specific protocol
 
         """
-
-    async def get_info(self):
-        """
-        Get the information about the DexSwap API.
-
-        Returns:
-            str: A string containing the version of DexSwap, the name obtained from
-                 `get_name()`, and the account number.
-        Raises:
-            Exception: If there is an error while retrieving the information.
-        """
-        try:
-            return (
-                f"💱 {self.name()}\n"
-                # f"🪪 {self.account.account_number}"
-            )
-        except Exception as error:
-            logger.error("info {}", error)
 
     async def get_account_balance(self):
         """
@@ -251,21 +257,15 @@ class DexClient:
         """
         return await self.account.get_account_open_positions()
 
-    async def replace_instrument(self, instrument):
+    async def get_account_pnl(self):
         """
-        Replace instrument by an alternative instrument, if the
-        instrument is not in the mapping, it will be ignored.
+        Return account pnl.
 
         Args:
-            order (dict):
+            None
 
         Returns:
-            dict
+            pnl
         """
-        for item in self.mapping:
-            if item["id"] == instrument:
-                instrument = item["alt"]
-                logger.debug("Instrument symbol changed {}", instrument)
-                break
 
-        return instrument
+        return await self.account.get_account_pnl()

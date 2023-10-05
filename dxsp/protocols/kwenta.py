@@ -20,7 +20,7 @@ class DexKwenta(DexClient):
 
     """
 
-    async def get_quote(self, buy_address, sell_address, amount=1):
+    async def get_quote(self, buy_address=None, symbol=None, amount=1):
         """ """
         kwenta = Kwenta(
             network_id=10,
@@ -28,21 +28,23 @@ class DexKwenta(DexClient):
             wallet_address=self.wallet_address,
             private_key=self.private_key,
         )
+        if buy_address is None:
+            buy_address = self.trading_asset_address
         logger.info(f"kwenta client: {kwenta}")
-        symbol = "ETH"
-        # display the perps markets
-        assets = kwenta.markets.keys()
-        logger.info(f"Assets: {', '.join(assets)}\n")
+        return f"🦄: {kwenta}"
+        # # display the perps markets
+        # assets = kwenta.markets.keys()
+        # logger.info(f"Assets: {', '.join(assets)}\n")
 
-        for asset in assets:
-            market = kwenta.markets[asset]
-            logger.info(f"{asset} Market: {market}\n")
+        # for asset in assets:
+        #     market = kwenta.markets[asset]
+        #     logger.info(f"{asset} Market: {market}\n")
 
-        market = kwenta.markets[symbol]
-        # # symbol = self.contract_utils.get_token_symbol(buy_address)
-        # # logger.debug(f"Symbol: {symbol}\n")
-        logger.debug(f"Market: {market}\n")
-        #return kwenta.get_current_asset_price(symbol)
+        # market = kwenta.markets[symbol]
+        # # # symbol = self.contract_utils.get_token_symbol(buy_address)
+        # # # logger.debug(f"Symbol: {symbol}\n")
+        # logger.debug(f"Market: {market}\n")
+        # return kwenta.get_current_asset_price(symbol)
 
     async def make_swap(self, sell_address, buy_address, amount):
         """ """
@@ -79,9 +81,9 @@ class DexKwenta(DexClient):
 
         # # submit an order
         # open_position = kwenta.modify_position(
-        #symbol,
-        #size_delta=0.5,
-        #execute_now=True)
+        # symbol,
+        # size_delta=0.5,
+        # execute_now=True)
         # logger.debug(f"Open position tx: {open_position}\n")
 
         # # wait for the transfer to be mined

@@ -73,14 +73,20 @@ def order_params_fixture():
     }
 
 
-@pytest.fixture(name="invalid_order")
-def invalid_order_fixture():
+@pytest.fixture(name="invalid_symbol")
+def invalid_symbol_fixture():
     """Return order parameters."""
     return {
         "action": "BUY",
         "instrument": "NOTATHING",
         "quantity": 1,
     }
+
+
+@pytest.fixture(name="invalid_order")
+def invalid_order_fixture():
+    """Return order parameters."""
+    return "not an order"
 
 
 def test_dynaconf_is_in_testing():
@@ -103,8 +109,7 @@ async def test_dextrader(dex):
         assert dx.name is not None
         assert dx.protocol == "uniswap"
         assert dx.private_key.startswith("0x")
-        assert dx.account.wallet_address.startswith("0x")
-        assert callable(dx.get_info)
+        assert dx.wallet_address.startswith("0x")
         assert callable(dx.get_quote)
         assert callable(dx.get_account_balance)
         assert callable(dx.get_account_position)
@@ -117,6 +122,7 @@ async def test_get_info(dex):
     print(result)
     assert result is not None
     assert "ℹ️" in result
+    assert ("1" in result) or ("56" in result)
 
 
 @pytest.mark.asyncio
@@ -124,11 +130,13 @@ async def test_get_quote(dex):
     """getquote Testing"""
     print(dex.clients)
     get_quote = AsyncMock()
-    result = await dex.get_quotes("UNI")
+    replace_instrument = AsyncMock()
+    result = await dex.get_quotes("BTC")
     print(result)
     assert result is not None
     assert "🦄" in result
     assert get_quote.awaited
+    assert replace_instrument.awaited
     assert ("eth" in result) or ("bsc" in result)
 
 
@@ -150,8 +158,21 @@ async def test_get_positions(dex):
     print(result)
     assert result is not None
     assert "📊" in result
+    assert "Opened" in result
+    assert "Margin" in result
     assert get_account_position.awaited
     assert ("1" in result) or ("56" in result)
+
+
+@pytest.mark.asyncio
+async def test_get_pnls(dex):
+    get_account_pnl = AsyncMock()
+    result = await dex.get_pnl()
+    print(result)
+    assert result is not None
+    assert "🏆" in result
+    assert get_account_pnl.awaited
+    assert ("eth" in result) or ("bsc" in result)
 
 
 @pytest.mark.asyncio

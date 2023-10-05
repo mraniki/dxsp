@@ -16,7 +16,7 @@ class DexUniswap(DexClient):
 
     """
 
-    async def get_quote(self, buy_address, sell_address, amount=1):
+    async def get_quote(self, buy_address=None, symbol=None, amount=1):
         """
         Retrieves a quote for the given buy and sell addresses.
 
@@ -29,7 +29,9 @@ class DexUniswap(DexClient):
             float: The calculated quote for the given buy and sell addresses.
         """
         try:
-            logger.debug(f"Uniswap quote {buy_address} {sell_address} {amount}")
+            if buy_address is None:
+                buy_address = self.trading_asset_address
+            sell_address = await self.get_instrument_address(symbol)
             uniswap = Uniswap(
                 address=self.wallet_address,
                 private_key=self.private_key,

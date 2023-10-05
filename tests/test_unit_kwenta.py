@@ -46,11 +46,10 @@ async def test_dex(dex):
 
 # @pytest.mark.asyncio
 # async def test_get_quote(dex):
-#     assert isinstance(dex, DexSwap)
-#     for dx in dex.clients:
-#         result = await dx.get_quote("BTC","test")
-#         assert result is not None
-#         assert "🦄" in result
+#     result = await dex.get_quotes("WBTC")
+#     print("kwenta quote: ", result)
+#     assert result is not None
+#     assert "🦄" in result
 
 
 # @pytest.mark.asyncio

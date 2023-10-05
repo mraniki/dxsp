@@ -46,7 +46,7 @@ async def test_dex(dex):
 
 @pytest.mark.asyncio
 async def test_get_quote(dex):
-    result = await dex.get_quotes("UNI")
+    result = await dex.get_quotes("WBTC")
     print("0x quote: ", result)
     assert result is not None
     assert "🦄" in result
