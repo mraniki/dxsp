@@ -56,7 +56,6 @@ class DexSwap:
                     wallet_address=_config.get("wallet_address"),
                     private_key=_config.get("private_key"),
                     w3=Web3(Web3.HTTPProvider(_config.get("rpc"))),
-                    protocol=_config.get("protocol_type"),
                     protocol_version=_config.get("protocol_version"),
                     api_endpoint=_config.get("api_endpoint"),
                     api_key=_config.get("api_key"),
@@ -71,6 +70,7 @@ class DexSwap:
                     block_explorer_api=_config.get("block_explorer_api"),
                     mapping=_config.get("mapping"),
                 )
+
                 self.clients.append(client)
                 logger.debug(f"Loaded {item}")
 
