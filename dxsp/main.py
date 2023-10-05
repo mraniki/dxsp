@@ -52,7 +52,7 @@ class DexSwap:
                     continue
                 client = self._create_client(
                     protocol=_config.get("protocol"),
-                    name=_config.get("name"),
+                    name=item,
                     api_key=_config.get("api_key"),
                     secret=_config.get("secret"),
                     password=_config.get("password"),
@@ -136,17 +136,19 @@ class DexSwap:
 
         """
         try:
-            for dx in self.clients:
-                logger.debug("submit order {}", dx)
+            for client in self.clients:
+                logger.debug("submit order {}", client)
                 action = order_params.get("action")
-                instrument = await dx.replace_instrument(order_params.get("instrument"))
+                instrument = await client.replace_instrument(
+                    order_params.get("instrument")
+                )
                 quantity = order_params.get("quantity", 1)
                 sell_token, buy_token = (
-                    (dx.trading_asset_address, instrument)
+                    (client.trading_asset_address, instrument)
                     if action == "BUY"
-                    else (instrument, dx.trading_asset_address)
+                    else (instrument, client.trading_asset_address)
                 )
-                order = await dx.get_swap(sell_token, buy_token, quantity)
+                order = await client.get_swap(sell_token, buy_token, quantity)
                 if order:
                     trade_confirmation = (
                         f"⬇️ {instrument}"
@@ -168,9 +170,9 @@ class DexSwap:
         :rtype: float
         """
         info = "💵\n"
-        for dx in self.clients:
-            info += f"\n{dx.name}:"
-            info += f"{await dx.get_account_balance()}"
+        for client in self.clients:
+            info += f"\n{client.name}:"
+            info += f"{await client.get_account_balance()}"
         return info.strip()
 
     async def get_positions(self):
