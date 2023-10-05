@@ -156,6 +156,8 @@ async def test_get_positions(dex):
     print(result)
     assert result is not None
     assert "📊" in result
+    assert "Opened" in result
+    assert "margin" in result
     assert get_account_position.awaited
     assert ("1" in result) or ("56" in result)
 
