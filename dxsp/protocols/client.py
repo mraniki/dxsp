@@ -113,9 +113,10 @@ class DexClient:
 
     async def get_instrument_address(self, instrument):
         instrument = await self.replace_instrument(instrument)
-        instrument_address = await self.contract_utils.search_contract_address(instrument)
-        logger.debug("Instrument {}", instrument_address)
-        return instrument_address
+        address = (await self.contract_utils.search_contract_address(
+                instrument))
+        logger.debug("Instrument {}", address)
+        return address
         
 
     async def get_order_amount(
