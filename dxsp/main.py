@@ -37,42 +37,41 @@ class DexSwap:
 
     """
 
+    def __init__(self, w3: Optional[Web3] = None):
+        """
+        Initialize the DexTrader object
+        to interact with exchanges
 
-def __init__(self, w3: Optional[Web3] = None):
-    """
-    Initialize the DexTrader object
-    to interact with exchanges
+        """
+        try:
+            config = settings.dex
+            self.clients = []
+            for item in config:
+                _config = config[item]
+                if item not in ["", "template"]:
+                    client = self._create_client(
+                        protocol=_config.get("protocol"),
+                        name=_config.get("name"),
+                        api_key=_config.get("api_key"),
+                        secret=_config.get("secret"),
+                        password=_config.get("password"),
+                        testmode=_config.get("testmode"),
+                        defaulttype=_config.get("defaulttype"),
+                        ordertype=_config.get("ordertype"),
+                        leverage_type=_config.get("leverage_type"),
+                        leverage=_config.get("leverage"),
+                        trading_risk_percentage=_config.get("trading_risk_percentage"),
+                        trading_risk_amount=_config.get("trading_risk_amount"),
+                        trading_slippage=_config.get("trading_slippage"),
+                        trading_asset=_config.get("trading_asset"),
+                        trading_asset_separator=_config.get("trading_asset_separator"),
+                        mapping=_config.get("mapping"),
+                    )
+                    self.clients.append(client)
+                    logger.debug(f"Loaded {item}")
 
-    """
-    try:
-        config = settings.dex
-        self.clients = []
-        for item in config:
-            _config = config[item]
-            if item not in ["", "template"]:
-                client = self._create_client(
-                    protocol=_config.get("protocol"),
-                    name=_config.get("name"),
-                    api_key=_config.get("api_key"),
-                    secret=_config.get("secret"),
-                    password=_config.get("password"),
-                    testmode=_config.get("testmode"),
-                    defaulttype=_config.get("defaulttype"),
-                    ordertype=_config.get("ordertype"),
-                    leverage_type=_config.get("leverage_type"),
-                    leverage=_config.get("leverage"),
-                    trading_risk_percentage=_config.get("trading_risk_percentage"),
-                    trading_risk_amount=_config.get("trading_risk_amount"),
-                    trading_slippage=_config.get("trading_slippage"),
-                    trading_asset=_config.get("trading_asset"),
-                    trading_asset_separator=_config.get("trading_asset_separator"),
-                    mapping=_config.get("mapping"),
-                )
-                self.clients.append(client)
-                logger.debug(f"Loaded {item}")
-
-    except Exception as e:
-        logger.error("init: {}", e)
+        except Exception as e:
+            logger.error("init: {}", e)
 
     def _create_client(self, **kwargs):
         protocol_type = kwargs["protocol_type"]
