@@ -2,6 +2,45 @@
 
 
 
+## v5.1.5 (2023-10-05)
+
+### Other
+
+* Merge pull request #440 from mraniki/dev
+
+⚡ ♻️ ([`08bbae5`](https://github.com/mraniki/dxsp/commit/08bbae51a485981e68e95c4a29e628dd64adef4a))
+
+* Fix whitespace issue in test_unit.py ([`3dfd6fa`](https://github.com/mraniki/dxsp/commit/3dfd6fa68696d3289189437eeb6312b4fde8d65f))
+
+* Merge pull request #439 from mraniki/renovate/pytest-loguru-0.x
+
+⬆️ 🛠️(deps): update dependency pytest-loguru to ^0.3.0 ([`750cfd2`](https://github.com/mraniki/dxsp/commit/750cfd2dc903e2bd419837a2dc35af82051bcbfc))
+
+* Merge pull request #437 from mraniki/dev
+
+Add support for .op.toml configuration file ([`65a676d`](https://github.com/mraniki/dxsp/commit/65a676d185ebcb2b6ab9d60c872691a5152ee882))
+
+* Add support for .op.toml configuration file ([`6864181`](https://github.com/mraniki/dxsp/commit/68641811d3693aa0ef07d772577a921b51fb58c9))
+
+### ♻️
+
+* ♻️ ([`9811062`](https://github.com/mraniki/dxsp/commit/9811062c5b5564a01955d883be351fdf025cab6e))
+
+* ♻️ ([`f2055a8`](https://github.com/mraniki/dxsp/commit/f2055a8095f42172cdd94d0b7dd678ab79163f25))
+
+### ⚡
+
+* ⚡ ♻️ ([`f8a4d17`](https://github.com/mraniki/dxsp/commit/f8a4d174c73d1ba41fa4fdcc90e034383f8e25ee))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency pytest-loguru to ^0.3.0 ([`b950b0e`](https://github.com/mraniki/dxsp/commit/b950b0efbf1f2584967760cbdf7cccadafc6e79e))
+
+### 🐛
+
+* 🐛 ([`3fef341`](https://github.com/mraniki/dxsp/commit/3fef3410a97079692ab187d645366f4d9804b403))
+
+
 ## v5.1.4 (2023-10-04)
 
 ### :white_check_mark:
