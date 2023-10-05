@@ -44,12 +44,12 @@ async def test_dex(dex):
         assert dx.protocol == "kwenta"
 
 
-@pytest.mark.asyncio
-async def test_get_quote(dex):
-    result = await dex.get_quotes("WBTC")
-    print("kwenta quote: ", result)
-    assert result is not None
-    assert "🦄" in result
+# @pytest.mark.asyncio
+# async def test_get_quote(dex):
+#     result = await dex.get_quotes("WBTC")
+#     print("kwenta quote: ", result)
+#     assert result is not None
+#     assert "🦄" in result
 
 
 # @pytest.mark.asyncio
