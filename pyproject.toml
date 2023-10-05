@@ -46,7 +46,7 @@ exclude = [
   "docs/*",
 ]
 #ignore = ["F401"]
-format = "github"
+#format = "github"
 fixable = ["ALL"]
 
 
