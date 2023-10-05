@@ -2,6 +2,47 @@
 
 
 
+## v5.2.0 (2023-10-05)
+
+### :ambulance:
+
+* :ambulance: ([`f9d98d3`](https://github.com/mraniki/dxsp/commit/f9d98d3b99723a62b37224066c5facbdb85de483))
+
+### :bug:
+
+* :bug: ([`c35baf6`](https://github.com/mraniki/dxsp/commit/c35baf6c52fb0abfa48fd35073348e7231082747))
+
+* :bug: ([`444e41a`](https://github.com/mraniki/dxsp/commit/444e41ad3c0e9b3c79742b0c4bafa9c87f67d282))
+
+### Other
+
+* Merge pull request #442 from mraniki/dev
+
+✅ Unit Test ([`f688a81`](https://github.com/mraniki/dxsp/commit/f688a81d8110c66f21aa97dcb730bf77c3f6be3b))
+
+### ⚡
+
+* ⚡ ([`ef0d7d0`](https://github.com/mraniki/dxsp/commit/ef0d7d0c96c9955678644bc6d02366ba3d20b7f1))
+
+### ✅
+
+* ✅ Unit Test ([`5927293`](https://github.com/mraniki/dxsp/commit/5927293e247db7167f59c0c9eaefe6f1be8b96fb))
+
+* ✅ Unit Test ([`b469f60`](https://github.com/mraniki/dxsp/commit/b469f60bd086ee97d742d5f78bbc583069a9daa1))
+
+### 💄
+
+* 💄 ♻️ protocol used across packages ([`a2ee706`](https://github.com/mraniki/dxsp/commit/a2ee706348c450307c6c93c31acdb9a54c7ded57))
+
+### 🚑
+
+* 🚑 ([`8b4b166`](https://github.com/mraniki/dxsp/commit/8b4b166576cac8bf2bc28b6e93ad4980a48eb7af))
+
+### 🚨
+
+* 🚨 ([`c3e29e9`](https://github.com/mraniki/dxsp/commit/c3e29e9c11e7d05a6c9cec584dc77151e931a1ca))
+
+
 ## v5.1.6 (2023-10-05)
 
 ### :white_check_mark:
