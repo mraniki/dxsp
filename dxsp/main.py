@@ -75,15 +75,15 @@ class DexSwap:
             logger.error("init: {}", e)
 
     def _create_client(self, **kwargs):
-        protocol_type = kwargs["protocol_type"]
-        if protocol_type == "uniswap":
+        protocol = kwargs["protocol"]
+        if protocol == "uniswap":
             return DexUniswap(**kwargs)
-        elif protocol_type == "0x":
+        elif protocol == "0x":
             return DexZeroX(**kwargs)
-        elif protocol_type == "kwenta":
+        elif protocol == "kwenta":
             return DexKwenta(**kwargs)
         else:
-            logger.error(f"protocol type {protocol_type} not supported")
+            logger.error(f"protocol type {protocol} not supported")
 
     async def get_info(self):
         """

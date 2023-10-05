@@ -28,7 +28,7 @@ def mock_dex_client():
         name="uniswap",
         wallet_address="0x1a9C8182C09F50C8318d769245beA52c32BE35BC",
         private_key="0xdeadbeet45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266",
-        protocol_type="uniswap",
+        protocol="uniswap",
         protocol_version=2,
         api_endpoint=None,
         api_key=None,
@@ -101,7 +101,7 @@ async def test_dextrader(dex):
     for dx in dex.clients:
         assert dx is not None
         assert dx.name is not None
-        assert dx.protocol_type == "uniswap"
+        assert dx.protocol == "uniswap"
         assert dx.private_key.startswith("0x")
         assert dx.account.wallet_address.startswith("0x")
         assert callable(dx.get_info)

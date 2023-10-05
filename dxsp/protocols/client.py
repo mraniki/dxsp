@@ -18,7 +18,7 @@ class DexClient:
         name (str): The name of the dex
         wallet_address (str): The wallet address
         private_key (str): The private key
-        protocol_type (str): The protocol type
+        protocol (str): The protocol type
         protocol_version (int): The protocol version
         api_endpoint (str): The api endpoint
         api_key (str): The api key
@@ -39,7 +39,7 @@ class DexClient:
         name,
         wallet_address,
         private_key,
-        protocol_type="uniswap",
+        protocol="uniswap",
         protocol_version=2,
         api_endpoint="https://api.0x.org/",
         api_key=None,
@@ -61,7 +61,7 @@ class DexClient:
         logger.debug(f"setting up DexClient: {self.name}")
         self.wallet_address = wallet_address
         self.private_key = private_key
-        self.protocol_type = protocol_type
+        self.protocol = protocol
         self.protocol_version = protocol_version
         self.api_endpoint = api_endpoint
         self.api_key = api_key
@@ -128,7 +128,7 @@ class DexClient:
             sell_token_amount_wei = sell_amount * (
                 10 ** (await self.contract_utils.get_token_decimals(sell_token_address))
             )
-            if self.protocol_type == "0x":
+            if self.protocol == "0x":
                 await self.account.get_approve(sell_token_address)
 
             order_amount = int(
