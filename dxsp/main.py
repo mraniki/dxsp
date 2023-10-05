@@ -141,7 +141,7 @@ class DexSwap:
         """
         _info = ["📊\n"]
         for client in self.clients:
-            _info.append(f"{client.name}:\n{await client.get_account_balance()}")
+            _info.append(f"{client.name}:\n{await client.get_account_position()}")
         return "\n".join(_info)
 
     async def get_pnl(self):
