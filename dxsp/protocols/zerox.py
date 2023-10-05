@@ -16,7 +16,7 @@ class DexZeroX(DexClient):
 
     """
 
-    async def get_quote(self, buy_address, sell_address, amount=1):
+    async def get_quote(self, buy_address, symbol, amount=1):
         """
         Retrieves a quote for a token swap.
 
@@ -28,6 +28,9 @@ class DexZeroX(DexClient):
         Returns:
             float: The guaranteed price for the token swap.
         """
+        if buy_address is None:
+            buy_address = self.trading_asset_address
+        sell_address = await self.get_instrument_address(symbol)
         logger.debug(f"0x quote {buy_address} {sell_address} {amount}")
         token_decimals = await self.contract_utils.get_token_decimals(sell_address)
         out_amount = amount * (10**token_decimals)

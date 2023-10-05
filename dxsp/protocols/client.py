@@ -88,10 +88,9 @@ class DexClient:
             self.block_explorer_url,
             self.block_explorer_api,
         )
-
-    async def get_quote(self, buy_address, sell_address, amount=1):
-        """ """
-        # return await self.dex_swap.get_quote(buy_address, sell_address, amount)
+        self.account = (
+            f"{str(self.w3.net.version)} - " f"{str(self.wallet_address)[-8:]}"
+        )
 
     async def get_swap(self, sell_token=None, buy_token=None, quantity=1):
         """
@@ -186,24 +185,6 @@ class DexClient:
 
         """
 
-    async def get_info(self):
-        """
-        Get the information about the DexSwap API.
-
-        Returns:
-            str: A string containing the version of DexSwap, the name obtained from
-                 `get_name()`, and the account number.
-        Raises:
-            Exception: If there is an error while retrieving the information.
-        """
-        try:
-            return (
-                f"💱 {self.name()}\n"
-                # f"🪪 {self.account.account_number}"
-            )
-        except Exception as error:
-            logger.error("info {}", error)
-
     async def get_account_balance(self):
         """
         Retrieves the account balance.
@@ -269,3 +250,7 @@ class DexClient:
                 break
 
         return instrument
+
+    async def get_instrument_address(self, instrument):
+        instrument = await self.replace_instrument(instrument)
+        return await self.contract_utils.search_contract_address(instrument)

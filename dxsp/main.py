@@ -51,11 +51,11 @@ class DexSwap:
                 if item in ["", "template"]:
                     continue
                 client = self._create_client(
-                    protocol=_config.get("protocol"),
                     name=item,
                     wallet_address=_config.get("wallet_address"),
                     private_key=_config.get("private_key"),
                     w3=Web3(Web3.HTTPProvider(_config.get("rpc"))),
+                    protocol=_config.get("protocol"),
                     protocol_version=_config.get("protocol_version"),
                     api_endpoint=_config.get("api_endpoint"),
                     api_key=_config.get("api_key"),
@@ -78,6 +78,21 @@ class DexSwap:
             logger.error("init: {}", e)
 
     def _create_client(self, **kwargs):
+        """
+        Create a client based on the given protocol.
+
+        Parameters:
+            **kwargs (dict): Keyword arguments that
+            contain the necessary information for creating the client.
+            The "protocol" key is required.
+
+        Returns:
+            The created client object based on the specified protocol.
+
+        Raises:
+            KeyError: If the "protocol" key is missing in the kwargs dictionary.
+            ValueError: If the specified protocol is not supported.
+        """
         protocol = kwargs["protocol"]
         if protocol == "uniswap":
             return DexUniswap(**kwargs)
@@ -86,7 +101,7 @@ class DexSwap:
         elif protocol == "kwenta":
             return DexKwenta(**kwargs)
         else:
-            logger.error(f"protocol type {protocol} not supported")
+            logger.error(f"protocol {protocol} not supported")
 
     async def get_info(self):
         """
@@ -103,7 +118,7 @@ class DexSwap:
         )
         return version_info + client_info.strip()
 
-    async def get_quotes(self, sell_token):
+    async def get_quotes(self, symbol):
         """
         gets a quote for a token
 
@@ -114,18 +129,27 @@ class DexSwap:
             str: The quote with the trading symbol
 
         """
-        logger.debug("get quote", sell_token)
-        info = "🦄\n"
-        for dx in self.clients:
-            logger.debug("get quote {}", dx)
-            buy_address = dx.trading_asset_address
-            sell_token = await dx.replace_instrument(sell_token)
-            sell_address = await dx.contract_utils.search_contract_address(sell_token)
-            quote = await dx.get_quote(buy_address, sell_address) or "Quote failed"
-            symbol = await dx.contract_utils.get_token_symbol(dx.trading_asset_address)
-            info += f"{dx.name}: {quote} {symbol}\n"
+        # info = "🦄\n"
+        # for client in self.clients:
+        #     logger.debug("get quote {}", client)
+        #     buy_address = client.trading_asset_address
+        #     sell_token = await client.replace_instrument(sell_token)
+        #     sell_address = await client.contract_utils.search_contract_address(
+        #         sell_token
+        #     )
+        #     quote = await client.get_quote(buy_address,
+        #  sell_address) or "Quote failed"
+        #     symbol = await client.contract_utils.get_token_symbol(
+        #         client.trading_asset_address
+        #     )
+        #     info += f"{client.name}: {quote} {symbol}\n"
 
-        return info.strip()
+        # return info.strip()
+        quotes = ["🦄\n"]
+        for client in self.clients:
+            quote = await client.get_quote(symbol)
+            quotes.append(f"⚖️ {client.name}: {quote}")
+        return "\n".join(quotes)
 
     async def submit_order(self, order_params):
         """
@@ -186,7 +210,7 @@ class DexSwap:
         :rtype: AccountPosition
         """
         info = "📊\n"
-        for dx in self.clients:
-            info += f"\n{dx.name}:"
-            info += f"{await dx.get_account_position()}"
+        for client in self.clients:
+            info += f"\n{client.name}:"
+            info += f"{await client.get_account_position()}"
         return info.strip()
