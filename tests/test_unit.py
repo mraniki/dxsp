@@ -168,7 +168,7 @@ async def test_get_pnls(dex):
     assert result is not None
     assert "🏆" in result
     assert get_account_pnl.awaited
-    assert ("1" in result) or ("56" in result)
+    assert ("eth" in result) or ("bsc" in result)
 
 
 @pytest.mark.asyncio
