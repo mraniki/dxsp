@@ -103,7 +103,7 @@ async def test_dextrader(dex):
         assert dx.name is not None
         assert dx.protocol == "uniswap"
         assert dx.private_key.startswith("0x")
-        assert dx.account.wallet_address.startswith("0x")
+        assert dx.wallet_address.startswith("0x")
         assert callable(dx.get_info)
         assert callable(dx.get_quote)
         assert callable(dx.get_account_balance)
