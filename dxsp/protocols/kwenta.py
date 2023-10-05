@@ -31,6 +31,7 @@ class DexKwenta(DexClient):
         if buy_address is None:
             buy_address = self.trading_asset_address
         logger.info(f"kwenta client: {kwenta}")
+        return f"🦄: {kwenta}"
         # # display the perps markets
         # assets = kwenta.markets.keys()
         # logger.info(f"Assets: {', '.join(assets)}\n")
