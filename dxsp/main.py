@@ -52,7 +52,7 @@ class DexSwap:
                     continue
                 client = self._create_client(
                     protocol=_config.get("protocol"),
-                    name=_config.get("name"),
+                    name=item,
                     api_key=_config.get("api_key"),
                     secret=_config.get("secret"),
                     password=_config.get("password"),
