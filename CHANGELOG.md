@@ -2,6 +2,27 @@
 
 
 
+## v5.1.6 (2023-10-05)
+
+### :white_check_mark:
+
+* :white_check_mark: Unit Test ([`1432e12`](https://github.com/mraniki/dxsp/commit/1432e128a15d7b6926f2070a5502f37c06e1d6c8))
+
+### Other
+
+* Merge pull request #441 from mraniki/dev
+
+🥅 ([`8e39096`](https://github.com/mraniki/dxsp/commit/8e3909626172e001dabbafc362c0ce7f17018d29))
+
+### ✅
+
+* ✅ Unit Test ([`991faa6`](https://github.com/mraniki/dxsp/commit/991faa66221f4f2016582172691a43097c5031da))
+
+### 🥅
+
+* 🥅 ([`12b9ab7`](https://github.com/mraniki/dxsp/commit/12b9ab700fd50bf61355880a5128c678cc1330ea))
+
+
 ## v5.1.5 (2023-10-05)
 
 ### Other
