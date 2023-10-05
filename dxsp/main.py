@@ -51,10 +51,7 @@ class DexSwap:
                 if item in ["", "template"]:
                     continue
                 client = self._create_client(
-<<<<<<< dev
                     protocol=_config.get("protocol"),
-                    name=item,
-=======
                     name=item,
                     wallet_address=_config.get("wallet_address"),
                     private_key=_config.get("private_key"),
@@ -62,7 +59,6 @@ class DexSwap:
                     protocol=_config.get("protocol_type"),
                     protocol_version=_config.get("protocol_version"),
                     api_endpoint=_config.get("api_endpoint"),
->>>>>>> origin/dev
                     api_key=_config.get("api_key"),
                     router_contract_addr=_config.get("router_contract_addr"),
                     factory_contract_addr=_config.get("factory_contract_addr"),
