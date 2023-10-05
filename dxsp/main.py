@@ -169,7 +169,7 @@ class DexSwap:
         """
         _info = ["🦄\n"]
         for client in self.clients:
-            _info.append(f"{client.name}:\n{await client.get_quote(symbol)}")
+            _info.append(f"{client.name}:\n{await client.get_quote(symbol=symbol)}")
         return "\n".join(_info)
 
     async def submit_order(self, order_params):
