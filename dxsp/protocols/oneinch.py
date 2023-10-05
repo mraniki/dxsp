@@ -14,7 +14,7 @@ class DexOneInch(DexClient):
 
     """
 
-    async def get_quote(self, buy_address, sell_address, amount=1):
+    async def get_quote(self, buy_address=None, symbol=None, amount=1):
         """
         Retrieves a quote for the
         given buy and sell addresses and amount.
