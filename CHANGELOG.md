@@ -2,6 +2,77 @@
 
 
 
+## v5.2.1 (2023-10-05)
+
+### :recycle:
+
+* :white_check_mark: Unit Test :recycle: ([`9f50565`](https://github.com/mraniki/dxsp/commit/9f5056550f7b9c931ad48e1bccc6938568a0a360))
+
+### :white_check_mark:
+
+* :white_check_mark: Unit Test ([`d41ce1a`](https://github.com/mraniki/dxsp/commit/d41ce1ad29c31d5b009d6d1f19e30b2d8022e673))
+
+### Other
+
+* Merge pull request #443 from mraniki/dev
+
+✅ Unit Test Coverage for Multi exchange support ♻️ ([`33554a9`](https://github.com/mraniki/dxsp/commit/33554a908cfe6e430a592d58a5724296386aeddf))
+
+* Fix assert statement in test_get_positions ([`180094a`](https://github.com/mraniki/dxsp/commit/180094a7210192be8359f3515a9f73aea90cef68))
+
+* Refactor account balance to account position in DexSwap class. ([`6cfffe9`](https://github.com/mraniki/dxsp/commit/6cfffe958be2beaa8959560ce27e3c95a498c27c))
+
+* Refactor test_get_quote in test_unit.py
+
+- Replace instrument &#34;UNI&#34; with &#34;BTC&#34;
+- Add AsyncMock for replace_instrument
+- Assert that replace_instrument was awaited ([`07c2582`](https://github.com/mraniki/dxsp/commit/07c25829c76ddd9251ec476f9882b0569205c0f5))
+
+* Add test for get_positions function ([`9aa0d75`](https://github.com/mraniki/dxsp/commit/9aa0d75c44cc04d0b58c584b18249e63aa203657))
+
+* Refactor search_contract_address method in DexClient ([`1359838`](https://github.com/mraniki/dxsp/commit/135983845d6d5a1af58c22927ca918f5e071a046))
+
+* Refactor search_contract_address method in DexClient ([`cdb4b59`](https://github.com/mraniki/dxsp/commit/cdb4b5906c7ba2be1c5f2267bc4161d2d201808c))
+
+* Refactor search_contract_address method in DexClient class ([`a2e6f54`](https://github.com/mraniki/dxsp/commit/a2e6f54ab6baeccae491e949e14e6484f54e10c6))
+
+### Update
+
+* Update Requirements ([`a8760b5`](https://github.com/mraniki/dxsp/commit/a8760b5018faba647ea3e6999008e4bec19fe13a))
+
+### ♻️
+
+* ✅ Unit Test ♻️ ([`eb68366`](https://github.com/mraniki/dxsp/commit/eb68366c932b809bd79f356391ee389fee5b2961))
+
+* ♻️ ([`16abe61`](https://github.com/mraniki/dxsp/commit/16abe6146f34406ae63e476b10e9e9e7a1957a0a))
+
+* ♻️ ([`07c6b7c`](https://github.com/mraniki/dxsp/commit/07c6b7c03cc2971a3b23950f22656673ddc5733b))
+
+### ⚗️
+
+* ⚗️ ([`fc8f916`](https://github.com/mraniki/dxsp/commit/fc8f9160cb95adcacbbc85fecee827871080ec53))
+
+### ✅
+
+* ✅ Unit Test ([`e379688`](https://github.com/mraniki/dxsp/commit/e37968813d560ff4a89a6bfe73e272812ea620ce))
+
+* ✅ Unit Test ([`4f85a8f`](https://github.com/mraniki/dxsp/commit/4f85a8fc4785a8c25e482d87740257ad974568de))
+
+* ✅ Unit Test ([`eb05522`](https://github.com/mraniki/dxsp/commit/eb055227e98535006271890ab6aff14b90cdd2cf))
+
+### 🐛
+
+* 🐛 0x ([`23fa6bf`](https://github.com/mraniki/dxsp/commit/23fa6bf41388fb45092aa37f68d996108137f135))
+
+### 🚑
+
+* 🚑 ([`3e0135e`](https://github.com/mraniki/dxsp/commit/3e0135e4ed308dde4fa1ddc7de178726109a71be))
+
+### 🚨
+
+* 🚨 ([`8eab670`](https://github.com/mraniki/dxsp/commit/8eab670704f3435e66c9506c31aae4ef24bf138b))
+
+
 ## v5.2.0 (2023-10-05)
 
 ### :ambulance:
