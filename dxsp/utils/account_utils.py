@@ -124,6 +124,16 @@ class AccountUtils:
         """
         return 0
 
+    async def get_account_pnl(self):
+        """
+        Get the open positions for the account.
+        Not yet implemented
+
+        :return: The number of open positions
+        for the account.
+        """
+        return 0
+
     async def get_approve(self, token_address):
         """
         Given a token address, approve a token

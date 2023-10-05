@@ -73,14 +73,20 @@ def order_params_fixture():
     }
 
 
-@pytest.fixture(name="invalid_order")
-def invalid_order_fixture():
+@pytest.fixture(name="invalid_symbol")
+def invalid_symbol_fixture():
     """Return order parameters."""
     return {
         "action": "BUY",
         "instrument": "NOTATHING",
         "quantity": 1,
     }
+
+
+@pytest.fixture(name="invalid_order")
+def invalid_order_fixture():
+    """Return order parameters."""
+    return "not an order"
 
 
 def test_dynaconf_is_in_testing():
@@ -117,6 +123,7 @@ async def test_get_info(dex):
     print(result)
     assert result is not None
     assert "ℹ️" in result
+    assert ("1" in result) or ("56" in result)
 
 
 @pytest.mark.asyncio
@@ -145,12 +152,23 @@ async def test_get_balances(dex):
 
 @pytest.mark.asyncio
 async def test_get_positions(dex):
-    # get_account_position = AsyncMock()
+    get_account_position = AsyncMock()
     result = await dex.get_positions()
     print(result)
     assert result is not None
     assert "📊" in result
-    # assert get_account_position.awaited
+    assert get_account_position.awaited
+    assert ("1" in result) or ("56" in result)
+
+
+@pytest.mark.asyncio
+async def test_get_pnls(dex):
+    get_account_pnl = AsyncMock()
+    result = await dex.get_pnl()
+    print(result)
+    assert result is not None
+    assert "📊" in result
+    assert get_account_pnl.awaited
     assert ("1" in result) or ("56" in result)
 
 
