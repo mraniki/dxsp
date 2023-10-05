@@ -11,7 +11,7 @@ from dxsp import DexSwap
 from dxsp.config import settings
 from dxsp.protocols import DexUniswap
 
- 
+
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="dxsp")
@@ -129,7 +129,7 @@ async def test_get_quote(dex):
     assert result is not None
     assert "🦄" in result
     assert get_quote.awaited
-    # assert ("eth" in result) or ("bsc" in result)
+    assert ("eth" in result) or ("bsc" in result)
 
 
 @pytest.mark.asyncio
@@ -140,7 +140,7 @@ async def test_get_balances(dex):
     assert result is not None
     assert "💵" in result
     assert get_account_balance.awaited
-    # assert ("1" in result) or ("56" in result)
+    assert ("1" in result) or ("56" in result)
 
 
 @pytest.mark.asyncio
