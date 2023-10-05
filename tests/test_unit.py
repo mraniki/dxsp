@@ -92,13 +92,13 @@ def test_dynaconf_is_in_testing():
 async def test_dextrader(dex):
     """Init Testing"""
     assert isinstance(dex, DexSwap)
-    assert dex.dex_info is not None
+    assert dex.clients is not None
     assert isinstance(dex, DexSwap)
     assert callable(dex.get_balances)
     assert callable(dex.get_positions)
     assert callable(dex.submit_order)
 
-    for dx in dex.dex_info:
+    for dx in dex.clients:
         assert dx is not None
         assert dx.name is not None
         assert dx.protocol_type == "uniswap"
@@ -122,7 +122,7 @@ async def test_get_info(dex):
 @pytest.mark.asyncio
 async def test_get_quote(dex):
     """getquote Testing"""
-    print(dex.dex_info)
+    print(dex.clients)
     get_quote = AsyncMock()
     result = await dex.get_quotes("UNI")
     print(result)
