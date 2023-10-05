@@ -93,7 +93,7 @@ class DexSwap:
         the exchange name and the account information.
         :rtype: str
         """
-        version_info = f"{__version__}\n"
+        version_info = f"ℹ️ {__version__}\n"
         client_info = "".join(
             f"💱 {client.name}\n🪪 {client.account}\n" for client in self.clients
         )
