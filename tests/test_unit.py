@@ -130,11 +130,13 @@ async def test_get_quote(dex):
     """getquote Testing"""
     print(dex.clients)
     get_quote = AsyncMock()
-    result = await dex.get_quotes("UNI")
+    replace_instrument = AsyncMock()
+    result = await dex.get_quotes("BTC")
     print(result)
     assert result is not None
     assert "🦄" in result
     assert get_quote.awaited
+    assert replace_instrument.awaited
     assert ("eth" in result) or ("bsc" in result)
 
 
