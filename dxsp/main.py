@@ -51,21 +51,23 @@ class DexSwap:
                 if item in ["", "template"]:
                     continue
                 client = self._create_client(
-                    protocol=_config.get("protocol"),
                     name=item,
+                    wallet_address=_config.get("wallet_address"),
+                    private_key=_config.get("private_key"),
+                    w3=Web3(Web3.HTTPProvider(_config.get("rpc"))),
+                    protocol=_config.get("protocol_type"),
+                    protocol_version=_config.get("protocol_version"),
+                    api_endpoint=_config.get("api_endpoint"),
                     api_key=_config.get("api_key"),
-                    secret=_config.get("secret"),
-                    password=_config.get("password"),
-                    testmode=_config.get("testmode"),
-                    defaulttype=_config.get("defaulttype"),
-                    ordertype=_config.get("ordertype"),
-                    leverage_type=_config.get("leverage_type"),
-                    leverage=_config.get("leverage"),
+                    router_contract_addr=_config.get("router_contract_addr"),
+                    factory_contract_addr=_config.get("factory_contract_addr"),
                     trading_risk_percentage=_config.get("trading_risk_percentage"),
                     trading_risk_amount=_config.get("trading_risk_amount"),
                     trading_slippage=_config.get("trading_slippage"),
-                    trading_asset=_config.get("trading_asset"),
+                    trading_asset_address=_config.get("trading_asset_address"),
                     trading_asset_separator=_config.get("trading_asset_separator"),
+                    block_explorer_url=_config.get("block_explorer_url"),
+                    block_explorer_api=_config.get("block_explorer_api"),
                     mapping=_config.get("mapping"),
                 )
                 self.clients.append(client)
