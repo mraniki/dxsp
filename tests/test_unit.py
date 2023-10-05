@@ -28,7 +28,7 @@ def mock_dex_client():
         name="uniswap",
         wallet_address="0x1a9C8182C09F50C8318d769245beA52c32BE35BC",
         private_key="0xdeadbeet45ab87712ad64ccb3b10217737f7faacbf2872e88fdd9a537d8fe266",
-        protocol_type="uniswap",
+        protocol="uniswap",
         protocol_version=2,
         api_endpoint=None,
         api_key=None,
@@ -101,7 +101,7 @@ async def test_dextrader(dex):
     for dx in dex.clients:
         assert dx is not None
         assert dx.name is not None
-        assert dx.protocol_type == "uniswap"
+        assert dx.protocol == "uniswap"
         assert dx.private_key.startswith("0x")
         assert dx.account.wallet_address.startswith("0x")
         assert callable(dx.get_info)
@@ -129,7 +129,7 @@ async def test_get_quote(dex):
     assert result is not None
     assert "🦄" in result
     assert get_quote.awaited
-    #assert ("eth" in result) or ("bsc" in result)
+    assert ("eth" in result) or ("bsc" in result)
 
 
 @pytest.mark.asyncio
@@ -140,7 +140,7 @@ async def test_get_balances(dex):
     assert result is not None
     assert "💵" in result
     assert get_account_balance.awaited
-    #assert ("1" in result) or ("56" in result)
+    assert ("1" in result) or ("56" in result)
 
 
 @pytest.mark.asyncio
@@ -151,7 +151,7 @@ async def test_get_positions(dex):
     assert result is not None
     assert "📊" in result
     assert get_account_position.awaited
-    # assert ("1" in result) or ("56" in result)
+    assert ("1" in result) or ("56" in result)
 
 
 @pytest.mark.asyncio

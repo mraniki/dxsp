@@ -52,22 +52,25 @@ class DexSwap:
                     continue
                 client = self._create_client(
                     protocol=_config.get("protocol"),
-                    name=_config.get("name"),
+                    name=item,
+                    wallet_address=_config.get("wallet_address"),
+                    private_key=_config.get("private_key"),
+                    w3=Web3(Web3.HTTPProvider(_config.get("rpc"))),
+                    protocol_version=_config.get("protocol_version"),
+                    api_endpoint=_config.get("api_endpoint"),
                     api_key=_config.get("api_key"),
-                    secret=_config.get("secret"),
-                    password=_config.get("password"),
-                    testmode=_config.get("testmode"),
-                    defaulttype=_config.get("defaulttype"),
-                    ordertype=_config.get("ordertype"),
-                    leverage_type=_config.get("leverage_type"),
-                    leverage=_config.get("leverage"),
+                    router_contract_addr=_config.get("router_contract_addr"),
+                    factory_contract_addr=_config.get("factory_contract_addr"),
                     trading_risk_percentage=_config.get("trading_risk_percentage"),
                     trading_risk_amount=_config.get("trading_risk_amount"),
                     trading_slippage=_config.get("trading_slippage"),
-                    trading_asset=_config.get("trading_asset"),
+                    trading_asset_address=_config.get("trading_asset_address"),
                     trading_asset_separator=_config.get("trading_asset_separator"),
+                    block_explorer_url=_config.get("block_explorer_url"),
+                    block_explorer_api=_config.get("block_explorer_api"),
                     mapping=_config.get("mapping"),
                 )
+
                 self.clients.append(client)
                 logger.debug(f"Loaded {item}")
 
@@ -75,15 +78,15 @@ class DexSwap:
             logger.error("init: {}", e)
 
     def _create_client(self, **kwargs):
-        protocol_type = kwargs["protocol_type"]
-        if protocol_type == "uniswap":
+        protocol = kwargs["protocol"]
+        if protocol == "uniswap":
             return DexUniswap(**kwargs)
-        elif protocol_type == "0x":
+        elif protocol == "0x":
             return DexZeroX(**kwargs)
-        elif protocol_type == "kwenta":
+        elif protocol == "kwenta":
             return DexKwenta(**kwargs)
         else:
-            logger.error(f"protocol type {protocol_type} not supported")
+            logger.error(f"protocol type {protocol} not supported")
 
     async def get_info(self):
         """
@@ -94,7 +97,7 @@ class DexSwap:
         the exchange name and the account information.
         :rtype: str
         """
-        version_info = f"ℹ️ {__version__}\n"
+        version_info = f"ℹ️ {type(self).__name__} {__version__}\n"
         client_info = "".join(
             f"💱 {client.name}\n🪪 {client.account}\n" for client in self.clients
         )
@@ -136,17 +139,19 @@ class DexSwap:
 
         """
         try:
-            for dx in self.clients:
-                logger.debug("submit order {}", dx)
+            for client in self.clients:
+                logger.debug("submit order {}", client)
                 action = order_params.get("action")
-                instrument = await dx.replace_instrument(order_params.get("instrument"))
+                instrument = await client.replace_instrument(
+                    order_params.get("instrument")
+                )
                 quantity = order_params.get("quantity", 1)
                 sell_token, buy_token = (
-                    (dx.trading_asset_address, instrument)
+                    (client.trading_asset_address, instrument)
                     if action == "BUY"
-                    else (instrument, dx.trading_asset_address)
+                    else (instrument, client.trading_asset_address)
                 )
-                order = await dx.get_swap(sell_token, buy_token, quantity)
+                order = await client.get_swap(sell_token, buy_token, quantity)
                 if order:
                     trade_confirmation = (
                         f"⬇️ {instrument}"
@@ -168,9 +173,9 @@ class DexSwap:
         :rtype: float
         """
         info = "💵\n"
-        for dx in self.clients:
-            info += f"\n{dx.name}:"
-            info += f"{await dx.get_account_balance()}"
+        for client in self.clients:
+            info += f"\n{client.name}:"
+            info += f"{await client.get_account_balance()}"
         return info.strip()
 
     async def get_positions(self):

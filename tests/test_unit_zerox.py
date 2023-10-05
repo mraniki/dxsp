@@ -40,8 +40,8 @@ async def test_dex(dex):
     for dx in dex.clients:
         assert dx is not None
         assert dx.w3 is not None
-        assert dx.protocol_type is not None
-        assert dx.protocol_type == "0x"
+        assert dx.protocol is not None
+        assert dx.protocol == "0x"
 
 
 @pytest.mark.asyncio
