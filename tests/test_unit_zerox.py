@@ -37,7 +37,7 @@ def test_dynaconf_is_in_testing():
 async def test_dex(dex):
     """Init Testing"""
     assert isinstance(dex, DexSwap)
-    for dx in dex.dex_info:
+    for dx in dex.clients:
         assert dx is not None
         assert dx.w3 is not None
         assert dx.protocol_type is not None

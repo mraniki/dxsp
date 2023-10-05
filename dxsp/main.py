@@ -43,56 +43,35 @@ class DexSwap:
         to interact with exchanges
 
         """
-        exchanges = settings.dex
-        self.dex_info = []
         try:
-            for dx in exchanges:
-                logger.debug(f"Loading {dx}")
-                name = dx
-                wallet_address = exchanges[dx]["wallet_address"]
-                private_key = exchanges[dx]["private_key"]
-                w3 = Web3(Web3.HTTPProvider(exchanges[dx]["rpc"]))
-                protocol_type = exchanges[dx]["protocol_type"]
-                protocol_version = exchanges[dx]["protocol_version"]
-                api_endpoint = exchanges[dx]["api_endpoint"]
-                api_key = exchanges[dx]["api_key"]
-                router_contract_addr = exchanges[dx]["router_contract_addr"]
-                factory_contract_addr = exchanges[dx]["factory_contract_addr"]
-                trading_risk_percentage = (
-                    True or exchanges[dx]["trading_risk_percentage"]
-                )
-                trading_risk_amount = 1 or exchanges[dx]["trading_risk_amount"]
-                trading_slippage = 2 or exchanges[dx]["trading_slippage"]
-                trading_asset_address = "" or exchanges[dx]["trading_asset_address"]
-                trading_asset_separator = "" or exchanges[dx]["trading_asset_separator"]
-                block_explorer_url = exchanges[dx]["block_explorer_url"]
-                block_explorer_api = exchanges[dx]["block_explorer_api"]
-                mapping = exchanges[dx]["mapping"]
-                client = self._create_client(
-                    name=name,
-                    wallet_address=wallet_address,
-                    private_key=private_key,
-                    w3=w3,
-                    protocol_type=protocol_type,
-                    protocol_version=protocol_version,
-                    api_endpoint=api_endpoint,
-                    api_key=api_key,
-                    router_contract_addr=router_contract_addr,
-                    factory_contract_addr=factory_contract_addr,
-                    trading_asset_address=trading_asset_address,
-                    trading_risk_percentage=trading_risk_percentage,
-                    trading_risk_amount=trading_risk_amount,
-                    trading_slippage=trading_slippage,
-                    trading_asset_separator=trading_asset_separator,
-                    block_explorer_url=block_explorer_url,
-                    block_explorer_api=block_explorer_api,
-                    mapping=mapping,
-                )
-                self.dex_info.append(client)
-            logger.debug("init complete")
+            config = settings.dex
+            self.clients = []
+            for item in config:
+                _config = config[item]
+                if item not in ["", "template"]:
+                    client = self._create_client(
+                        protocol=_config.get("protocol"),
+                        name=_config.get("name"),
+                        api_key=_config.get("api_key"),
+                        secret=_config.get("secret"),
+                        password=_config.get("password"),
+                        testmode=_config.get("testmode"),
+                        defaulttype=_config.get("defaulttype"),
+                        ordertype=_config.get("ordertype"),
+                        leverage_type=_config.get("leverage_type"),
+                        leverage=_config.get("leverage"),
+                        trading_risk_percentage=_config.get("trading_risk_percentage"),
+                        trading_risk_amount=_config.get("trading_risk_amount"),
+                        trading_slippage=_config.get("trading_slippage"),
+                        trading_asset=_config.get("trading_asset"),
+                        trading_asset_separator=_config.get("trading_asset_separator"),
+                        mapping=_config.get("mapping"),
+                    )
+                    self.clients.append(client)
+                    logger.debug(f"Loaded {item}")
 
         except Exception as e:
-            logger.error(e)
+            logger.error("init: {}", e)
 
     def _create_client(self, **kwargs):
         protocol_type = kwargs["protocol_type"]
@@ -104,6 +83,21 @@ class DexSwap:
             return DexKwenta(**kwargs)
         else:
             logger.error(f"protocol type {protocol_type} not supported")
+
+    async def get_info(self):
+        """
+        Retrieves information about the exchange
+        and the account.
+
+        :return: A formatted string containing
+        the exchange name and the account information.
+        :rtype: str
+        """
+        version_info = f"ℹ️ {__version__}\n"
+        client_info = "".join(
+            f"💱 {client.name}\n🪪 {client.account}\n" for client in self.clients
+        )
+        return version_info + client_info.strip()
 
     async def get_quotes(self, sell_token):
         """
@@ -118,7 +112,7 @@ class DexSwap:
         """
         logger.debug("get quote", sell_token)
         info = "🦄\n"
-        for dx in self.dex_info:
+        for dx in self.clients:
             logger.debug("get quote {}", dx)
             buy_address = dx.trading_asset_address
             sell_token = await dx.replace_instrument(sell_token)
@@ -141,7 +135,7 @@ class DexSwap:
 
         """
         try:
-            for dx in self.dex_info:
+            for dx in self.clients:
                 logger.debug("submit order {}", dx)
                 action = order_params.get("action")
                 instrument = await dx.replace_instrument(order_params.get("instrument"))
@@ -164,17 +158,6 @@ class DexSwap:
         except Exception as error:
             return f"⚠️ order execution: {error}"
 
-    async def get_info(self):
-        """
-        Get information from the account.
-
-        :return: The information retrieved from the account.
-        """
-        info = f"ℹ️  v{__version__}\n"
-        for dx in self.dex_info:
-            info += f"\n{await dx.get_info()}" or "Info failed\n"
-        return info.strip()
-
     # 🔒 USER RELATED
     async def get_balances(self):
         """
@@ -184,7 +167,7 @@ class DexSwap:
         :rtype: float
         """
         info = "💵\n"
-        for dx in self.dex_info:
+        for dx in self.clients:
             info += f"\n{dx.name}:"
             info += f"{await dx.get_account_balance()}"
         return info.strip()
@@ -197,7 +180,7 @@ class DexSwap:
         :rtype: AccountPosition
         """
         info = "📊\n"
-        for dx in self.dex_info:
+        for dx in self.clients:
             info += f"\n{dx.name}:"
             info += f"{await dx.get_account_position()}"
         return info.strip()

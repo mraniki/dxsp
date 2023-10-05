@@ -37,7 +37,7 @@ def test_dynaconf_is_in_testing():
 async def test_dex(dex):
     """Init Testing"""
     assert isinstance(dex, DexSwap)
-    for dx in dex.dex_info:
+    for dx in dex.clients:
         assert dx is not None
         assert dx.w3 is not None
         assert dx.protocol_type is not None
@@ -47,7 +47,7 @@ async def test_dex(dex):
 # @pytest.mark.asyncio
 # async def test_get_quote(dex):
 #     assert isinstance(dex, DexSwap)
-#     for dx in dex.dex_info:
+#     for dx in dex.clients:
 #         result = await dx.get_quote("BTC","test")
 #         assert result is not None
 #         assert "🦄" in result
@@ -55,7 +55,7 @@ async def test_dex(dex):
 
 # @pytest.mark.asyncio
 # async def test_submit_order(dex, order):
-#     for dx in dex.dex_info:
+#     for dx in dex.clients:
 #         assert dx is not None
 #         result = await dx.make_swap("BTC",1)
 #         print(result)
