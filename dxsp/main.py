@@ -145,11 +145,10 @@ class DexSwap:
         #     info += f"{client.name}: {quote} {symbol}\n"
 
         # return info.strip()
-        quotes = ["🦄\n"]
+        _info = ["🦄\n"]
         for client in self.clients:
-            quote = await client.get_quote(symbol)
-            quotes.append(f"⚖️ {client.name}: {quote}")
-        return "\n".join(quotes)
+            _info.append(f"🏦 {client.name}:\n{await client.get_quote(symbol)}")
+        return "\n".join(_info)
 
     async def submit_order(self, order_params):
         """
@@ -196,11 +195,10 @@ class DexSwap:
         :return: The account balance.
         :rtype: float
         """
-        info = "💵\n"
+        _info = ["💵\n"]
         for client in self.clients:
-            info += f"\n{client.name}:"
-            info += f"{await client.get_account_balance()}"
-        return info.strip()
+            _info.append(f"🏦 {client.name}:\n{await client.get_account_balance()}")
+        return "\n".join(_info)
 
     async def get_positions(self):
         """
@@ -209,8 +207,7 @@ class DexSwap:
         :return: The account position.
         :rtype: AccountPosition
         """
-        info = "📊\n"
+        _info = ["📊\n"]
         for client in self.clients:
-            info += f"\n{client.name}:"
-            info += f"{await client.get_account_position()}"
-        return info.strip()
+            _info.append(f"🏦 {client.name}:\n{await client.get_account_balance()}")
+        return "\n".join(_info)

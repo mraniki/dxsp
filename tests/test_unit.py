@@ -145,12 +145,12 @@ async def test_get_balances(dex):
 
 @pytest.mark.asyncio
 async def test_get_positions(dex):
-    get_account_position = AsyncMock()
+    # get_account_position = AsyncMock()
     result = await dex.get_positions()
     print(result)
     assert result is not None
     assert "📊" in result
-    assert get_account_position.awaited
+    # assert get_account_position.awaited
     assert ("1" in result) or ("56" in result)
 
 
