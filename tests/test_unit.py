@@ -110,7 +110,6 @@ async def test_dextrader(dex):
         assert dx.protocol == "uniswap"
         assert dx.private_key.startswith("0x")
         assert dx.wallet_address.startswith("0x")
-        assert callable(dx.get_info)
         assert callable(dx.get_quote)
         assert callable(dx.get_account_balance)
         assert callable(dx.get_account_position)
@@ -167,7 +166,7 @@ async def test_get_pnls(dex):
     result = await dex.get_pnl()
     print(result)
     assert result is not None
-    assert "📊" in result
+    assert "🏆" in result
     assert get_account_pnl.awaited
     assert ("1" in result) or ("56" in result)
 

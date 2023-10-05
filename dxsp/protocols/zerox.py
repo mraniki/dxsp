@@ -16,7 +16,7 @@ class DexZeroX(DexClient):
 
     """
 
-    async def get_quote(self, buy_address, symbol, amount=1):
+    async def get_quote(self, buy_address=None, symbol=None, amount=1):
         """
         Retrieves a quote for a token swap.
 

@@ -153,9 +153,8 @@ class DexSwap:
         """
         _info = ["🏆\n"]
         for client in self.clients:
-            _info.append(f"{client.name}:\n{await client.get_account_balance()}")
+            _info.append(f"{client.name}:\n{await client.get_account_pnl()}")
         return "\n".join(_info)
-
 
     async def get_quotes(self, symbol):
         """
@@ -172,7 +171,6 @@ class DexSwap:
         for client in self.clients:
             _info.append(f"{client.name}:\n{await client.get_quote(symbol)}")
         return "\n".join(_info)
-
 
     async def submit_order(self, order_params):
         """
