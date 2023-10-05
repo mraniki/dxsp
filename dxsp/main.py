@@ -37,62 +37,44 @@ class DexSwap:
 
     """
 
-    def __init__(self, w3: Optional[Web3] = None):
-        """
-        Initialize the DexTrader object
-        to interact with exchanges
+def __init__(self, w3: Optional[Web3] = None):
+    """
+    Initialize the DexTrader object
+    to interact with exchanges
 
-        """
-        exchanges = settings.dex
-        self.dex_info = []
-        try:
-            for dx in exchanges:
-                logger.debug(f"Loading {dx}")
-                name = dx
-                wallet_address = exchanges[dx]["wallet_address"]
-                private_key = exchanges[dx]["private_key"]
-                w3 = Web3(Web3.HTTPProvider(exchanges[dx]["rpc"]))
-                protocol_type = exchanges[dx]["protocol_type"]
-                protocol_version = exchanges[dx]["protocol_version"]
-                api_endpoint = exchanges[dx]["api_endpoint"]
-                api_key = exchanges[dx]["api_key"]
-                router_contract_addr = exchanges[dx]["router_contract_addr"]
-                factory_contract_addr = exchanges[dx]["factory_contract_addr"]
-                trading_risk_percentage = (
-                    True or exchanges[dx]["trading_risk_percentage"]
-                )
-                trading_risk_amount = 1 or exchanges[dx]["trading_risk_amount"]
-                trading_slippage = 2 or exchanges[dx]["trading_slippage"]
-                trading_asset_address = "" or exchanges[dx]["trading_asset_address"]
-                trading_asset_separator = "" or exchanges[dx]["trading_asset_separator"]
-                block_explorer_url = exchanges[dx]["block_explorer_url"]
-                block_explorer_api = exchanges[dx]["block_explorer_api"]
-                mapping = exchanges[dx]["mapping"]
-                client = self._create_client(
-                    name=name,
-                    wallet_address=wallet_address,
-                    private_key=private_key,
-                    w3=w3,
-                    protocol_type=protocol_type,
-                    protocol_version=protocol_version,
-                    api_endpoint=api_endpoint,
-                    api_key=api_key,
-                    router_contract_addr=router_contract_addr,
-                    factory_contract_addr=factory_contract_addr,
-                    trading_asset_address=trading_asset_address,
-                    trading_risk_percentage=trading_risk_percentage,
-                    trading_risk_amount=trading_risk_amount,
-                    trading_slippage=trading_slippage,
-                    trading_asset_separator=trading_asset_separator,
-                    block_explorer_url=block_explorer_url,
-                    block_explorer_api=block_explorer_api,
-                    mapping=mapping,
-                )
-                self.dex_info.append(client)
-            logger.debug("init complete")
+    """
+    exchanges = settings.dex
+    self.dex_info = []
+    try:
+        for dx in exchanges:
+            if dx == "template":
+                continue
+            name = dx
+            exchange_config = exchanges[dx]
+            client = self._create_client(
+                name=name,
+                wallet_address=exchange_config.get("wallet_address"),
+                private_key=exchange_config.get("private_key"),
+                w3=Web3(Web3.HTTPProvider(exchange_config.get("rpc"))),
+                protocol_type=exchange_config.get("protocol_type"),
+                protocol_version=exchange_config.get("protocol_version"),
+                api_endpoint=exchange_config.get("api_endpoint"),
+                api_key=exchange_config.get("api_key"),
+                router_contract_addr=exchange_config.get("router_contract_addr"),
+                factory_contract_addr=exchange_config.get("factory_contract_addr"),
+                trading_risk_percentage=exchange_config.get("trading_risk_percentage"),
+                trading_risk_amount=exchange_config.get("trading_risk_amount"),
+                trading_slippage=exchange_config.get("trading_slippage"),
+                trading_asset_address=exchange_config.get("trading_asset_address"),
+                trading_asset_separator=exchange_config.get("trading_asset_separator"),
+                block_explorer_url=exchange_config.get("block_explorer_url"),
+                block_explorer_api=exchange_config.get("block_explorer_api"),
+                mapping=exchange_config.get("mapping"),
+            )
+            self.dex_info.append(client)
 
-        except Exception as e:
-            logger.error(e)
+    except Exception as e:
+        logger.error(e)
 
     def _create_client(self, **kwargs):
         protocol_type = kwargs["protocol_type"]
