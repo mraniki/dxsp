@@ -132,7 +132,7 @@ class AccountUtils:
         :return: The number of open positions
         for the account.
         """
-        return f"{self.account_number}: {str(await self.get_account_pnl())}"
+        return f"{self.account_number}: {str(0)}"
 
     async def get_approve(self, token_address):
         """
