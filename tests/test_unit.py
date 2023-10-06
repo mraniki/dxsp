@@ -107,13 +107,21 @@ async def test_dextrader(dex):
     for dx in dex.clients:
         assert dx is not None
         assert dx.name is not None
-        assert dx.protocol == "uniswap"
+        assert dx.protocol in ["uniswap", "0x", "kwenta"]
         assert dx.private_key.startswith("0x")
         assert dx.wallet_address.startswith("0x")
+        assert callable(dx.replace_instrument)
+        assert callable(dx.get_instrument_address)
+        assert callable(dx.get_order_amount)
         assert callable(dx.get_quote)
-        assert callable(dx.get_account_balance)
-        assert callable(dx.get_account_position)
         assert callable(dx.get_swap)
+        assert callable(dx.make_swap)
+        assert callable(dx.get_account_balance)
+        assert callable(dx.get_trading_asset_balance)
+        assert callable(dx.get_account_margin)
+        assert callable(dx.get_account_position)
+        assert callable(dx.get_account_open_positions)
+        assert callable(dx.get_account_pnl)
 
 
 @pytest.mark.asyncio
@@ -172,7 +180,7 @@ async def test_get_pnls(dex):
     assert result is not None
     assert "🏆" in result
     assert get_account_pnl.awaited
-    assert ("eth" in result) or ("bsc" in result)
+    assert ("1" in result) or ("56" in result)
 
 
 @pytest.mark.asyncio
