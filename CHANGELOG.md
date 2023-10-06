@@ -2,6 +2,57 @@
 
 
 
+## v5.2.2 (2023-10-06)
+
+### :white_check_mark:
+
+* :white_check_mark: Unit Test ([`74190cb`](https://github.com/mraniki/dxsp/commit/74190cb7e7a9c056c5e42256d05adee1a9862f4e))
+
+### Other
+
+* Merge pull request #444 from mraniki/dev
+
+🚨 linter ([`79ed2ff`](https://github.com/mraniki/dxsp/commit/79ed2fff0b9b49d8d3a241be67bd000044d1572c))
+
+* Merge pull request #446 from mraniki/sourcery/dev
+
+🚨 linter (Sourcery refactored) ([`73b7c66`](https://github.com/mraniki/dxsp/commit/73b7c6624c549e8e658ffaa46c49292a4269a048))
+
+* &#39;Refactored by Sourcery&#39; ([`5b4bd0e`](https://github.com/mraniki/dxsp/commit/5b4bd0e3421e5b3143a0abf23ffc413c7a2487e2))
+
+* Merge pull request #445 from mraniki/sourcery/dev
+
+🚨 linter (Sourcery refactored) ([`f3629c6`](https://github.com/mraniki/dxsp/commit/f3629c6eee8092fcc5d859ec3d02462606882bf1))
+
+* &#39;Refactored by Sourcery&#39; ([`e0a59ad`](https://github.com/mraniki/dxsp/commit/e0a59ad3b636f7397cc01c36fe53b583f75f1363))
+
+* Fix protocol assertion in test_unit.py ([`970bec0`](https://github.com/mraniki/dxsp/commit/970bec04edb4da5ffbb4aefe5244549854ac23dc))
+
+* Remove deprecated unit tests for Kwenta and ZeroX
+
+- Removed tests/archive/test_unit_kwenta.py
+- Removed tests/archive/test_unit_zerox.py ([`8e474da`](https://github.com/mraniki/dxsp/commit/8e474daa2c6252ea26055a711780d5ae839538fe))
+
+* Refactor Kwenta client initialization and logging
+
+- Refactored the Kwenta client initialization and logging code in the De
+xKwenta class.
+- Removed the unused import statement for the Kwenta class.
+- Added a new unit test file for Kwenta functionality. ([`50b72a3`](https://github.com/mraniki/dxsp/commit/50b72a37a21f497e5e2cd26a138c8f529327e9e9))
+
+### Update
+
+* Update pyproject.toml format ([`868bdf1`](https://github.com/mraniki/dxsp/commit/868bdf1aaef1e241d4153cc7f6d0edb64504634b))
+
+* Update pyproject.toml - ignore F401 ([`9d1dafe`](https://github.com/mraniki/dxsp/commit/9d1dafecccec2d40588f1e1825a77af4d6cb4d5f))
+
+### ✅
+
+* ✅ Unit Test ([`d6fbb39`](https://github.com/mraniki/dxsp/commit/d6fbb39a0d05df10efa98eab53820cac5faa8118))
+
+* ✅ Unit Test ([`ca91d84`](https://github.com/mraniki/dxsp/commit/ca91d8474653dc680eea056a08ca9a6ecbb2d6cb))
+
+
 ## v5.2.1 (2023-10-05)
 
 ### :recycle:
