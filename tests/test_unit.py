@@ -107,7 +107,7 @@ async def test_dextrader(dex):
     for dx in dex.clients:
         assert dx is not None
         assert dx.name is not None
-        assert dx.protocol in ["uniswap", "0x"]
+        assert dx.protocol in ["uniswap", "0x", "kwenta"]
         assert dx.private_key.startswith("0x")
         assert dx.wallet_address.startswith("0x")
         assert callable(dx.replace_instrument)
@@ -122,7 +122,6 @@ async def test_dextrader(dex):
         assert callable(dx.get_account_position)
         assert callable(dx.get_account_open_positions)
         assert callable(dx.get_account_pnl)
-
 
 
 @pytest.mark.asyncio
