@@ -2,6 +2,37 @@
 
 
 
+## v5.2.3 (2023-10-07)
+
+### Other
+
+* Merge pull request #447 from mraniki/dev
+
+Refactor client information display in DexSwap class ([`2fb638f`](https://github.com/mraniki/dxsp/commit/2fb638f3ad26b0731d619b8d0defd5f30f8bba69))
+
+* Remove rusty_rlp dependency ([`f21a131`](https://github.com/mraniki/dxsp/commit/f21a13167be06c6d3de5bc5ab77d9eae01ceb23d))
+
+* Refactor DexSwap class documentation
+
+- Removed unnecessary details from the docstring
+- Updated the description of the return value
+
+Fixes #123 ([`abacd94`](https://github.com/mraniki/dxsp/commit/abacd94584aae717fa95eb1e6db1d7274e5fc8d2))
+
+* Refactor client information display in DexSwap class
+
+- Removed the previous formatting for client name and account number
++ Added a new formatting for client information display ([`dc9bb75`](https://github.com/mraniki/dxsp/commit/dc9bb75773386626c05591f253bfb4ea1546ef4f))
+
+* Add rusty_rlp dependency ([`9d6ec20`](https://github.com/mraniki/dxsp/commit/9d6ec20f21428c6e89d1a55b9f8b9710ef54e338))
+
+* Merge branch &#39;main&#39; into dev ([`1d74123`](https://github.com/mraniki/dxsp/commit/1d741238fe4c28f93b85ef216aa237d86b8a501c))
+
+### Update
+
+* Update Requirements ([`3302ab1`](https://github.com/mraniki/dxsp/commit/3302ab19d978a99c4f1e913135a78dc058775f06))
+
+
 ## v5.2.2 (2023-10-06)
 
 ### :white_check_mark:
@@ -9,6 +40,10 @@
 * :white_check_mark: Unit Test ([`74190cb`](https://github.com/mraniki/dxsp/commit/74190cb7e7a9c056c5e42256d05adee1a9862f4e))
 
 ### Other
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`ac52d49`](https://github.com/mraniki/dxsp/commit/ac52d49da0e1a573d38badfc1ad84bf04e8aec4a))
+
+* Refactor test_unit.py to comment out print statements ([`665ad64`](https://github.com/mraniki/dxsp/commit/665ad64cf0c51df16bf63e5d2149628f3d2b87b7))
 
 * Merge pull request #444 from mraniki/dev
 
