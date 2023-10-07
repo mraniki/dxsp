@@ -127,7 +127,7 @@ async def test_dextrader(dex):
 @pytest.mark.asyncio
 async def test_get_info(dex):
     result = await dex.get_info()
-    print(result)
+    #print(result)
     assert result is not None
     assert "ℹ️" in result
     assert ("1" in result) or ("56" in result)
@@ -140,7 +140,7 @@ async def test_get_quote(dex):
     get_quote = AsyncMock()
     replace_instrument = AsyncMock()
     result = await dex.get_quotes("BTC")
-    print(result)
+    #print(result)
     assert result is not None
     assert "🦄" in result
     assert get_quote.awaited
@@ -152,7 +152,7 @@ async def test_get_quote(dex):
 async def test_get_balances(dex):
     get_account_balance = AsyncMock()
     result = await dex.get_balances()
-    print(result)
+    #print(result)
     assert result is not None
     assert "💵" in result
     assert get_account_balance.awaited
@@ -163,7 +163,7 @@ async def test_get_balances(dex):
 async def test_get_positions(dex):
     get_account_position = AsyncMock()
     result = await dex.get_positions()
-    print(result)
+    #print(result)
     assert result is not None
     assert "📊" in result
     assert "Opened" in result
@@ -176,7 +176,7 @@ async def test_get_positions(dex):
 async def test_get_pnls(dex):
     get_account_pnl = AsyncMock()
     result = await dex.get_pnl()
-    print(result)
+    #print(result)
     assert result is not None
     assert "🏆" in result
     assert get_account_pnl.awaited
@@ -197,19 +197,19 @@ async def test_get_order_amount(dex_client):
 @pytest.mark.asyncio
 async def test_submit_order(dex, order):
     result = await dex.submit_order(order)
-    print(f"swap_order: {result}")
+    #print(f"swap_order: {result}")
     assert result is not None
 
 
 @pytest.mark.asyncio
 async def test_submit_order_invalid(dex, invalid_order):
     result = await dex.submit_order(invalid_order)
-    print(result)
+    #print(result)
     assert "⚠️" in result
 
 
 @pytest.mark.asyncio
 async def test_get_swap(dex_client):
     result = await dex_client.get_swap("USDT", "UNI", 1)
-    print(f"swap_order: {result}")
+    #print(f"swap_order: {result}")
     assert result is not None

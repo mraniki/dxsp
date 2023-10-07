@@ -89,11 +89,9 @@ class DexSwap:
             The "protocol" key is required.
 
         Returns:
-            The created client object based on the specified protocol.
+            client object based on
+            the specified protocol.
 
-        Raises:
-            KeyError: If the "protocol" key is missing in the kwargs dictionary.
-            ValueError: If the specified protocol is not supported.
         """
         protocol = kwargs["protocol"]
         if protocol == "uniswap":
@@ -116,7 +114,7 @@ class DexSwap:
         """
         version_info = f"ℹ️ {type(self).__name__} {__version__}\n"
         client_info = "".join(
-            f"💱 {client.name}\n🪪 {client.account_number}\n" for client in self.clients
+            f"💱 {client.name} {client.account_number}\n" for client in self.clients
         )
         return version_info + client_info.strip()
 
