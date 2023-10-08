@@ -2,6 +2,26 @@
 
 
 
+## v5.2.5 (2023-10-08)
+
+### Other
+
+* Merge pull request #449 from mraniki/dev
+
+Refactor DexSwap class in main.py ([`702e4b0`](https://github.com/mraniki/dxsp/commit/702e4b00f5336f12b9ac767154af83b5c0a8e376))
+
+* Refactor DexSwap class in main.py
+
+- Removed unnecessary code and fixed formatting issues. ([`f8743b5`](https://github.com/mraniki/dxsp/commit/f8743b592bfaf661b3a6d446befcdb9b2cab3773))
+
+### Update
+
+* Update test_unit.py assertions
+
+- Increase minimum numerical count to 10
+- Update expected result for &#34;:money:&#34; check ([`d4d894a`](https://github.com/mraniki/dxsp/commit/d4d894afcb5750dc6630237b6c392f8d647ebc44))
+
+
 ## v5.2.4 (2023-10-08)
 
 ### :recycle:
