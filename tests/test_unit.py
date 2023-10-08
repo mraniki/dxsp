@@ -68,7 +68,7 @@ def order_params_fixture():
     """Return order parameters."""
     return {
         "action": "BUY",
-        "instrument": "WBTC",
+        "instrument": "BTC",
         "quantity": 1,
     }
 
@@ -146,6 +146,9 @@ async def test_get_quote(dex):
     assert get_quote.awaited
     assert replace_instrument.awaited
     assert ("eth" in result) or ("bsc" in result)
+    assert "2" in result
+    numerical_count = sum(1 for char in result if char.isdigit())
+    assert numerical_count >= 10
 
 
 @pytest.mark.asyncio
@@ -154,7 +157,7 @@ async def test_get_balances(dex):
     result = await dex.get_balances()
     #print(result)
     assert result is not None
-    assert "💵" in result
+    assert "🏦" in result
     assert get_account_balance.awaited
     assert ("1" in result) or ("56" in result)
 

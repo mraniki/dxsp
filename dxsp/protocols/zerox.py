@@ -40,6 +40,7 @@ class DexZeroX(DexClient):
         )
         headers = {"0x-api-key": self.api_key}
         response = await get(url, params=None, headers=headers)
+        logger.debug("0x quote response {}", response)
         if response:
             return float(response["guaranteedPrice"])
 
