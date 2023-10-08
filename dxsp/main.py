@@ -125,9 +125,9 @@ class DexSwap:
         :return: The account balance.
         :rtype: float
         """
-        _info = ["💵\n"]
+        _info = ["🏦 Balance"]
         for client in self.clients:
-            _info.append(f"{client.name}:\n{await client.get_account_balance()}")
+            _info.append(f"\n{await client.get_account_balance()}")
         return "\n".join(_info)
 
     async def get_positions(self):
