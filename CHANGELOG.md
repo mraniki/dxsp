@@ -2,6 +2,19 @@
 
 
 
+## v5.2.4 (2023-10-08)
+
+### :recycle:
+
+* :recycle: Refactor code for improved readability and debugging. ([`122ae6b`](https://github.com/mraniki/dxsp/commit/122ae6ba2d4d36399b194eaf6f9ec04c2d4dc5ec))
+
+### Other
+
+* Merge pull request #448 from mraniki/dev
+
+:recycle: Refactor code for improved readability and debugging. ([`072e73a`](https://github.com/mraniki/dxsp/commit/072e73a42e3235ef85b563a7a2af8a0c7a476886))
+
+
 ## v5.2.3 (2023-10-07)
 
 ### Other
