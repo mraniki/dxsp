@@ -2,6 +2,23 @@
 
 
 
+## v5.2.6 (2023-10-10)
+
+### Other
+
+* Merge pull request #450 from mraniki/dev
+
+🔊 adding zerox log for quote ([`26ea466`](https://github.com/mraniki/dxsp/commit/26ea466a2e74325c49b3945b41e99a84ac6d9699))
+
+### 🎨
+
+* 🎨 0x ([`be2c1f5`](https://github.com/mraniki/dxsp/commit/be2c1f549cb9fb66f35e8b7933c453d4b696a92a))
+
+### 🔊
+
+* 🔊 adding zerox log for quote ([`c0b42c2`](https://github.com/mraniki/dxsp/commit/c0b42c2a19bcdfb455709cd5d64dc4f3a41f7664))
+
+
 ## v5.2.5 (2023-10-08)
 
 ### Other
