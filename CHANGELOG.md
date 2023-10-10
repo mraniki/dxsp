@@ -2,6 +2,45 @@
 
 
 
+## v5.2.7 (2023-10-10)
+
+### Other
+
+* Merge pull request #451 from mraniki/dev
+
+Refactor debug logging and add assertion for API key presence ([`1c33a9f`](https://github.com/mraniki/dxsp/commit/1c33a9fd8d5c42d910e026dfca527efe4ad9df17))
+
+* Merge pull request #452 from mraniki/renovate/ruff-0.x
+
+⬆️ 🛠️(deps): update dependency ruff to ^0.0.292 ([`2104cbe`](https://github.com/mraniki/dxsp/commit/2104cbec743455a1f2833641d6ed4aab641c8b78))
+
+* Refactor pyproject.toml, exclude tests directory ([`2903ccc`](https://github.com/mraniki/dxsp/commit/2903ccc93ddae6bf0b9a06ca9ae0f24c1dbbe565))
+
+* Refactor debug logging and add assertion for API key presence ([`34b49ad`](https://github.com/mraniki/dxsp/commit/34b49ad30420e3a05d7003c8229c0d7a4e109d96))
+
+### ♻️
+
+* ♻️ pyproject update ([`7764a57`](https://github.com/mraniki/dxsp/commit/7764a576f829623ba8f1dbf4454313ad75492538))
+
+### ✅
+
+* ✅ Unit Test ([`a03f69d`](https://github.com/mraniki/dxsp/commit/a03f69d7154c7b2bafbe76be3edceaa89fd8452c))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency ruff to ^0.0.292 ([`b0cff4e`](https://github.com/mraniki/dxsp/commit/b0cff4ee7e25ca22246340d726fae7daacd30d2b))
+
+### 👷
+
+* 👷 CI Change with precommit ([`97dd0eb`](https://github.com/mraniki/dxsp/commit/97dd0eba8f022a4245ab2480abbe37c31c16f07e))
+
+### 🔒
+
+* 🔒 ([`6d9fd21`](https://github.com/mraniki/dxsp/commit/6d9fd217ed6b0c0dc60d7d41217d403a8a78bd80))
+
+* 🔒 bandit ([`9b2c70b`](https://github.com/mraniki/dxsp/commit/9b2c70bbc2c4f563c491706bd00be4d1313c3cb7))
+
+
 ## v5.2.6 (2023-10-10)
 
 ### Other
