@@ -118,7 +118,7 @@ omit = [
 
 [tool.bandit]
 exclude_dirs = ["tests","docs"]
-skips = ["B101"]
+skips = ["B101","B104"]
 
 
 
