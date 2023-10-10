@@ -28,11 +28,13 @@ pycoingecko = "3.1.0"
 web3 = "6.10.0"
 uniswap-python = "0.7.1"
 kwenta = "1.2.0"
-#rusty_rlp = "0.2.1"
+
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = ">=8.0.8"
-#ruff = "*"
+ruff = "^0.0.265"
+black = "^23.3.0"
+pre-commit = "^3.3.1"
 
 
 [tool.ruff]
@@ -45,8 +47,6 @@ exclude = [
   ".github/*",
   "docs/*",
 ]
-#ignore = ["F401"]
-#format = "github"
 fixable = ["ALL"]
 
 
@@ -115,10 +115,12 @@ omit = [
 ]
 
 
+
 [tool.bandit]
-exclude_dirs = ["tests"]
+exclude_dirs = ["tests","docs"]
 
-
+[tool.bandit.assert_used]
+skips = ["*_test.py", "test_*.py"]
 
 
 
