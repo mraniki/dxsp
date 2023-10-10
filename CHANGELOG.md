@@ -2,6 +2,34 @@
 
 
 
+## v5.2.8 (2023-10-10)
+
+### :fire:
+
+* :fire: Remove unnecessary lines from pyproject.toml file ([`fbbf609`](https://github.com/mraniki/dxsp/commit/fbbf6098c3ba002942bfa5b1c1247200eca8a142))
+
+### Other
+
+* Merge pull request #454 from mraniki/dev
+
+:fire: Remove unnecessary lines from pyproject.toml file ([`6b35e3e`](https://github.com/mraniki/dxsp/commit/6b35e3e0c14d627e1541033fbd7d27097cadd718))
+
+* Merge pull request #453 from mraniki/dev
+
+Update with mergify ([`1c913d2`](https://github.com/mraniki/dxsp/commit/1c913d2d641f8f2548ca6b2a8f66ebf83914761c))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`c28f992`](https://github.com/mraniki/dxsp/commit/c28f9922dd285adcd6211bba75712f3545a9f86b))
+
+* Add automatic merge on approval rule
+
+- Added .github/.mergify.yml file
+- Configured pull_request_rules for automatic merge on approval
+- Conditions include successful build and test checks, and no check
+fail
+ures
+- Merge method set to merge ([`548c3cc`](https://github.com/mraniki/dxsp/commit/548c3cc4f425dba137c674620e61dea959a17881))
+
+
 ## v5.2.7 (2023-10-10)
 
 ### Other
