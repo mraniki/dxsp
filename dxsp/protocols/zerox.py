@@ -30,19 +30,27 @@ class DexZeroX(DexClient):
         """
         if buy_address is None:
             buy_address = self.trading_asset_address
-        sell_address = await self.get_instrument_address(symbol)
+        sell_address = str(await self.get_instrument_address(symbol))
         logger.debug(f"0x quote {buy_address} {sell_address} {amount}")
         token_decimals = await self.contract_utils.get_token_decimals(sell_address)
-        out_amount = amount * (10**token_decimals)
+        logger.debug("token_decimals {}", token_decimals)
+        out_amount = str(amount * (10**token_decimals))
+        logger.debug("out_amount {}", out_amount)
         url = (
             f"{self.api_endpoint}/swap/v1/quote"
-            f"?buyToken={str(buy_address)}&sellToken={str(sell_address)}&sellAmount={str(out_amount)}"
+            f"?buyToken={buy_address}&sellToken={sell_address}&sellAmount={out_amount}"
         )
+        logger.debug("0x quote url {}", url)
         headers = {"0x-api-key": self.api_key}
         response = await get(url, params=None, headers=headers)
         logger.debug("0x quote response {}", response)
         if response:
-            return float(response["guaranteedPrice"])
+            if "guaranteedPrice" in response:
+                return float(response["guaranteedPrice"])
+            elif "code" in response and "reason" in response:
+                return response["code"], response["reason"]
+            else:
+                return "Error from 0x"
 
     async def make_swap(self, buy_address, sell_address, amount):
         """
