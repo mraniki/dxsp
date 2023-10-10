@@ -122,6 +122,8 @@ async def test_dextrader(dex):
         assert callable(dx.get_account_position)
         assert callable(dx.get_account_open_positions)
         assert callable(dx.get_account_pnl)
+        if dx.protocol == "0x":
+            assert dx.api_key is not None
 
 
 @pytest.mark.asyncio
