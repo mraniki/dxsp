@@ -2,6 +2,27 @@
 
 
 
+## v5.2.11 (2023-10-11)
+
+### Other
+
+* Merge pull request #458 from mraniki/mergify/mraniki/config-update
+
+ci(Mergify): configuration update ([`4264a3b`](https://github.com/mraniki/dxsp/commit/4264a3b066285e33c63181f1f25cfe50aa1af59e))
+
+* ci(Mergify): configuration update
+
+Signed-off-by: null &lt;null&gt; ([`cd967bb`](https://github.com/mraniki/dxsp/commit/cd967bbe011fcda8baaf2eed005ebbfb5262bfb7))
+
+* Merge pull request #457 from mraniki/dev
+
+🚑 missed passing header in get ([`31256b4`](https://github.com/mraniki/dxsp/commit/31256b46b826f73729e3ec5d285e5bf2ae7757db))
+
+### 🚑
+
+* 🚑 missed passing header in get ([`537d6cc`](https://github.com/mraniki/dxsp/commit/537d6ccc8e425648123df0a0433f9561434d8107))
+
+
 ## v5.2.10 (2023-10-11)
 
 ### Other
