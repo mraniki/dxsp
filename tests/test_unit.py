@@ -136,6 +136,18 @@ async def test_get_info(dex):
 
 
 @pytest.mark.asyncio
+async def test_search_cg_token_data(dex):
+    for dx in dex.clients:
+        if dx.protocol == "0x":
+            result = await dx.contract_utils.search_cg_token_data(
+                "0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6"
+            )
+            assert result is not None
+            assert result == "0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6"
+            print(result)
+
+
+@pytest.mark.asyncio
 async def test_get_quote(dex):
     """getquote Testing"""
     print(dex.clients)
@@ -146,7 +158,7 @@ async def test_get_quote(dex):
     assert "🦄" in result
     assert get_quote.awaited
     assert replace_instrument.awaited
-    assert ("eth" in result) or ("bsc" in result)
+    assert ("eth" in result) or ("bsc" in result) or ("pol" in result)
     assert "2" in result
     numerical_count = sum(1 for char in result if char.isdigit())
     assert numerical_count >= 10
@@ -159,7 +171,7 @@ async def test_get_balances(dex):
     assert result is not None
     assert "🏦" in result
     assert get_account_balance.awaited
-    assert ("1" in result) or ("56" in result)
+    assert ("1" in result) or ("56" in result) or ("137" in result)
 
 
 @pytest.mark.asyncio

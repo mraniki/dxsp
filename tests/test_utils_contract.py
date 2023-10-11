@@ -7,11 +7,9 @@ import time
 import pytest
 from web3 import EthereumTesterProvider, Web3
 
-import dxsp
 from dxsp import DexSwap
 from dxsp.config import settings
-from dxsp.protocols import DexClient, DexUniswap, DexZeroX
-from dxsp.utils import AccountUtils, ContractUtils
+from dxsp.protocols import DexUniswap
 
 
 @pytest.fixture(scope="session", autouse=True)
