@@ -2,6 +2,21 @@
 
 
 
+## v5.2.9 (2023-10-11)
+
+### Other
+
+* Merge pull request #455 from mraniki/dev
+
+Fix header quotes in DexZeroX class ([`1ada846`](https://github.com/mraniki/dxsp/commit/1ada846ebd1dadc0930e35bc2ed174b605bc204f))
+
+* Fix header quotes in DexZeroX class ([`f220641`](https://github.com/mraniki/dxsp/commit/f220641d706543add08dc3a39a64745ad93f56c2))
+
+### 👷
+
+* 👷 CI Change ([`1ff4d7f`](https://github.com/mraniki/dxsp/commit/1ff4d7fff1c352223d768f78452f7be4c6989153))
+
+
 ## v5.2.8 (2023-10-10)
 
 ### :fire:
