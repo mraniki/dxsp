@@ -41,7 +41,7 @@ class DexZeroX(DexClient):
             f"?buyToken={buy_address}&sellToken={sell_address}&sellAmount={out_amount}"
         )
         logger.debug("0x quote url {}", url)
-        headers = {"0x-api-key": self.api_key}
+        headers = {'0x-api-key': self.api_key}
         response = await get(url, params=None, headers=headers)
         logger.debug("0x quote response {}", response)
         if response:
