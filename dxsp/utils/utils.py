@@ -33,7 +33,7 @@ async def get(url, params=None, headers=None):
         logger.debug(headers)
         async with aiohttp.ClientSession() as session:
             async with session.get(
-                url, params=None, headers=None, timeout=20
+                url, params=params, headers=headers, timeout=20
             ) as response:
                 logger.debug(response)
                 if response.status == 200:
