@@ -104,7 +104,7 @@ class ContractUtils:
                 token_data = await self.get_token_data(contract_list, token)
                 if token_data is not None:
                     logger.debug("Found {} on {}", token_data, contract_list)
-                    return token_data["address"]
+                    return token_data
 
             logger.debug("Searching on Coingecko")
             token_data = await self.search_cg_contract(token)
