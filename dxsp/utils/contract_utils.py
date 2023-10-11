@@ -168,10 +168,9 @@ class ContractUtils:
         """
         search token data on coingecko
         """
-        token_data = self.cg.get_coin_info_from_contract_address_by_id(
+        return self.cg.get_coin_info_from_contract_address_by_id(
             id=self.platform, contract_address=token_address
         )
-        return token_data
 
     async def get_token_data(self, token_list_url, symbol):
         """
