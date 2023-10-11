@@ -260,22 +260,23 @@ class ContractUtils:
         logger.debug("token abi: {}", token_abi)
 
         # Check if the ABI has an implementation object
-        proxy = next(
-            (
-                obj
-                for obj in json.loads(token_abi.text)
-                if obj["name"] == "implementation"
-            ),
-            None,
-        )
+        
 
         # If the ABI is not found, try to get it from a default URL
         if token_abi is None:
             token_abi = await get(settings.dex_erc20_abi_url)
 
         # If the ABI has an implementation, get the ABI for the implementation
-        elif proxy is not None:
-            token_abi = await self.get_token_abi(proxy)
+        # elif proxy is not None:
+        #     proxy = next(
+        #     (
+        #         obj
+        #         for obj in json.loads(token_abi.text)
+        #         if obj["name"] == "implementation"
+        #     ),
+        #     None,
+        #     )
+        #     token_abi = await self.get_token_abi(proxy)
 
         # Return the contract object with the token address and ABI
         return self.w3.eth.contract(address=token_address, abi=token_abi)
