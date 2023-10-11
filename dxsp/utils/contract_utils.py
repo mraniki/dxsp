@@ -238,6 +238,7 @@ class ContractUtils:
         Returns:
             int: The token decimals
 
+        
         """
         search = await self.search_token_data(token_address)
         if search["decimals"]:
