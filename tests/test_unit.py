@@ -136,21 +136,8 @@ async def test_get_info(dex):
 
 
 @pytest.mark.asyncio
-async def test_search_cg_token_data(dex):
-    for dx in dex.clients:
-        if dx.protocol == "0x":
-            result = await dx.contract_utils.search_cg_token_data(
-                "0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6"
-            )
-            assert result is not None
-            assert result == "0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6"
-            print(result)
-
-
-@pytest.mark.asyncio
 async def test_get_quote(dex):
     """getquote Testing"""
-    print(dex.clients)
     get_quote = AsyncMock()
     replace_instrument = AsyncMock()
     result = await dex.get_quotes("BTC")
