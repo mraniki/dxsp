@@ -241,7 +241,7 @@ class ContractUtils:
         
         """
         search = await self.search_token_data(token_address)
-        if search["decimals"]:
+        if search:
             return search["decimals"]
         contract = await self.get_token_contract(token_address)
         return 18 if not contract else contract.functions.decimals().call()
