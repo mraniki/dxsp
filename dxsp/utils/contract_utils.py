@@ -173,7 +173,7 @@ class Token:
         if self.name is None:
             self.name = await self.get_token_name()
 
-    async def get_token_abi(address=None):
+    async def get_token_abi(self, address=None):
         if not self.block_explorer_api:
             return await get(settings.dex_erc20_abi_url)
         if address is None:
