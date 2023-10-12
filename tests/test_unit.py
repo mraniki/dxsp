@@ -202,7 +202,7 @@ async def test_get_swap(dex_client):
 
 
 @pytest.mark.asyncio
-async def test_get_cg_data(dex):
+async def test_get_cg_data(dex_client):
     """getquote Testing"""
     get_cg_data = AsyncMock()
     result = await dex_client.get_quote(symbol="LINK")
