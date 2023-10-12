@@ -205,10 +205,7 @@ class Token:
         return contract
 
     def get_contract_function(self, contract, func_name: str):
-        if func_name in dir(contract.functions):
-            return True
-        else:
-            return False
+        return func_name in dir(contract.functions)
 
     async def get_token_balance(self, wallet_address: str) -> Optional[int]:
         contract = await self.get_token_contract(self.address)
