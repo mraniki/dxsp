@@ -58,9 +58,9 @@ class ContractUtils:
             if result is not None:
                 logger.debug("Found on Coingecko {}", token_instance)
                 logger.debug(result)
-                token_instance = Token(w3=self.w3, address=result["address"])
-                token_instance.decimals = result["decimals"]
-                token_instance.symbol = result["symbol"]
+                token_instance = Token(w3=self.w3, address=result["contract_address"])
+                token_instance.decimals = result["decimal_place"]
+
                 token_instance.block_explorer_api = self.block_explorer_api
                 token_instance.block_explorer_url = self.block_explorer_url
 
@@ -100,16 +100,14 @@ class ContractUtils:
     async def get_cg_data(self, token):
         try:
             search_results = self.cg.search(query=token)
-            logger.debug("cg data  {}", search_results)
             search_dict = search_results["coins"]
             filtered_dict = [x for x in search_dict if x["symbol"] == token.upper()]
             api_dict = [sub["api_symbol"] for sub in filtered_dict]
             for i in api_dict:
                 coin_dict = self.cg.get_coin_by_id(i)
                 try:
-                    if coin_dict["platforms"][f"{self.platform}"]:
-                        logger.debug("cg coin data found {}", coin_dict)
-                        return coin_dict
+                    if coin_dict["detail_platforms"][f"{self.platform}"]:
+                        return coin_dict["detail_platforms"][f"{self.platform}"]
                 except (KeyError, requests.exceptions.HTTPError):
                     pass
         except Exception as e:

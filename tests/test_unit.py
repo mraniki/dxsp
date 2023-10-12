@@ -209,3 +209,9 @@ async def test_get_cg_data(dex_client):
     assert result is not None
     assert "🦄" in result
     assert get_cg_data.awaited
+
+
+@pytest.mark.asyncio
+async def test_get_token_exception(dex_client):
+    with pytest.raises(Exception):
+        result = await dex_client.get_quote(symbol="NOTATHING")
