@@ -155,10 +155,10 @@ class Token:
     def __init__(
         self, w3, address, block_explorer_url=None, block_explorer_api=None, symbol=None
     ):
+        self.w3 = w3
         self.address = self.w3.to_checksum_address(address)
         self.decimals = None
         self.symbol = None
-        self.w3 = w3
         self.block_explorer_api = None
         self.block_explorer_url = None
 
