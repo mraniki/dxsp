@@ -199,3 +199,13 @@ async def test_get_swap(dex_client):
     result = await dex_client.get_swap(sell_token="USDT", buy_token="UNI", quantity=1)
     # print(f"swap_order: {result}")
     assert result is not None
+
+
+@pytest.mark.asyncio
+async def test_get_cg_data(dex):
+    """getquote Testing"""
+    get_cg_data = AsyncMock()
+    result = await dex.get_quotes("LINK")
+    assert result is not None
+    assert "🦄" in result
+    assert get_cg_data.awaited
