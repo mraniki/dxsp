@@ -66,8 +66,7 @@ class ContractUtils:
 
                 return token_instance
             if token_instance is None:
-                logger.warning("Invalid Token {}", token)
-            
+                raise Exception("Token not found: {}".format(token))
         except Exception as e:
             logger.error("Invalid Token {}: {}", token, e)
 
@@ -108,7 +107,7 @@ class ContractUtils:
             for i in api_dict:
                 coin_dict = self.cg.get_coin_by_id(i)
                 try:
-                    if coin_dict["platforms"][f"{self.platform()}"]:
+                    if coin_dict["platforms"][f"{self.platform}"]:
                         logger.debug("cg coin data found {}", coin_dict)
                         return coin_dict
                 except (KeyError, requests.exceptions.HTTPError):
