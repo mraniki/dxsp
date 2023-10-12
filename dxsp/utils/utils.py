@@ -28,14 +28,10 @@ async def get(url, params=None, headers=None):
     """
 
     try:
-        logger.debug(url)
-        logger.debug(params)
-        logger.debug(headers)
         async with aiohttp.ClientSession() as session:
             async with session.get(
                 url, params=params, headers=headers, timeout=20
             ) as response:
-                logger.debug(response)
                 if response.status == 200:
                     if response.content_length > MAX_RESPONSE_SIZE:
                         logger.warning("Response content too large, skipping...")

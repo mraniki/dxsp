@@ -30,18 +30,18 @@ class DexZeroX(DexClient):
         """
         if buy_address is None:
             buy_address = self.trading_asset_address
-        sell_address = str(await self.get_instrument_address(symbol))
-        logger.debug(f"0x quote {buy_address} {sell_address} {amount}")
-        token_decimals = await self.contract_utils.get_token_decimals(sell_address)
-        logger.debug("token_decimals {}", token_decimals)
-        out_amount = str(amount * (10**token_decimals))
+        buy_token = await self.contract_utils.get_data(address=buy_address)
+        symbol = await self.replace_instrument(symbol)
+        sell_token = await self.contract_utils.get_data(symbol=symbol)
+        logger.debug(f"0x quote {buy_token.address} {sell_token.address} {amount}")
+        out_amount = str(amount * (10**sell_token.decimals))
         logger.debug("out_amount {}", out_amount)
         url = (
             f"{self.api_endpoint}/swap/v1/quote"
-            f"?buyToken={buy_address}&sellToken={sell_address}&sellAmount={out_amount}"
+            f"?buyToken={buy_token.address}&sellToken={sell_token.address}&sellAmount={out_amount}"
         )
         logger.debug("0x quote url {}", url)
-        headers = {'0x-api-key': self.api_key}
+        headers = {"0x-api-key": self.api_key}
         response = await get(url, params=None, headers=headers)
         logger.debug("0x quote response {}", response)
         if response:

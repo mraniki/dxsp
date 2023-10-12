@@ -113,30 +113,23 @@ class DexClient:
 
         return instrument
 
-    async def get_instrument_address(self, instrument):
-        instrument = await self.replace_instrument(instrument)
-        instrument = await self.contract_utils.search_token_data(instrument)
-        logger.debug("Instrument {}", instrument["address"])
-        return instrument["address"]
+    # async def get_instrument_address(self, instrument):
+    #     instrument = await self.replace_instrument(instrument)
+    #     instrument = await self.contract_utils.search(instrument)
+    #     logger.debug("Instrument {}", instrument.address)
+    #     return instrument["address"]
 
     async def get_order_amount(
-        self, sell_token_address, wallet_address, quantity, is_percentage=True
+        self, sell_token, wallet_address, quantity, is_percentage=True
     ):
-        balance = await self.contract_utils.get_token_balance(
-            sell_token_address, wallet_address
-        )
-        sell_contract = await self.contract_utils.get_token_contract(sell_token_address)
-        sell_decimals = (
-            sell_contract.functions.decimals().call() if sell_contract else 18
-        )
-
+        balance = await sell_token.get_token_balance(wallet_address)
         if not is_percentage and balance:
             return quantity
 
         if balance:
             risk_percentage = float(quantity) / 100
             amount = (
-                balance / (decimal.Decimal(risk_percentage) * 10**sell_decimals)
+                balance / (decimal.Decimal(risk_percentage) * 10**sell_token.decimals)
             ) * (decimal.Decimal(quantity) / 100)
 
             if amount >= 1:
@@ -159,24 +152,26 @@ class DexClient:
         """
         try:
             logger.debug("get swap")
-            sell_token_data = await self.contract_utils.search_token_data(sell_token)
-            logger.debug("sell token {}", sell_token_data)
-            buy_token_data = await self.contract_utils.search_token_data(buy_token)
-            logger.debug("buy token {}", buy_token_data)
+            sell_token = await self.contract_utils.get_data(symbol=sell_token)
+            logger.debug("sell token {}", sell_token)
+            buy_token = await self.contract_utils.get_data(symbol=buy_token)
+            logger.debug("buy token {}", buy_token)
 
             sell_amount = await self.get_order_amount(
-                sell_token_data["address"], self.account.wallet_address, quantity
+                sell_token, self.account.wallet_address, quantity
             )
-            sell_token_amount_wei = sell_amount * (10 ** sell_token_data["decimals"])
+            sell_token_amount_wei = sell_amount * (
+                10 ** await sell_token.get_token_decimals
+            )
             if self.protocol == "0x":
-                await self.account.get_approve(sell_token_data["address"])
+                await self.account.get_approve(sell_token.address)
 
             order_amount = int(
                 sell_token_amount_wei * decimal.Decimal((self.trading_slippage / 100))
             )
             logger.debug(order_amount)
             order = await self.make_swap(
-                sell_token_data["address"], buy_token_data["address"], order_amount
+                sell_token.address, buy_token.address, order_amount
             )
 
             if not order:

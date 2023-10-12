@@ -110,9 +110,8 @@ async def test_dextrader(dex):
         assert dx.protocol in ["uniswap", "0x", "kwenta"]
         assert dx.private_key.startswith("0x")
         assert dx.wallet_address.startswith("0x")
-        assert callable(dx.replace_instrument)
-        assert callable(dx.get_instrument_address)
         assert callable(dx.get_order_amount)
+        assert callable(dx.replace_instrument)
         assert callable(dx.get_quote)
         assert callable(dx.get_swap)
         assert callable(dx.make_swap)
@@ -139,12 +138,10 @@ async def test_get_info(dex):
 async def test_get_quote(dex):
     """getquote Testing"""
     get_quote = AsyncMock()
-    replace_instrument = AsyncMock()
     result = await dex.get_quotes("BTC")
     assert result is not None
     assert "🦄" in result
     assert get_quote.awaited
-    assert replace_instrument.awaited
     assert ("eth" in result) or ("bsc" in result) or ("pol" in result)
     assert "2" in result
     numerical_count = sum(1 for char in result if char.isdigit())

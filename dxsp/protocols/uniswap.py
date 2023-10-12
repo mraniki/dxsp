@@ -30,8 +30,11 @@ class DexUniswap(DexClient):
         """
         try:
             if buy_address is None:
-                buy_address = self.trading_asset_address
-            sell_address = await self.get_instrument_address(symbol)
+                buy_token = await self.contract_utils.get_data(
+                    address=self.trading_asset_address
+                )
+            symbol = await self.replace_instrument(symbol)
+            sell_token = await self.contract_utils.search(symbol)
             uniswap = Uniswap(
                 address=self.wallet_address,
                 private_key=self.private_key,
@@ -41,28 +44,16 @@ class DexUniswap(DexClient):
                 router_contract_addr=self.router_contract_addr,
             )
             logger.debug("Uniswap client created {}", uniswap)
-            amount_wei = amount * (
-                10 ** (await self.contract_utils.get_token_decimals(sell_address))
-            )
+            amount_wei = amount * (10 ** (sell_token.decimals))
             logger.debug("Amount {}", amount_wei)
-            quote = uniswap.get_price_input(sell_address, buy_address, amount_wei)
+            quote = uniswap.get_price_input(
+                sell_token.address, buy_token.address, amount_wei
+            )
             logger.debug("quote {}", quote)
             if quote is None:
                 return "Quote failed"
             return round(
-                float(
-                    (
-                        quote
-                        / (
-                            10
-                            ** (
-                                await self.contract_utils.get_token_decimals(
-                                    buy_address
-                                )
-                            )
-                        )
-                    )
-                ),
+                float((quote / (10 ** (buy_token.decimals)))),
                 5,
             )
 

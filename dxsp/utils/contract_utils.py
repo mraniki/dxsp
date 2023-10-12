@@ -22,6 +22,14 @@ class ContractUtils:
         self.cg = CoinGeckoAPI()
         self.platform = self.get_cg_platform() or None
 
+    async def get_data(self, symbol=None, contract_address=None):
+        if symbol is None and contract_address is None:
+            return None
+        if symbol:
+            return await self.search(symbol)
+        if contract_address:
+            return Token(w3=self.w3, address=contract_address)
+
     async def search(self, token):
         try:
             token_instance = None
@@ -144,25 +152,25 @@ class ContractUtils:
 
 
 class Token:
-    def __init__(self, w3, address, block_explorer_url=None, block_explorer_api=None):
-        self.address = address
+    def __init__(
+        self, w3, address, block_explorer_url=None, block_explorer_api=None, symbol=None
+    ):
+        self.address = self.w3.to_checksum_address(address)
         self.decimals = None
         self.symbol = None
         self.w3 = w3
         self.block_explorer_api = None
         self.block_explorer_url = None
 
-    async def get_token_data(self):
+    async def get_data(self):
         self.abi = await self.get_token_abi(self.address)
-        logger.debug("token abi: {}", self.address)
-        self.contract = self.w3.eth.contract(address=self.address, abi=self.abi)
-        self.decimals = None
-        self.symbol = None
-        self.name = None
-        self.alt_symbol = None
-        self.abi = None
-        self.contract = self.w3.eth.contract(address=self.address, abi=self.abi)
-        self.get_token_contract(self.address)
+        self.contract = self.get_token_contract()
+        if self.decimals is None:
+            self.decimals = await self.get_token_decimals()
+        if self.symbol is None:
+            self.symbol = await self.get_token_symbol()
+        if self.name is None:
+            self.name = await self.get_token_name()
 
     async def get_token_abi(self):
         if not self.block_explorer_api:
@@ -202,18 +210,17 @@ class Token:
         return round(self.w3.from_wei(balance, "ether"), 5) or 0
 
     async def get_token_symbol(self):
-        contract = await self.get_token_contract(self.address)
+        contract = await self.get_token_contract()
         return contract.functions.symbol().call()
 
     async def get_token_name(self):
-        contract = await self.get_token_contract(self.address)
+        contract = await self.get_token_contract()
         return contract.functions.name().call()
 
     async def get_token_decimals(self):
-        search = await self.search_token_data(self.address)
-        if search["decimals"]:
-            return search["decimals"]
-        contract = await self.get_token_contract(self.address)
+        if self.decimals:
+            return self.decimals
+        contract = await self.get_token_contract()
         return 18 if not contract else contract.functions.decimals().call()
 
 

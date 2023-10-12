@@ -87,8 +87,11 @@ class AccountUtils:
             If the balance is not available,
             it returns 0.
         """
-        trading_asset_balance = await self.contract_utils.get_token_balance(
-            self.trading_asset_address, self.wallet_address
+        trading_asset = await self.contract_utils.search(
+            address=self.trading_asset_address
+        )
+        trading_asset_balance = await trading_asset.get_token_balance(
+            self.wallet_address
         )
         return trading_asset_balance if trading_asset_balance else 0
 
@@ -145,19 +148,19 @@ class AccountUtils:
 
         """
         try:
-            contract = await self.contract_utils.get_token_contract(token_address)
-            if contract is None:
+            token = await self.contract_utils.get_data(address=token_address)
+            if token.contract is None:
                 return
             approved_amount = self.w3.to_wei(2**64 - 1, "ether")
             owner_address = self.w3.to_checksum_address(self.wallet_address)
             dex_router_address = self.w3.to_checksum_address(
                 settings.dex_router_contract_addr
             )
-            allowance = contract.functions.allowance(
+            allowance = token.contract.functions.allowance(
                 owner_address, dex_router_address
             ).call()
             if allowance == 0:
-                approval_tx = contract.functions.approve(
+                approval_tx = token.contract.functions.approve(
                     dex_router_address, approved_amount
                 )
                 approval_tx_hash = await self.get_sign(approval_tx.transact())
