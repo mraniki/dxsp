@@ -88,7 +88,7 @@ class AccountUtils:
             it returns 0.
         """
         trading_asset = await self.contract_utils.get_data(
-            address=self.trading_asset_address
+            contract_address=self.trading_asset_address
         )
         trading_asset_balance = await trading_asset.get_token_balance(
             self.wallet_address

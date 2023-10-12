@@ -99,6 +99,7 @@ class ContractUtils:
     async def get_cg_data(self, token):
         try:
             search_results = self.cg.search(query=token)
+            logger.debug("cg data  {}", search_results)
             search_dict = search_results["coins"]
             filtered_dict = [x for x in search_dict if x["symbol"] == token.upper()]
             api_dict = [sub["api_symbol"] for sub in filtered_dict]
@@ -203,6 +204,7 @@ class Token:
             )
 
         return contract
+
 
     def get_contract_function(self, contract, func_name: str):
         return func_name in dir(contract.functions)
