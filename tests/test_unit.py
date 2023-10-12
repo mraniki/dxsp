@@ -205,7 +205,7 @@ async def test_get_swap(dex_client):
 async def test_get_cg_data(dex):
     """getquote Testing"""
     get_cg_data = AsyncMock()
-    result = await dex.get_quotes("LINK")
+    result = await dex_client.get_quote(symbol="LINK")
     assert result is not None
     assert "🦄" in result
     assert get_cg_data.awaited
