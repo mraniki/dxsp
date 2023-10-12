@@ -192,8 +192,7 @@ class Token:
         contract = self.w3.eth.contract(address=self.address, abi=self.abi)
         if self.get_contract_function(contract=contract, func_name="implementation"):
             logger.debug(
-                "Proxy Detected. Using Implementation address: {}",
-                contract.functions.implementation().call(),
+                "Proxy Detected. Using Implementation address"
             )
             implementation_address = self.w3.to_checksum_address(
                 contract.functions.implementation().call()
