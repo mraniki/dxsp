@@ -59,7 +59,7 @@ class DexClient:
         self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
         self.name = name
         logger.debug(f"setting up DexClient: {self.name}")
-        self.wallet_address = wallet_address
+        self.wallet_address = self.w3.to_checksum_address(wallet_address)
         self.private_key = private_key
         self.account_number = (
             f"{str(self.w3.net.version)} - " f"{str(self.wallet_address)[-8:]}"

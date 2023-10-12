@@ -67,7 +67,7 @@ class AccountUtils:
         """
         try:
             account_balance = self.w3.eth.get_balance(
-                self.w3.to_checksum_address(self.wallet_address)
+                self.wallet_address
             )
             account_balance = self.w3.from_wei(account_balance, "ether") or 0
             trading_asset_balance = await self.get_trading_asset_balance()
@@ -148,7 +148,7 @@ class AccountUtils:
 
         """
         try:
-            token = await self.contract_utils.get_data(address=token_address)
+            token = await self.contract_utils.get_data(contract_address=token_address)
             if token.contract is None:
                 return
             approved_amount = self.w3.to_wei(2**64 - 1, "ether")

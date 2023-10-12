@@ -209,8 +209,8 @@ class Token:
     def get_contract_function(self, contract, func_name: str):
         return func_name in dir(contract.functions)
 
-    async def get_token_balance(self, wallet_address: str) -> Optional[int]:
-        contract = await self.get_token_contract(self.address)
+    async def get_token_balance(self, wallet_address)
+        contract = await self.get_token_contract()
         if contract is None or contract.functions is None:
             logger.warning("No Balance")
             return 0
