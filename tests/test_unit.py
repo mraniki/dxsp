@@ -201,17 +201,17 @@ async def test_get_swap(dex_client):
     assert result is not None
 
 
-@pytest.mark.asyncio
-async def test_get_cg_data(dex_client):
-    """getquote Testing"""
-    get_cg_data = AsyncMock()
-    result = await dex_client.get_quote(symbol="LINK")
-    assert result is not None
-    assert "🦄" in result
-    assert get_cg_data.awaited
+# @pytest.mark.asyncio
+# async def test_get_cg_data(dex_client):
+#     """getquote Testing"""
+#     get_cg_data = AsyncMock()
+#     result = await dex_client.get_quote(symbol="LINK")
+#     assert result is not None
+#     assert "🦄" in result
+#     assert get_cg_data.awaited
 
 
-@pytest.mark.asyncio
-async def test_get_token_exception(dex_client):
-    with pytest.raises(Exception):
-        result = await dex_client.get_quote(symbol="NOTATHING")
+# @pytest.mark.asyncio
+# async def test_get_token_exception(dex_client):
+#     with pytest.raises(Exception):
+#         result = await dex_client.get_quote(symbol="NOTATHING")

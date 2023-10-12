@@ -70,7 +70,7 @@ class ContractUtils:
                 raise Exception(f"Token not found: {token}")
         except Exception as e:
             logger.error("Invalid Token {}: {}", token, e)
-            raise Exception(f"Token not found: {token}")
+            raise e
 
     async def get_tokenlist_data(self, token_list_url, symbol):
         try:
