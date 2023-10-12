@@ -175,7 +175,6 @@ class Token:
     async def get_token_abi(self):
         if not self.block_explorer_api:
             return await get(settings.dex_erc20_abi_url)
-
         params = {
             "module": "contract",
             "action": "getabi",
@@ -186,17 +185,26 @@ class Token:
             url=self.block_explorer_url, headers=settings.headers, params=params
         )
         if resp:
-            logger.debug("get_token_abi: {}", resp)
             return resp["result"] if resp["status"] == "1" else None
 
     async def get_token_contract(self):
         self.abi = await self.get_token_abi(self.address)
         logger.debug("token abi: {}", self.abi)
+        contract = self.w3.eth.contract(address=self.address, abi=self.abi)
+        if contract.functions.implementation().call() is not None:
+            logger.debug(
+                "Proxy Implementation address detected: {}",
+                contract.functions.implementation().call(),
+            )
+            implementation_address = self.w3.to_checksum_address(
+                contract.functions.implementation().call()
+            )
+            implementation_abi = await self.get_token_abi(implementation_address)
+            contract = self.w3.eth.contract(
+                address=implementation_address, abi=implementation_abi
+            )
 
-        # TODO
-        # support proxy contract
-
-        return self.w3.eth.contract(address=self.address, abi=self.abi)
+        return contract
 
     async def get_token_balance(self, wallet_address: str) -> Optional[int]:
         contract = await self.get_token_contract(self.address)

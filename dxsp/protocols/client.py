@@ -160,6 +160,9 @@ class DexClient:
             sell_amount = await self.get_order_amount(
                 sell_token, self.account.wallet_address, quantity
             )
+            if not sell_amount:
+                logger.error("sell amount {}", sell_amount)
+                return f"⚠️ sell amount failed {sell_amount}"
             sell_token_amount_wei = sell_amount * (
                 10 ** await sell_token.get_token_decimals
             )
