@@ -24,7 +24,7 @@ class ContractUtils:
 
     async def search(self, token):
         try:
-            token_data = []
+            token_instance = None
             logger.debug("Searching Token Address")
             contract_lists = [
                 settings.token_personal_list,
@@ -35,17 +35,29 @@ class ContractUtils:
                 if not contract_list:
                     continue
                 logger.debug("Searching {} on {}", token, contract_list)
-                token_data = await self.get_tokenlist_data(contract_list, token)
-                if token_data is not None:
-                    logger.debug("Found {} on {}", token_data, contract_list)
-                    return token_data["address"]
+                result = await self.get_tokenlist_data(contract_list, token)
+                if result is not None:
+                    logger.debug("Found {} on {}", token_instance, contract_list)
+                    token_instance = Token(w3=self.w3, address=result["address"])
+                    token_instance.decimals = result["decimals"]
+                    token_instance.symbol = result["symbol"]
+                    token_instance.block_explorer_api = self.block_explorer_api
+                    token_instance.block_explorer_url = self.block_explorer_url
+                    return token_instance
 
             logger.debug("Searching on Coingecko")
-            token_data = await self.get_cg_data(token)
-            if token_data is None:
+            result = await self.get_cg_data(token)
+            if result is not None:
+                token_instance = Token(w3=self.w3, address=result["address"])
+                token_instance.decimals = result["decimals"]
+                token_instance.symbol = result["symbol"]
+                token_instance.block_explorer_api = self.block_explorer_api
+                token_instance.block_explorer_url = self.block_explorer_url
+                return token_instance
+            if token_instance is None:
                 logger.warning("Invalid Token {}", token)
-            logger.debug("Found on Coingecko {}", token_data)
-            return token_data
+            logger.debug("Found on Coingecko {}", token_instance)
+            return token_instance
         except Exception as e:
             logger.error("Invalid Token {}: {}", token, e)
 
@@ -86,37 +98,12 @@ class ContractUtils:
                 coin_dict = self.cg.get_coin_by_id(i)
                 try:
                     if coin_dict["platforms"][f"{self.platform()}"]:
+                        logger.debug("cg coin data found {}", coin_dict)
                         return coin_dict
                 except (KeyError, requests.exceptions.HTTPError):
                     pass
         except Exception as e:
             logger.error("search_cg {}", e)
-
-    async def get_token_abi(self, token_address):
-        return self.token.get_abi(token_address)
-
-    async def get_token_contract(self, token_address):
-        return self.token.get_contract(token_address)
-
-    async def get_token_balance(
-        self, token_address: str, wallet_address: str
-    ) -> Optional[int]:
-        return self.token.get_balance(token_address, wallet_address)
-
-    async def get_token_symbol(self, token_address: str):
-        contract = await self.get_token_contract(token_address)
-        return contract.functions.symbol().call()
-
-    async def get_token_name(self, token_address: str):
-        contract = await self.get_token_contract(token_address)
-        return contract.functions.name().call()
-
-    async def get_token_decimals(self, token_address: str) -> Optional[int]:
-        search = await self.search_token_data(token_address)
-        if search["decimals"]:
-            return search["decimals"]
-        contract = await self.get_token_contract(token_address)
-        return 18 if not contract else contract.functions.decimals().call()
 
     async def get_confirmation(self, transactionHash):
         """
@@ -154,6 +141,80 @@ class ContractUtils:
             }
         except Exception as error:
             logger.error("get_confirmation {}", error)
+
+
+class Token:
+    def __init__(self, w3, address, block_explorer_url=None, block_explorer_api=None):
+        self.address = address
+        self.decimals = None
+        self.symbol = None
+        self.w3 = w3
+        self.block_explorer_api = None
+        self.block_explorer_url = None
+
+    async def get_token_data(self):
+        self.abi = await self.get_token_abi(self.address)
+        logger.debug("token abi: {}", self.address)
+        self.contract = self.w3.eth.contract(address=self.address, abi=self.abi)
+        self.decimals = None
+        self.symbol = None
+        self.name = None
+        self.alt_symbol = None
+        self.abi = None
+        self.contract = self.w3.eth.contract(address=self.address, abi=self.abi)
+        self.get_token_contract(self.address)
+
+    async def get_token_abi(self):
+        if not self.block_explorer_api:
+            return await get(settings.dex_erc20_abi_url)
+
+        params = {
+            "module": "contract",
+            "action": "getabi",
+            "address": self.address,
+            "apikey": self.block_explorer_api,
+        }
+        resp = await get(
+            url=self.block_explorer_url, headers=settings.headers, params=params
+        )
+        if resp:
+            logger.debug("get_token_abi: {}", resp)
+            return resp["result"] if resp["status"] == "1" else None
+
+    async def get_token_contract(self):
+        self.abi = await self.get_token_abi(self.address)
+        logger.debug("token abi: {}", self.abi)
+
+        # TODO
+        # support proxy contract
+
+        return self.w3.eth.contract(address=self.address, abi=self.abi)
+
+    async def get_token_balance(self, wallet_address: str) -> Optional[int]:
+        contract = await self.get_token_contract(self.address)
+        if contract is None or contract.functions is None:
+            logger.warning("No Balance")
+            return 0
+        balance = contract.functions.balanceOf(wallet_address).call()
+        if balance is None:
+            logger.warning("No Balance")
+            return 0
+        return round(self.w3.from_wei(balance, "ether"), 5) or 0
+
+    async def get_token_symbol(self):
+        contract = await self.get_token_contract(self.address)
+        return contract.functions.symbol().call()
+
+    async def get_token_name(self):
+        contract = await self.get_token_contract(self.address)
+        return contract.functions.name().call()
+
+    async def get_token_decimals(self):
+        search = await self.search_token_data(self.address)
+        if search["decimals"]:
+            return search["decimals"]
+        contract = await self.get_token_contract(self.address)
+        return 18 if not contract else contract.functions.decimals().call()
 
 
 # class ContractUtils:
