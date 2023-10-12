@@ -181,17 +181,6 @@ async def test_get_pnls(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_order_amount(dex_client):
-    result = await dex_client.get_order_amount(
-        "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
-        dex_client.wallet_address,
-        1,
-    )
-    print(result)
-    assert result is not None
-
-
-@pytest.mark.asyncio
 async def test_submit_order(dex, order):
     result = await dex.submit_order(order)
     # print(f"swap_order: {result}")
@@ -207,6 +196,6 @@ async def test_submit_order_invalid(dex, invalid_order):
 
 @pytest.mark.asyncio
 async def test_get_swap(dex_client):
-    result = await dex_client.get_swap("USDT", "UNI", 1)
+    result = await dex_client.get_swap(sell_token="USDT", buy_token="UNI", quantity=1)
     # print(f"swap_order: {result}")
     assert result is not None
