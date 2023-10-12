@@ -66,7 +66,7 @@ class ContractUtils:
 
                 return token_instance
             if token_instance is None:
-                raise Exception("Token not found: {}".format(token))
+                raise Exception(f"Token not found: {token}")
         except Exception as e:
             logger.error("Invalid Token {}: {}", token, e)
 
