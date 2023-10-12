@@ -33,6 +33,7 @@ class DexUniswap(DexClient):
                 buy_token = await self.contract_utils.get_data(
                     contract_address=self.trading_asset_address
                 )
+                logger.debug("buy token {}", buy_token.decimals)
             symbol = await self.replace_instrument(symbol)
             sell_token = await self.contract_utils.get_data(symbol=symbol)
             uniswap = Uniswap(
