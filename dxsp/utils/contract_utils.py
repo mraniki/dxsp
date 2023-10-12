@@ -56,19 +56,21 @@ class ContractUtils:
             logger.debug("Searching on Coingecko")
             result = await self.get_cg_data(token)
             if result is not None:
-                logger.debug("Found on Coingecko {}", token_instance)
+                logger.debug("Found on Coingecko", token_instance)
                 logger.debug(result)
                 token_instance = Token(w3=self.w3, address=result["contract_address"])
                 token_instance.decimals = result["decimal_place"]
 
                 token_instance.block_explorer_api = self.block_explorer_api
                 token_instance.block_explorer_url = self.block_explorer_url
+                logger.debug(token_instance.decimals)
 
                 return token_instance
             if token_instance is None:
                 raise Exception(f"Token not found: {token}")
         except Exception as e:
             logger.error("Invalid Token {}: {}", token, e)
+            raise Exception(f"Token not found: {token}")
 
     async def get_tokenlist_data(self, token_list_url, symbol):
         try:

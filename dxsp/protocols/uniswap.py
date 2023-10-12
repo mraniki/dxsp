@@ -34,7 +34,7 @@ class DexUniswap(DexClient):
                     contract_address=self.trading_asset_address
                 )
             symbol = await self.replace_instrument(symbol)
-            sell_token = await self.contract_utils.search(symbol)
+            sell_token = await self.contract_utils.get_data(symbol=symbol)
             uniswap = Uniswap(
                 address=self.wallet_address,
                 private_key=self.private_key,
