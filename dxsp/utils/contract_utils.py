@@ -3,7 +3,6 @@
 ✍️ CONTRACT
 """
 
-import json
 from datetime import datetime
 from typing import Optional
 
@@ -13,27 +12,148 @@ from pycoingecko import CoinGeckoAPI
 
 from dxsp.config import settings
 from dxsp.utils.utils import get
-from dxsp.utils.token_utils import Token
+
 
 class ContractUtils:
-    def __init__(self, token: Token, w3=None, block_explorer_url=None, block_explorer_api=None):
-        self.token = token
+    def __init__(self, w3=None, block_explorer_url=None, block_explorer_api=None):
         self.w3 = w3
         self.block_explorer_url = block_explorer_url
         self.block_explorer_api = block_explorer_api
         self.cg = CoinGeckoAPI()
-        self.platform = self.search_cg_platform() or None
+        self.platform = self.get_cg_platform() or None
+
+    async def search(self, token):
+        try:
+            token_data = []
+            logger.debug("Searching Token Address")
+            contract_lists = [
+                settings.token_personal_list,
+                settings.token_testnet_list,
+                settings.token_mainnet_list,
+            ]
+            for contract_list in contract_lists:
+                if not contract_list:
+                    continue
+                logger.debug("Searching {} on {}", token, contract_list)
+                token_data = await self.get_tokenlist_data(contract_list, token)
+                if token_data is not None:
+                    logger.debug("Found {} on {}", token_data, contract_list)
+                    return token_data["address"]
+
+            logger.debug("Searching on Coingecko")
+            token_data = await self.get_cg_data(token)
+            if token_data is None:
+                logger.warning("Invalid Token {}", token)
+            logger.debug("Found on Coingecko {}", token_data)
+            return token_data
+        except Exception as e:
+            logger.error("Invalid Token {}: {}", token, e)
+
+    async def get_tokenlist_data(self, token_list_url, symbol):
+        try:
+            logger.debug("Token address search in {}", token_list_url)
+            token_list = await get(token_list_url)
+            token_search = token_list["tokens"]
+            for keyval in token_search:
+                if keyval["symbol"] == symbol and keyval["chainId"] == int(
+                    self.w3.net.version
+                ):
+                    logger.debug("token data found {}", keyval)
+                    return keyval
+            logger.warning(f"Token not found {symbol}")
+        except Exception as e:
+            logger.error("get_token_data: {}", e)
+            return None
+
+    def get_cg_platform(self):
+        asset_platforms = self.cg.get_asset_platforms()
+        output_dict = next(
+            x
+            for x in asset_platforms
+            if x["chain_identifier"] == int(self.w3.net.version)
+        )
+        platform = output_dict["id"] or None
+        logger.debug("coingecko platform identified {}", platform)
+        return platform
+
+    async def get_cg_data(self, token):
+        try:
+            search_results = self.cg.search(query=token)
+            search_dict = search_results["coins"]
+            filtered_dict = [x for x in search_dict if x["symbol"] == token.upper()]
+            api_dict = [sub["api_symbol"] for sub in filtered_dict]
+            for i in api_dict:
+                coin_dict = self.cg.get_coin_by_id(i)
+                try:
+                    if coin_dict["platforms"][f"{self.platform()}"]:
+                        return coin_dict
+                except (KeyError, requests.exceptions.HTTPError):
+                    pass
+        except Exception as e:
+            logger.error("search_cg {}", e)
+
+    async def get_token_abi(self, token_address):
+        return self.token.get_abi(token_address)
 
     async def get_token_contract(self, token_address):
         return self.token.get_contract(token_address)
-
-    async def get_token_abi(self, address):
-        return self.token.get_abi(address)
 
     async def get_token_balance(
         self, token_address: str, wallet_address: str
     ) -> Optional[int]:
         return self.token.get_balance(token_address, wallet_address)
+
+    async def get_token_symbol(self, token_address: str):
+        contract = await self.get_token_contract(token_address)
+        return contract.functions.symbol().call()
+
+    async def get_token_name(self, token_address: str):
+        contract = await self.get_token_contract(token_address)
+        return contract.functions.name().call()
+
+    async def get_token_decimals(self, token_address: str) -> Optional[int]:
+        search = await self.search_token_data(token_address)
+        if search["decimals"]:
+            return search["decimals"]
+        contract = await self.get_token_contract(token_address)
+        return 18 if not contract else contract.functions.decimals().call()
+
+    async def get_confirmation(self, transactionHash):
+        """
+
+        Returns trade confirmation.
+
+        Args:
+            transactionHash (str): The transaction hash
+
+        Returns:
+            dict: The trade confirmation
+
+        Raises:
+            Exception: Error
+
+        """
+        try:
+            transaction = self.w3.eth.get_transaction(transactionHash)
+            block_info = self.w3.eth.get_block(transaction["blockNumber"])
+            return {
+                "timestamp": datetime.utcfromtimestamp(block_info["timestamp"]),
+                "id": transactionHash,
+                "instrument": transaction["to"],
+                "contract": transaction["to"],  # TBD To be determined.
+                "amount": transaction["value"],
+                "price": transaction["value"],  # TBD To be determined.
+                "fee": transaction["gas"],
+                "confirmation": (
+                    f"➕ Size: {round(transaction['value'], 4)}\n"
+                    f"⚫️ Entry: {round(transaction['value'], 4)}\n"
+                    f"ℹ️ {transactionHash}\n"
+                    f"⛽ {transaction['gas']}\n"
+                    f"🗓️ {datetime.utcfromtimestamp(block_info['timestamp'])}"
+                ),
+            }
+        except Exception as error:
+            logger.error("get_confirmation {}", error)
 
 
 # class ContractUtils:
@@ -61,7 +181,6 @@ class ContractUtils:
 #         get_token_balance()
 #         calculate_sell_amount()
 #         get_confirmation()
-
 
 
 #     """

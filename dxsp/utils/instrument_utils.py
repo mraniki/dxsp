@@ -1,4 +1,4 @@
-class FinancialInstrument:
+class Instrument:
     def __init__(self, name, symbol, address, alt_symbol=None):
         self.name = name
         self.symbol = symbol
