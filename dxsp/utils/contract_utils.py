@@ -163,8 +163,7 @@ class Token:
         self.block_explorer_url = None
 
     async def get_data(self):
-        self.abi = await self.get_token_abi(self.address)
-        self.contract = self.get_token_contract()
+        self.contract = await self.get_token_contract()
         if self.decimals is None:
             self.decimals = await self.get_token_decimals()
         if self.symbol is None:
@@ -191,9 +190,9 @@ class Token:
         self.abi = await self.get_token_abi(self.address)
         logger.debug("token abi: {}", self.abi)
         contract = self.w3.eth.contract(address=self.address, abi=self.abi)
-        if contract.functions.implementation().call() is not None:
+        if self.get_contract_function(contract=contract, func_name="implementation"):
             logger.debug(
-                "Proxy Implementation address detected: {}",
+                "Proxy Detected. Using Implementation address: {}",
                 contract.functions.implementation().call(),
             )
             implementation_address = self.w3.to_checksum_address(
@@ -205,6 +204,12 @@ class Token:
             )
 
         return contract
+
+    def get_contract_function(self, contract, func_name: str):
+        if func_name in dir(contract.functions):
+            return True
+        else:
+            return False
 
     async def get_token_balance(self, wallet_address: str) -> Optional[int]:
         contract = await self.get_token_contract(self.address)
