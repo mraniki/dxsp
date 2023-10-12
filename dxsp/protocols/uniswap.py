@@ -31,7 +31,7 @@ class DexUniswap(DexClient):
         try:
             if buy_address is None:
                 buy_token = await self.contract_utils.get_data(
-                    address=self.trading_asset_address
+                    contract_address=self.trading_asset_address
                 )
             symbol = await self.replace_instrument(symbol)
             sell_token = await self.contract_utils.search(symbol)

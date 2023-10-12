@@ -30,7 +30,7 @@ class DexZeroX(DexClient):
         """
         if buy_address is None:
             buy_address = self.trading_asset_address
-        buy_token = await self.contract_utils.get_data(address=buy_address)
+        buy_token = await self.contract_utils.get_data(contract_address=buy_address)
         symbol = await self.replace_instrument(symbol)
         sell_token = await self.contract_utils.get_data(symbol=symbol)
         logger.debug(f"0x quote {buy_token.address} {sell_token.address} {amount}")
