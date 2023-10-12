@@ -56,6 +56,7 @@ class ContractUtils:
             logger.debug("Searching on Coingecko")
             result = await self.get_cg_data(token)
             if result is not None:
+                logger.debug(result)
                 token_instance = Token(w3=self.w3, address=result["address"])
                 token_instance.decimals = result["decimals"]
                 token_instance.symbol = result["symbol"]
@@ -99,7 +100,7 @@ class ContractUtils:
     async def get_cg_data(self, token):
         try:
             search_results = self.cg.search(query=token)
-            logger.debug("cg data  {}", search_results)
+            #logger.debug("cg data  {}", search_results)
             search_dict = search_results["coins"]
             filtered_dict = [x for x in search_dict if x["symbol"] == token.upper()]
             api_dict = [sub["api_symbol"] for sub in filtered_dict]
@@ -172,13 +173,15 @@ class Token:
         if self.name is None:
             self.name = await self.get_token_name()
 
-    async def get_token_abi(self):
+    async def get_token_abi(address=None):
         if not self.block_explorer_api:
             return await get(settings.dex_erc20_abi_url)
+        if address is None:
+            address = self.address
         params = {
             "module": "contract",
             "action": "getabi",
-            "address": self.address,
+            "address": address,
             "apikey": self.block_explorer_api,
         }
         resp = await get(
@@ -188,7 +191,7 @@ class Token:
             return resp["result"] if resp["status"] == "1" else None
 
     async def get_token_contract(self):
-        self.abi = await self.get_token_abi(self.address)
+        self.abi = await self.get_token_abi()
         logger.debug("token abi: {}", self.abi)
         contract = self.w3.eth.contract(address=self.address, abi=self.abi)
         if self.get_contract_function(contract=contract, func_name="implementation"):
