@@ -55,7 +55,7 @@ class DexSwap:
                     wallet_address=_config.get("wallet_address"),
                     private_key=_config.get("private_key"),
                     rpc=_config.get("rpc"),
-                    w3=Web3(Web3.HTTPProvider(rpc)),
+                    w3=Web3(Web3.HTTPProvider(_config.get("rpc"))),
                     protocol=protocol,
                     protocol_version=_config.get("protocol_version") or 2,
                     api_endpoint=_config.get("api_endpoint") or "https://api.0x.org/",
