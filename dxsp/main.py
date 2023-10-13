@@ -25,13 +25,7 @@ class DexSwap:
 
      Methods:
         _create_client()
-        get_quote()
-        execute_order()
-        get_help()
-        get_info()
-        get_name()
-        get_account_balance()
-        get_account_position()
+        
 
 
 
@@ -50,12 +44,19 @@ class DexSwap:
                 _config = config[item]
                 if item in ["", "template"]:
                     continue
+                protocol = _config.get("protocol") or "uniswap"
+                if protocol not in ["uniswap", "0x", "kwenta"]:
+                    logger.warning(
+                        f"Skipping client creation for unsupported protocol: {protocol}"
+                    )
+                    continue
                 client = self._create_client(
                     name=item,
                     wallet_address=_config.get("wallet_address"),
                     private_key=_config.get("private_key"),
+                    rpc=_config.get("rpc"),
                     w3=Web3(Web3.HTTPProvider(_config.get("rpc"))),
-                    protocol=_config.get("protocol") or "uniswap",
+                    protocol=protocol,
                     protocol_version=_config.get("protocol_version") or 2,
                     api_endpoint=_config.get("api_endpoint") or "https://api.0x.org/",
                     api_key=_config.get("api_key") or None,
@@ -93,15 +94,12 @@ class DexSwap:
             the specified protocol.
 
         """
-        protocol = kwargs["protocol"]
-        if protocol == "uniswap":
-            return DexUniswap(**kwargs)
-        elif protocol == "0x":
+        if kwargs["protocol"] == "0x":
             return DexZeroX(**kwargs)
-        elif protocol == "kwenta":
+        elif kwargs["protocol"] == "kwenta":
             return DexKwenta(**kwargs)
         else:
-            logger.error(f"protocol {protocol} not supported")
+            return DexUniswap(**kwargs)
 
     async def get_info(self):
         """

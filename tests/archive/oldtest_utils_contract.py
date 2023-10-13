@@ -7,11 +7,9 @@ import time
 import pytest
 from web3 import EthereumTesterProvider, Web3
 
-import dxsp
 from dxsp import DexSwap
 from dxsp.config import settings
-from dxsp.protocols import DexClient, DexUniswap, DexZeroX
-from dxsp.utils import AccountUtils, ContractUtils
+from dxsp.protocols import DexUniswap
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -79,15 +77,15 @@ def test_dynaconf_is_in_testing():
 
 @pytest.mark.asyncio
 async def test_search_contract_address(dex_client):
-    result = await dex_client.contract_utils.search_contract_address("USDT")
+    result = await dex_client.contract_utils.search_token_data("USDT")
     assert result is not None
-    assert result == "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+    assert result["address"] == "0xdAC17F958D2ee523a2206206994597C13D831ec7"
     print(result)
 
 
 @pytest.mark.asyncio
 async def test_invalid_search_contract_address(dex_client):
-    result = await dex_client.contract_utils.search_contract_address("NOTATHING")
+    result = await dex_client.contract_utils.search_token_data("NOTATHING")
     assert result is None
 
 
