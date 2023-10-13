@@ -49,8 +49,7 @@ class DexZeroX(DexClient):
                 return float(response["guaranteedPrice"])
             elif "code" in response and "reason" in response:
                 return response["code"], response["reason"]
-            else:
-                return "Error from 0x"
+        return "Quote failed"
 
     async def make_swap(self, buy_address, sell_address, amount):
         """
