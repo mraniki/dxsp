@@ -201,17 +201,32 @@ async def test_get_swap(dex_client):
     assert result is not None
 
 
-# @pytest.mark.asyncio
-# async def test_get_cg_data(dex_client):
-#     """getquote Testing"""
-#     get_cg_data = AsyncMock()
-#     result = await dex_client.get_quote(symbol="LINK")
-#     assert result is not None
-#     assert "🦄" in result
-#     assert get_cg_data.awaited
+@pytest.mark.asyncio
+async def test_get_cg_data(dex_client):
+    get_cg_data = AsyncMock()
+    result = await dex_client.get_quote(symbol="LINK")
+    assert result is not None
+    assert "🦄" in result
+    assert get_cg_data.awaited
 
 
 # @pytest.mark.asyncio
 # async def test_get_token_exception(dex_client):
 #     with pytest.raises(Exception):
 #         result = await dex_client.get_quote(symbol="NOTATHING")
+
+
+@pytest.mark.asyncio
+async def test_get_confirmation(dex_client):
+    result = await dex_client.contract_utils.get_confirmation(
+        "0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771"
+    )
+    print(result)
+    assert result is not None
+    assert result["timestamp"] is not None
+    assert result["fee"] is not None
+    assert result["confirmation"] is not None
+    assert "➕" in result["confirmation"]
+    assert "⛽" in result["confirmation"]
+    assert "🗓️" in result["confirmation"]
+    assert "ℹ️" in result["confirmation"]
