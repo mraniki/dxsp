@@ -2,7 +2,7 @@
 Kwenta 🧮
 
 """
-
+from loguru import logger
 from kwenta import Kwenta
 
 from dxsp.protocols import DexClient
