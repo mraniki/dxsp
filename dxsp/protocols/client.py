@@ -37,6 +37,7 @@ class DexClient:
     def __init__(
         self,
         w3=None,
+        rpc=None,
         name=None,
         wallet_address=None,
         private_key=None,
@@ -57,6 +58,7 @@ class DexClient:
     ):
         self.w3 = w3
         self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
+        self.rpc = rpc
         self.name = name
         logger.debug(f"setting up DexClient: {self.name}")
         self.wallet_address = self.w3.to_checksum_address(wallet_address)
