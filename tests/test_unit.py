@@ -99,9 +99,10 @@ async def test_dextrader(dex):
     """Init Testing"""
     assert isinstance(dex, DexSwap)
     assert dex.clients is not None
-    assert isinstance(dex, DexSwap)
+    assert callable(dex.get_info)
     assert callable(dex.get_balances)
     assert callable(dex.get_positions)
+    assert callable(dex.get_pnl)
     assert callable(dex.submit_order)
 
     for dx in dex.clients:
@@ -144,10 +145,10 @@ async def test_get_quotes(dex):
     assert get_quote.awaited
     assert ("eth" in result) or ("bsc" in result) or ("pol" in result)
     assert "2" in result
-    #assert "proxy" in result
+    # assert "proxy" in result
     numerical_count = sum(1 for char in result if char.isdigit())
     assert numerical_count >= 10
-    
+
 
 @pytest.mark.asyncio
 async def test_get_balances(dex):
@@ -240,4 +241,3 @@ async def test_get_cg_data(dex_client):
 async def test_get_token_exception(dex_client, caplog):
     await dex_client.get_quote(symbol="NOTATHING")
     assert "Quote failed" in caplog.text
-
