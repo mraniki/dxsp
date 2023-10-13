@@ -239,3 +239,4 @@ async def test_get_cg_data(dex_client):
 async def test_get_token_exception(dex_client, caplog):
     await dex_client.get_quote(symbol="NOTATHING")
     assert "Quote failed" in caplog.text
+
