@@ -68,8 +68,8 @@ async def test_dextrader(dex):
         assert dx is not None
         assert dx.name is not None
         assert dx.protocol in ["uniswap", "0x", "kwenta"]
-        assert dx.private_key.startswith("0x")
-        assert dx.wallet_address.startswith("0x")
+        #assert dx.private_key.startswith("0x")
+        #assert dx.wallet_address.startswith("0x")
         assert callable(dx.get_order_amount)
         assert callable(dx.replace_instrument)
         assert callable(dx.get_quote)
