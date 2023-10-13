@@ -26,8 +26,10 @@ class DexKwenta(DexClient):
             wallet_address=self.wallet_address,
             private_key=self.private_key,
         )
-
+        symbol = await self.replace_instrument(symbol)
+        sell_token = await self.contract_utils.get_data(symbol=symbol)
         asset = 'ETH'
+        #asset = sell_token.symbol
         market = kwenta.markets[asset]
         logger.info("market: {}", market)
 
