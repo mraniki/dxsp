@@ -36,9 +36,11 @@ def test_dynaconf_is_in_testing():
 
 @pytest.mark.asyncio
 async def test_get_swap(dex_client):
-    result = await dex_client.get_swap(sell_token="USDT", buy_token="UNI", quantity=1)
+    result = await dex_client.get_swap(sell_token="USDT", buy_token="WBTC", quantity=1)
     assert result is not None
 
+
+ 
 @pytest.mark.asyncio
 async def test_get_token_exception(dex_client, caplog):
     await dex_client.get_quote(symbol="NOTATHING")

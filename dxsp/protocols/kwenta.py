@@ -20,23 +20,26 @@ class DexKwenta(DexClient):
     async def get_quote(self, buy_address=None, symbol=None, amount=1):
         """ """
         #pass
-        kwenta = Kwenta(
-            network_id=self.w3.net.version,
-            provider_rpc=self.rpc,
-            wallet_address=self.wallet_address,
-            private_key=self.private_key,
-        )
-        symbol = await self.replace_instrument(symbol)
-        sell_token = await self.contract_utils.get_data(symbol=symbol)
-        asset = 'ETH'
-        #asset = sell_token.symbol
-        market = kwenta.markets[asset]
-        logger.info("market: {}", market)
-
-        quote = kwenta.get_current_asset_price(asset)
-        logger.info("quote: {}", quote)
-        return quote
+        try:
+            kwenta = Kwenta(
+                network_id=10,
+                provider_rpc=self.rpc,
+                wallet_address=self.wallet_address,
+                private_key=self.private_key,
+            )
+            symbol = await self.replace_instrument(symbol)
+            sell_token = await self.contract_utils.get_data(symbol=symbol)
+            asset = 'ETH'
+            #asset = sell_token.symbol
+            market = kwenta.markets[asset]
+            logger.info("market: {}", market)
     
+            quote = kwenta.get_current_asset_price(asset)
+            logger.info("quote: {}", quote)
+            return quote
+        except Exception as error:
+            logger.debug(error)
+
 
     async def make_swap(self, sell_address, buy_address, amount):
         """ """
