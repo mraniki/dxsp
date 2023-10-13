@@ -230,3 +230,14 @@ async def test_get_confirmation(dex_client):
     assert "⛽" in result["confirmation"]
     assert "🗓️" in result["confirmation"]
     assert "ℹ️" in result["confirmation"]
+
+@pytest.mark.asyncio
+async def test_get_approve(dex_client):
+    symbol = "UNI"
+    approve_receipt = None
+    try:
+        approve_receipt = await dex_client.account.get_approve(symbol)
+        print(approve_receipt)
+    except Exception as e:
+        print(f"Error getting approve receipt: {e}")
+    assert approve_receipt is None
