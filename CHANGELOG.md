@@ -2,6 +2,39 @@
 
 
 
+## v6.0.1 (2023-10-13)
+
+### Other
+
+* Merge pull request #468 from mraniki/dev
+
+♻️🚨😬 ([`8bc8931`](https://github.com/mraniki/dxsp/commit/8bc89316b2700e46b9f1bca89859b88bd3ecad23))
+
+* Refactor Kwenta integration and add error handling
+
+- Refactored the Kwenta integration in `dxsp/protocols/kwenta.py` to use
+a fixed network ID of 10.
+- Added error handling in case of any exceptions during the Kwenta
+integ
+ration.
+- Updated the unit test in `tests/test_unit_dexswap.py` to reflect the
+c
+hanges. ([`737fb67`](https://github.com/mraniki/dxsp/commit/737fb67ef5a831b37111c4b85bbee22ff5fe27ad))
+
+* Add test case for get_swap function ([`5382084`](https://github.com/mraniki/dxsp/commit/5382084f3d0f992dcd4443202a36f3fe64dd8d58))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`fe25458`](https://github.com/mraniki/dxsp/commit/fe25458f6f85db61ee549187146e4fb25aaf86b3))
+
+* Refactor test_get_swap in test_unit_client.py
+
+- Change buy_token from UNI to WBTC
+- Remove unnecessary whitespace ([`43d335f`](https://github.com/mraniki/dxsp/commit/43d335fa0841833145c450a23e3753d32591cebc))
+
+### Update
+
+* :construction_worker_man:Update gitIgnoredAuthors in renovate.json ([`31dd879`](https://github.com/mraniki/dxsp/commit/31dd87964c47de28b30f9f5e41d848ebf79cde85))
+
+
 ## v6.0.0 (2023-10-13)
 
 ### :recycle:
