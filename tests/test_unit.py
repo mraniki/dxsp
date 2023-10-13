@@ -183,37 +183,19 @@ async def test_get_pnls(dex):
 @pytest.mark.asyncio
 async def test_submit_order(dex, order):
     result = await dex.submit_order(order)
-    # print(f"swap_order: {result}")
     assert result is not None
 
 
 @pytest.mark.asyncio
 async def test_submit_order_invalid(dex, invalid_order):
     result = await dex.submit_order(invalid_order)
-    # print(result)
     assert "⚠️" in result
 
 
 @pytest.mark.asyncio
 async def test_get_swap(dex_client):
     result = await dex_client.get_swap(sell_token="USDT", buy_token="UNI", quantity=1)
-    # print(f"swap_order: {result}")
     assert result is not None
-
-
-@pytest.mark.asyncio
-async def test_get_cg_data(dex_client):
-    get_cg_data = AsyncMock()
-    result = await dex_client.get_quote(symbol="LINK")
-    assert result is not None
-    assert "🦄" in result
-    assert get_cg_data.awaited
-
-
-# @pytest.mark.asyncio
-# async def test_get_token_exception(dex_client):
-#     with pytest.raises(Exception):
-#         result = await dex_client.get_quote(symbol="NOTATHING")
 
 
 @pytest.mark.asyncio
@@ -231,6 +213,7 @@ async def test_get_confirmation(dex_client):
     assert "🗓️" in result["confirmation"]
     assert "ℹ️" in result["confirmation"]
 
+
 @pytest.mark.asyncio
 async def test_get_approve(dex_client):
     symbol = "UNI"
@@ -241,3 +224,18 @@ async def test_get_approve(dex_client):
     except Exception as e:
         print(f"Error getting approve receipt: {e}")
     assert approve_receipt is None
+
+
+@pytest.mark.asyncio
+async def test_get_cg_data(dex_client):
+    get_cg_data = AsyncMock()
+    result = await dex_client.get_quote(symbol="LINK")
+    assert result is not None
+    assert isinstance(result, float)
+    assert get_cg_data.awaited
+
+
+@pytest.mark.asyncio
+async def test_get_token_exception(dex_client, caplog):
+    await dex_client.get_quote(symbol="NOTATHING")
+    assert "Quote failed" in caplog.text

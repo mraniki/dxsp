@@ -22,17 +22,22 @@ class ContractUtils:
         self.platform = self.get_cg_platform() or None
 
     async def get_data(self, symbol=None, contract_address=None):
-        if symbol is None and contract_address is None:
-            return None
+        logger.debug("get_data {} {}", symbol, contract_address)
         if symbol:
             return await self.search(symbol)
         if contract_address:
-            return Token(w3=self.w3, address=contract_address)
+            token = Token(
+                w3=self.w3,
+                address=contract_address,
+            )
+            await token.get_data()
+            return token
+        return None
 
     async def search(self, token):
         try:
             token_instance = None
-            logger.debug("Searching Token Address")
+            logger.debug("Searching on list {}", token)
             contract_lists = [
                 settings.token_personal_list,
                 settings.token_testnet_list,
@@ -57,8 +62,12 @@ class ContractUtils:
             if result is not None:
                 logger.debug("Found on Coingecko", token_instance)
                 logger.debug(result)
+                logger.debug(result["contract_address"])
                 token_instance = Token(w3=self.w3, address=result["contract_address"])
+                logger.debug(token_instance.address)
+                logger.debug(result["decimal_place"])
                 token_instance.decimals = result["decimal_place"]
+                logger.debug(token_instance.decimals)
 
                 token_instance.block_explorer_api = self.block_explorer_api
                 token_instance.block_explorer_url = self.block_explorer_url
@@ -68,12 +77,12 @@ class ContractUtils:
             if token_instance is None:
                 raise Exception(f"Token not found: {token}")
         except Exception as e:
-            logger.error("Invalid Token {}: {}", token, e)
-            raise e
+            logger.error("Search Token {}: {}", token, e)
+            raise
 
     async def get_tokenlist_data(self, token_list_url, symbol):
         try:
-            logger.debug("Token address search in {}", token_list_url)
+            logger.debug("Token search in {}", token_list_url)
             token_list = await get(token_list_url)
             token_search = token_list["tokens"]
             for keyval in token_search:
@@ -82,7 +91,7 @@ class ContractUtils:
                 ):
                     logger.debug("token data found {}", keyval)
                     return keyval
-            logger.warning(f"Token not found {symbol}")
+            logger.warning(f"Token {symbol} not found on list")
         except Exception as e:
             logger.error("get_token_data: {}", e)
             return None
@@ -154,16 +163,27 @@ class ContractUtils:
 
 class Token:
     def __init__(
-        self, w3, address, block_explorer_url=None, block_explorer_api=None, symbol=None
+        self,
+        w3=None,
+        address=None,
+        block_explorer_url=None,
+        block_explorer_api=None,
+        symbol=None,
     ):
-        self.w3 = w3
-        self.address = self.w3.to_checksum_address(address)
-        self.decimals = None
-        self.symbol = None
-        self.block_explorer_api = None
-        self.block_explorer_url = None
+        try:
+            self.w3 = w3
+            self.address = self.w3.to_checksum_address(address)
+            self.symbol = symbol
+            self.block_explorer_url = block_explorer_url
+            self.block_explorer_api = block_explorer_api
+            self.decimals = None
+            self.name = None
+            logger.debug("token initialized {}", self.address)
+        except Exception as error:
+            logger.error("token error {}", error)
 
     async def get_data(self):
+        logger.debug("get token data")
         self.contract = await self.get_token_contract()
         if self.decimals is None:
             self.decimals = await self.get_token_decimals()
@@ -171,6 +191,7 @@ class Token:
             self.symbol = await self.get_token_symbol()
         if self.name is None:
             self.name = await self.get_token_name()
+        logger.debug("token data {}", self)
 
     async def get_token_abi(self, address=None):
         if not self.block_explorer_api:
@@ -202,7 +223,7 @@ class Token:
             contract = self.w3.eth.contract(
                 address=implementation_address, abi=implementation_abi
             )
-
+        logger.debug("token contract: {}", contract)
         return contract
 
     def get_contract_function(self, contract, func_name: str):

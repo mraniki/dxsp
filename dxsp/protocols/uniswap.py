@@ -33,7 +33,6 @@ class DexUniswap(DexClient):
                 buy_token = await self.contract_utils.get_data(
                     contract_address=self.trading_asset_address
                 )
-                logger.debug("buy token {}", buy_token.decimals)
             symbol = await self.replace_instrument(symbol)
             sell_token = await self.contract_utils.get_data(symbol=symbol)
             uniswap = Uniswap(
@@ -51,6 +50,7 @@ class DexUniswap(DexClient):
                 sell_token.address, buy_token.address, amount_wei
             )
             logger.debug("quote {}", quote)
+            logger.debug("buy_token.decimals {}", buy_token.decimals)
             if quote is None:
                 return "Quote failed"
             return round(
