@@ -2,6 +2,273 @@
 
 
 
+## v6.0.0 (2023-10-13)
+
+### :recycle:
+
+* :white_check_mark: Unit Test :recycle: ([`ab776b4`](https://github.com/mraniki/dxsp/commit/ab776b41db543e5a791a7fd729b24f9599f2ac04))
+
+* :recycle::white_check_mark: ([`f31154b`](https://github.com/mraniki/dxsp/commit/f31154b602afb3ad723d3a72caa95e76ba9fe2bb))
+
+### :rotating_light:
+
+* :rotating_light:Refactor DexSwap class to use the rpc value from the config file ([`278ee03`](https://github.com/mraniki/dxsp/commit/278ee0308ae5bca840f319e8a5271207688f4cfb))
+
+* :rotating_light:Fix get_token_balance method indentation ([`bc6f1c6`](https://github.com/mraniki/dxsp/commit/bc6f1c6a36edc5a46ef64807d3b80dee8aca05df))
+
+* :rotating_light:Refactor contract_utils.py and test_unit.py ([`9ecceea`](https://github.com/mraniki/dxsp/commit/9ecceea88637b0d201bd4c60b2e13bb359dcf80b))
+
+### :white_check_mark:
+
+* :white_check_mark: ([`5a0da1d`](https://github.com/mraniki/dxsp/commit/5a0da1df92e6566d2447dbf327e1e67852d14d6a))
+
+### Fix
+
+* Refactor unit tests and fixtures in test_unit.py ([`6b55baf`](https://github.com/mraniki/dxsp/commit/6b55baf433ed2189b36b2de3f2b688278654ce55))
+
+### Other
+
+* Merge pull request #462 from mraniki/dev
+
+💥 breaking: contract search refactoring ([`e195e94`](https://github.com/mraniki/dxsp/commit/e195e947fbcdccee03eb353da6b1db15606349f1))
+
+* Refactor Kwenta protocol and add test case for get_quotes_invalid function ([`837aa05`](https://github.com/mraniki/dxsp/commit/837aa0582b359084cf1fc43b169babb92d9b7da2))
+
+* Add logger import to Kwenta protocol ([`6f7feac`](https://github.com/mraniki/dxsp/commit/6f7feacb90ecb3230868faddb1c877b701959b8b))
+
+* Refactor DexSwap and DexClient to use the &#34;rpc&#34; parameter
+
+- Refactor DexSwap to use the &#34;rpc&#34; parameter instead of _config.get(&#34;rp
+c&#34;)
+- Refactor DexClient to use the &#34;rpc&#34; parameter instead of None ([`7cffbd5`](https://github.com/mraniki/dxsp/commit/7cffbd54472e461566455f521a145dcfc1625909))
+
+* Refactor 0x quote method ([`08e35e6`](https://github.com/mraniki/dxsp/commit/08e35e651ac02d8b8f3650805f72a3622f34fe9c))
+
+* Refactor main.py and zerox.py
+
+- Removed unused methods in DexSwap class in main.py
+- Removed unnecessary else statement in DexZeroX class in zerox.py
+- Updated return statement in DexZeroX class in zerox.py ([`12b4550`](https://github.com/mraniki/dxsp/commit/12b4550b5b24b980c4b1d5e2a2486ef48420422c))
+
+* Fix token not found exception handling and remove test cases for get_cg_data and get_token_exception.
+
+This commit message is based on the following file differences:
+
+diff --git a/dxsp/utils/contract_utils.py
+b/dxsp/utils/contract_utils.py
+index ddedee2..cb49932 100644
+--- a/dxsp/utils/contract_utils.py
++++ b/dxsp/utils/contract_utils.py
+@@ -73 +73 @@ class ContractUtils:
+-            raise Exception(f&#34;Token not found: {token}&#34;)
++            raise e
+diff --git a/tests/test_unit.py b/tests/test_unit.py
+index dcec268..8508233 100755
+--- a/tests/test_unit.py
++++ b/tests/test_unit.py
+@@ -204,14 +204,14 @@ async def test_get_swap(dex_client):
+-@pytest.mark.asyncio
+-async def test_get_cg_data(dex_client):
+-    &#34;&#34;&#34;getquote Testing&#34;&#34;&#34;
+-    get_cg_data = AsyncMock()
+-    result = await dex_client.get_quote(symbol=&#34;LINK&#34;)
+-    assert result is not None
+-    assert &#34;:unicorn:&#34; in result
+-    assert get_cg_data.awaited
+-
+-
+-@pytest.mark.asyncio
+-async def test_get_token_exception(dex_client):
+-    with pytest.raises(Exception):
+-        result = await dex_client.get_quote(symbol=&#34;NOTATHING&#34;)
++# @pytest.mark.asyncio
++# async def test_get_cg_data(dex_client):
++#     &#34;&#34;&#34;getquote Testing&#34;&#34;&#34;
++#     get_cg_data = AsyncMock()
++#     result = await dex_client.get_quote(symbol=&#34;LINK&#34;)
++#     assert result is not None
++#     assert
+&#34;�\b�\u001a[�\u001c�\\�[\u001d\u0002���\b\b\b\b\u0018\\��\\�\b\u0019�]\
+u0017����\u0018]\u0018K�]�Z]\u0019Y\u0002���\u0010\u001c\u001e]\u0019
+\\�\u000b�X\\�˘\\�[��[��\u0018\\�[��\u0019\u0019Y�\u001d\u0019\\�\u001
+7��]\u0017�\u001b��[��^\u0018�\\\u001d\u001a[ۊ\u0019\u0019^\u0017��\u001
+aY[�
+N����\b\b\b\b\u001d�]\u001a\b\u001c\u001e]\u0019\\�\u000b��Z\\�\\�\u001
+1^\u0018�\\\u001d\u001a[ۊN����\b\b\b\b\b\b\b\b\u001c�\\�[\u001d\b\u000fH
+\u0018]�Z]\b\u0019\u0019^\u0017��\u001a
+Y[�\u000b��]\u0017�][�\u0019J\u001c�[X��\u000fH���\u0010U\u0012\u0012S�
+ȊB ([`9f15127`](https://github.com/mraniki/dxsp/commit/9f151271cae6fa469b4dd5ef64856cebc50ff019))
+
+* Add debug logging for token decimals in Uniswap protocol ([`ad41fb6`](https://github.com/mraniki/dxsp/commit/ad41fb65eb05a59386b8ae97d6fc91d067ae3011))
+
+* Refactor contract_utils.py and uniswap.py ([`2bbca14`](https://github.com/mraniki/dxsp/commit/2bbca14f4e5f393adbbe1a18811644ca3816f312))
+
+* Merge pull request #467 from mraniki/sourcery/dev
+
+💥 breaking: contract search refactoring (Sourcery refactored) ([`92ea5ba`](https://github.com/mraniki/dxsp/commit/92ea5badac903391305a4820615a0e70574aa030))
+
+* &#39;Refactored by Sourcery&#39; ([`e4d6eb9`](https://github.com/mraniki/dxsp/commit/e4d6eb94468c64ae33d88c3c651c371139c3450f))
+
+* Refactor contract_utils.py and add test cases for exception handling
+
+The changes in this commit refactor the contract_utils.py file by updati
+ng the variable names and adding test cases for exception handling. ([`135f163`](https://github.com/mraniki/dxsp/commit/135f16310da6fd78ab62380dcaac5f6042657c4d))
+
+* Fix token validation and platform check in ContractUtils
+
+- Invalid Token warning message changed to raising an exception.
+- Fixed platform check in the if statement. ([`5efe066`](https://github.com/mraniki/dxsp/commit/5efe066aa04af060336b38fb0b25c779a22981e4))
+
+* Refactor logger.debug in ContractUtils ([`f9fed19`](https://github.com/mraniki/dxsp/commit/f9fed1970aa9631b27e146266eae6eb5634e5675))
+
+* Add debug logging for Coingecko token instance ([`665746b`](https://github.com/mraniki/dxsp/commit/665746b8284b9e6a27fc0147e2998375057f9863))
+
+* Refactor get_token_abi method in Token class ([`066a333`](https://github.com/mraniki/dxsp/commit/066a333eccc0f625636d39b53cf5b6b2d6e9f52b))
+
+* Refactor contract_utils.py for better logging and address flexibility
+
+The changes in this commit refactor the contract_utils.py file to improv
+e logging and provide flexibility in specifying the token address. The
+s
+pecific changes include:
+
+- Added a debug log statement for the &#39;result&#39; variable in the
+ContractU
+tils class.
+- Commented out a debug log statement for &#39;search_results&#39; in the
+Contra
+ctUtils class.
+- Modified the &#39;get_token_abi&#39; method in the Token class to accept an
+op
+tional &#39;address&#39; parameter.
+- Updated the &#39;get_token_abi&#39; method in the Token class to use the
+speci
+fied &#39;address&#39; if provided, or fallback to the default token address.
+- Modified the &#39;Token&#39; class initialization to use the updated
+&#39;get_toke
+n_abi&#39; method without specifying the token address.
+
+These changes aim to improve the code&#39;s readability, maintainability,
+an
+d flexibility. ([`e463d18`](https://github.com/mraniki/dxsp/commit/e463d188eebf6ab99b17790b0b127e857d198430))
+
+* Fix wallet address checksum in DexClient and AccountUtils
+
+- Fix wallet address checksum in DexClient and AccountUtils
+- Fix contract address parameter in AccountUtils.get_data
+- Fix formatting in Token.get_token_balance ([`e261886`](https://github.com/mraniki/dxsp/commit/e2618863b06106c3f18d33854d204ae40557cb0e))
+
+* Refactor get_quotes function in test_unit.py ([`1d1542b`](https://github.com/mraniki/dxsp/commit/1d1542b938c99e3703246e019bf1ee891d8b9efb))
+
+* Fix variable name in AccountUtils class and add debug logging in ContractUtils class ([`a810716`](https://github.com/mraniki/dxsp/commit/a810716f64d9ab2b9d1e27022aaed2b7bcfc338e))
+
+* Merge pull request #466 from mraniki/sourcery/dev
+
+💥 breaking: contract search refactoring (Sourcery refactored) ([`ec7ee2c`](https://github.com/mraniki/dxsp/commit/ec7ee2c5b5c131759949196c372cb5948d42f7db))
+
+* &#39;Refactored by Sourcery&#39; ([`8015133`](https://github.com/mraniki/dxsp/commit/8015133cc4388adbcd6d69f1a6dcd6cc201b1ad6))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`1c18d55`](https://github.com/mraniki/dxsp/commit/1c18d55ea565d6319f43da21635b8c58c74fa63d))
+
+* Fix contract address parameter in Uniswap and ZeroX protocols
+
+- Fix contract address parameter in Uniswap protocol
+- Fix contract address parameter in ZeroX protocol ([`03a1e3b`](https://github.com/mraniki/dxsp/commit/03a1e3b74e5bd7f20b9d8f772c5a78e588ddd631))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`ebcd96b`](https://github.com/mraniki/dxsp/commit/ebcd96b2b92529f55bf3131a4b69f20e712d4ac2))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`5e05309`](https://github.com/mraniki/dxsp/commit/5e05309eb2adfff0d9f7e12b3546b0980167f488))
+
+* Refactor contract_utils.py by removing unnecessary code and comments.
+
+This commit removes unused code and comments in contract_utils.py. ([`34c1551`](https://github.com/mraniki/dxsp/commit/34c15517c97e9106b70397ebd869ce3b787a80d5))
+
+* Merge pull request #465 from mraniki/renovate/web3-6.x
+
+⬆️ 🛠️(deps): update dependency web3 to v6.11.0 ([`4c12191`](https://github.com/mraniki/dxsp/commit/4c12191d410a1a20fe65d7fba9c8ebb5d59ef1f0))
+
+* Add unit tests for DEXSWAP functionality ([`3196bd4`](https://github.com/mraniki/dxsp/commit/3196bd42e084d5562be849f12e61d673c85535be))
+
+* Refactor contract_utils.py for search functionality ([`73929e8`](https://github.com/mraniki/dxsp/commit/73929e8372717e9f8746c031008a19ae9f1b96d6))
+
+* Refactor contract_utils.py to return the entire token_data object instead of just the address. ([`d997146`](https://github.com/mraniki/dxsp/commit/d997146dd53ecc53b3b67b9c3f6f3dd34000d37f))
+
+* Refactor account and contract utils, update test cases ([`7b36773`](https://github.com/mraniki/dxsp/commit/7b36773c5c107c3e18536f776bd64cc6663f26aa))
+
+* Merge pull request #463 from mraniki/sourcery/dev
+
+💥 breaking: contract search refactoring (Sourcery refactored) ([`47823bb`](https://github.com/mraniki/dxsp/commit/47823bb6bdad3f39aa1be2edc047f5680a918b60))
+
+* &#39;Refactored by Sourcery&#39; ([`95c3708`](https://github.com/mraniki/dxsp/commit/95c37085b23d37511f8a7db4e168f2bba9ccad51))
+
+### Update
+
+* Update Requirements ([`523946d`](https://github.com/mraniki/dxsp/commit/523946d613adf9e0d3f7b9d3aaadec81f270140c))
+
+* Update web3client version ([`47ce51c`](https://github.com/mraniki/dxsp/commit/47ce51c227eaf682413a11d19cc29078bb98cc63))
+
+* Update Requirements ([`f222f82`](https://github.com/mraniki/dxsp/commit/f222f82931ed687f0cd629124fb7bb07cd66e7ee))
+
+* Update pyproject.toml with new web3client version
+
+This commit updates the pyproject.toml file by adding the new web3client
+version. ([`da9acbe`](https://github.com/mraniki/dxsp/commit/da9acbebe52f35c9e329eb075dab4b5283de9391))
+
+* Update .github/workflows/Flow.yml ([`f5ffa77`](https://github.com/mraniki/dxsp/commit/f5ffa773840b450d6946087338c83e7e18e48716))
+
+* Update Requirements ([`ba4114a`](https://github.com/mraniki/dxsp/commit/ba4114a067f05eac429e3d18549521072223073c))
+
+* Update Requirements ([`a3a018c`](https://github.com/mraniki/dxsp/commit/a3a018ca3e8f5482e75b8d845f118851bd56f2e1))
+
+### ♻️
+
+* ✅ Unit Test ♻️ ([`f8c4fe8`](https://github.com/mraniki/dxsp/commit/f8c4fe8ae6969c89a62c6a3838926303e40409cb))
+
+* ✅ Unit Test ♻️ ([`85e2c8c`](https://github.com/mraniki/dxsp/commit/85e2c8ced60e3339a9af0e81cab5e2ee4b535dff))
+
+* ♻️ ([`57e5886`](https://github.com/mraniki/dxsp/commit/57e5886df114a1d75d4b034aadcebce186328725))
+
+* ♻️ ([`8a40555`](https://github.com/mraniki/dxsp/commit/8a40555ab750132a233ed229dc46bce97297dc97))
+
+* ♻️ ([`a267469`](https://github.com/mraniki/dxsp/commit/a267469e833a1a34229a91a6b9e943c178d0a770))
+
+* ♻️ ([`126e416`](https://github.com/mraniki/dxsp/commit/126e416db8f552bc6e7a2cb05df92dc5c66c710e))
+
+* ♻️ Token class ([`67ff106`](https://github.com/mraniki/dxsp/commit/67ff106f6fdf2fe77de057db3158ba59de3a0879))
+
+### ⚡
+
+* ⚡ Proxy implementation try ([`7ad3c8a`](https://github.com/mraniki/dxsp/commit/7ad3c8acb9687056e49b4c5a19c13ab157ddeba7))
+
+* ✅ Unit Test ⚡ ([`7dd4160`](https://github.com/mraniki/dxsp/commit/7dd416055c1822c8310fbae70392a207db0b47fb))
+
+### ✅
+
+* ✅ Unit Test ([`00a599c`](https://github.com/mraniki/dxsp/commit/00a599c57dac757fa126e66b900d3dad97f90b59))
+
+* ✅ Unit Test ([`8dd7926`](https://github.com/mraniki/dxsp/commit/8dd79261c82eb638f315e50d051519c1b1717aa9))
+
+* ✅ Unit Test ([`aac8dcd`](https://github.com/mraniki/dxsp/commit/aac8dcd32a20d82d4f2db3fe17892b9662971819))
+
+* ✅ Unit Test ([`2809cc6`](https://github.com/mraniki/dxsp/commit/2809cc652cd5e2d27c98f522cda27991d52021a5))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency web3 to v6.11.0 ([`820e558`](https://github.com/mraniki/dxsp/commit/820e55893f74046af515590c813fe521dc493dd7))
+
+### 🎨
+
+* 🎨 ([`a7abe2d`](https://github.com/mraniki/dxsp/commit/a7abe2d4e8524934e25153a37f3f91f15bf13697))
+
+### 💥
+
+* 💥 breaking: contract search refactoring ([`c92f2dd`](https://github.com/mraniki/dxsp/commit/c92f2dd3de9b9d195b67b67f5ecc4d6fb35f680c))
+
+### 🔥
+
+* 🔥 ([`0593df9`](https://github.com/mraniki/dxsp/commit/0593df9773a81223f6712585efbb7669dd30a8a6))
+
+
 ## v5.2.12 (2023-10-11)
 
 ### Other
