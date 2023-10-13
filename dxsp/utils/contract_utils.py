@@ -4,7 +4,6 @@
 """
 
 from datetime import datetime
-from typing import Optional
 
 import requests
 from loguru import logger
@@ -195,9 +194,7 @@ class Token:
         logger.debug("token abi: {}", self.abi)
         contract = self.w3.eth.contract(address=self.address, abi=self.abi)
         if self.get_contract_function(contract=contract, func_name="implementation"):
-            logger.debug(
-                "Proxy Detected. Using Implementation address"
-            )
+            logger.debug("Proxy Detected. Using Implementation address")
             implementation_address = self.w3.to_checksum_address(
                 contract.functions.implementation().call()
             )
@@ -208,10 +205,8 @@ class Token:
 
         return contract
 
-
     def get_contract_function(self, contract, func_name: str):
         return func_name in dir(contract.functions)
-
 
     async def get_token_balance(self, wallet_address):
         contract = await self.get_token_contract()
