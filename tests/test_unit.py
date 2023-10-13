@@ -135,7 +135,7 @@ async def test_get_info(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_quote(dex):
+async def test_get_quotes(dex):
     """getquote Testing"""
     get_quote = AsyncMock()
     result = await dex.get_quotes("BTC")
@@ -144,9 +144,10 @@ async def test_get_quote(dex):
     assert get_quote.awaited
     assert ("eth" in result) or ("bsc" in result) or ("pol" in result)
     assert "2" in result
+    assert "proxy" in result
     numerical_count = sum(1 for char in result if char.isdigit())
     assert numerical_count >= 10
-
+    
 
 @pytest.mark.asyncio
 async def test_get_balances(dex):
