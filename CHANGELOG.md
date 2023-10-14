@@ -2,6 +2,19 @@
 
 
 
+## v6.0.2 (2023-10-14)
+
+### Other
+
+* Merge pull request #469 from mraniki/dev
+
+📝 🔥 cleanup and added documentation ([`30f5394`](https://github.com/mraniki/dxsp/commit/30f53949f7a175e59bc1dcd169464010d56a9625))
+
+### 🔥
+
+* 📝 🔥 cleanup and added documentation ([`85006d7`](https://github.com/mraniki/dxsp/commit/85006d78e16bc462e0003bcce88b75407c4eca86))
+
+
 ## v6.0.1 (2023-10-13)
 
 ### Other
