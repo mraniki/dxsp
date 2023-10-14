@@ -43,14 +43,10 @@ class DexUniswap(DexClient):
                 factory_contract_addr=self.factory_contract_addr,
                 router_contract_addr=self.router_contract_addr,
             )
-            logger.debug("Uniswap client created {}", uniswap)
             amount_wei = amount * (10 ** (sell_token.decimals))
-            logger.debug("Amount {}", amount_wei)
             quote = uniswap.get_price_input(
                 sell_token.address, buy_token.address, amount_wei
             )
-            logger.debug("quote {}", quote)
-            logger.debug("buy_token.decimals {}", buy_token.decimals)
             if quote is None:
                 return "Quote failed"
             return round(

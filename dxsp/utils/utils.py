@@ -40,3 +40,4 @@ async def get(url, params=None, headers=None):
 
     except Exception as error:
         logger.error("get: {}", error)
+        raise error

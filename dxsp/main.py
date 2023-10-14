@@ -25,9 +25,12 @@ class DexSwap:
 
      Methods:
         _create_client()
-        
-
-
+        get_info
+        get_balances
+        get_positions
+        get_pnl
+        get_quotes()
+        submit_order
 
     """
 

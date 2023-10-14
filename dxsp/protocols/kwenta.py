@@ -2,8 +2,8 @@
 Kwenta 🧮
 
 """
-from loguru import logger
 from kwenta import Kwenta
+from loguru import logger
 
 from dxsp.protocols import DexClient
 
@@ -18,8 +18,22 @@ class DexKwenta(DexClient):
     """
 
     async def get_quote(self, buy_address=None, symbol=None, amount=1):
-        """ """
-        #pass
+        """
+        Retrieves a quote for a given symbol.
+
+        Args:
+            buy_address (str, optional): The buy address. Defaults to None.
+            symbol (str, optional): The symbol to retrieve the quote for. 
+            Defaults to None.
+            amount (int, optional): The amount of the asset to retrieve the quote for.
+            Defaults to 1.
+
+        Returns:
+            float: The quote for the specified symbol.
+
+        Raises:
+            Exception: If an error occurs during the retrieval process.
+        """
         try:
             kwenta = Kwenta(
                 network_id=10,
@@ -29,20 +43,16 @@ class DexKwenta(DexClient):
             )
             symbol = await self.replace_instrument(symbol)
             sell_token = await self.contract_utils.get_data(symbol=symbol)
-            asset = 'ETH'
-            #asset = sell_token.symbol
-            market = kwenta.markets[asset]
+            market = kwenta.markets[f"{sell_token.symbol}"]
             logger.info("market: {}", market)
-    
-            quote = kwenta.get_current_asset_price(asset)
+
+            quote = kwenta.get_current_asset_price(sell_token.symbol)
             logger.info("quote: {}", quote)
             return quote
         except Exception as error:
             logger.debug(error)
 
-
     async def make_swap(self, sell_address, buy_address, amount):
-        """ """
         pass
 
         # kwenta = Kwenta(

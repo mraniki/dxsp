@@ -90,10 +90,10 @@ class AccountUtils:
         trading_asset = await self.contract_utils.get_data(
             contract_address=self.trading_asset_address
         )
-        trading_asset_balance = await trading_asset.get_token_balance(
+        balance = await trading_asset.get_token_balance(
             self.wallet_address
         )
-        return trading_asset_balance if trading_asset_balance else 0
+        return balance if balance else 0
 
     async def get_account_position(self):
         """
