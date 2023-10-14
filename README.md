@@ -32,7 +32,7 @@ Trade on any blockchains <br>with uniswap based router, 0x protocol and kwenta s
     #BUY 1% to SWAP with BITCOIN
     #demo_tx = await dex.submit_order({
         "action": "BUY",
-        "instrument": "WBTC",
+        "instrument": "BTC",
         "quantity": 1,
     })
 </code>
