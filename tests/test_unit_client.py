@@ -41,7 +41,7 @@ async def test_get_swap_1(dex_client):
 @pytest.mark.asyncio
 async def test_get_swap_2(dex_client):
     # Mock the contract_utils.get_data method
-    dex_client.contract_utils.get_data = AsyncMock()
+    #dex_client.contract_utils.get_data = AsyncMock()
 
     # Mock the get_order_amount method
     dex_client.get_order_amount = AsyncMock(return_value="1")
