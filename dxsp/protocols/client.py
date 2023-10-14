@@ -170,7 +170,9 @@ class DexClient:
             # )
             
 
-            sell_token_amount_wei = decimal.Decimal(sell_amount) * (decimal.Decimal('10') ** int(sell_token.decimals))
+            sell_token_amount_wei = decimal.Decimal(
+                sell_amount) * (
+                decimal.Decimal('10') ** int(sell_token.decimals))
             if self.protocol == "0x":
                 await self.account.get_approve(sell_token.address)
 
