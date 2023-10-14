@@ -166,7 +166,7 @@ class DexClient:
                 logger.error("sell amount {}", sell_amount)
                 return f"⚠️ sell amount failed {sell_amount}"
             sell_token_amount_wei = sell_amount * (
-                10 ** await sell_token.get_token_decimals
+                10 ** sell_token.decimals
             )
             if self.protocol == "0x":
                 await self.account.get_approve(sell_token.address)
