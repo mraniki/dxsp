@@ -110,7 +110,7 @@ async def test_get_quotes(dex):
 async def test_get_quotes_invalid(dex):
     """getquote Testing"""
     result = await dex.get_quotes("NOTATOKEN")
-    assert "🦄" in result
+    assert "⚖️" in result
     assert "None" in result
 
 
