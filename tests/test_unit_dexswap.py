@@ -5,11 +5,9 @@
 from unittest.mock import AsyncMock
 
 import pytest
-from web3 import EthereumTesterProvider, Web3
 
 from dxsp import DexSwap
 from dxsp.config import settings
-from dxsp.protocols import DexUniswap
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -68,8 +66,8 @@ async def test_dextrader(dex):
         assert dx is not None
         assert dx.name is not None
         assert dx.protocol in ["uniswap", "0x", "kwenta"]
-        #assert dx.private_key.startswith("0x")
-        #assert dx.wallet_address.startswith("0x")
+        # assert dx.private_key.startswith("0x")
+        # assert dx.wallet_address.startswith("0x")
         assert callable(dx.get_order_amount)
         assert callable(dx.replace_instrument)
         assert callable(dx.get_quote)
@@ -100,12 +98,13 @@ async def test_get_quotes(dex):
     get_quote = AsyncMock()
     result = await dex.get_quotes("BTC")
     assert result is not None
-    assert "🦄" in result
+    assert "⚖️" in result
     assert get_quote.awaited
     assert ("eth" in result) or ("bsc" in result) or ("pol" in result)
     assert "2" in result
     numerical_count = sum(1 for char in result if char.isdigit())
     assert numerical_count >= 10
+
 
 @pytest.mark.asyncio
 async def test_get_quotes_invalid(dex):
@@ -113,6 +112,7 @@ async def test_get_quotes_invalid(dex):
     result = await dex.get_quotes("NOTATOKEN")
     assert "🦄" in result
     assert "None" in result
+
 
 @pytest.mark.asyncio
 async def test_get_balances(dex):
@@ -151,6 +151,7 @@ async def test_submit_order(dex, order):
     result = await dex.submit_order(order)
     assert result is not None
 
+
 @pytest.mark.asyncio
 async def test_submit_invalid_symbol(dex, invalid_symbol):
     result = await dex.submit_order(invalid_symbol)
@@ -161,5 +162,3 @@ async def test_submit_invalid_symbol(dex, invalid_symbol):
 async def test_submit_order_invalid(dex, invalid_order):
     result = await dex.submit_order(invalid_order)
     assert "⚠️" in result
-
-
