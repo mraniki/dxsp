@@ -2,6 +2,106 @@
 
 
 
+## v6.0.4 (2023-10-15)
+
+### :rotating_light:
+
+* :rotating_light: ([`495add6`](https://github.com/mraniki/dxsp/commit/495add6d1436b4acd1ca9457ab52d4b2c22d2ea4))
+
+* :rotating_light: ([`4385596`](https://github.com/mraniki/dxsp/commit/43855961225d08e7c1ffa130e1aef9a13adfd69b))
+
+### Other
+
+* Merge pull request #470 from mraniki/dev
+
+🎨✅👷 ([`a0a9e61`](https://github.com/mraniki/dxsp/commit/a0a9e6149b4a5894b71caa58189d252c0419277b))
+
+* :construction_worker_man: CI Change ([`66bd4ff`](https://github.com/mraniki/dxsp/commit/66bd4ff7ef95f625cbe47882aee8cb957d0df62c))
+
+* :construction_worker_man:Flow.yml ([`ad7c694`](https://github.com/mraniki/dxsp/commit/ad7c69490ba989018ca4f5297a392539ee67a185))
+
+* Refactor sell_token_amount_wei calculation in DexClient class ([`aa6d329`](https://github.com/mraniki/dxsp/commit/aa6d3297fb4984da1232adc241cd7d8da555df15))
+
+* Refactor sell_token_amount_wei calculation
+
+- Refactored sell_token_amount_wei calculation to use decimal.Decimal fo
+r better precision. ([`5e7950a`](https://github.com/mraniki/dxsp/commit/5e7950aa2ca8b78c56dce2dacb9b2f080465dd2f))
+
+* Refactor sell_token_amount_wei calculation ([`b8ac4c8`](https://github.com/mraniki/dxsp/commit/b8ac4c8481bc652f7ccacdd3073640e9510ce430))
+
+* Refactor sell_token_amount_wei calculation in DexClient ([`7373aed`](https://github.com/mraniki/dxsp/commit/7373aedc3a4cda0e83ee1a79470ef2ba88a46fe2))
+
+* Fix decimal conversion bug in DexClient sell_token_amount_wei calculation ([`46d448a`](https://github.com/mraniki/dxsp/commit/46d448a495c3146ea3bef35d4c62aa84d67916b0))
+
+* Fix sell token decimals conversion ([`191e85c`](https://github.com/mraniki/dxsp/commit/191e85cd2324d70f80bde4d95ff4d1d7474ee4d9))
+
+* Refactor token decimals retrieval in DexClient ([`b7d44ee`](https://github.com/mraniki/dxsp/commit/b7d44eee10e27a7133bcf939358fc3fff0d43a01))
+
+* Refactor test_get_swap_2 in test_unit_client.py ([`fb6a388`](https://github.com/mraniki/dxsp/commit/fb6a388d849160ddc17ee0a05d77c9ccffb2739c))
+
+* Refactor test_get_quotes_invalid function
+
+- Removed unnecessary assert statement ([`452a8d3`](https://github.com/mraniki/dxsp/commit/452a8d34feaadc4cac34fe8d8560912e329c3341))
+
+### Update
+
+* Update .github/workflows/:wrench:Flow.yml ([`2b11523`](https://github.com/mraniki/dxsp/commit/2b115233dbda6222a8be1252fbd718b9e48b3e7d))
+
+### ♻️
+
+* ♻️ ([`5c825c4`](https://github.com/mraniki/dxsp/commit/5c825c43a79238e02e671c297cda63f820c6cf2f))
+
+### ✅
+
+* ✅ Unit Test ([`6a25a2d`](https://github.com/mraniki/dxsp/commit/6a25a2d673d893f287ee3363a27c085e30a80eae))
+
+* ✅ Unit Test ([`fd2e57a`](https://github.com/mraniki/dxsp/commit/fd2e57ab244154e91fd2abd88ace27cb3636838d))
+
+* ✅ Unit Test ([`e6fd967`](https://github.com/mraniki/dxsp/commit/e6fd967a2e164cf7e05412cbfe18c99a7ac94395))
+
+* ✅ Unit Test ([`4aa055f`](https://github.com/mraniki/dxsp/commit/4aa055f8b39e7fc3bc5e023108b420b1cca3e151))
+
+* ✅ Unit Test ([`178a429`](https://github.com/mraniki/dxsp/commit/178a429745031671593d7a6b4c48b0b0356d4eeb))
+
+* ✅ Unit Test ([`0d2d12a`](https://github.com/mraniki/dxsp/commit/0d2d12a5790a170c159ccf9dc3e4df0131a9efbe))
+
+* ✅ Unit Test ([`a9a510e`](https://github.com/mraniki/dxsp/commit/a9a510e2f7fa31020138d40e51d6d153b22de081))
+
+### 🎨
+
+* 🎨 ([`5b2e0ef`](https://github.com/mraniki/dxsp/commit/5b2e0ef0b966932ba1533d048aa72c42ceb1e8ae))
+
+### 🐛
+
+* 🐛 wait_for_transaction_receipt ([`bcdc174`](https://github.com/mraniki/dxsp/commit/bcdc174d6994ebee0a41445eb04e50dd1968611b))
+
+* 🐛 ([`fe646f7`](https://github.com/mraniki/dxsp/commit/fe646f777057b3bf006a0273cb485509e09be98b))
+
+### 👷
+
+* 👷 CI Change ([`0b2c666`](https://github.com/mraniki/dxsp/commit/0b2c6667a29fe56c0594ca617cb2d54f760eff9f))
+
+* 👷 CI Change ([`b361755`](https://github.com/mraniki/dxsp/commit/b361755782310dab5810a9ab8ba2401e87728e95))
+
+* 👷 CI Change ([`4e8bd91`](https://github.com/mraniki/dxsp/commit/4e8bd9193be3f13d28b4dbbe479300036ed6dbe9))
+
+* 👷 CI Change ([`ed901d4`](https://github.com/mraniki/dxsp/commit/ed901d442c02e9e32d306390b0dd2102fa910700))
+
+* 👷 CI Change ([`f9ae89f`](https://github.com/mraniki/dxsp/commit/f9ae89f3d5bb5f6dbcc27a1e3d784c2b1268789a))
+
+* 👷 CI Change ([`07eef04`](https://github.com/mraniki/dxsp/commit/07eef04cdf79c77b898424b07b24552907f0e45b))
+
+* 👷 CI Change ([`4d21265`](https://github.com/mraniki/dxsp/commit/4d21265bee55ca869bb9b31395dbb6970b54f1b6))
+
+* 👷 CI Change ([`cff80c4`](https://github.com/mraniki/dxsp/commit/cff80c461ab135be4d9f467c518373ec01afb0ca))
+
+* 👷 CI Change ([`eb85281`](https://github.com/mraniki/dxsp/commit/eb85281fab72e52e14de4aa3d5032fa20f71ec7c))
+
+### 🔊
+
+* 🔊 ([`493dc55`](https://github.com/mraniki/dxsp/commit/493dc55a26f0c1a2b8e8e91c17cc3ec48fbd19ba))
+
+
 ## v6.0.3 (2023-10-14)
 
 ### Update
