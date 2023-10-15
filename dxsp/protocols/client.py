@@ -168,16 +168,15 @@ class DexClient:
             # sell_token_amount_wei = sell_amount * (
             #     10 ** int(sell_token.decimals)
             # )
-            
 
-            sell_token_amount_wei = decimal.Decimal(
-                sell_amount) * (
-                decimal.Decimal('10') ** int(sell_token.decimals))
+            sell_token_amount_wei = decimal.Decimal(sell_amount) * (
+                decimal.Decimal("10") ** int(sell_token.decimals)
+            )
             if self.protocol == "0x":
                 await self.account.get_approve(sell_token.address)
 
             order_amount = int(
-                sell_token_amount_wei * (self.trading_slippage / 100)
+                sell_token_amount_wei * decimal.Decimal((self.trading_slippage / 100))
             )
             logger.debug(order_amount)
             order = await self.make_swap(
