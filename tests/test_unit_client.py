@@ -62,7 +62,7 @@ async def test_get_swap_2(dex_client):
 
     # Mock the w3.wait_for_transaction_receipt method
     dex_client.w3.wait_for_transaction_receipt = (
-        dex_client.w3.wait_for_transaction_receipt(
+        dex_client.w3.eth.wait_for_transaction_receipt(
             "0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771"
         )
     )
@@ -81,7 +81,7 @@ async def test_get_swap_2(dex_client):
     assert dex_client.make_swap.awaited
     assert dex_client.account.get_sign.awaited
     assert dex_client.w3.to_hex.called
-    assert dex_client.w3.wait_for_transaction_receipt.called
+    assert dex_client.w3.eth.wait_for_transaction_receipt.called
     assert dex_client.account.get_confirmation.awaited
 
 

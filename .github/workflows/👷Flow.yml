@@ -9,30 +9,28 @@ on:
 
 
 jobs:
+  secret:
+    uses: mraniki/coding_toolset/.github/workflows/👁️Secret.yml@main
+    secrets: inherit
   lint:
     uses: mraniki/coding_toolset/.github/workflows/🦺Lint.yml@main
     secrets: inherit
   test:
-    needs: [lint]
+    needs: [lint,secret]
     uses: mraniki/coding_toolset/.github/workflows/🧪Test.yml@main
+    with:
+      settings_location: ${{ secrets.SETTINGS_LOCATION }}
     secrets: inherit
-  # security:
-  #   needs: [lint]
-  #   uses: mraniki/coding_toolset/.github/workflows/🔏Security.yml@main
-  #   secrets: inherit
   build:
     needs: [lint]
     uses: mraniki/coding_toolset/.github/workflows/🐍Build.yml@main
+    with:
+      settings_token: ${{ needs.secret.outputs.TOKEN }} 
     secrets: inherit
   release:
-    needs: [build]
+    needs: [build,secret]
     uses: mraniki/coding_toolset/.github/workflows/📦Release.yml@main
+    with:
+      settings_pypi: ${{ needs.secret.outputs.PYPI_API_TOKEN }}
+      settings_token: ${{ needs.secret.outputs.TOKEN }} 
     secrets: inherit
-  # publish:
-  #   needs: [release]
-  #   uses: mraniki/coding_toolset/.github/workflows/🚚Publish.yml@main
-  #   secrets: inherit
-  # docker:
-  #   needs: [release]
-  #   uses: mraniki/coding_toolset/.github/workflows/🐳Docker.yml@main
-  #   secrets: inherit
