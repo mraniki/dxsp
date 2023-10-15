@@ -18,6 +18,8 @@ jobs:
   test:
     needs: [lint,secret]
     uses: mraniki/coding_toolset/.github/workflows/🧪Test.yml@main
+    with:
+      settings_location: ${{ needs.secret.outputs.SETTINGS_LOCATION }}
     secrets: inherit
   build:
     needs: [lint]
