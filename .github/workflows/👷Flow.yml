@@ -9,11 +9,11 @@ on:
 
 
 jobs:
-  # secret:
-    # uses: mraniki/coding_toolset/.github/workflows/👁️Secret.yml@main
-    # # with:
-    # #   repo: "dxsp"
-    # secrets: inherit
+  secret:
+    uses: mraniki/coding_toolset/.github/workflows/👁️Secret.yml@main
+    with:
+      repo: ${{ github.event.repository.name }
+    secrets: inherit
   lint:
     uses: mraniki/coding_toolset/.github/workflows/🦺Lint.yml@main
     secrets: inherit
