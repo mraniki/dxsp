@@ -165,8 +165,12 @@ class DexClient:
             if not sell_amount:
                 logger.error("sell amount {}", sell_amount)
                 return f"⚠️ sell amount failed {sell_amount}"
-            sell_token_amount_wei = sell_amount * (
-                10 ** await sell_token.get_token_decimals
+            # sell_token_amount_wei = sell_amount * (
+            #     10 ** int(sell_token.decimals)
+            # )
+
+            sell_token_amount_wei = decimal.Decimal(sell_amount) * (
+                decimal.Decimal("10") ** int(sell_token.decimals)
             )
             if self.protocol == "0x":
                 await self.account.get_approve(sell_token.address)
@@ -185,7 +189,9 @@ class DexClient:
 
             signed_order = await self.account.get_sign(order)
             order_hash = str(self.w3.to_hex(signed_order))
-            receipt = self.w3.wait_for_transaction_receipt(order_hash)
+            logger.debug(order_hash)
+            receipt = self.w3.eth.wait_for_transaction_receipt(order_hash)
+            logger.debug(receipt)
 
             if receipt["status"] != 1:
                 logger.error("receipt failed")

@@ -85,6 +85,7 @@ class DexSwap:
 
     def _create_client(self, **kwargs):
         """
+        
         Create a client based on the given protocol.
 
         Parameters:
@@ -166,7 +167,7 @@ class DexSwap:
             str: The quote with the trading symbol
 
         """
-        _info = ["🦄\n"]
+        _info = ["⚖️\n"]
         for client in self.clients:
             _info.append(f"{client.name}: {await client.get_quote(symbol=symbol)}")
         return "\n".join(_info)

@@ -2,14 +2,12 @@
  DEXSWAP Unit Test
 """
 
-from unittest.mock import AsyncMock
+from unittest.mock import AsyncMock, MagicMock
 
 import pytest
-from web3 import EthereumTesterProvider, Web3
 
 from dxsp import DexSwap
 from dxsp.config import settings
-from dxsp.protocols import DexUniswap
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -25,7 +23,7 @@ def DexSwap_fixture():
 @pytest.fixture(name="dex_client")
 def client_fixture(dex):
     for dx in dex.clients:
-        if dx.protocol == "uniswap": 
+        if dx.protocol == "uniswap":
             return dx
 
 
@@ -35,12 +33,53 @@ def test_dynaconf_is_in_testing():
 
 
 @pytest.mark.asyncio
-async def test_get_swap(dex_client):
+async def test_get_swap_1(dex_client):
     result = await dex_client.get_swap(sell_token="USDT", buy_token="WBTC", quantity=1)
     assert result is not None
 
 
- 
+@pytest.mark.asyncio
+async def test_get_swap_2(dex_client):
+    # Mock the contract_utils.get_data method
+    # dex_client.contract_utils.get_data = AsyncMock()
+
+    # Mock the get_order_amount method
+    dex_client.get_order_amount = AsyncMock(return_value="1")
+
+    # Mock the account.get_approve method
+    dex_client.account.get_approve = AsyncMock()
+
+    # Mock the make_swap method
+    dex_client.make_swap = AsyncMock()
+
+    # Mock the account.get_sign method
+    dex_client.account.get_sign = AsyncMock()
+
+    # Mock the w3.to_hex method
+    dex_client.w3.to_hex = MagicMock(
+        return_value="0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771"
+    )
+
+    # Mock the w3.wait_for_transaction_receipt method
+    dex_client.w3.wait_for_transaction_receipt = (
+        dex_client.w3.eth.wait_for_transaction_receipt(
+            "0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771"
+        )
+    )
+
+    # Mock the account.get_confirmation method
+    dex_client.account.get_confirmation = AsyncMock()
+
+    # Call the get_swap method
+    result = await dex_client.get_swap(sell_token="USDT", buy_token="WBTC", quantity=1)
+
+    # Assertions
+    assert result is not None
+    # assert dex_client.contract_utils.get_data.awaited
+    # assert dex_client.get_order_amount.awaited
+    assert dex_client.account.get_confirmation.awaited
+
+
 @pytest.mark.asyncio
 async def test_get_token_exception(dex_client, caplog):
     await dex_client.get_quote(symbol="NOTATHING")
@@ -87,7 +126,6 @@ async def test_get_gas_price(dex_client):
     assert result is not None
 
 
-
 @pytest.mark.asyncio
 async def test_get_confirmation(dex_client):
     result = await dex_client.contract_utils.get_confirmation(
@@ -102,4 +140,3 @@ async def test_get_confirmation(dex_client):
     assert "⛽" in result["confirmation"]
     assert "🗓️" in result["confirmation"]
     assert "ℹ️" in result["confirmation"]
-    
