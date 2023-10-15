@@ -41,7 +41,7 @@ async def test_get_swap_1(dex_client):
 @pytest.mark.asyncio
 async def test_get_swap_2(dex_client):
     # Mock the contract_utils.get_data method
-    #dex_client.contract_utils.get_data = AsyncMock()
+    # dex_client.contract_utils.get_data = AsyncMock()
 
     # Mock the get_order_amount method
     dex_client.get_order_amount = AsyncMock(return_value="1")
@@ -56,7 +56,9 @@ async def test_get_swap_2(dex_client):
     dex_client.account.get_sign = AsyncMock()
 
     # Mock the w3.to_hex method
-    dex_client.w3.to_hex = MagicMock(return_value="mocked_order_hash")
+    dex_client.w3.to_hex = MagicMock(
+        return_value="0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771"
+    )
 
     # Mock the w3.wait_for_transaction_receipt method
     dex_client.w3.wait_for_transaction_receipt = MagicMock(return_value={"status": 1})
