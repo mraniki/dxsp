@@ -31,7 +31,8 @@ jobs:
     #   settings_token: ${{ needs.secret.outputs.TOKEN }} 
     secrets: inherit
   release:
-    needs: [build,secret]
+    # needs: [build,secret]
+    needs: [build]
     uses: mraniki/coding_toolset/.github/workflows/📦Release.yml@main
     # with:
     #   settings_pypi: ${{ needs.secret.outputs.PYPI_API_TOKEN }}
