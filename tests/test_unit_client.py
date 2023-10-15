@@ -86,6 +86,7 @@ async def test_get_swap_2(dex_client):
 
 
 
+
 @pytest.mark.asyncio
 async def test_get_token_exception(dex_client, caplog):
     await dex_client.get_quote(symbol="NOTATHING")
