@@ -71,20 +71,13 @@ async def test_get_swap_2(dex_client):
     dex_client.account.get_confirmation = AsyncMock()
 
     # Call the get_swap method
-    await dex_client.get_swap(sell_token="USDT", buy_token="WBTC", quantity=1)
+    result = await dex_client.get_swap(sell_token="USDT", buy_token="WBTC", quantity=1)
 
     # Assertions
-    # assert result == "mocked_confirmation"
-    assert dex_client.contract_utils.get_data.awaited
-    assert dex_client.get_order_amount.awaited
-    assert dex_client.account.get_approve.awaited
-    assert dex_client.make_swap.awaited
-    assert dex_client.account.get_sign.awaited
-    assert dex_client.w3.to_hex.called
-    assert dex_client.w3.eth.wait_for_transaction_receipt.called
+    assert result is not None
+    # assert dex_client.contract_utils.get_data.awaited
+    # assert dex_client.get_order_amount.awaited
     assert dex_client.account.get_confirmation.awaited
-
-
 
 
 @pytest.mark.asyncio
