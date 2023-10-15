@@ -61,7 +61,11 @@ async def test_get_swap_2(dex_client):
     )
 
     # Mock the w3.wait_for_transaction_receipt method
-    dex_client.w3.wait_for_transaction_receipt = MagicMock(return_value={"status": 1})
+    dex_client.w3.wait_for_transaction_receipt = (
+        dex_client.w3.wait_for_transaction_receipt(
+            "0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771"
+        )
+    )
 
     # Mock the account.get_confirmation method
     dex_client.account.get_confirmation = AsyncMock()
