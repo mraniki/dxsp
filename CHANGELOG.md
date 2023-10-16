@@ -2,6 +2,19 @@
 
 
 
+## v6.0.5 (2023-10-16)
+
+### Other
+
+* Merge pull request #471 from mraniki/dev
+
+🚨 linter ([`760f857`](https://github.com/mraniki/dxsp/commit/760f85769b01636ab5346b5c44f74fa6c18925cc))
+
+### 🚨
+
+* 🚨 linter ([`bcad572`](https://github.com/mraniki/dxsp/commit/bcad57227972c1101b070dbf4c27f5eed75adc6e))
+
+
 ## v6.0.4 (2023-10-15)
 
 ### :rotating_light:
