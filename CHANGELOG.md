@@ -2,6 +2,37 @@
 
 
 
+## v6.0.7 (2023-10-17)
+
+### Other
+
+* Merge pull request #475 from mraniki/dev
+
+👷 CI Change ([`cf5759b`](https://github.com/mraniki/dxsp/commit/cf5759b64fcd789942263941fcc1990c7076166e))
+
+* Merge pull request #476 from mraniki/sourcery/dev
+
+👷 CI Change (Sourcery refactored) ([`b7ad1c4`](https://github.com/mraniki/dxsp/commit/b7ad1c414acd5741c89f5e294bb7a7b38f191292))
+
+* &#39;Refactored by Sourcery&#39; ([`910881e`](https://github.com/mraniki/dxsp/commit/910881e92e5c7cb9c2046d4224aeffec122d0686))
+
+### Update
+
+* Update Requirements ([`3cee9ab`](https://github.com/mraniki/dxsp/commit/3cee9abaf044d70abd93a5c6aa4a90b3edbb8f90))
+
+### ♻️
+
+* ♻️ ([`113141f`](https://github.com/mraniki/dxsp/commit/113141f4c6e58fcabb9e57f5b9dc0db7e7cbf7f3))
+
+### ⚡
+
+* ✅ Unit Test ⚡ ([`7203eab`](https://github.com/mraniki/dxsp/commit/7203eabf11d8d307fe350acb1746bda394133eea))
+
+### 👷
+
+* 👷 CI Change ([`3e79453`](https://github.com/mraniki/dxsp/commit/3e79453cd79502560be2a786e5c6853b772b166e))
+
+
 ## v6.0.6 (2023-10-17)
 
 ### Other
