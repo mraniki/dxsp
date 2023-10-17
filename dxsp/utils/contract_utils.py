@@ -52,7 +52,7 @@ class ContractUtils:
         self.block_explorer_url = block_explorer_url
         self.block_explorer_api = block_explorer_api
         self.cg = CoinGeckoAPI()
-        self.platform = self.get_cg_platform() or None
+        self.platform = self.get_cg_platform()
 
     async def get_data(self, symbol=None, contract_address=None):
         """
@@ -77,6 +77,43 @@ class ContractUtils:
             return token
         return None
 
+    def get_cg_platform(self):
+        """
+        Retrieves the platform associated 
+        with the current network.
+
+        Returns:
+            str: The coingecko platform name of the platform associated 
+            with the current network, or None if no platform is found.
+
+        Raises:
+            Exception: If an error occurs
+             while retrieving the platform.
+
+        """
+        # TODO: use settings.network_versions instead
+        network_versions = {
+            1: "ethereum",
+            56: "binance-smart-chain",
+            137: "polygon-pos",
+            42161: "arbitrum-one",
+        }
+        if network_name := network_versions.get(self.w3.net.version):
+            return network_name
+        try:
+            asset_platforms = self.cg.get_asset_platforms()
+            output_dict = next(
+                x
+                for x in asset_platforms
+                if x["chain_identifier"] == int(self.w3.net.version)
+            )
+            platform = output_dict["id"] or None
+            logger.debug("coingecko platform identified {}", platform)
+            return platform
+        except Exception as e:
+            logger.error("get_token_data: {}", e)
+            return None
+
     async def search(self, token):
         """
         Asynchronously searches for a token based on the given token parameter.
@@ -91,33 +128,10 @@ class ContractUtils:
             Exception: If the token is not found.
         """
         try:
-            token_instance = None
-            #TODO move the lists to the get_tokenlist_data method
-            contract_lists = [
-                settings.token_personal_list,
-                settings.token_testnet_list,
-                settings.token_mainnet_list,
-            ]
-            for contract_list in contract_lists:
-                if not contract_list:
-                    continue
-                logger.info("Searching {} on {}", token, contract_list)
-                result = await self.get_tokenlist_data(contract_list, token)
-                if result is not None:
-                    logger.info("Found {} on {}", token_instance, contract_list)
-                    token_instance = Token(w3=self.w3, address=result["address"])
-                    token_instance.decimals = result["decimals"]
-                    token_instance.symbol = result["symbol"]
-
+            token_instance = await self.search_tokenlist_data(token)
             if token_instance is None:
                 logger.info("Searching on Coingecko")
-                result = await self.get_cg_data(token)
-                if result is not None:
-                    logger.info("Found on Coingecko")
-                    token_instance = Token(
-                        w3=self.w3, address=result["contract_address"]
-                    )
-                    token_instance.decimals = result["decimal_place"]
+                token_instance = await self.search_cg_data(token)
 
             if token_instance is not None:
                 token_instance.block_explorer_api = self.block_explorer_api
@@ -126,50 +140,79 @@ class ContractUtils:
             else:
                 raise Exception(f"Token not found: {token}")
         except Exception as e:
-            logger.error("Search Token {}: {}", token, e)
+            logger.error("Search {}: {}", token, e)
             raise
 
-    async def get_tokenlist_data(self, token_list_url, symbol):
+    async def search_tokenlist_data(self, token):
+        """
+        Asynchronously searches for tokenlist data based on a given token.
+
+        :param token: The token to search for.
+        :type token: str
+
+        :return: An instance of the Token class
+        if the tokenlist data is found, else None.
+        :rtype: Token or None
+        """
+        result = await self.get_tokenlist_data(token)
+        if result is not None:
+            token_instance = Token(w3=self.w3, address=result["address"])
+            token_instance.decimals = result["decimals"]
+            token_instance.symbol = result["symbol"]
+            return token_instance
+        return None
+
+    async def get_tokenlist_data(self, symbol):
         """
         Retrieves token data from a given token list URL based on the provided symbol.
 
         Args:
-            token_list_url (str): The URL of the token list.
             symbol (str): The symbol of the token to search for.
 
         Returns:
             dict or None: The token data if found, None otherwise.
         """
         try:
-            logger.debug("Token search in {}", token_list_url)
-            token_list = await get(token_list_url)
-            token_search = token_list["tokens"]
-            for keyval in token_search:
-                if keyval["symbol"] == symbol and keyval["chainId"] == int(
-                    self.w3.net.version
-                ):
-                    logger.debug("token data found {}", keyval)
-                    return keyval
-            logger.warning(f"Token {symbol} not found on list")
+            token_list_urls = [
+                settings.token_personal_list,
+                settings.token_testnet_list,
+                settings.token_mainnet_list,
+            ]
+
+            for token_list_url in token_list_urls:
+                if not token_list_url:
+                    continue
+                logger.debug("Token search in {}", token_list_url)
+                token_list = await get(token_list_url)
+                token_search = token_list["tokens"]
+                for keyval in token_search:
+                    if keyval["symbol"] == symbol and keyval["chainId"] == int(
+                        self.w3.net.version
+                    ):
+                        logger.debug("token data found {}", keyval)
+                        return keyval
+                logger.warning(f"Token {symbol} not found on list")
         except Exception as e:
             logger.error("get_token_data: {}", e)
             return None
 
-    def get_cg_platform(self):
+    async def search_cg_data(self, token):
         """
-        Retrieves the CoinGecko platform associated with the current network.
+        Asynchronously searches for CG data using the provided token.
 
-        :return: The ID of the CoinGecko platform or None if not found.
+        :param token: The token to search for.
+        :type token: Any
+
+        :return: The token instance if found on Coingecko, otherwise None.
+        :rtype: Optional[Token]
         """
-        asset_platforms = self.cg.get_asset_platforms()
-        output_dict = next(
-            x
-            for x in asset_platforms
-            if x["chain_identifier"] == int(self.w3.net.version)
-        )
-        platform = output_dict["id"] or None
-        logger.debug("coingecko platform identified {}", platform)
-        return platform
+        result = await self.get_cg_data(token)
+        if result is not None:
+            logger.info("Found on Coingecko")
+            token_instance = Token(w3=self.w3, address=result["contract_address"])
+            token_instance.decimals = result["decimal_place"]
+            return token_instance
+        return None
 
     async def get_cg_data(self, token):
         """
@@ -183,6 +226,8 @@ class ContractUtils:
                          or None if the token is not found or an error occurs.
         """
         try:
+            if self.platform is None:
+                return None
             search_results = self.cg.search(query=token)
             search_dict = search_results["coins"]
             filtered_dict = [x for x in search_dict if x["symbol"] == token.upper()]
@@ -352,6 +397,8 @@ class Token:
         :return: The token contract.
         """
         self.abi = await self.get_token_abi()
+        if self.abi is None:
+            return None
         logger.debug("token abi: {}", self.abi)
         contract = self.w3.eth.contract(address=self.address, abi=self.abi)
         if self.get_contract_function(contract=contract, func_name="implementation"):
