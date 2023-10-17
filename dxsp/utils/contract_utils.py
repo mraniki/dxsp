@@ -92,7 +92,7 @@ class ContractUtils:
         """
         try:
             token_instance = None
-            #TODO move the lists to the get_tokenlist_data method
+            # TODO move the lists to the get_tokenlist_data method
             contract_lists = [
                 settings.token_personal_list,
                 settings.token_testnet_list,
@@ -161,15 +161,29 @@ class ContractUtils:
 
         :return: The ID of the CoinGecko platform or None if not found.
         """
-        asset_platforms = self.cg.get_asset_platforms()
-        output_dict = next(
-            x
-            for x in asset_platforms
-            if x["chain_identifier"] == int(self.w3.net.version)
-        )
-        platform = output_dict["id"] or None
-        logger.debug("coingecko platform identified {}", platform)
-        return platform
+        network_versions = {
+            1: "ethereum",
+            56: "binance-smart-chain",
+            137: "polygon-pos",
+            42161: "arbitrum-one",
+        }
+        network_name = network_versions.get(self.w3.net.version)
+        if network_name:
+            return network_name
+        else:
+            try:
+                asset_platforms = self.cg.get_asset_platforms()
+                output_dict = next(
+                    x
+                    for x in asset_platforms
+                    if x["chain_identifier"] == int(self.w3.net.version)
+                )
+                platform = output_dict["id"] or None
+                logger.debug("coingecko platform identified {}", platform)
+                return platform
+            except Exception as e:
+                logger.error("get_token_data: {}", e)
+                return None
 
     async def get_cg_data(self, token):
         """
@@ -183,6 +197,8 @@ class ContractUtils:
                          or None if the token is not found or an error occurs.
         """
         try:
+            if self.platform is None:
+                return None
             search_results = self.cg.search(query=token)
             search_dict = search_results["coins"]
             filtered_dict = [x for x in search_dict if x["symbol"] == token.upper()]
@@ -352,6 +368,8 @@ class Token:
         :return: The token contract.
         """
         self.abi = await self.get_token_abi()
+        if self.abi is None:
+            return None
         logger.debug("token abi: {}", self.abi)
         contract = self.w3.eth.contract(address=self.address, abi=self.abi)
         if self.get_contract_function(contract=contract, func_name="implementation"):
