@@ -79,11 +79,11 @@ class ContractUtils:
 
     def get_cg_platform(self):
         """
-        Retrieves the platform associated 
+        Retrieves the platform associated
         with the current network.
 
         Returns:
-            str: The coingecko platform name of the platform associated 
+            str: The coingecko platform name of the platform associated
             with the current network, or None if no platform is found.
 
         Raises:
@@ -399,20 +399,20 @@ class Token:
         self.abi = await self.get_token_abi()
         if self.abi is None:
             return None
-        logger.debug("token abi: {}", self.abi)
+        logger.debug("Token abi: {}", self.abi)
         contract = self.w3.eth.contract(address=self.address, abi=self.abi)
-        if self.get_contract_function(contract=contract, func_name="implementation"):
-            logger.debug("Proxy Detected. Using Implementation address")
-            implementation_address = self.w3.to_checksum_address(
-                contract.functions.implementation().call()
-            )
-            implementation_abi = await self.get_token_abi(implementation_address)
-            contract = self.w3.eth.contract(
-                address=implementation_address, abi=implementation_abi
-            )
-        logger.debug("token functions: {}", contract.functions)
-
+        logger.debug("Contract functions available: {}", contract.functions)
         return contract
+        # if self.get_contract_function(contract=contract, func_name="implementation"):
+        #     logger.debug("Proxy Detected. Using Implementation address")
+        #     implementation_address = self.w3.to_checksum_address(
+        #         contract.functions.implementation().call()
+        #     )
+        #     implementation_abi = await self.get_token_abi(implementation_address)
+        #     contract = self.w3.eth.contract(
+        #         address=implementation_address, abi=implementation_abi
+        #     )
+        # logger.debug("token functions: {}", contract.functions)
 
     def get_contract_function(self, contract, func_name: str):
         """
