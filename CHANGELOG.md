@@ -2,6 +2,19 @@
 
 
 
+## v6.1.2 (2023-10-17)
+
+### Other
+
+* Merge pull request #479 from mraniki/dev
+
+Update README.md ([`ca03819`](https://github.com/mraniki/dxsp/commit/ca0381957292cc297bb3f5bb8ac4d15a6eb70324))
+
+### Update
+
+* Update README.md ([`a8e89eb`](https://github.com/mraniki/dxsp/commit/a8e89eb6b1e159743fc27b3ad46d86c42856fc2f))
+
+
 ## v6.1.1 (2023-10-17)
 
 ### Other
