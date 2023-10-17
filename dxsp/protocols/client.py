@@ -52,6 +52,7 @@ class DexClient:
         trading_risk_percentage=True,
         trading_risk_amount=1,
         trading_slippage=2,
+        trading_amount_threshold=0,
         block_explorer_url=None,
         block_explorer_api=None,
         mapping=None,
@@ -77,6 +78,7 @@ class DexClient:
         self.trading_asset_separator = trading_asset_separator
         self.trading_risk_amount = trading_risk_amount
         self.trading_slippage = trading_slippage
+        self.trading_amount_threshold = trading_amount_threshold
         self.block_explorer_url = block_explorer_url
         self.block_explorer_api = block_explorer_api
         self.mapping = mapping
@@ -115,27 +117,41 @@ class DexClient:
 
         return instrument
 
-    # async def get_instrument_address(self, instrument):
-    #     instrument = await self.replace_instrument(instrument)
-    #     instrument = await self.contract_utils.search(instrument)
-    #     logger.debug("Instrument {}", instrument.address)
-    #     return instrument["address"]
-
     async def get_order_amount(
         self, sell_token, wallet_address, quantity, is_percentage=True
     ):
+        """
+        Calculate the order amount based on the sell token,
+        wallet address, quantity, and whether it is a percentage.
+
+        Args:
+            sell_token (SellToken): The sell token object.
+            wallet_address (str): The wallet address.
+            quantity (float): The quantity of the sell token.
+            is_percentage (bool, optional):
+            Flag indicating whether the quantity is a percentage. Defaults to True.
+
+        Returns:
+            float: The calculated order amount.
+        """
         balance = await sell_token.get_token_balance(wallet_address)
+        logger.debug("Balance {}", balance)
         if not is_percentage and balance:
+            logger.debug("Quantity {}", quantity)
             return quantity
 
         if balance:
             risk_percentage = float(quantity) / 100
-            amount = (
-                balance / (decimal.Decimal(risk_percentage) * 10**sell_token.decimals)
-            ) * (decimal.Decimal(quantity) / 100)
-
-            if amount >= 1:
+            logger.debug("Risk percentage {}", risk_percentage)
+            amount = balance * decimal.Decimal(risk_percentage)
+            logger.debug("Amount {}", amount)
+            if (
+                isinstance(amount, decimal.Decimal)
+                and amount > self.trading_amount_threshold
+            ):
+                logger.debug("Amount {}", amount)
                 return amount
+
         return 0
 
     async def get_swap(self, sell_token=None, buy_token=None, quantity=1):
@@ -165,9 +181,6 @@ class DexClient:
             if not sell_amount:
                 logger.error("sell amount {}", sell_amount)
                 return f"⚠️ sell amount failed {sell_amount}"
-            # sell_token_amount_wei = sell_amount * (
-            #     10 ** int(sell_token.decimals)
-            # )
 
             sell_token_amount_wei = decimal.Decimal(sell_amount) * (
                 decimal.Decimal("10") ** int(sell_token.decimals)
@@ -178,7 +191,8 @@ class DexClient:
             order_amount = int(
                 sell_token_amount_wei * decimal.Decimal((self.trading_slippage / 100))
             )
-            logger.debug(order_amount)
+            logger.debug("order amount {}", order_amount)
+
             order = await self.make_swap(
                 sell_token.address, buy_token.address, order_amount
             )

@@ -33,6 +33,32 @@ def test_dynaconf_is_in_testing():
 
 
 @pytest.mark.asyncio
+async def test_get_order_amount(dex_client):
+    sell_token = AsyncMock()
+    sell_token.get_token_balance.return_value = 10000
+    sell_token.decimals = 6
+    quantity = 50
+    # Test when is_percentage is True
+    result = await dex_client.get_order_amount(
+        sell_token, dex_client.wallet_address, quantity
+    )
+    assert result == 5000.0
+
+    # Test when is_percentage is False and balance is not zero
+    result = await dex_client.get_order_amount(
+        sell_token, dex_client.wallet_address, 50, False
+    )
+    assert result == 50
+
+    # Test when is_percentage is False and balance is zero
+    sell_token.get_token_balance.return_value = 0
+    result = await dex_client.get_order_amount(
+        sell_token, dex_client.wallet_address, 50, False
+    )
+    assert result == 0
+
+
+@pytest.mark.asyncio
 async def test_get_swap_1(dex_client):
     result = await dex_client.get_swap(sell_token="USDT", buy_token="WBTC", quantity=1)
     assert result is not None
@@ -40,50 +66,55 @@ async def test_get_swap_1(dex_client):
 
 @pytest.mark.asyncio
 async def test_get_swap_2(dex_client):
-    # Mock the contract_utils.get_data method
-    # dex_client.contract_utils.get_data = AsyncMock()
-
-    # Mock the get_order_amount method
     dex_client.get_order_amount = AsyncMock(return_value="1")
-
-    # Mock the account.get_approve method
     dex_client.account.get_approve = AsyncMock()
-
-    # Mock the make_swap method
     dex_client.make_swap = AsyncMock()
-
-    # Mock the account.get_sign method
     dex_client.account.get_sign = AsyncMock()
-
-    # Mock the w3.to_hex method
     dex_client.w3.to_hex = MagicMock(
         return_value="0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771"
     )
-
-    # Mock the w3.wait_for_transaction_receipt method
     dex_client.w3.wait_for_transaction_receipt = (
         dex_client.w3.eth.wait_for_transaction_receipt(
             "0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771"
         )
     )
-
-    # Mock the account.get_confirmation method
     dex_client.account.get_confirmation = AsyncMock()
-
-    # Call the get_swap method
     result = await dex_client.get_swap(sell_token="USDT", buy_token="WBTC", quantity=1)
 
-    # Assertions
     assert result is not None
-    # assert dex_client.contract_utils.get_data.awaited
-    # assert dex_client.get_order_amount.awaited
     assert dex_client.account.get_confirmation.awaited
 
 
 @pytest.mark.asyncio
-async def test_get_token_exception(dex_client, caplog):
-    await dex_client.get_quote(symbol="NOTATHING")
-    assert "Quote failed" in caplog.text
+async def test_get_trading_asset_balance(dex_client):
+    dex_client.account.get_trading_asset_balance = AsyncMock()
+    result = await dex_client.get_trading_asset_balance()
+    assert result is not None
+    assert dex_client.account.get_trading_asset_balance.awaited
+
+
+@pytest.mark.asyncio
+async def test_get_account_open_positions(dex_client):
+    dex_client.account.get_account_open_positions = AsyncMock()
+    result = await dex_client.get_account_open_positions()
+    assert result is not None
+    assert dex_client.account.get_account_open_positions.awaited
+
+
+@pytest.mark.asyncio
+async def test_get_account_margin(dex_client):
+    dex_client.account.get_account_margin = AsyncMock()
+    result = await dex_client.get_account_margin()
+    assert result is not None
+    assert dex_client.account.get_account_margin.awaited
+
+
+@pytest.mark.asyncio
+async def test_get_account_pnl(dex_client):
+    dex_client.account.get_account_pnl = AsyncMock()
+    result = await dex_client.get_account_pnl()
+    assert result is not None
+    assert dex_client.account.get_account_pnl.awaited
 
 
 @pytest.mark.asyncio
@@ -93,6 +124,12 @@ async def test_get_cg_data(dex_client):
     assert result is not None
     assert isinstance(result, float)
     assert get_cg_data.awaited
+
+
+@pytest.mark.asyncio
+async def test_get_token_exception(dex_client, caplog):
+    await dex_client.get_quote(symbol="NOTATHING")
+    assert "Quote failed" in caplog.text
 
 
 @pytest.mark.asyncio

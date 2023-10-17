@@ -66,9 +66,7 @@ class AccountUtils:
             the trading asset balance like USDT (💵).
         """
         try:
-            account_balance = self.w3.eth.get_balance(
-                self.wallet_address
-            )
+            account_balance = self.w3.eth.get_balance(self.wallet_address)
             account_balance = self.w3.from_wei(account_balance, "ether") or 0
             trading_asset_balance = await self.get_trading_asset_balance()
             balance = f"{self.account_number} \n"
@@ -90,9 +88,7 @@ class AccountUtils:
         trading_asset = await self.contract_utils.get_data(
             contract_address=self.trading_asset_address
         )
-        balance = await trading_asset.get_token_balance(
-            self.wallet_address
-        )
+        balance = await trading_asset.get_token_balance(self.wallet_address)
         return balance if balance else 0
 
     async def get_account_position(self):
