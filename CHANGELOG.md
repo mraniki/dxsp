@@ -2,6 +2,19 @@
 
 
 
+## v6.1.0 (2023-10-17)
+
+### Other
+
+* Merge pull request #477 from mraniki/dev
+
+✨ trading_amount_threshold and ✅ Unit Test ([`af1260d`](https://github.com/mraniki/dxsp/commit/af1260dacf25b7856296d4bd441b43a2b59e738b))
+
+### ✨
+
+* ✨ trading_amount_threshold and ✅ Unit Test ([`c305d0c`](https://github.com/mraniki/dxsp/commit/c305d0cac1e163cf838552b243a6b89a98db2598))
+
+
 ## v6.0.7 (2023-10-17)
 
 ### Other
