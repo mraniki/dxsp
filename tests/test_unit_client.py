@@ -1,5 +1,5 @@
 """
- DEXSWAP Unit Test
+ DEXclient Unit Test
 """
 
 from unittest.mock import AsyncMock, MagicMock
@@ -7,6 +7,7 @@ from unittest.mock import AsyncMock, MagicMock
 import pytest
 
 from dxsp import DexSwap
+from dxsp.protocols.uniswap import DexUniswap
 from dxsp.config import settings
 
 
@@ -26,6 +27,28 @@ def client_fixture(dex):
         if dx.protocol == "uniswap":
             return dx
 
+# @pytest.fixture(name="dex_client")
+# def client_fixture(dex):
+#     return DexUniswap(
+#         name="uniswap",
+#                     wallet_address=_config.get("wallet_address"),
+#                     private_key=_config.get("private_key"),
+#                     rpc=_config.get("rpc"),
+#                     w3=Web3(Web3.HTTPProvider(_config.get("rpc"))),
+#                     protocol=protocol,
+#                     protocol_version=_config.get("protocol_version") or 2,
+#                     api_endpoint=_config.get("api_endpoint") or "https://api.0x.org/",
+#                     api_key=_config.get("api_key") or None,
+#                     router_contract_addr= None,
+#                     factory_contract_addr= None,
+#                     trading_risk_percentage= True,
+#                     trading_risk_amount=  1,
+#                     trading_slippage= 2,
+#                     trading_asset_address=,
+#                     trading_asset_separator= "",
+#                     block_explorer_url=_config.get("block_explorer_url") or None,
+#                     block_explorer_api=_config.get("block_explorer_api") or None,
+#                     mapping=_config.get("mapping") or None,)
 
 def test_dynaconf_is_in_testing():
     print(settings.VALUE)
