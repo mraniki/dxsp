@@ -167,23 +167,21 @@ class ContractUtils:
             137: "polygon-pos",
             42161: "arbitrum-one",
         }
-        network_name = network_versions.get(self.w3.net.version)
-        if network_name:
+        if network_name := network_versions.get(self.w3.net.version):
             return network_name
-        else:
-            try:
-                asset_platforms = self.cg.get_asset_platforms()
-                output_dict = next(
-                    x
-                    for x in asset_platforms
-                    if x["chain_identifier"] == int(self.w3.net.version)
-                )
-                platform = output_dict["id"] or None
-                logger.debug("coingecko platform identified {}", platform)
-                return platform
-            except Exception as e:
-                logger.error("get_token_data: {}", e)
-                return None
+        try:
+            asset_platforms = self.cg.get_asset_platforms()
+            output_dict = next(
+                x
+                for x in asset_platforms
+                if x["chain_identifier"] == int(self.w3.net.version)
+            )
+            platform = output_dict["id"] or None
+            logger.debug("coingecko platform identified {}", platform)
+            return platform
+        except Exception as e:
+            logger.error("get_token_data: {}", e)
+            return None
 
     async def get_cg_data(self, token):
         """
