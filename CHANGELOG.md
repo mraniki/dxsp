@@ -2,6 +2,23 @@
 
 
 
+## v6.1.1 (2023-10-17)
+
+### Other
+
+* Merge pull request #478 from mraniki/dev
+
+✅ Unit Test ⚡ ([`6fc9e7d`](https://github.com/mraniki/dxsp/commit/6fc9e7dc014a046f31ff1164e4e5cf0568554baf))
+
+* Merge pull request #473 from mraniki/renovate/ruff-0.x
+
+⬆️ 🛠️(deps): update dependency ruff to ^0.1.0 ([`3eb8e74`](https://github.com/mraniki/dxsp/commit/3eb8e74772ab5fd2a18fa90dbb95e32e1088b419))
+
+### ⚡
+
+* :white_check_mark: Unit Test ⚡ ([`dc149e9`](https://github.com/mraniki/dxsp/commit/dc149e956d6b5b2ecc5f2131cb6ec0ed8e7108d4))
+
+
 ## v6.1.0 (2023-10-17)
 
 ### Other
@@ -53,6 +70,10 @@
 * Merge pull request #474 from mraniki/dev
 
 👷 CI Change ([`346a80a`](https://github.com/mraniki/dxsp/commit/346a80aaf3d8727eca7b3bbc93833b342cdcc1b1))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency ruff to ^0.1.0 ([`61fe348`](https://github.com/mraniki/dxsp/commit/61fe3484d9b3786498a15fa954ef75b7db3c1d2c))
 
 ### 👷
 
