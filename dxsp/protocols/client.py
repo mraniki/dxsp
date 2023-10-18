@@ -59,6 +59,10 @@ class DexClient:
     ):
         self.w3 = w3
         self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
+        self.w3.middleware_onion.add(middleware.time_based_cache_middleware)
+        self.w3.middleware_onion.add(middleware.latest_block_based_cache_middleware)
+        self.w3.middleware_onion.add(middleware.simple_cache_middleware)
+
         self.rpc = rpc
         self.name = name
         logger.debug(f"setting up DexClient: {self.name}")

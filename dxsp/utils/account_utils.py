@@ -205,4 +205,5 @@ class AccountUtils:
             int: The gas price
 
         """
+
         return round(self.w3.from_wei(self.w3.eth.generate_gas_price(), "gwei"), 2)
