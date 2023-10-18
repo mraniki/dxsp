@@ -29,6 +29,7 @@ class DexZeroX(DexClient):
             float: The guaranteed price for the token swap.
         """
         try:
+            logger.debug("0x get_quote {} {} {}", buy_address, symbol, amount)
             if buy_address is None:
                 buy_address = self.trading_asset_address
             buy_token = await self.contract_utils.get_data(contract_address=buy_address)
@@ -49,6 +50,7 @@ class DexZeroX(DexClient):
                     return response["code"], response["reason"]
         except Exception as error:
             logger.error("Quote failed {}", error)
+
     async def make_swap(self, buy_address, sell_address, amount):
         """
         Asynchronously gets a swap order by calling the `get_quote`
@@ -66,7 +68,7 @@ class DexZeroX(DexClient):
         of the `account` object with the `swap_order`
         as an argument.
         """
-        logger.debug(f"0x swap {buy_address} {sell_address} {amount}")
+        logger.debug(f"0x make_swap {buy_address} {sell_address} {amount}")
         swap_order = await self.get_quote(buy_address, sell_address, amount)
         if swap_order:
             return await self.account.get_sign(swap_order)
