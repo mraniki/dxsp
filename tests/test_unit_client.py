@@ -148,7 +148,7 @@ async def test_get_approve(dex_client):
 async def test_get_gas(dex_client):
     """get_gas Testing"""
     mock_tx = {
-        "to": "0x1234567890123456789012345678901234567890",
+        "to": "0x5f65f7b609678448494De4C87521CdF6cEf1e932",
         "value": "1000000000000000000",
     }
     result = await dex_client.account.get_gas(mock_tx)
