@@ -29,6 +29,7 @@ class DexUniswap(DexClient):
             float: The calculated quote for the given buy and sell addresses.
         """
         try:
+            logger.debug("Uniswap get_quote {} {} {}", buy_address, symbol, amount)
             if buy_address is None:
                 buy_token = await self.contract_utils.get_data(
                     contract_address=self.trading_asset_address
@@ -73,6 +74,9 @@ class DexUniswap(DexClient):
         :raises ValueError: If the swap fails.
         """
         try:
+            logger.debug(
+                "Uniswap make_swap {} {} {}", sell_address, buy_address, amount
+            )
             uniswap = Uniswap(
                 address=self.wallet_address,
                 private_key=self.private_key,

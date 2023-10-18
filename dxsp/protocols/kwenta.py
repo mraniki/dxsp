@@ -23,7 +23,7 @@ class DexKwenta(DexClient):
 
         Args:
             buy_address (str, optional): The buy address. Defaults to None.
-            symbol (str, optional): The symbol to retrieve the quote for. 
+            symbol (str, optional): The symbol to retrieve the quote for.
             Defaults to None.
             amount (int, optional): The amount of the asset to retrieve the quote for.
             Defaults to 1.
@@ -35,12 +35,14 @@ class DexKwenta(DexClient):
             Exception: If an error occurs during the retrieval process.
         """
         try:
+            logger.debug("Kwenta get_quote {} {} {}", buy_address, symbol, amount)
             kwenta = Kwenta(
-                network_id=10,
+                network_id=int(self.w3.net.version),
                 provider_rpc=self.rpc,
                 wallet_address=self.wallet_address,
                 private_key=self.private_key,
             )
+            logger.debug("kwenta client: {}", kwenta)
             symbol = await self.replace_instrument(symbol)
             sell_token = await self.contract_utils.get_data(symbol=symbol)
             market = kwenta.markets[f"{sell_token.symbol}"]
@@ -50,6 +52,7 @@ class DexKwenta(DexClient):
             logger.info("quote: {}", quote)
             return quote
         except Exception as error:
+            logger.error("Kwenta Quote failed {}, Verify Kwenta wallet setup", error)
             logger.debug(error)
 
     async def make_swap(self, sell_address, buy_address, amount):

@@ -5,6 +5,7 @@ Base DexClient Class   🦄
 import decimal
 
 from loguru import logger
+from web3 import middleware
 from web3.gas_strategies.time_based import medium_gas_price_strategy
 
 from dxsp.utils import AccountUtils, ContractUtils
@@ -59,6 +60,10 @@ class DexClient:
     ):
         self.w3 = w3
         self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
+        self.w3.middleware_onion.add(middleware.time_based_cache_middleware)
+        self.w3.middleware_onion.add(middleware.latest_block_based_cache_middleware)
+        self.w3.middleware_onion.add(middleware.simple_cache_middleware)
+
         self.rpc = rpc
         self.name = name
         logger.debug(f"setting up DexClient: {self.name}")
@@ -107,6 +112,7 @@ class DexClient:
         Returns:
             dict
         """
+        logger.debug("Replace instrument: {}", instrument)
         if self.mapping is None:
             return instrument
         for item in self.mapping:
@@ -114,7 +120,7 @@ class DexClient:
                 instrument = item["alt"]
                 logger.debug("Instrument symbol changed {}", instrument)
                 break
-
+        logger.debug("Instrument symbol changed {}", instrument)
         return instrument
 
     async def get_order_amount(
@@ -134,6 +140,8 @@ class DexClient:
         Returns:
             float: The calculated order amount.
         """
+        logger.debug("get order amount {} {} {}", sell_token, wallet_address, quantity)
+        logger.debug("Protocol", self.contract_utils.platform)
         balance = await sell_token.get_token_balance(wallet_address)
         logger.debug("Balance {}", balance)
         if not is_percentage and balance:
@@ -169,7 +177,8 @@ class DexClient:
 
         """
         try:
-            logger.debug("get swap")
+            logger.debug("get swap {} {} {}", sell_token, buy_token, quantity)
+            logger.debug("Protocol", self.contract_utils.platform)
             sell_token = await self.contract_utils.get_data(symbol=sell_token)
             logger.debug("sell token {}", sell_token)
             buy_token = await self.contract_utils.get_data(symbol=buy_token)
