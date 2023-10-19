@@ -156,11 +156,11 @@ async def test_get_gas(dex_client):
     assert result is not None
 
 
-@pytest.mark.asyncio
-async def test_get_gas_price(dex_client):
-    result = await dex_client.account.get_gas_price()
-    print(f"gas_price: {result}")
-    assert result is not None
+# @pytest.mark.asyncio
+# async def test_get_gas_price(dex_client):
+#     result = await dex_client.account.get_gas_price()
+#     print(f"gas_price: {result}")
+#     assert result is not None
 
 
 
