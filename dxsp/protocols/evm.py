@@ -29,7 +29,6 @@ class DexEvm(DexClient):
 
     async def get_quote(self, buy_address=None, symbol=None, amount=1):
         logger.debug("Evm get_quote {} {} {}", buy_address, symbol, amount)
-        pass
         # dex = fetch_deployment(
         #     self.w3,
         #     factory_address=self.factory_contract_addr,
@@ -38,4 +37,3 @@ class DexEvm(DexClient):
 
     async def make_swap(self, sell_address, buy_address, amount):
         logger.debug("Evm make_swap {} {} {}", sell_address, buy_address, amount)
-        pass
