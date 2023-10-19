@@ -26,12 +26,10 @@ dynaconf = ">=3.2.0"
 loguru = ">=0.6.0"
 pycoingecko = "3.1.0"
 requests = "^2.31.0"
-web3 = "6.11.0"
-#web3 = {version = "6.11.0", extras = ["tester"]}
+web3 = "6.11.1"
 eth-tester = "0.9.1b1"
 uniswap-python = "0.7.1"
 kwenta = "1.2.0"
-
 
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = ">=8.0.8"
