@@ -2,6 +2,136 @@
 
 
 
+## v6.1.3 (2023-10-20)
+
+### :fire:
+
+* :fire: cleanup ([`83c0a20`](https://github.com/mraniki/dxsp/commit/83c0a207a7a6e2a71d01f0344cb2308f2825a265))
+
+* :fire: cleanup ([`f18f941`](https://github.com/mraniki/dxsp/commit/f18f941688ea402d40bf4346fb5d1eff68a02bb0))
+
+### :recycle:
+
+* :recycle:gas strategy ([`6b48357`](https://github.com/mraniki/dxsp/commit/6b48357d065627defd276e9c0b13f934df91e269))
+
+* :recycle:gas strategy ([`c999d42`](https://github.com/mraniki/dxsp/commit/c999d42dae911ac29f139ca08624a011ed376be8))
+
+* :recycle:gas strategy ([`60e0bba`](https://github.com/mraniki/dxsp/commit/60e0bba6d4f9cea8ad572e0944c2ac83f48e4824))
+
+### :white_check_mark:
+
+* :white_check_mark: Unit Test ([`60ef200`](https://github.com/mraniki/dxsp/commit/60ef200468d11521a3c4a60c232e626847d3635a))
+
+### Other
+
+* Merge pull request #487 from mraniki/dev
+
+Merge pull request #486 from mraniki/main ([`a8d0ff8`](https://github.com/mraniki/dxsp/commit/a8d0ff80a72cbdb48c0add8784d9806a45433e2f))
+
+* Merge pull request #486 from mraniki/main
+
+Merge pull request #485 from mraniki/dev ([`e2d201a`](https://github.com/mraniki/dxsp/commit/e2d201a22984447c0d3e1f31f64f89a289447607))
+
+* Merge pull request #485 from mraniki/dev
+
+👷 CI Change ([`a7e60f5`](https://github.com/mraniki/dxsp/commit/a7e60f51d79ce9b912fe6df5e15db041a3e98582))
+
+* Merge branch &#39;main&#39; into dev ([`e9de6e1`](https://github.com/mraniki/dxsp/commit/e9de6e137654d9c3cc605b341e0ef98dd3fdabe0))
+
+* Merge pull request #483 from mraniki/dev
+
+Dev ([`368568d`](https://github.com/mraniki/dxsp/commit/368568d2cd046128c97af5dedef5d678191e49b8))
+
+* Merge pull request #484 from mraniki/sourcery/dev
+
+Dev (Sourcery refactored) ([`6934513`](https://github.com/mraniki/dxsp/commit/6934513845dda1a51287a31dffbfe1d7d4a51dfc))
+
+* &#39;Refactored by Sourcery&#39; ([`ceacdcd`](https://github.com/mraniki/dxsp/commit/ceacdcdfcf20ecbaf6af74c5f65d408764ce40e1))
+
+* Merge pull request #482 from mraniki/dependabot/pip/dev/web3-6.11.1
+
+⬆️ 🤖 Dependencies: Update web3 requirement from 6.11.0 to 6.11.1 ([`cd7f744`](https://github.com/mraniki/dxsp/commit/cd7f744dd901c3522813f29bc9e0da5ddaf72a90))
+
+* Merge branch &#39;dev&#39; into dependabot/pip/dev/web3-6.11.1 ([`01479e4`](https://github.com/mraniki/dxsp/commit/01479e4f4f53a1b4e858f3621066eccbf4775a27))
+
+* Merge pull request #481 from mraniki/renovate/web3-6.x
+
+⬆️ 🛠️(deps): update dependency web3 to v6.11.1 ([`fa1dcce`](https://github.com/mraniki/dxsp/commit/fa1dcce28889c13312b20392f8a441b8fab37184))
+
+* Merge pull request #480 from mraniki/dev
+
+🔊🥅 Logging and Error Management improvement ([`5b4b76b`](https://github.com/mraniki/dxsp/commit/5b4b76b9ae348d85917b47834e09a26369b13f89))
+
+* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`d86aa2b`](https://github.com/mraniki/dxsp/commit/d86aa2bddecc317f872245c253ff7d38455d9e6e))
+
+### Update
+
+* :arrow_up: 🤖 Dependencies: Update web3 requirement from 6.11.0 to 6.11.1
+
+Updates the requirements on [web3](https://github.com/ethereum/web3.py) to permit the latest version.
+- [Release notes](https://github.com/ethereum/web3.py/releases)
+- [Changelog](https://github.com/ethereum/web3.py/blob/main/docs/releases.rst)
+- [Commits](https://github.com/ethereum/web3.py/compare/v6.11.0...v6.11.1)
+
+---
+updated-dependencies:
+- dependency-name: web3
+  dependency-type: direct:production
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`2c14663`](https://github.com/mraniki/dxsp/commit/2c1466389e2f2f24ab9a68deb40e2e0234a72349))
+
+* Update Requirements ([`3f87a7f`](https://github.com/mraniki/dxsp/commit/3f87a7fe982ca5695112763d89482242619adafa))
+
+* Update Requirements ([`6d1bc0c`](https://github.com/mraniki/dxsp/commit/6d1bc0cf3e6ec2ad9f79f8421b71da45c807ad19))
+
+### ♻️
+
+* ♻️ ([`42c1e11`](https://github.com/mraniki/dxsp/commit/42c1e1141dda2439affed93ec56e8ac874e07984))
+
+* ♻️ ([`d2ea5ca`](https://github.com/mraniki/dxsp/commit/d2ea5cafebf6c4e1eaf833d97c34bf4cf39616be))
+
+* ♻️ ([`8883828`](https://github.com/mraniki/dxsp/commit/8883828148859403adc615c28ac8eb35f5c8c97a))
+
+### ✅
+
+* ✅ Unit Test ([`264f31f`](https://github.com/mraniki/dxsp/commit/264f31fc70502184d3e35fcdb4d093fb68a4f130))
+
+* ✅ Unit Test ([`243e69b`](https://github.com/mraniki/dxsp/commit/243e69b71811818238d0b7ae3be494a2bd16cd2a))
+
+* ✅ Unit Test ([`7ec8a36`](https://github.com/mraniki/dxsp/commit/7ec8a362ce37d733337d7db27eaeb83c4c0353d6))
+
+* ✅ Unit Test w3 test ([`ed1ea08`](https://github.com/mraniki/dxsp/commit/ed1ea080963c40a6c8ffdda442f9dc2bb82c2592))
+
+* ✅ Unit Test ([`3ea9d2c`](https://github.com/mraniki/dxsp/commit/3ea9d2c632d3d71ee67789c92fa04b8d878c9e3c))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency web3 to v6.11.1 ([`b1749ff`](https://github.com/mraniki/dxsp/commit/b1749ff6e35d0cf030e21d2095d8775401ef1ab4))
+
+### 👷
+
+* 👷 CI Change ([`3bb8e6d`](https://github.com/mraniki/dxsp/commit/3bb8e6d3f8e4e094eed014e20b9c6654c6eccc29))
+
+* 👷 CI Change ([`e2bd122`](https://github.com/mraniki/dxsp/commit/e2bd122ebe9ce653fd228c49f7907cbc1b0a8642))
+
+* 👷 CI Change ([`577d337`](https://github.com/mraniki/dxsp/commit/577d3375edb27fd9c0d2fe4e81049076e6bad1bc))
+
+* 👷 CI Change ([`10c221e`](https://github.com/mraniki/dxsp/commit/10c221e90c9862ca3b6513198bf16a0263b291ae))
+
+### 🔊
+
+* 🔊 ([`eaee5a8`](https://github.com/mraniki/dxsp/commit/eaee5a8171cae21e259f95df8715a4d00358d676))
+
+### 🚨
+
+* 🚨 ([`3612ca9`](https://github.com/mraniki/dxsp/commit/3612ca96b1193f8be2a7237a586697916a3607d9))
+
+### 🥅
+
+* 🥅 ([`dc1ce3a`](https://github.com/mraniki/dxsp/commit/dc1ce3ab1eae244a08a2480b2c71c3a2c3b450ae))
+
+
 ## v6.1.2 (2023-10-17)
 
 ### Other
