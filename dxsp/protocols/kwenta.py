@@ -36,6 +36,11 @@ class DexKwenta(DexClient):
         """
         try:
             logger.debug("Kwenta get_quote {} {} {}", buy_address, symbol, amount)
+            if buy_address is None:
+                buy_token = await self.contract_utils.get_data(
+                    contract_address=self.trading_asset_address
+                )
+                buy_address = buy_token.address
             kwenta = Kwenta(
                 network_id=int(self.w3.net.version),
                 provider_rpc=self.rpc,
