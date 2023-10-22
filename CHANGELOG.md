@@ -2,6 +2,27 @@
 
 
 
+## v6.1.4 (2023-10-22)
+
+### Other
+
+* Merge pull request #488 from mraniki/dev
+
+🥅 better error handling for no config ([`e7cc495`](https://github.com/mraniki/dxsp/commit/e7cc4954cce1455e8db7b3c143c8faaca0bee520))
+
+### Update
+
+* Update Requirements ([`f5cd3ee`](https://github.com/mraniki/dxsp/commit/f5cd3ee120cf7e2f3c5b416587de35898cbe7df4))
+
+### ♻️
+
+* ♻️ ([`2c92b5f`](https://github.com/mraniki/dxsp/commit/2c92b5f8007a2b7c8fcb71498a141bfd2eadd295))
+
+### 🥅
+
+* 🥅 better error handling for no config ([`7735b77`](https://github.com/mraniki/dxsp/commit/7735b77398009cd56638a6369f1df0ba70797e0c))
+
+
 ## v6.1.3 (2023-10-20)
 
 ### :fire:
