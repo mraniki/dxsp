@@ -4,7 +4,7 @@ uniswap  🦄
 from loguru import logger
 from uniswap import Uniswap
 
-from dxsp.protocols import DexClient
+from dxsp.protocols.client import DexClient
 
 
 class DexUniswap(DexClient):

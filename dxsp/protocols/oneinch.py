@@ -1,10 +1,8 @@
 """
 OneInch 🦄
 """
-from loguru import logger
 
-from dxsp.config import settings
-from dxsp.protocols import DexClient
+from dxsp.protocols.client import DexClient
 
 
 class DexOneInch(DexClient):

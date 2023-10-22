@@ -41,6 +41,7 @@ class DexSwap:
 
         """
         try:
+            logger.info("Initializing DexSwap")
             config = settings.dex
             self.clients = []
             for item in config:
@@ -79,6 +80,10 @@ class DexSwap:
 
                 self.clients.append(client)
                 logger.debug(f"Loaded {item}")
+            if self.clients:
+                logger.info(f"Loaded {len(self.clients)} DEX clients")
+            else:
+                logger.warning("No DEX clients loaded. Verify config")
 
         except Exception as e:
             logger.error("init: {}", e)
