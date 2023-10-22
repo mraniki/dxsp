@@ -5,7 +5,7 @@ Kwenta 🧮
 from kwenta import Kwenta
 from loguru import logger
 
-from dxsp.protocols import DexClient
+from dxsp.protocols.client import DexClient
 
 
 class DexKwenta(DexClient):

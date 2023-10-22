@@ -4,7 +4,7 @@
 """
 from loguru import logger
 
-from dxsp.protocols import DexClient
+from dxsp.protocols.client import DexClient
 from dxsp.utils.utils import get
 
 
