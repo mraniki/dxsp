@@ -133,12 +133,11 @@ class ContractUtils:
                 logger.info("Searching on Coingecko")
                 token_instance = await self.search_cg_data(token)
 
-            if token_instance is not None:
-                token_instance.block_explorer_api = self.block_explorer_api
-                token_instance.block_explorer_url = self.block_explorer_url
-                return token_instance
-            else:
+            if token_instance is None:
                 raise Exception(f"Token not found: {token} on {str(self.w3.net.version)}")
+            token_instance.block_explorer_api = self.block_explorer_api
+            token_instance.block_explorer_url = self.block_explorer_url
+            return token_instance
         except Exception as e:
             logger.error("Search {}: {}", token, e)
             raise
