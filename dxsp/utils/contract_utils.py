@@ -138,7 +138,7 @@ class ContractUtils:
                 token_instance.block_explorer_url = self.block_explorer_url
                 return token_instance
             else:
-                raise Exception(f"Token not found: {token}")
+                raise Exception(f"Token not found: {token} on {str(self.w3.net.version)}")
         except Exception as e:
             logger.error("Search {}: {}", token, e)
             raise
