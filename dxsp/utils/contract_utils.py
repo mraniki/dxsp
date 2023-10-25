@@ -53,6 +53,7 @@ class ContractUtils:
         self.block_explorer_api = block_explorer_api
         self.cg = CoinGeckoAPI()
         self.platform = self.get_cg_platform()
+        self.chain = str(self.w3.net.version)
 
     async def get_data(self, symbol=None, contract_address=None):
         """
@@ -134,7 +135,7 @@ class ContractUtils:
                 token_instance = await self.search_cg_data(token)
 
             if token_instance is None:
-                raise Exception(f"Token not found: {token} on {str(self.w3.net.version)}")
+                raise Exception(f"Token not found: {token} on {self.chain}")
             token_instance.block_explorer_api = self.block_explorer_api
             token_instance.block_explorer_url = self.block_explorer_url
             return token_instance
