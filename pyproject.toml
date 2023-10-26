@@ -173,7 +173,7 @@ changelog_file = "CHANGELOG.md"
 exclude_commit_patterns = []
 
 [tool.semantic_release.branches.main]
-match = "(main|master)"
+match = "(main|master|dev)"
 prerelease_token = "rc"
 prerelease = false
 
