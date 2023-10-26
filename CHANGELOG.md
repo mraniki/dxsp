@@ -2,6 +2,52 @@
 
 
 
+## v6.1.5 (2023-10-26)
+
+### :recycle:
+
+* :recycle: Refactor ContractUtils error message
+
+The error message in ContractUtils has been refactored to include the ne
+twork version. ([`209810a`](https://github.com/mraniki/dxsp/commit/209810a883b224a591cff5035e8e78edeef9ed22))
+
+### Other
+
+* Merge pull request #491 from mraniki/dev
+
+⬆️ 🤖 - Auto Release ([`1ae247b`](https://github.com/mraniki/dxsp/commit/1ae247be433259f288cc3d5315bd223111e90e93))
+
+* Merge branch &#39;main&#39; into dev ([`b03c525`](https://github.com/mraniki/dxsp/commit/b03c5258a8473046a3a403e92d8293c4f88e9ef0))
+
+* Fix token not found exception message ([`abe6745`](https://github.com/mraniki/dxsp/commit/abe6745ced0813efc7130e4cef2a31bc2799a588))
+
+* Merge pull request #492 from mraniki/sourcery/dev
+
+⬆️ 🤖 - Auto Release (Sourcery refactored) ([`aab048e`](https://github.com/mraniki/dxsp/commit/aab048e446707212df5f5ca00dce835897223ecf))
+
+* &#39;Refactored by Sourcery&#39; ([`94a10ba`](https://github.com/mraniki/dxsp/commit/94a10ba1680877b254f9997d994d21059dd832b4))
+
+* Auto ([`21edab8`](https://github.com/mraniki/dxsp/commit/21edab83939456c40115d636bf305a3eb39567e4))
+
+* Merge pull request #490 from mraniki/dev
+
+⬆️ 🤖 - Auto Release ([`7ba2587`](https://github.com/mraniki/dxsp/commit/7ba2587dc53821e37b2d15cd75da7c6613e8f746))
+
+* Merge branch &#39;main&#39; into dev ([`94a3f01`](https://github.com/mraniki/dxsp/commit/94a3f01cf8b7dcd97bba6803f2e03db710b00f8e))
+
+* Auto ([`b5aae66`](https://github.com/mraniki/dxsp/commit/b5aae665b1a48e461e2b921af7923028b49d8ecd))
+
+* Merge pull request #489 from mraniki/dev
+
+⬆️ 🤖 - Auto Release ([`b06a439`](https://github.com/mraniki/dxsp/commit/b06a4391555b78552df6565aab15e777aef073f5))
+
+* Auto ([`4014aaa`](https://github.com/mraniki/dxsp/commit/4014aaa045c47c58ee36b9ba5a60c62b138c6f45))
+
+### Update
+
+* Update Requirements ([`076c122`](https://github.com/mraniki/dxsp/commit/076c1229b5c52af0b542b972bd8e2e03fd47ca27))
+
+
 ## v6.1.4 (2023-10-22)
 
 ### Other
