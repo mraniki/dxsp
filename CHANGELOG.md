@@ -2,6 +2,25 @@
 
 
 
+## v6.1.6 (2023-10-26)
+
+### Other
+
+* Merge pull request #494 from mraniki/dev
+
+⬆️ 🤖 - Auto Release ([`8607804`](https://github.com/mraniki/dxsp/commit/8607804b0e6492a147ab57ec5d1fbb0be9ebd9ad))
+
+* Merge branch &#39;main&#39; into dev ([`4b08577`](https://github.com/mraniki/dxsp/commit/4b085771985b27cf26e01b7726ea648f3b1b1dbe))
+
+### Update
+
+* ⬆️ Update Requirements and Version ([`be0f2a5`](https://github.com/mraniki/dxsp/commit/be0f2a529c106f4b640468b4d8a71bc1d1f86697))
+
+### 🔧
+
+* 🔧 ([`240b1ba`](https://github.com/mraniki/dxsp/commit/240b1bac5699368282510442b07b715949eb3271))
+
+
 ## v6.1.5 (2023-10-26)
 
 ### :recycle:
@@ -12,6 +31,10 @@ The error message in ContractUtils has been refactored to include the ne
 twork version. ([`209810a`](https://github.com/mraniki/dxsp/commit/209810a883b224a591cff5035e8e78edeef9ed22))
 
 ### Other
+
+* Merge branch &#39;main&#39; into dev ([`dce8280`](https://github.com/mraniki/dxsp/commit/dce82806f2db3c1664bc70b695586503a56c2458))
+
+* Auto ([`a278388`](https://github.com/mraniki/dxsp/commit/a2783880d627b7126d1ddaa8d667b13a8c501038))
 
 * Merge pull request #491 from mraniki/dev
 
