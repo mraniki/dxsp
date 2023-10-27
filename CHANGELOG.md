@@ -2,6 +2,19 @@
 
 
 
+## v6.1.7 (2023-10-27)
+
+### Other
+
+* Merge pull request #497 from mraniki/dev
+
+⬆️ 🤖 - Auto Release ([`b3e34d5`](https://github.com/mraniki/dxsp/commit/b3e34d58eb3d4c717502895f98ef376490b76043))
+
+### Update
+
+* ⬆️ Update Requirements and Version ([`c517f6d`](https://github.com/mraniki/dxsp/commit/c517f6dfce4cdd0c7270764979eafe72c82cde1e))
+
+
 ## v6.1.6 (2023-10-26)
 
 ### Other
