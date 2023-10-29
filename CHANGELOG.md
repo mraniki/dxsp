@@ -2,6 +2,45 @@
 
 
 
+## v6.1.8 (2023-10-29)
+
+### Other
+
+* Merge pull request #502 from mraniki/dev
+
+⬆️ 🤖 - Make a wish it might come true ([`114a653`](https://github.com/mraniki/dxsp/commit/114a6533b3ce6eaeaf000615744635457551e078))
+
+* Merge pull request #501 from mraniki/main
+
+Merge ([`ee071e3`](https://github.com/mraniki/dxsp/commit/ee071e314d67c22d2056af2e7e5ecb0a044a7a9b))
+
+* Merge pull request #500 from mraniki/dev
+
+⬆️ 🤖 - My only love sprung from my only hate ([`f49e7c3`](https://github.com/mraniki/dxsp/commit/f49e7c30776e67532f32cdface9e015caf6efda7))
+
+* Merge pull request #499 from mraniki/dev
+
+⬆️ Update Requirements and Version ([`ebb4bb9`](https://github.com/mraniki/dxsp/commit/ebb4bb9a06fedfb955bd9313180f1a47a6480b26))
+
+### Update
+
+* Update GitHub Actions workflow file ([`0eedaf6`](https://github.com/mraniki/dxsp/commit/0eedaf661a2aa73838ae178683f7750b5a10d4ff))
+
+* ⬆️ Update Requirements and Version ([`82fc1be`](https://github.com/mraniki/dxsp/commit/82fc1be758d95011f2508a014f8c220a07484ce0))
+
+### ✅
+
+* ✅ Unit Test ([`da70b72`](https://github.com/mraniki/dxsp/commit/da70b72c776af9f2206e5a1015fe879439107a48))
+
+* ✅ Unit Test ([`8892ca2`](https://github.com/mraniki/dxsp/commit/8892ca21930fc84c7f69ff42fc6784b1a9e40c4e))
+
+### 👷
+
+* 👷 CI Change ([`d40d0c8`](https://github.com/mraniki/dxsp/commit/d40d0c8ce5c5eeaaeb7d6e9e5ddf75ef80294f22))
+
+* 👷 CI Change ([`b6d8d22`](https://github.com/mraniki/dxsp/commit/b6d8d22c2f216076fc03ca7411da4cc411bba65d))
+
+
 ## v6.1.7 (2023-10-27)
 
 ### Other
