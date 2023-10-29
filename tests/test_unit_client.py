@@ -167,7 +167,7 @@ async def test_get_gas(dex_client):
 @pytest.mark.asyncio
 async def test_get_confirmation(dex_client):
     result = await dex_client.contract_utils.get_confirmation(
-        "0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771"
+        "0xea5a0fd0a15f68ef2f4b38661d445aa14de06a88844adc236bb071c46734fd09"
     )
     print(result)
     assert result is not None
