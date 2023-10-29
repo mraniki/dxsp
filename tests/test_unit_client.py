@@ -71,11 +71,11 @@ async def test_get_swap_2(dex_client):
     dex_client.make_swap = AsyncMock()
     dex_client.account.get_sign = AsyncMock()
     dex_client.w3.to_hex = MagicMock(
-        return_value="0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771"
+        return_value="0xea5a0fd0a15f68ef2f4b38661d445aa14de06a88844adc236bb071c46734fd09"
     )
     dex_client.w3.wait_for_transaction_receipt = (
         dex_client.w3.eth.wait_for_transaction_receipt(
-            "0xda56e5f1a26241a03d3f96740989e432ca41ae35b5a1b44bcb37aa2cf7772771"
+            "0xea5a0fd0a15f68ef2f4b38661d445aa14de06a88844adc236bb071c46734fd09"
         )
     )
     dex_client.account.get_confirmation = AsyncMock()
