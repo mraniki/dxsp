@@ -2,15 +2,11 @@
 DXSP Example
 """
 import asyncio
-import logging
 
 from dxsp import DexSwap
 
-logging.basicConfig()
-
 
 async def main():
-    logging.getLogger().setLevel(logging.DEBUG)
     dex = DexSwap()
     symbol = "BTC"
 
