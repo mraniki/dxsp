@@ -27,7 +27,7 @@ loguru = ">=0.6.0"
 pycoingecko = "3.1.0"
 requests = "^2.31.0"
 web3 = "6.11.3"
-eth-tester = "0.9.1b1"
+eth-tester = "0.10.0b1"
 uniswap-python = "0.7.1"
 kwenta = "1.2.0"
 
@@ -74,7 +74,7 @@ pytest-cov = "^4.1"
 pytest-asyncio = "^0.21.0"
 pytest-mock = "^3.11.1"
 pytest-loguru = "^0.3.0"
-eth_tester = "^0.9.0b2"
+eth_tester = ">=0.9,<0.11"
 
 [tool.pytest.ini_options]
 pythonpath = "."
