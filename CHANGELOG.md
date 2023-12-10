@@ -2,6 +2,63 @@
 
 
 
+## v6.1.9 (2023-12-10)
+
+### Other
+
+* Merge pull request #518 from mraniki/dev
+
+⬆️ 🤖 - Q	How much does it cost to ride the Unibus ([`33a5cf2`](https://github.com/mraniki/dxsp/commit/33a5cf2f4e47a0f2a908c5d9786bc57d511930f7))
+
+* Merge pull request #512 from mraniki/dev
+
+⬆️ 🤖 - You will be surrounded by luxury ([`3ef64a4`](https://github.com/mraniki/dxsp/commit/3ef64a47f84323d4c1db68ea92a2185d2ac15fa9))
+
+* Merge pull request #510 from mraniki/dev
+
+⬆️ 🤖 - Must I hold a candle to my shames ([`f4c20d5`](https://github.com/mraniki/dxsp/commit/f4c20d52f41267f44fd856b68fb455a09363db21))
+
+* Merge pull request #508 from mraniki/main
+
+align ([`56eb0df`](https://github.com/mraniki/dxsp/commit/56eb0df736e50f7c2111bd812195ead5a62a0da8))
+
+* Delete requirements.txt ([`50c94b6`](https://github.com/mraniki/dxsp/commit/50c94b6ab64a707e9f134d18ae99f59b272357ef))
+
+* Merge pull request #506 from mraniki/dev
+
+⬆️ 🤖 - Executive ability is prominent in your makeup ([`7f5bafe`](https://github.com/mraniki/dxsp/commit/7f5bafed1df3d20e5255b722a42162fe57d10236))
+
+* Merge pull request #505 from mraniki/renovate/pytest-asyncio-0.x
+
+⬆️ 🛠️(deps): update dependency pytest-asyncio to ^0.22.0 ([`49c5297`](https://github.com/mraniki/dxsp/commit/49c5297759934ed0839df2ab792cd74d517889f2))
+
+### Update
+
+* Update pyproject.toml ([`3fe7a2a`](https://github.com/mraniki/dxsp/commit/3fe7a2ae1c01131c5b3b4af04e8554b41942f2b9))
+
+### ♻️
+
+* ♻️ simplify example ([`dcdfd46`](https://github.com/mraniki/dxsp/commit/dcdfd46a5f36fbdcf88174a971f9f0190d7b871b))
+
+### ✅
+
+* ✅ Unit Test ([`08de25a`](https://github.com/mraniki/dxsp/commit/08de25acfc225358dba930b802e09c97a0fe9d99))
+
+* ✅ Unit Test ([`c05453a`](https://github.com/mraniki/dxsp/commit/c05453a576932d2183e7aa5fff880860158a9dd7))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency web3 to v6.11.4 ([`95f5e5e`](https://github.com/mraniki/dxsp/commit/95f5e5e0c9daa5dbf009ddd1bde4aad53049cbbc))
+
+* ⬆️ 🛠️(deps): update dependency pytest-asyncio to ^0.23.0 ([`a155c05`](https://github.com/mraniki/dxsp/commit/a155c05fa2d4383e1b93104d73b9f0a94df27d49))
+
+* ⬆️ 🛠️(deps): update dependency web3 to v6.11.3 ([`2901306`](https://github.com/mraniki/dxsp/commit/29013061b9d362c7edfd4658e63993b4adb82389))
+
+* ⬆️ 🛠️(deps): update dependency pytest-asyncio to ^0.22.0 ([`d76e1da`](https://github.com/mraniki/dxsp/commit/d76e1da0c7119523d7be2d780e6855b2fa30096d))
+
+* ⬆️ 🛠️(deps): update dependency web3 to v6.11.2 ([`34d821b`](https://github.com/mraniki/dxsp/commit/34d821b40cfb26b00684b08b102b044cf8086efe))
+
+
 ## v6.1.8 (2023-10-29)
 
 ### Other
