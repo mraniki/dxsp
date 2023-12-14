@@ -2,6 +2,19 @@
 
 
 
+## v6.1.10 (2023-12-14)
+
+### Other
+
+* Merge pull request #521 from mraniki/dev
+
+⬆️ 🤖 - You will have long and healthy life ([`f248425`](https://github.com/mraniki/dxsp/commit/f2484256adf6cd5cf54ba9c01a4f91ed64748d41))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency web3 to v6.12.0 ([`55ce262`](https://github.com/mraniki/dxsp/commit/55ce262dd6ba3882d2da90d39946de4d7cb738a2))
+
+
 ## v6.1.9 (2023-12-10)
 
 ### Other
