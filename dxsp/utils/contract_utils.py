@@ -53,7 +53,7 @@ class ContractUtils:
         self.block_explorer_api = block_explorer_api
         self.cg = CoinGeckoAPI()
         self.platform = self.get_cg_platform()
-        self.chain = str(self.w3.net.version)
+        self.chain = str(self.w3.net.version())
 
     async def get_data(self, symbol=None, contract_address=None):
         """
@@ -99,14 +99,14 @@ class ContractUtils:
             137: "polygon-pos",
             42161: "arbitrum-one",
         }
-        if network_name := network_versions.get(self.w3.net.version):
+        if network_name := network_versions.get(self.chain):
             return network_name
         try:
             asset_platforms = self.cg.get_asset_platforms()
             output_dict = next(
                 x
                 for x in asset_platforms
-                if x["chain_identifier"] == int(self.w3.net.version)
+                if x["chain_identifier"] == self.chain
             )
             platform = output_dict["id"] or None
             logger.debug("coingecko platform identified {}", platform)
