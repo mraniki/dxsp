@@ -49,11 +49,12 @@ class ContractUtils:
         :type block_explorer_api: str
         """
         self.w3 = w3
+        self.chain = str(self.w3.net.version)
         self.block_explorer_url = block_explorer_url
         self.block_explorer_api = block_explorer_api
         self.cg = CoinGeckoAPI()
         self.platform = self.get_cg_platform()
-        self.chain = str(self.w3.net.version)
+
 
     async def get_data(self, symbol=None, contract_address=None):
         """
