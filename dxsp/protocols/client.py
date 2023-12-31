@@ -7,7 +7,7 @@ import decimal
 from loguru import logger
 from web3 import middleware
 from web3.gas_strategies.time_based import medium_gas_price_strategy
-
+from web3.middleware import geth_poa_middleware
 from dxsp.utils import AccountUtils, ContractUtils
 
 
