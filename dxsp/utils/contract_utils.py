@@ -49,11 +49,17 @@ class ContractUtils:
         :type block_explorer_api: str
         """
         self.w3 = w3
+        logger.debug("w3: {}", self.w3)
         self.chain = str(self.w3.net.version)
+        logger.debug("chain: {}", self.chain)
         self.block_explorer_url = block_explorer_url
+        logger.debug("block_explorer_url: {}", self.block_explorer_url)
         self.block_explorer_api = block_explorer_api
+        logger.debug("block_explorer_api: {}", self.block_explorer_api)
         self.cg = CoinGeckoAPI()
+        logger.debug("cg: {}", self.cg)
         self.platform = self.get_cg_platform()
+        logger.debug("platform: {}", self.platform)
 
 
     async def get_data(self, symbol=None, contract_address=None):
@@ -93,7 +99,9 @@ class ContractUtils:
              while retrieving the platform.
 
         """
-        # TODO: use settings.network_versions instead
+
+        logger.debug("get_cg_platform")
+        logger.debug("chain: {}", self.chain)
         network_versions = {
             1: "ethereum",
             56: "binance-smart-chain",
@@ -115,7 +123,7 @@ class ContractUtils:
             logger.debug("coingecko platform identified {}", platform)
             return platform
         except Exception as e:
-            logger.error("get_token_data: {}", e)
+            logger.error("get_cg_platform: {}", e)
             return None
 
     async def search(self, token):
