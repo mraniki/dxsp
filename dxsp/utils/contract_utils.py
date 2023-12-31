@@ -51,7 +51,7 @@ class ContractUtils:
         self.w3 = w3
         logger.debug("w3: {}", self.w3)
         logger.debug("raw chain: {}", self.w3.net.version)
-        self.chain = int(self.w3.net.version)[2:]
+        self.chain = int(self.w3.net.version, 16)
         logger.debug("chain: {}", self.chain)
         self.block_explorer_url = block_explorer_url
         self.block_explorer_api = block_explorer_api
