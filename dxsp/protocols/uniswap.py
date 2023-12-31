@@ -24,7 +24,7 @@ class DexUniswap(DexClient):
             buy_address (str): The address of the token to buy.
             sell_address (str): The address of the token to sell.
             amount (int, optional): The amount of tokens to sell. Defaults to 1.
-
+ 
         Returns:
             float: The calculated quote for the given buy and sell addresses.
         """
@@ -36,6 +36,7 @@ class DexUniswap(DexClient):
                 )
             symbol = await self.replace_instrument(symbol)
             sell_token = await self.contract_utils.get_data(symbol=symbol)
+            logger.debug("sell token {}", sell_token)
             uniswap = Uniswap(
                 address=self.wallet_address,
                 private_key=self.private_key,
@@ -44,10 +45,15 @@ class DexUniswap(DexClient):
                 factory_contract_addr=self.factory_contract_addr,
                 router_contract_addr=self.router_contract_addr,
             )
+            logger.debug("Uniswap client {}", uniswap)
             amount_wei = amount * (10 ** (sell_token.decimals))
+            logger.debug("amount wei {}", amount_wei)
+            logger.debug("buy token {}", buy_token.address)
+            logger.debug("sell token {}", sell_token.address)
             quote = uniswap.get_price_input(
                 sell_token.address, buy_token.address, amount_wei
             )
+            logger.debug("Quote {}", quote)
             if quote is None:
                 return "Quote failed"
             return round(
