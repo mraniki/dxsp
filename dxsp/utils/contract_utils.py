@@ -53,7 +53,7 @@ class ContractUtils:
         self.block_explorer_api = block_explorer_api
         self.cg = CoinGeckoAPI()
         self.platform = self.get_cg_platform()
-        self.chain = str(self.w3.net.version())
+        self.chain = str(self.w3.net.version)
 
     async def get_data(self, symbol=None, contract_address=None):
         """
