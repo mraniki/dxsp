@@ -72,6 +72,8 @@ class DexClient:
         self.account_number = (
             f"{str(self.w3.net.version)} - " f"{str(self.wallet_address)[-8:]}"
         )
+        logger.debug("account number {}", self.account_number)
+        logger.debug("chain version {}", self.w3.net.version)
         self.protocol = protocol
         self.protocol_version = protocol_version
         self.api_endpoint = api_endpoint
