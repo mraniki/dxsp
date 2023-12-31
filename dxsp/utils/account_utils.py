@@ -48,7 +48,7 @@ class AccountUtils:
         self.w3 = w3
         self.wallet_address = self.w3.to_checksum_address(wallet_address)
         self.account_number = (
-            f"{str(self.w3.net.version)} - " f"{str(self.wallet_address)[-8:]}"
+            f"{int(self.w3.net.version, 16)} - " f"{str(self.wallet_address)[-8:]}"
         )
         self.private_key = private_key
         self.trading_asset_address = self.w3.to_checksum_address(trading_asset_address)

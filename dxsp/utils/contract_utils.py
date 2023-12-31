@@ -194,9 +194,7 @@ class ContractUtils:
                 token_list = await get(token_list_url)
                 token_search = token_list["tokens"]
                 for keyval in token_search:
-                    if keyval["symbol"] == symbol and keyval["chainId"] == int(
-                        self.w3.net.version
-                    ):
+                  if keyval["symbol"] == symbol and keyval["chainId"] == self.chain:
                         logger.debug("token data found {}", keyval)
                         return keyval
                 logger.warning(f"Token {symbol} not found on list")
@@ -407,9 +405,9 @@ class Token:
         self.abi = await self.get_token_abi()
         if self.abi is None:
             return None
-        logger.debug("Token abi: {}", self.abi)
+        #logger.debug("Token abi: {}", self.abi)
         contract = self.w3.eth.contract(address=self.address, abi=self.abi)
-        logger.debug("Contract functions available: {}", contract.functions)
+        #logger.debug("Contract functions available: {}", contract.functions)
         return contract
         # if self.get_contract_function(contract=contract, func_name="implementation"):
         #     logger.debug("Proxy Detected. Using Implementation address")
