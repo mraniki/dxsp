@@ -51,14 +51,11 @@ class ContractUtils:
         self.w3 = w3
         logger.debug("w3: {}", self.w3)
         logger.debug("raw chain: {}", self.w3.net.version)
-        self.chain = str(self.w3.net.version)[2:]
+        self.chain = int(self.w3.net.version)[2:]
         logger.debug("chain: {}", self.chain)
         self.block_explorer_url = block_explorer_url
-        logger.debug("block_explorer_url: {}", self.block_explorer_url)
         self.block_explorer_api = block_explorer_api
-        logger.debug("block_explorer_api: {}", self.block_explorer_api)
         self.cg = CoinGeckoAPI()
-        logger.debug("cg: {}", self.cg)
         self.platform = self.get_cg_platform()
         logger.debug("platform: {}", self.platform)
 
@@ -114,7 +111,6 @@ class ContractUtils:
             return network_name
         try:
             asset_platforms = self.cg.get_asset_platforms()
-            logger.debug("coingecko asset platforms {}", asset_platforms)
             output_dict = next(
                 x
                 for x in asset_platforms
