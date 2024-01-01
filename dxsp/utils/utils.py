@@ -6,6 +6,7 @@
 import aiohttp
 from loguru import logger
 
+#todo: move to config
 MAX_RESPONSE_SIZE = 5 * 1024 * 1024  # Maximum response size in bytes (e.g., 5 MB)
 
 
@@ -20,22 +21,25 @@ async def get(url, params=None, headers=None):
         headers (dict, optional): The headers to send. Defaults to None.
 
     Returns:
-        dict or None: The response or None if an error occurs or the response is too large.
+        dict or None: The response or None if an 
+        error occurs or the response is too large.
 
     """
     try:
         async with aiohttp.ClientSession() as session:
-            async with session.get(url, params=params, headers=headers, timeout=20) as response:
+            async with session.get(
+                url, params=params, headers=headers, timeout=20) as response:
                 if response.status == 200:
                     # Check if content_length is not None and does not exceed the limit
-                    if response.content_length is not None and response.content_length > MAX_RESPONSE_SIZE:
+                    if (response.content_length is not None 
+                        and response.content_length > MAX_RESPONSE_SIZE):
                         logger.warning("Response content too large, skipping...")
                         return None
                     else:
                         return await response.json(content_type=None)
                 else:
                     logger.warning(f"Non-200 status code received: {response.status}")
-                    return None  # You may want to return None or handle this case differently.
+                    return None
     except aiohttp.ClientError as client_error:
         logger.error(f"Client error occurred: {client_error}")
     except aiohttp.http_exceptions.HttpProcessingError as http_error:

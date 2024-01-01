@@ -98,7 +98,7 @@ async def test_get_quotes(dex):
     assert result is not None
     assert "⚖️" in result
     assert get_quote.awaited
-    assert ("eth" in result) or ("bsc" in result) or ("pol" in result)
+    assert ("eth" in result) or ("pol" in result)
     assert ("4" in result) or ("3" in result)
     numerical_count = sum(1 for char in result if char.isdigit())
     assert numerical_count >= 10

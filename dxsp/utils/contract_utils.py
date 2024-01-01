@@ -348,7 +348,7 @@ class Token:
             self.block_explorer_api = block_explorer_api
             self.decimals = None
             self.name = None
-            logger.debug("token initialized {}", self.address)
+            logger.debug("{} - token initialized {}", self.symbol, self.address)
         except Exception as error:
             logger.error("token error {}", error)
 
@@ -364,6 +364,7 @@ class Token:
             self.symbol = await self.get_token_symbol()
         if self.name is None:
             self.name = await self.get_token_name()
+        logger.debug("{} - token data {}", self.symbol, self.address)
         logger.debug("token data {}", self)
 
     async def get_token_abi(self, address=None):
