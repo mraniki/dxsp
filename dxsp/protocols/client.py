@@ -139,6 +139,7 @@ class DexClient:
         else:
             raise ValueError("Token symbol or address is required.")
 
+
     async def replace_instrument(self, instrument):
         """
         Replace instrument by an alternative instrument, if the
