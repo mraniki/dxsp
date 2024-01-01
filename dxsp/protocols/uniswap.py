@@ -63,13 +63,20 @@ class DexUniswap(DexClient):
         """
 
         try:
-            logger.debug("Uniswap get_quote {} {} {} {}", buy_address, buy_symbol, sell_address, sell_symbol)
+            logger.debug("Uniswap get_quote {} {} {} {}",
+                buy_address, buy_symbol, sell_address, sell_symbol)
             
-            buy_token = await self.resolve_token(address=buy_address, symbol=buy_symbol, default_address=self.trading_asset_address)
-            sell_token = await self.resolve_token(address=sell_address, symbol=sell_symbol)
+            buy_token = await self.resolve_token(
+                address=buy_address,
+                symbol=buy_symbol,
+                default_address=self.trading_asset_address
+                )
+            sell_token = await self.resolve_token(
+                address=sell_address,
+                symbol=sell_symbol)
             amount_wei = amount * (10 ** (sell_token.decimals))
 
-            logger.debug(f"Uniswap get_quote {buy_token.address} {sell_token.address} {amount_wei}")
+            logger.debug(f"Uniswap get_quote{buy_token.address} {sell_token.address} {amount_wei}")  # noqa: E501
             quote = self.client.get_price_input(
                 sell_token.address, buy_token.address, amount_wei
             )

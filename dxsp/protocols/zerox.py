@@ -35,9 +35,14 @@ class DexZeroX(DexClient):
             float: The guaranteed price for the token swap.
         """
         try:
-            logger.debug("0x get_quote {} {} {} {}", buy_address, buy_symbol, sell_address, sell_symbol)
-            buy_token = await self.resolve_token(address=buy_address, symbol=buy_symbol, default_address=self.trading_asset_address)
-            sell_token = await self.resolve_token(address=sell_address, symbol=sell_symbol)
+            logger.debug("0x get_quote {} {} {} {}", buy_address, buy_symbol, sell_address, sell_symbol)  # noqa: E501
+            buy_token = await self.resolve_token(
+                address=buy_address,
+                symbol=buy_symbol,
+                default_address=self.trading_asset_address)
+            sell_token = await self.resolve_token(
+                address=sell_address,
+                symbol=sell_symbol)
             amount_wei = amount * (10 ** (sell_token.decimals))
 
             url = (

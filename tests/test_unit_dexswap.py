@@ -94,7 +94,7 @@ async def test_get_info(dex):
 async def test_get_quotes(dex):
     """getquote Testing"""
     get_quote = AsyncMock()
-    result = await dex.get_quotes("BTC")
+    result = await dex.get_quotes(symbol="BTC")
     assert result is not None
     assert "⚖️" in result
     assert get_quote.awaited
@@ -107,7 +107,7 @@ async def test_get_quotes(dex):
 @pytest.mark.asyncio
 async def test_get_quotes_invalid(dex):
     """getquote Testing"""
-    result = await dex.get_quotes("NOTATOKEN")
+    result = await dex.get_quotes(symbol="NOTATOKEN")
     assert "⚖️" in result
     assert "None" in result
 

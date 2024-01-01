@@ -126,7 +126,8 @@ class DexClient:
             sell_symbol = await self.replace_instrument(sell_symbol)
             return await self.contract_utils.get_data(symbol=sell_symbol)
         else:
-            return await self.contract_utils.get_data(contract_address=self.trading_asset_address)
+            return await self.contract_utils.get_data(
+                contract_address=self.trading_asset_address)
 
     async def resolve_token(self, address=None, symbol=None, default_address=None):
         if address:

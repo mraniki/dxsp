@@ -161,7 +161,7 @@ class DexSwap:
             _info.append(f"{client.name}:\n{await client.get_account_pnl()}")
         return "\n".join(_info)
 
-    async def get_quotes(self, symbol):
+    async def get_quotes(self, symbol=None, address=None):
         """
         gets a quote for a token
 
@@ -174,7 +174,8 @@ class DexSwap:
         """
         _info = ["⚖️\n"]
         for client in self.clients:
-            _info.append(f"{client.name}: {await client.get_quote(symbol=symbol)}")
+            _info.append(
+                f"{client.name}: {await client.get_quote(sell_symbol=symbol,sell_address=address)}")  # noqa: E501
         return "\n".join(_info)
 
     async def submit_order(self, order_params):
