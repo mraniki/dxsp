@@ -3,7 +3,7 @@
 
 """
 from loguru import logger
- 
+
 from dxsp.protocols.client import DexClient
 from dxsp.utils.utils import get
 
@@ -19,10 +19,11 @@ class DexZeroX(DexClient):
     async def get_quote(
         self,
         buy_address=None,
-        buy_symbol = None,
+        buy_symbol=None,
         sell_address=None,
         sell_symbol=None,
-        amount=1):
+        amount=1,
+    ):
         """
         Retrieves a quote for a token swap.
 
@@ -35,14 +36,21 @@ class DexZeroX(DexClient):
             float: The guaranteed price for the token swap.
         """
         try:
-            logger.debug("0x get_quote {} {} {} {}", buy_address, buy_symbol, sell_address, sell_symbol)  # noqa: E501
+            logger.debug(
+                "0x get_quote {} {} {} {}",
+                buy_address,
+                buy_symbol,
+                sell_address,
+                sell_symbol,
+            )
             buy_token = await self.resolve_token(
                 address=buy_address,
                 symbol=buy_symbol,
-                default_address=self.trading_asset_address)
+                default_address=self.trading_asset_address,
+            )
             sell_token = await self.resolve_token(
-                address=sell_address,
-                symbol=sell_symbol)
+                address=sell_address, symbol=sell_symbol
+            )
             amount_wei = amount * (10 ** (sell_token.decimals))
 
             url = (

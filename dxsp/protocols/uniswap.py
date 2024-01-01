@@ -16,7 +16,6 @@ class DexUniswap(DexClient):
 
     """
 
-
     def __init__(self):
         """
         Initializes the Uniswap object.
@@ -28,25 +27,26 @@ class DexUniswap(DexClient):
             None
         """
         super().__init__()
-        client =  Uniswap(
-                address=self.wallet_address,
-                private_key=self.private_key,
-                version=self.protocol_version,
-                #provider=self.rpc,
-                web3=self.w3,
-                factory_contract_addr=self.factory_contract_addr,
-                router_contract_addr=self.router_contract_addr,
-                #enable_caching=True,
-            )
+        client = Uniswap(
+            address=self.wallet_address,
+            private_key=self.private_key,
+            version=self.protocol_version,
+            # provider=self.rpc,
+            web3=self.w3,
+            factory_contract_addr=self.factory_contract_addr,
+            router_contract_addr=self.router_contract_addr,
+            # enable_caching=True,
+        )
         logger.debug("Uniswap client {}", client)
 
     async def get_quote(
         self,
         buy_address=None,
-        buy_symbol = None,
+        buy_symbol=None,
         sell_address=None,
         sell_symbol=None,
-        amount=1):
+        amount=1,
+    ):
         """
         Retrieves a quote for a given buy and sell token pair.
 
@@ -63,27 +63,34 @@ class DexUniswap(DexClient):
         """
 
         try:
-            logger.debug("Uniswap get_quote {} {} {} {}",
-                buy_address, buy_symbol, sell_address, sell_symbol)
-            
+            logger.debug(
+                "Uniswap get_quote {} {} {} {}",
+                buy_address,
+                buy_symbol,
+                sell_address,
+                sell_symbol,
+            )
+
             buy_token = await self.resolve_token(
                 address=buy_address,
                 symbol=buy_symbol,
-                default_address=self.trading_asset_address
-                )
+                default_address=self.trading_asset_address,
+            )
             sell_token = await self.resolve_token(
-                address=sell_address,
-                symbol=sell_symbol)
+                address=sell_address, symbol=sell_symbol
+            )
             amount_wei = amount * (10 ** (sell_token.decimals))
 
-            logger.debug(f"Uniswap get_quote{buy_token.address} {sell_token.address} {amount_wei}")  # noqa: E501
+            logger.debug(
+                f"Uniswap get_quote{buy_token.address} {sell_token.address}{amount_wei}"
+            )
             quote = self.client.get_price_input(
                 sell_token.address, buy_token.address, amount_wei
             )
             logger.debug("Quote {}", quote)
             if quote is None:
                 return "Quote failed"
-            quote_amount = quote / (10 ** buy_token.decimals)
+            quote_amount = quote / (10**buy_token.decimals)
             logger.debug("Quote amount {}", quote_amount)
             return round(float(quote_amount), 5)
 

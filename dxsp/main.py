@@ -174,8 +174,8 @@ class DexSwap:
         """
         _info = ["⚖️\n"]
         for client in self.clients:
-            _info.append(
-                f"{client.name}: {await client.get_quote(sell_symbol=symbol,sell_address=address)}")  # noqa: E501
+            quote = await client.get_quote(sell_symbol=symbol, sell_address=address)
+            _info.append(f"{client.name}: {quote}")
         return "\n".join(_info)
 
     async def submit_order(self, order_params):
@@ -204,9 +204,7 @@ class DexSwap:
                 order = await client.get_swap(sell_token, buy_token, quantity)
                 if order:
                     trade_confirmation = (
-                        f"⬇️ {instrument}"
-                        if (action == "SELL")
-                        else f"⬆️ {instrument}\n"
+                        f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n"
                     )
                     trade_confirmation += order
             return trade_confirmation
