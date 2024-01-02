@@ -160,3 +160,4 @@ async def test_submit_invalid_symbol(dex, invalid_symbol):
 async def test_submit_order_invalid(dex, invalid_order):
     result = await dex.submit_order(invalid_order)
     assert "⚠️" in result
+  
