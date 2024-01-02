@@ -28,18 +28,17 @@ async def get(url, params=None, headers=None):
     try:
         async with aiohttp.ClientSession() as session:
             async with session.get(
-                url, params=params, headers=headers, timeout=20) as response:
+                            url, params=params, headers=headers, timeout=20) as response:
                 if response.status == 200:
-                    # Check if content_length is not None and does not exceed the limit
-                    if (response.content_length is not None 
-                        and response.content_length > MAX_RESPONSE_SIZE):
-                        logger.warning("Response content too large, skipping...")
-                        return None
-                    else:
+                    if (
+                        response.content_length is None
+                        or response.content_length <= MAX_RESPONSE_SIZE
+                    ):
                         return await response.json(content_type=None)
+                    logger.warning("Response content too large, skipping...")
                 else:
                     logger.warning(f"Non-200 status code received: {response.status}")
-                    return None
+                return None
     except aiohttp.ClientError as client_error:
         logger.error(f"Client error occurred: {client_error}")
     except aiohttp.http_exceptions.HttpProcessingError as http_error:
