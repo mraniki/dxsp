@@ -177,8 +177,16 @@ class DexSwap:
         """
         _info = ["⚖️\n"]
         for client in self.clients:
-            quote = await client.get_quote(sell_symbol=symbol, sell_address=address)
-            _info.append(f"{client.name}: {quote}")
+            try:
+                quote = await client.get_quote(sell_symbol=symbol, sell_address=address)
+                client_info = f"{client.name}: {quote}"
+                _info.append(client_info)
+                logger.debug("Retrieved quote for {}: {}", client.name, quote)
+            except Exception as error:
+                logger.error("Error retrieving quote for {}: {}", client.name, error)
+
+        # Aggregated quote information logged at once
+        logger.debug("All quotes: {}", " | ".join(_info))
         return "\n".join(_info)
 
     async def submit_order(self, order_params):

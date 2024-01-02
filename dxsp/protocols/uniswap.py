@@ -105,6 +105,7 @@ class DexUniswap(DexClient):
 
         except Exception as error:
             logger.error("Quote failed {}", error)
+            return f"⚠️ {error}"
 
     async def make_swap(self, sell_address, buy_address, amount):
         """
@@ -131,3 +132,4 @@ class DexUniswap(DexClient):
 
         except Exception as error:
             logger.error("Swap failed {}", error)
+            return f"⚠️ {error}"
