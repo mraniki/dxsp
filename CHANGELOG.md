@@ -2,6 +2,99 @@
 
 
 
+## v7.0.0 (2024-01-02)
+
+### :bug:
+
+* :bug: ([`f7f1999`](https://github.com/mraniki/dxsp/commit/f7f1999a42ec87cbe639e3dd31189c1d74d82b3f))
+
+### :rotating_light:
+
+* :rotating_light: ([`2da0d39`](https://github.com/mraniki/dxsp/commit/2da0d3975ef7778e8cf0238318e53cb8c6b85913))
+
+### Fix
+
+* 🚨 linter fix ([`ad91422`](https://github.com/mraniki/dxsp/commit/ad91422711a0367ec2f715c46c46a998069a30fa))
+
+### Other
+
+* Merge pull request #527 from mraniki/dev
+
+⬆️ 🤖 - You are sick twisted and perverted  I like that in a person ([`fd09616`](https://github.com/mraniki/dxsp/commit/fd09616a117cb934e24b97ee082ee61d6b323884))
+
+* Fix DexClient and AccountUtils network version conversion ([`dfaa973`](https://github.com/mraniki/dxsp/commit/dfaa973c6d2a7a4fad4ddbb16a24a87402022b10))
+
+### Update
+
+* Update web3client version ([`0254da4`](https://github.com/mraniki/dxsp/commit/0254da45fa8b0f7fe8de4a89362fcd8b1339487a))
+
+* Update web3client version and add eth-ape dependency ([`2e88dc9`](https://github.com/mraniki/dxsp/commit/2e88dc9008c1fee96f160eb5e60ab586177b2bc8))
+
+### ♻️
+
+* ♻️ ([`2438f96`](https://github.com/mraniki/dxsp/commit/2438f96e2379f6b13c70b19810647b69ac4ad4aa))
+
+* ♻️ ([`01aaca7`](https://github.com/mraniki/dxsp/commit/01aaca72bbb1ceabb976556d895b838c42e81db7))
+
+* ♻️ ([`3382e6b`](https://github.com/mraniki/dxsp/commit/3382e6bad45d4af6cf58516ea8709defae492abb))
+
+### ⚡
+
+* 🔊 ⚡ ([`ced1e17`](https://github.com/mraniki/dxsp/commit/ced1e1780c0ebf173b7beda009875296c14ca375))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency web3 to v6.13.0 ([`d50efdd`](https://github.com/mraniki/dxsp/commit/d50efdda7eca9c6bfc5907702f4dc21302532464))
+
+### 🐛
+
+* 🐛 ([`90f9722`](https://github.com/mraniki/dxsp/commit/90f97227f8eb49648b6203ef876f5604b727aa77))
+
+* 🐛 ([`52ea325`](https://github.com/mraniki/dxsp/commit/52ea325be9eb624e09d7bd827ced5dd9a4b0ba98))
+
+* 🐛 str(self.w3.net.version)[2:] ([`09954c6`](https://github.com/mraniki/dxsp/commit/09954c6935366be2672679c6b360b670468a6eed))
+
+* 🐛 ([`52e9f9a`](https://github.com/mraniki/dxsp/commit/52e9f9a1c4c57cbec3c4e8252daa5edd84438227))
+
+* 🐛 typo ([`9a0cf5d`](https://github.com/mraniki/dxsp/commit/9a0cf5d9de04188bad73ba900b40b04bce99badc))
+
+### 💄
+
+* 💄 Improve loggin and client  protocol creation in case of rpc failure ([`5c4147c`](https://github.com/mraniki/dxsp/commit/5c4147c1fec19dbc352299925cd5dd904bc75720))
+
+### 💥
+
+* 💥 breaking ([`d2648e1`](https://github.com/mraniki/dxsp/commit/d2648e1eddb40ac7a273a2bf467dcb199dceab7f))
+
+### 🔊
+
+* 🔊 ([`192c808`](https://github.com/mraniki/dxsp/commit/192c80857ef7bfb020ef4cb5ce289144968952fa))
+
+* 🔊 ([`5c9f6ab`](https://github.com/mraniki/dxsp/commit/5c9f6abe86589736f2578a6241b9b6fcd1531992))
+
+* 🔊 debug log ([`9fff41e`](https://github.com/mraniki/dxsp/commit/9fff41e9739b9d23ee8f44d523dd27edac6b90e5))
+
+### 🔧
+
+* 🔧 ([`a3d6545`](https://github.com/mraniki/dxsp/commit/a3d6545c4fb7637ac8c8eec03706d5f531d65ecf))
+
+### 🚑
+
+* 🚑 Fix get function in case of none return ([`5ee7379`](https://github.com/mraniki/dxsp/commit/5ee73790d920d7c48ff02b7a196fe8a90283c393))
+
+* 🚑 correcting get_cg_platform ([`4a7e358`](https://github.com/mraniki/dxsp/commit/4a7e3582a603e1bada7307fe5f32b3fd1e3e70d7))
+
+### 🚨
+
+* 🚨 ([`1db5f9a`](https://github.com/mraniki/dxsp/commit/1db5f9a986f3d95ff85fc04ba92a1d84b1ebc23a))
+
+* 🚨 ([`8e164f3`](https://github.com/mraniki/dxsp/commit/8e164f3cfadb53ec0a97f74b8e5418d94293f374))
+
+### 🧐
+
+* 🧐 more log debug for the get_quote method ([`44d7fa3`](https://github.com/mraniki/dxsp/commit/44d7fa3f63c58ca8695077461e00bde8c4b3c441))
+
+
 ## v6.1.10 (2023-12-14)
 
 ### Other
