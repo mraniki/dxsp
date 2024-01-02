@@ -45,6 +45,7 @@ class DexSwap:
             config = settings.dex
             self.clients = []
             for item in config:
+                logger.debug("Client configuration starting: {}", item)
                 _config = config[item]
                 if item in ["", "template"]:
                     continue
@@ -54,6 +55,7 @@ class DexSwap:
                         f"Skipping client creation for unsupported protocol: {protocol}"
                     )
                     continue
+                logger.debug("Client protocol: {}", protocol)
                 client = self._create_client(
                     name=item,
                     wallet_address=_config.get("wallet_address"),
@@ -103,6 +105,7 @@ class DexSwap:
             the specified protocol.
 
         """
+        logger.debug("Creating client {}", kwargs["protocol"])
         if kwargs["protocol"] == "0x":
             return DexZeroX(**kwargs)
         elif kwargs["protocol"] == "kwenta":
@@ -161,7 +164,7 @@ class DexSwap:
             _info.append(f"{client.name}:\n{await client.get_account_pnl()}")
         return "\n".join(_info)
 
-    async def get_quotes(self, symbol):
+    async def get_quotes(self, symbol=None, address=None):
         """
         gets a quote for a token
 
@@ -174,7 +177,16 @@ class DexSwap:
         """
         _info = ["⚖️\n"]
         for client in self.clients:
-            _info.append(f"{client.name}: {await client.get_quote(symbol=symbol)}")
+            try:
+                quote = await client.get_quote(sell_symbol=symbol, sell_address=address)
+                client_info = f"{client.name}: {quote}"
+                _info.append(client_info)
+                logger.debug("Retrieved quote for {}: {}", client.name, quote)
+            except Exception as error:
+                logger.error("Error retrieving quote for {}: {}", client.name, error)
+
+        # Aggregated quote information logged at once
+        logger.debug("All quotes: {}", " | ".join(_info))
         return "\n".join(_info)
 
     async def submit_order(self, order_params):
@@ -203,9 +215,7 @@ class DexSwap:
                 order = await client.get_swap(sell_token, buy_token, quantity)
                 if order:
                     trade_confirmation = (
-                        f"⬇️ {instrument}"
-                        if (action == "SELL")
-                        else f"⬆️ {instrument}\n"
+                        f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n"
                     )
                     trade_confirmation += order
             return trade_confirmation

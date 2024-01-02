@@ -16,7 +16,14 @@ class DexZeroX(DexClient):
 
     """
 
-    async def get_quote(self, buy_address=None, symbol=None, amount=1):
+    async def get_quote(
+        self,
+        buy_address=None,
+        buy_symbol=None,
+        sell_address=None,
+        sell_symbol=None,
+        amount=1,
+    ):
         """
         Retrieves a quote for a token swap.
 
@@ -29,17 +36,26 @@ class DexZeroX(DexClient):
             float: The guaranteed price for the token swap.
         """
         try:
-            logger.debug("0x get_quote {} {} {}", buy_address, symbol, amount)
-            if buy_address is None:
-                buy_address = self.trading_asset_address
-            buy_token = await self.contract_utils.get_data(contract_address=buy_address)
-            symbol = await self.replace_instrument(symbol)
-            sell_token = await self.contract_utils.get_data(symbol=symbol)
-            logger.debug(f"0x quote {buy_token.address} {sell_token.address} {amount}")
-            out_amount = str(amount * (10**sell_token.decimals))
+            logger.debug(
+                "0x get_quote {} {} {} {}",
+                buy_address,
+                buy_symbol,
+                sell_address,
+                sell_symbol,
+            )
+            buy_token = await self.resolve_token(
+                address=buy_address,
+                symbol=buy_symbol,
+                default_address=self.trading_asset_address,
+            )
+            sell_token = await self.resolve_token(
+                address=sell_address, symbol=sell_symbol
+            )
+            amount_wei = amount * (10 ** (sell_token.decimals))
+
             url = (
                 f"{self.api_endpoint}/swap/v1/quote"
-                f"?buyToken={buy_token.address}&sellToken={sell_token.address}&sellAmount={out_amount}"
+                f"?buyToken={buy_token.address}&sellToken={sell_token.address}&sellAmount={amount_wei}"
             )
             headers = {"0x-api-key": self.api_key}
             response = await get(url, params=None, headers=headers)

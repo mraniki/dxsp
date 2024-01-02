@@ -49,11 +49,16 @@ class ContractUtils:
         :type block_explorer_api: str
         """
         self.w3 = w3
+        logger.debug("w3: {}", self.w3)
+        logger.debug("raw chain: {}", self.w3.net.version)
+        self.chain = int(self.w3.net.version, 16)
+        logger.debug("chain: {}", self.chain)
         self.block_explorer_url = block_explorer_url
         self.block_explorer_api = block_explorer_api
         self.cg = CoinGeckoAPI()
         self.platform = self.get_cg_platform()
-        self.chain = str(self.w3.net.version)
+        logger.debug("platform: {}", self.platform)
+
 
     async def get_data(self, symbol=None, contract_address=None):
         """
@@ -92,27 +97,30 @@ class ContractUtils:
              while retrieving the platform.
 
         """
-        # TODO: use settings.network_versions instead
+
+        logger.debug("get_cg_platform")
+        logger.debug("chain: {}", self.chain)
         network_versions = {
             1: "ethereum",
             56: "binance-smart-chain",
             137: "polygon-pos",
             42161: "arbitrum-one",
         }
-        if network_name := network_versions.get(self.w3.net.version):
+        if network_name := network_versions.get(self.chain):
+            logger.debug("coingecko platform identified {}", network_name)
             return network_name
         try:
             asset_platforms = self.cg.get_asset_platforms()
             output_dict = next(
                 x
                 for x in asset_platforms
-                if x["chain_identifier"] == int(self.w3.net.version)
+                if x["chain_identifier"] == self.chain
             )
             platform = output_dict["id"] or None
             logger.debug("coingecko platform identified {}", platform)
             return platform
         except Exception as e:
-            logger.error("get_token_data: {}", e)
+            logger.error("get_cg_platform: {}", e)
             return None
 
     async def search(self, token):
@@ -186,9 +194,7 @@ class ContractUtils:
                 token_list = await get(token_list_url)
                 token_search = token_list["tokens"]
                 for keyval in token_search:
-                    if keyval["symbol"] == symbol and keyval["chainId"] == int(
-                        self.w3.net.version
-                    ):
+                  if keyval["symbol"] == symbol and keyval["chainId"] == self.chain:
                         logger.debug("token data found {}", keyval)
                         return keyval
                 logger.warning(f"Token {symbol} not found on list")
@@ -342,7 +348,7 @@ class Token:
             self.block_explorer_api = block_explorer_api
             self.decimals = None
             self.name = None
-            logger.debug("token initialized {}", self.address)
+            logger.debug("{} - token initialized {}", self.symbol, self.address)
         except Exception as error:
             logger.error("token error {}", error)
 
@@ -358,6 +364,7 @@ class Token:
             self.symbol = await self.get_token_symbol()
         if self.name is None:
             self.name = await self.get_token_name()
+        logger.debug("{} - token data {}", self.symbol, self.address)
         logger.debug("token data {}", self)
 
     async def get_token_abi(self, address=None):
@@ -399,9 +406,9 @@ class Token:
         self.abi = await self.get_token_abi()
         if self.abi is None:
             return None
-        logger.debug("Token abi: {}", self.abi)
+        #logger.debug("Token abi: {}", self.abi)
         contract = self.w3.eth.contract(address=self.address, abi=self.abi)
-        logger.debug("Contract functions available: {}", contract.functions)
+        #logger.debug("Contract functions available: {}", contract.functions)
         return contract
         # if self.get_contract_function(contract=contract, func_name="implementation"):
         #     logger.debug("Proxy Detected. Using Implementation address")

@@ -5,8 +5,8 @@ Base DexClient Class   🦄
 import decimal
 
 from loguru import logger
-from web3 import middleware
 from web3.gas_strategies.time_based import medium_gas_price_strategy
+from web3.middleware import geth_poa_middleware
 
 from dxsp.utils import AccountUtils, ContractUtils
 
@@ -59,21 +59,29 @@ class DexClient:
         mapping=None,
     ):
         self.w3 = w3
+        # Add the Geth POA Middleware
+        self.w3.middleware_onion.inject(geth_poa_middleware, layer=0)
+        # Set gas price strategy
         self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
-        self.w3.middleware_onion.add(middleware.time_based_cache_middleware)
-        self.w3.middleware_onion.add(middleware.latest_block_based_cache_middleware)
-        self.w3.middleware_onion.add(middleware.simple_cache_middleware)
+        # Add caching middlewares
+        #self.w3.middleware_onion.add(middleware.time_based_cache_middleware)
+        #self.w3.middleware_onion.add(middleware.latest_block_based_cache_middleware)
+        #self.w3.middleware_onion.add(middleware.simple_cache_middleware)
+
 
         self.rpc = rpc
         self.name = name
         logger.debug(f"setting up DexClient: {self.name}")
-        self.wallet_address = self.w3.to_checksum_address(wallet_address)
+        self.wallet_address = wallet_address
         self.private_key = private_key
         self.account_number = (
-            f"{str(self.w3.net.version)} - " f"{str(self.wallet_address)[-8:]}"
+            f"{int(self.w3.net.version, 16)} - " f"{str(self.wallet_address)[-8:]}"
         )
+        logger.debug("account number {}", self.account_number)
+        logger.debug("chain hex {}", self.w3.net.version)
+        logger.debug("chain {}", int(self.w3.net.version, 16))
         self.protocol = protocol
-        self.protocol_version = protocol_version
+        self.protocol_version = int(protocol_version)
         self.api_endpoint = api_endpoint
         self.api_key = api_key
         self.router_contract_addr = router_contract_addr
@@ -100,6 +108,38 @@ class DexClient:
             self.block_explorer_url,
             self.block_explorer_api,
         )
+        self.client = None
+
+    async def resolve_buy_token(self, buy_address=None, buy_symbol=None):
+        if buy_address:
+            return await self.contract_utils.get_data(contract_address=buy_address)
+        elif buy_symbol:
+            buy_symbol = await self.replace_instrument(buy_symbol)
+            return await self.contract_utils.get_data(symbol=buy_symbol)
+        else:
+            raise ValueError("Buy symbol or address is required.")
+
+    async def resolve_sell_token(self, sell_address=None, sell_symbol=None):
+        if sell_address:
+            return await self.contract_utils.get_data(contract_address=sell_address)
+        elif sell_symbol:
+            sell_symbol = await self.replace_instrument(sell_symbol)
+            return await self.contract_utils.get_data(symbol=sell_symbol)
+        else:
+            return await self.contract_utils.get_data(
+                contract_address=self.trading_asset_address)
+
+    async def resolve_token(self, address=None, symbol=None, default_address=None):
+        if address:
+            return await self.contract_utils.get_data(contract_address=address)
+        elif symbol:
+            symbol = await self.replace_instrument(symbol)
+            return await self.contract_utils.get_data(symbol=symbol)
+        elif default_address:
+            return await self.contract_utils.get_data(contract_address=default_address)
+        else:
+            raise ValueError("Token symbol or address is required.")
+
 
     async def replace_instrument(self, instrument):
         """

@@ -66,8 +66,6 @@ async def test_dextrader(dex):
         assert dx is not None
         assert dx.name is not None
         assert dx.protocol in ["uniswap", "0x", "kwenta"]
-        # assert dx.private_key.startswith("0x")
-        # assert dx.wallet_address.startswith("0x")
         assert callable(dx.get_order_amount)
         assert callable(dx.replace_instrument)
         assert callable(dx.get_quote)
@@ -96,12 +94,12 @@ async def test_get_info(dex):
 async def test_get_quotes(dex):
     """getquote Testing"""
     get_quote = AsyncMock()
-    result = await dex.get_quotes("BTC")
+    result = await dex.get_quotes(symbol="BTC")
     assert result is not None
     assert "⚖️" in result
     assert get_quote.awaited
-    assert ("eth" in result) or ("bsc" in result) or ("pol" in result)
-    assert ("2" in result) or ("3" in result)
+    assert ("eth" in result) or ("pol" in result)
+    assert ("4" in result) or ("3" in result)
     numerical_count = sum(1 for char in result if char.isdigit())
     assert numerical_count >= 10
 
@@ -109,7 +107,7 @@ async def test_get_quotes(dex):
 @pytest.mark.asyncio
 async def test_get_quotes_invalid(dex):
     """getquote Testing"""
-    result = await dex.get_quotes("NOTATOKEN")
+    result = await dex.get_quotes(symbol="NOTATOKEN")
     assert "⚖️" in result
     assert "None" in result
 
@@ -162,3 +160,4 @@ async def test_submit_invalid_symbol(dex, invalid_symbol):
 async def test_submit_order_invalid(dex, invalid_order):
     result = await dex.submit_order(invalid_order)
     assert "⚠️" in result
+  

@@ -16,76 +16,120 @@ class DexUniswap(DexClient):
 
     """
 
-    async def get_quote(self, buy_address=None, symbol=None, amount=1):
+    def build_client(self):
         """
-        Retrieves a quote for the given buy and sell addresses.
+        Initializes the Uniswap object.
 
-        Args:
-            buy_address (str): The address of the token to buy.
-            sell_address (str): The address of the token to sell.
-            amount (int, optional): The amount of tokens to sell. Defaults to 1.
+        Parameters:
+            None
 
         Returns:
-            float: The calculated quote for the given buy and sell addresses.
+            None
         """
         try:
-            logger.debug("Uniswap get_quote {} {} {}", buy_address, symbol, amount)
-            if buy_address is None:
-                buy_token = await self.contract_utils.get_data(
-                    contract_address=self.trading_asset_address
-                )
-            symbol = await self.replace_instrument(symbol)
-            sell_token = await self.contract_utils.get_data(symbol=symbol)
-            uniswap = Uniswap(
+            logger.debug("Uniswap client starting")
+            logger.debug("Uniswap client rpc {}", self.rpc)
+            logger.debug("Uniswap client wallet {}", self.wallet_address)
+            self.client = Uniswap(
                 address=self.wallet_address,
                 private_key=self.private_key,
                 version=self.protocol_version,
+                provider=self.rpc,
                 web3=self.w3,
                 factory_contract_addr=self.factory_contract_addr,
                 router_contract_addr=self.router_contract_addr,
+                # enable_caching=True,
+            )
+            logger.debug("Uniswap client {}", self.client)
+        except Exception as error:
+            logger.error("Uniswap client failed {}", error)
+            raise Exception("Uniswap client creation failed, Verify rpc")
+
+
+    async def get_quote(
+        self,
+        buy_address=None,
+        buy_symbol=None,
+        sell_address=None,
+        sell_symbol=None,
+        amount=1,
+    ):
+        """
+        Retrieves a quote for a given buy and sell token pair.
+
+        :param buy_address: The address of the buy token. Default is None.
+        :param buy_symbol: The symbol of the buy token. Default is None.
+        :param sell_address: The address of the sell token. Default is None.
+        :param sell_symbol: The symbol of the sell token. Default is None.
+        :param amount: The amount of tokens to buy. Default is 1.
+
+        :return: The price of the buy token in terms of the sell token.
+        :rtype: float
+
+        :raises Exception: If the quote retrieval fails.
+        """
+
+        try:
+
+            logger.debug(
+                "Uniswap get_quote {} {} {} {}",
+                buy_address,
+                buy_symbol,
+                sell_address,
+                sell_symbol,
+            )
+            self.build_client()
+
+            buy_token = await self.resolve_token(
+                address=buy_address,
+                symbol=buy_symbol,
+                default_address=self.trading_asset_address,
+            )
+            sell_token = await self.resolve_token(
+                address=sell_address, symbol=sell_symbol
             )
             amount_wei = amount * (10 ** (sell_token.decimals))
-            quote = uniswap.get_price_input(
+
+            logger.debug(
+                f"Uniswap get_quote{buy_token.address} {sell_token.address}{amount_wei}"
+            )
+            quote = self.client.get_price_input(
                 sell_token.address, buy_token.address, amount_wei
             )
+            logger.debug("Quote {}", quote)
             if quote is None:
                 return "Quote failed"
-            return round(
-                float((quote / (10 ** (buy_token.decimals)))),
-                5,
-            )
+            quote_amount = quote / (10**buy_token.decimals)
+            logger.debug("Quote amount {}", quote_amount)
+            return round(float(quote_amount), 5)
 
         except Exception as error:
             logger.error("Quote failed {}", error)
+            return f"⚠️ {error}"
 
     async def make_swap(self, sell_address, buy_address, amount):
         """
-        Asynchronously gets the swap
-        for the specified sell address, buy address, and amount.
+        Make a swap on Uniswap.
 
-        :param sell_address: The address of the token being sold.
-        :type sell_address: str
-        :param buy_address: The address of the token being bought.
-        :type buy_address: str
-        :param amount: The amount of tokens to be swapped.
-        :type amount: int
-        :return: The result of the swap.
-        :rtype: Any
-        :raises ValueError: If the swap fails.
+        Args:
+            sell_address (str): The address of the token to sell.
+            buy_address (str): The address of the token to buy.
+            amount (float): The amount of tokens to swap.
+
+        Returns:
+            object: The result of the swap.
+
+        Raises:
+            Exception: If the swap fails.
         """
+
         try:
+            self.build_client()
             logger.debug(
                 "Uniswap make_swap {} {} {}", sell_address, buy_address, amount
             )
-            uniswap = Uniswap(
-                address=self.wallet_address,
-                private_key=self.private_key,
-                version=self.protocol_version,
-                web3=self.w3,
-                factory_contract_addr=self.factory_contract_addr,
-                router_contract_addr=self.router_contract_addr,
-            )
-            return uniswap.make_trade(sell_address, buy_address, amount)
+            return self.client.make_trade(sell_address, buy_address, amount)
 
         except Exception as error:
             logger.error("Swap failed {}", error)
+            return f"⚠️ {error}"
