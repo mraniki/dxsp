@@ -16,7 +16,7 @@ class DexUniswap(DexClient):
 
     """
 
-    def __init__(self):
+    def build_client(self):
         """
         Initializes the Uniswap object.
 
@@ -26,18 +26,25 @@ class DexUniswap(DexClient):
         Returns:
             None
         """
-        super().__init__()
-        client = Uniswap(
-            address=self.wallet_address,
-            private_key=self.private_key,
-            version=self.protocol_version,
-            # provider=self.rpc,
-            web3=self.w3,
-            factory_contract_addr=self.factory_contract_addr,
-            router_contract_addr=self.router_contract_addr,
-            # enable_caching=True,
-        )
-        logger.debug("Uniswap client {}", client)
+        try:
+            logger.debug("Uniswap client starting")
+            logger.debug("Uniswap client rpc {}", self.rpc)
+            logger.debug("Uniswap client wallet {}", self.wallet_address)
+            self.client = Uniswap(
+                address=self.wallet_address,
+                private_key=self.private_key,
+                version=self.protocol_version,
+                provider=self.rpc,
+                web3=self.w3,
+                factory_contract_addr=self.factory_contract_addr,
+                router_contract_addr=self.router_contract_addr,
+                # enable_caching=True,
+            )
+            logger.debug("Uniswap client {}", self.client)
+        except Exception as error:
+            logger.error("Uniswap client failed {}", error)
+            raise Exception("Uniswap client creation failed, Verify rpc")
+
 
     async def get_quote(
         self,
@@ -63,6 +70,7 @@ class DexUniswap(DexClient):
         """
 
         try:
+
             logger.debug(
                 "Uniswap get_quote {} {} {} {}",
                 buy_address,
@@ -70,6 +78,7 @@ class DexUniswap(DexClient):
                 sell_address,
                 sell_symbol,
             )
+            self.build_client()
 
             buy_token = await self.resolve_token(
                 address=buy_address,
@@ -114,6 +123,7 @@ class DexUniswap(DexClient):
         """
 
         try:
+            self.build_client()
             logger.debug(
                 "Uniswap make_swap {} {} {}", sell_address, buy_address, amount
             )

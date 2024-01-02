@@ -16,8 +16,9 @@ class DexEVM(DexClient):
     """
 
     def __init__(self):
-        super().__init__()
-        # client = BaseClient()
+        #super().__init__()
+        client = "BaseClient()"
+        logger.debug("EVM client {}", client)
 
     async def get_quote(
         self,

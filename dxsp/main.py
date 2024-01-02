@@ -45,6 +45,7 @@ class DexSwap:
             config = settings.dex
             self.clients = []
             for item in config:
+                logger.debug("Client configuration starting: {}", item)
                 _config = config[item]
                 if item in ["", "template"]:
                     continue
@@ -54,6 +55,7 @@ class DexSwap:
                         f"Skipping client creation for unsupported protocol: {protocol}"
                     )
                     continue
+                logger.debug("Client protocol: {}", protocol)
                 client = self._create_client(
                     name=item,
                     wallet_address=_config.get("wallet_address"),
@@ -103,6 +105,7 @@ class DexSwap:
             the specified protocol.
 
         """
+        logger.debug("Creating client {}", kwargs["protocol"])
         if kwargs["protocol"] == "0x":
             return DexZeroX(**kwargs)
         elif kwargs["protocol"] == "kwenta":

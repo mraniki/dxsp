@@ -117,16 +117,16 @@ async def test_get_account_pnl(dex_client):
     assert dex_client.account.get_account_pnl.awaited
 
 
-# @pytest.mark.asyncio
-# async def test_get_cg_data(dex_client):
-#     result = await dex_client.get_quote(symbol="LINK")
-#     assert result is not None
-#     assert isinstance(result, float)
+@pytest.mark.asyncio
+async def test_get_cg_data(dex_client):
+    result = await dex_client.get_quote(sell_symbol="LINK")
+    assert result is not None
+    assert isinstance(result, float)
 
 
 @pytest.mark.asyncio
 async def test_get_token_exception(dex_client, caplog):
-    await dex_client.get_quote(symbol="NOTATHING")
+    await dex_client.get_quote(sell_symbol="NOTATHING")
     assert "Quote failed" in caplog.text
 
 
