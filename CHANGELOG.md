@@ -2,6 +2,43 @@
 
 
 
+## v7.0.1 (2024-01-04)
+
+### :arrow_up:
+
+* :arrow_up:Add empty line to README.md ([`87b12a6`](https://github.com/mraniki/dxsp/commit/87b12a67b45764bae87ed0fbf0c1d2ff2551f392))
+
+### Other
+
+* Merge pull request #534 from mraniki/dev
+
+⬆️ 🤖 - A banker is a fellow who lends you his umbrella when the sun is shining ([`3d7a62a`](https://github.com/mraniki/dxsp/commit/3d7a62af4ddc0cf6b2c97f09082a6f150d4678e5))
+
+* Merge branch &#39;main&#39; into dev ([`38875c2`](https://github.com/mraniki/dxsp/commit/38875c2917b78938c3f055be52d63f2a9308c01d))
+
+### ⬆️
+
+* ⬆️ 🤖 - Keep emotionally active  Cater to your favorite neurosis (#532)
+
+* :arrow_up:Add empty line to README.md
+
+* 💬 test
+
+---------
+
+Co-authored-by: mraniki &lt;mraniki@users.noreply.github.com&gt; ([`605d5e2`](https://github.com/mraniki/dxsp/commit/605d5e26d054f86ff551d30caa395648c8bdc4a6))
+
+### 🐛
+
+* 🐛 ([`56fff00`](https://github.com/mraniki/dxsp/commit/56fff0035fea27a8b43ce83d9d844a0b7dfd693d))
+
+### 💬
+
+* 💬 test ([`be0249c`](https://github.com/mraniki/dxsp/commit/be0249cc8ed4fa95bbf7b1ba81fa2253d7f1fb06))
+
+* 💬 test ([`bbd4b50`](https://github.com/mraniki/dxsp/commit/bbd4b50227a64b093ae06da0d7f108efb07b4f6d))
+
+
 ## v7.0.0 (2024-01-02)
 
 ### :bug:
