@@ -2,6 +2,19 @@
 
 
 
+## v7.0.2 (2024-01-05)
+
+### Other
+
+* Merge pull request #539 from mraniki/dev
+
+⬆️ 🤖 - The better part of valor is discretion ([`4b29c57`](https://github.com/mraniki/dxsp/commit/4b29c577dca64596c00fc28134b9c1392e09f03a))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency pydata-sphinx-theme to ^0.15.0 ([`774f9df`](https://github.com/mraniki/dxsp/commit/774f9df8462ccca3c4733d1b2f57aacbdbc787ce))
+
+
 ## v7.0.1 (2024-01-04)
 
 ### :arrow_up:
