@@ -2,6 +2,19 @@
 
 
 
+## v7.0.3 (2024-01-06)
+
+### Other
+
+* Merge pull request #540 from mraniki/dev
+
+⬆️ 🤖 - After all all he did was string together a lot of old wellknown quotations ([`d2bc04e`](https://github.com/mraniki/dxsp/commit/d2bc04e1276ff0151f8586c21fcde8531be7f7a5))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency eth-ape to v0.7.3 ([`6d4be88`](https://github.com/mraniki/dxsp/commit/6d4be8841744f2e1317fc68f9db68207bbd83b37))
+
+
 ## v7.0.2 (2024-01-05)
 
 ### Other
