@@ -2,6 +2,19 @@
 
 
 
+## v7.0.4 (2024-01-07)
+
+### Other
+
+* Merge pull request #542 from mraniki/dev
+
+⬆️ 🤖 - Your business will go through a period of considerable expansion ([`e3df4ce`](https://github.com/mraniki/dxsp/commit/e3df4ce26133dbae34a85498577b056138d18d18))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency eth-ape to v0.7.4 ([`195b0b2`](https://github.com/mraniki/dxsp/commit/195b0b2da6f176e4ef0e500047064581214c4227))
+
+
 ## v7.0.3 (2024-01-06)
 
 ### Other
