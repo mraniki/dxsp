@@ -2,6 +2,29 @@
 
 
 
+## v7.0.5 (2024-01-11)
+
+### Other
+
+* Merge pull request #546 from mraniki/dev
+
+⬆️ 🤖 - Give him an evasive answer ([`1494d7d`](https://github.com/mraniki/dxsp/commit/1494d7df3750ed20d2ba9e076815f55506e64e81))
+
+* Merge pull request #544 from mraniki/dev
+
+⬆️ 🤖 - Excellent time to become a missing person ([`dfa45fc`](https://github.com/mraniki/dxsp/commit/dfa45fc3af663fcbcaa0cdea05317f03fac27aa3))
+
+### Update
+
+* Update README.md ([`7a61bc7`](https://github.com/mraniki/dxsp/commit/7a61bc7dac922aa88b6444facda301eb632b9f9d))
+
+* ⬆️ Update README.md ([`24a6e73`](https://github.com/mraniki/dxsp/commit/24a6e7319ac9c74cecfd67363be284e9e0304eae))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency web3 to v6.14.0 ([`d9518ed`](https://github.com/mraniki/dxsp/commit/d9518ede148b4c8bf650c47aad3df30e2917643b))
+
+
 ## v7.0.4 (2024-01-07)
 
 ### Other
