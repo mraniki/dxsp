@@ -2,6 +2,19 @@
 
 
 
+## v7.0.6 (2024-01-25)
+
+### Other
+
+* Merge pull request #551 from mraniki/dev
+
+⬆️ 🤖 - You are always busy ([`12cdddf`](https://github.com/mraniki/dxsp/commit/12cdddfec2b2725670b7fa0aab3be0297d4e9ec7))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency eth-ape to v0.7.6 ([`4514b73`](https://github.com/mraniki/dxsp/commit/4514b73cb7aed3dc7ecce5d4e8e28a44cf55f434))
+
+
 ## v7.0.5 (2024-01-11)
 
 ### Other
