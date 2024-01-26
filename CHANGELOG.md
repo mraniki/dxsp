@@ -2,6 +2,19 @@
 
 
 
+## v7.0.7 (2024-01-26)
+
+### Other
+
+* Merge pull request #554 from mraniki/dev
+
+⬆️ 🤖 - Whenever you find that you are on the side of the majority it is time ([`4e12a3b`](https://github.com/mraniki/dxsp/commit/4e12a3b418981e24041275aa8a5100da3668cb42))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency web3 to v6.15.0 ([`8c06067`](https://github.com/mraniki/dxsp/commit/8c06067de811355c2eb2be8ca7f5f0cc3e42a26c))
+
+
 ## v7.0.6 (2024-01-25)
 
 ### Other
