@@ -37,7 +37,7 @@ eth-ape = "0.7.6"
 [tool.poetry.group.dev.dependencies]
 python-semantic-release = ">=8.0.8"
 ruff = "^0.1.0"
-black = "^23.3.0"
+black = ">=23.3,<25.0"
 pre-commit = "^3.3.1"
 
 
