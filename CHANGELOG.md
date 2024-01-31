@@ -2,6 +2,19 @@
 
 
 
+## v7.0.8 (2024-01-31)
+
+### Other
+
+* Merge pull request #559 from mraniki/dev
+
+⬆️ 🤖 - Beware of a tall blond man with one black shoe ([`c101427`](https://github.com/mraniki/dxsp/commit/c101427787ccda3b30fe91342bff463e9b5e49ba))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency eth-ape to v0.7.7 ([`768ec66`](https://github.com/mraniki/dxsp/commit/768ec66abe2a9738d8e235aa2c41266e78f98134))
+
+
 ## v7.0.7 (2024-01-26)
 
 ### Other
