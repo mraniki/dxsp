@@ -2,6 +2,19 @@
 
 
 
+## v7.0.9 (2024-02-03)
+
+### Other
+
+* Merge pull request #562 from mraniki/dev
+
+⬆️ 🤖 - The only way to keep your health is to eat what you dont want drink what ([`152eb3c`](https://github.com/mraniki/dxsp/commit/152eb3cd9ca06261f4ebc92c7c380bc639feb80e))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency ruff to ^0.2.0 ([`f9846a4`](https://github.com/mraniki/dxsp/commit/f9846a4d9882d3eef455bb0ca6b6ed4d262080a7))
+
+
 ## v7.0.8 (2024-01-31)
 
 ### Other
