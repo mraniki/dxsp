@@ -2,6 +2,33 @@
 
 
 
+## v7.0.10 (2024-02-11)
+
+### Other
+
+* Merge pull request #572 from mraniki/dev
+
+⬆️ 🤖 - You look like a million dollars  All green and wrinkled ([`747548a`](https://github.com/mraniki/dxsp/commit/747548aa3318518e5fe9a5b83c497d9211068180))
+
+* Remove DexEVM protocol and update __all__ in __init__.py ([`cbda811`](https://github.com/mraniki/dxsp/commit/cbda811704713db6f468bb01a1121178e7cd0467))
+
+* Remove eth-tester and add web3client to pyproject.toml ([`462e6c1`](https://github.com/mraniki/dxsp/commit/462e6c1d441f35e20334943c9ccd8c96c59cb613))
+
+### Update
+
+* Update web3 version ([`de7c47f`](https://github.com/mraniki/dxsp/commit/de7c47f5cfb10ab37491ca21503de3eab7442255))
+
+* Update eth-tester version ([`c5ab509`](https://github.com/mraniki/dxsp/commit/c5ab50906a32503947ea9124665f7940afe650d6))
+
+* Update web3 and eth-tester versions ([`7cd2829`](https://github.com/mraniki/dxsp/commit/7cd2829e29b60d5bca3dee6c21931889a104cc68))
+
+* Update eth-tester version to 0.9.1b2 ([`12ddbc7`](https://github.com/mraniki/dxsp/commit/12ddbc7251e20569dbc943ecb366f459842bff0a))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency web3 to v6.15.1 ([`052877e`](https://github.com/mraniki/dxsp/commit/052877e0c069247016d186a4abc7b3693d5a76e3))
+
+
 ## v7.0.9 (2024-02-03)
 
 ### Other
