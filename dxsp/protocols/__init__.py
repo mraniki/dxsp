@@ -4,4 +4,4 @@ from dxsp.protocols.kwenta import DexKwenta
 from dxsp.protocols.uniswap import DexUniswap
 from dxsp.protocols.zerox import DexZeroX
 
-__all__ = ["DexUniswap", "DexZeroX", "DexKwenta", "DexEVM"]
+__all__ = ["DexUniswap", "DexZeroX", "DexKwenta"]
