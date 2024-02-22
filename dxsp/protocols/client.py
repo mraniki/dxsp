@@ -63,11 +63,6 @@ class DexClient:
         self.w3.middleware_onion.inject(geth_poa_middleware, layer=0)
         # Set gas price strategy
         self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
-        # Add caching middlewares
-        #self.w3.middleware_onion.add(middleware.time_based_cache_middleware)
-        #self.w3.middleware_onion.add(middleware.latest_block_based_cache_middleware)
-        #self.w3.middleware_onion.add(middleware.simple_cache_middleware)
-
 
         self.rpc = rpc
         self.name = name
