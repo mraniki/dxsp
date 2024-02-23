@@ -1,7 +1,7 @@
 """
  DEX SWAP
 ✍️ CONTRACT
-"""
+""" 
 
 from datetime import datetime
 
@@ -31,7 +31,7 @@ class ContractUtils:
         get_cg_platform()
         get_tokenlist_data()
         get_cg_data()
-        get_confirmation()
+        get_confirmation() 
 
     """
 
@@ -248,13 +248,13 @@ class ContractUtils:
         except Exception as e:
             logger.error("search_cg {}", e)
 
-    async def get_confirmation(self, transactionHash):
+    async def get_confirmation(self, transaction_hash):
         """
 
         Returns trade confirmation.
 
         Args:
-            transactionHash (str): The transaction hash
+            transaction_hash (str): The transaction hash
 
         Returns:
             dict: The trade confirmation
@@ -264,21 +264,19 @@ class ContractUtils:
 
         """
         try:
-            transaction = self.w3.eth.get_transaction(transactionHash)
+            transaction = self.w3.eth.get_transaction(transaction_hash)
             block_info = self.w3.eth.get_block(transaction["blockNumber"])
             return {
                 "timestamp": datetime.utcfromtimestamp(block_info["timestamp"]),
-                "id": transactionHash,
+                "id": transaction_hash,
                 "instrument": transaction["to"],
-                "contract": transaction["to"],  # TBD To be determined.
                 "amount": transaction["value"],
-                "price": transaction["value"],  # TBD To be determined.
-                "fee": transaction["gas"],
+                "price": transaction["gasPrice"],
+                "fee": block_info["gasUsed"],
                 "confirmation": (
                     f"➕ Size: {round(transaction['value'], 4)}\n"
-                    f"⚫️ Entry: {round(transaction['value'], 4)}\n"
-                    f"ℹ️ {transactionHash}\n"
-                    f"⛽ {transaction['gas']}\n"
+                    f"ℹ️ {transaction_hash}\n"
+                    f"⛽ {block_info['gasUsed']}\n"
                     f"🗓️ {datetime.utcfromtimestamp(block_info['timestamp'])}"
                 ),
             }
@@ -352,20 +350,16 @@ class Token:
         except Exception as error:
             logger.error("token error {}", error)
 
-    async def get_data(self):
+    async def fetch_data(self) -> None:
         """
         Retrieves data for the token.
         """
-        logger.debug("get token data")
+        logger.debug("fetch token data")
         self.contract = await self.get_token_contract()
-        if self.decimals is None:
-            self.decimals = await self.get_token_decimals()
-        if self.symbol is None:
-            self.symbol = await self.get_token_symbol()
-        if self.name is None:
-            self.name = await self.get_token_name()
+        self.decimals = await self.get_token_decimals()
+        self.symbol = await self.get_token_symbol()
+        self.name = await self.get_token_name()
         logger.debug("{} - token data {}", self.symbol, self.address)
-        logger.debug("token data {}", self)
 
     async def get_token_abi(self, address=None):
         """
@@ -406,20 +400,9 @@ class Token:
         self.abi = await self.get_token_abi()
         if self.abi is None:
             return None
-        #logger.debug("Token abi: {}", self.abi)
         contract = self.w3.eth.contract(address=self.address, abi=self.abi)
-        #logger.debug("Contract functions available: {}", contract.functions)
         return contract
-        # if self.get_contract_function(contract=contract, func_name="implementation"):
-        #     logger.debug("Proxy Detected. Using Implementation address")
-        #     implementation_address = self.w3.to_checksum_address(
-        #         contract.functions.implementation().call()
-        #     )
-        #     implementation_abi = await self.get_token_abi(implementation_address)
-        #     contract = self.w3.eth.contract(
-        #         address=implementation_address, abi=implementation_abi
-        #     )
-        # logger.debug("token functions: {}", contract.functions)
+
 
     def get_contract_function(self, contract, func_name: str):
         """
@@ -489,7 +472,7 @@ class Token:
         Returns:
             int: The number of decimal places for the token.
         """
-        if self.decimals:
+        if self.decimals is not None:
             return self.decimals
         contract = await self.get_token_contract()
-        return 18 if not contract else contract.functions.decimals().call()
+        return contract.functions.decimals().call() if contract else 18

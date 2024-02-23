@@ -3,14 +3,13 @@
 🔒 USER RELATED
 """
 
-
+# from brownie_safe import BrownieSafe
 from loguru import logger
 
 from dxsp.config import settings
 
 
 class AccountUtils:
-
     """
     Class AccountUtils to interact with private related methods
     such as account balance, signing transactions, etc.
@@ -44,6 +43,7 @@ class AccountUtils:
         trading_asset_address,
         block_explorer_url,
         block_explorer_api,
+        gnosis_safe=False,
     ):
         self.w3 = w3
         self.wallet_address = self.w3.to_checksum_address(wallet_address)
@@ -55,53 +55,58 @@ class AccountUtils:
         self.contract_utils = contract_utils
         self.block_explorer_url = block_explorer_url
         self.block_explorer_api = block_explorer_api
+        self.safe = None
+        self.vault = None
+        # if gnosis_safe:
+        #     self.safe = BrownieSafe(self.wallet_address)
 
-    async def get_account_balance(self):
+    async def get_account_balance(self) -> str:
         """
         Retrieves the account balance of the user.
 
         Returns:
-            str: A formatted string containing
+            A formatted string containing
             the account balance in Bitcoin (₿) and
             the trading asset balance like USDT (💵).
         """
-        try:
-            account_balance = self.w3.eth.get_balance(self.wallet_address)
-            account_balance = self.w3.from_wei(account_balance, "ether") or 0
-            trading_asset_balance = await self.get_trading_asset_balance()
-            balance = f"{self.account_number} \n"
-            balance += f"₿ {round(account_balance,5)}\n$ {trading_asset_balance}"
-            return balance
-        except Exception as error:
-            logger.error(error)
+        account_balance = self.w3.from_wei(
+            self.w3.eth.get_balance(self.wallet_address), "ether"
+        )
+        trading_asset_balance = await self.get_trading_asset_balance()
+        return (
+            f"{self.account_number} \n"
+            f"₿: {account_balance:.5f}\n"
+            f"💵: {trading_asset_balance:.2f}"
+        )
 
-    async def get_trading_asset_balance(self):
+    async def get_trading_asset_balance(self) -> float:
         """
         Retrieves the balance of the trading asset
         for the current wallet address.
 
         Returns:
             The balance of the trading asset as a float.
-            If the balance is not available,
-            it returns 0.
         """
         trading_asset = await self.contract_utils.get_data(
             contract_address=self.trading_asset_address
         )
         balance = await trading_asset.get_token_balance(self.wallet_address)
-        return balance if balance else 0
+        return balance or 0.0
 
-    async def get_account_position(self):
+    async def get_account_position(self) -> str:
         """
         Retrieves the account position.
 
         Returns:
-            str: A string representing the account position.
+            A string representing the account position.
         """
-        position = f"📊 Position {self.account_number} \n"
-        position += f"Opened: {str(await self.get_account_open_positions())}\n"
-        position += f"Margin: {str(await self.get_account_margin())}"
-        return position
+        opened_positions = await self.get_account_open_positions()
+        margin = await self.get_account_margin()
+        return (
+            f"📊 {self.account_number} \n"
+            f"Opened: {opened_positions}\n"
+            f"Margin: {margin}"
+        )
 
     async def get_account_margin(self):
         """
