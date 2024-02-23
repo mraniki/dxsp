@@ -23,11 +23,10 @@ async def fetch_url(url, params=None, headers=None):
 
     """
     max_response_size = 10 * 1024 * 1024  # 10 MB
-    timeout_seconds = 20
     try:
         async with aiohttp.ClientSession() as session:
             async with session.get(
-                url, params=params, headers=headers, timeout=timeout_seconds
+                url, params=params, headers=headers, timeout=20
             ) as response:
                 if response.status == 200:
                     if (
@@ -38,10 +37,6 @@ async def fetch_url(url, params=None, headers=None):
                         return None
                     return await response.json(content_type=None)
                 logger.warning(f"Received non-200 status code: {response.status}")
-    except aiohttp.ClientError as client_error:
-        logger.error(f"Client error occurred: {client_error}")
-    except aiohttp.http_exceptions.HttpProcessingError as http_error:
-        logger.error(f"HTTP processing error occurred: {http_error}")
     except Exception as error:
         logger.error(f"Unexpected error occurred: {error}")
     return None
