@@ -5,7 +5,7 @@
 from loguru import logger
 
 from dxsp.protocols.client import DexClient
-from dxsp.utils.utils import get
+from dxsp.utils.utils import fetch_url
 
 
 class DexZeroX(DexClient):
@@ -57,8 +57,11 @@ class DexZeroX(DexClient):
                 f"{self.api_endpoint}/swap/v1/quote"
                 f"?buyToken={buy_token.address}&sellToken={sell_token.address}&sellAmount={amount_wei}"
             )
+            logger.debug("0x get_quote url {}", url)
+
             headers = {"0x-api-key": self.api_key}
-            response = await get(url, params=None, headers=headers)
+            response = await fetch_url(url, params=None, headers=headers)
+            logger.debug("0x get_quote response {}", response)
             if response:
                 if "guaranteedPrice" in response:
                     return float(response["guaranteedPrice"])

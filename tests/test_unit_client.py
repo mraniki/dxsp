@@ -27,6 +27,13 @@ def client_fixture(dex):
             return dx
 
 
+@pytest.fixture(name="dex_client_zero_x")
+def client_zero_x_fixture(dex):
+    for dx in dex.clients:
+        if dx.protocol == "0x":
+            return dx
+
+
 def test_dynaconf_is_in_testing():
     print(settings.VALUE)
     assert settings.VALUE == "On Testing"
@@ -161,7 +168,6 @@ async def test_get_gas(dex_client):
 #     assert result is not None
 
 
-
 @pytest.mark.asyncio
 async def test_get_confirmation(dex_client):
     result = await dex_client.contract_utils.get_confirmation(
@@ -176,3 +182,17 @@ async def test_get_confirmation(dex_client):
     assert "⛽" in result["confirmation"]
     assert "🗓️" in result["confirmation"]
     assert "ℹ️" in result["confirmation"]
+
+
+@pytest.mark.asyncio
+async def test_get_quote_zero_x(dex_client_zero_x):
+
+    result = await dex_client_zero_x.get_quote(
+        buy_address="0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",  # USDT
+        sell_address="0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6",  # WBTC
+        amount=1,
+    )
+
+    # Assert the result
+    assert result is not None
+    assert result > 0

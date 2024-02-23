@@ -3,7 +3,6 @@
 🔒 USER RELATED
 """
 
-# from brownie_safe import BrownieSafe
 from loguru import logger
 
 from dxsp.config import settings
@@ -18,14 +17,12 @@ class AccountUtils:
         None
 
     Methods:
-        get_info()
-        get_help()
+
         get_account_balance()
         get_trading_asset_balance()
         get_account_position
         get_account_margin
         get_account_open_positions
-        get_account_transactions()
         get_account_pnl
         get_approve
         get_sign
@@ -43,7 +40,7 @@ class AccountUtils:
         trading_asset_address,
         block_explorer_url,
         block_explorer_api,
-        gnosis_safe=False,
+        safe=False,
     ):
         self.w3 = w3
         self.wallet_address = self.w3.to_checksum_address(wallet_address)
@@ -55,10 +52,6 @@ class AccountUtils:
         self.contract_utils = contract_utils
         self.block_explorer_url = block_explorer_url
         self.block_explorer_api = block_explorer_api
-        self.safe = None
-        self.vault = None
-        # if gnosis_safe:
-        #     self.safe = BrownieSafe(self.wallet_address)
 
     async def get_account_balance(self) -> str:
         """
