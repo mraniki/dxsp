@@ -59,22 +59,21 @@ class DexClient:
         mapping=None,
     ):
         self.w3 = w3
-        # Add the Geth POA Middleware
+
         self.w3.middleware_onion.inject(geth_poa_middleware, layer=0)
-        # Set gas price strategy
         self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
 
         self.rpc = rpc
         self.name = name
-        logger.debug(f"setting up DexClient: {self.name}")
+        logger.debug(f"Setting up: {self.name}")
         self.wallet_address = wallet_address
         self.private_key = private_key
         self.account_number = (
             f"{int(self.w3.net.version, 16)} - " f"{str(self.wallet_address)[-8:]}"
         )
-        logger.debug("account number {}", self.account_number)
-        logger.debug("chain hex {}", self.w3.net.version)
-        logger.debug("chain {}", int(self.w3.net.version, 16))
+        logger.debug("Account {}", self.account_number)
+        logger.debug("Chain hex {}", self.w3.net.version)
+        logger.debug("Chain {}", int(self.w3.net.version, 16))
         self.protocol = protocol
         self.protocol_version = int(protocol_version)
         self.api_endpoint = api_endpoint

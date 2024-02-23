@@ -31,7 +31,7 @@ class ContractUtils:
         get_cg_platform()
         get_tokenlist_data()
         get_cg_data()
-        get_confirmation()
+        get_confirmation() 
 
     """
 
@@ -248,13 +248,13 @@ class ContractUtils:
         except Exception as e:
             logger.error("search_cg {}", e)
 
-    async def get_confirmation(self, transactionHash):
+    async def get_confirmation(self, transaction_hash):
         """
 
         Returns trade confirmation.
 
         Args:
-            transactionHash (str): The transaction hash
+            transaction_hash (str): The transaction hash
 
         Returns:
             dict: The trade confirmation
@@ -264,21 +264,19 @@ class ContractUtils:
 
         """
         try:
-            transaction = self.w3.eth.get_transaction(transactionHash)
+            transaction = self.w3.eth.get_transaction(transaction_hash)
             block_info = self.w3.eth.get_block(transaction["blockNumber"])
             return {
                 "timestamp": datetime.utcfromtimestamp(block_info["timestamp"]),
-                "id": transactionHash,
+                "id": transaction_hash,
                 "instrument": transaction["to"],
-                "contract": transaction["to"],  # TBD To be determined.
                 "amount": transaction["value"],
-                "price": transaction["value"],  # TBD To be determined.
-                "fee": transaction["gas"],
+                "price": transaction["gasPrice"],
+                "fee": block_info["gasUsed"],
                 "confirmation": (
                     f"➕ Size: {round(transaction['value'], 4)}\n"
-                    f"⚫️ Entry: {round(transaction['value'], 4)}\n"
-                    f"ℹ️ {transactionHash}\n"
-                    f"⛽ {transaction['gas']}\n"
+                    f"ℹ️ {transaction_hash}\n"
+                    f"⛽ {block_info['gasUsed']}\n"
                     f"🗓️ {datetime.utcfromtimestamp(block_info['timestamp'])}"
                 ),
             }
