@@ -6,11 +6,8 @@
 import aiohttp
 from loguru import logger
 
-#todo: move to config
-MAX_RESPONSE_SIZE = 5 * 1024 * 1024  # Maximum response size in bytes (e.g., 5 MB)
 
-
-async def get(url, params=None, headers=None):
+async def fetch_url(url, params=None, headers=None):
     """
     Asynchronously gets a url payload
     and returns the response.
@@ -21,29 +18,30 @@ async def get(url, params=None, headers=None):
         headers (dict, optional): The headers to send. Defaults to None.
 
     Returns:
-        dict or None: The response or None if an 
+        dict or None: The response or None if an
         error occurs or the response is too large.
 
     """
+    max_response_size = 10 * 1024 * 1024  # 10 MB
+    timeout_seconds = 20
     try:
         async with aiohttp.ClientSession() as session:
             async with session.get(
-                url, params=params, headers=headers, timeout=20) as response:
+                url, params=params, headers=headers, timeout=timeout_seconds
+            ) as response:
                 if response.status == 200:
-                    # Check if content_length is not None and does not exceed the limit
-                    if (response.content_length is not None 
-                        and response.content_length > MAX_RESPONSE_SIZE):
-                        logger.warning("Response content too large, skipping...")
+                    if (
+                        response.content_length
+                        and response.content_length > max_response_size
+                    ):
+                        logger.warning("Response content is too large to process.")
                         return None
-                    else:
-                        return await response.json(content_type=None)
-                else:
-                    logger.warning(f"Non-200 status code received: {response.status}")
-                    return None
+                    return await response.json(content_type=None)
+                logger.warning(f"Received non-200 status code: {response.status}")
     except aiohttp.ClientError as client_error:
         logger.error(f"Client error occurred: {client_error}")
     except aiohttp.http_exceptions.HttpProcessingError as http_error:
         logger.error(f"HTTP processing error occurred: {http_error}")
     except Exception as error:
         logger.error(f"Unexpected error occurred: {error}")
-    return None  # Return None in case of any error.
+    return None

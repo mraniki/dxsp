@@ -10,7 +10,7 @@ from loguru import logger
 from pycoingecko import CoinGeckoAPI
 
 from dxsp.config import settings
-from dxsp.utils.utils import get
+from dxsp.utils.utils import fetch_url
 
 
 class ContractUtils:
@@ -79,7 +79,7 @@ class ContractUtils:
                 w3=self.w3,
                 address=contract_address,
             )
-            await token.get_data()
+            await token.fetch_data()
             return token
         return None
 
@@ -102,8 +102,11 @@ class ContractUtils:
         logger.debug("chain: {}", self.chain)
         network_versions = {
             1: "ethereum",
+            10: "optimistic-ethereum",
             56: "binance-smart-chain",
             137: "polygon-pos",
+            250: "fantom",
+            43114: "avalanche",
             42161: "arbitrum-one",
         }
         if network_name := network_versions.get(self.chain):
@@ -191,7 +194,7 @@ class ContractUtils:
                 if not token_list_url:
                     continue
                 logger.debug("Token search in {}", token_list_url)
-                token_list = await get(token_list_url)
+                token_list = await fetch_url(token_list_url)
                 token_search = token_list["tokens"]
                 for keyval in token_search:
                   if keyval["symbol"] == symbol and keyval["chainId"] == self.chain:
@@ -246,7 +249,7 @@ class ContractUtils:
                 except (KeyError, requests.exceptions.HTTPError):
                     pass
         except Exception as e:
-            logger.error("search_cg {}", e)
+            logger.error("get_cg_data {}", e)
 
     async def get_confirmation(self, transaction_hash):
         """
@@ -301,7 +304,7 @@ class Token:
 
     Methods:
         __init__: Initializes an instance of the class.
-        get_data: Retrieves data for the token.
+        fetch_data: Retrieves data for the token.
         get_token_abi: Retrieves the token abi.
         get_token_contract: Retrieves the token contract.
         get_contract_function: Retrieves the contract functions by name.
@@ -376,7 +379,7 @@ class Token:
             None if the request fails or the contract does not have an ABI.
         """
         if not self.block_explorer_api:
-            return await get(settings.dex_erc20_abi_url)
+            return await fetch_url(settings.dex_erc20_abi_url)
         if address is None:
             address = self.address
         params = {
@@ -385,7 +388,7 @@ class Token:
             "address": address,
             "apikey": self.block_explorer_api,
         }
-        resp = await get(
+        resp = await fetch_url(
             url=self.block_explorer_url, headers=settings.headers, params=params
         )
         if resp:
