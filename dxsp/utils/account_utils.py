@@ -3,7 +3,7 @@
 🔒 USER RELATED
 """
 
-from brownie_safe import BrownieSafe
+# from brownie_safe import BrownieSafe
 from loguru import logger
 
 from dxsp.config import settings
@@ -57,8 +57,8 @@ class AccountUtils:
         self.block_explorer_api = block_explorer_api
         self.safe = None
         self.vault = None
-        if gnosis_safe:
-            self.safe = BrownieSafe(self.wallet_address)
+        # if gnosis_safe:
+        #     self.safe = BrownieSafe(self.wallet_address)
 
     async def get_account_balance(self) -> str:
         """
