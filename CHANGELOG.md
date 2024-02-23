@@ -2,6 +2,57 @@
 
 
 
+## v7.0.11 (2024-02-23)
+
+### Other
+
+* Merge pull request #579 from mraniki/dev
+
+⬆️ 🤖 - Its a very UNlucky week in which to be took dead ([`010cd79`](https://github.com/mraniki/dxsp/commit/010cd79b36d40a38085f8f9062658aa362acb944))
+
+* Merge pull request #577 from mraniki/dev
+
+⬆️ 🤖 - Civilization is the limitless multiplication of unnecessary necessities ([`d67caee`](https://github.com/mraniki/dxsp/commit/d67caee8481b1651458b400c94639eb07d02bccb))
+
+### Update
+
+* Update web3 version to 6.15.0 ([`4bd162d`](https://github.com/mraniki/dxsp/commit/4bd162d3cad853d552f140db95f9e08a97986952))
+
+### ♻️
+
+* ♻️ ([`cfae79d`](https://github.com/mraniki/dxsp/commit/cfae79d54e39223d1240b9fd22ed2469aab9f471))
+
+* ♻️ refactor an introductino of safe ([`8bb47b3`](https://github.com/mraniki/dxsp/commit/8bb47b3e599ff361f3c270853350d9a0b7d53fd1))
+
+### ✅
+
+* ✅ Unit Test improvement ([`ae5e762`](https://github.com/mraniki/dxsp/commit/ae5e76221231f52113880e1e8a3ff48dd2d656e8))
+
+* ✅ Unit Test 🙈 ([`32e341b`](https://github.com/mraniki/dxsp/commit/32e341b209d2c5b0b5f79db02df8a7881ae0c989))
+
+* ✅ Unit Test ([`9ce13ab`](https://github.com/mraniki/dxsp/commit/9ce13ab7c7f4c6d92110b4ce31b38d308d750da1))
+
+### ⬆️
+
+* ⬆️ ([`f5b0d94`](https://github.com/mraniki/dxsp/commit/f5b0d943e520e6f9763b66e23adcfed33f7e39b8))
+
+### 🎨
+
+* 🎨  🐛 ♻️ ([`5e50e12`](https://github.com/mraniki/dxsp/commit/5e50e12863c0e26224b65b9a4fd33c43ac8fcd64))
+
+* 🎨 ♻️ ([`ed77211`](https://github.com/mraniki/dxsp/commit/ed772112c59b2f808c4adfa7676f02a0c93eac2c))
+
+* 🎨 ([`92cdf07`](https://github.com/mraniki/dxsp/commit/92cdf0772f4d6c672c73826224c95f5726dae19a))
+
+### 🐛
+
+* 🐛 ([`0298cc8`](https://github.com/mraniki/dxsp/commit/0298cc8e0abeef990f59d0c6342dbc59739d1f29))
+
+* 🐛 ([`32e9b3a`](https://github.com/mraniki/dxsp/commit/32e9b3aa91cd993366480e5af91a2b28398e25ca))
+
+* 🐛 ([`fe27615`](https://github.com/mraniki/dxsp/commit/fe27615d1e9fc83c4314131a995a55efa32ea25b))
+
+
 ## v7.0.10 (2024-02-11)
 
 ### Other
