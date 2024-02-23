@@ -100,7 +100,7 @@ async def test_get_quotes(dex):
     assert get_quote.awaited
     assert ("eth" in result) or ("pol" in result)
     assert ("4" in result) or ("5" in result)
-    numerical_count = sum(1 for char in result if char.isdigit())
+    numerical_count = len([char for char in result if char.isdigit()])
     assert numerical_count >= 10
 
 
