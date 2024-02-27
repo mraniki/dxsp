@@ -2,6 +2,27 @@
 
 
 
+## v7.0.12 (2024-02-27)
+
+### Other
+
+* Merge pull request #582 from mraniki/dev
+
+⬆️ 🤖 - People are beginning to notice you  Try dressing before you leave the house ([`b5c5511`](https://github.com/mraniki/dxsp/commit/b5c5511903c2d27cec50e3c78d24bc538f78d423))
+
+* Merge pull request #581 from mraniki/dev
+
+⬆️ 🤖 - An avocadotone refrigerator would look good on your resume ([`e080e5f`](https://github.com/mraniki/dxsp/commit/e080e5f9ba785c90b4e7d71a44c73338ab0f9e10))
+
+* Remove oldtest_utils_account.py test file. ([`775fa1e`](https://github.com/mraniki/dxsp/commit/775fa1ed6d649bb01c97ba5ae8e64a90669ed6bd))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency black to v24 ([`7b6c0f6`](https://github.com/mraniki/dxsp/commit/7b6c0f64618a4f9dfb9c1cc7a3810ce7d642d20a))
+
+* ⬆️ Adjusted dependencies ([`0a6f325`](https://github.com/mraniki/dxsp/commit/0a6f325754f338c2d8c3016b0cbf718a09ef68a8))
+
+
 ## v7.0.11 (2024-02-23)
 
 ### Other
