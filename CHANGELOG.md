@@ -2,6 +2,23 @@
 
 
 
+## v7.0.13 (2024-02-27)
+
+### Other
+
+* Merge pull request #584 from mraniki/dev
+
+⬆️ ([`4a2104a`](https://github.com/mraniki/dxsp/commit/4a2104a7170146fcbb4dbb5580c562c536f4c2d4))
+
+### ⬆️
+
+* ⬆️ ([`d6ebf8d`](https://github.com/mraniki/dxsp/commit/d6ebf8dfc4900da0f7ff180d03040779806c85b1))
+
+### 🐛
+
+* 🐛 ([`d889b88`](https://github.com/mraniki/dxsp/commit/d889b88ce7ca4f9b96fcc169464d24beb0f445b4))
+
+
 ## v7.0.12 (2024-02-27)
 
 ### Other
