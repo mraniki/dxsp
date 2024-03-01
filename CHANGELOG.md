@@ -2,6 +2,19 @@
 
 
 
+## v7.0.14 (2024-03-01)
+
+### Other
+
+* Merge pull request #586 from mraniki/dev
+
+⬆️ 🤖 - Q	Why is Christmas just like a day at the office ([`f0deecf`](https://github.com/mraniki/dxsp/commit/f0deecff76fae53ca5da71ba27ba21806b8a5131))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency ruff to ^0.3.0 ([`473c5e2`](https://github.com/mraniki/dxsp/commit/473c5e2beafd87a8794daed9d44c4fdcceaec873))
+
+
 ## v7.0.13 (2024-02-27)
 
 ### Other
