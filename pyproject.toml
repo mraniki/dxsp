@@ -29,7 +29,7 @@ requests = "^2.31.0"
 web3 = "6.15.1"
 uniswap-python = "0.7.1"
 kwenta = "1.2.0"
-eth-ape = "0.7.10"
+eth-ape = "0.7.13"
 #eth-tester = "0.9.1b2"
 # brownie_safe = {version="0.8.5", python = ">=3.11,<3.12"}
 # eth-brownie = "1.20.1"
