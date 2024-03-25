@@ -7,7 +7,7 @@ from uniswap import Uniswap
 from dxsp.protocols.client import DexClient
 
 
-class DexUniswap(DexClient):
+class UNISWAPDEX(DexClient):
     """
     A DexClient using uniswap-python library
 

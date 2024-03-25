@@ -8,7 +8,7 @@ from loguru import logger
 from dxsp.protocols.client import DexClient
 
 
-class DexKwenta(DexClient):
+class KWENTADEX(DexClient):
     """
     A DexClient using kwenta-python library
 

@@ -8,7 +8,7 @@ from dxsp.protocols.client import DexClient
 from dxsp.utils.utils import fetch_url
 
 
-class DexZeroX(DexClient):
+class ZEROXDEX(DexClient):
     """
     A DexClient class using 0x protocol
     Implementation of 0x swap protocol

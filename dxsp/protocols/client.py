@@ -16,79 +16,70 @@ class DexClient:
     Base DexClient Class
 
     Args:
-        name (str): The name of the dex
-        wallet_address (str): The wallet address
-        private_key (str): The private key
-        protocol (str): The protocol type
-        protocol_version (int): The protocol version
-        api_endpoint (str): The api endpoint
-        api_key (str): The api key
-        router_contract_addr (str): The router contract address
-        factory_contract_addr (str): The factory contract address
-        trading_asset_address (str): The trading asset address
-        trading_risk_amount (int): The trading risk amount
-        trading_slippage (int): The trading slippage
-        block_explorer_url (str): The block explorer url
-        block_explorer_api (str): The block explorer api
-        w3 (Optional[Web3]): Web3
+        **kwargs:
 
+    Returns:
+        None
+
+    Methods:
+        resolve_buy_token
+        resolve_sell_token
+        resolve_token
+        replace_instrument
+        get_order_amount
+        get_swap
+        make_swap
+        get_account_balance
+        get_trading_asset_balance
+        get_account_position
+        get_account_margin
+        get_account_open_positions
+        get_account_pnl
 
     """
 
-    def __init__(
-        self,
-        w3=None,
-        rpc=None,
-        name=None,
-        wallet_address=None,
-        private_key=None,
-        protocol=None,
-        protocol_version=None,
-        api_endpoint=None,
-        api_key=None,
-        router_contract_addr=None,
-        factory_contract_addr=None,
-        trading_asset_address=None,
-        trading_asset_separator=None,
-        trading_risk_percentage=True,
-        trading_risk_amount=1,
-        trading_slippage=2,
-        trading_amount_threshold=0,
-        block_explorer_url=None,
-        block_explorer_api=None,
-        mapping=None,
-    ):
-        self.w3 = w3
+    def __init__(self, **kwargs):
 
-        self.w3.middleware_onion.inject(geth_poa_middleware, layer=0)
-        self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
+        self.w3 = kwargs.get("w3", None)
 
-        self.rpc = rpc
-        self.name = name
+        if self.w3:
+            self.w3.middleware_onion.inject(geth_poa_middleware, layer=0)
+            self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
+
+        self.rpc = kwargs.get("rpc", None)
+        self.name = kwargs.get("name", None)
         logger.debug(f"Setting up: {self.name}")
-        self.wallet_address = wallet_address
-        self.private_key = private_key
-        self.account_number = (
-            f"{int(self.w3.net.version, 16)} - " f"{str(self.wallet_address)[-8:]}"
-        )
+        self.wallet_address = kwargs.get("wallet_address", None)
+        self.private_key = kwargs.get("private_key", None)
+        if self.w3 and self.wallet_address:
+            self.account_number = (
+                f"{int(self.w3.net.version, 16)} - {str(self.wallet_address)[-8:]}"
+            )
+        else:
+            self.account_number = None
         logger.debug("Account {}", self.account_number)
-        logger.debug("Chain hex {}", self.w3.net.version)
-        logger.debug("Chain {}", int(self.w3.net.version, 16))
-        self.protocol = protocol
-        self.protocol_version = int(protocol_version)
-        self.api_endpoint = api_endpoint
-        self.api_key = api_key
-        self.router_contract_addr = router_contract_addr
-        self.factory_contract_addr = factory_contract_addr
-        self.trading_asset_address = self.w3.to_checksum_address(trading_asset_address)
-        self.trading_risk_percentage = trading_risk_percentage
-        self.trading_asset_separator = trading_asset_separator
-        self.trading_risk_amount = trading_risk_amount
-        self.trading_slippage = trading_slippage
-        self.trading_amount_threshold = trading_amount_threshold
-        self.block_explorer_url = block_explorer_url
-        self.block_explorer_api = block_explorer_api
-        self.mapping = mapping
+        if self.w3:
+            logger.debug("Chain hex {}", self.w3.net.version)
+            logger.debug("Chain {}", int(self.w3.net.version, 16))
+        self.protocol = kwargs.get("protocol", None)
+        self.protocol_version = kwargs.get("protocol_version", None)
+        self.api_endpoint = kwargs.get("api_endpoint", None)
+        self.api_key = kwargs.get("api_key", None)
+        self.router_contract_addr = kwargs.get("router_contract_addr", None)
+        self.factory_contract_addr = kwargs.get("factory_contract_addr", None)
+        self.trading_asset_address = kwargs.get("trading_asset_address", None)
+        if self.w3 and self.trading_asset_address:
+            self.trading_asset_address = self.w3.to_checksum_address(
+                self.trading_asset_address
+            )
+        self.trading_risk_percentage = kwargs.get("trading_risk_percentage", None)
+        self.trading_asset_separator = kwargs.get("trading_asset_separator", None)
+        self.trading_risk_amount = kwargs.get("trading_risk_amount", None)
+        self.trading_slippage = kwargs.get("trading_slippage", None)
+        self.trading_amount_threshold = kwargs.get("trading_amount_threshold", None)
+        self.block_explorer_url = kwargs.get("block_explorer_url", None)
+        self.block_explorer_api = kwargs.get("block_explorer_api", None)
+        self.mapping = kwargs.get("mapping", None)
 
         self.contract_utils = ContractUtils(
             self.w3, self.block_explorer_url, self.block_explorer_api
@@ -121,7 +112,8 @@ class DexClient:
             return await self.contract_utils.get_data(symbol=sell_symbol)
         else:
             return await self.contract_utils.get_data(
-                contract_address=self.trading_asset_address)
+                contract_address=self.trading_asset_address
+            )
 
     async def resolve_token(self, address=None, symbol=None, default_address=None):
         if address:
@@ -133,7 +125,6 @@ class DexClient:
             return await self.contract_utils.get_data(contract_address=default_address)
         else:
             raise ValueError("Token symbol or address is required.")
-
 
     async def replace_instrument(self, instrument):
         """
