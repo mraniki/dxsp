@@ -1,6 +1,7 @@
 """
 uniswap  🦄
 """
+
 from loguru import logger
 from uniswap import Uniswap
 
@@ -44,7 +45,6 @@ class UNISWAPDEX(DexClient):
         except Exception as error:
             logger.error("Uniswap client failed {}", error)
             raise Exception("Uniswap client creation failed, Verify rpc")
-
 
     async def get_quote(
         self,
