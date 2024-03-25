@@ -2,6 +2,21 @@
 
 
 
+## v7.0.15 (2024-03-25)
+
+### Other
+
+* Merge pull request #593 from mraniki/dev
+
+⬆️ 🤖 - Q	How can you tell when a Burroughs salesman is lying ([`5791ffe`](https://github.com/mraniki/dxsp/commit/5791ffe95a7131e4e1b410f35c550e406f782dda))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency pytest-loguru to ^0.4.0 ([`7a1a921`](https://github.com/mraniki/dxsp/commit/7a1a9214fa886361795d41536bdd6cfad74179ae))
+
+* ⬆️ 🛠️(deps): update dependency eth-ape to v0.7.13 ([`c3e58f2`](https://github.com/mraniki/dxsp/commit/c3e58f256082397977e60eeb8ac78cc8bc5ba1da))
+
+
 ## v7.0.14 (2024-03-01)
 
 ### Other
