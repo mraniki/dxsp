@@ -5,6 +5,7 @@ Base DexClient Class   🦄
 import decimal
 
 from loguru import logger
+from web3 import Web3
 from web3.gas_strategies.time_based import medium_gas_price_strategy
 from web3.middleware import geth_poa_middleware
 
@@ -40,7 +41,7 @@ class DexClient:
 
     def __init__(self, **kwargs):
 
-        self.w3 = kwargs.get("w3", None)
+        self.w3 = kwargs.get("w3", Web3(Web3.HTTPProvider(_config.get("rpc"))),)
 
         if self.w3:
             self.w3.middleware_onion.inject(geth_poa_middleware, layer=0)
