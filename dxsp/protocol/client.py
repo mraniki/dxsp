@@ -41,14 +41,13 @@ class DexClient:
 
     def __init__(self, **kwargs):
 
-        self.w3 = kwargs.get("w3", Web3(Web3.HTTPProvider(_config.get("rpc"))),)
-
+        self.name = kwargs.get("name", None)
+        self.rpc = kwargs.get("rpc", None)
+        self.w3 = Web3(Web3.HTTPProvider(self.rpc))
         if self.w3:
             self.w3.middleware_onion.inject(geth_poa_middleware, layer=0)
             self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
 
-        self.rpc = kwargs.get("rpc", None)
-        self.name = kwargs.get("name", None)
         logger.debug(f"Setting up: {self.name}")
         self.wallet_address = kwargs.get("wallet_address", None)
         self.private_key = kwargs.get("private_key", None)
