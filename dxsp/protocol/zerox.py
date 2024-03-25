@@ -16,6 +16,16 @@ class ZEROXDEX(DexClient):
 
     """
 
+    def __init__(
+        self,
+        **kwargs,
+    ):
+        """
+        Initialize the client
+
+        """
+        super().__init__(**kwargs)
+
     async def get_quote(
         self,
         buy_address=None,

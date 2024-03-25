@@ -16,6 +16,15 @@ class UNISWAPDEX(DexClient):
     https://github.com/uniswap-python/uniswap-python
 
     """
+    def __init__(
+        self,
+        **kwargs,
+    ):
+        """
+        Initialize the client
+
+        """
+        super().__init__(**kwargs)
 
     def build_client(self):
         """

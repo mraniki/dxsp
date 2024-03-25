@@ -11,7 +11,15 @@
 #     https://github.com/mraniki/dxsp/issues/189
 
 #     """
+# def __init__(
+#     self,
+#     **kwargs,
+# ):
+#     """
+#     Initialize the client
 
+#     """
+#     super().__init__(**kwargs)
 #     async def get_quote(self, buy_address=None, symbol=None, amount=1):
 #         """
 #         Retrieves a quote for the
