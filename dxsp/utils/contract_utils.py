@@ -1,7 +1,7 @@
 """
  DEX SWAP
 ✍️ CONTRACT
-""" 
+"""
 
 from datetime import datetime
 
@@ -31,7 +31,7 @@ class ContractUtils:
         get_cg_platform()
         get_tokenlist_data()
         get_cg_data()
-        get_confirmation() 
+        get_confirmation()
 
     """
 
@@ -58,7 +58,6 @@ class ContractUtils:
         self.cg = CoinGeckoAPI()
         self.platform = self.get_cg_platform()
         logger.debug("platform: {}", self.platform)
-
 
     async def get_data(self, symbol=None, contract_address=None):
         """
@@ -115,9 +114,7 @@ class ContractUtils:
         try:
             asset_platforms = self.cg.get_asset_platforms()
             output_dict = next(
-                x
-                for x in asset_platforms
-                if x["chain_identifier"] == self.chain
+                x for x in asset_platforms if x["chain_identifier"] == self.chain
             )
             platform = output_dict["id"] or None
             logger.debug("coingecko platform identified {}", platform)
@@ -197,7 +194,7 @@ class ContractUtils:
                 token_list = await fetch_url(token_list_url)
                 token_search = token_list["tokens"]
                 for keyval in token_search:
-                  if keyval["symbol"] == symbol and keyval["chainId"] == self.chain:
+                    if keyval["symbol"] == symbol and keyval["chainId"] == self.chain:
                         logger.debug("token data found {}", keyval)
                         return keyval
                 logger.warning(f"Token {symbol} not found on list")
@@ -405,7 +402,6 @@ class Token:
             return None
         contract = self.w3.eth.contract(address=self.address, abi=self.abi)
         return contract
-
 
     def get_contract_function(self, contract, func_name: str):
         """
