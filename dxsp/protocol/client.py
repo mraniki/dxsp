@@ -42,6 +42,7 @@ class DexClient:
     def __init__(self, **kwargs):
 
         self.name = kwargs.get("name", None)
+        self.protocol = kwargs.get("protocol") or "uniswap"
         self.rpc = kwargs.get("rpc", None)
         self.w3 = Web3(Web3.HTTPProvider(self.rpc))
         if self.w3:
@@ -61,8 +62,7 @@ class DexClient:
         if self.w3:
             logger.debug("Chain hex {}", self.w3.net.version)
             logger.debug("Chain {}", int(self.w3.net.version, 16))
-        self.protocol = kwargs.get("protocol", None)
-        self.protocol_version = kwargs.get("protocol_version", None)
+        self.protocol_version = kwargs.get("protocol_version") or 2
         self.api_endpoint = kwargs.get("api_endpoint", None)
         self.api_key = kwargs.get("api_key", None)
         self.router_contract_addr = kwargs.get("router_contract_addr", None)
