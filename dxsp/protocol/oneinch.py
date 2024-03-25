@@ -2,7 +2,7 @@
 # OneInch 🦄
 # """
 
-# from dxsp.protocols.client import DexClient
+# from dxsp.protocol.client import DexClient
 
 
 # class ONEINCHDEX(DexClient):
