@@ -87,6 +87,7 @@ async def test_dextrader(dex):
 async def test_get_info(dex):
     result = await dex.get_info()
     assert result is not None
+    print(result)
     assert "ℹ️" in result
     assert ("1" in result) or ("56" in result)
 

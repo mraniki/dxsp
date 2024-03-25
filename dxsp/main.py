@@ -13,10 +13,7 @@ from dxsp.config import settings
 class DexSwap:
     """
     class to build a DexSwap Object
-     use to interact with the dex protocol
-
-     Args:
-         w3 (Optional[Web3]): Web3
+    use to interact with the dex protocol
 
      Returns:
          DexSwap
@@ -224,7 +221,6 @@ class DexSwap:
             except Exception as error:
                 logger.error("Error retrieving quote for {}: {}", client.name, error)
 
-        # Aggregated quote information logged at once
         logger.debug("All quotes: {}", " | ".join(_info))
         return "\n".join(_info)
 

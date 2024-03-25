@@ -42,14 +42,20 @@ class DexClient:
     def __init__(self, **kwargs):
 
         self.name = kwargs.get("name", None)
+        logger.debug(f"Setting up: {self.name}")
+
         self.protocol = kwargs.get("protocol") or "uniswap"
+        self.protocol_version = kwargs.get("protocol_version") or 2
+        self.api_endpoint = kwargs.get("api_endpoint", None)
+        self.api_key = kwargs.get("api_key", None)
         self.rpc = kwargs.get("rpc", None)
         self.w3 = Web3(Web3.HTTPProvider(self.rpc))
         if self.w3:
             self.w3.middleware_onion.inject(geth_poa_middleware, layer=0)
             self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
+            logger.debug("Chain hex {}", self.w3.net.version)
+            logger.debug("Chain {}", int(self.w3.net.version, 16))
 
-        logger.debug(f"Setting up: {self.name}")
         self.wallet_address = kwargs.get("wallet_address", None)
         self.private_key = kwargs.get("private_key", None)
         if self.w3 and self.wallet_address:
@@ -59,12 +65,7 @@ class DexClient:
         else:
             self.account_number = None
         logger.debug("Account {}", self.account_number)
-        if self.w3:
-            logger.debug("Chain hex {}", self.w3.net.version)
-            logger.debug("Chain {}", int(self.w3.net.version, 16))
-        self.protocol_version = kwargs.get("protocol_version") or 2
-        self.api_endpoint = kwargs.get("api_endpoint", None)
-        self.api_key = kwargs.get("api_key", None)
+
         self.router_contract_addr = kwargs.get("router_contract_addr", None)
         self.factory_contract_addr = kwargs.get("factory_contract_addr", None)
         self.trading_asset_address = kwargs.get("trading_asset_address", None)
