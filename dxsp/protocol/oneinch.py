@@ -5,7 +5,7 @@
 # from dxsp.protocols.client import DexClient
 
 
-# class DexOneInch(DexClient):
+# class ONEINCHDEX(DexClient):
 #     """
 #     DexClient using 1inch protocol
 #     https://github.com/mraniki/dxsp/issues/189

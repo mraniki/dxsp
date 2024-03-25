@@ -1,7 +1,7 @@
-from dxsp.protocols.kwenta import KWENTADEX
+from dxsp.protocol.kwenta import KWENTADEX
 
-# from dxsp.protocols.oneinch import DexOneInch
-from dxsp.protocols.uniswap import UNISWAPDEX
-from dxsp.protocols.zerox import ZEROXDEX
+# from dxsp.protocol.oneinch import ONEINCHDEX
+from dxsp.protocol.uniswap import UNISWAPDEX
+from dxsp.protocol.zerox import ZEROXDEX
 
 __all__ = ["UNISWAPDEX", "ZEROXDEX", "KWENTADEX"]
