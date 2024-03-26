@@ -2,6 +2,23 @@
 
 
 
+## v8.0.1 (2024-03-26)
+
+### :bug:
+
+* :bug: Fix contract chain conversion bug in ContractUtils class ([`2f85099`](https://github.com/mraniki/dxsp/commit/2f850994cd044aa8962f9eac70c76b35ac05c5eb))
+
+### Other
+
+* Merge pull request #597 from mraniki/dev
+
+Merge pull request #596 from mraniki/main ([`8ccb836`](https://github.com/mraniki/dxsp/commit/8ccb83607eaab8498486ad72e53e6fb610b79b49))
+
+* Merge pull request #596 from mraniki/main
+
+:bug: Fix contract chain conversion bug in ContractUtils class ([`dd4cdd1`](https://github.com/mraniki/dxsp/commit/dd4cdd1faf0f32090d3fe22fec50bf5923b17a34))
+
+
 ## v8.0.0 (2024-03-26)
 
 ### Other
