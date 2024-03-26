@@ -36,6 +36,7 @@ token_testnet_list = ""
 token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json"
 
 [default.dex.template]
+enabled=true
 wallet_address = ""
 private_key = ""
 rpc = "" # https://chainlist.org for rpc url example
@@ -61,6 +62,7 @@ mapping = [ # mapping to use to change instrument per exchange
 
 # # uniswap v2 protocol type and router uniswap
 # [default.dex.eth]
+# enabled=true
 # wallet_address = "0x1234567890123456789012345678901234567890"
 # private_key = "0xdeadbeef88"
 # rpc = "https://rpc.ankr.com/eth"
@@ -84,6 +86,7 @@ mapping = [ # mapping to use to change instrument per exchange
 
 # # uniswap v2 protocol type and router pancakeswap on BSC chain 56
 # [default.dex.bsc]
+# enabled=true
 # wallet_address = "0x1234567890123456789012345678901234567890"
 # private_key = "0xdeadbeef88"
 # rpc = "https://rpc.ankr.com/bsc"
@@ -107,6 +110,7 @@ mapping = [ # mapping to use to change instrument per exchange
 
 # # ZeroX 0x protocol type on polygon chain 137
 # [default.dex.polygon]
+# enabled=true
 # wallet_address = "0x1234567890123456789012345678901234567890"
 # private_key = "0xdeadbeef88"
 # rpc = "https://rpc.ankr.com/polygon"
@@ -130,6 +134,7 @@ mapping = [ # mapping to use to change instrument per exchange
 
 # # kwenta protocol type on OPTIMISM chain 10
 # [default.dex.opt]
+# enabled=false
 # wallet_address = "0x1234567890123456789012345678901234567890"
 # private_key = "0xdeadbeef88"
 # rpc = "https://optimism.llamarpc.com"

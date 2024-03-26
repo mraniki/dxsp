@@ -4,17 +4,29 @@
 """
 from loguru import logger
 
-from dxsp.protocols.client import DexClient
+from dxsp.protocol.client import DexClient
 from dxsp.utils.utils import fetch_url
 
 
-class DexZeroX(DexClient):
+class ZEROXDEX(DexClient):
     """
     A DexClient class using 0x protocol
     Implementation of 0x swap protocol
     https://0x.org/docs/0x-swap-api/introduction
 
     """
+
+    def __init__(
+        self,
+        **kwargs,
+    ):
+        """
+        Initialize the client
+
+        """
+        super().__init__(**kwargs)
+        # self.build_client()
+        self.client = "0x"
 
     async def get_quote(
         self,

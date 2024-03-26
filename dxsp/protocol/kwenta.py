@@ -2,13 +2,14 @@
 Kwenta 🧮
 
 """
+
 from kwenta import Kwenta
 from loguru import logger
 
-from dxsp.protocols.client import DexClient
+from dxsp.protocol.client import DexClient
 
 
-class DexKwenta(DexClient):
+class KWENTADEX(DexClient):
     """
     A DexClient using kwenta-python library
 
@@ -16,6 +17,22 @@ class DexKwenta(DexClient):
     https://github.com/Kwenta/kwenta-python-sdk
 
     """
+
+    def __init__(
+        self,
+        **kwargs,
+    ):
+        """
+        Initialize the client
+
+        """
+        super().__init__(**kwargs)
+        self.client = Kwenta(
+            network_id=int(self.w3.net.version),
+            provider_rpc=self.rpc,
+            wallet_address=self.wallet_address,
+            private_key=self.private_key,
+        )
 
     async def get_quote(self, buy_address=None, symbol=None, amount=1):
         """
@@ -41,19 +58,14 @@ class DexKwenta(DexClient):
                     contract_address=self.trading_asset_address
                 )
                 buy_address = buy_token.address
-            kwenta = Kwenta(
-                network_id=int(self.w3.net.version),
-                provider_rpc=self.rpc,
-                wallet_address=self.wallet_address,
-                private_key=self.private_key,
-            )
-            logger.debug("kwenta client: {}", kwenta)
+
+            logger.debug("kwenta client: {}", self.client)
             symbol = await self.replace_instrument(symbol)
             sell_token = await self.contract_utils.get_data(symbol=symbol)
-            market = kwenta.markets[f"{sell_token.symbol}"]
+            market = self.client.markets[f"{sell_token.symbol}"]
             logger.info("market: {}", market)
 
-            quote = kwenta.get_current_asset_price(sell_token.symbol)
+            quote = self.client.get_current_asset_price(sell_token.symbol)
             logger.info("quote: {}", quote)
             return quote
         except Exception as error:
@@ -63,56 +75,50 @@ class DexKwenta(DexClient):
     async def make_swap(self, sell_address, buy_address, amount):
         pass
 
-        # kwenta = Kwenta(
-        #     network_id=10,
-        #     provider_rpc="https://optimism.llamarpc.com",
-        #     wallet_address=self.wallet_address,
-        #     private_key=self.private_key,
-        # )
         # symbol = self.contract_utils.get_token_symbol(buy_address)
         # logger.debug(f"Symbol: {symbol}\n")
         # # get the market info for the asset
-        # market = kwenta.markets[symbol]
+        # market = self.client.markets[symbol]
         # logger.debug(f"Market: {market}\n")
 
         # # check margin balance
-        # margin_balance_before = kwenta.get_accessible_margin(symbol)
+        # margin_balance_before = self.client.get_accessible_margin(symbol)
         # logger.debug(f"Starting margin balance: {margin_balance_before}\n")
 
         # # transfer margin to the market
-        # transfer_margin = kwenta.transfer_margin(symbol, 100, execute_now=True)
+        # transfer_margin = self.client.transfer_margin(symbol, 100, execute_now=True)
         # logger.debug(f"Transfer tx: {transfer_margin}\n")
 
         # # wait for the transfer to be mined
-        # kwenta.web3.eth.wait_for_transaction_receipt(transfer_margin)
+        # self.client.web3.eth.wait_for_transaction_receipt(transfer_margin)
         # logger.debug("Transfer transaction confirmed\n")
         # await asyncio.sleep(10)
 
         # # check margin balance again
-        # margin_balance_after = kwenta.get_accessible_margin(symbol)
+        # margin_balance_after = self.client.get_accessible_margin(symbol)
         # logger.debug(f"Ending margin balance: {margin_balance_after}\n")
 
         # # submit an order
-        # open_position = kwenta.modify_position(
+        # open_position = self.client.modify_position(
         # symbol,
         # size_delta=0.5,
         # execute_now=True)
         # logger.debug(f"Open position tx: {open_position}\n")
 
         # # wait for the transfer to be mined
-        # kwenta.web3.eth.wait_for_transaction_receipt(open_position)
+        # self.client.web3.eth.wait_for_transaction_receipt(open_position)
         # logger.debug("Order transaction confirmed\n")
         # await asyncio.sleep(2)
 
         # # check the order status
-        # order_before = kwenta.check_delayed_orders(symbol)
+        # order_before = self.client.check_delayed_orders(symbol)
         # logger.debug(f"Order before: {order_before}\n")
         # await asyncio.sleep(20)
 
         # # check the open position
-        # position = kwenta.get_current_position(symbol)
+        # position = self.client.get_current_position(symbol)
         # logger.debug(f"Position: {position}\n")
 
         # # check the order status again
-        # order_after = kwenta.check_delayed_orders(symbol)
+        # order_after = self.client.check_delayed_orders(symbol)
         # logger.debug(f"Order after: {order_after}\n")

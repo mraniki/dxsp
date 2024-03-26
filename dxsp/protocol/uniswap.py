@@ -1,13 +1,14 @@
 """
 uniswap  🦄
 """
+
 from loguru import logger
 from uniswap import Uniswap
 
-from dxsp.protocols.client import DexClient
+from dxsp.protocol.client import DexClient
 
 
-class DexUniswap(DexClient):
+class UNISWAPDEX(DexClient):
     """
     A DexClient using uniswap-python library
 
@@ -15,6 +16,17 @@ class DexUniswap(DexClient):
     https://github.com/uniswap-python/uniswap-python
 
     """
+
+    def __init__(
+        self,
+        **kwargs,
+    ):
+        """
+        Initialize the client
+
+        """
+        super().__init__(**kwargs)
+        self.build_client()
 
     def build_client(self):
         """
@@ -44,7 +56,6 @@ class DexUniswap(DexClient):
         except Exception as error:
             logger.error("Uniswap client failed {}", error)
             raise Exception("Uniswap client creation failed, Verify rpc")
-
 
     async def get_quote(
         self,
@@ -78,7 +89,6 @@ class DexUniswap(DexClient):
                 sell_address,
                 sell_symbol,
             )
-            self.build_client()
 
             buy_token = await self.resolve_token(
                 address=buy_address,
@@ -124,7 +134,7 @@ class DexUniswap(DexClient):
         """
 
         try:
-            self.build_client()
+
             logger.debug(
                 "Uniswap make_swap {} {} {}", sell_address, buy_address, amount
             )
