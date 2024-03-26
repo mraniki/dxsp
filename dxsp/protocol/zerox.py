@@ -25,6 +25,8 @@ class ZEROXDEX(DexClient):
 
         """
         super().__init__(**kwargs)
+        # self.build_client()
+        self.client = "0x"
 
     async def get_quote(
         self,

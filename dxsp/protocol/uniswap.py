@@ -25,6 +25,7 @@ class UNISWAPDEX(DexClient):
 
         """
         super().__init__(**kwargs)
+        self.build_client()
 
     def build_client(self):
         """
@@ -87,7 +88,7 @@ class UNISWAPDEX(DexClient):
                 sell_address,
                 sell_symbol,
             )
-            self.build_client()
+            
 
             buy_token = await self.resolve_token(
                 address=buy_address,
@@ -133,7 +134,7 @@ class UNISWAPDEX(DexClient):
         """
 
         try:
-            self.build_client()
+            # self.build_client()
             logger.debug(
                 "Uniswap make_swap {} {} {}", sell_address, buy_address, amount
             )

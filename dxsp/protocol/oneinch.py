@@ -20,6 +20,8 @@
 
 #     """
 #     super().__init__(**kwargs)
+#     self.client = "1inch"
+
 #     async def get_quote(self, buy_address=None, symbol=None, amount=1):
 #         """
 #         Retrieves a quote for the
