@@ -30,7 +30,7 @@ def client_fixture(dex):
 @pytest.fixture(name="dex_client_zero_x")
 def client_zero_x_fixture(dex):
     for dx in dex.clients:
-        if dx.protocol == "0x":
+        if dx.protocol == "zerox":
             return dx
 
 

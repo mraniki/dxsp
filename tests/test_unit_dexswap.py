@@ -66,7 +66,7 @@ async def test_dextrader(dex):
     for dx in dex.clients:
         assert dx is not None
         assert dx.name is not None
-        assert dx.protocol in ["uniswap", "0x", "kwenta"]
+        assert dx.protocol in ["uniswap", "zerox", "kwenta"]
         assert callable(dx.get_order_amount)
         assert callable(dx.replace_instrument)
         assert callable(dx.get_quote)
