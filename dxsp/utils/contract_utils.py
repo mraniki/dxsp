@@ -109,6 +109,8 @@ class ContractUtils:
             43114: "avalanche",
             42161: "arbitrum-one",
         }
+
+        logger.debug("network_versions: {}", network_versions)
         if network_name := network_versions.get(self.chain):
             logger.debug("coingecko platform identified {}", network_name)
             return network_name
