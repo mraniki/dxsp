@@ -52,7 +52,7 @@ class ContractUtils:
         logger.debug("w3: {}", self.w3)
         # logger.debug("raw chain: {}", self.w3.net.version)
         # self.chain = int(self.w3.net.version, 16)
-        self.chain = self.w3.net.version
+        self.chain = int(self.w3.net.version)
         logger.debug("chain: {}", self.chain)
         self.block_explorer_url = block_explorer_url
         self.block_explorer_api = block_explorer_api
@@ -109,8 +109,6 @@ class ContractUtils:
             43114: "avalanche",
             42161: "arbitrum-one",
         }
-
-        logger.debug("network_versions: {}", network_versions)
         if network_name := network_versions.get(self.chain):
             logger.debug("coingecko platform identified {}", network_name)
             return network_name
@@ -122,6 +120,9 @@ class ContractUtils:
             platform = output_dict["id"] or None
             logger.debug("coingecko platform identified {}", platform)
             return platform
+        except StopIteration:
+            logger.error("No matching platform found for chain: {}", self.chain)
+            return None
         except Exception as e:
             logger.error("get_cg_platform: {}", e)
             return None
