@@ -117,7 +117,6 @@ class DexSwap:
             library is not supported.
 
         """
-        logger.debug("kwargs {}", kwargs)
         library = kwargs.get("protocol") or kwargs.get("library")
         client_class = self.client_classes.get(f"{library.upper()}DEX")
 
