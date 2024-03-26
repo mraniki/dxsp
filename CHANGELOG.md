@@ -2,6 +2,75 @@
 
 
 
+## v8.0.0 (2024-03-26)
+
+### Other
+
+* Merge pull request #594 from mraniki/dev
+
+💥 breaking class renamed and refactor of client ([`f04454c`](https://github.com/mraniki/dxsp/commit/f04454c89721714634351638a6270ad613246fc0))
+
+* Refactor DexClient constructor in client.py ([`a848778`](https://github.com/mraniki/dxsp/commit/a8487783f8d402e3243f206459f9340696baebeb))
+
+* Refactor DexClient constructor to use Web3 from kwargs ([`a31e5e7`](https://github.com/mraniki/dxsp/commit/a31e5e71018058a93d671aff140ddfae77f2757d))
+
+### Update
+
+* Update protocol and protocol version initialization in DexClient ([`e506255`](https://github.com/mraniki/dxsp/commit/e506255daf2290e2311f4695ecd7c6ac4a74c9d2))
+
+### ♻️
+
+* ♻️ ([`da429f9`](https://github.com/mraniki/dxsp/commit/da429f9e7a2ef5bad0a210850caf8bccfdfaca33))
+
+* ♻️ ([`03a6d29`](https://github.com/mraniki/dxsp/commit/03a6d29f55bbafec0ddafa7267ce0a17195a04dd))
+
+* ♻️ ([`4ee0b46`](https://github.com/mraniki/dxsp/commit/4ee0b46ab0d24df8b55845b2c0aacea666c52061))
+
+* ♻️ ([`70b84b7`](https://github.com/mraniki/dxsp/commit/70b84b7fadc78a71086aa639488ae74778f254b6))
+
+* ♻️ protocol folder ([`562edc3`](https://github.com/mraniki/dxsp/commit/562edc326b68a7af71624ed3de4e5ce58d4409d4))
+
+### ⚡
+
+* ⚡ ([`2020cc5`](https://github.com/mraniki/dxsp/commit/2020cc5b89589aea5bfcbefe1ce8be410e15aebb))
+
+### ✅
+
+* ✅ Unit Test ([`5c4daf6`](https://github.com/mraniki/dxsp/commit/5c4daf6c7846cd6d0e9806f0b8876f00739f63af))
+
+### 🎨
+
+* 🎨 cleanup ([`222ead5`](https://github.com/mraniki/dxsp/commit/222ead52f7b07492e745fe3719c24f47d6930e88))
+
+### 🐛
+
+* 🐛 ([`696cdaa`](https://github.com/mraniki/dxsp/commit/696cdaa30bd419923095a3e87bf340bc92e0c122))
+
+### 💥
+
+* 💥 breaking class renamed and refactor of client ([`46dd001`](https://github.com/mraniki/dxsp/commit/46dd001c0d7108904b3218a133346d6e7c993069))
+
+### 🔇
+
+* 🔇 ([`8291a43`](https://github.com/mraniki/dxsp/commit/8291a4302df971ba41d9693aac356956c7f6d9d9))
+
+### 🔧
+
+* 🔧 cleanup settings ([`31f403a`](https://github.com/mraniki/dxsp/commit/31f403a9bc52ee433e63b8d9da9a40a2f875d308))
+
+### 🚑
+
+* 🚑 missing clientsetup in client class ([`7197683`](https://github.com/mraniki/dxsp/commit/7197683542691305cf13b93a2fe71f6003cd1c0a))
+
+* 🚑 ([`ffd01b7`](https://github.com/mraniki/dxsp/commit/ffd01b798f56a4daa68206cb7b960e5b68c972fd))
+
+### 🚨
+
+* 🚨 ([`485ee5a`](https://github.com/mraniki/dxsp/commit/485ee5a8e307f132eb177a261d21c6670ea5238d))
+
+* 🚨 Linter setup update ([`584212f`](https://github.com/mraniki/dxsp/commit/584212fd3a9590b7ec21d4602d9cb4a100313679))
+
+
 ## v7.0.15 (2024-03-25)
 
 ### Other
