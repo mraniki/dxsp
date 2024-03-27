@@ -1,6 +1,6 @@
 from .kwenta import KwentaHandler
 
-# from dxsp.protocol.oneinch import ONEINCHDEX
+# from .oneinch import OneinchHandler
 from .uniswap import UniswapHandler
 from .zerox import ZeroxHandler
 
