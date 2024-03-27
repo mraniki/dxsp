@@ -56,8 +56,10 @@ class DexClient:
             logger.debug("Chain hex {}", self.w3.net.version)
             logger.debug("Chain {}", int(self.w3.net.version, 16))
 
-        self.wallet_address = kwargs.get("wallet_address", None)
-        self.private_key = kwargs.get("private_key", None)
+        self.wallet_address = self.w3.to_checksum_address(
+            kwargs.get("wallet_address", None)
+        )
+        self.private_key = self.w3.to_checksum_address(kwargs.get("private_key", None))
         if self.w3 and self.wallet_address:
             self.account_number = (
                 f"{int(self.w3.net.version, 16)} - {str(self.wallet_address)[-8:]}"
