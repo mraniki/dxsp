@@ -98,6 +98,13 @@ class UniswapHandler(DexClient):
             sell_token = await self.resolve_token(
                 address=sell_address, symbol=sell_symbol
             )
+
+            logger.debug("Buy token {}", buy_token)
+            logger.debug("Sell token {}", sell_token)
+            if not buy_token:
+                return "Buy token not found"
+            if not sell_token:
+                return "Sell token not found"
             amount_wei = amount * (10 ** (sell_token.decimals))
 
             logger.debug(
