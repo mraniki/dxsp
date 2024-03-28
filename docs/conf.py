@@ -11,7 +11,7 @@ from typing import Any, Dict
 import pydata_sphinx_theme
 from sphinx.application import Sphinx
 
-sys.path.insert(0, os.path.abspath('../'))
+# sys.path.insert(0, os.path.abspath('../'))
 
 
 # -- Project information -----------------------------------------------------
@@ -26,14 +26,14 @@ language = "en"
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
-    'sphinx.ext.napoleon',
+    # 'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
     "sphinx.ext.intersphinx",
-    "hoverxref.extension",
-    "sphinx.ext.extlinks",
-    "sphinx_design",
-    "myst_parser",
-    "sphinx_copybutton",
+    # "hoverxref.extension",
+    # "sphinx.ext.extlinks",
+    # "sphinx_design",
+    # "myst_parser",
+    # "sphinx_copybutton",
     # "autoapi.extension",
 ]
 
@@ -41,40 +41,40 @@ extensions = [
 
 # -- intersphinx ------------
 
-intersphinx_mapping = {
-    "sphinx": ("https://www.sphinx-doc.org/en/master/", None),
-    # - :doc:`sphinx:usage/extensions/intersphinx`
-    "dynaconf": ("https://www.dynaconf.com", None),
-    "python": ("https://docs.python.org/3", None),
-    "talky": ("https://talky.readthedocs.io/en/latest", None),
-    "talky-dev": ("https://talky.readthedocs.io/en/dev/", None),
-    "findmyorder": (
-        "https://findmyorder.readthedocs.io/en/latest", None),
-    "dxsp": ("https://dxsp.readthedocs.io/en/latest", None),
-    "iamlistening": (
-        "https://iamlistening.readthedocs.io/en/latest", None),
-    "talkytrend": ("https://talkytrend.readthedocs.io/en/latest", None),
-    "myllm": ("https://myllm.readthedocs.io/en/latest", None),
-    "community": ("https://tt-plugins.readthedocs.io/en/latest", None),
-}
+# intersphinx_mapping = {
+#     "sphinx": ("https://www.sphinx-doc.org/en/master/", None),
+#     # - :doc:`sphinx:usage/extensions/intersphinx`
+#     "dynaconf": ("https://www.dynaconf.com", None),
+#     "python": ("https://docs.python.org/3", None),
+#     "talky": ("https://talky.readthedocs.io/en/latest", None),
+#     "talky-dev": ("https://talky.readthedocs.io/en/dev/", None),
+#     "findmyorder": (
+#         "https://findmyorder.readthedocs.io/en/latest", None),
+#     "dxsp": ("https://dxsp.readthedocs.io/en/latest", None),
+#     "iamlistening": (
+#         "https://iamlistening.readthedocs.io/en/latest", None),
+#     "talkytrend": ("https://talkytrend.readthedocs.io/en/latest", None),
+#     "myllm": ("https://myllm.readthedocs.io/en/latest", None),
+#     "community": ("https://tt-plugins.readthedocs.io/en/latest", None),
+# }
 
-intersphinx_disabled_reftypes = ["*"]
+# intersphinx_disabled_reftypes = ["*"]
 
 
 # -- hoverxref ----------------
 
-hoverxref_intersphinx = [
-    'readthedocs',
-    'sphinx',
-    'python',
-    'talky',
-    'findmyorder',
-    'dxsp',
-    'iamlistening',
-    'talkytrend',
-    'myllm',
+# hoverxref_intersphinx = [
+#     'readthedocs',
+#     'sphinx',
+#     'python',
+#     'talky',
+#     'findmyorder',
+#     'dxsp',
+#     'iamlistening',
+#     'talkytrend',
+#     'myllm',
 
-]
+# ]
 
 # -- autodoc --------------------
 
@@ -95,29 +95,29 @@ add_module_names = True
 
 # -- napoleon -------------------
 
-napoleon_google_docstring = True
+# napoleon_google_docstring = True
 
 # -- MyST options -----------------
 
 # This allows us to use ::: to denote directives, useful for admonitions
-myst_enable_extensions = ["colon_fence", "linkify", "substitution"]
-myst_heading_anchors = 2
-myst_substitutions = {"rtd": "[Read the Docs](https://readthedocs.org/)"}
+# myst_enable_extensions = ["colon_fence", "linkify", "substitution"]
+# myst_heading_anchors = 2
+# myst_substitutions = {"rtd": "[Read the Docs](https://readthedocs.org/)"}
 
-master_doc = 'index'
-source_suffix = ['.rst', '.md']
-templates_path = ["_templates"]
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+# master_doc = 'index'
+# source_suffix = ['.rst', '.md']
+# templates_path = ["_templates"]
+# exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # -- Sitemap ----------------------
 
 # ReadTheDocs has its own way of generating sitemaps, etc.
-if not os.environ.get("READTHEDOCS"):
-    extensions += ["sphinx_sitemap"]
+# if not os.environ.get("READTHEDOCS"):
+#     extensions += ["sphinx_sitemap"]
 
-    html_baseurl = os.environ.get("SITEMAP_URL_BASE", "http://127.0.0.1:8000/")
-    sitemap_locales = [None]
-    sitemap_url_scheme = "{link}"
+#     html_baseurl = os.environ.get("SITEMAP_URL_BASE", "http://127.0.0.1:8000/")
+#     sitemap_locales = [None]
+#     sitemap_url_scheme = "{link}"
 
 
 # -- Options for HTML output --------
