@@ -2,6 +2,31 @@
 
 
 
+## v9.0.2 (2024-03-28)
+
+### :bug:
+
+* :memo: :bug: ([`54f6a31`](https://github.com/mraniki/dxsp/commit/54f6a3156e9c00398b3ee7df09378d80e9823cc7))
+
+### Other
+
+* Merge pull request #601 from mraniki/dev
+
+Update readthedocs.yaml and conf.py for poetry installation ([`ca93dfa`](https://github.com/mraniki/dxsp/commit/ca93dfa59a0859684f0b5caedcc833f0575a4f9b))
+
+### Update
+
+* Update readthedocs.yaml and conf.py for poetry installation and dependencies
+
+Builds broken with poetry 1.8 ([`75f4af2`](https://github.com/mraniki/dxsp/commit/75f4af2db60961ae71c15cc48d89fcd361e72c1b))
+
+### 🐛
+
+* 📝 🐛 ([`ef22a4a`](https://github.com/mraniki/dxsp/commit/ef22a4abaee15e71b9263d0da6e98433ccf24409))
+
+* 🐛 📝 ([`a598157`](https://github.com/mraniki/dxsp/commit/a598157900e1967488d0b1b57d9f10e39eb23a0e))
+
+
 ## v9.0.1 (2024-03-28)
 
 ### Other
