@@ -5,13 +5,13 @@
 
 import os
 import sys
-from pathlib import Path
+#from pathlib import Path
 from typing import Any, Dict
 
 import pydata_sphinx_theme
 from sphinx.application import Sphinx
 
-# sys.path.insert(0, os.path.abspath('../'))
+#sys.path.insert(0, os.path.abspath('../'))
 
 
 # -- Project information -----------------------------------------------------
@@ -111,55 +111,56 @@ add_module_names = True
 
 # -- Sitemap ----------------------
 
-# ReadTheDocs has its own way of generating sitemaps, etc.
-# if not os.environ.get("READTHEDOCS"):
-#     extensions += ["sphinx_sitemap"]
+#ReadTheDocs has its own way of generating sitemaps, etc.
+if not os.environ.get("READTHEDOCS"):
+    extensions += ["sphinx_sitemap"]
 
-#     html_baseurl = os.environ.get("SITEMAP_URL_BASE", "http://127.0.0.1:8000/")
-#     sitemap_locales = [None]
-#     sitemap_url_scheme = "{link}"
+    html_baseurl = os.environ.get("SITEMAP_URL_BASE", "http://127.0.0.1:8000/")
+    sitemap_locales = [None]
+    sitemap_url_scheme = "{link}"
 
 
 # -- Options for HTML output --------
 
-html_static_path = ["_static"]
-html_css_files = ["custom.css"]
-html_logo = '_static/logo.png'
-html_favicon = '_static/favicon.ico'
-html_show_sphinx = False
-html_show_copyright = False
 html_theme = "pydata_sphinx_theme"
-html_theme_options = {
-    "secondary_sidebar_items": ["page-toc"],
-    "logo": {
-        "link": "https://talky.readthedocs.io",
-    },
-    "icon_links": [
-        {
-            "name": "GitHub",
-            "url": "https://github.com/mraniki/tt/",
-            "icon": "fa-brands fa-github",
-            "type": "fontawesome",
-        },
-        {
-            "name": "Telegram",
-            "url": "https://t.me/TTTalkyTraderChat/1",
-            "icon": "fa-brands fa-telegram",
-        },
-        {
-            "name": "Mastodon",
-            "url": "https://mastodon.social/@MrAniki",
-            "icon": "fa-brands fa-mastodon",
-        },
-        {
-            "name": "Tips",
-            "url": "https://coindrop.to/mraniki",
-            "icon": "fa-solid fa-burger",
-        },
-        ],
+# html_static_path = ["_static"]
+# html_css_files = ["custom.css"]
+# html_logo = '_static/logo.png'
+# html_favicon = '_static/favicon.ico'
+# html_show_sphinx = False
+# html_show_copyright = False
 
-}
-html_context = {
-   "default_mode": "dark",
+# html_theme_options = {
+#     "secondary_sidebar_items": ["page-toc"],
+#     "logo": {
+#         "link": "https://talky.readthedocs.io",
+#     },
+#     "icon_links": [
+#         {
+#             "name": "GitHub",
+#             "url": "https://github.com/mraniki/tt/",
+#             "icon": "fa-brands fa-github",
+#             "type": "fontawesome",
+#         },
+#         {
+#             "name": "Telegram",
+#             "url": "https://t.me/TTTalkyTraderChat/1",
+#             "icon": "fa-brands fa-telegram",
+#         },
+#         {
+#             "name": "Mastodon",
+#             "url": "https://mastodon.social/@MrAniki",
+#             "icon": "fa-brands fa-mastodon",
+#         },
+#         {
+#             "name": "Tips",
+#             "url": "https://coindrop.to/mraniki",
+#             "icon": "fa-solid fa-burger",
+#         },
+#         ],
 
-}
+# }
+# html_context = {
+#    "default_mode": "dark",
+
+# }
