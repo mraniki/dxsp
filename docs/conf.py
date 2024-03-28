@@ -5,13 +5,13 @@
 
 import os
 import sys
-#from pathlib import Path
+from pathlib import Path
 from typing import Any, Dict
 
 import pydata_sphinx_theme
 from sphinx.application import Sphinx
 
-#sys.path.insert(0, os.path.abspath('../'))
+sys.path.insert(0, os.path.abspath('../'))
 
 
 # -- Project information -----------------------------------------------------
@@ -26,14 +26,14 @@ language = "en"
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
-    # 'sphinx.ext.napoleon',
+    'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
     "sphinx.ext.intersphinx",
-    # "hoverxref.extension",
-    # "sphinx.ext.extlinks",
-    # "sphinx_design",
-    # "myst_parser",
-    # "sphinx_copybutton",
+    "hoverxref.extension",
+     "sphinx.ext.extlinks",
+     "sphinx_design",
+     "myst_parser",
+     "sphinx_copybutton",
     # "autoapi.extension",
 ]
 
@@ -41,40 +41,40 @@ extensions = [
 
 # -- intersphinx ------------
 
-# intersphinx_mapping = {
-#     "sphinx": ("https://www.sphinx-doc.org/en/master/", None),
-#     # - :doc:`sphinx:usage/extensions/intersphinx`
-#     "dynaconf": ("https://www.dynaconf.com", None),
-#     "python": ("https://docs.python.org/3", None),
-#     "talky": ("https://talky.readthedocs.io/en/latest", None),
-#     "talky-dev": ("https://talky.readthedocs.io/en/dev/", None),
-#     "findmyorder": (
-#         "https://findmyorder.readthedocs.io/en/latest", None),
-#     "dxsp": ("https://dxsp.readthedocs.io/en/latest", None),
-#     "iamlistening": (
-#         "https://iamlistening.readthedocs.io/en/latest", None),
-#     "talkytrend": ("https://talkytrend.readthedocs.io/en/latest", None),
-#     "myllm": ("https://myllm.readthedocs.io/en/latest", None),
-#     "community": ("https://tt-plugins.readthedocs.io/en/latest", None),
-# }
+intersphinx_mapping = {
+    "sphinx": ("https://www.sphinx-doc.org/en/master/", None),
+    # - :doc:`sphinx:usage/extensions/intersphinx`
+    "dynaconf": ("https://www.dynaconf.com", None),
+    "python": ("https://docs.python.org/3", None),
+    "talky": ("https://talky.readthedocs.io/en/latest", None),
+    "talky-dev": ("https://talky.readthedocs.io/en/dev/", None),
+    "findmyorder": (
+        "https://findmyorder.readthedocs.io/en/latest", None),
+    "dxsp": ("https://dxsp.readthedocs.io/en/latest", None),
+    "iamlistening": (
+        "https://iamlistening.readthedocs.io/en/latest", None),
+    "talkytrend": ("https://talkytrend.readthedocs.io/en/latest", None),
+    "myllm": ("https://myllm.readthedocs.io/en/latest", None),
+    "community": ("https://tt-plugins.readthedocs.io/en/latest", None),
+}
 
-# intersphinx_disabled_reftypes = ["*"]
+intersphinx_disabled_reftypes = ["*"]
 
 
 # -- hoverxref ----------------
 
-# hoverxref_intersphinx = [
-#     'readthedocs',
-#     'sphinx',
-#     'python',
-#     'talky',
-#     'findmyorder',
-#     'dxsp',
-#     'iamlistening',
-#     'talkytrend',
-#     'myllm',
+hoverxref_intersphinx = [
+    'readthedocs',
+    'sphinx',
+    'python',
+    'talky',
+    'findmyorder',
+    'dxsp',
+    'iamlistening',
+    'talkytrend',
+    'myllm',
 
-# ]
+]
 
 # -- autodoc --------------------
 
@@ -95,7 +95,7 @@ add_module_names = True
 
 # -- napoleon -------------------
 
-# napoleon_google_docstring = True
+napoleon_google_docstring = True
 
 # -- MyST options -----------------
 
@@ -104,10 +104,10 @@ add_module_names = True
 # myst_heading_anchors = 2
 # myst_substitutions = {"rtd": "[Read the Docs](https://readthedocs.org/)"}
 
-# master_doc = 'index'
-# source_suffix = ['.rst', '.md']
-# templates_path = ["_templates"]
-# exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+master_doc = 'index'
+source_suffix = ['.rst', '.md']
+templates_path = ["_templates"]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # -- Sitemap ----------------------
 
@@ -123,44 +123,44 @@ if not os.environ.get("READTHEDOCS"):
 # -- Options for HTML output --------
 
 html_theme = "pydata_sphinx_theme"
-# html_static_path = ["_static"]
-# html_css_files = ["custom.css"]
-# html_logo = '_static/logo.png'
-# html_favicon = '_static/favicon.ico'
-# html_show_sphinx = False
-# html_show_copyright = False
+html_static_path = ["_static"]
+html_css_files = ["custom.css"]
+html_logo = '_static/logo.png'
+html_favicon = '_static/favicon.ico'
+html_show_sphinx = False
+html_show_copyright = False
 
-# html_theme_options = {
-#     "secondary_sidebar_items": ["page-toc"],
-#     "logo": {
-#         "link": "https://talky.readthedocs.io",
-#     },
-#     "icon_links": [
-#         {
-#             "name": "GitHub",
-#             "url": "https://github.com/mraniki/tt/",
-#             "icon": "fa-brands fa-github",
-#             "type": "fontawesome",
-#         },
-#         {
-#             "name": "Telegram",
-#             "url": "https://t.me/TTTalkyTraderChat/1",
-#             "icon": "fa-brands fa-telegram",
-#         },
-#         {
-#             "name": "Mastodon",
-#             "url": "https://mastodon.social/@MrAniki",
-#             "icon": "fa-brands fa-mastodon",
-#         },
-#         {
-#             "name": "Tips",
-#             "url": "https://coindrop.to/mraniki",
-#             "icon": "fa-solid fa-burger",
-#         },
-#         ],
+html_theme_options = {
+    "secondary_sidebar_items": ["page-toc"],
+    "logo": {
+        "link": "https://talky.readthedocs.io",
+    },
+    "icon_links": [
+        {
+            "name": "GitHub",
+            "url": "https://github.com/mraniki/tt/",
+            "icon": "fa-brands fa-github",
+            "type": "fontawesome",
+        },
+        {
+            "name": "Telegram",
+            "url": "https://t.me/TTTalkyTraderChat/1",
+            "icon": "fa-brands fa-telegram",
+        },
+        {
+            "name": "Mastodon",
+            "url": "https://mastodon.social/@MrAniki",
+            "icon": "fa-brands fa-mastodon",
+        },
+        {
+            "name": "Tips",
+            "url": "https://coindrop.to/mraniki",
+            "icon": "fa-solid fa-burger",
+        },
+        ],
 
-# }
-# html_context = {
-#    "default_mode": "dark",
+}
+html_context = {
+   "default_mode": "dark",
 
-# }
+}
