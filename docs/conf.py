@@ -30,10 +30,10 @@ extensions = [
     'sphinx.ext.viewcode',
     "sphinx.ext.intersphinx",
     "hoverxref.extension",
-    "sphinx.ext.extlinks",
-    "sphinx_design",
-    "myst_parser",
-    "sphinx_copybutton",
+     "sphinx.ext.extlinks",
+     "sphinx_design",
+     "myst_parser",
+     "sphinx_copybutton",
     # "autoapi.extension",
 ]
 
@@ -100,9 +100,9 @@ napoleon_google_docstring = True
 # -- MyST options -----------------
 
 # This allows us to use ::: to denote directives, useful for admonitions
-myst_enable_extensions = ["colon_fence", "linkify", "substitution"]
-myst_heading_anchors = 2
-myst_substitutions = {"rtd": "[Read the Docs](https://readthedocs.org/)"}
+# myst_enable_extensions = ["colon_fence", "linkify", "substitution"]
+# myst_heading_anchors = 2
+# myst_substitutions = {"rtd": "[Read the Docs](https://readthedocs.org/)"}
 
 master_doc = 'index'
 source_suffix = ['.rst', '.md']
@@ -111,7 +111,7 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # -- Sitemap ----------------------
 
-# ReadTheDocs has its own way of generating sitemaps, etc.
+#ReadTheDocs has its own way of generating sitemaps, etc.
 if not os.environ.get("READTHEDOCS"):
     extensions += ["sphinx_sitemap"]
 
@@ -122,13 +122,14 @@ if not os.environ.get("READTHEDOCS"):
 
 # -- Options for HTML output --------
 
+html_theme = "pydata_sphinx_theme"
 html_static_path = ["_static"]
 html_css_files = ["custom.css"]
 html_logo = '_static/logo.png'
 html_favicon = '_static/favicon.ico'
 html_show_sphinx = False
 html_show_copyright = False
-html_theme = "pydata_sphinx_theme"
+
 html_theme_options = {
     "secondary_sidebar_items": ["page-toc"],
     "logo": {
