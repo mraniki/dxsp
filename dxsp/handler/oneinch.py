@@ -2,10 +2,10 @@
 # OneInch 🦄
 # """
 
-# from dxsp.protocol.client import DexClient
+# from .client import DexClient
 
 
-# class ONEINCHDEX(DexClient):
+# class OneinchHandler(DexClient):
 #     """
 #     DexClient using 1inch protocol
 #     https://github.com/mraniki/dxsp/issues/189

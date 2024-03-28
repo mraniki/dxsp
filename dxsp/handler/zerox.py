@@ -4,11 +4,11 @@
 """
 from loguru import logger
 
-from dxsp.protocol.client import DexClient
+from .client import DexClient
 from dxsp.utils.utils import fetch_url
 
 
-class ZEROXDEX(DexClient):
+class ZeroxHandler(DexClient):
     """
     A DexClient class using 0x protocol
     Implementation of 0x swap protocol

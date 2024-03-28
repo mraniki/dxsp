@@ -6,10 +6,10 @@ Kwenta 🧮
 from kwenta import Kwenta
 from loguru import logger
 
-from dxsp.protocol.client import DexClient
+from .client import DexClient
 
 
-class KWENTADEX(DexClient):
+class KwentaHandler(DexClient):
     """
     A DexClient using kwenta-python library
 

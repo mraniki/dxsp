@@ -118,7 +118,7 @@ class DexSwap:
 
         """
         library = kwargs.get("protocol") or kwargs.get("library")
-        client_class = self.client_classes.get(f"{library.upper()}DEX")
+        client_class = self.client_classes.get(f"{library.capitalize()}Handler")
 
         if client_class is None:
             logger.error(f"library {library} not supported")
@@ -128,9 +128,9 @@ class DexSwap:
 
     def get_all_client_classes(self):
         """
-        Retrieves all client classes from the `myllm.provider` module.
+        Retrieves all client classes from the `dxsp.handler` module.
 
-        This function imports the `myllm.provider` module and retrieves
+        This function imports the `dxsp.handler` module and retrieves
         all the classes defined in it.
 
         The function returns a dictionary where the keys are the
@@ -139,9 +139,9 @@ class DexSwap:
 
         Returns:
             dict: A dictionary containing all the client classes
-            from the `myllm.provider` module.
+            from the `dxsp.handler` module.
         """
-        provider_module = importlib.import_module("dxsp.protocol")
+        provider_module = importlib.import_module("dxsp.handler")
         return {
             name: cls
             for name, cls in provider_module.__dict__.items()
