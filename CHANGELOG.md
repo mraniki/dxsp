@@ -2,6 +2,29 @@
 
 
 
+## v9.0.0 (2024-03-28)
+
+### :boom:
+
+* :boom: Add KwentaHandler, UniswapHandler, and ZeroxHandler classes. ([`1a89d68`](https://github.com/mraniki/dxsp/commit/1a89d685c73b6419a0437c5aca7cf7ebeb39c202))
+
+### Other
+
+* Merge pull request #599 from mraniki/dev
+
+⬆️ 🤖 - Q	How can you tell when a Burroughs salesman is lying ([`b177c9b`](https://github.com/mraniki/dxsp/commit/b177c9b294c3746eafd0fa08263cf728fa9ac61c))
+
+### Update
+
+* Update handler import in __init__.py file ([`9dbc112`](https://github.com/mraniki/dxsp/commit/9dbc1125cc740f8a47a93458d2b717c2b595049a))
+
+### 🐛
+
+* 🐛 ([`852e86e`](https://github.com/mraniki/dxsp/commit/852e86ea9e1d11bd322faa8a12976e2ee8f4b06c))
+
+* 🐛 ([`4c1521f`](https://github.com/mraniki/dxsp/commit/4c1521feca724f6cee7f920bc1970995077a5a46))
+
+
 ## v8.0.1 (2024-03-26)
 
 ### :bug:
