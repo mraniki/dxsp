@@ -2,6 +2,23 @@
 
 
 
+## v9.0.1 (2024-03-28)
+
+### Other
+
+* Merge pull request #600 from mraniki/dev
+
+🥅 improving error management ([`d9e050c`](https://github.com/mraniki/dxsp/commit/d9e050cc0582440c4ad4295df66c57d9c4b3f6d7))
+
+### ♻️
+
+* ♻️ ([`d3d9edd`](https://github.com/mraniki/dxsp/commit/d3d9edd9cf1812a687eb7f27b9e79c828a0a9c03))
+
+### 🥅
+
+* 🥅 improving error management ([`54dda05`](https://github.com/mraniki/dxsp/commit/54dda05a4be5319d740c1bc84912a71653da640e))
+
+
 ## v9.0.0 (2024-03-28)
 
 ### :boom:
