@@ -67,7 +67,10 @@ async def test_get_order_amount(dex_client):
 
 # @pytest.mark.asyncio
 # async def test_get_swap_1(dex_client):
-#     result = await dex_client.get_swap(sell_token="USDT", buy_token="WBTC", quantity=1)
+#     result = await dex_client.get_swap(
+#         sell_token="USDT",
+#         buy_token="WBTC",quantity=1
+#         )
 #     assert result is not None
 
 
