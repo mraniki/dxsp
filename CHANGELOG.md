@@ -2,6 +2,53 @@
 
 
 
+## v9.0.5 (2024-03-29)
+
+### :white_check_mark:
+
+* :white_check_mark: Unit Test ([`eacdf2f`](https://github.com/mraniki/dxsp/commit/eacdf2fd86cd1f626bd1c3082aea0e2214c4c1a3))
+
+* :white_check_mark: Unit Test ([`74763f4`](https://github.com/mraniki/dxsp/commit/74763f48b7d99bc9e248d71b3974f9e62e1e9d31))
+
+* :white_check_mark: Unit Test update ([`34e9c49`](https://github.com/mraniki/dxsp/commit/34e9c49ab2dd79c1afe223fe2c03bfcef1330a1d))
+
+### Other
+
+* Merge pull request #605 from mraniki/dev
+
+✅ Unit Test optimization ([`91d671c`](https://github.com/mraniki/dxsp/commit/91d671c9fa5afb782719794a050c7a6cceafd2a8))
+
+* Fix assert statement and remove extra whitespace in test functions. ([`280dbe2`](https://github.com/mraniki/dxsp/commit/280dbe248199cfcb53ebc1b0aa4454bdf475669b))
+
+### ♻️
+
+* ✅ Unit Test ♻️ ([`6a6ca33`](https://github.com/mraniki/dxsp/commit/6a6ca33beb09673e0ab6533f59c2dd1309bc24fa))
+
+### ✅
+
+* ✅ Unit Test ([`2d0765a`](https://github.com/mraniki/dxsp/commit/2d0765a42d748b1d9b662126bdbe42b4b545f47e))
+
+* ✅ Unit Test for exception and client ([`8d4bfef`](https://github.com/mraniki/dxsp/commit/8d4bfefb1592a5f5f153d008f6c904caea310af7))
+
+* ✅ Unit Test test: update test_unit_dexswap.py ([`449af30`](https://github.com/mraniki/dxsp/commit/449af30d44876d78643ace3de1e1465ef3823ff0))
+
+* ✅ Unit Test test: update test_unit_client.py and test_unit_dexswap.py ([`8ea30e1`](https://github.com/mraniki/dxsp/commit/8ea30e122199e9dd911dd6d635de679700fd78e3))
+
+* ✅ Unit Test ([`ac8172a`](https://github.com/mraniki/dxsp/commit/ac8172a6322f60add65043e60edf1b996ce61bbd))
+
+* ✅ adding more verbose for unit test ([`3efa0fa`](https://github.com/mraniki/dxsp/commit/3efa0fa370015847b2e43846e4f52f8499f9dd6e))
+
+* ✅ Unit Test optimization ([`92cbb37`](https://github.com/mraniki/dxsp/commit/92cbb37e2bf6bb1f733d232cbf873b6e9224876d))
+
+### 🔊
+
+* 🔊 update main.py ([`d29eba2`](https://github.com/mraniki/dxsp/commit/d29eba2543a963e4cce9b27148d2a93712bcf430))
+
+### 🚨
+
+* 🚨 ([`02571b0`](https://github.com/mraniki/dxsp/commit/02571b009d33f461e42c64b4a056d3ca684b2be4))
+
+
 ## v9.0.4 (2024-03-29)
 
 ### Other
