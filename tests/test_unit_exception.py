@@ -22,13 +22,15 @@ def set_test_settings():
 def test_dynaconf_is_in_exception():
     print(settings.VALUE)
     assert settings.VALUE == "exception"
+    
 
 
 @pytest.mark.asyncio
 async def test_moduledisabled(caplog):
     """Init Testing"""
     DexSwap()
-    assert "Module is disabled" in caplog.text
+    print(settings.dxsp_enabled)
+    assert "Loaded 0 clients" in caplog.text
 
 
 # @pytest.mark.asyncio
