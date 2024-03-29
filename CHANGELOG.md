@@ -2,6 +2,19 @@
 
 
 
+## v9.0.3 (2024-03-29)
+
+### Other
+
+* Merge pull request #603 from mraniki/dev
+
+⬆️ 🤖 - Not Hercules could have knockd out his brains for he had none ([`32f486f`](https://github.com/mraniki/dxsp/commit/32f486fa778dd0bdb6a94aae04a38210c893b62d))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency web3 to v6.16.0 ([`a97ae15`](https://github.com/mraniki/dxsp/commit/a97ae1522ed914b61b5fa96a13f7e5b356d68730))
+
+
 ## v9.0.2 (2024-03-28)
 
 ### :bug:
