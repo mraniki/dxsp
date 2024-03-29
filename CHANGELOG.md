@@ -2,6 +2,23 @@
 
 
 
+## v9.0.4 (2024-03-29)
+
+### Other
+
+* Merge pull request #604 from mraniki/dev
+
+🔊 Improve log when no clients loaded ([`bab5753`](https://github.com/mraniki/dxsp/commit/bab57539652c73f59b6715bf2a23563ccc392857))
+
+### 🔇
+
+* 🔇 ([`dd547ba`](https://github.com/mraniki/dxsp/commit/dd547bab262e5206ccb3c61fa690b2facb2a5774))
+
+### 🔊
+
+* 🔊 Improve log when no clients loaded ([`cd72ca2`](https://github.com/mraniki/dxsp/commit/cd72ca2a08f183f9aeee6929779b7bbe91db08c5))
+
+
 ## v9.0.3 (2024-03-29)
 
 ### Other
