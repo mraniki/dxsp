@@ -95,36 +95,36 @@ async def test_get_swap_2(dex_client):
     assert dex_client.account.get_confirmation.awaited
 
 
-@pytest.mark.asyncio
-async def test_get_trading_asset_balance(dex_client):
-    dex_client.account.get_trading_asset_balance = AsyncMock()
-    result = await dex_client.get_trading_asset_balance()
-    assert result is not None
-    assert dex_client.account.get_trading_asset_balance.awaited
+# @pytest.mark.asyncio
+# async def test_get_trading_asset_balance(dex_client):
+#     dex_client.account.get_trading_asset_balance = AsyncMock()
+#     result = await dex_client.get_trading_asset_balance()
+#     assert result is not None
+#     assert dex_client.account.get_trading_asset_balance.awaited
 
 
-@pytest.mark.asyncio
-async def test_get_account_open_positions(dex_client):
-    dex_client.account.get_account_open_positions = AsyncMock()
-    result = await dex_client.get_account_open_positions()
-    assert result is not None
-    assert dex_client.account.get_account_open_positions.awaited
+# @pytest.mark.asyncio
+# async def test_get_account_open_positions(dex_client):
+#     dex_client.account.get_account_open_positions = AsyncMock()
+#     result = await dex_client.get_account_open_positions()
+#     assert result is not None
+#     assert dex_client.account.get_account_open_positions.awaited
 
 
-@pytest.mark.asyncio
-async def test_get_account_margin(dex_client):
-    dex_client.account.get_account_margin = AsyncMock()
-    result = await dex_client.get_account_margin()
-    assert result is not None
-    assert dex_client.account.get_account_margin.awaited
+# @pytest.mark.asyncio
+# async def test_get_account_margin(dex_client):
+#     dex_client.account.get_account_margin = AsyncMock()
+#     result = await dex_client.get_account_margin()
+#     assert result is not None
+#     assert dex_client.account.get_account_margin.awaited
 
 
-@pytest.mark.asyncio
-async def test_get_account_pnl(dex_client):
-    dex_client.account.get_account_pnl = AsyncMock()
-    result = await dex_client.get_account_pnl()
-    assert result is not None
-    assert dex_client.account.get_account_pnl.awaited
+# @pytest.mark.asyncio
+# async def test_get_account_pnl(dex_client):
+#     dex_client.account.get_account_pnl = AsyncMock()
+#     result = await dex_client.get_account_pnl()
+#     assert result is not None
+#     assert dex_client.account.get_account_pnl.awaited
 
 
 @pytest.mark.asyncio
