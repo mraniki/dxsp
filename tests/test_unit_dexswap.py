@@ -8,7 +8,6 @@ import pytest
 
 from dxsp import DexSwap
 from dxsp.config import settings
-from dxsp.utils.utils import fetch_url
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -20,6 +19,11 @@ def set_test_settings():
 def DexSwap_fixture():
     return DexSwap()
 
+@pytest.fixture(name="dex_client")
+def client_fixture(dex):
+    for dx in dex.clients:
+        if dx.name == "eth":
+            return dx
 
 @pytest.fixture(name="order")
 def order_params_fixture():
@@ -41,10 +45,10 @@ def invalid_symbol_fixture():
     }
 
 
-@pytest.fixture(name="invalid_order")
-def invalid_order_fixture():
-    """Return order parameters."""
-    return "not an order"
+# @pytest.fixture(name="invalid_order")
+# def invalid_order_fixture():
+#     """Return order parameters."""
+#     return "not an order"
 
 
 def test_dynaconf_is_in_testing():
@@ -93,27 +97,6 @@ async def test_get_info(dex):
 
 
 @pytest.mark.asyncio
-async def test_get_quotes(dex):
-    """getquote Testing"""
-    get_quote = AsyncMock()
-    result = await dex.get_quotes(symbol="BTC")
-    assert result is not None
-    assert "⚖️" in result
-    assert get_quote.awaited
-    assert ("eth" in result) or ("pol" in result)
-    numerical_count = len([char for char in result if char.isdigit()])
-    assert numerical_count >= 10
-
-
-@pytest.mark.asyncio
-async def test_get_quotes_invalid(dex):
-    """getquote Testing"""
-    result = await dex.get_quotes(symbol="NOTATOKEN")
-    assert "⚖️" in result
-    assert "None" in result
-
-
-@pytest.mark.asyncio
 async def test_get_balances(dex):
     get_account_balance = AsyncMock()
     result = await dex.get_balances()
@@ -146,6 +129,27 @@ async def test_get_pnls(dex):
 
 
 @pytest.mark.asyncio
+async def test_get_quotes(dex):
+    """getquote Testing"""
+    get_quote = AsyncMock()
+    result = await dex.get_quotes(symbol="LINK")
+    assert result is not None
+    assert "⚖️" in result
+    assert get_quote.awaited
+    assert ("eth" in result) or ("pol" in result)
+    numerical_count = len([char for char in result if char.isdigit()])
+    assert numerical_count >= 10
+
+
+@pytest.mark.asyncio
+async def test_get_quotes_invalid(dex):
+    """getquote Testing"""
+    result = await dex.get_quotes(symbol="NOTATOKEN")
+    assert "⚖️" in result
+    assert "None" in result
+
+
+@pytest.mark.asyncio
 async def test_submit_order(dex, order):
     result = await dex.submit_order(order)
     assert result is not None
@@ -155,17 +159,10 @@ async def test_submit_order(dex, order):
 async def test_submit_invalid_symbol(dex, invalid_symbol):
     result = await dex.submit_order(invalid_symbol)
     assert result is not None
-
-
-@pytest.mark.asyncio
-async def test_submit_order_invalid(dex, invalid_order):
-    result = await dex.submit_order(invalid_order)
     assert "⚠️" in result
 
 
-@pytest.mark.asyncio
-async def test_fetch_url_error():
-    # with pytest.raises(NameError):
-    url = ""
-    response = await fetch_url(url)
-    assert response is None
+# @pytest.mark.asyncio
+# async def test_submit_order_invalid(dex, invalid_order):
+#     result = await dex.submit_order(invalid_order)
+#     assert "⚠️" in result

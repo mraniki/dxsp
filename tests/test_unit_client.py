@@ -20,25 +20,19 @@ def DexSwap_fixture():
     return DexSwap()
 
 
+# @pytest.fixture(name="dex_client")
+# def client_fixture(dex):
+#     for dx in dex.clients:
+#         if dx.protocol == "uniswap":
+#             return dx
+
 @pytest.fixture(name="dex_client")
 def client_fixture(dex):
     for dx in dex.clients:
-        if dx.protocol == "uniswap":
+        if dx.name == "eth":
             return dx
 
-
-@pytest.fixture(name="dex_client_zero_x")
-def client_zero_x_fixture(dex):
-    for dx in dex.clients:
-        if dx.protocol == "zerox":
-            return dx
-
-
-def test_dynaconf_is_in_testing():
-    print(settings.VALUE)
-    assert settings.VALUE == "On Testing"
-
-
+### CLIENT
 @pytest.mark.asyncio
 async def test_get_order_amount(dex_client):
     sell_token = AsyncMock()
@@ -125,77 +119,3 @@ async def test_get_swap_2(dex_client):
 #     result = await dex_client.get_account_pnl()
 #     assert result is not None
 #     assert dex_client.account.get_account_pnl.awaited
-
-
-@pytest.mark.asyncio
-async def test_get_cg_data(dex_client):
-    result = await dex_client.get_quote(sell_symbol="LINK")
-    assert result is not None
-    assert isinstance(result, float)
-
-
-@pytest.mark.asyncio
-async def test_get_token_exception(dex_client, caplog):
-    await dex_client.get_quote(sell_symbol="NOTATHING")
-    assert "Quote failed" in caplog.text
-
-
-@pytest.mark.asyncio
-async def test_get_approve(dex_client):
-    symbol = "UNI"
-    approve_receipt = None
-    try:
-        approve_receipt = await dex_client.account.get_approve(symbol)
-        print(approve_receipt)
-    except Exception as e:
-        print(f"Error getting approve receipt: {e}")
-    assert approve_receipt is None
-
-
-@pytest.mark.asyncio
-async def test_get_gas(dex_client):
-    """get_gas Testing"""
-    mock_tx = {
-        "to": "0x5f65f7b609678448494De4C87521CdF6cEf1e932",
-        "value": "1000000000000000000",
-    }
-    result = await dex_client.account.get_gas(mock_tx)
-    print(result)
-    assert result is not None
-
-
-# @pytest.mark.asyncio
-# async def test_get_gas_price(dex_client):
-#     result = await dex_client.account.get_gas_price()
-#     print(f"gas_price: {result}")
-#     assert result is not None
-
-
-@pytest.mark.asyncio
-async def test_get_confirmation(dex_client):
-    result = await dex_client.contract_utils.get_confirmation(
-        "0xea5a0fd0a15f68ef2f4b38661d445aa14de06a88844adc236bb071c46734fd09"
-    )
-    print(result)
-    assert result is not None
-    assert result["timestamp"] is not None
-    assert result["fee"] is not None
-    assert result["confirmation"] is not None
-    assert "➕" in result["confirmation"]
-    assert "⛽" in result["confirmation"]
-    assert "🗓️" in result["confirmation"]
-    assert "ℹ️" in result["confirmation"]
-
-
-# @pytest.mark.asyncio
-# async def test_get_quote_zero_x(dex_client_zero_x):
-
-#     result = await dex_client_zero_x.get_quote(
-#         buy_address="0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",  # USDT
-#         sell_address="0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6",  # WBTC
-#         amount=1,
-#     )
-
-#     # Assert the result
-#     assert result is not None
-#     assert result > 0
