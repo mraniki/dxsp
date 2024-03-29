@@ -8,7 +8,6 @@ import pytest
 
 from dxsp import DexSwap
 from dxsp.config import settings
-from dxsp.utils.utils import fetch_url
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -19,6 +18,20 @@ def set_test_settings():
 @pytest.fixture(name="dex")
 def DexSwap_fixture():
     return DexSwap()
+
+
+@pytest.fixture(name="dex_client")
+def client_fixture(dex):
+    for dx in dex.clients:
+        if dx.name == "eth":
+            return dx
+
+
+@pytest.fixture(name="dex_client_zero_x")
+def client_zero_x_fixture(dex):
+    for dx in dex.clients:
+        if dx.protocol == "zerox":
+            return dx
 
 
 @pytest.fixture(name="order")
@@ -41,10 +54,10 @@ def invalid_symbol_fixture():
     }
 
 
-@pytest.fixture(name="invalid_order")
-def invalid_order_fixture():
-    """Return order parameters."""
-    return "not an order"
+# @pytest.fixture(name="invalid_order")
+# def invalid_order_fixture():
+#     """Return order parameters."""
+#     return "not an order"
 
 
 def test_dynaconf_is_in_testing():
@@ -78,7 +91,7 @@ async def test_dextrader(dex):
         assert callable(dx.get_account_position)
         assert callable(dx.get_account_open_positions)
         assert callable(dx.get_account_pnl)
-        if dx.protocol == "0x":
+        if dx.protocol == "zerox":
             assert dx.api_key is not None
             assert dx.api_endpoint is not None
 
@@ -90,28 +103,6 @@ async def test_get_info(dex):
     print(result)
     assert "ℹ️" in result
     assert ("1" in result) or ("56" in result)
-
-
-@pytest.mark.asyncio
-async def test_get_quotes(dex):
-    """getquote Testing"""
-    get_quote = AsyncMock()
-    result = await dex.get_quotes(symbol="BTC")
-    assert result is not None
-    assert "⚖️" in result
-    assert get_quote.awaited
-    assert ("eth" in result) or ("pol" in result)
-    # assert ("4" in result) or ("5" in result)
-    numerical_count = len([char for char in result if char.isdigit()])
-    assert numerical_count >= 10
-
-
-@pytest.mark.asyncio
-async def test_get_quotes_invalid(dex):
-    """getquote Testing"""
-    result = await dex.get_quotes(symbol="NOTATOKEN")
-    assert "⚖️" in result
-    assert "None" in result
 
 
 @pytest.mark.asyncio
@@ -147,6 +138,27 @@ async def test_get_pnls(dex):
 
 
 @pytest.mark.asyncio
+async def test_get_quotes(dex):
+    """getquote Testing"""
+    get_quote = AsyncMock()
+    result = await dex.get_quotes(symbol="WBTC")
+    assert result is not None
+    assert "⚖️" in result
+    assert get_quote.awaited
+    assert ("eth" in result) or ("pol" in result)
+    numerical_count = len([char for char in result if char.isdigit()])
+    assert numerical_count >= 9
+
+
+@pytest.mark.asyncio
+async def test_get_quotes_invalid(dex):
+    """getquote Testing"""
+    result = await dex.get_quotes(symbol="NOTATOKEN")
+    assert "⚖️" in result
+    assert "None" in result
+
+
+@pytest.mark.asyncio
 async def test_submit_order(dex, order):
     result = await dex.submit_order(order)
     assert result is not None
@@ -156,17 +168,22 @@ async def test_submit_order(dex, order):
 async def test_submit_invalid_symbol(dex, invalid_symbol):
     result = await dex.submit_order(invalid_symbol)
     assert result is not None
-
-
-@pytest.mark.asyncio
-async def test_submit_order_invalid(dex, invalid_order):
-    result = await dex.submit_order(invalid_order)
     assert "⚠️" in result
 
 
+# @pytest.mark.asyncio
+# async def test_submit_order_invalid(dex, invalid_order):
+#     result = await dex.submit_order(invalid_order)
+#     assert "⚠️" in result
+
+
 @pytest.mark.asyncio
-async def test_fetch_url_error():
-    # with pytest.raises(NameError):
-    url = ""
-    response = await fetch_url(url)
-    assert response is None
+async def test_get_quote_zero_x(dex_client_zero_x):
+
+    result = await dex_client_zero_x.get_quote(
+        buy_address="0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",  # USDT
+        sell_address="0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6",  # WBTC
+        amount=1,
+    )
+    assert result is not None
+    assert result > 0

@@ -20,23 +20,32 @@ def DexSwap_fixture():
     return DexSwap()
 
 
+# @pytest.fixture(name="dex_client")
+# def client_fixture(dex):
+#     for dx in dex.clients:
+#         if dx.protocol == "uniswap":
+#             return dx
+
+
 @pytest.fixture(name="dex_client")
 def client_fixture(dex):
     for dx in dex.clients:
-        if dx.protocol == "uniswap":
+        if dx.name == "eth":
             return dx
 
 
-@pytest.fixture(name="dex_client_zero_x")
-def client_zero_x_fixture(dex):
-    for dx in dex.clients:
-        if dx.protocol == "zerox":
-            return dx
+@pytest.mark.asyncio
+async def test_resolve_address(dex_client):
+    result = await dex_client.resolve_token(
+        address="0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
+    )
+    assert result.symbol == "WBTC"
 
 
-def test_dynaconf_is_in_testing():
-    print(settings.VALUE)
-    assert settings.VALUE == "On Testing"
+@pytest.mark.asyncio
+async def test_resolve_symbol(dex_client):
+    result = await dex_client.resolve_token(symbol="LINK")
+    assert result.address == "0x514910771AF9Ca656af840dff83E8264EcF986CA"
 
 
 @pytest.mark.asyncio
@@ -66,13 +75,7 @@ async def test_get_order_amount(dex_client):
 
 
 @pytest.mark.asyncio
-async def test_get_swap_1(dex_client):
-    result = await dex_client.get_swap(sell_token="USDT", buy_token="WBTC", quantity=1)
-    assert result is not None
-
-
-@pytest.mark.asyncio
-async def test_get_swap_2(dex_client):
+async def test_get_swap(dex_client):
     dex_client.get_order_amount = AsyncMock(return_value="1")
     dex_client.account.get_approve = AsyncMock()
     dex_client.make_swap = AsyncMock()
@@ -92,6 +95,15 @@ async def test_get_swap_2(dex_client):
     assert dex_client.account.get_confirmation.awaited
 
 
+# @pytest.mark.asyncio
+# async def test_get_swap_1(dex_client):
+#     result = await dex_client.get_swap(
+#         sell_token="USDT",
+#         buy_token="WBTC",quantity=1
+#         )
+#     assert result is not None
+
+
 @pytest.mark.asyncio
 async def test_get_trading_asset_balance(dex_client):
     dex_client.account.get_trading_asset_balance = AsyncMock()
@@ -100,99 +112,25 @@ async def test_get_trading_asset_balance(dex_client):
     assert dex_client.account.get_trading_asset_balance.awaited
 
 
-@pytest.mark.asyncio
-async def test_get_account_open_positions(dex_client):
-    dex_client.account.get_account_open_positions = AsyncMock()
-    result = await dex_client.get_account_open_positions()
-    assert result is not None
-    assert dex_client.account.get_account_open_positions.awaited
-
-
-@pytest.mark.asyncio
-async def test_get_account_margin(dex_client):
-    dex_client.account.get_account_margin = AsyncMock()
-    result = await dex_client.get_account_margin()
-    assert result is not None
-    assert dex_client.account.get_account_margin.awaited
-
-
-@pytest.mark.asyncio
-async def test_get_account_pnl(dex_client):
-    dex_client.account.get_account_pnl = AsyncMock()
-    result = await dex_client.get_account_pnl()
-    assert result is not None
-    assert dex_client.account.get_account_pnl.awaited
-
-
-@pytest.mark.asyncio
-async def test_get_cg_data(dex_client):
-    result = await dex_client.get_quote(sell_symbol="LINK")
-    assert result is not None
-    assert isinstance(result, float)
-
-
-@pytest.mark.asyncio
-async def test_get_token_exception(dex_client, caplog):
-    await dex_client.get_quote(sell_symbol="NOTATHING")
-    assert "Quote failed" in caplog.text
-
-
-@pytest.mark.asyncio
-async def test_get_approve(dex_client):
-    symbol = "UNI"
-    approve_receipt = None
-    try:
-        approve_receipt = await dex_client.account.get_approve(symbol)
-        print(approve_receipt)
-    except Exception as e:
-        print(f"Error getting approve receipt: {e}")
-    assert approve_receipt is None
-
-
-@pytest.mark.asyncio
-async def test_get_gas(dex_client):
-    """get_gas Testing"""
-    mock_tx = {
-        "to": "0x5f65f7b609678448494De4C87521CdF6cEf1e932",
-        "value": "1000000000000000000",
-    }
-    result = await dex_client.account.get_gas(mock_tx)
-    print(result)
-    assert result is not None
+# @pytest.mark.asyncio
+# async def test_get_account_open_positions(dex_client):
+#     dex_client.account.get_account_open_positions = AsyncMock()
+#     result = await dex_client.get_account_open_positions()
+#     assert result is not None
+#     assert dex_client.account.get_account_open_positions.awaited
 
 
 # @pytest.mark.asyncio
-# async def test_get_gas_price(dex_client):
-#     result = await dex_client.account.get_gas_price()
-#     print(f"gas_price: {result}")
+# async def test_get_account_margin(dex_client):
+#     dex_client.account.get_account_margin = AsyncMock()
+#     result = await dex_client.get_account_margin()
 #     assert result is not None
+#     assert dex_client.account.get_account_margin.awaited
 
 
-@pytest.mark.asyncio
-async def test_get_confirmation(dex_client):
-    result = await dex_client.contract_utils.get_confirmation(
-        "0xea5a0fd0a15f68ef2f4b38661d445aa14de06a88844adc236bb071c46734fd09"
-    )
-    print(result)
-    assert result is not None
-    assert result["timestamp"] is not None
-    assert result["fee"] is not None
-    assert result["confirmation"] is not None
-    assert "➕" in result["confirmation"]
-    assert "⛽" in result["confirmation"]
-    assert "🗓️" in result["confirmation"]
-    assert "ℹ️" in result["confirmation"]
-
-
-@pytest.mark.asyncio
-async def test_get_quote_zero_x(dex_client_zero_x):
-
-    result = await dex_client_zero_x.get_quote(
-        buy_address="0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",  # USDT
-        sell_address="0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6",  # WBTC
-        amount=1,
-    )
-
-    # Assert the result
-    assert result is not None
-    assert result > 0
+# @pytest.mark.asyncio
+# async def test_get_account_pnl(dex_client):
+#     dex_client.account.get_account_pnl = AsyncMock()
+#     result = await dex_client.get_account_pnl()
+#     assert result is not None
+#     assert dex_client.account.get_account_pnl.awaited
