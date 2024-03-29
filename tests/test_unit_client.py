@@ -32,7 +32,13 @@ def client_fixture(dex):
         if dx.name == "eth":
             return dx
 
-### CLIENT
+
+@pytest.mark.asyncio
+async def test_resolve_buy_token_with_buy_address(dex_client):
+    result = await dex_client.resolve_buy_token(buy_symbol="WBTC")
+    assert result == "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+
+
 @pytest.mark.asyncio
 async def test_get_order_amount(dex_client):
     sell_token = AsyncMock()
@@ -59,17 +65,8 @@ async def test_get_order_amount(dex_client):
     assert result == 0
 
 
-# @pytest.mark.asyncio
-# async def test_get_swap_1(dex_client):
-#     result = await dex_client.get_swap(
-#         sell_token="USDT",
-#         buy_token="WBTC",quantity=1
-#         )
-#     assert result is not None
-
-
 @pytest.mark.asyncio
-async def test_get_swap_2(dex_client):
+async def test_get_swap(dex_client):
     dex_client.get_order_amount = AsyncMock(return_value="1")
     dex_client.account.get_approve = AsyncMock()
     dex_client.make_swap = AsyncMock()
@@ -90,11 +87,20 @@ async def test_get_swap_2(dex_client):
 
 
 # @pytest.mark.asyncio
-# async def test_get_trading_asset_balance(dex_client):
-#     dex_client.account.get_trading_asset_balance = AsyncMock()
-#     result = await dex_client.get_trading_asset_balance()
+# async def test_get_swap_1(dex_client):
+#     result = await dex_client.get_swap(
+#         sell_token="USDT",
+#         buy_token="WBTC",quantity=1
+#         )
 #     assert result is not None
-#     assert dex_client.account.get_trading_asset_balance.awaited
+
+
+@pytest.mark.asyncio
+async def test_get_trading_asset_balance(dex_client):
+    dex_client.account.get_trading_asset_balance = AsyncMock()
+    result = await dex_client.get_trading_asset_balance()
+    assert result is not None
+    assert dex_client.account.get_trading_asset_balance.awaited
 
 
 # @pytest.mark.asyncio

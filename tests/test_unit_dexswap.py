@@ -19,11 +19,20 @@ def set_test_settings():
 def DexSwap_fixture():
     return DexSwap()
 
+
 @pytest.fixture(name="dex_client")
 def client_fixture(dex):
     for dx in dex.clients:
         if dx.name == "eth":
             return dx
+
+
+@pytest.fixture(name="dex_client_zero_x")
+def client_zero_x_fixture(dex):
+    for dx in dex.clients:
+        if dx.protocol == "zerox":
+            return dx
+
 
 @pytest.fixture(name="order")
 def order_params_fixture():
@@ -82,7 +91,7 @@ async def test_dextrader(dex):
         assert callable(dx.get_account_position)
         assert callable(dx.get_account_open_positions)
         assert callable(dx.get_account_pnl)
-        if dx.protocol == "0x":
+        if dx.protocol == "zerox":
             assert dx.api_key is not None
             assert dx.api_endpoint is not None
 
@@ -166,3 +175,15 @@ async def test_submit_invalid_symbol(dex, invalid_symbol):
 # async def test_submit_order_invalid(dex, invalid_order):
 #     result = await dex.submit_order(invalid_order)
 #     assert "⚠️" in result
+
+
+@pytest.mark.asyncio
+async def test_get_quote_zero_x(dex_client_zero_x):
+
+    result = await dex_client_zero_x.get_quote(
+        buy_address="0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",  # USDT
+        sell_address="0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6",  # WBTC
+        amount=1,
+    )
+    assert result is not None
+    assert result > 0
