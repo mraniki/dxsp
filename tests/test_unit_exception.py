@@ -22,7 +22,7 @@ def set_test_settings():
 def test_dynaconf_is_in_exception():
     print(settings.VALUE)
     assert settings.VALUE == "exception"
-    
+
 
 
 @pytest.mark.asyncio
