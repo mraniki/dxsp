@@ -60,7 +60,7 @@ class DexSwap:
 
         # Create a mapping of library names to client classes
         self.client_classes = self.get_all_client_classes()
-        logger.debug("client_classes available {}", self.client_classes)
+        # logger.debug("client_classes available {}", self.client_classes)
 
         if not self.enabled:
             logger.info("Module is disabled. No clients will be created.")
