@@ -132,7 +132,7 @@ async def test_get_pnls(dex):
 async def test_get_quotes(dex):
     """getquote Testing"""
     get_quote = AsyncMock()
-    result = await dex.get_quotes(symbol="LINK")
+    result = await dex.get_quotes(symbol="WBTC")
     assert result is not None
     assert "⚖️" in result
     assert get_quote.awaited
