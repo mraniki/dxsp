@@ -36,4 +36,4 @@ async def test_moduledisabled(dex, caplog):
 async def test_uniswap_exception(dex, caplog):
     """Init Testing"""
     UniswapHandler()
-    assert "failed" in caplog.text
+    assert "No clients were created" in caplog.text

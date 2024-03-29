@@ -96,25 +96,25 @@ class DexClient:
         )
         self.client = None
 
-    async def resolve_buy_token(self, buy_address=None, buy_symbol=None):
-        if buy_address:
-            return await self.contract_utils.get_data(contract_address=buy_address)
-        elif buy_symbol:
-            buy_symbol = await self.replace_instrument(buy_symbol)
-            return await self.contract_utils.get_data(symbol=buy_symbol)
-        else:
-            raise ValueError("Buy symbol or address is required.")
+    # async def resolve_buy_token(self, buy_address=None, buy_symbol=None):
+    #     if buy_address:
+    #         return await self.contract_utils.get_data(contract_address=buy_address)
+    #     elif buy_symbol:
+    #         buy_symbol = await self.replace_instrument(buy_symbol)
+    #         return await self.contract_utils.get_data(symbol=buy_symbol)
+    #     else:
+    #         raise ValueError("Buy symbol or address is required.")
 
-    async def resolve_sell_token(self, sell_address=None, sell_symbol=None):
-        if sell_address:
-            return await self.contract_utils.get_data(contract_address=sell_address)
-        elif sell_symbol:
-            sell_symbol = await self.replace_instrument(sell_symbol)
-            return await self.contract_utils.get_data(symbol=sell_symbol)
-        else:
-            return await self.contract_utils.get_data(
-                contract_address=self.trading_asset_address
-            )
+    # async def resolve_sell_token(self, sell_address=None, sell_symbol=None):
+    #     if sell_address:
+    #         return await self.contract_utils.get_data(contract_address=sell_address)
+    #     elif sell_symbol:
+    #         sell_symbol = await self.replace_instrument(sell_symbol)
+    #         return await self.contract_utils.get_data(symbol=sell_symbol)
+    #     else:
+    #         return await self.contract_utils.get_data(
+    #             contract_address=self.trading_asset_address
+    #         )
 
     async def resolve_token(self, address=None, symbol=None, default_address=None):
         if address:
