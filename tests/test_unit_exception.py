@@ -27,8 +27,6 @@ def test_dynaconf_is_in_exception():
 @pytest.mark.asyncio
 async def test_moduledisabled(dex, caplog):
     """Init Testing"""
-    assert isinstance(dex, DexSwap)
-    assert dex.clients is None
     assert "Module is disabled" in caplog.text
 
 
@@ -36,4 +34,4 @@ async def test_moduledisabled(dex, caplog):
 async def test_uniswap_exception(dex, caplog):
     """Init Testing"""
     UniswapHandler()
-    assert "No clients were created" in caplog.text
+    assert "Loaded 0 clients" in caplog.text

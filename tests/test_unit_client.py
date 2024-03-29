@@ -37,14 +37,14 @@ def client_fixture(dex):
 @pytest.mark.asyncio
 async def test_resolve_address(dex_client):
     result = await dex_client.resolve_token(
-        buy_address="0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
+        address="0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
     )
     assert result.get_token_symbol == "WBTC"
 
 
 @pytest.mark.asyncio
 async def test_resolve_symbol(dex_client):
-    result = await dex_client.resolve_token(buy_symbol="LINK")
+    result = await dex_client.resolve_token(symbol="LINK")
     assert result.get_token_address == "0x514910771AF9Ca656af840dff83E8264EcF986CA"
 
 
