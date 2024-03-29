@@ -39,13 +39,13 @@ async def test_resolve_address(dex_client):
     result = await dex_client.resolve_token(
         address="0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
     )
-    assert result.get_token_symbol == "WBTC"
+    assert result.symbol == "WBTC" 
 
 
 @pytest.mark.asyncio
 async def test_resolve_symbol(dex_client):
     result = await dex_client.resolve_token(symbol="LINK")
-    assert result.get_token_address == "0x514910771AF9Ca656af840dff83E8264EcF986CA"
+    assert result.address == "0x514910771AF9Ca656af840dff83E8264EcF986CA"
 
 
 @pytest.mark.asyncio

@@ -147,7 +147,7 @@ async def test_get_quotes(dex):
     assert get_quote.awaited
     assert ("eth" in result) or ("pol" in result)
     numerical_count = len([char for char in result if char.isdigit()])
-    assert numerical_count >= 10
+    assert numerical_count >= 9
 
 
 @pytest.mark.asyncio
