@@ -14,7 +14,6 @@ from dxsp.config import settings
 def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="dxsp")
 
-
 @pytest.fixture(name="dex")
 def DexSwap_fixture():
     return DexSwap()
