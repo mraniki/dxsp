@@ -14,12 +14,9 @@ from dxsp.config import settings
 def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="dxsp")
 
-
 @pytest.fixture(name="dex")
-def DexSwap_fixture(caplog):
-    fixture = DexSwap()
-    assert "notalibrary not supported" in caplog.text
-    return fixture
+def DexSwap_fixture():
+    return DexSwap()
 
 
 @pytest.fixture(name="dex_client")

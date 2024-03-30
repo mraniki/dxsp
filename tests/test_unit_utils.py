@@ -99,7 +99,7 @@ async def test_fetch_url_error():
 
 @pytest.mark.asyncio
 async def test_fetch_url_large_response(caplog):
-    url = "https://httpbin.org/bytes/15000000"
+    url = "https://github.com/json-iterator/test-data/raw/master/large-file.json"
     response = await fetch_url(url)
     assert response is None
     assert "Response content is too large to process." in caplog.text
