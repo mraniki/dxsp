@@ -16,8 +16,10 @@ def set_test_settings():
 
 
 @pytest.fixture(name="dex")
-def DexSwap_fixture():
-    return DexSwap()
+def DexSwap_fixture(caplog):
+    fixture = DexSwap()
+    assert "notalibrary not supported" in caplog.text
+    return fixture
 
 
 @pytest.fixture(name="dex_client")

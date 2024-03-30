@@ -95,3 +95,11 @@ async def test_fetch_url_error():
     url = ""
     response = await fetch_url(url)
     assert response is None
+
+
+@pytest.mark.asyncio
+async def test_fetch_url_large_response(caplog):
+    url = "https://httpbin.org/bytes/15000000"
+    response = await fetch_url(url)
+    assert response is None
+    assert "Response content is too large to process." in caplog.text
