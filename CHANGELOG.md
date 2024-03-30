@@ -2,6 +2,25 @@
 
 
 
+## v9.0.6 (2024-03-30)
+
+### Other
+
+* Merge pull request #606 from mraniki/dev
+
+✅ Unit Test: update test_unit_dexswap.py and test_unit_utils.py ([`5063795`](https://github.com/mraniki/dxsp/commit/5063795e0f4380f5ce77a338483837727298b3d1))
+
+### ✅
+
+* ✅ Unit Test: update test_unit_dexswap.py and test_unit_utils.py ([`01727e5`](https://github.com/mraniki/dxsp/commit/01727e55938b34ab2b993c69f7dde307d295b83e))
+
+### 🐛
+
+* 🐛 ([`628b910`](https://github.com/mraniki/dxsp/commit/628b910fcbdca06cf80ff239bcfdd941568aec9c))
+
+* 🐛 ([`1b587ba`](https://github.com/mraniki/dxsp/commit/1b587ba194d913085c7e16af1227d08a2be92309))
+
+
 ## v9.0.5 (2024-03-29)
 
 ### :white_check_mark:
