@@ -74,7 +74,9 @@ class DexClient:
         if self.w3 and self.trading_asset_address:
             logger.debug("Trading asset {}", self.trading_asset_address)
             try:
-                self.trading_asset = self.resolve_token(self.trading_asset_address)
+                self.trading_asset = await self.resolve_token(
+                    self.trading_asset_address
+                )
                 self.trading_asset_address = self.trading_asset.address
             except Exception as e:
                 logger.error("Failed to resolve trading asset: {}", e)
