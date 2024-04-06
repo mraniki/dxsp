@@ -189,7 +189,6 @@ class DexClient:
         Get a quote method for specific protocol
 
         """
-        pass
 
     async def get_swap(self, sell_token=None, buy_token=None, quantity=1):
         """
