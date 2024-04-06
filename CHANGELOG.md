@@ -2,6 +2,57 @@
 
 
 
+## v10.0.0 (2024-04-06)
+
+### Other
+
+* Merge pull request #612 from mraniki/dev
+
+✨ capability to disable instruments and various refactor ([`510bd9a`](https://github.com/mraniki/dxsp/commit/510bd9a8bcdd7f2722c971212f37514054aa6ab1))
+
+### Update
+
+* Update dxsp/handler/client.py
+
+Co-authored-by: sourcery-ai[bot] &lt;58596630+sourcery-ai[bot]@users.noreply.github.com&gt; ([`ec54de6`](https://github.com/mraniki/dxsp/commit/ec54de6f88e9c3454340995d68ef81815ba2b5b2))
+
+* Update dxsp/handler/client.py
+
+Co-authored-by: sourcery-ai[bot] &lt;58596630+sourcery-ai[bot]@users.noreply.github.com&gt; ([`5ac3a49`](https://github.com/mraniki/dxsp/commit/5ac3a49ce7f223b378c4636c9d2ff4f77bf673f9))
+
+### ♻️
+
+* ♻️ trading_asset ([`e05e468`](https://github.com/mraniki/dxsp/commit/e05e4684bad4abbb416591f047869f6734664287))
+
+* ♻️ resolve_token ([`39e2cb6`](https://github.com/mraniki/dxsp/commit/39e2cb698ec76a3d5d09f724f71aacd6b047ff7c))
+
+* ♻️ resolve_token ([`5c19426`](https://github.com/mraniki/dxsp/commit/5c19426bfe5d89c30711263e0cfd838b14c91055))
+
+### ⚡
+
+* ⚡ update client.py to transform trading asset as a token at the initialization ([`243498f`](https://github.com/mraniki/dxsp/commit/243498f68b5c17bb42a10ec73b01a2a46b36b69e))
+
+### ✨
+
+* ✨ capability to disable some instrument ([`35e0801`](https://github.com/mraniki/dxsp/commit/35e080154dadcbeac9fdb3e0db4f6963428be5ff))
+
+### 🐛
+
+* 🐛 changing resolve_token to sync ([`1c17798`](https://github.com/mraniki/dxsp/commit/1c17798cb47381f077de95798bd9310552325247))
+
+* 🐛 ([`b86ca56`](https://github.com/mraniki/dxsp/commit/b86ca5649e7f42401ccab73cc07ee09f114ffbf3))
+
+### 💥
+
+* 💥 breaking further refactoring ([`11710d8`](https://github.com/mraniki/dxsp/commit/11710d8be4c199b310c9ed3ca98de98467d988db))
+
+### 🚨
+
+* 🚨 ([`dcecab7`](https://github.com/mraniki/dxsp/commit/dcecab72a064192e99e96b5ba35de879af1e942e))
+
+* 🚨 ([`4a82e04`](https://github.com/mraniki/dxsp/commit/4a82e0495930fda06fbf93c94487e8349d6b9905))
+
+
 ## v9.0.7 (2024-04-06)
 
 ### Other
