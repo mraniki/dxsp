@@ -109,7 +109,7 @@ class DexClient:
         elif default_address:
             return await self.contract_utils.get_data(contract_address=default_address)
         else:
-            raise ValueError("Token not found")
+raise ValueError("Token symbol or address not found")
 
     async def replace_instrument(self, instrument):
         """
