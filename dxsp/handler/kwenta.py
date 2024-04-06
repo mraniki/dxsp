@@ -34,7 +34,14 @@ class KwentaHandler(DexClient):
             private_key=self.private_key,
         )
 
-    async def get_quote(self, buy_address=None, symbol=None, amount=1):
+    async def get_quote(
+        self,
+        buy_address=None,
+        buy_symbol=None,
+        sell_address=None,
+        sell_symbol=None,
+        amount=1,
+    ):
         """
         Retrieves a quote for a given symbol.
 
@@ -52,16 +59,30 @@ class KwentaHandler(DexClient):
             Exception: If an error occurs during the retrieval process.
         """
         try:
-            logger.debug("Kwenta get_quote {} {} {}", buy_address, symbol, amount)
-            if buy_address is None:
-                buy_token = await self.contract_utils.get_data(
-                    contract_address=self.trading_asset_address
-                )
-                buy_address = buy_token.address
+            logger.debug(
+                "Kwenta get_quote {} {} {} {}",
+                buy_address,
+                buy_symbol,
+                sell_address,
+                sell_symbol,
+            )
+            # Resolve buy_token
+            buy_token = await self.resolve_token(
+                address_or_symbol=buy_address
+                or buy_symbol
+                or self.trading_asset_address
+            )
 
-            logger.debug("kwenta client: {}", self.client)
-            symbol = await self.replace_instrument(symbol)
-            sell_token = await self.contract_utils.get_data(symbol=symbol)
+            # Resolve sell_token
+            sell_token = await self.resolve_token(
+                address_or_symbol=sell_address or sell_symbol
+            )
+            logger.info("buy_token: {}", buy_token)
+            logger.info("sell_token: {}", sell_token)
+            if not buy_token:
+                return "Buy token not found"
+            if not sell_token:
+                return "Sell token not found"
             market = self.client.markets[f"{sell_token.symbol}"]
             logger.info("market: {}", market)
 

@@ -89,14 +89,16 @@ class UniswapHandler(DexClient):
                 sell_address,
                 sell_symbol,
             )
-
+            # Resolve buy_token
             buy_token = await self.resolve_token(
-                address=buy_address,
-                symbol=buy_symbol,
-                default_address=self.trading_asset_address,
+                address_or_symbol=buy_address
+                or buy_symbol
+                or self.trading_asset_address
             )
+
+            # Resolve sell_token
             sell_token = await self.resolve_token(
-                address=sell_address, symbol=sell_symbol
+                address_or_symbol=sell_address or sell_symbol
             )
 
             logger.debug("Buy token {}", buy_token)

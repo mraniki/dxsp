@@ -28,6 +28,7 @@ class DexClient:
         resolve_token
         replace_instrument
         get_order_amount
+        get_quote
         get_swap
         make_swap
         get_account_balance
@@ -69,10 +70,6 @@ class DexClient:
         self.router_contract_addr = kwargs.get("router_contract_addr", None)
         self.factory_contract_addr = kwargs.get("factory_contract_addr", None)
         self.trading_asset_address = kwargs.get("trading_asset_address", None)
-        if self.w3 and self.trading_asset_address:
-            self.trading_asset_address = self.w3.to_checksum_address(
-                self.trading_asset_address
-            )
         self.trading_risk_percentage = kwargs.get("trading_risk_percentage", None)
         self.trading_asset_separator = kwargs.get("trading_asset_separator", None)
         self.trading_risk_amount = kwargs.get("trading_risk_amount", None)
@@ -96,44 +93,53 @@ class DexClient:
         )
         self.client = None
 
-    # async def resolve_buy_token(self, buy_address=None, buy_symbol=None):
-    #     if buy_address:
-    #         return await self.contract_utils.get_data(contract_address=buy_address)
-    #     elif buy_symbol:
-    #         buy_symbol = await self.replace_instrument(buy_symbol)
-    #         return await self.contract_utils.get_data(symbol=buy_symbol)
-    #     else:
-    #         raise ValueError("Buy symbol or address is required.")
+    async def resolve_token(self, **kwargs):
+        """
+        A function to resolve a token based on the input address or symbol.
+        It takes *args and **kwargs as input parameters.
+        Returns the data associated with the token.
 
-    # async def resolve_sell_token(self, sell_address=None, sell_symbol=None):
-    #     if sell_address:
-    #         return await self.contract_utils.get_data(contract_address=sell_address)
-    #     elif sell_symbol:
-    #         sell_symbol = await self.replace_instrument(sell_symbol)
-    #         return await self.contract_utils.get_data(symbol=sell_symbol)
-    #     else:
-    #         return await self.contract_utils.get_data(
-    #             contract_address=self.trading_asset_address
-    #         )
+        Args:
+            **kwargs: either an address or a symbol.
 
-    async def resolve_token(self, address=None, symbol=None, default_address=None):
-        if address:
-            return await self.contract_utils.get_data(contract_address=address)
-        elif symbol:
-            symbol = await self.replace_instrument(symbol)
-            return await self.contract_utils.get_data(symbol=symbol)
-        elif default_address:
-            return await self.contract_utils.get_data(contract_address=default_address)
+        Returns:
+            Token: The token object containing the data if contract_address is provided.
+            None: If neither symbol nor contract_address is provided.
+        """
+        logger.debug("Resolving token {}", kwargs)
+        try:
+            (identifier,) = kwargs.values()
+        except ValueError as e:
+            raise ValueError(
+                "Token identification must be an address or a symbol"
+            ) from e
+
+        # Determine if the input is an address or a symbol
+        # Assuming addresses start with '0x'
+        if identifier.startswith("0x"):
+            result = await self.contract_utils.get_data(contract_address=identifier)
         else:
-            raise ValueError("Token symbol or address is required.")
+            symbol = await self.replace_instrument(identifier)
+            result = await self.contract_utils.get_data(symbol=symbol)
+
+        # Check if the result is not None
+        if not result:
+            raise ValueError("Token {} not found", identifier)
+
+        return result
 
     async def replace_instrument(self, instrument):
         """
         Replace instrument by an alternative instrument, if the
         instrument is not in the mapping, it will be ignored.
+        Mapping, define in settings as TOML or .env variable.
+        It is a list of dictionaries such as:
+        mapping = [
+            { id = "BTC", alt = "WBTC" ,enable = true },
+        ]
 
         Args:
-            order (dict):
+            instrument (str):
 
         Returns:
             dict
@@ -142,7 +148,7 @@ class DexClient:
         if self.mapping is None:
             return instrument
         for item in self.mapping:
-            if item["id"] == instrument:
+            if item["id"] == instrument and item["enable"] is not False:
                 instrument = item["alt"]
                 logger.debug("Instrument symbol changed {}", instrument)
                 break
@@ -187,6 +193,19 @@ class DexClient:
                 return amount
 
         return 0
+
+    async def get_quote(
+        self,
+        buy_address=None,
+        buy_symbol=None,
+        sell_address=None,
+        sell_symbol=None,
+        amount=1,
+    ):
+        """
+        Get a quote method for specific protocol
+
+        """
 
     async def get_swap(self, sell_token=None, buy_token=None, quantity=1):
         """
