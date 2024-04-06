@@ -74,15 +74,10 @@ class DexClient:
         if self.w3 and self.trading_asset_address:
             logger.debug("Trading asset {}", self.trading_asset_address)
             try:
-                self.trading_asset = self.resolve_token(
-                    address=self.trading_asset_address
-                )
+                self.trading_asset = self.resolve_token(self.trading_asset_address)
                 self.trading_asset_address = self.trading_asset.address
             except Exception as e:
                 logger.error("Failed to resolve trading asset: {}", e)
-                # self.trading_asset_address = self.w3.to_checksum_address(
-                #     self.trading_asset_address
-                # )
         self.trading_risk_percentage = kwargs.get("trading_risk_percentage", None)
         self.trading_asset_separator = kwargs.get("trading_asset_separator", None)
         self.trading_risk_amount = kwargs.get("trading_risk_amount", None)
@@ -106,28 +101,38 @@ class DexClient:
         )
         self.client = None
 
-    async def resolve_token(self, *args, **kwargs):
-        if len(args) == 1:
-            address_or_symbol = args[0]
-        elif len(kwargs) == 1:
-            address_or_symbol = list(kwargs.values())[0]
-        else:
-            raise ValueError("Exactly one argument is required")
+    async def resolve_token(self, **kwargs):
+        """
+        A function to resolve a token based on the input address or symbol.
+        It takes *args and **kwargs as input parameters.
+        Returns the data associated with the token.
+
+        Args:
+            **kwargs: either an address or a symbol.
+
+        Returns:
+            Token: The token object containing the data if contract_address is provided.
+            None: If neither symbol nor contract_address is provided.
+        """
+        logger.debug("Resolving token {}", kwargs)
+        try:
+            (identifier,) = kwargs.values()
+        except ValueError as e:
+            raise ValueError(
+                "Token identification must be an address or a symbol"
+            ) from e
 
         # Determine if the input is an address or a symbol
-        if address_or_symbol.startswith("0x"):  # Assuming addresses start with '0x'
-            # It's an address
-            result = await self.contract_utils.get_data(
-                contract_address=address_or_symbol
-            )
+        # Assuming addresses start with '0x'
+        if identifier.startswith("0x"):
+            result = await self.contract_utils.get_data(contract_address=identifier)
         else:
-            # It's a symbol, possibly replace it first
-            symbol = await self.replace_instrument(address_or_symbol)
+            symbol = await self.replace_instrument(identifier)
             result = await self.contract_utils.get_data(symbol=symbol)
 
-        # Check if the result is valid
+        # Check if the result is not None
         if not result:
-            raise ValueError("Token {} not found", address_or_symbol)
+            raise ValueError("Token {} not found", identifier)
 
         return result
 
