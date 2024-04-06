@@ -70,9 +70,12 @@ class DexClient:
         self.factory_contract_addr = kwargs.get("factory_contract_addr", None)
         self.trading_asset_address = kwargs.get("trading_asset_address", None)
         if self.w3 and self.trading_asset_address:
-            self.trading_asset_address = self.w3.to_checksum_address(
-                self.trading_asset_address
-            )
+            logger.debug("Trading asset {}", self.trading_asset_address)
+            self.trading_asset = self.resolve_token(address=self.trading_asset_address)
+            self.trading_asset.address = self.trading_asset_address
+            # self.trading_asset_address = self.w3.to_checksum_address(
+            #     self.trading_asset_address
+            # )
         self.trading_risk_percentage = kwargs.get("trading_risk_percentage", None)
         self.trading_asset_separator = kwargs.get("trading_asset_separator", None)
         self.trading_risk_amount = kwargs.get("trading_risk_amount", None)
