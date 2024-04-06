@@ -70,14 +70,6 @@ class DexClient:
         self.router_contract_addr = kwargs.get("router_contract_addr", None)
         self.factory_contract_addr = kwargs.get("factory_contract_addr", None)
         self.trading_asset_address = kwargs.get("trading_asset_address", None)
-        self.trading_asset = None
-        if self.w3 and self.trading_asset_address:
-            logger.debug("Trading asset {}", self.trading_asset_address)
-            try:
-                self.trading_asset = self.resolve_token(self.trading_asset_address)
-                self.trading_asset_address = self.trading_asset.address
-            except Exception as e:
-                logger.error("Failed to resolve trading asset: {}", e)
         self.trading_risk_percentage = kwargs.get("trading_risk_percentage", None)
         self.trading_asset_separator = kwargs.get("trading_asset_separator", None)
         self.trading_risk_amount = kwargs.get("trading_risk_amount", None)
@@ -101,7 +93,7 @@ class DexClient:
         )
         self.client = None
 
-    def resolve_token(self, **kwargs):
+    async def resolve_token(self, **kwargs):
         """
         A function to resolve a token based on the input address or symbol.
         It takes *args and **kwargs as input parameters.

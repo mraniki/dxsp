@@ -57,8 +57,15 @@ class ZeroxHandler(DexClient):
                 sell_address,
                 sell_symbol,
             )
-            buy_token = self.trading_asset
-            sell_token = self.resolve_token(
+            # Resolve buy_token
+            buy_token = await self.resolve_token(
+                address_or_symbol=buy_address
+                or buy_symbol
+                or self.trading_asset_address
+            )
+
+            # Resolve sell_token
+            sell_token = await self.resolve_token(
                 address_or_symbol=sell_address or sell_symbol
             )
             if not buy_token:
