@@ -106,16 +106,30 @@ class DexClient:
         )
         self.client = None
 
-    async def resolve_token(self, address=None, symbol=None, default_address=None):
-        if address:
-            return await self.contract_utils.get_data(contract_address=address)
-        elif symbol:
-            symbol = await self.replace_instrument(symbol)
-            return await self.contract_utils.get_data(symbol=symbol)
-        elif default_address:
-            return await self.contract_utils.get_data(contract_address=default_address)
+    async def resolve_token(self, *args, **kwargs):
+        if len(args) == 1:
+            address_or_symbol = args[0]
+        elif len(kwargs) == 1:
+            address_or_symbol = list(kwargs.values())[0]
         else:
-            raise ValueError("Token symbol or address not found")
+            raise ValueError("Exactly one argument is required")
+
+        # Determine if the input is an address or a symbol
+        if address_or_symbol.startswith("0x"):  # Assuming addresses start with '0x'
+            # It's an address
+            result = await self.contract_utils.get_data(
+                contract_address=address_or_symbol
+            )
+        else:
+            # It's a symbol, possibly replace it first
+            symbol = await self.replace_instrument(address_or_symbol)
+            result = await self.contract_utils.get_data(symbol=symbol)
+
+        # Check if the result is valid
+        if not result:
+            raise ValueError("Token {} not found", address_or_symbol)
+
+        return result
 
     async def replace_instrument(self, instrument):
         """
