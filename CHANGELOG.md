@@ -2,6 +2,19 @@
 
 
 
+## v9.0.7 (2024-04-06)
+
+### Other
+
+* Merge pull request #609 from mraniki/dev
+
+⬆️ 🤖 - You can create your own opportunities this week  Blackmail a senior executive ([`97bbcf5`](https://github.com/mraniki/dxsp/commit/97bbcf569843999a332083d9c34e1c3c782e948a))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency eth-ape to v0.7.14 ([`fe97a35`](https://github.com/mraniki/dxsp/commit/fe97a35f1b6ebb9991bd4af2599ed4e980a6abe2))
+
+
 ## v9.0.6 (2024-03-30)
 
 ### Other
