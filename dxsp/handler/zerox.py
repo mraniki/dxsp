@@ -2,10 +2,12 @@
 0️⃣x
 
 """
+
 from loguru import logger
 
-from .client import DexClient
 from dxsp.utils.utils import fetch_url
+
+from .client import DexClient
 
 
 class ZeroxHandler(DexClient):

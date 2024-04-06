@@ -57,7 +57,7 @@ trading_amount_threshold = 0
 block_explorer_url = "" # your block explorer url
 block_explorer_api = "" # your block explorer api
 mapping = [ # mapping to use to change instrument per exchange
-    { id = "BTC", alt = "WBTC" },
+    { id = "BTC", alt = "WBTC" ,enable = true },
 ]
 
 # # uniswap v2 protocol type and router uniswap
