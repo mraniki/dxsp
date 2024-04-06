@@ -71,9 +71,12 @@ class DexClient:
         self.factory_contract_addr = kwargs.get("factory_contract_addr", None)
         self.trading_asset_address = kwargs.get("trading_asset_address", None)
         if self.w3 and self.trading_asset_address:
-            logger.debug("Trading asset {}", self.trading_asset_address)
-            self.trading_asset = self.resolve_token(address=self.trading_asset_address)
-            self.trading_asset_address = self.trading_asset.address
+logger.debug("Trading asset {}", self.trading_asset_address)
+try:
+    self.trading_asset = self.resolve_token(address=self.trading_asset_address)
+    self.trading_asset_address = self.trading_asset.address
+except Exception as e:
+    logger.error("Failed to resolve trading asset: {}", e)
             # self.trading_asset_address = self.w3.to_checksum_address(
             #     self.trading_asset_address
             # )
