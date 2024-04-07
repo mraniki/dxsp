@@ -2,6 +2,19 @@
 
 
 
+## v10.0.1 (2024-04-07)
+
+### Other
+
+* Merge pull request #613 from mraniki/dev
+
+🚑 update client.py ([`140cf5b`](https://github.com/mraniki/dxsp/commit/140cf5ba3fa9cc97746d42a5747a11dbd9e44565))
+
+### 🚑
+
+* 🚑 update client.py ([`53d7f50`](https://github.com/mraniki/dxsp/commit/53d7f5016b1737ac676470640b0dae7c54e60d57))
+
+
 ## v10.0.0 (2024-04-06)
 
 ### Other
