@@ -148,7 +148,7 @@ class DexClient:
         if self.mapping is None:
             return instrument
         for item in self.mapping:
-            if item["id"] == instrument and item["enable"] is not False:
+            if item["id"] == instrument:  # and item["enable"] is not False:
                 instrument = item["alt"]
                 logger.debug("Instrument symbol changed {}", instrument)
                 break
