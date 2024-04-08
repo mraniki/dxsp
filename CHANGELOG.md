@@ -2,6 +2,23 @@
 
 
 
+## v10.0.3 (2024-04-08)
+
+### Other
+
+* Merge pull request #615 from mraniki/dev
+
+♻️ update contract_utils.py ([`981c678`](https://github.com/mraniki/dxsp/commit/981c678793bab2859f2aad1b94fd6075aeee0130))
+
+### ♻️
+
+* ♻️ update contract_utils.py ([`f8ed464`](https://github.com/mraniki/dxsp/commit/f8ed46459c27feb4ea26534499ec0177f8d241e3))
+
+### ⚡
+
+* ⚡ update contract_utils.py and example.py ([`40de9e9`](https://github.com/mraniki/dxsp/commit/40de9e9e08d0dce870268ec2bd4013be15e3641c))
+
+
 ## v10.0.2 (2024-04-08)
 
 ### Other
