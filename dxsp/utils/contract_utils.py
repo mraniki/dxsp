@@ -236,13 +236,13 @@ class ContractUtils:
             str or None: The data for the token on the specified platform,
                          or None if the token is not found or an error occurs.
         """
-        #todo: add support for address search 
+        # todo: add support for address search
         try:
             if self.platform is None:
                 return None
             search_results = self.cg.search(query=token)
             search_dict = search_results["coins"]
-            logger.debug("Coingecko search results: {}", search_dict)
+            # logger.debug("Coingecko search results: {}", search_dict)
             filtered_dict = [x for x in search_dict if x["symbol"] == token.upper()]
             api_dict = [sub["api_symbol"] for sub in filtered_dict]
             for i in api_dict:

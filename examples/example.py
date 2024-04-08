@@ -1,6 +1,7 @@
 """
 DXSP Example
 """
+
 import asyncio
 
 from dxsp import DexSwap
@@ -8,7 +9,8 @@ from dxsp import DexSwap
 
 async def main():
     dex = DexSwap()
-    symbol = "BTC"
+    # symbol = "LINK"
+    symbol = "0x514910771af9ca656af840dff83e8264ecf986ca"
 
     quote = await dex.get_quotes(symbol)
     print("quote ", quote)
