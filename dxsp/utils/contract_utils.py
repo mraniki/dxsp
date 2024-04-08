@@ -348,7 +348,9 @@ class Token:
             self.block_explorer_api = block_explorer_api
             self.decimals = None
             self.name = None
-            logger.debug("{} - token initialized {}", self.symbol, self.address)
+            logger.debug(
+                "token initialized symbol {} address {}", self.symbol, self.address
+            )
         except Exception as error:
             logger.error("token error {}", error)
 
