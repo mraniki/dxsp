@@ -232,7 +232,7 @@ class DexClient:
             sell_amount = await self.get_order_amount(
                 sell_token, self.account.wallet_address, quantity
             )
-            if not sell_amount:
+            if not sell_amount or sell_amount == 0:
                 logger.error("sell amount {}", sell_amount)
                 return f"⚠️ sell amount failed {sell_amount}"
 
