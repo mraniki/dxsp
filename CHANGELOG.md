@@ -2,6 +2,19 @@
 
 
 
+## v10.0.5 (2024-04-09)
+
+### Fix
+
+* 🐛 ♻️ 🎨  improve submit_order format and bug fix ([`afe26ec`](https://github.com/mraniki/dxsp/commit/afe26ec86c1ebf1d8b1fb22af7a1ae79c31f4b6d))
+
+### Other
+
+* Merge pull request #617 from mraniki/dev
+
+🐛 ♻️ 🎨  improve submit_order format and bug fix ([`c48a32c`](https://github.com/mraniki/dxsp/commit/c48a32c86213d639322b04ade3c03f740ec11ec7))
+
+
 ## v10.0.4 (2024-04-08)
 
 ### Other
