@@ -242,8 +242,9 @@ class DexSwap:
             str: The trade confirmation
 
         """
-        try:
-            for client in self.clients:
+        _order = ["🦄 Order\n"]
+        for client in self.clients:
+            try:
                 action = order_params.get("action")
                 instrument = await client.replace_instrument(
                     order_params.get("instrument")
@@ -256,11 +257,16 @@ class DexSwap:
                 )
                 order = await client.get_swap(sell_token, buy_token, quantity)
                 if order:
-                    trade_confirmation = (
-                        f"⬇️ {instrument}" if (action == "SELL") else f"⬆️ {instrument}\n"
+                    order_info = (
+                        f"{client.name}:\n⬇️ {instrument}"
+                        if action == "SELL"
+                        else f"{client.name}:\n⬆️ {instrument}\n"
                     )
-                    trade_confirmation += order
-            return trade_confirmation
-
-        except Exception as error:
-            return f"⚠️ order execution: {error}"
+                    order_info += order
+                    _order.append(order_info)
+                else:
+                    _order.append(f"⚠️ {client.name} order error {str(order)}")
+            except Exception as error:
+                logger.error("Error submitting order for {}: {}", client.name, error)
+                _order.append(f"⚠️ {client.name} order failed")
+        return "\n".join(_order)

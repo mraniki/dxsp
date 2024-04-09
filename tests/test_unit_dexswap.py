@@ -14,6 +14,7 @@ from dxsp.config import settings
 def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="dxsp")
 
+
 @pytest.fixture(name="dex")
 def DexSwap_fixture():
     return DexSwap()
@@ -160,7 +161,11 @@ async def test_get_quotes_invalid(dex):
 @pytest.mark.asyncio
 async def test_submit_order(dex, order):
     result = await dex.submit_order(order)
+    print(result)
     assert result is not None
+    assert "🦄" in result
+    assert ("eth" in result) or ("pol" in result)
+    assert ("failed" in result) or ("⛽" in result)
 
 
 @pytest.mark.asyncio
