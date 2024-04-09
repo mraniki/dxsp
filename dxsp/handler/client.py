@@ -264,11 +264,13 @@ class DexClient:
             if receipt["status"] != 1:
                 logger.error("receipt failed")
 
-            return await self.account.get_confirmation(receipt["transactionHash"])
+            return await self.contract_utils.get_confirmation(
+                receipt["transactionHash"]
+            )
 
         except Exception as error:
             logger.debug(error)
-            raise error
+            return error
 
     async def make_swap(self, sell_address, buy_address, amount):
         """
