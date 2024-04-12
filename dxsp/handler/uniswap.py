@@ -152,3 +152,17 @@ class UniswapHandler(DexClient):
         except Exception as error:
             logger.error("Swap failed {}", error)
             return f"⚠️ {error}"
+
+    async def calculate_pnl(self, period=None):
+        """
+        Calculate the PnL for a given period.
+
+        Parameters:
+            period (str):
+            The period for which to calculate PnL ('W', 'M', 'Y', or None)
+
+        Returns:
+            pnl: The calculated PnL value.
+        """
+        # TODO: implement this
+        # return await self.account.get_account_pnl()
