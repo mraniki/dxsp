@@ -1,4 +1,4 @@
-__version__ = "10.0.5"
+__version__ = "10.1.0"
 
 from dxsp.main import DexSwap
 

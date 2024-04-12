@@ -2,6 +2,35 @@
 
 
 
+## v10.1.0 (2024-04-12)
+
+### Other
+
+* Merge pull request #620 from mraniki/dev
+
+💄 PnL code structure alignement ([`7ecc0a6`](https://github.com/mraniki/dxsp/commit/7ecc0a6c7661af332f449c6a7a182544224f105f))
+
+### Update
+
+* Update web3 version to 6.16.0 ([`e497298`](https://github.com/mraniki/dxsp/commit/e497298f7277a7f6be1892e36b492731938143ce))
+
+### ♻️
+
+* ♻️ ([`137b435`](https://github.com/mraniki/dxsp/commit/137b435fcc40d6950bbd75108c21c16c39d199b8))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency web3 to v6.17.0 ([`2c755d8`](https://github.com/mraniki/dxsp/commit/2c755d87c3f97df1db30b3e192f3e718f232563e))
+
+### 🐛
+
+* 🐛 ([`54f8a95`](https://github.com/mraniki/dxsp/commit/54f8a95719f9bedebf463e58f85e63a5908968bc))
+
+### 💄
+
+* 💄 PnL code structure alignement ([`97a45c9`](https://github.com/mraniki/dxsp/commit/97a45c91c372ebabb98174958d69c1857e9f354b))
+
+
 ## v10.0.5 (2024-04-09)
 
 ### Fix
