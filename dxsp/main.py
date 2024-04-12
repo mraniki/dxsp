@@ -195,7 +195,7 @@ class DexSwap:
             _info.append(f"{client.name}:\n{await client.get_account_position()}")
         return "\n".join(_info)
 
-    async def get_pnl(self):
+    async def get_pnl(self, **kwargs):
         """
         Retrieves the account position.
 
@@ -204,7 +204,12 @@ class DexSwap:
         """
         _info = ["🏆\n"]
         for client in self.clients:
-            _info.append(f"{client.name}:\n{await client.get_account_pnl()}")
+            client_name = f"{client.name}:\n"
+            account_pnl = await client.get_account_pnl(
+                period=kwargs.get("period", None)
+            )
+            client_info = f"{client_name}{account_pnl}"
+            _info.append(client_info)
         return "\n".join(_info)
 
     async def get_quotes(self, symbol=None, address=None):

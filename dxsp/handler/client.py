@@ -3,6 +3,7 @@ Base DexClient Class   🦄
 """
 
 import decimal
+from datetime import datetime, timedelta
 
 from loguru import logger
 from web3 import Web3
@@ -37,6 +38,7 @@ class DexClient:
         get_account_margin
         get_account_open_positions
         get_account_pnl
+        calculate_pnl
 
     """
 
@@ -78,6 +80,7 @@ class DexClient:
         self.block_explorer_url = kwargs.get("block_explorer_url", None)
         self.block_explorer_api = kwargs.get("block_explorer_api", None)
         self.mapping = kwargs.get("mapping", None)
+        self.is_pnl_active = kwargs.get("is_pnl_active", False)
 
         self.contract_utils = ContractUtils(
             self.w3, self.block_explorer_url, self.block_explorer_api
@@ -325,7 +328,7 @@ class DexClient:
         """
         return await self.account.get_account_open_positions()
 
-    async def get_account_pnl(self):
+    async def get_account_pnl(self, period=None):
         """
         Return account pnl.
 
@@ -335,5 +338,27 @@ class DexClient:
         Returns:
             pnl
         """
+        today = datetime.now().date()
+        if period is None:
+            start_date = today
+        elif period == "W":
+            start_date = today - timedelta(days=today.weekday())
+        elif period == "M":
+            start_date = today.replace(day=1)
+        elif period == "Y":
+            start_date = today.replace(month=1, day=1)
+        else:
+            return 0
+        return self.calculate_pnl(start_date) if self.is_pnl_active else 0
 
-        return await self.account.get_account_pnl()
+    async def calculate_pnl(self, period=None):
+        """
+        Calculate the PnL for a given period.
+
+        Parameters:
+            period (str):
+            The period for which to calculate PnL ('W', 'M', 'Y', or None)
+
+        Returns:
+            pnl: The calculated PnL value.
+        """
