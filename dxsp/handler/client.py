@@ -5,6 +5,7 @@ Base DexClient Class   🦄
 import decimal
 from datetime import datetime, timedelta
 
+import aiohttp
 from loguru import logger
 from web3 import Web3
 from web3.gas_strategies.time_based import medium_gas_price_strategy
@@ -81,6 +82,7 @@ class DexClient:
         self.block_explorer_api = kwargs.get("block_explorer_api", None)
         self.mapping = kwargs.get("mapping", None)
         self.is_pnl_active = kwargs.get("is_pnl_active", False)
+        self.rotki_report_endpoint = kwargs.get("rotki_report_endpoint", None)
 
         self.contract_utils = ContractUtils(
             self.w3, self.block_explorer_url, self.block_explorer_api
@@ -362,3 +364,35 @@ class DexClient:
         Returns:
             pnl: The calculated PnL value.
         """
+        if self.rotki_report_endpoint is None:
+            return 0
+        params = {"period": period} if period else {}
+
+        async with aiohttp.ClientSession() as session:
+            async with session.get(
+                self.rotki_report_endpoint, params=params
+            ) as response:
+                if response.status != 200:
+                    logger.error(f"Received non-200 status code: {response.status}")
+                    return 0
+                data = await response.json()
+                result = data.get("result", {})
+                entries = result.get("entries", [])
+                # Initialize a dictionary to hold the sum of 'free' values
+                free_values = {
+                    "trade": 0,
+                    "transaction event": 0,
+                    "fee": 0,
+                    "asset movement": 0,
+                }
+                for entry in entries:
+                    overview = entry.get("overview", {})
+                    for category, amounts in overview.items():
+                        try:
+                            free_amount = float(amounts.get("free", "0"))
+                            # Add it to the total
+                            free_values[category] += free_amount
+                        except ValueError:
+                            logger.error(f"Invalid free amount: {amounts.get('free')}")
+
+                return free_values
