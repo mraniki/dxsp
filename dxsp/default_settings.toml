@@ -86,7 +86,7 @@ rotki_report_endpoint= "http://localhost:5042/api/v1/reports/1"
 # mapping = [
 #     { id = "BTC", alt = "WBTC" },
 # ]
-# rotki_endpoint= "http://localhost:5042/api/1/pnl"
+# rotki_report_endpoint= "http://localhost:5042/api/1/pnl"
 
 # # uniswap v2 protocol type and router pancakeswap on BSC chain 56
 # [default.dex.bsc]
@@ -111,7 +111,7 @@ rotki_report_endpoint= "http://localhost:5042/api/v1/reports/1"
 # mapping = [
 #     { id = "BTC", alt = "BTCB" },
 # ]
-# rotki_endpoint= "http://localhost:5042/api/1/pnl"
+# rotki_report_endpoint= "http://localhost:5042/api/1/pnl"
 
 # # ZeroX 0x protocol type on polygon chain 137
 # [default.dex.polygon]
@@ -136,7 +136,7 @@ rotki_report_endpoint= "http://localhost:5042/api/v1/reports/1"
 # mapping = [
 #     { id = "BTC", alt = "WBTC" },
 # ]
-# rotki_endpoint= "http://localhost:5042/api/1/pnl"
+# rotki_report_endpoint= "http://localhost:5042/api/1/pnl"
 
 # # kwenta protocol type on OPTIMISM chain 10
 # [default.dex.opt]
@@ -163,7 +163,7 @@ rotki_report_endpoint= "http://localhost:5042/api/v1/reports/1"
 #     { id = "GOLD", alt = "XAU" },
 #     { id = "BTC", alt = "BTC" },
 # ]
-# rotki_endpoint= "http://localhost:5042/api/1/pnl"
+# rotki_report_endpoint= "http://localhost:5042/api/1/pnl"
 
 ########################################
 ###     END OF DEFAULT SETTINGS      ###
