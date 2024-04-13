@@ -2,6 +2,23 @@
 
 
 
+## v10.2.0 (2024-04-13)
+
+### Feat
+
+* ✨ feature calculate_pnl via rotki ([`5872578`](https://github.com/mraniki/dxsp/commit/58725785889b8dd4f98f4bc12a627ccad063b0d3))
+
+### Other
+
+* Merge pull request #626 from mraniki/dev
+
+✨ feature calculate_pnl via rotki ([`6a7d018`](https://github.com/mraniki/dxsp/commit/6a7d01824ac2ecc9031d639183bba1860a31ffa1))
+
+### 🔧
+
+* 🔧 ([`4cdff25`](https://github.com/mraniki/dxsp/commit/4cdff25512280a9b37c81728f087784f54689899))
+
+
 ## v10.1.1 (2024-04-13)
 
 ### Other
