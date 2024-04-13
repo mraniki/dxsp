@@ -5,7 +5,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "dxsp"
-version = "10.1.0"
+version = "10.1.1"
 description = "DXSP (DeX SwaP), A defi swap helper package. Swap made easy."
 authors = ["mraniki <8766259+mraniki@users.noreply.github.com>"]
 license = "MIT License"
@@ -99,6 +99,7 @@ quote-style = "double"
 
 
 
+
 [tool.poetry.group.test.dependencies]
 pytest = "^7.0"
 pytest-cov = "^4.1"
@@ -131,6 +132,7 @@ omit = [
 [tool.bandit]
 exclude_dirs = ["tests","docs"]
 skips = ["B101","B104"]
+
 
 
 

@@ -2,6 +2,19 @@
 
 
 
+## v10.1.1 (2024-04-13)
+
+### Other
+
+* Merge pull request #624 from mraniki/dev
+
+⬆️ 🤖 - You attempt things that you do not even plan because of your extreme stupidity ([`f823105`](https://github.com/mraniki/dxsp/commit/f823105abb328a4570163d0f9ce548527ac2f68c))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency eth-ape to v0.7.15 ([`d979d6b`](https://github.com/mraniki/dxsp/commit/d979d6b5ff2aa408568f9c2f428b574d35032734))
+
+
 ## v10.1.0 (2024-04-12)
 
 ### Other
