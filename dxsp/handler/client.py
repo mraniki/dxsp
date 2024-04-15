@@ -356,6 +356,7 @@ class DexClient:
     async def calculate_pnl(self, period=None):
         """
         Calculate the PnL for a given period.
+        via https://rotki.readthedocs.io/en/latest/api.html
 
         Parameters:
             period (str):
