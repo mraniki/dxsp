@@ -273,5 +273,5 @@ class DexSwap:
                     _order.append(f"⚠️ {client.name} order error {str(order)}")
             except Exception as error:
                 logger.error("Error submitting order for {}: {}", client.name, error)
-                _order.append(f"⚠️ {client.name} order failed")
+                _order.append(f"⚠️ {client.name} {error}")
         return "\n".join(_order)
