@@ -165,7 +165,7 @@ async def test_submit_order(dex, order):
     assert result is not None
     assert "🦄" in result
     assert ("eth" in result) or ("pol" in result)
-    assert ("failed" in result) or ("⛽" in result)
+    assert ("⚠️" in result) or ("⛽" in result)
 
 
 @pytest.mark.asyncio

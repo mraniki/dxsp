@@ -275,7 +275,7 @@ class DexClient:
 
         except Exception as error:
             logger.debug(error)
-            return error
+            return "⚠️ " + str(error)
 
     async def make_swap(self, sell_address, buy_address, amount):
         """
@@ -356,6 +356,7 @@ class DexClient:
     async def calculate_pnl(self, period=None):
         """
         Calculate the PnL for a given period.
+        via https://rotki.readthedocs.io/en/latest/api.html
 
         Parameters:
             period (str):
