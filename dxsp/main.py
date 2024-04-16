@@ -261,7 +261,9 @@ class DexSwap:
                     else (instrument, client.trading_asset_address)
                 )
                 order = await client.get_swap(sell_token, buy_token, quantity)
-                if order:
+                if "error" in order:
+                    _order.append(f"⚠️ {client.name} order error {str(order)}")
+                else:
                     order_info = (
                         f"{client.name}:\n⬇️ {instrument}"
                         if action == "SELL"
@@ -269,8 +271,6 @@ class DexSwap:
                     )
                     order_info += order
                     _order.append(order_info)
-                else:
-                    _order.append(f"⚠️ {client.name} order error {str(order)}")
             except Exception as error:
                 logger.error("Error submitting order for {}: {}", client.name, error)
                 _order.append(f"⚠️ {client.name} {error}")

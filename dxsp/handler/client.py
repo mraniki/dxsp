@@ -275,7 +275,7 @@ class DexClient:
 
         except Exception as error:
             logger.debug(error)
-            return error
+            return str(error)
 
     async def make_swap(self, sell_address, buy_address, amount):
         """
