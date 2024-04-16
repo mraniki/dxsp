@@ -2,6 +2,40 @@
 
 
 
+## v10.2.1 (2024-04-16)
+
+### Other
+
+* Merge pull request #629 from mraniki/dev
+
+🎨 improve error message ([`2604465`](https://github.com/mraniki/dxsp/commit/2604465b358814565ff4d935e1bd039f9ab464f4))
+
+* Fix return statement in DexClient class method
+
+and handle order error in DexSwap class. ([`d575dc9`](https://github.com/mraniki/dxsp/commit/d575dc91693a4ee3d2cc0cc526fa5419f268364b))
+
+* build(deps): update pyproject.toml ([`7659a88`](https://github.com/mraniki/dxsp/commit/7659a887685f648ac66ecdbfa35f6e4613416c26))
+
+* Add link to API documentation in DexClient class. ([`8e37caa`](https://github.com/mraniki/dxsp/commit/8e37caa69c227a12ff3c387d018b6443b66664ab))
+
+### Update
+
+* Update test for submit_order function to check for warning icon. ([`7762411`](https://github.com/mraniki/dxsp/commit/77624113e3ae367f3acdd05a0a50feb0f04b32ba))
+
+* Update error handling message in DexClient class
+
+- Add warning emoji to error message
+- Fix error message formatting in DexSwap class ([`48c35b4`](https://github.com/mraniki/dxsp/commit/48c35b48b3d3fbf04fe278c4a3c1248107c58788))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency web3 to v6.17.1 ([`fbef38c`](https://github.com/mraniki/dxsp/commit/fbef38c4ecc94e9fa6580af3bc578b3ce24290bf))
+
+### 🎨
+
+* 🎨 improve error message ([`1bf5adf`](https://github.com/mraniki/dxsp/commit/1bf5adf54d53a295788ce7ee434506fde79fd42a))
+
+
 ## v10.2.0 (2024-04-13)
 
 ### Feat
