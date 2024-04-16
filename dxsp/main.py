@@ -261,8 +261,8 @@ class DexSwap:
                     else (instrument, client.trading_asset_address)
                 )
                 order = await client.get_swap(sell_token, buy_token, quantity)
-                if "error" in order:
-                    _order.append(f"⚠️ {client.name} order error {str(order)}")
+                if "⚠️" in order:
+                    _order.append(f" {client.name} error {str(order)}")
                 else:
                     order_info = (
                         f"{client.name}:\n⬇️ {instrument}"
