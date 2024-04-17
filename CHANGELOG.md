@@ -2,6 +2,23 @@
 
 
 
+## v10.2.2 (2024-04-17)
+
+### Other
+
+* Merge pull request #632 from mraniki/dev
+
+⬆️ 🤖 - You never have to change anything you got up in the middle of the night ([`f289c7b`](https://github.com/mraniki/dxsp/commit/f289c7bb2c2827ef419a89c1137d98834d0213ad))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.3.4 ([`2aaff25`](https://github.com/mraniki/dxsp/commit/2aaff2528ffc6ec6a1bb389c145a55753ff823f7))
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.3.2 ([`b9a8587`](https://github.com/mraniki/dxsp/commit/b9a8587b79219f85e819ede1a870a89d9c0574d5))
+
+* ⬆️ 🛠️(deps): update dependency eth-ape to v0.7.16 ([`74e546f`](https://github.com/mraniki/dxsp/commit/74e546f14deeeea8a8d133208ee0d4aa17e2c9c2))
+
+
 ## v10.2.1 (2024-04-16)
 
 ### Other
