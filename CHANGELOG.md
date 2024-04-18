@@ -2,6 +2,27 @@
 
 
 
+## v10.2.3 (2024-04-18)
+
+### Other
+
+* Merge pull request #640 from mraniki/dev
+
+⬆️ 🛠️ ([`b183c88`](https://github.com/mraniki/dxsp/commit/b183c887f1e17133a5c31339bf76322160b447f0))
+
+* build(deps): update pyproject.toml ([`3221470`](https://github.com/mraniki/dxsp/commit/32214703abdfd46351ae6d4553d25a8172dac4f2))
+
+### ⬆️
+
+* ⬆️ ([`be954ef`](https://github.com/mraniki/dxsp/commit/be954ef765e5c347ad1722fe3b6001f53b59e806))
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.3.6 ([`45f1e05`](https://github.com/mraniki/dxsp/commit/45f1e051a2ff0057ea36f9d9d9c2b7615ab5a0a3))
+
+* ⬆️ 🛠️(deps): update dependency web3 to v6.17.2 ([`504005c`](https://github.com/mraniki/dxsp/commit/504005ccea2ed0d8d672cb5b69f7b56c3f38885e))
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.3.5 ([`a6deffc`](https://github.com/mraniki/dxsp/commit/a6deffc9b72db20df7e04829350fd6afbdd1042c))
+
+
 ## v10.2.2 (2024-04-17)
 
 ### Other
