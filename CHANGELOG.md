@@ -2,6 +2,19 @@
 
 
 
+## v10.2.4 (2024-04-19)
+
+### Other
+
+* Merge pull request #643 from mraniki/dev
+
+⬆️ 🤖 - Do what comes naturally  Seethe and fume and throw a tantrum ([`a53151d`](https://github.com/mraniki/dxsp/commit/a53151dcb677356faee699ddcdc2a28c64a771b4))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency ruff to ^0.4.0 ([`e79ddb7`](https://github.com/mraniki/dxsp/commit/e79ddb7c10dd026fdaef880d4931f4bc3d79efd2))
+
+
 ## v10.2.3 (2024-04-18)
 
 ### Other
