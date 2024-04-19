@@ -2,6 +2,23 @@
 
 
 
+## v10.2.5 (2024-04-19)
+
+### Other
+
+* Merge pull request #645 from mraniki/dev
+
+⬆️ 🤖 - Lord what fools these mortals be ([`0fb11a3`](https://github.com/mraniki/dxsp/commit/0fb11a33aad690be7a7bc50e5d0cf0def927009f))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.3.7 ([`c0a8cfd`](https://github.com/mraniki/dxsp/commit/c0a8cfdaa833b99e60b5bc1b33805b75ee9210f5))
+
+### 🎨
+
+* 🎨 update main.py ([`700873d`](https://github.com/mraniki/dxsp/commit/700873d6b00d5ec9a2d63d597948333e5bf9d3e2))
+
+
 ## v10.2.4 (2024-04-19)
 
 ### Other
