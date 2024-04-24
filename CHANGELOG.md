@@ -2,6 +2,19 @@
 
 
 
+## v10.2.6 (2024-04-24)
+
+### Other
+
+* Merge pull request #648 from mraniki/dev
+
+⬆️ 🤖 - So youre back about time ([`7a382c5`](https://github.com/mraniki/dxsp/commit/7a382c55afc9b58333db05af7bd91901aa6c9970))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency pytest-cov to v5 ([`6132ab6`](https://github.com/mraniki/dxsp/commit/6132ab6a291b8299b9d0e45581450168ca4dbdf5))
+
+
 ## v10.2.5 (2024-04-19)
 
 ### Other
