@@ -2,6 +2,23 @@
 
 
 
+## v10.2.7 (2024-05-17)
+
+### Other
+
+* Merge pull request #669 from mraniki/dev
+
+⬆️web3 update ([`fc46d44`](https://github.com/mraniki/dxsp/commit/fc46d44460c4680f0662ae9781734b2a930aa950))
+
+* Remove eth-ape dependency from pyproject.toml ([`c498502`](https://github.com/mraniki/dxsp/commit/c4985028cb5bbfb5f80c16dd2b4f7a5acb33ad76))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency web3 to v6.19.0 ([`b93273f`](https://github.com/mraniki/dxsp/commit/b93273fd3351816545fbcbad28587275734b2200))
+
+* ⬆️ 🛠️(deps): update dependency web3 to v6.18.0 ([`76b0ad1`](https://github.com/mraniki/dxsp/commit/76b0ad11c72c7d801b54f18f105b03fc74612ff5))
+
+
 ## v10.2.6 (2024-04-24)
 
 ### Other
