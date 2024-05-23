@@ -2,6 +2,19 @@
 
 
 
+## v10.2.8 (2024-05-23)
+
+### Other
+
+* Merge pull request #672 from mraniki/dev
+
+⬆️ 🤖 - Q	What do you call the money you pay to the government when ([`fd9a335`](https://github.com/mraniki/dxsp/commit/fd9a335c532fb93decfd884ea032b3d32eff80a2))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency sphinx_design to ^0.6.0 ([`900523c`](https://github.com/mraniki/dxsp/commit/900523c25924b3b636bd75f4bd5bc20752dbfe19))
+
+
 ## v10.2.7 (2024-05-17)
 
 ### Other
