@@ -2,6 +2,21 @@
 
 
 
+## v10.2.9 (2024-05-24)
+
+### Other
+
+* Merge pull request #675 from mraniki/dev
+
+⬆️ 🤖 - Time to be aggressive  Go after a tattooed Virgo ([`aefd186`](https://github.com/mraniki/dxsp/commit/aefd186215bf89ed3f3140e08f154ed2ce574b11))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myst_parser to v3.0.1 ([`d346654`](https://github.com/mraniki/dxsp/commit/d3466541de5847f9f158ff465e4bb6abec9a5ec0))
+
+* ⬆️ 🛠️(deps): update dependency myst_parser to v3 ([`3d3806b`](https://github.com/mraniki/dxsp/commit/3d3806b90bf73dfc8dd8c7e40ba16950f1392823))
+
+
 ## v10.2.8 (2024-05-23)
 
 ### Other
