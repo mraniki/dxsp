@@ -2,6 +2,19 @@
 
 
 
+## v10.2.10 (2024-05-29)
+
+### Other
+
+* Merge pull request #677 from mraniki/dev
+
+⬆️ 🤖 - Q	Why do firemen wear red suspenders ([`4a67dee`](https://github.com/mraniki/dxsp/commit/4a67dee41aa5e44c691065d352e3d982fee4d145))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency pydata-sphinx-theme to v0.15.3 ([`ed3edd7`](https://github.com/mraniki/dxsp/commit/ed3edd79dce6a38a86e551802a144169947ee7c3))
+
+
 ## v10.2.9 (2024-05-24)
 
 ### Other
