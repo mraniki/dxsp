@@ -2,6 +2,19 @@
 
 
 
+## v10.2.11 (2024-05-31)
+
+### Other
+
+* Merge pull request #680 from mraniki/dev
+
+⬆️ 🤖 - That secret youve been guarding isnt ([`9d1423d`](https://github.com/mraniki/dxsp/commit/9d1423d0892ecbc0479dcfe7bf98e1a5e55e342d))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency sphinx-hoverxref to v1.4.0 ([`3f7dd1a`](https://github.com/mraniki/dxsp/commit/3f7dd1a0550fc4762413d6e52b494ef199ba4e75))
+
+
 ## v10.2.10 (2024-05-29)
 
 ### Other
