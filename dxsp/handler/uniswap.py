@@ -108,7 +108,9 @@ class UniswapHandler(DexClient):
             amount_wei = amount * (10 ** (sell_token.decimals))
 
             logger.debug(
-                f"Uniswap get_quote {buy_token.address} {sell_token.address} {amount_wei}"
+                f"Buy Token Address: {buy_token.address}\n"
+                f"Sell Token Address: {sell_token.address}\n"
+                f"Amount in Wei: {amount_wei}"
             )
             quote = self.client.get_price_input(
                 sell_token.address, buy_token.address, amount_wei
