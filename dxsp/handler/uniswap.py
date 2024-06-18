@@ -39,9 +39,11 @@ class UniswapHandler(DexClient):
             None
         """
         try:
-            logger.debug("Uniswap client starting")
-            logger.debug("Uniswap client rpc {}", self.rpc)
-            logger.debug("Uniswap client wallet {}", self.wallet_address)
+            logger.debug(
+                "Uniswap client starting. RPC: {}, Wallet: {}",
+                self.rpc,
+                self.wallet_address,
+            )
             self.client = Uniswap(
                 address=self.wallet_address,
                 private_key=self.private_key,
@@ -83,11 +85,8 @@ class UniswapHandler(DexClient):
         try:
 
             logger.debug(
-                "Uniswap get_quote {} {} {} {}",
-                buy_address,
-                buy_symbol,
-                sell_address,
-                sell_symbol,
+                f"Uniswap get_quote: {buy_symbol} to {sell_symbol}, "
+                f"buy={buy_address}, sell={sell_address}"
             )
             # Resolve buy_token
             buy_token = await self.resolve_token(
@@ -100,9 +99,8 @@ class UniswapHandler(DexClient):
             sell_token = await self.resolve_token(
                 address_or_symbol=sell_address or sell_symbol
             )
+            logger.debug("Buy token {}. Sell token {}", buy_token, sell_token)
 
-            logger.debug("Buy token {}", buy_token)
-            logger.debug("Sell token {}", sell_token)
             if not buy_token:
                 return "Buy token not found"
             if not sell_token:
@@ -110,7 +108,9 @@ class UniswapHandler(DexClient):
             amount_wei = amount * (10 ** (sell_token.decimals))
 
             logger.debug(
-                f"Uniswap get_quote{buy_token.address} {sell_token.address}{amount_wei}"
+                f"Buy Token Address: {buy_token.address}\n"
+                f"Sell Token Address: {sell_token.address}\n"
+                f"Amount in Wei: {amount_wei}"
             )
             quote = self.client.get_price_input(
                 sell_token.address, buy_token.address, amount_wei
