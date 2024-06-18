@@ -2,6 +2,23 @@
 
 
 
+## v10.2.12 (2024-06-18)
+
+### Other
+
+* Merge pull request #681 from mraniki/dev
+
+🔊 🎨 update uniswap.py and contract_utils.py ([`6f9da22`](https://github.com/mraniki/dxsp/commit/6f9da22da468ed0519ba8068e2a08326a30f4932))
+
+### 🎨
+
+* 🔊 🎨 update uniswap.py and contract_utils.py ([`615acca`](https://github.com/mraniki/dxsp/commit/615accaa94977a7f206b62c17d9e0297f8bebf42))
+
+### 🚨
+
+* 🚨 ([`65df418`](https://github.com/mraniki/dxsp/commit/65df418271ece8d3aefd1a49f8859d4a68aff305))
+
+
 ## v10.2.11 (2024-05-31)
 
 ### Other
