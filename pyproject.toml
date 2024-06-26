@@ -199,7 +199,7 @@ optional = true
 
 [tool.poetry.group.docs.dependencies]
 sphinx = "7.3.7"
-pydata-sphinx-theme = "0.15.3"
+pydata-sphinx-theme = "0.15.4"
 sphinx-hoverxref = "1.4.0"
 sphinx_copybutton = "0.5.2"
 myst_parser = "3.0.1"
