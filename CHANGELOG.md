@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v10.2.14 (2024-06-28)
+
+### Other
+
+* Merge pull request #686 from mraniki/dev
+
+⬆️ 🤖 - Q	Why did Menachem Begin invade Lebanon ([`89e36ad`](https://github.com/mraniki/dxsp/commit/89e36adc359c51b4ae034b04542be9f15aca0be8))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency ruff to ^0.5.0 ([`bc57853`](https://github.com/mraniki/dxsp/commit/bc578531aefdf814c6063c6ef37aa6a93a4dff28))
+
+* ⬆️ 🛠️(deps): update dependency web3 to v6.20.0 ([`8e78da8`](https://github.com/mraniki/dxsp/commit/8e78da86e7dd2cb719b20e46406de17cc2a23350))
+
 ## v10.2.13 (2024-06-26)
 
 ### Other
