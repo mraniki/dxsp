@@ -108,7 +108,7 @@ class ContractUtils:
             42161: "arbitrum-one",
         }
         if network_name := network_versions.get(self.chain):
-            logger.debug("coingecko platform identified {}", network_name)
+            # logger.debug("coingecko platform identified {}", network_name)
             return network_name
         try:
             asset_platforms = self.cg.get_asset_platforms()
