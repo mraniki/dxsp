@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v10.2.15 (2024-06-28)
+
+### Other
+
+* Merge pull request #688 from mraniki/dev
+
+🔇 Reduce log ([`6a45ab6`](https://github.com/mraniki/dxsp/commit/6a45ab679c8670f0ee9720ea6f30ac49aef5616a))
+
+### 🔇
+
+* 🔇 ([`ae19a3b`](https://github.com/mraniki/dxsp/commit/ae19a3b7f69a8398e9b688163867c7cddbb70911))
+
 ## v10.2.14 (2024-06-28)
 
 ### Other
