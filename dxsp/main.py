@@ -85,9 +85,7 @@ class DexSwap:
         logger.info(f"Loaded {len(self.clients)} clients")
         if not self.clients:
             logger.warning(
-                """
-                No Client were created. Check your settings or disable the module.
-                """
+                "No Client were created. Check your settings or disable the module."
             )
 
     def _create_client(self, **kwargs):
