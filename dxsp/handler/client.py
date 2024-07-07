@@ -57,9 +57,9 @@ class DexClient:
         if self.w3:
             self.w3.middleware_onion.inject(geth_poa_middleware, layer=0)
             self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
-            logger.debug("Chain hex {}", self.w3.net.version)
-            logger.debug("Chain {}", int(self.w3.net.version, 16))
-
+            logger.debug(
+                f"Chain hex {self.w3.net.version} Chain {int(self.w3.net.version, 16)}"
+            )
         self.wallet_address = kwargs.get("wallet_address", None)
         self.private_key = kwargs.get("private_key", None)
         if self.w3 and self.wallet_address:
@@ -275,7 +275,7 @@ class DexClient:
 
         except Exception as error:
             logger.debug(error)
-            return "⚠️ " + str(error)
+            return f"⚠️ {str(error)}"
 
     async def make_swap(self, sell_address, buy_address, amount):
         """
