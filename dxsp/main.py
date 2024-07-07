@@ -66,20 +66,26 @@ class DexSwap:
             logger.info("Module is disabled. No Client will be created.")
             return
         self.clients = []
-        # Create a client for each client in settings.myllm
+        # Create a client for each client in settings.dex
         for name, client_config in settings.dex.items():
-            # Skip template and empty string client names
-            if name in ["", "template"] or not client_config.get("enabled"):
+            if (
+                # Skip empty client configs
+                client_config is None
+                # Skip non-dict client configs
+                or not isinstance(client_config, dict)
+                # Skip template and empty string client names
+                or name in ["", "template"]
+                # Skip disabled clients
+                or not client_config.get("enabled")
+            ):
                 continue
-            try:
-                # Create the client
-                client = self._create_client(**client_config, name=name)
-                # If the client has a valid client attribute, append it to the list
-                if client and getattr(client, "client", None):
-                    self.clients.append(client)
-            except Exception as e:
-                # Log the error if the client fails to be created
-                logger.error(f"Failed to create client {name}: {e}")
+
+            # Create the client
+            logger.debug("Creating client {}", name)
+            client = self._create_client(**client_config, name=name)
+            # If the client has a valid client attribute, append it to the list
+            if client and getattr(client, "client", None):
+                self.clients.append(client)
 
         # Log the number of clients that were created
         logger.info(f"Loaded {len(self.clients)} clients")
