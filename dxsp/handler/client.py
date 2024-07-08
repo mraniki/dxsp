@@ -53,7 +53,8 @@ class DexClient:
         self.api_endpoint = kwargs.get("api_endpoint", None)
         self.api_key = kwargs.get("api_key", None)
         self.rpc = kwargs.get("rpc", None)
-        self.w3 = Web3(Web3.HTTPProvider(self.rpc))
+        if self.rpc:
+            self.w3 = Web3(Web3.HTTPProvider(self.rpc))
         if self.w3:
             self.w3.middleware_onion.inject(geth_poa_middleware, layer=0)
             self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
@@ -66,9 +67,9 @@ class DexClient:
             self.account_number = (
                 f"{int(self.w3.net.version, 16)} - {str(self.wallet_address)[-8:]}"
             )
+            logger.debug("Account {}", self.account_number)
         else:
             self.account_number = None
-        logger.debug("Account {}", self.account_number)
 
         self.router_contract_addr = kwargs.get("router_contract_addr", None)
         self.factory_contract_addr = kwargs.get("factory_contract_addr", None)
@@ -83,19 +84,19 @@ class DexClient:
         self.mapping = kwargs.get("mapping", None)
         self.is_pnl_active = kwargs.get("is_pnl_active", False)
         self.rotki_report_endpoint = kwargs.get("rotki_report_endpoint", None)
-
-        self.contract_utils = ContractUtils(
-            self.w3, self.block_explorer_url, self.block_explorer_api
-        )
-        self.account = AccountUtils(
-            self.w3,
-            self.contract_utils,
-            self.wallet_address,
-            self.private_key,
-            self.trading_asset_address,
-            self.block_explorer_url,
-            self.block_explorer_api,
-        )
+        if self.w3:
+            self.contract_utils = ContractUtils(
+                self.w3, self.block_explorer_url, self.block_explorer_api
+            )
+            self.account = AccountUtils(
+                self.w3,
+                self.contract_utils,
+                self.wallet_address,
+                self.private_key,
+                self.trading_asset_address,
+                self.block_explorer_url,
+                self.block_explorer_api,
+            )
         self.client = None
 
     async def resolve_token(self, **kwargs):
