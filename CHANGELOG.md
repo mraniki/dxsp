@@ -1,5 +1,47 @@
 # CHANGELOG
 
+## v10.3.0 (2024-07-08)
+
+### Other
+
+* Merge pull request #689 from mraniki/dev
+
+✅ Unit Test ([`c1678eb`](https://github.com/mraniki/dxsp/commit/c1678eb20baa37600e6262602d4003ec75dc8d45))
+
+* build(deps): update pyproject.toml ([`d173f1b`](https://github.com/mraniki/dxsp/commit/d173f1b1039f8bd151a12283b7f0d698c614e14f))
+
+### ♻️
+
+* ♻️ ([`49a19d6`](https://github.com/mraniki/dxsp/commit/49a19d6b47de7e74204e8172b3f01c75a77c414b))
+
+* ♻️ ([`7de7d81`](https://github.com/mraniki/dxsp/commit/7de7d8187312b12f64b7b71f0e41b1760abde1f1))
+
+* ♻️ ([`842a865`](https://github.com/mraniki/dxsp/commit/842a8658d55a6626e99ec937c3395c7a53aeb180))
+
+### ⚡
+
+* ⚡ ([`59a7cd4`](https://github.com/mraniki/dxsp/commit/59a7cd471155e6ec1570083985fd7e1b7435e054))
+
+### ✅
+
+* ✅ Unit Test ([`9af1622`](https://github.com/mraniki/dxsp/commit/9af1622cff58e17a8f9e94c138b83a43ba20f85a))
+
+### 🎨
+
+* 🎨 ([`b29e827`](https://github.com/mraniki/dxsp/commit/b29e827f99b2d63bbecfd7f1cee13710c6d95af1))
+
+### 🐛
+
+* 🐛 ([`26ebdaf`](https://github.com/mraniki/dxsp/commit/26ebdaf037b05509c908e3639d3259906f048e6a))
+
+* 🐛 ♻️ ([`2f780f4`](https://github.com/mraniki/dxsp/commit/2f780f474eba8fea18817e2bb2fd865546574bab))
+
+* 🐛 ([`6d303d7`](https://github.com/mraniki/dxsp/commit/6d303d701e1eb30249271307e89bb93be7fa76e0))
+
+### 💄
+
+* 💄 _create_client update ([`03c5dc3`](https://github.com/mraniki/dxsp/commit/03c5dc3f8996dd171c2f7be3768ff14662837cae))
+
 ## v10.2.15 (2024-06-28)
 
 ### Other
