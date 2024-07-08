@@ -82,6 +82,8 @@ class DexClient:
         self.api_key = kwargs.get("api_key", None)
         self.rpc = kwargs.get("rpc", None)
         self.w3 = kwargs.get("w3", None)
+        self.wallet_address = kwargs.get("wallet_address", None)
+        self.private_key = kwargs.get("private_key", None)
         self.router_contract_addr = kwargs.get("router_contract_addr", None)
         self.factory_contract_addr = kwargs.get("factory_contract_addr", None)
         self.trading_asset_address = kwargs.get("trading_asset_address", None)
