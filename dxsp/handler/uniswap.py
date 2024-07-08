@@ -26,6 +26,8 @@ class UniswapHandler(DexClient):
 
         """
         super().__init__(**kwargs)
+        if self.rpc is None:
+            return
         self.build_client()
 
     def build_client(self):

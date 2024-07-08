@@ -1,12 +1,11 @@
 """
- DEXSWAP Unit Test
+CexTrader Exception Testing
 """
 
 import pytest
 
 from dxsp import DexSwap
 from dxsp.config import settings
-#from dxsp.handler.uniswap import UniswapHandler
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -14,27 +13,27 @@ def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="exception")
 
 
-# @pytest.fixture(name="dex")
-# def DexSwap_fixture():
-#     return DexSwap()
-
-
-def test_dynaconf_is_in_exception():
-    print(settings.VALUE)
-    assert settings.VALUE == "exception"
-
-
-
 @pytest.mark.asyncio
-async def test_moduledisabled(caplog):
-    """Init Testing"""
-    DexSwap()
-    print(settings.dxsp_enabled)
-    assert "Loaded 0 clients" in caplog.text
+async def test_module_exception(caplog):
+    result = DexSwap()
+    print(result)
+    assert any(
+        record.message == "Module is disabled. No Client will be created."
+        for record in caplog.records
+        if record.levelname == "INFO"
+    )
 
 
 # @pytest.mark.asyncio
-# async def test_uniswap_exception(dex, caplog):
-#     """Init Testing"""
-#     UniswapHandler()
-#     assert "Loaded 0 clients" in caplog.text
+async def test_create_client_exception(caplog):
+    settings.dxsp_enabled = True
+    test_class = DexSwap()
+    result = test_class._create_client()
+    print(result)
+    assert result is not None
+    assert any(
+        record.message
+        == "No Client were created. Check your settings or disable the module."
+        for record in caplog.records
+        if record.levelname == "WARNING"
+    )

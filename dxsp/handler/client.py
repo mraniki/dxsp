@@ -44,7 +44,35 @@ class DexClient:
     """
 
     def __init__(self, **kwargs):
+        """
+        Initializes the DexClient object.
 
+        Args:
+            **kwargs: Keyword arguments containing the following:
+                - name (str): The name of the client.
+                - protocol (str): The protocol to use (default: "uniswap").
+                - protocol_version (int): The version of the protocol (default: 2).
+                - api_endpoint (str): The API endpoint.
+                - api_key (str): The API key.
+                - rpc (str): The RPC URL.
+                - w3 (Web3): The Web3 instance.
+                - router_contract_addr (str): The router contract address.
+                - factory_contract_addr (str): The factory contract address.
+                - trading_asset_address (str): The trading asset address.
+                - trading_risk_percentage (float): The trading risk percentage.
+                - trading_asset_separator (str): The trading asset separator.
+                - trading_risk_amount (float): The trading risk amount.
+                - trading_slippage (float): The trading slippage.
+                - trading_amount_threshold (float): The trading amount threshold.
+                - block_explorer_url (str): The block explorer URL.
+                - block_explorer_api (str): The block explorer API.
+                - mapping (dict): The mapping.
+                - is_pnl_active (bool): Indicates if PnL is active (default: False).
+                - rotki_report_endpoint (str): The Rotki report endpoint.
+
+        Returns:
+            None
+        """
         self.name = kwargs.get("name", None)
         logger.debug(f"Setting up: {self.name}")
 
@@ -53,23 +81,9 @@ class DexClient:
         self.api_endpoint = kwargs.get("api_endpoint", None)
         self.api_key = kwargs.get("api_key", None)
         self.rpc = kwargs.get("rpc", None)
-        self.w3 = Web3(Web3.HTTPProvider(self.rpc))
-        if self.w3:
-            self.w3.middleware_onion.inject(geth_poa_middleware, layer=0)
-            self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
-            logger.debug("Chain hex {}", self.w3.net.version)
-            logger.debug("Chain {}", int(self.w3.net.version, 16))
-
+        self.w3 = kwargs.get("w3", None)
         self.wallet_address = kwargs.get("wallet_address", None)
         self.private_key = kwargs.get("private_key", None)
-        if self.w3 and self.wallet_address:
-            self.account_number = (
-                f"{int(self.w3.net.version, 16)} - {str(self.wallet_address)[-8:]}"
-            )
-        else:
-            self.account_number = None
-        logger.debug("Account {}", self.account_number)
-
         self.router_contract_addr = kwargs.get("router_contract_addr", None)
         self.factory_contract_addr = kwargs.get("factory_contract_addr", None)
         self.trading_asset_address = kwargs.get("trading_asset_address", None)
@@ -83,19 +97,37 @@ class DexClient:
         self.mapping = kwargs.get("mapping", None)
         self.is_pnl_active = kwargs.get("is_pnl_active", False)
         self.rotki_report_endpoint = kwargs.get("rotki_report_endpoint", None)
+        if self.rpc:
+            try:
+                self.w3 = Web3(Web3.HTTPProvider(self.rpc))
+                self.w3.middleware_onion.inject(geth_poa_middleware, layer=0)
+                self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
+                logger.debug(
+                    f"Chain {self.w3.net.version} - {int(self.w3.net.version, 16)}"
+                )
+            except Exception as e:
+                logger.error(f"Failed to connect to RPC: {e}")
 
-        self.contract_utils = ContractUtils(
-            self.w3, self.block_explorer_url, self.block_explorer_api
-        )
-        self.account = AccountUtils(
-            self.w3,
-            self.contract_utils,
-            self.wallet_address,
-            self.private_key,
-            self.trading_asset_address,
-            self.block_explorer_url,
-            self.block_explorer_api,
-        )
+        if self.w3 and self.wallet_address:
+            self.account_number = (
+                f"{int(self.w3.net.version, 16)} - {str(self.wallet_address)[-8:]}"
+            )
+            logger.debug("Account {}", self.account_number)
+            self.contract_utils = ContractUtils(
+                self.w3, self.block_explorer_url, self.block_explorer_api
+            )
+            self.account = AccountUtils(
+                self.w3,
+                self.contract_utils,
+                self.wallet_address,
+                self.private_key,
+                self.trading_asset_address,
+                self.block_explorer_url,
+                self.block_explorer_api,
+            )
+        else:
+            self.account_number = None
+
         self.client = None
 
     async def resolve_token(self, **kwargs):
@@ -275,7 +307,7 @@ class DexClient:
 
         except Exception as error:
             logger.debug(error)
-            return "⚠️ " + str(error)
+            return f"⚠️ {str(error)}"
 
     async def make_swap(self, sell_address, buy_address, amount):
         """

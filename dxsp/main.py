@@ -56,40 +56,42 @@ class DexSwap:
             None
         """
         # Check if the module is enabled
-        self.enabled = settings.dxsp_enabled or True
+        self.enabled = settings.dxsp_enabled
 
         # Create a mapping of library names to client classes
         self.client_classes = self.get_all_client_classes()
         # logger.debug("client_classes available {}", self.client_classes)
 
         if not self.enabled:
-            logger.info("Module is disabled. No clients will be created.")
+            logger.info("Module is disabled. No Client will be created.")
             return
         self.clients = []
-        # Create a client for each client in settings.myllm
+        # Create a client for each client in settings.dex
         for name, client_config in settings.dex.items():
-            # Skip template and empty string client names
-            if name in ["", "template"] or not client_config.get("enabled"):
+            if (
+                # Skip empty client configs
+                client_config is None
+                # Skip non-dict client configs
+                or not isinstance(client_config, dict)
+                # Skip template and empty string client names
+                or name in ["", "template"]
+                # Skip disabled clients
+                or not client_config.get("enabled")
+            ):
                 continue
-            try:
-                # Create the client
-                client = self._create_client(**client_config, name=name)
-                # If the client has a valid client attribute, append it to the list
-                if client and getattr(client, "client", None):
-                    self.clients.append(client)
-            except Exception as e:
-                # Log the error if the client fails to be created
-                logger.error(f"Failed to create client {name}: {e}")
+
+            # Create the client
+            logger.debug("Creating client {}", name)
+            client = self._create_client(**client_config, name=name)
+            # If the client has a valid client attribute, append it to the list
+            if client and getattr(client, "client", None):
+                self.clients.append(client)
 
         # Log the number of clients that were created
         logger.info(f"Loaded {len(self.clients)} clients")
         if not self.clients:
             logger.warning(
-                """
-                No clients were created.
-                Check your settings or disable the module.
-                https://talky.readthedocs.io/en/latest/02_config.html
-                """
+                "No Client were created. Check your settings or disable the module."
             )
 
     def _create_client(self, **kwargs):
@@ -125,14 +127,15 @@ class DexSwap:
             library is not supported.
 
         """
-        library = kwargs.get("protocol") or kwargs.get("library")
-        client_class = self.client_classes.get(f"{library.capitalize()}Handler")
-
-        if client_class is None:
-            logger.error(f"library {library} not supported")
-            return None
-
-        return client_class(**kwargs)
+        library = (
+            kwargs.get("library")
+            or kwargs.get("platform")
+            or kwargs.get("protocol")
+            or kwargs.get("parser_library")
+            or "uniswap"
+        )
+        cls = self.client_classes.get((f"{library.capitalize()}Handler"))
+        return None if cls is None else cls(**kwargs)
 
     def get_all_client_classes(self):
         """
