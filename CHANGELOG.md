@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## v10.3.1 (2024-07-09)
+
+### Other
+
+* Merge pull request #690 from mraniki/dev
+
+🎨 update main.py ([`9c3abc4`](https://github.com/mraniki/dxsp/commit/9c3abc47793742b0d4eb7f1cc0dbff6d57f6c9e8))
+
+### ✅
+
+* ✅ Unit Test ([`5e78764`](https://github.com/mraniki/dxsp/commit/5e7876489b9f75e4e47f6d20ca99df7c64300a4f))
+
+### 🎨
+
+* 🎨 update main.py ([`8b7b3e8`](https://github.com/mraniki/dxsp/commit/8b7b3e8066227068bf3e91c02fe62967ad910d9b))
+
+### 🔧
+
+* 🔧 ([`c558819`](https://github.com/mraniki/dxsp/commit/c55881967859432877d38ecab06fb9d573a1bd8c))
+
 ## v10.3.0 (2024-07-08)
 
 ### Other
