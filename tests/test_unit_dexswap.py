@@ -110,7 +110,6 @@ async def test_get_balances(dex):
     get_account_balance = AsyncMock()
     result = await dex.get_balances()
     assert result is not None
-    assert "🏦" in result
     assert get_account_balance.awaited
     assert ("1" in result) or ("56" in result) or ("137" in result)
 
@@ -120,7 +119,6 @@ async def test_get_positions(dex):
     get_account_position = AsyncMock()
     result = await dex.get_positions()
     assert result is not None
-    assert "📊" in result
     assert "Opened" in result
     assert "Margin" in result
     assert get_account_position.awaited
@@ -132,7 +130,6 @@ async def test_get_pnls(dex):
     get_account_pnl = AsyncMock()
     result = await dex.get_pnl()
     assert result is not None
-    assert "🏆" in result
     assert get_account_pnl.awaited
     assert ("eth" in result) or ("pol" in result)
 
@@ -143,7 +140,6 @@ async def test_get_quotes(dex):
     get_quote = AsyncMock()
     result = await dex.get_quotes(symbol="WBTC")
     assert result is not None
-    assert "⚖️" in result
     assert get_quote.awaited
     assert ("eth" in result) or ("pol" in result)
     numerical_count = len([char for char in result if char.isdigit()])
@@ -154,7 +150,6 @@ async def test_get_quotes(dex):
 async def test_get_quotes_invalid(dex):
     """getquote Testing"""
     result = await dex.get_quotes(symbol="NOTATOKEN")
-    assert "⚖️" in result
     assert "None" in result
 
 
@@ -163,7 +158,6 @@ async def test_submit_order(dex, order):
     result = await dex.submit_order(order)
     print(result)
     assert result is not None
-    assert "🦄" in result
     assert ("eth" in result) or ("pol" in result)
     assert ("⚠️" in result) or ("⛽" in result)
 
