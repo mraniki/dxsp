@@ -18,6 +18,7 @@ settings = Dynaconf(
         ".op.toml",
     ],
     load_dotenv=True,
+    merge_enabled=True,
     environments=True,
     default_env="default",
 )
