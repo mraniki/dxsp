@@ -93,6 +93,7 @@ class DexSwap:
             logger.warning(
                 "No Client were created. Check your settings or disable the module."
             )
+            return None
 
     def _create_client(self, **kwargs):
         """
@@ -181,7 +182,7 @@ class DexSwap:
         :return: The account balance.
         :rtype: float
         """
-        _info = ["🏦 Balance"]
+        _info = []
         for client in self.clients:
             _info.append(f"\n{await client.get_account_balance()}")
         return "\n".join(_info)
@@ -193,7 +194,7 @@ class DexSwap:
         :return: The account position.
         :rtype: AccountPosition
         """
-        _info = ["📊\n"]
+        _info = []
         for client in self.clients:
             _info.append(f"{client.name}:\n{await client.get_account_position()}")
         return "\n".join(_info)
@@ -205,7 +206,7 @@ class DexSwap:
         :return: The account position.
         :rtype: AccountPosition
         """
-        _info = ["🏆\n"]
+        _info = []
         for client in self.clients:
             client_name = f"{client.name}:\n"
             account_pnl = await client.get_account_pnl(
@@ -226,7 +227,7 @@ class DexSwap:
             str: The quote with the trading symbol
 
         """
-        _info = ["⚖️\n"]
+        _info = []
         for client in self.clients:
             try:
                 quote = await client.get_quote(sell_symbol=symbol, sell_address=address)
@@ -250,7 +251,7 @@ class DexSwap:
             str: The trade confirmation
 
         """
-        _order = ["🦄 Order\n"]
+        _order = []
         for client in self.clients:
             try:
                 action = order_params.get("action")
