@@ -199,7 +199,7 @@ class DexSwap:
             _info.append(f"{client.name}:\n{await client.get_account_position()}")
         return "\n".join(_info)
 
-    async def get_pnl(self, **kwargs):
+    async def get_pnls(self, **kwargs):
         """
         Retrieves the account position.
 
@@ -215,6 +215,8 @@ class DexSwap:
             client_info = f"{client_name}{account_pnl}"
             _info.append(client_info)
         return "\n".join(_info)
+
+    get_pnl = get_pnls
 
     async def get_quotes(self, symbol=None, address=None):
         """
