@@ -73,7 +73,7 @@ async def test_dextrader(dex):
     assert callable(dex.get_info)
     assert callable(dex.get_balances)
     assert callable(dex.get_positions)
-    assert callable(dex.get_pnl)
+    assert callable(dex.get_pnls)
     assert callable(dex.submit_order)
 
     for dx in dex.clients:

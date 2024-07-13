@@ -91,10 +91,7 @@ class DexClient:
         )
         self.token_mainnet_list = kwargs.get("token_mainnet_list", None)
         self.token_testnet_list = kwargs.get("token_testnet_list", None)
-        self.token_personal_list = kwargs.get(
-            "token_personal_list",
-            "https://raw.githubusercontent.com/mraniki/tokenlist/main/TT.json",
-        )
+        self.token_personal_list = kwargs.get("token_personal_list", None)
         self.router_contract_addr = kwargs.get("router_contract_addr", None)
         self.factory_contract_addr = kwargs.get("factory_contract_addr", None)
         self.trading_asset_address = kwargs.get("trading_asset_address", None)

@@ -67,7 +67,7 @@ class ContractUtils:
 
         # Logging for debugging purpose
         logger.debug(
-            "w3: {}. chain: {}. platform: {}", self.w3, self.chain, self.platform
+            "w3: {}. chain: {}", self.w3, self.chain
         )
 
     def initialize_platform(self):
