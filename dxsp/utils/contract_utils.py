@@ -9,7 +9,6 @@ import requests
 from loguru import logger
 from pycoingecko import CoinGeckoAPI
 
-from dxsp.config import settings
 from dxsp.utils.utils import fetch_url
 
 
@@ -35,7 +34,7 @@ class ContractUtils:
 
     """
 
-    def __init__(self, w3=None, block_explorer_url=None, block_explorer_api=None):
+    def __init__(self, **kwargs):
         """
         Initializes an instance of the class.
 
@@ -48,10 +47,15 @@ class ContractUtils:
         :param block_explorer_api: The API endpoint of the block explorer.
         :type block_explorer_api: str
         """
-        self.w3 = w3
+        self.w3 = kwargs.get("w3", None)
         self.chain = int(self.w3.net.version, 16)
-        self.block_explorer_url = block_explorer_url
-        self.block_explorer_api = block_explorer_api
+        self.dex_erc20_abi_url = kwargs.get("dex_erc20_abi_url", None)
+        self.token_mainnet_list = kwargs.get("token_mainnet_list", None)
+        self.token_testnet_list = kwargs.get("token_testnet_list", None)
+        self.token_personal_list = kwargs.get("token_personal_list", None)
+        self.headers = kwargs.get("headers", None)
+        self.block_explorer_url = kwargs.get("block_explorer_url", None)
+        self.block_explorer_api = kwargs.get("block_explorer_api", None)
         self.cg = CoinGeckoAPI()
         self.platform = self.get_cg_platform()
         logger.debug(
@@ -184,9 +188,9 @@ class ContractUtils:
         """
         try:
             token_list_urls = [
-                settings.token_personal_list,
-                settings.token_testnet_list,
-                settings.token_mainnet_list,
+                self.token_personal_list,
+                self.token_testnet_list,
+                self.token_mainnet_list,
             ]
 
             for token_list_url in token_list_urls:
@@ -385,7 +389,7 @@ class Token:
             None if the request fails or the contract does not have an ABI.
         """
         if not self.block_explorer_api:
-            return await fetch_url(settings.dex_erc20_abi_url)
+            return await fetch_url(self.dex_erc20_abi_url)
         if address is None:
             address = self.address
         params = {
@@ -395,7 +399,7 @@ class Token:
             "apikey": self.block_explorer_api,
         }
         resp = await fetch_url(
-            url=self.block_explorer_url, headers=settings.headers, params=params
+            url=self.block_explorer_url, headers=self.headers, params=params
         )
         if resp:
             return resp["result"] if resp["status"] == "1" else None

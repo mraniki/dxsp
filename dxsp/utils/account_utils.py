@@ -5,8 +5,6 @@
 
 from loguru import logger
 
-from dxsp.config import settings
-
 
 class AccountUtils:
     """
@@ -31,27 +29,22 @@ class AccountUtils:
 
     """
 
-    def __init__(
-        self,
-        w3,
-        contract_utils,
-        wallet_address,
-        private_key,
-        trading_asset_address,
-        block_explorer_url,
-        block_explorer_api,
-        safe=False,
-    ):
-        self.w3 = w3
-        self.wallet_address = self.w3.to_checksum_address(wallet_address)
+    def __init__(self, **kwargs):
+        self.w3 = self.w3 = kwargs.get("w3", None)
+        self.wallet_address = self.w3.to_checksum_address(
+            kwargs.get("wallet_address", None)
+        )
         self.account_number = (
             f"{int(self.w3.net.version, 16)} - " f"{str(self.wallet_address)[-8:]}"
         )
-        self.private_key = private_key
-        self.trading_asset_address = self.w3.to_checksum_address(trading_asset_address)
-        self.contract_utils = contract_utils
-        self.block_explorer_url = block_explorer_url
-        self.block_explorer_api = block_explorer_api
+        self.private_key = kwargs.get("private_key", None)
+        self.trading_asset_address = self.w3.to_checksum_address(
+            kwargs.get("trading_asset_address", None)
+        )
+        self.router_contract_addr = kwargs.get("router_contract_addr", None)
+        self.contract_utils = kwargs.get("contract_utils", None)
+        self.block_explorer_url = kwargs.get("block_explorer_url", None)
+        self.block_explorer_api = kwargs.get("block_explorer_api", None)
 
     async def get_account_balance(self) -> str:
         """
@@ -147,9 +140,7 @@ class AccountUtils:
                 return
             approved_amount = self.w3.to_wei(2**64 - 1, "ether")
             owner_address = self.w3.to_checksum_address(self.wallet_address)
-            dex_router_address = self.w3.to_checksum_address(
-                settings.dex_router_contract_addr
-            )
+            dex_router_address = self.w3.to_checksum_address(self.router_contract_addr)
             allowance = token.contract.functions.allowance(
                 owner_address, dex_router_address
             ).call()

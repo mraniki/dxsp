@@ -84,6 +84,11 @@ class DexClient:
         self.w3 = kwargs.get("w3", None)
         self.wallet_address = kwargs.get("wallet_address", None)
         self.private_key = kwargs.get("private_key", None)
+        self.headers = kwargs.get("headers", None)
+        self.dex_erc20_abi_url = kwargs.get("dex_erc20_abi_url", None)
+        self.token_mainnet_list = kwargs.get("token_mainnet_list", None)
+        self.token_testnet_list = kwargs.get("token_testnet_list", None)
+        self.token_personal_list = kwargs.get("token_personal_list", None)
         self.router_contract_addr = kwargs.get("router_contract_addr", None)
         self.factory_contract_addr = kwargs.get("factory_contract_addr", None)
         self.trading_asset_address = kwargs.get("trading_asset_address", None)
@@ -114,16 +119,24 @@ class DexClient:
             )
             logger.debug("Account {}", self.account_number)
             self.contract_utils = ContractUtils(
-                self.w3, self.block_explorer_url, self.block_explorer_api
+                w3=self.w3,
+                dex_erc20_abi_url=self.dex_erc20_abi_url,
+                token_mainnet_list=self.token_mainnet_list,
+                token_testnet_list=self.token_testnet_list,
+                token_personal_list=self.token_personal_list,
+                headers=self.headers,
+                block_explorer_url=self.block_explorer_url,
+                block_explorer_api=self.block_explorer_api,
             )
             self.account = AccountUtils(
-                self.w3,
-                self.contract_utils,
-                self.wallet_address,
-                self.private_key,
-                self.trading_asset_address,
-                self.block_explorer_url,
-                self.block_explorer_api,
+                w3=self.w3,
+                contract_utils=self.contract_utils,
+                wallet_address=self.wallet_address,
+                private_key=self.private_key,
+                trading_asset_address=self.trading_asset_address,
+                router_contract_addr=self.router_contract_addr,
+                block_explorer_url=self.block_explorer_url,
+                block_explorer_api=self.block_explorer_api,
             )
         else:
             self.account_number = None
