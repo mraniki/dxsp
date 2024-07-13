@@ -114,9 +114,8 @@ class DexClient:
                 logger.error(f"Failed to connect to RPC: {e}")
 
         if self.w3 and self.wallet_address:
-            self.account_number = (
-                f"{self.w3.net.version} - {str(self.wallet_address)[-8:]}"
-            )
+            self.chain = self.w3.net.version
+            self.account_number = f"{self.chain} - {str(self.wallet_address)[-8:]}"
             logger.debug("Account {}", self.account_number)
             self.contract_utils = ContractUtils(
                 w3=self.w3,

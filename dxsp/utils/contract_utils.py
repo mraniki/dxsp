@@ -48,8 +48,8 @@ class ContractUtils:
         :type block_explorer_api: str
         """
         self.w3 = kwargs.get("w3", None)
-        # self.chain = int(self.w3.net.version, 16)
-        self.chain = self.w3.net.version
+        self.chain = int(self.w3.net.version, 16)
+        # self.chain = self.w3.net.version
         self.dex_erc20_abi_url = kwargs.get("dex_erc20_abi_url", None)
         self.token_mainnet_list = kwargs.get("token_mainnet_list", None)
         self.token_testnet_list = kwargs.get("token_testnet_list", None)
@@ -81,6 +81,10 @@ class ContractUtils:
             token = Token(
                 w3=self.w3,
                 address=contract_address,
+                abi_url=self.dex_erc20_abi_url,
+                block_explorer_url=self.block_explorer_url,
+                block_explorer_api=self.block_explorer_api,
+                headers=self.headers,
             )
             await token.fetch_data()
             return token
@@ -324,14 +328,7 @@ class Token:
 
     """
 
-    def __init__(
-        self,
-        w3=None,
-        address=None,
-        block_explorer_url=None,
-        block_explorer_api=None,
-        symbol=None,
-    ):
+    def __init__(self, **kwargs):
         """
         Initializes an instance of the class.
 
@@ -351,11 +348,13 @@ class Token:
         :type symbol: str
         """
         try:
-            self.w3 = w3
-            self.address = self.w3.to_checksum_address(address)
-            self.symbol = symbol
-            self.block_explorer_url = block_explorer_url
-            self.block_explorer_api = block_explorer_api
+            self.w3 = kwargs.get("w3", None)
+            self.address = self.w3.to_checksum_address(kwargs.get("address", None))
+            self.symbol = kwargs.get("symbol", None)
+            self.headers = kwargs.get("headers", None)
+            self.dex_erc20_abi_url = kwargs.get("dex_erc20_abi_url", None)
+            self.block_explorer_url = kwargs.get("block_explorer_url", None)
+            self.block_explorer_api = kwargs.get("block_explorer_api", None)
             self.decimals = None
             self.name = None
             logger.debug(
