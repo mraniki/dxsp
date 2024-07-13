@@ -5,6 +5,7 @@
 
 from datetime import datetime
 
+import requests
 from loguru import logger
 from pycoingecko import CoinGeckoAPI
 
@@ -276,10 +277,23 @@ class ContractUtils:
             str or None: The data for the token on the specified platform,
                          or None if the token is not found or an error occurs.
         """
+        # try:
+        self.initialize_platform()
         try:
-            self.initialize_platform()
-            coin_dict = self.cg.get_coin_by_id(token.upper())
-            return coin_dict.get("detail_platforms", {}).get(self.platform)
+            if self.platform is None:
+                return None
+            search_results = self.cg.search(query=token)
+            search_dict = search_results["coins"]
+            # logger.debug("Coingecko search results: {}", search_dict)
+            filtered_dict = [x for x in search_dict if x["symbol"] == token.upper()]
+            api_dict = [sub["api_symbol"] for sub in filtered_dict]
+            for i in api_dict:
+                coin_dict = self.cg.get_coin_by_id(i)
+                try:
+                    if coin_dict["detail_platforms"][f"{self.platform}"]:
+                        return coin_dict["detail_platforms"][f"{self.platform}"]
+                except (KeyError, requests.exceptions.HTTPError):
+                    pass
         except Exception as e:
             logger.error("get_cg_data {}", e)
 
