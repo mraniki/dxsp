@@ -128,7 +128,7 @@ async def test_get_positions(dex):
 @pytest.mark.asyncio
 async def test_get_pnls(dex):
     get_account_pnl = AsyncMock()
-    result = await dex.get_pnl()
+    result = await dex.get_pnls()
     assert result is not None
     assert get_account_pnl.awaited
     assert ("eth" in result) or ("pol" in result)

@@ -20,11 +20,6 @@ def DexSwap_fixture():
     return DexSwap()
 
 
-# @pytest.fixture(name="dex_client")
-# def client_fixture(dex):
-#     for dx in dex.clients:
-#         if dx.protocol == "uniswap":
-#             return dx
 
 
 @pytest.fixture(name="dex_client")
