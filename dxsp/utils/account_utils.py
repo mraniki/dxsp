@@ -30,21 +30,23 @@ class AccountUtils:
     """
 
     def __init__(self, **kwargs):
-        self.w3 = self.w3 = kwargs.get("w3", None)
+        get = kwargs.get
+
+        self.w3 = self.w3 = get("w3", None)
         self.wallet_address = self.w3.to_checksum_address(
-            kwargs.get("wallet_address", None)
+            get("wallet_address", None)
         )
         self.account_number = (
             f"{int(self.w3.net.version, 16)} - " f"{str(self.wallet_address)[-8:]}"
         )
-        self.private_key = kwargs.get("private_key", None)
+        self.private_key = get("private_key", None)
         self.trading_asset_address = self.w3.to_checksum_address(
-            kwargs.get("trading_asset_address", None)
+            get("trading_asset_address", None)
         )
-        self.router_contract_addr = kwargs.get("router_contract_addr", None)
-        self.contract_utils = kwargs.get("contract_utils", None)
-        self.block_explorer_url = kwargs.get("block_explorer_url", None)
-        self.block_explorer_api = kwargs.get("block_explorer_api", None)
+        self.router_contract_addr = get("router_contract_addr", None)
+        self.contract_utils = get("contract_utils", None)
+        self.block_explorer_url = get("block_explorer_url", None)
+        self.block_explorer_api = get("block_explorer_api", None)
 
     async def get_account_balance(self) -> str:
         """

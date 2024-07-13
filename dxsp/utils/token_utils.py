@@ -3,7 +3,6 @@
 🪙 TOKEN
 """
 
-
 from loguru import logger
 
 from dxsp.utils.utils import fetch_url
@@ -57,15 +56,15 @@ class Token:
         :type symbol: str
         """
         try:
-
-            # logger.debug("token init {} {}", kwargs, type(kwargs))
-            self.w3 = kwargs.get("w3", None)
-            self.address = self.w3.to_checksum_address(kwargs.get("address", None))
-            self.symbol = kwargs.get("symbol", None)
-            self.headers = kwargs.get("headers", None)
-            self.abi_url = kwargs.get("abi_url", None)
-            self.block_explorer_url = kwargs.get("block_explorer_url", None)
-            self.block_explorer_api = kwargs.get("block_explorer_api", None)
+            get = kwargs.get
+            logger.debug("initializing token")
+            self.w3 = get("w3", None)
+            self.address = self.w3.to_checksum_address(get("address", None))
+            self.symbol = get("symbol", None)
+            self.headers = get("headers", None)
+            self.abi_url = get("abi_url", None)
+            self.block_explorer_url = get("block_explorer_url", None)
+            self.block_explorer_api = get("block_explorer_api", None)
             self.decimals = None
             self.name = None
             logger.debug(

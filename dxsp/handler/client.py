@@ -73,38 +73,39 @@ class DexClient:
         Returns:
             None
         """
-        self.name = kwargs.get("name", None)
+        get = kwargs.get
+        self.name = get("name", None)
         logger.debug(f"Setting up: {self.name}")
 
-        self.protocol = kwargs.get("library") or kwargs.get("protocol") or "uniswap"
-        self.protocol_version = kwargs.get("protocol_version", 2)
-        self.api_endpoint = kwargs.get("api_endpoint", None)
-        self.api_key = kwargs.get("api_key", None)
-        self.rpc = kwargs.get("rpc", None)
-        self.w3 = kwargs.get("w3", None)
-        self.wallet_address = kwargs.get("wallet_address", None)
-        self.private_key = kwargs.get("private_key", None)
-        self.headers = kwargs.get("headers", "{User-Agent= 'Mozilla/5.0'}")
-        self.abi_url = kwargs.get(
+        self.protocol = get("library") or get("protocol") or "uniswap"
+        self.protocol_version = get("protocol_version", 2)
+        self.api_endpoint = get("api_endpoint", None)
+        self.api_key = get("api_key", None)
+        self.rpc = get("rpc", None)
+        self.w3 = get("w3", None)
+        self.wallet_address = get("wallet_address", None)
+        self.private_key = get("private_key", None)
+        self.headers = get("headers", "{User-Agent= 'Mozilla/5.0'}")
+        self.abi_url = get(
             "abi_url",
             "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json",
         )
-        self.token_mainnet_list = kwargs.get("token_mainnet_list", None)
-        self.token_testnet_list = kwargs.get("token_testnet_list", None)
-        self.token_personal_list = kwargs.get("token_personal_list", None)
-        self.router_contract_addr = kwargs.get("router_contract_addr", None)
-        self.factory_contract_addr = kwargs.get("factory_contract_addr", None)
-        self.trading_asset_address = kwargs.get("trading_asset_address", None)
-        self.trading_risk_percentage = kwargs.get("trading_risk_percentage", None)
-        self.trading_asset_separator = kwargs.get("trading_asset_separator", None)
-        self.trading_risk_amount = kwargs.get("trading_risk_amount", None)
-        self.trading_slippage = kwargs.get("trading_slippage", None)
-        self.trading_amount_threshold = kwargs.get("trading_amount_threshold", None)
-        self.block_explorer_url = kwargs.get("block_explorer_url", None)
-        self.block_explorer_api = kwargs.get("block_explorer_api", None)
-        self.mapping = kwargs.get("mapping", None)
-        self.is_pnl_active = kwargs.get("is_pnl_active", False)
-        self.rotki_report_endpoint = kwargs.get("rotki_report_endpoint", None)
+        self.token_mainnet_list = get("token_mainnet_list", None)
+        self.token_testnet_list = get("token_testnet_list", None)
+        self.token_personal_list = get("token_personal_list", None)
+        self.router_contract_addr = get("router_contract_addr", None)
+        self.factory_contract_addr = get("factory_contract_addr", None)
+        self.trading_asset_address = get("trading_asset_address", None)
+        self.trading_risk_percentage = get("trading_risk_percentage", None)
+        self.trading_asset_separator = get("trading_asset_separator", None)
+        self.trading_risk_amount = get("trading_risk_amount", None)
+        self.trading_slippage = get("trading_slippage", None)
+        self.trading_amount_threshold = get("trading_amount_threshold", None)
+        self.block_explorer_url = get("block_explorer_url", None)
+        self.block_explorer_api = get("block_explorer_api", None)
+        self.mapping = get("mapping", None)
+        self.is_pnl_active = get("is_pnl_active", False)
+        self.rotki_report_endpoint = get("rotki_report_endpoint", None)
         if self.rpc:
             try:
                 self.w3 = Web3(Web3.HTTPProvider(self.rpc))

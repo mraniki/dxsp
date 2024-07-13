@@ -42,9 +42,8 @@ class UniswapHandler(DexClient):
         """
         try:
             logger.debug(
-                "Uniswap client starting. RPC: {}, Wallet: {}",
+                "Uniswap client starting. RPC: {}",
                 self.rpc,
-                self.wallet_address,
             )
             self.client = Uniswap(
                 address=self.wallet_address,
