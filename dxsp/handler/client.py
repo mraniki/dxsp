@@ -115,7 +115,7 @@ class DexClient:
 
         if self.w3 and self.wallet_address:
             self.account_number = (
-                f"{int(self.w3.net.version, 16)} - {str(self.wallet_address)[-8:]}"
+                f"{self.w3.net.version} - {str(self.wallet_address)[-8:]}"
             )
             logger.debug("Account {}", self.account_number)
             self.contract_utils = ContractUtils(

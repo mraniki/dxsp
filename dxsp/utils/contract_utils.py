@@ -48,7 +48,8 @@ class ContractUtils:
         :type block_explorer_api: str
         """
         self.w3 = kwargs.get("w3", None)
-        self.chain = int(self.w3.net.version, 16)
+        # self.chain = int(self.w3.net.version, 16)
+        self.chain = self.w3.net.version
         self.dex_erc20_abi_url = kwargs.get("dex_erc20_abi_url", None)
         self.token_mainnet_list = kwargs.get("token_mainnet_list", None)
         self.token_testnet_list = kwargs.get("token_testnet_list", None)
