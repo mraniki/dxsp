@@ -216,8 +216,6 @@ class DexSwap:
             _info.append(client_info)
         return "\n".join(_info)
 
-    get_pnl = get_pnls
-
     async def get_quotes(self, symbol=None, address=None):
         """
         gets a quote for a token
@@ -231,13 +229,10 @@ class DexSwap:
         """
         _info = []
         for client in self.clients:
-            try:
-                quote = await client.get_quote(sell_symbol=symbol, sell_address=address)
-                client_info = f"{client.name}: {quote}"
-                _info.append(client_info)
-                logger.debug("Retrieved quote for {}: {}", client.name, quote)
-            except Exception as error:
-                logger.error("Error retrieving quote for {}: {}", client.name, error)
+            quote = await client.get_quote(sell_symbol=symbol, sell_address=address)
+            client_info = f"{client.name}: {quote}"
+            _info.append(client_info)
+            logger.debug("Retrieved quote for {}: {}", client.name, quote)
 
         logger.debug("All quotes: {}", " | ".join(_info))
         return "\n".join(_info)

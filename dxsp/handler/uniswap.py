@@ -54,7 +54,6 @@ class UniswapHandler(DexClient):
                 web3=self.w3,
                 factory_contract_addr=self.factory_contract_addr,
                 router_contract_addr=self.router_contract_addr,
-                # enable_caching=True,
             )
             logger.debug("Uniswap client {}", self.client)
         except Exception as error:
