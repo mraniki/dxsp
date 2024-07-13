@@ -83,6 +83,9 @@ class Token:
         """
         Retrieves the ABI (Application Binary Interface)
         of a token contract at the given address.
+        First, it tries to fetch the ABI from the block explorer
+        if the block explorer url and api key are provided.
+        If not, it tries to fetch the ABI from the dex ERC20 ABI URL
 
         Args:
             address (str, optional): The address of the token contract.
@@ -93,21 +96,23 @@ class Token:
             str: The ABI of the token contract, if successful.
             None if the request fails or the contract does not have an ABI.
         """
-        if not self.block_explorer_api:
-            return await fetch_url(url=self.dex_erc20_abi_url)
-        if address is None:
-            address = self.address
-        params = {
-            "module": "contract",
-            "action": "getabi",
-            "address": address,
-            "apikey": self.block_explorer_api,
-        }
-        resp = await fetch_url(
-            url=self.block_explorer_url, headers=self.headers, params=params
-        )
-        if resp:
-            return resp["result"] if resp["status"] == "1" else None
+        if self.block_explorer_url and self.block_explorer_api:
+            if address is None:
+                address = self.address
+            params = {
+                "module": "contract",
+                "action": "getabi",
+                "address": address,
+                "apikey": self.block_explorer_api,
+            }
+            resp = await fetch_url(
+                url=self.block_explorer_url, headers=self.headers, params=params
+            )
+            if resp:
+                return resp["result"] if resp["status"] == "1" else None
+
+        logger.warning("No block explorer url or api key provided")
+        return await fetch_url(url=self.dex_erc20_abi_url)
 
     async def get_token_contract(self):
         """
@@ -116,6 +121,7 @@ class Token:
         :return: The token contract.
         """
         self.abi = await self.get_token_abi()
+        logger.debug("token abi {}", self.abi)
         if self.abi is None:
             return None
         contract = self.w3.eth.contract(address=self.address, abi=self.abi)
