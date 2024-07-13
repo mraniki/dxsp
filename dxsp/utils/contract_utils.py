@@ -81,10 +81,10 @@ class ContractUtils:
             token = Token(
                 w3=self.w3,
                 address=contract_address,
-                abi_url=self.dex_erc20_abi_url,
+                headers=self.headers,
+                dex_erc20_abi_url=self.dex_erc20_abi_url,
                 block_explorer_url=self.block_explorer_url,
                 block_explorer_api=self.block_explorer_api,
-                headers=self.headers,
             )
             await token.fetch_data()
             return token
@@ -175,7 +175,14 @@ class ContractUtils:
         """
         result = await self.get_tokenlist_data(token)
         if result is not None:
-            token_instance = Token(w3=self.w3, address=result["address"])
+            token_instance = Token(
+                w3=self.w3,
+                address=result["address"],
+                headers=self.headers,
+                dex_erc20_abi_url=self.dex_erc20_abi_url,
+                block_explorer_api=self.block_explorer_api,
+                block_explorer_url=self.block_explorer_url,
+            )
             token_instance.decimals = result["decimals"]
             token_instance.symbol = result["symbol"]
             return token_instance
@@ -229,7 +236,14 @@ class ContractUtils:
         result = await self.get_cg_data(token)
         if result is not None:
             logger.info("Found on Coingecko")
-            token_instance = Token(w3=self.w3, address=result["contract_address"])
+            token_instance = Token(
+                w3=self.w3,
+                address=result["contract_address"],
+                headers=self.headers,
+                dex_erc20_abi_url=self.dex_erc20_abi_url,
+                block_explorer_api=self.block_explorer_api,
+                block_explorer_url=self.block_explorer_url,
+            )
             token_instance.decimals = result["decimal_place"]
             return token_instance
         return None
