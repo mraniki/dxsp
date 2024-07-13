@@ -85,7 +85,7 @@ class DexClient:
         self.wallet_address = kwargs.get("wallet_address", None)
         self.private_key = kwargs.get("private_key", None)
         self.headers = kwargs.get("headers", None)
-        self.dex_erc20_abi_url = kwargs.get("dex_erc20_abi_url", None)
+        self.abi_url = kwargs.get("abi_url", None)
         self.token_mainnet_list = kwargs.get("token_mainnet_list", None)
         self.token_testnet_list = kwargs.get("token_testnet_list", None)
         self.token_personal_list = kwargs.get("token_personal_list", None)
@@ -119,7 +119,7 @@ class DexClient:
             logger.debug("Account {}", self.account_number)
             self.contract_utils = ContractUtils(
                 w3=self.w3,
-                dex_erc20_abi_url=self.dex_erc20_abi_url,
+                abi_url=self.abi_url,
                 token_mainnet_list=self.token_mainnet_list,
                 token_testnet_list=self.token_testnet_list,
                 token_personal_list=self.token_personal_list,

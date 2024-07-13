@@ -49,11 +49,11 @@ class ContractUtils:
         :type block_explorer_api: str
         """
         logger.debug("Initializing ContractUtils")
-        logger.debug("kwargs: {}", kwargs)
+        # logger.debug("kwargs: {}", kwargs)
 
         self.w3 = kwargs.get("w3", None)
         self.chain = int(self.w3.net.version, 16)
-        self.dex_erc20_abi_url = kwargs.get("dex_erc20_abi_url", None)
+        self.abi_url = kwargs.get("abi_url", None)
         self.token_mainnet_list = kwargs.get("token_mainnet_list", None)
         self.token_testnet_list = kwargs.get("token_testnet_list", None)
         self.token_personal_list = kwargs.get("token_personal_list", None)
@@ -85,7 +85,7 @@ class ContractUtils:
                 w3=self.w3,
                 address=contract_address,
                 headers=self.headers,
-                dex_erc20_abi_url=self.dex_erc20_abi_url,
+                abi_url=self.abi_url,
                 block_explorer_url=self.block_explorer_url,
                 block_explorer_api=self.block_explorer_api,
             )
@@ -182,7 +182,7 @@ class ContractUtils:
                 w3=self.w3,
                 address=result["address"],
                 headers=self.headers,
-                dex_erc20_abi_url=self.dex_erc20_abi_url,
+                abi_url=self.abi_url,
                 block_explorer_api=self.block_explorer_api,
                 block_explorer_url=self.block_explorer_url,
             )
@@ -243,7 +243,7 @@ class ContractUtils:
                 w3=self.w3,
                 address=result["contract_address"],
                 headers=self.headers,
-                dex_erc20_abi_url=self.dex_erc20_abi_url,
+                abi_url=self.abi_url,
                 block_explorer_api=self.block_explorer_api,
                 block_explorer_url=self.block_explorer_url,
             )

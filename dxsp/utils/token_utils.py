@@ -52,12 +52,12 @@ class Token:
         """
         try:
 
-            logger.debug("token init {} {}", kwargs, type(kwargs))
+            # logger.debug("token init {} {}", kwargs, type(kwargs))
             self.w3 = kwargs.get("w3", None)
             self.address = self.w3.to_checksum_address(kwargs.get("address", None))
             self.symbol = kwargs.get("symbol", None)
             self.headers = kwargs.get("headers", None)
-            self.dex_erc20_abi_url = kwargs.get("dex_erc20_abi_url", None)
+            self.abi_url = kwargs.get("abi_url", None)
             self.block_explorer_url = kwargs.get("block_explorer_url", None)
             self.block_explorer_api = kwargs.get("block_explorer_api", None)
             self.decimals = None
@@ -73,10 +73,10 @@ class Token:
         Retrieves data for the token.
         """
         logger.debug("fetch token data")
-        self.contract = await self.get_token_contract()
-        self.decimals = await self.get_token_decimals()
-        self.symbol = await self.get_token_symbol()
-        self.name = await self.get_token_name()
+        self.contract = await self.get_token_contract() or None
+        self.decimals = await self.get_token_decimals() or 18
+        self.symbol = await self.get_token_symbol() or None
+        self.name = await self.get_token_name() or None
         logger.debug("{} - token data {}", self.symbol, self.address)
 
     async def get_token_abi(self, address=None):
@@ -112,7 +112,7 @@ class Token:
                 return resp["result"] if resp["status"] == "1" else None
 
         logger.warning("No block explorer url or api key provided")
-        return await fetch_url(url=self.dex_erc20_abi_url)
+        return await fetch_url(url=self.abi_url)
 
     async def get_token_contract(self):
         """
@@ -173,7 +173,8 @@ class Token:
             str: The symbol of the token.
         """
         contract = await self.get_token_contract()
-        return contract.functions.symbol().call()
+        if contract:
+            return contract.functions.symbol().call()
 
     async def get_token_name(self):
         """
@@ -186,7 +187,8 @@ class Token:
             The name of the token as a string.
         """
         contract = await self.get_token_contract()
-        return contract.functions.name().call()
+        if contract:
+            return contract.functions.name().call()
 
     async def get_token_decimals(self):
         """

@@ -65,7 +65,7 @@ rotki_report_endpoint= "http://localhost:5042/api/v1/reports/1"
 headers = {User-Agent= 'Mozilla/5.0'}
 
 # DEX ABI to use in case you have no explorer setup
-dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
+abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
 
 # token list using uniswap tokenlist format
 # https://github.com/mraniki/tokenlist
@@ -106,7 +106,7 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 # headers = {User-Agent= 'Mozilla/5.0'}
 
 # # DEX ABI to use in case you have no explorer setup
-# dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
+# abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
 
 # # token list using uniswap tokenlist format
 # # https://github.com/mraniki/tokenlist
@@ -147,7 +147,7 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 # headers = {User-Agent= 'Mozilla/5.0'}
 
 # # DEX ABI to use in case you have no explorer setup
-# dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
+# abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
 
 # # token list using uniswap tokenlist format
 # # https://github.com/mraniki/tokenlist
@@ -188,7 +188,7 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 # headers = {User-Agent= 'Mozilla/5.0'}
 
 # # DEX ABI to use in case you have no explorer setup
-# dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
+# abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
 
 # # token list using uniswap tokenlist format
 # # https://github.com/mraniki/tokenlist
@@ -231,7 +231,7 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 # headers = {User-Agent= 'Mozilla/5.0'}
 
 # # DEX ABI to use in case you have no explorer setup
-# dex_erc20_abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
+# abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
 
 # # token list using uniswap tokenlist format
 # # https://github.com/mraniki/tokenlist
