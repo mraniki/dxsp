@@ -9,6 +9,7 @@ import requests
 from loguru import logger
 from pycoingecko import CoinGeckoAPI
 
+from dxsp.utils.token_utils import Token
 from dxsp.utils.utils import fetch_url
 
 
@@ -47,9 +48,11 @@ class ContractUtils:
         :param block_explorer_api: The API endpoint of the block explorer.
         :type block_explorer_api: str
         """
+        logger.debug("Initializing ContractUtils")
+        logger.debug("kwargs: {}", kwargs)
+
         self.w3 = kwargs.get("w3", None)
         self.chain = int(self.w3.net.version, 16)
-        # self.chain = self.w3.net.version
         self.dex_erc20_abi_url = kwargs.get("dex_erc20_abi_url", None)
         self.token_mainnet_list = kwargs.get("token_mainnet_list", None)
         self.token_testnet_list = kwargs.get("token_testnet_list", None)
@@ -209,7 +212,7 @@ class ContractUtils:
                 if not token_list_url:
                     continue
                 logger.debug("Token search in {}", token_list_url)
-                token_list = await fetch_url(token_list_url)
+                token_list = await fetch_url(url=token_list_url)
                 token_search = token_list["tokens"]
                 for keyval in token_search:
                     if keyval["symbol"] == symbol and keyval["chainId"] == self.chain:
@@ -312,193 +315,3 @@ class ContractUtils:
             }
         except Exception as error:
             logger.error("get_confirmation {}", error)
-
-
-class Token:
-    """
-
-    Class Token to interact with web3 token contract
-
-    Args:
-        w3: An instance of the web3 library.
-        address: The address of the token contract.
-        block_explorer_url: The URL of the block explorer for the token.
-        block_explorer_api: The API endpoint of the block explorer for the token.
-        symbol: The symbol of the token.
-
-    Returns:
-        Token
-
-    Methods:
-        __init__: Initializes an instance of the class.
-        fetch_data: Retrieves data for the token.
-        get_token_abi: Retrieves the token abi.
-        get_token_contract: Retrieves the token contract.
-        get_contract_function: Retrieves the contract functions by name.
-        get_token_balance: Retrieves the token balance.
-        get_token_symbol: Retrieves the token symbol.
-        get_token_name: Retrieves the token name.
-        get_token_decimals: Retrieves the token decimals.
-
-    """
-
-    def __init__(self, **kwargs):
-        """
-        Initializes an instance of the class.
-
-        :param w3: An instance of the web3 library.
-        :type w3: object
-
-        :param address: The address of the token contract.
-        :type address: str
-
-        :param block_explorer_url: The URL of the block explorer for the token.
-        :type block_explorer_url: str
-
-        :param block_explorer_api: The API endpoint of the block explorer for the token.
-        :type block_explorer_api: str
-
-        :param symbol: The symbol of the token.
-        :type symbol: str
-        """
-        try:
-            self.w3 = kwargs.get("w3", None)
-            self.address = self.w3.to_checksum_address(kwargs.get("address", None))
-            self.symbol = kwargs.get("symbol", None)
-            self.headers = kwargs.get("headers", None)
-            self.dex_erc20_abi_url = kwargs.get("dex_erc20_abi_url", None)
-            self.block_explorer_url = kwargs.get("block_explorer_url", None)
-            self.block_explorer_api = kwargs.get("block_explorer_api", None)
-            self.decimals = None
-            self.name = None
-            logger.debug(
-                "token initialized symbol {} address {}", self.symbol, self.address
-            )
-        except Exception as error:
-            logger.error("token error {}", error)
-
-    async def fetch_data(self) -> None:
-        """
-        Retrieves data for the token.
-        """
-        logger.debug("fetch token data")
-        self.contract = await self.get_token_contract()
-        self.decimals = await self.get_token_decimals()
-        self.symbol = await self.get_token_symbol()
-        self.name = await self.get_token_name()
-        logger.debug("{} - token data {}", self.symbol, self.address)
-
-    async def get_token_abi(self, address=None):
-        """
-        Retrieves the ABI (Application Binary Interface)
-        of a token contract at the given address.
-
-        Args:
-            address (str, optional): The address of the token contract.
-            If not provided, the address associated with the
-             contract instance is used. Defaults to None.
-
-        Returns:
-            str: The ABI of the token contract, if successful.
-            None if the request fails or the contract does not have an ABI.
-        """
-        if not self.block_explorer_api:
-            return await fetch_url(self.dex_erc20_abi_url)
-        if address is None:
-            address = self.address
-        params = {
-            "module": "contract",
-            "action": "getabi",
-            "address": address,
-            "apikey": self.block_explorer_api,
-        }
-        resp = await fetch_url(
-            url=self.block_explorer_url, headers=self.headers, params=params
-        )
-        if resp:
-            return resp["result"] if resp["status"] == "1" else None
-
-    async def get_token_contract(self):
-        """
-        Retrieves the token contract.
-
-        :return: The token contract.
-        """
-        self.abi = await self.get_token_abi()
-        if self.abi is None:
-            return None
-        contract = self.w3.eth.contract(address=self.address, abi=self.abi)
-        return contract
-
-    def get_contract_function(self, contract, func_name: str):
-        """
-        Get the contract function by name.
-
-        Args:
-            contract: The contract object.
-            func_name (str): The name of the function.
-
-        Returns:
-            bool: True if the function exists
-            in the contract, False otherwise.
-        """
-        return func_name in dir(contract.functions)
-
-    async def get_token_balance(self, wallet_address):
-        """
-        Get the balance of a token for a given wallet address.
-
-        Args:
-            wallet_address (str): The wallet
-            address to check the balance for.
-
-        Returns:
-            float: The balance of the token in ether.
-
-        Raises:
-            None
-        """
-        contract = await self.get_token_contract()
-        if contract is None or contract.functions is None:
-            logger.warning("No Balance")
-            return 0
-        balance = contract.functions.balanceOf(wallet_address).call()
-        if balance is None:
-            logger.warning("No Balance")
-            return 0
-        return round(self.w3.from_wei(balance, "ether"), 5) or 0
-
-    async def get_token_symbol(self):
-        """
-        Retrieves the symbol of the token.
-
-        Returns:
-            str: The symbol of the token.
-        """
-        contract = await self.get_token_contract()
-        return contract.functions.symbol().call()
-
-    async def get_token_name(self):
-        """
-        Get the name of the token.
-
-        Args:
-            self: The object itself.
-
-        Returns:
-            The name of the token as a string.
-        """
-        contract = await self.get_token_contract()
-        return contract.functions.name().call()
-
-    async def get_token_decimals(self):
-        """
-        Get the number of decimal places for the token.
-
-        Returns:
-            int: The number of decimal places for the token.
-        """
-        if self.decimals is not None:
-            return self.decimals
-        contract = await self.get_token_contract()
-        return contract.functions.decimals().call() if contract else 18
