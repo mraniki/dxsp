@@ -5,7 +5,6 @@
 
 from datetime import datetime
 
-import requests
 from loguru import logger
 from pycoingecko import CoinGeckoAPI
 
@@ -49,22 +48,37 @@ class ContractUtils:
         :type block_explorer_api: str
         """
         logger.debug("Initializing ContractUtils")
-        # logger.debug("kwargs: {}", kwargs)
 
-        self.w3 = kwargs.get("w3", None)
-        self.chain = int(self.w3.net.version, 16)
-        self.abi_url = kwargs.get("abi_url", None)
-        self.token_mainnet_list = kwargs.get("token_mainnet_list", None)
-        self.token_testnet_list = kwargs.get("token_testnet_list", None)
-        self.token_personal_list = kwargs.get("token_personal_list", None)
-        self.headers = kwargs.get("headers", None)
-        self.block_explorer_url = kwargs.get("block_explorer_url", None)
-        self.block_explorer_api = kwargs.get("block_explorer_api", None)
-        self.cg = CoinGeckoAPI()
-        self.platform = self.get_cg_platform()
+        # Use local variable to reduce repeated dictionary lookups
+        get = kwargs.get
+
+        self.w3 = get("w3", None)
+        # Directly convert to int, assuming w3 is always provided
+        self.chain = int(self.w3.net.version) if self.w3 else None
+        self.abi_url = get("abi_url", None)
+        self.token_mainnet_list = get("token_mainnet_list", None)
+        self.token_testnet_list = get("token_testnet_list", None)
+        self.token_personal_list = get("token_personal_list", None)
+        self.headers = get("headers", None)
+        self.block_explorer_url = get("block_explorer_url", None)
+        self.block_explorer_api = get("block_explorer_api", None)
+        self.cg = None
+        self.platform = None
+
+        # Logging for debugging purpose
         logger.debug(
             "w3: {}. chain: {}. platform: {}", self.w3, self.chain, self.platform
         )
+
+    def initialize_platform(self):
+        """
+        Initialize the platform by making an API call to CoinGecko.
+        Call this method when the platform information is actually needed.
+        """
+        if self.platform is None:
+            self.cg = CoinGeckoAPI()
+            self.platform = self.get_cg_platform()
+            logger.debug("Platform initialized: {}", self.platform)
 
     async def get_data(self, symbol=None, contract_address=None):
         """
@@ -262,22 +276,10 @@ class ContractUtils:
             str or None: The data for the token on the specified platform,
                          or None if the token is not found or an error occurs.
         """
-        # todo: add support for address search
         try:
-            if self.platform is None:
-                return None
-            search_results = self.cg.search(query=token)
-            search_dict = search_results["coins"]
-            # logger.debug("Coingecko search results: {}", search_dict)
-            filtered_dict = [x for x in search_dict if x["symbol"] == token.upper()]
-            api_dict = [sub["api_symbol"] for sub in filtered_dict]
-            for i in api_dict:
-                coin_dict = self.cg.get_coin_by_id(i)
-                try:
-                    if coin_dict["detail_platforms"][f"{self.platform}"]:
-                        return coin_dict["detail_platforms"][f"{self.platform}"]
-                except (KeyError, requests.exceptions.HTTPError):
-                    pass
+            self.initialize_platform()
+            coin_dict = self.cg.get_coin_by_id(token.upper())
+            return coin_dict.get("detail_platforms", {}).get(self.platform)
         except Exception as e:
             logger.error("get_cg_data {}", e)
 
