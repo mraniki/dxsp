@@ -27,7 +27,6 @@ class ZeroxHandler(DexClient):
 
         """
         super().__init__(**kwargs)
-        # self.build_client()
         self.client = "0x"
 
     async def get_quote(
@@ -68,10 +67,8 @@ class ZeroxHandler(DexClient):
             sell_token = await self.resolve_token(
                 address_or_symbol=sell_address or sell_symbol
             )
-            if not buy_token:
-                return "Buy token not found"
-            if not sell_token:
-                return "Sell token not found"
+            if not buy_token or not sell_token:
+                return "⚠️ Buy or sell token not found"
             amount_wei = amount * (10 ** (sell_token.decimals))
 
             url = (
@@ -90,6 +87,7 @@ class ZeroxHandler(DexClient):
                     return response["code"], response["reason"]
         except Exception as error:
             logger.error("Quote failed {}", error)
+            return f"⚠️ {error}"
 
     async def make_swap(self, buy_address, sell_address, amount):
         """
@@ -108,7 +106,12 @@ class ZeroxHandler(DexClient):
         of the `account` object with the `swap_order`
         as an argument.
         """
-        logger.debug(f"0x make_swap {buy_address} {sell_address} {amount}")
-        swap_order = await self.get_quote(buy_address, sell_address, amount)
-        if swap_order:
-            return await self.account.get_sign(swap_order)
+        try:
+            logger.debug(f"0x make_swap {buy_address} {sell_address} {amount}")
+            swap_order = await self.get_quote(buy_address, sell_address, amount)
+            if swap_order:
+                return await self.account.get_sign(swap_order)
+
+        except Exception as error:
+            logger.error("Swap failed {}", error)
+            return f"⚠️ {error}"

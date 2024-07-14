@@ -26,7 +26,7 @@ class UniswapHandler(DexClient):
 
         """
         super().__init__(**kwargs)
-        if self.rpc is None:
+        if self.rpc is None or self.w3 is None:
             return
         self.build_client()
 
@@ -42,9 +42,8 @@ class UniswapHandler(DexClient):
         """
         try:
             logger.debug(
-                "Uniswap client starting. RPC: {}, Wallet: {}",
+                "Uniswap client starting. RPC: {}",
                 self.rpc,
-                self.wallet_address,
             )
             self.client = Uniswap(
                 address=self.wallet_address,
@@ -54,7 +53,6 @@ class UniswapHandler(DexClient):
                 web3=self.w3,
                 factory_contract_addr=self.factory_contract_addr,
                 router_contract_addr=self.router_contract_addr,
-                # enable_caching=True,
             )
             logger.debug("Uniswap client {}", self.client)
         except Exception as error:
@@ -103,10 +101,8 @@ class UniswapHandler(DexClient):
             )
             logger.debug("Buy token {}. Sell token {}", buy_token, sell_token)
 
-            if not buy_token:
-                return "Buy token not found"
-            if not sell_token:
-                return "Sell token not found"
+            if not buy_token or not sell_token:
+                return "⚠️ Buy or sell token not found"
             amount_wei = amount * (10 ** (sell_token.decimals))
 
             logger.debug(

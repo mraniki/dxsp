@@ -53,13 +53,6 @@ def invalid_symbol_fixture():
         "quantity": 1,
     }
 
-
-# @pytest.fixture(name="invalid_order")
-# def invalid_order_fixture():
-#     """Return order parameters."""
-#     return "not an order"
-
-
 def test_dynaconf_is_in_testing():
     print(settings.VALUE)
     assert settings.VALUE == "On Testing"
@@ -73,7 +66,7 @@ async def test_dextrader(dex):
     assert callable(dex.get_info)
     assert callable(dex.get_balances)
     assert callable(dex.get_positions)
-    assert callable(dex.get_pnl)
+    assert callable(dex.get_pnls)
     assert callable(dex.submit_order)
 
     for dx in dex.clients:
@@ -128,7 +121,7 @@ async def test_get_positions(dex):
 @pytest.mark.asyncio
 async def test_get_pnls(dex):
     get_account_pnl = AsyncMock()
-    result = await dex.get_pnl()
+    result = await dex.get_pnls()
     assert result is not None
     assert get_account_pnl.awaited
     assert ("eth" in result) or ("pol" in result)
@@ -150,8 +143,8 @@ async def test_get_quotes(dex):
 async def test_get_quotes_invalid(dex):
     """getquote Testing"""
     result = await dex.get_quotes(symbol="NOTATOKEN")
-    assert "None" in result
-
+    assert "⚠️ Token" in result
+    assert "not found" in result
 
 @pytest.mark.asyncio
 async def test_submit_order(dex, order):
@@ -167,21 +160,3 @@ async def test_submit_invalid_symbol(dex, invalid_symbol):
     result = await dex.submit_order(invalid_symbol)
     assert result is not None
     assert "⚠️" in result
-
-
-# @pytest.mark.asyncio
-# async def test_submit_order_invalid(dex, invalid_order):
-#     result = await dex.submit_order(invalid_order)
-#     assert "⚠️" in result
-
-
-@pytest.mark.asyncio
-async def test_get_quote_zero_x(dex_client_zero_x):
-
-    result = await dex_client_zero_x.get_quote(
-        buy_address="0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",  # USDT
-        sell_address="0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6",  # WBTC
-        amount=1,
-    )
-    assert result is not None
-    assert result > 0

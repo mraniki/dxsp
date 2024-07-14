@@ -20,32 +20,58 @@ def DexSwap_fixture():
     return DexSwap()
 
 
-# @pytest.fixture(name="dex_client")
-# def client_fixture(dex):
-#     for dx in dex.clients:
-#         if dx.protocol == "uniswap":
-#             return dx
-
-
 @pytest.fixture(name="dex_client")
 def client_fixture(dex):
     for dx in dex.clients:
         if dx.name == "eth":
             return dx
 
+@pytest.fixture(name="dex_client_bsc")
+def client_fixture_bsc(dex):
+    for dx in dex.clients:
+        if dx.name == "bsc":
+            return dx
+
+@pytest.fixture(name="dex_client_zero_x")
+def client_zero_x_fixture(dex):
+    for dx in dex.clients:
+        if dx.protocol == "zerox":
+            return dx
+
 
 @pytest.mark.asyncio
-async def test_resolve_address(dex_client):
+async def test_resolve_token_address(dex_client):
     result = await dex_client.resolve_token(
         address="0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
     )
     assert result.symbol == "WBTC"
 
 
+# @pytest.mark.asyncio
+# async def test_resolve_token_symbol(dex_client):
+#     result = await dex_client.resolve_token(symbol="LINK")
+#     assert result.address == "0x514910771AF9Ca656af840dff83E8264EcF986CA"
+
 @pytest.mark.asyncio
-async def test_resolve_symbol(dex_client):
-    result = await dex_client.resolve_token(symbol="LINK")
-    assert result.address == "0x514910771AF9Ca656af840dff83E8264EcF986CA"
+async def test_resolve_token_symbol(dex_client_bsc):
+    result = await dex_client_bsc.resolve_token(symbol="TON")
+    assert result.address == "0x76A797A59Ba2C17726896976B7B3747BfD1d220f"
+
+
+@pytest.mark.asyncio
+async def test_resolve_token(dex_client):
+    result = await dex_client.resolve_token(symbol="PEPE")
+    assert result.address == "0x6982508145454Ce325dDbE47a25d4ec3d2311933"
+    assert result.decimals == 18
+    # assert result.get_contract_function is not None
+    # balanceOf = result.get_contract_function("balanceOf")
+
+
+@pytest.mark.asyncio
+async def test_resolve_token_error(dex_client):
+    with pytest.raises(ValueError):
+        await dex_client.resolve_token()
+
 
 
 @pytest.mark.asyncio
@@ -75,6 +101,18 @@ async def test_get_order_amount(dex_client):
 
 
 @pytest.mark.asyncio
+async def test_get_quote_zero_x(dex_client_zero_x):
+
+    result = await dex_client_zero_x.get_quote(
+        buy_address="0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",  # USDT
+        sell_address="0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6",  # WBTC
+        amount=1,
+    )
+    assert result is not None
+    assert result > 0
+
+
+@pytest.mark.asyncio
 async def test_get_swap(dex_client):
     dex_client.get_order_amount = AsyncMock(return_value="1")
     dex_client.account.get_approve = AsyncMock()
@@ -95,13 +133,10 @@ async def test_get_swap(dex_client):
     assert dex_client.account.get_confirmation.awaited
 
 
-# @pytest.mark.asyncio
-# async def test_get_swap_1(dex_client):
-#     result = await dex_client.get_swap(
-#         sell_token="USDT",
-#         buy_token="WBTC",quantity=1
-#         )
-#     assert result is not None
+@pytest.mark.asyncio
+async def test_get_swap_1(dex_client):
+    result = await dex_client.get_swap(sell_token="USDT", buy_token="WBTC", quantity=1)
+    assert result is not None
 
 
 @pytest.mark.asyncio
@@ -112,25 +147,31 @@ async def test_get_trading_asset_balance(dex_client):
     assert dex_client.account.get_trading_asset_balance.awaited
 
 
-# @pytest.mark.asyncio
-# async def test_get_account_open_positions(dex_client):
-#     dex_client.account.get_account_open_positions = AsyncMock()
-#     result = await dex_client.get_account_open_positions()
-#     assert result is not None
-#     assert dex_client.account.get_account_open_positions.awaited
+@pytest.mark.asyncio
+async def test_get_account_open_positions(dex_client):
+    dex_client.account.get_account_open_positions = AsyncMock()
+    result = await dex_client.get_account_open_positions()
+    assert result is not None
+    assert dex_client.account.get_account_open_positions.awaited
 
 
-# @pytest.mark.asyncio
-# async def test_get_account_margin(dex_client):
-#     dex_client.account.get_account_margin = AsyncMock()
-#     result = await dex_client.get_account_margin()
-#     assert result is not None
-#     assert dex_client.account.get_account_margin.awaited
+@pytest.mark.asyncio
+async def test_get_account_margin(dex_client):
+    dex_client.account.get_account_margin = AsyncMock()
+    result = await dex_client.get_account_margin()
+    assert result is not None
+    assert dex_client.account.get_account_margin.awaited
 
 
-# @pytest.mark.asyncio
-# async def test_get_account_pnl(dex_client):
-#     dex_client.account.get_account_pnl = AsyncMock()
-#     result = await dex_client.get_account_pnl()
-#     assert result is not None
-#     assert dex_client.account.get_account_pnl.awaited
+@pytest.mark.asyncio
+async def test_get_account_pnl(dex_client):
+    dex_client.account.get_account_pnl = AsyncMock()
+    result = await dex_client.get_account_pnl()
+    assert result is not None
+    assert dex_client.account.get_account_pnl.awaited
+
+
+@pytest.mark.asyncio
+async def test_calculate_pnl_rotki_report_endpoint_none(dex_client):
+    result = await dex_client.calculate_pnl()
+    assert result == 0

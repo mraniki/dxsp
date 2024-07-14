@@ -8,6 +8,8 @@ from datetime import datetime, timedelta
 import aiohttp
 from loguru import logger
 from web3 import Web3
+
+# from web3.exceptions import Web3Exception
 from web3.gas_strategies.time_based import medium_gas_price_strategy
 from web3.middleware import geth_poa_middleware
 
@@ -73,30 +75,42 @@ class DexClient:
         Returns:
             None
         """
-        self.name = kwargs.get("name", None)
+        get = kwargs.get
+        self.name = get("name", None)
         logger.debug(f"Setting up: {self.name}")
 
-        self.protocol = kwargs.get("protocol") or "uniswap"
-        self.protocol_version = kwargs.get("protocol_version") or 2
-        self.api_endpoint = kwargs.get("api_endpoint", None)
-        self.api_key = kwargs.get("api_key", None)
-        self.rpc = kwargs.get("rpc", None)
-        self.w3 = kwargs.get("w3", None)
-        self.wallet_address = kwargs.get("wallet_address", None)
-        self.private_key = kwargs.get("private_key", None)
-        self.router_contract_addr = kwargs.get("router_contract_addr", None)
-        self.factory_contract_addr = kwargs.get("factory_contract_addr", None)
-        self.trading_asset_address = kwargs.get("trading_asset_address", None)
-        self.trading_risk_percentage = kwargs.get("trading_risk_percentage", None)
-        self.trading_asset_separator = kwargs.get("trading_asset_separator", None)
-        self.trading_risk_amount = kwargs.get("trading_risk_amount", None)
-        self.trading_slippage = kwargs.get("trading_slippage", None)
-        self.trading_amount_threshold = kwargs.get("trading_amount_threshold", None)
-        self.block_explorer_url = kwargs.get("block_explorer_url", None)
-        self.block_explorer_api = kwargs.get("block_explorer_api", None)
-        self.mapping = kwargs.get("mapping", None)
-        self.is_pnl_active = kwargs.get("is_pnl_active", False)
-        self.rotki_report_endpoint = kwargs.get("rotki_report_endpoint", None)
+        self.protocol = get("library") or get("protocol") or "uniswap"
+        self.protocol_version = get("protocol_version", 2)
+        self.api_endpoint = get("api_endpoint", None)
+        self.api_key = get("api_key", None)
+        self.rpc = get("rpc", None)
+        self.w3 = get("w3", None)
+        self.wallet_address = get("wallet_address", None)
+        self.private_key = get("private_key", None)
+        self.headers = get("headers", "{User-Agent= 'Mozilla/5.0'}")
+        self.abi_url = get(
+            "abi_url",
+            "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json",
+        )
+        self.token_mainnet_list = get("token_mainnet_list", None)
+        self.token_testnet_list = get("token_testnet_list", None)
+        self.token_personal_list = get("token_personal_list", None)
+        self.router_contract_addr = get("router_contract_addr", None)
+        self.factory_contract_addr = get("factory_contract_addr", None)
+        self.trading_asset_address = get("trading_asset_address", None)
+        self.trading_risk_percentage = get("trading_risk_percentage", None)
+        self.trading_asset_separator = get("trading_asset_separator", None)
+        self.trading_risk_amount = get("trading_risk_amount", None)
+        self.trading_slippage = get("trading_slippage", None)
+        self.trading_amount_threshold = get("trading_amount_threshold", None)
+        self.block_explorer_url = get("block_explorer_url", None)
+        self.block_explorer_api = get("block_explorer_api", None)
+        self.mapping = get("mapping", None)
+        self.is_pnl_active = get("is_pnl_active", False)
+        self.rotki_report_endpoint = get("rotki_report_endpoint", None)
+        self.client = None
+        self.chain = None
+        self.account_number = None
         if self.rpc:
             try:
                 self.w3 = Web3(Web3.HTTPProvider(self.rpc))
@@ -106,29 +120,34 @@ class DexClient:
                     f"Chain {self.w3.net.version} - {int(self.w3.net.version, 16)}"
                 )
             except Exception as e:
-                logger.error(f"Failed to connect to RPC: {e}")
+                # This block catches all other exceptions
+                logger.error(f"Invalid RPC URL or response: {e}")
+                self.w3 = None
 
         if self.w3 and self.wallet_address:
-            self.account_number = (
-                f"{int(self.w3.net.version, 16)} - {str(self.wallet_address)[-8:]}"
-            )
+            self.chain = self.w3.net.version
+            self.account_number = f"{self.chain} - {str(self.wallet_address)[-8:]}"
             logger.debug("Account {}", self.account_number)
             self.contract_utils = ContractUtils(
-                self.w3, self.block_explorer_url, self.block_explorer_api
+                w3=self.w3,
+                abi_url=self.abi_url,
+                token_mainnet_list=self.token_mainnet_list,
+                token_testnet_list=self.token_testnet_list,
+                token_personal_list=self.token_personal_list,
+                headers=self.headers,
+                block_explorer_url=self.block_explorer_url,
+                block_explorer_api=self.block_explorer_api,
             )
             self.account = AccountUtils(
-                self.w3,
-                self.contract_utils,
-                self.wallet_address,
-                self.private_key,
-                self.trading_asset_address,
-                self.block_explorer_url,
-                self.block_explorer_api,
+                w3=self.w3,
+                contract_utils=self.contract_utils,
+                wallet_address=self.wallet_address,
+                private_key=self.private_key,
+                trading_asset_address=self.trading_asset_address,
+                router_contract_addr=self.router_contract_addr,
+                block_explorer_url=self.block_explorer_url,
+                block_explorer_api=self.block_explorer_api,
             )
-        else:
-            self.account_number = None
-
-        self.client = None
 
     async def resolve_token(self, **kwargs):
         """
@@ -397,6 +416,7 @@ class DexClient:
         Returns:
             pnl: The calculated PnL value.
         """
+
         if self.rotki_report_endpoint is None:
             return 0
         params = {"period": period} if period else {}

@@ -24,7 +24,6 @@ async def test_module_exception(caplog):
     )
 
 
-# @pytest.mark.asyncio
 async def test_create_client_exception(caplog):
     settings.dxsp_enabled = True
     test_class = DexSwap()
