@@ -106,6 +106,7 @@ class DexClient:
         self.mapping = get("mapping", None)
         self.is_pnl_active = get("is_pnl_active", False)
         self.rotki_report_endpoint = get("rotki_report_endpoint", None)
+        self.client = None
         if self.rpc:
             try:
                 self.w3 = Web3(Web3.HTTPProvider(self.rpc))
@@ -143,8 +144,6 @@ class DexClient:
             )
         else:
             self.account_number = None
-
-        self.client = None
 
     async def resolve_token(self, **kwargs):
         """
