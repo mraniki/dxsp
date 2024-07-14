@@ -49,7 +49,7 @@ async def test_resolve_token_symbol(dex_client):
 
 
 @pytest.mark.asyncio
-async def test_resolve_token_symbol2(dex_client):
+async def test_resolve_token(dex_client):
     result = await dex_client.resolve_token(symbol="PEPE")
     assert result.address == "0x6982508145454Ce325dDbE47a25d4ec3d2311933"
     assert result.decimals == 18
@@ -61,10 +61,6 @@ async def test_resolve_token_error(dex_client):
     with pytest.raises(ValueError):
         await dex_client.resolve_token()
 
-
-@pytest.mark.asyncio
-async def test_token_decimals(dex_client):
-    result = await dex_client.resolve_token(symbol="PEPE")
 
 
 @pytest.mark.asyncio
