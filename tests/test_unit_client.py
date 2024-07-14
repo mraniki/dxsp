@@ -63,7 +63,7 @@ async def test_resolve_token_error(dex_client):
 @pytest.mark.asyncio
 async def test_token_decimals(dex_client):
     result = await dex_client.resolve_token(symbol="PEPE")
-    assert result.decimals == "18"
+    assert result.decimals == 18
 
 
 @pytest.mark.asyncio
