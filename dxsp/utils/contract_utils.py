@@ -172,7 +172,7 @@ class ContractUtils:
                 token_instance = await self.search_cg_data(token)
 
             if token_instance is None:
-                raise Exception(f"Token not found: {token} on {self.chain}")
+                raise Exception(f"Token {token} not found on {self.chain}")
             token_instance.block_explorer_api = self.block_explorer_api
             token_instance.block_explorer_url = self.block_explorer_url
             return token_instance

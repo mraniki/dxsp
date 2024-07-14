@@ -53,13 +53,6 @@ def invalid_symbol_fixture():
         "quantity": 1,
     }
 
-
-# @pytest.fixture(name="invalid_order")
-# def invalid_order_fixture():
-#     """Return order parameters."""
-#     return "not an order"
-
-
 def test_dynaconf_is_in_testing():
     print(settings.VALUE)
     assert settings.VALUE == "On Testing"
@@ -150,8 +143,8 @@ async def test_get_quotes(dex):
 async def test_get_quotes_invalid(dex):
     """getquote Testing"""
     result = await dex.get_quotes(symbol="NOTATOKEN")
-    assert "None" in result
-
+    assert "⚠️ Token" in result
+    assert "not found" in result
 
 @pytest.mark.asyncio
 async def test_submit_order(dex, order):
