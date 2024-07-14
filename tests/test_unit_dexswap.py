@@ -13,7 +13,7 @@ from dxsp.config import settings
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="dxsp")
- 
+
 
 @pytest.fixture(name="dex")
 def DexSwap_fixture():
@@ -167,4 +167,3 @@ async def test_submit_invalid_symbol(dex, invalid_symbol):
     result = await dex.submit_order(invalid_symbol)
     assert result is not None
     assert "⚠️" in result
-

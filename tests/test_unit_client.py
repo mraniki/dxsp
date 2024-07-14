@@ -52,6 +52,8 @@ async def test_resolve_token_symbol(dex_client):
 async def test_resolve_token_symbol2(dex_client):
     result = await dex_client.resolve_token(symbol="PEPE")
     assert result.address == "0x6982508145454Ce325dDbE47a25d4ec3d2311933"
+    assert result.decimals == 18
+    assert result.get_contract_function is not None
 
 
 @pytest.mark.asyncio
@@ -63,7 +65,6 @@ async def test_resolve_token_error(dex_client):
 @pytest.mark.asyncio
 async def test_token_decimals(dex_client):
     result = await dex_client.resolve_token(symbol="PEPE")
-    assert result.decimals == 18
 
 
 @pytest.mark.asyncio
@@ -127,10 +128,7 @@ async def test_get_swap(dex_client):
 
 @pytest.mark.asyncio
 async def test_get_swap_1(dex_client):
-    result = await dex_client.get_swap(
-        sell_token="USDT",
-        buy_token="WBTC",quantity=1
-        )
+    result = await dex_client.get_swap(sell_token="USDT", buy_token="WBTC", quantity=1)
     assert result is not None
 
 
