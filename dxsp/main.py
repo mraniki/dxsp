@@ -102,14 +102,13 @@ class DexSwap:
         This function takes in a dictionary of keyword arguments, `kwargs`,
         containing the necessary information to create a client. The required
         key in `kwargs` is "library", which specifies the protocol to use for
-        communication with the LLM. The value of "library" must match one of the
-        libraries supported by MyLLM.
+        communication with the Dex. The value of "library" must match one of the
+        libraries supported by DXSP.
 
         This function retrieves the class used to create the client based on the
         value of "library" from the mapping of library names to client classes
         stored in `self.client_classes`. If the value of "library" does not
-        match any of the libraries supported, the function logs an error message
-        and returns None.
+        match any of the libraries supported, the function returns None.
 
         If the class used to create the client is found, the function creates a
         new instance of the class using the keyword arguments in `kwargs` and
@@ -128,15 +127,10 @@ class DexSwap:
             library is not supported.
 
         """
-        library = (
-            kwargs.get("library")
-            or kwargs.get("platform")
-            or kwargs.get("protocol")
-            or kwargs.get("parser_library")
-            or "uniswap"
+        library = kwargs.get("library") or kwargs.get("platform") or "uniswap"
+        return self.client_classes.get(f"{library.capitalize()}Handler", None).__call__(
+            **kwargs
         )
-        cls = self.client_classes.get((f"{library.capitalize()}Handler"))
-        return None if cls is None else cls(**kwargs)
 
     def get_all_client_classes(self):
         """
