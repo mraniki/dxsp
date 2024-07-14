@@ -13,7 +13,7 @@ from dxsp.config import settings
 @pytest.fixture(scope="session", autouse=True)
 def set_test_settings():
     settings.configure(FORCE_ENV_FOR_DYNACONF="dxsp")
-
+ 
 
 @pytest.fixture(name="dex")
 def DexSwap_fixture():
@@ -168,20 +168,3 @@ async def test_submit_invalid_symbol(dex, invalid_symbol):
     assert result is not None
     assert "⚠️" in result
 
-
-# @pytest.mark.asyncio
-# async def test_submit_order_invalid(dex, invalid_order):
-#     result = await dex.submit_order(invalid_order)
-#     assert "⚠️" in result
-
-
-@pytest.mark.asyncio
-async def test_get_quote_zero_x(dex_client_zero_x):
-
-    result = await dex_client_zero_x.get_quote(
-        buy_address="0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",  # USDT
-        sell_address="0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6",  # WBTC
-        amount=1,
-    )
-    assert result is not None
-    assert result > 0

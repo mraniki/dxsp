@@ -161,13 +161,10 @@ class Token:
             None
         """
         contract = await self.get_token_contract()
-        if contract is None or contract.functions is None:
+        if not contract or contract.functions is None:
             logger.warning("No Balance")
             return 0
         balance = contract.functions.balanceOf(wallet_address).call()
-        if balance is None:
-            logger.warning("No Balance")
-            return 0
         return round(self.w3.from_wei(balance, "ether"), 5) or 0
 
     async def get_token_symbol(self):
