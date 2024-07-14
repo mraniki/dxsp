@@ -413,6 +413,7 @@ class DexClient:
         Returns:
             pnl: The calculated PnL value.
         """
+
         if self.rotki_report_endpoint is None:
             return 0
         params = {"period": period} if period else {}
@@ -425,54 +426,23 @@ class DexClient:
                     logger.error(f"Received non-200 status code: {response.status}")
                     return 0
                 data = await response.json()
+                result = data.get("result", {})
+                entries = result.get("entries", [])
+                # Initialize a dictionary to hold the sum of 'free' values
                 free_values = {
                     "trade": 0,
                     "transaction event": 0,
                     "fee": 0,
                     "asset movement": 0,
                 }
-                entries = data.get("result", {}).get("entries", [])
                 for entry in entries:
                     overview = entry.get("overview", {})
-                    free_values.update(
-                        {
-                            category: free_values[category]
-                            + float(amounts.get("free", 0))
-                            for category, amounts in overview.items()
-                        }
-                    )
+                    for category, amounts in overview.items():
+                        try:
+                            free_amount = float(amounts.get("free", "0"))
+                            # Add it to the total
+                            free_values[category] += free_amount
+                        except ValueError:
+                            logger.error(f"Invalid free amount: {amounts.get('free')}")
 
                 return free_values
-
-        # if self.rotki_report_endpoint is None:
-        #     return 0
-        # params = {"period": period} if period else {}
-
-        # async with aiohttp.ClientSession() as session:
-        #     async with session.get(
-        #         self.rotki_report_endpoint, params=params
-        #     ) as response:
-        #         if response.status != 200:
-        #             logger.error(f"Received non-200 status code: {response.status}")
-        #             return 0
-        #         data = await response.json()
-        #         result = data.get("result", {})
-        #         entries = result.get("entries", [])
-        #         # Initialize a dictionary to hold the sum of 'free' values
-        #         free_values = {
-        #             "trade": 0,
-        #             "transaction event": 0,
-        #             "fee": 0,
-        #             "asset movement": 0,
-        #         }
-        #         for entry in entries:
-        #             overview = entry.get("overview", {})
-        #             for category, amounts in overview.items():
-        #                 try:
-        #                     free_amount = float(amounts.get("free", "0"))
-        #                     # Add it to the total
-        #                     free_values[category] += free_amount
-        #                 except ValueError:
-        #                     logger.error(f"Invalid free amount: {amounts.get('free')}")
-
-        #         return free_values
