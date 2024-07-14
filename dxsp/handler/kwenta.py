@@ -27,6 +27,8 @@ class KwentaHandler(DexClient):
 
         """
         super().__init__(**kwargs)
+        if self.rpc is None or self.w3 is None:
+            return
         self.client = Kwenta(
             network_id=int(self.w3.net.version),
             provider_rpc=self.rpc,

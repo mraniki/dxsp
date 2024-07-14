@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 import aiohttp
 from loguru import logger
 from web3 import Web3
+from web3.exceptions import InvalidResponse
 from web3.gas_strategies.time_based import medium_gas_price_strategy
 from web3.middleware import geth_poa_middleware
 
@@ -115,8 +116,9 @@ class DexClient:
                 logger.debug(
                     f"Chain {self.w3.net.version} - {int(self.w3.net.version, 16)}"
                 )
-            except Exception as e:
-                logger.error(f"Failed to connect to RPC: {e}")
+            except (InvalidResponse, Exception) as e:
+                logger.error(f"Invalid RPC URL or response: {e}")
+                self.w3 = None
 
         if self.w3 and self.wallet_address:
             self.chain = self.w3.net.version
