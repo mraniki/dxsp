@@ -26,6 +26,11 @@ def client_fixture(dex):
         if dx.name == "eth":
             return dx
 
+@pytest.fixture(name="dex_client_bsc")
+def client_fixture(dex):
+    for dx in dex.clients:
+        if dx.name == "bsc":
+            return dx
 
 @pytest.fixture(name="dex_client_zero_x")
 def client_zero_x_fixture(dex):
@@ -42,10 +47,15 @@ async def test_resolve_token_address(dex_client):
     assert result.symbol == "WBTC"
 
 
+# @pytest.mark.asyncio
+# async def test_resolve_token_symbol(dex_client):
+#     result = await dex_client.resolve_token(symbol="LINK")
+#     assert result.address == "0x514910771AF9Ca656af840dff83E8264EcF986CA"
+
 @pytest.mark.asyncio
-async def test_resolve_token_symbol(dex_client):
-    result = await dex_client.resolve_token(symbol="LINK")
-    assert result.address == "0x514910771AF9Ca656af840dff83E8264EcF986CA"
+async def test_resolve_token_symbol(dex_client_bsc):
+    result = await dex_client.resolve_token(symbol="TON")
+    assert result.address == "0x76a797a59ba2c17726896976b7b3747bfd1d220f"
 
 
 @pytest.mark.asyncio
