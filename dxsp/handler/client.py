@@ -8,7 +8,8 @@ from datetime import datetime, timedelta
 import aiohttp
 from loguru import logger
 from web3 import Web3
-from web3.exceptions import InvalidResponse
+
+# from web3.exceptions import Web3Exception
 from web3.gas_strategies.time_based import medium_gas_price_strategy
 from web3.middleware import geth_poa_middleware
 
@@ -108,6 +109,8 @@ class DexClient:
         self.is_pnl_active = get("is_pnl_active", False)
         self.rotki_report_endpoint = get("rotki_report_endpoint", None)
         self.client = None
+        self.chain = None
+        self.account_number = None
         if self.rpc:
             try:
                 self.w3 = Web3(Web3.HTTPProvider(self.rpc))
@@ -116,7 +119,8 @@ class DexClient:
                 logger.debug(
                     f"Chain {self.w3.net.version} - {int(self.w3.net.version, 16)}"
                 )
-            except (InvalidResponse, Exception) as e:
+            except Exception as e:
+                # This block catches all other exceptions
                 logger.error(f"Invalid RPC URL or response: {e}")
                 self.w3 = None
 
@@ -144,8 +148,6 @@ class DexClient:
                 block_explorer_url=self.block_explorer_url,
                 block_explorer_api=self.block_explorer_api,
             )
-        else:
-            self.account_number = None
 
     async def resolve_token(self, **kwargs):
         """
