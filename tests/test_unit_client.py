@@ -55,7 +55,7 @@ async def test_resolve_token_address(dex_client):
 @pytest.mark.asyncio
 async def test_resolve_token_symbol(dex_client_bsc):
     result = await dex_client_bsc.resolve_token(symbol="TON")
-    assert result.address == "0x76a797a59ba2c17726896976b7b3747bfd1d220f"
+    assert result.address == "0x76A797A59Ba2C17726896976B7B3747BfD1d220f"
 
 
 @pytest.mark.asyncio
