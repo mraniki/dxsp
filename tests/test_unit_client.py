@@ -27,7 +27,7 @@ def client_fixture(dex):
             return dx
 
 @pytest.fixture(name="dex_client_bsc")
-def client_fixture(dex):
+def client_fixture_bsc(dex):
     for dx in dex.clients:
         if dx.name == "bsc":
             return dx
