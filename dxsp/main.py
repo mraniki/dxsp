@@ -127,7 +127,7 @@ class DexSwap:
             library is not supported.
 
         """
-        library = kwargs.get("library") or kwargs.get("platform") or "uniswap"
+        library = kwargs.get("library") or kwargs.get("protocol") or "uniswap"
         return self.client_classes.get(f"{library.capitalize()}Handler", None).__call__(
             **kwargs
         )

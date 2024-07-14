@@ -101,10 +101,8 @@ class UniswapHandler(DexClient):
             )
             logger.debug("Buy token {}. Sell token {}", buy_token, sell_token)
 
-            if not buy_token:
-                return "Buy token not found"
-            if not sell_token:
-                return "Sell token not found"
+            if not buy_token or not sell_token:
+                return "⚠️ Buy or sell token not found"
             amount_wei = amount * (10 ** (sell_token.decimals))
 
             logger.debug(
