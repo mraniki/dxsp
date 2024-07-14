@@ -132,19 +132,19 @@ class Token:
         contract = self.w3.eth.contract(address=self.address, abi=self.abi)
         return contract
 
-    def get_contract_function(self, contract, func_name: str):
-        """
-        Get the contract function by name.
+    # def get_contract_function(self, contract, func_name: str):
+    #     """
+    #     Get the contract function by name.
 
-        Args:
-            contract: The contract object.
-            func_name (str): The name of the function.
+    #     Args:
+    #         contract: The contract object.
+    #         func_name (str): The name of the function.
 
-        Returns:
-            bool: True if the function exists
-            in the contract, False otherwise.
-        """
-        return func_name in dir(contract.functions)
+    #     Returns:
+    #         bool: True if the function exists
+    #         in the contract, False otherwise.
+    #     """
+    #     return func_name in dir(contract.functions)
 
     async def get_token_balance(self, wallet_address):
         """
