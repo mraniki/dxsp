@@ -199,7 +199,7 @@ skips = ["B101","B104"]
 optional = true
 
 [tool.poetry.group.docs.dependencies]
-sphinx = "7.4.2"
+sphinx = "7.4.3"
 pydata-sphinx-theme = "0.15.4"
 sphinx-hoverxref = "1.4.0"
 sphinx_copybutton = "0.5.2"
