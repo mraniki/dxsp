@@ -1,5 +1,29 @@
 # CHANGELOG
 
+## v11.0.1 (2024-07-17)
+
+### Other
+
+* Merge pull request #701 from mraniki/dev
+
+⬆️ 🤖 - Just to have it is enough ([`f73eb3d`](https://github.com/mraniki/dxsp/commit/f73eb3dc0ff376a2eaef29d095c95e22f86a3ec4))
+
+* Merge pull request #698 from mraniki/dev
+
+⬆️ 🤖 - Q	What is the difference between Texas and yogurt ([`39cde98`](https://github.com/mraniki/dxsp/commit/39cde98874d3664c1ff386360c2429582b9a89ef))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.4.5 ([`9a99dd7`](https://github.com/mraniki/dxsp/commit/9a99dd7d30b13404a4167565c234bf68729c63f3))
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.4.4 ([`d487587`](https://github.com/mraniki/dxsp/commit/d487587b0552afb9161b16782fb941db705aa4b7))
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.4.3 ([`80735c6`](https://github.com/mraniki/dxsp/commit/80735c6064f7c9326288af2c175105990daefb51))
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.4.2 ([`06877c4`](https://github.com/mraniki/dxsp/commit/06877c4e534c07589d2bb5cd294942d7b277d54b))
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.4.0 ([`060bb9a`](https://github.com/mraniki/dxsp/commit/060bb9a82438b436355e41d66d957795eccce3ae))
+
 ## v11.0.0 (2024-07-14)
 
 ### :rotating_light:
