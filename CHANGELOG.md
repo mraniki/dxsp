@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v11.0.2 (2024-07-20)
+
+### Other
+
+* Merge pull request #703 from mraniki/dev
+
+⬆️ 🤖 - Its all in the mind ya know ([`e9a8d1a`](https://github.com/mraniki/dxsp/commit/e9a8d1a8f75110a1edfb1d81dfa966d552d70e4c))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.4.6 ([`e82fe52`](https://github.com/mraniki/dxsp/commit/e82fe52e899f10649cd7a75474d166703fb60de2))
+
 ## v11.0.1 (2024-07-17)
 
 ### Other
