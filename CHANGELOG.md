@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v11.0.3 (2024-07-21)
+
+### Other
+
+* Merge pull request #705 from mraniki/dev
+
+⬆️ 🤖 - Q	What do you call the money you pay to the government when ([`e47a972`](https://github.com/mraniki/dxsp/commit/e47a972fa36bde6b88c1d501a10e9194744171c3))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency sphinx to v7.4.7 ([`6e61bb6`](https://github.com/mraniki/dxsp/commit/6e61bb6ebac2238d31e54cff523c98f50d59bad5))
+
 ## v11.0.2 (2024-07-20)
 
 ### Other
