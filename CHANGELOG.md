@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v11.0.4 (2024-07-24)
+
+### Other
+
+* Merge pull request #708 from mraniki/dev
+
+⬆️ 🤖 - You will outgrow your usefulness ([`f98cf87`](https://github.com/mraniki/dxsp/commit/f98cf8757036aeab13339cb0e65bd523a0cc2e98))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency web3 to v6.20.1 ([`1975891`](https://github.com/mraniki/dxsp/commit/197589182f540bbd49355f430018ca1e0c88d6be))
+
 ## v11.0.3 (2024-07-21)
 
 ### Other
