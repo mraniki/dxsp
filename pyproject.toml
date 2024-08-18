@@ -14,6 +14,7 @@ packages = [
     {include = "dxsp"}
 ]
 
+
 [tool.poetry.urls]
 "Changelog" =  "https://github.com/mraniki/dxsp/blob/dev/CHANGELOG.rst"
 "Support" =  "https://github.com/mraniki/dxsp/discussions"
