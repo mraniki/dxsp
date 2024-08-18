@@ -1,5 +1,33 @@
 # CHANGELOG
 
+## v11.0.5 (2024-08-18)
+
+### :arrow_up:
+
+* :arrow_up: update ([`2d6ceb2`](https://github.com/mraniki/dxsp/commit/2d6ceb2a791d93f1b51a0c9d76d4118f9196fbc1))
+
+### Other
+
+* Merge pull request #719 from mraniki/dev
+
+:arrow_up: update ([`672d3a7`](https://github.com/mraniki/dxsp/commit/672d3a7fb01911756a9b56d0eef18850fa23b881))
+
+* Merge pull request #715 from mraniki/dev
+
+Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160d078d1f81562a7c0))
+
+* build(deps): update pyproject.toml ([`bbef9b7`](https://github.com/mraniki/dxsp/commit/bbef9b7aa72aaceaf614d0dd57106ed5842ea193))
+
+### Update
+
+* Update web3 version to 6.20.0 and ruff to ^0.6.0 ([`843bdde`](https://github.com/mraniki/dxsp/commit/843bdde779503c8d2b90a709e654d83246d715e7))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency web3 to v6.20.2 ([`59d196f`](https://github.com/mraniki/dxsp/commit/59d196f81bf5b4bfb6287e1041c090db6ec198a7))
+
+* ⬆️ 🛠️(deps): update dependency web3 to v6.20.2 ([`e4c44d7`](https://github.com/mraniki/dxsp/commit/e4c44d7eac9faea01b9be1bd4d93a0a12052f863))
+
 ## v11.0.4 (2024-07-24)
 
 ### Other
