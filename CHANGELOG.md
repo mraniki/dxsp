@@ -1,5 +1,35 @@
 # CHANGELOG
 
+## v11.0.6 (2024-08-19)
+
+### :arrow_up:
+
+* :arrow_up: ([`4cb798b`](https://github.com/mraniki/dxsp/commit/4cb798bcda29e4f9e4b35e6bb7500228b9845f8c))
+
+### Other
+
+* Merge pull request #721 from mraniki/dev
+
+:arrow_up: ([`f94e99f`](https://github.com/mraniki/dxsp/commit/f94e99f36d622483257b84ec5eae965c2764c8f7))
+
+* Merge pull request #720 from mraniki/dev
+
+⬆️  build(deps): update pyproject.toml ([`c31f7ca`](https://github.com/mraniki/dxsp/commit/c31f7ca1962ef66cecf4fbef79b9428545758ec6))
+
+* build(deps): update pyproject.toml ([`30b6cbc`](https://github.com/mraniki/dxsp/commit/30b6cbcdafd9f1e8105aa54cde9384823f3ad7b0))
+
+* build(deps): update pyproject.toml ([`ac8ab97`](https://github.com/mraniki/dxsp/commit/ac8ab9792188f55d520c6c7e8689c6c9de6eb3b7))
+
+* build(deps): update pyproject.toml ([`7addc65`](https://github.com/mraniki/dxsp/commit/7addc654eb824e96af1e16a17c892f69f6fb89a8))
+
+* build(deps): update pyproject.toml ([`7f34358`](https://github.com/mraniki/dxsp/commit/7f343584ae0c7a9a9bab1f73d94f43380bdd8869))
+
+* build(deps): update pyproject.toml ([`4edea94`](https://github.com/mraniki/dxsp/commit/4edea94c0358612f72341a16fa1b762baa008543))
+
+* build(deps): update pyproject.toml ([`ed795fe`](https://github.com/mraniki/dxsp/commit/ed795fe8bb5b4b8247cf764cae4f4b1b8ffb5ce8))
+
+* build(deps): update pyproject.toml ([`94eb31f`](https://github.com/mraniki/dxsp/commit/94eb31ff1f2e84ab0dd50f1415ac6bd9eb754048))
+
 ## v11.0.5 (2024-08-18)
 
 ### :arrow_up:
