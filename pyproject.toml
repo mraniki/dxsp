@@ -106,7 +106,7 @@ sphinx = "7.4.7"
 pydata-sphinx-theme = "0.15.4"
 sphinx-hoverxref = "1.4.0"
 sphinx_copybutton = "0.5.2"
-myst_parser = "3.0.1"
+myst_parser = "4.0.0"
 sphinx_design = "^0.6.0"
 
 [tool.semantic_release]
