@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v11.0.8 (2024-09-05)
+
+### Other
+
+* Merge pull request #729 from mraniki/dev
+
+⬆️ 🤖 - Wagners music is better than it sounds ([`7d1ba0d`](https://github.com/mraniki/dxsp/commit/7d1ba0d18b31470e384b3685e12e89a971435c9e))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency myst_parser to v4 ([`623c0b8`](https://github.com/mraniki/dxsp/commit/623c0b8c6f977f41eeaa4396c640f7927914ad79))
+
 ## v11.0.7 (2024-08-23)
 
 ### Other
