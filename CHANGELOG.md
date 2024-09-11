@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v11.0.9 (2024-09-11)
+
+### Other
+
+* Merge pull request #731 from mraniki/dev
+
+⬆️ 🤖 - As to the Adjective when in doubt strike it out ([`6633a50`](https://github.com/mraniki/dxsp/commit/6633a50d4c6977b9ea64789bbfd054df5f51398d))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency sphinx-hoverxref to v1.4.1 ([`dd7f10c`](https://github.com/mraniki/dxsp/commit/dd7f10c9efcb24ed49e55dd6031141b7642cd0df))
+
 ## v11.0.8 (2024-09-05)
 
 ### Other
