@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v11.0.10 (2024-10-09)
+
+### Other
+
+* Merge pull request #736 from mraniki/dev
+
+⬆️ 🤖 - Big book big bore ([`2bade6c`](https://github.com/mraniki/dxsp/commit/2bade6c3c83924661624ddf9605eae064358564c))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update python docker tag to v3.13 ([`b17096b`](https://github.com/mraniki/dxsp/commit/b17096bfa7114b4e5da183494446b19873e2ea75))
+
 ## v11.0.9 (2024-09-11)
 
 ### Other
