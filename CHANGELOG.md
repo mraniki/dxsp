@@ -1,5 +1,21 @@
 # CHANGELOG
 
+
+## v11.0.11 (2024-10-25)
+
+### Other
+
+* Merge pull request #740 from mraniki/dev
+
+⬆️ 🤖 - There will be big changes for you but you will be happy ([`0641159`](https://github.com/mraniki/dxsp/commit/06411594a1b058e09155098ff1dbfa655785746f))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency pydata-sphinx-theme to v0.16.0 ([`fda0b88`](https://github.com/mraniki/dxsp/commit/fda0b88be27aec05c5a4991de2e3cae02b42847d))
+
+* ⬆️ 🛠️(deps): update dependency ruff to ^0.7.0 ([`a52e523`](https://github.com/mraniki/dxsp/commit/a52e523af6ca30ddc8096d8069256447b057b3b1))
+
+
 ## v11.0.10 (2024-10-09)
 
 ### Other
@@ -11,6 +27,7 @@
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update python docker tag to v3.13 ([`b17096b`](https://github.com/mraniki/dxsp/commit/b17096bfa7114b4e5da183494446b19873e2ea75))
+
 
 ## v11.0.9 (2024-09-11)
 
@@ -24,6 +41,7 @@
 
 * ⬆️ 🛠️(deps): update dependency sphinx-hoverxref to v1.4.1 ([`dd7f10c`](https://github.com/mraniki/dxsp/commit/dd7f10c9efcb24ed49e55dd6031141b7642cd0df))
 
+
 ## v11.0.8 (2024-09-05)
 
 ### Other
@@ -36,6 +54,7 @@
 
 * ⬆️ 🛠️(deps): update dependency myst_parser to v4 ([`623c0b8`](https://github.com/mraniki/dxsp/commit/623c0b8c6f977f41eeaa4396c640f7927914ad79))
 
+
 ## v11.0.7 (2024-08-23)
 
 ### Other
@@ -47,6 +66,7 @@
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency web3 to v6.20.3 ([`3b9051c`](https://github.com/mraniki/dxsp/commit/3b9051cb03f0cc8070183d9bafefab7453514073))
+
 
 ## v11.0.6 (2024-08-19)
 
@@ -78,6 +98,7 @@
 
 * build(deps): update pyproject.toml ([`94eb31f`](https://github.com/mraniki/dxsp/commit/94eb31ff1f2e84ab0dd50f1415ac6bd9eb754048))
 
+
 ## v11.0.5 (2024-08-18)
 
 ### :arrow_up:
@@ -106,6 +127,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 
 * ⬆️ 🛠️(deps): update dependency web3 to v6.20.2 ([`e4c44d7`](https://github.com/mraniki/dxsp/commit/e4c44d7eac9faea01b9be1bd4d93a0a12052f863))
 
+
 ## v11.0.4 (2024-07-24)
 
 ### Other
@@ -117,6 +139,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency web3 to v6.20.1 ([`1975891`](https://github.com/mraniki/dxsp/commit/197589182f540bbd49355f430018ca1e0c88d6be))
+
 
 ## v11.0.3 (2024-07-21)
 
@@ -130,6 +153,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 
 * ⬆️ 🛠️(deps): update dependency sphinx to v7.4.7 ([`6e61bb6`](https://github.com/mraniki/dxsp/commit/6e61bb6ebac2238d31e54cff523c98f50d59bad5))
 
+
 ## v11.0.2 (2024-07-20)
 
 ### Other
@@ -141,6 +165,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency sphinx to v7.4.6 ([`e82fe52`](https://github.com/mraniki/dxsp/commit/e82fe52e899f10649cd7a75474d166703fb60de2))
+
 
 ## v11.0.1 (2024-07-17)
 
@@ -165,6 +190,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 * ⬆️ 🛠️(deps): update dependency sphinx to v7.4.2 ([`06877c4`](https://github.com/mraniki/dxsp/commit/06877c4e534c07589d2bb5cd294942d7b277d54b))
 
 * ⬆️ 🛠️(deps): update dependency sphinx to v7.4.0 ([`060bb9a`](https://github.com/mraniki/dxsp/commit/060bb9a82438b436355e41d66d957795eccce3ae))
+
 
 ## v11.0.0 (2024-07-14)
 
@@ -270,6 +296,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 
 * 🥅 Improve error handling ([`bb5b83e`](https://github.com/mraniki/dxsp/commit/bb5b83e21d2d85c3a2fa62754216676ca760ebe7))
 
+
 ## v10.3.1 (2024-07-09)
 
 ### Other
@@ -289,6 +316,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 ### 🔧
 
 * 🔧 ([`c558819`](https://github.com/mraniki/dxsp/commit/c55881967859432877d38ecab06fb9d573a1bd8c))
+
 
 ## v10.3.0 (2024-07-08)
 
@@ -332,6 +360,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 
 * 💄 _create_client update ([`03c5dc3`](https://github.com/mraniki/dxsp/commit/03c5dc3f8996dd171c2f7be3768ff14662837cae))
 
+
 ## v10.2.15 (2024-06-28)
 
 ### Other
@@ -343,6 +372,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 ### 🔇
 
 * 🔇 ([`ae19a3b`](https://github.com/mraniki/dxsp/commit/ae19a3b7f69a8398e9b688163867c7cddbb70911))
+
 
 ## v10.2.14 (2024-06-28)
 
@@ -358,6 +388,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 
 * ⬆️ 🛠️(deps): update dependency web3 to v6.20.0 ([`8e78da8`](https://github.com/mraniki/dxsp/commit/8e78da86e7dd2cb719b20e46406de17cc2a23350))
 
+
 ## v10.2.13 (2024-06-26)
 
 ### Other
@@ -369,6 +400,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency pydata-sphinx-theme to v0.15.4 ([`27f98c6`](https://github.com/mraniki/dxsp/commit/27f98c6c2ad9470a51242de4e53917d1deac8db4))
+
 
 ## v10.2.12 (2024-06-18)
 
@@ -386,6 +418,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 
 * 🚨 ([`65df418`](https://github.com/mraniki/dxsp/commit/65df418271ece8d3aefd1a49f8859d4a68aff305))
 
+
 ## v10.2.11 (2024-05-31)
 
 ### Other
@@ -398,6 +431,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 
 * ⬆️ 🛠️(deps): update dependency sphinx-hoverxref to v1.4.0 ([`3f7dd1a`](https://github.com/mraniki/dxsp/commit/3f7dd1a0550fc4762413d6e52b494ef199ba4e75))
 
+
 ## v10.2.10 (2024-05-29)
 
 ### Other
@@ -409,6 +443,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency pydata-sphinx-theme to v0.15.3 ([`ed3edd7`](https://github.com/mraniki/dxsp/commit/ed3edd79dce6a38a86e551802a144169947ee7c3))
+
 
 ## v10.2.9 (2024-05-24)
 
@@ -424,6 +459,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 
 * ⬆️ 🛠️(deps): update dependency myst_parser to v3 ([`3d3806b`](https://github.com/mraniki/dxsp/commit/3d3806b90bf73dfc8dd8c7e40ba16950f1392823))
 
+
 ## v10.2.8 (2024-05-23)
 
 ### Other
@@ -435,6 +471,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency sphinx_design to ^0.6.0 ([`900523c`](https://github.com/mraniki/dxsp/commit/900523c25924b3b636bd75f4bd5bc20752dbfe19))
+
 
 ## v10.2.7 (2024-05-17)
 
@@ -452,6 +489,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 
 * ⬆️ 🛠️(deps): update dependency web3 to v6.18.0 ([`76b0ad1`](https://github.com/mraniki/dxsp/commit/76b0ad11c72c7d801b54f18f105b03fc74612ff5))
 
+
 ## v10.2.6 (2024-04-24)
 
 ### Other
@@ -463,6 +501,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency pytest-cov to v5 ([`6132ab6`](https://github.com/mraniki/dxsp/commit/6132ab6a291b8299b9d0e45581450168ca4dbdf5))
+
 
 ## v10.2.5 (2024-04-19)
 
@@ -480,6 +519,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 
 * 🎨 update main.py ([`700873d`](https://github.com/mraniki/dxsp/commit/700873d6b00d5ec9a2d63d597948333e5bf9d3e2))
 
+
 ## v10.2.4 (2024-04-19)
 
 ### Other
@@ -491,6 +531,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency ruff to ^0.4.0 ([`e79ddb7`](https://github.com/mraniki/dxsp/commit/e79ddb7c10dd026fdaef880d4931f4bc3d79efd2))
+
 
 ## v10.2.3 (2024-04-18)
 
@@ -512,6 +553,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 
 * ⬆️ 🛠️(deps): update dependency sphinx to v7.3.5 ([`a6deffc`](https://github.com/mraniki/dxsp/commit/a6deffc9b72db20df7e04829350fd6afbdd1042c))
 
+
 ## v10.2.2 (2024-04-17)
 
 ### Other
@@ -527,6 +569,7 @@ Dev ([`e0265c6`](https://github.com/mraniki/dxsp/commit/e0265c65eac4a84379b03160
 * ⬆️ 🛠️(deps): update dependency sphinx to v7.3.2 ([`b9a8587`](https://github.com/mraniki/dxsp/commit/b9a8587b79219f85e819ede1a870a89d9c0574d5))
 
 * ⬆️ 🛠️(deps): update dependency eth-ape to v0.7.16 ([`74e546f`](https://github.com/mraniki/dxsp/commit/74e546f14deeeea8a8d133208ee0d4aa17e2c9c2))
+
 
 ## v10.2.1 (2024-04-16)
 
@@ -561,6 +604,7 @@ and handle order error in DexSwap class. ([`d575dc9`](https://github.com/mraniki
 
 * 🎨 improve error message ([`1bf5adf`](https://github.com/mraniki/dxsp/commit/1bf5adf54d53a295788ce7ee434506fde79fd42a))
 
+
 ## v10.2.0 (2024-04-13)
 
 ### Feat
@@ -577,6 +621,7 @@ and handle order error in DexSwap class. ([`d575dc9`](https://github.com/mraniki
 
 * 🔧 ([`4cdff25`](https://github.com/mraniki/dxsp/commit/4cdff25512280a9b37c81728f087784f54689899))
 
+
 ## v10.1.1 (2024-04-13)
 
 ### Other
@@ -588,6 +633,7 @@ and handle order error in DexSwap class. ([`d575dc9`](https://github.com/mraniki
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency eth-ape to v0.7.15 ([`d979d6b`](https://github.com/mraniki/dxsp/commit/d979d6b5ff2aa408568f9c2f428b574d35032734))
+
 
 ## v10.1.0 (2024-04-12)
 
@@ -617,6 +663,7 @@ and handle order error in DexSwap class. ([`d575dc9`](https://github.com/mraniki
 
 * 💄 PnL code structure alignement ([`97a45c9`](https://github.com/mraniki/dxsp/commit/97a45c91c372ebabb98174958d69c1857e9f354b))
 
+
 ## v10.0.5 (2024-04-09)
 
 ### Fix
@@ -629,6 +676,7 @@ and handle order error in DexSwap class. ([`d575dc9`](https://github.com/mraniki
 
 🐛 ♻️ 🎨  improve submit_order format and bug fix ([`c48a32c`](https://github.com/mraniki/dxsp/commit/c48a32c86213d639322b04ade3c03f740ec11ec7))
 
+
 ## v10.0.4 (2024-04-08)
 
 ### Other
@@ -640,6 +688,7 @@ and handle order error in DexSwap class. ([`d575dc9`](https://github.com/mraniki
 ### ⚡
 
 * ⚡ update client.py and contract_utils.py ([`3d76881`](https://github.com/mraniki/dxsp/commit/3d76881e886fb37778f47c4db4848917cd595a53))
+
 
 ## v10.0.3 (2024-04-08)
 
@@ -657,6 +706,7 @@ and handle order error in DexSwap class. ([`d575dc9`](https://github.com/mraniki
 
 * ⚡ update contract_utils.py and example.py ([`40de9e9`](https://github.com/mraniki/dxsp/commit/40de9e9e08d0dce870268ec2bd4013be15e3641c))
 
+
 ## v10.0.2 (2024-04-08)
 
 ### Other
@@ -668,6 +718,7 @@ and handle order error in DexSwap class. ([`d575dc9`](https://github.com/mraniki
 ### ♻️
 
 * ♻️ update contract_utils.py ([`ce16ea7`](https://github.com/mraniki/dxsp/commit/ce16ea7e4a39b8ccbe240c5fd9e8b0ff4dfa38a7))
+
 
 ## v10.0.1 (2024-04-07)
 
@@ -681,6 +732,7 @@ and handle order error in DexSwap class. ([`d575dc9`](https://github.com/mraniki
 
 * 🚑 update client.py ([`53d7f50`](https://github.com/mraniki/dxsp/commit/53d7f5016b1737ac676470640b0dae7c54e60d57))
 
+
 ## v10.0.0 (2024-04-06)
 
 ### Other
@@ -693,11 +745,11 @@ and handle order error in DexSwap class. ([`d575dc9`](https://github.com/mraniki
 
 * Update dxsp/handler/client.py
 
-Co-authored-by: sourcery-ai[bot] &lt;58596630+sourcery-ai[bot]@users.noreply.github.com&gt; ([`ec54de6`](https://github.com/mraniki/dxsp/commit/ec54de6f88e9c3454340995d68ef81815ba2b5b2))
+Co-authored-by: sourcery-ai[bot] <58596630+sourcery-ai[bot]@users.noreply.github.com> ([`ec54de6`](https://github.com/mraniki/dxsp/commit/ec54de6f88e9c3454340995d68ef81815ba2b5b2))
 
 * Update dxsp/handler/client.py
 
-Co-authored-by: sourcery-ai[bot] &lt;58596630+sourcery-ai[bot]@users.noreply.github.com&gt; ([`5ac3a49`](https://github.com/mraniki/dxsp/commit/5ac3a49ce7f223b378c4636c9d2ff4f77bf673f9))
+Co-authored-by: sourcery-ai[bot] <58596630+sourcery-ai[bot]@users.noreply.github.com> ([`5ac3a49`](https://github.com/mraniki/dxsp/commit/5ac3a49ce7f223b378c4636c9d2ff4f77bf673f9))
 
 ### ♻️
 
@@ -731,6 +783,7 @@ Co-authored-by: sourcery-ai[bot] &lt;58596630+sourcery-ai[bot]@users.noreply.git
 
 * 🚨 ([`4a82e04`](https://github.com/mraniki/dxsp/commit/4a82e0495930fda06fbf93c94487e8349d6b9905))
 
+
 ## v9.0.7 (2024-04-06)
 
 ### Other
@@ -742,6 +795,7 @@ Co-authored-by: sourcery-ai[bot] &lt;58596630+sourcery-ai[bot]@users.noreply.git
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency eth-ape to v0.7.14 ([`fe97a35`](https://github.com/mraniki/dxsp/commit/fe97a35f1b6ebb9991bd4af2599ed4e980a6abe2))
+
 
 ## v9.0.6 (2024-03-30)
 
@@ -760,6 +814,7 @@ Co-authored-by: sourcery-ai[bot] &lt;58596630+sourcery-ai[bot]@users.noreply.git
 * 🐛 ([`628b910`](https://github.com/mraniki/dxsp/commit/628b910fcbdca06cf80ff239bcfdd941568aec9c))
 
 * 🐛 ([`1b587ba`](https://github.com/mraniki/dxsp/commit/1b587ba194d913085c7e16af1227d08a2be92309))
+
 
 ## v9.0.5 (2024-03-29)
 
@@ -807,6 +862,7 @@ Co-authored-by: sourcery-ai[bot] &lt;58596630+sourcery-ai[bot]@users.noreply.git
 
 * 🚨 ([`02571b0`](https://github.com/mraniki/dxsp/commit/02571b009d33f461e42c64b4a056d3ca684b2be4))
 
+
 ## v9.0.4 (2024-03-29)
 
 ### Other
@@ -823,6 +879,7 @@ Co-authored-by: sourcery-ai[bot] &lt;58596630+sourcery-ai[bot]@users.noreply.git
 
 * 🔊 Improve log when no clients loaded ([`cd72ca2`](https://github.com/mraniki/dxsp/commit/cd72ca2a08f183f9aeee6929779b7bbe91db08c5))
 
+
 ## v9.0.3 (2024-03-29)
 
 ### Other
@@ -834,6 +891,7 @@ Co-authored-by: sourcery-ai[bot] &lt;58596630+sourcery-ai[bot]@users.noreply.git
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency web3 to v6.16.0 ([`a97ae15`](https://github.com/mraniki/dxsp/commit/a97ae1522ed914b61b5fa96a13f7e5b356d68730))
+
 
 ## v9.0.2 (2024-03-28)
 
@@ -859,6 +917,7 @@ Builds broken with poetry 1.8 ([`75f4af2`](https://github.com/mraniki/dxsp/commi
 
 * 🐛 📝 ([`a598157`](https://github.com/mraniki/dxsp/commit/a598157900e1967488d0b1b57d9f10e39eb23a0e))
 
+
 ## v9.0.1 (2024-03-28)
 
 ### Other
@@ -874,6 +933,7 @@ Builds broken with poetry 1.8 ([`75f4af2`](https://github.com/mraniki/dxsp/commi
 ### 🥅
 
 * 🥅 improving error management ([`54dda05`](https://github.com/mraniki/dxsp/commit/54dda05a4be5319d740c1bc84912a71653da640e))
+
 
 ## v9.0.0 (2024-03-28)
 
@@ -897,6 +957,7 @@ Builds broken with poetry 1.8 ([`75f4af2`](https://github.com/mraniki/dxsp/commi
 
 * 🐛 ([`4c1521f`](https://github.com/mraniki/dxsp/commit/4c1521feca724f6cee7f920bc1970995077a5a46))
 
+
 ## v8.0.1 (2024-03-26)
 
 ### :bug:
@@ -912,6 +973,7 @@ Merge pull request #596 from mraniki/main ([`8ccb836`](https://github.com/mranik
 * Merge pull request #596 from mraniki/main
 
 :bug: Fix contract chain conversion bug in ContractUtils class ([`dd4cdd1`](https://github.com/mraniki/dxsp/commit/dd4cdd1faf0f32090d3fe22fec50bf5923b17a34))
+
 
 ## v8.0.0 (2024-03-26)
 
@@ -981,6 +1043,7 @@ Merge pull request #596 from mraniki/main ([`8ccb836`](https://github.com/mranik
 
 * 🚨 Linter setup update ([`584212f`](https://github.com/mraniki/dxsp/commit/584212fd3a9590b7ec21d4602d9cb4a100313679))
 
+
 ## v7.0.15 (2024-03-25)
 
 ### Other
@@ -995,6 +1058,7 @@ Merge pull request #596 from mraniki/main ([`8ccb836`](https://github.com/mranik
 
 * ⬆️ 🛠️(deps): update dependency eth-ape to v0.7.13 ([`c3e58f2`](https://github.com/mraniki/dxsp/commit/c3e58f256082397977e60eeb8ac78cc8bc5ba1da))
 
+
 ## v7.0.14 (2024-03-01)
 
 ### Other
@@ -1006,6 +1070,7 @@ Merge pull request #596 from mraniki/main ([`8ccb836`](https://github.com/mranik
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency ruff to ^0.3.0 ([`473c5e2`](https://github.com/mraniki/dxsp/commit/473c5e2beafd87a8794daed9d44c4fdcceaec873))
+
 
 ## v7.0.13 (2024-02-27)
 
@@ -1022,6 +1087,7 @@ Merge pull request #596 from mraniki/main ([`8ccb836`](https://github.com/mranik
 ### 🐛
 
 * 🐛 ([`d889b88`](https://github.com/mraniki/dxsp/commit/d889b88ce7ca4f9b96fcc169464d24beb0f445b4))
+
 
 ## v7.0.12 (2024-02-27)
 
@@ -1042,6 +1108,7 @@ Merge pull request #596 from mraniki/main ([`8ccb836`](https://github.com/mranik
 * ⬆️ 🛠️(deps): update dependency black to v24 ([`7b6c0f6`](https://github.com/mraniki/dxsp/commit/7b6c0f64618a4f9dfb9c1cc7a3810ce7d642d20a))
 
 * ⬆️ Adjusted dependencies ([`0a6f325`](https://github.com/mraniki/dxsp/commit/0a6f325754f338c2d8c3016b0cbf718a09ef68a8))
+
 
 ## v7.0.11 (2024-02-23)
 
@@ -1093,6 +1160,7 @@ Merge pull request #596 from mraniki/main ([`8ccb836`](https://github.com/mranik
 
 * 🐛 ([`fe27615`](https://github.com/mraniki/dxsp/commit/fe27615d1e9fc83c4314131a995a55efa32ea25b))
 
+
 ## v7.0.10 (2024-02-11)
 
 ### Other
@@ -1119,6 +1187,7 @@ Merge pull request #596 from mraniki/main ([`8ccb836`](https://github.com/mranik
 
 * ⬆️ 🛠️(deps): update dependency web3 to v6.15.1 ([`052877e`](https://github.com/mraniki/dxsp/commit/052877e0c069247016d186a4abc7b3693d5a76e3))
 
+
 ## v7.0.9 (2024-02-03)
 
 ### Other
@@ -1130,6 +1199,7 @@ Merge pull request #596 from mraniki/main ([`8ccb836`](https://github.com/mranik
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency ruff to ^0.2.0 ([`f9846a4`](https://github.com/mraniki/dxsp/commit/f9846a4d9882d3eef455bb0ca6b6ed4d262080a7))
+
 
 ## v7.0.8 (2024-01-31)
 
@@ -1143,6 +1213,7 @@ Merge pull request #596 from mraniki/main ([`8ccb836`](https://github.com/mranik
 
 * ⬆️ 🛠️(deps): update dependency eth-ape to v0.7.7 ([`768ec66`](https://github.com/mraniki/dxsp/commit/768ec66abe2a9738d8e235aa2c41266e78f98134))
 
+
 ## v7.0.7 (2024-01-26)
 
 ### Other
@@ -1155,6 +1226,7 @@ Merge pull request #596 from mraniki/main ([`8ccb836`](https://github.com/mranik
 
 * ⬆️ 🛠️(deps): update dependency web3 to v6.15.0 ([`8c06067`](https://github.com/mraniki/dxsp/commit/8c06067de811355c2eb2be8ca7f5f0cc3e42a26c))
 
+
 ## v7.0.6 (2024-01-25)
 
 ### Other
@@ -1166,6 +1238,7 @@ Merge pull request #596 from mraniki/main ([`8ccb836`](https://github.com/mranik
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency eth-ape to v0.7.6 ([`4514b73`](https://github.com/mraniki/dxsp/commit/4514b73cb7aed3dc7ecce5d4e8e28a44cf55f434))
+
 
 ## v7.0.5 (2024-01-11)
 
@@ -1189,6 +1262,7 @@ Merge pull request #596 from mraniki/main ([`8ccb836`](https://github.com/mranik
 
 * ⬆️ 🛠️(deps): update dependency web3 to v6.14.0 ([`d9518ed`](https://github.com/mraniki/dxsp/commit/d9518ede148b4c8bf650c47aad3df30e2917643b))
 
+
 ## v7.0.4 (2024-01-07)
 
 ### Other
@@ -1200,6 +1274,7 @@ Merge pull request #596 from mraniki/main ([`8ccb836`](https://github.com/mranik
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency eth-ape to v0.7.4 ([`195b0b2`](https://github.com/mraniki/dxsp/commit/195b0b2da6f176e4ef0e500047064581214c4227))
+
 
 ## v7.0.3 (2024-01-06)
 
@@ -1213,6 +1288,7 @@ Merge pull request #596 from mraniki/main ([`8ccb836`](https://github.com/mranik
 
 * ⬆️ 🛠️(deps): update dependency eth-ape to v0.7.3 ([`6d4be88`](https://github.com/mraniki/dxsp/commit/6d4be8841744f2e1317fc68f9db68207bbd83b37))
 
+
 ## v7.0.2 (2024-01-05)
 
 ### Other
@@ -1224,6 +1300,7 @@ Merge pull request #596 from mraniki/main ([`8ccb836`](https://github.com/mranik
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency pydata-sphinx-theme to ^0.15.0 ([`774f9df`](https://github.com/mraniki/dxsp/commit/774f9df8462ccca3c4733d1b2f57aacbdbc787ce))
+
 
 ## v7.0.1 (2024-01-04)
 
@@ -1237,7 +1314,7 @@ Merge pull request #596 from mraniki/main ([`8ccb836`](https://github.com/mranik
 
 ⬆️ 🤖 - A banker is a fellow who lends you his umbrella when the sun is shining ([`3d7a62a`](https://github.com/mraniki/dxsp/commit/3d7a62af4ddc0cf6b2c97f09082a6f150d4678e5))
 
-* Merge branch &#39;main&#39; into dev ([`38875c2`](https://github.com/mraniki/dxsp/commit/38875c2917b78938c3f055be52d63f2a9308c01d))
+* Merge branch 'main' into dev ([`38875c2`](https://github.com/mraniki/dxsp/commit/38875c2917b78938c3f055be52d63f2a9308c01d))
 
 ### ⬆️
 
@@ -1249,7 +1326,7 @@ Merge pull request #596 from mraniki/main ([`8ccb836`](https://github.com/mranik
 
 ---------
 
-Co-authored-by: mraniki &lt;mraniki@users.noreply.github.com&gt; ([`605d5e2`](https://github.com/mraniki/dxsp/commit/605d5e26d054f86ff551d30caa395648c8bdc4a6))
+Co-authored-by: mraniki <mraniki@users.noreply.github.com> ([`605d5e2`](https://github.com/mraniki/dxsp/commit/605d5e26d054f86ff551d30caa395648c8bdc4a6))
 
 ### 🐛
 
@@ -1260,6 +1337,7 @@ Co-authored-by: mraniki &lt;mraniki@users.noreply.github.com&gt; ([`605d5e2`](ht
 * 💬 test ([`bbd4b50`](https://github.com/mraniki/dxsp/commit/bbd4b50227a64b093ae06da0d7f108efb07b4f6d))
 
 * 💬 test ([`be0249c`](https://github.com/mraniki/dxsp/commit/be0249cc8ed4fa95bbf7b1ba81fa2253d7f1fb06))
+
 
 ## v7.0.0 (2024-01-02)
 
@@ -1353,6 +1431,7 @@ Co-authored-by: mraniki &lt;mraniki@users.noreply.github.com&gt; ([`605d5e2`](ht
 
 * 🧐 more log debug for the get_quote method ([`44d7fa3`](https://github.com/mraniki/dxsp/commit/44d7fa3f63c58ca8695077461e00bde8c4b3c441))
 
+
 ## v6.1.10 (2023-12-14)
 
 ### Other
@@ -1364,6 +1443,7 @@ Co-authored-by: mraniki &lt;mraniki@users.noreply.github.com&gt; ([`605d5e2`](ht
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency web3 to v6.12.0 ([`55ce262`](https://github.com/mraniki/dxsp/commit/55ce262dd6ba3882d2da90d39946de4d7cb738a2))
+
 
 ## v6.1.9 (2023-12-10)
 
@@ -1421,6 +1501,7 @@ align ([`56eb0df`](https://github.com/mraniki/dxsp/commit/56eb0df736e50f7c2111bd
 
 * ⬆️ 🛠️(deps): update dependency web3 to v6.11.2 ([`34d821b`](https://github.com/mraniki/dxsp/commit/34d821b40cfb26b00684b08b102b044cf8086efe))
 
+
 ## v6.1.8 (2023-10-29)
 
 ### Other
@@ -1459,6 +1540,7 @@ Merge ([`ee071e3`](https://github.com/mraniki/dxsp/commit/ee071e314d67c22d2056af
 
 * 👷 CI Change ([`b6d8d22`](https://github.com/mraniki/dxsp/commit/b6d8d22c2f216076fc03ca7411da4cc411bba65d))
 
+
 ## v6.1.7 (2023-10-27)
 
 ### Other
@@ -1471,6 +1553,7 @@ Merge ([`ee071e3`](https://github.com/mraniki/dxsp/commit/ee071e314d67c22d2056af
 
 * ⬆️ Update Requirements and Version ([`c517f6d`](https://github.com/mraniki/dxsp/commit/c517f6dfce4cdd0c7270764979eafe72c82cde1e))
 
+
 ## v6.1.6 (2023-10-26)
 
 ### Other
@@ -1479,7 +1562,7 @@ Merge ([`ee071e3`](https://github.com/mraniki/dxsp/commit/ee071e314d67c22d2056af
 
 ⬆️ 🤖 - Auto Release ([`8607804`](https://github.com/mraniki/dxsp/commit/8607804b0e6492a147ab57ec5d1fbb0be9ebd9ad))
 
-* Merge branch &#39;main&#39; into dev ([`4b08577`](https://github.com/mraniki/dxsp/commit/4b085771985b27cf26e01b7726ea648f3b1b1dbe))
+* Merge branch 'main' into dev ([`4b08577`](https://github.com/mraniki/dxsp/commit/4b085771985b27cf26e01b7726ea648f3b1b1dbe))
 
 ### Update
 
@@ -1488,6 +1571,7 @@ Merge ([`ee071e3`](https://github.com/mraniki/dxsp/commit/ee071e314d67c22d2056af
 ### 🔧
 
 * 🔧 ([`240b1ba`](https://github.com/mraniki/dxsp/commit/240b1bac5699368282510442b07b715949eb3271))
+
 
 ## v6.1.5 (2023-10-26)
 
@@ -1500,7 +1584,7 @@ twork version. ([`209810a`](https://github.com/mraniki/dxsp/commit/209810a883b22
 
 ### Other
 
-* Merge branch &#39;main&#39; into dev ([`dce8280`](https://github.com/mraniki/dxsp/commit/dce82806f2db3c1664bc70b695586503a56c2458))
+* Merge branch 'main' into dev ([`dce8280`](https://github.com/mraniki/dxsp/commit/dce82806f2db3c1664bc70b695586503a56c2458))
 
 * Merge pull request #491 from mraniki/dev
 
@@ -1508,7 +1592,7 @@ twork version. ([`209810a`](https://github.com/mraniki/dxsp/commit/209810a883b22
 
 * Auto ([`a278388`](https://github.com/mraniki/dxsp/commit/a2783880d627b7126d1ddaa8d667b13a8c501038))
 
-* Merge branch &#39;main&#39; into dev ([`b03c525`](https://github.com/mraniki/dxsp/commit/b03c5258a8473046a3a403e92d8293c4f88e9ef0))
+* Merge branch 'main' into dev ([`b03c525`](https://github.com/mraniki/dxsp/commit/b03c5258a8473046a3a403e92d8293c4f88e9ef0))
 
 * Merge pull request #490 from mraniki/dev
 
@@ -1520,11 +1604,11 @@ twork version. ([`209810a`](https://github.com/mraniki/dxsp/commit/209810a883b22
 
 ⬆️ 🤖 - Auto Release (Sourcery refactored) ([`aab048e`](https://github.com/mraniki/dxsp/commit/aab048e446707212df5f5ca00dce835897223ecf))
 
-* &#39;Refactored by Sourcery&#39; ([`94a10ba`](https://github.com/mraniki/dxsp/commit/94a10ba1680877b254f9997d994d21059dd832b4))
+* 'Refactored by Sourcery' ([`94a10ba`](https://github.com/mraniki/dxsp/commit/94a10ba1680877b254f9997d994d21059dd832b4))
 
 * Auto ([`21edab8`](https://github.com/mraniki/dxsp/commit/21edab83939456c40115d636bf305a3eb39567e4))
 
-* Merge branch &#39;main&#39; into dev ([`94a3f01`](https://github.com/mraniki/dxsp/commit/94a3f01cf8b7dcd97bba6803f2e03db710b00f8e))
+* Merge branch 'main' into dev ([`94a3f01`](https://github.com/mraniki/dxsp/commit/94a3f01cf8b7dcd97bba6803f2e03db710b00f8e))
 
 * Merge pull request #489 from mraniki/dev
 
@@ -1537,6 +1621,7 @@ twork version. ([`209810a`](https://github.com/mraniki/dxsp/commit/209810a883b22
 ### Update
 
 * Update Requirements ([`076c122`](https://github.com/mraniki/dxsp/commit/076c1229b5c52af0b542b972bd8e2e03fd47ca27))
+
 
 ## v6.1.4 (2023-10-22)
 
@@ -1557,6 +1642,7 @@ twork version. ([`209810a`](https://github.com/mraniki/dxsp/commit/209810a883b22
 ### 🥅
 
 * 🥅 better error handling for no config ([`7735b77`](https://github.com/mraniki/dxsp/commit/7735b77398009cd56638a6369f1df0ba70797e0c))
+
 
 ## v6.1.3 (2023-10-20)
 
@@ -1592,7 +1678,7 @@ Merge pull request #485 from mraniki/dev ([`e2d201a`](https://github.com/mraniki
 
 👷 CI Change ([`a7e60f5`](https://github.com/mraniki/dxsp/commit/a7e60f51d79ce9b912fe6df5e15db041a3e98582))
 
-* Merge branch &#39;main&#39; into dev ([`e9de6e1`](https://github.com/mraniki/dxsp/commit/e9de6e137654d9c3cc605b341e0ef98dd3fdabe0))
+* Merge branch 'main' into dev ([`e9de6e1`](https://github.com/mraniki/dxsp/commit/e9de6e137654d9c3cc605b341e0ef98dd3fdabe0))
 
 * Merge pull request #483 from mraniki/dev
 
@@ -1602,13 +1688,13 @@ Dev ([`368568d`](https://github.com/mraniki/dxsp/commit/368568d2cd046128c97af5de
 
 Dev (Sourcery refactored) ([`6934513`](https://github.com/mraniki/dxsp/commit/6934513845dda1a51287a31dffbfe1d7d4a51dfc))
 
-* &#39;Refactored by Sourcery&#39; ([`ceacdcd`](https://github.com/mraniki/dxsp/commit/ceacdcdfcf20ecbaf6af74c5f65d408764ce40e1))
+* 'Refactored by Sourcery' ([`ceacdcd`](https://github.com/mraniki/dxsp/commit/ceacdcdfcf20ecbaf6af74c5f65d408764ce40e1))
 
 * Merge pull request #482 from mraniki/dependabot/pip/dev/web3-6.11.1
 
 ⬆️ 🤖 Dependencies: Update web3 requirement from 6.11.0 to 6.11.1 ([`cd7f744`](https://github.com/mraniki/dxsp/commit/cd7f744dd901c3522813f29bc9e0da5ddaf72a90))
 
-* Merge branch &#39;dev&#39; into dependabot/pip/dev/web3-6.11.1 ([`01479e4`](https://github.com/mraniki/dxsp/commit/01479e4f4f53a1b4e858f3621066eccbf4775a27))
+* Merge branch 'dev' into dependabot/pip/dev/web3-6.11.1 ([`01479e4`](https://github.com/mraniki/dxsp/commit/01479e4f4f53a1b4e858f3621066eccbf4775a27))
 
 * Merge pull request #481 from mraniki/renovate/web3-6.x
 
@@ -1618,7 +1704,7 @@ Dev (Sourcery refactored) ([`6934513`](https://github.com/mraniki/dxsp/commit/69
 
 🔊🥅 Logging and Error Management improvement ([`5b4b76b`](https://github.com/mraniki/dxsp/commit/5b4b76b9ae348d85917b47834e09a26369b13f89))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`d86aa2b`](https://github.com/mraniki/dxsp/commit/d86aa2bddecc317f872245c253ff7d38455d9e6e))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`d86aa2b`](https://github.com/mraniki/dxsp/commit/d86aa2bddecc317f872245c253ff7d38455d9e6e))
 
 ### Update
 
@@ -1637,7 +1723,7 @@ updated-dependencies:
   dependency-type: direct:production
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`2c14663`](https://github.com/mraniki/dxsp/commit/2c1466389e2f2f24ab9a68deb40e2e0234a72349))
+Signed-off-by: dependabot[bot] <support@github.com> ([`2c14663`](https://github.com/mraniki/dxsp/commit/2c1466389e2f2f24ab9a68deb40e2e0234a72349))
 
 * Update Requirements ([`6d1bc0c`](https://github.com/mraniki/dxsp/commit/6d1bc0cf3e6ec2ad9f79f8421b71da45c807ad19))
 
@@ -1687,6 +1773,7 @@ Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`2c14663`](https://g
 
 * 🥅 ([`dc1ce3a`](https://github.com/mraniki/dxsp/commit/dc1ce3ab1eae244a08a2480b2c71c3a2c3b450ae))
 
+
 ## v6.1.2 (2023-10-17)
 
 ### Other
@@ -1698,6 +1785,7 @@ Update README.md ([`ca03819`](https://github.com/mraniki/dxsp/commit/ca038195729
 ### Update
 
 * Update README.md ([`a8e89eb`](https://github.com/mraniki/dxsp/commit/a8e89eb6b1e159743fc27b3ad46d86c42856fc2f))
+
 
 ## v6.1.1 (2023-10-17)
 
@@ -1719,6 +1807,7 @@ Update README.md ([`ca03819`](https://github.com/mraniki/dxsp/commit/ca038195729
 
 * ⬆️ 🛠️(deps): update dependency ruff to ^0.1.0 ([`61fe348`](https://github.com/mraniki/dxsp/commit/61fe3484d9b3786498a15fa954ef75b7db3c1d2c))
 
+
 ## v6.1.0 (2023-10-17)
 
 ### Other
@@ -1730,6 +1819,7 @@ Update README.md ([`ca03819`](https://github.com/mraniki/dxsp/commit/ca038195729
 ### ✨
 
 * ✨ trading_amount_threshold and ✅ Unit Test ([`c305d0c`](https://github.com/mraniki/dxsp/commit/c305d0cac1e163cf838552b243a6b89a98db2598))
+
 
 ## v6.0.7 (2023-10-17)
 
@@ -1743,7 +1833,7 @@ Update README.md ([`ca03819`](https://github.com/mraniki/dxsp/commit/ca038195729
 
 👷 CI Change (Sourcery refactored) ([`b7ad1c4`](https://github.com/mraniki/dxsp/commit/b7ad1c414acd5741c89f5e294bb7a7b38f191292))
 
-* &#39;Refactored by Sourcery&#39; ([`910881e`](https://github.com/mraniki/dxsp/commit/910881e92e5c7cb9c2046d4224aeffec122d0686))
+* 'Refactored by Sourcery' ([`910881e`](https://github.com/mraniki/dxsp/commit/910881e92e5c7cb9c2046d4224aeffec122d0686))
 
 ### Update
 
@@ -1761,6 +1851,7 @@ Update README.md ([`ca03819`](https://github.com/mraniki/dxsp/commit/ca038195729
 
 * 👷 CI Change ([`3e79453`](https://github.com/mraniki/dxsp/commit/3e79453cd79502560be2a786e5c6853b772b166e))
 
+
 ## v6.0.6 (2023-10-17)
 
 ### Other
@@ -1775,6 +1866,7 @@ Update README.md ([`ca03819`](https://github.com/mraniki/dxsp/commit/ca038195729
 
 * 👷 CI Change ([`91a0f2d`](https://github.com/mraniki/dxsp/commit/91a0f2d870d270d0bb80797aad31dc2033d9c4c2))
 
+
 ## v6.0.5 (2023-10-16)
 
 ### Other
@@ -1786,6 +1878,7 @@ Update README.md ([`ca03819`](https://github.com/mraniki/dxsp/commit/ca038195729
 ### 🚨
 
 * 🚨 linter ([`bcad572`](https://github.com/mraniki/dxsp/commit/bcad57227972c1101b070dbf4c27f5eed75adc6e))
+
 
 ## v6.0.4 (2023-10-15)
 
@@ -1886,11 +1979,13 @@ r better precision. ([`5e7950a`](https://github.com/mraniki/dxsp/commit/5e7950aa
 
 * 🔊 ([`493dc55`](https://github.com/mraniki/dxsp/commit/493dc55a26f0c1a2b8e8e91c17cc3ec48fbd19ba))
 
+
 ## v6.0.3 (2023-10-14)
 
 ### Update
 
 * Update README.md ([`ed62e46`](https://github.com/mraniki/dxsp/commit/ed62e46740f36b301de8d12739866c5486b29419))
+
 
 ## v6.0.2 (2023-10-14)
 
@@ -1903,6 +1998,7 @@ r better precision. ([`5e7950a`](https://github.com/mraniki/dxsp/commit/5e7950aa
 ### 🔥
 
 * 📝 🔥 cleanup and added documentation ([`85006d7`](https://github.com/mraniki/dxsp/commit/85006d78e16bc462e0003bcce88b75407c4eca86))
+
 
 ## v6.0.1 (2023-10-13)
 
@@ -1925,11 +2021,12 @@ hanges. ([`737fb67`](https://github.com/mraniki/dxsp/commit/737fb67ef5a831b37111
 
 * Add test case for get_swap function ([`5382084`](https://github.com/mraniki/dxsp/commit/5382084f3d0f992dcd4443202a36f3fe64dd8d58))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`fe25458`](https://github.com/mraniki/dxsp/commit/fe25458f6f85db61ee549187146e4fb25aaf86b3))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`fe25458`](https://github.com/mraniki/dxsp/commit/fe25458f6f85db61ee549187146e4fb25aaf86b3))
 
 ### Update
 
 * :construction_worker_man:Update gitIgnoredAuthors in renovate.json ([`31dd879`](https://github.com/mraniki/dxsp/commit/31dd87964c47de28b30f9f5e41d848ebf79cde85))
+
 
 ## v6.0.0 (2023-10-13)
 
@@ -1970,11 +2067,11 @@ hanges. ([`737fb67`](https://github.com/mraniki/dxsp/commit/737fb67ef5a831b37111
 
 * Add logger import to Kwenta protocol ([`6f7feac`](https://github.com/mraniki/dxsp/commit/6f7feacb90ecb3230868faddb1c877b701959b8b))
 
-* Refactor DexSwap and DexClient to use the &#34;rpc&#34; parameter
+* Refactor DexSwap and DexClient to use the "rpc" parameter
 
-- Refactor DexSwap to use the &#34;rpc&#34; parameter instead of _config.get(&#34;rp
-c&#34;)
-- Refactor DexClient to use the &#34;rpc&#34; parameter instead of None ([`7cffbd5`](https://github.com/mraniki/dxsp/commit/7cffbd54472e461566455f521a145dcfc1625909))
+- Refactor DexSwap to use the "rpc" parameter instead of _config.get("rp
+c")
+- Refactor DexClient to use the "rpc" parameter instead of None ([`7cffbd5`](https://github.com/mraniki/dxsp/commit/7cffbd54472e461566455f521a145dcfc1625909))
 
 * Refactor 0x quote method ([`08e35e6`](https://github.com/mraniki/dxsp/commit/08e35e651ac02d8b8f3650805f72a3622f34fe9c))
 
@@ -1994,7 +2091,7 @@ index ddedee2..cb49932 100644
 --- a/dxsp/utils/contract_utils.py
 +++ b/dxsp/utils/contract_utils.py
 @@ -73 +73 @@ class ContractUtils:
--            raise Exception(f&#34;Token not found: {token}&#34;)
+-            raise Exception(f"Token not found: {token}")
 +            raise e
 diff --git a/tests/test_unit.py b/tests/test_unit.py
 index dcec268..8508233 100755
@@ -2003,26 +2100,26 @@ index dcec268..8508233 100755
 @@ -204,14 +204,14 @@ async def test_get_swap(dex_client):
 -@pytest.mark.asyncio
 -async def test_get_cg_data(dex_client):
--    &#34;&#34;&#34;getquote Testing&#34;&#34;&#34;
+-    """getquote Testing"""
 -    get_cg_data = AsyncMock()
--    result = await dex_client.get_quote(symbol=&#34;LINK&#34;)
+-    result = await dex_client.get_quote(symbol="LINK")
 -    assert result is not None
--    assert &#34;:unicorn:&#34; in result
+-    assert ":unicorn:" in result
 -    assert get_cg_data.awaited
 -
 -
 -@pytest.mark.asyncio
 -async def test_get_token_exception(dex_client):
 -    with pytest.raises(Exception):
--        result = await dex_client.get_quote(symbol=&#34;NOTATHING&#34;)
+-        result = await dex_client.get_quote(symbol="NOTATHING")
 +# @pytest.mark.asyncio
 +# async def test_get_cg_data(dex_client):
-+#     &#34;&#34;&#34;getquote Testing&#34;&#34;&#34;
++#     """getquote Testing"""
 +#     get_cg_data = AsyncMock()
-+#     result = await dex_client.get_quote(symbol=&#34;LINK&#34;)
++#     result = await dex_client.get_quote(symbol="LINK")
 +#     assert result is not None
 +#     assert
-&#34;�\b�\u001a[�\u001c�\\�[\u001d\u0002���\b\b\b\b\u0018\\��\\�\b\u0019�]\
+"�\b�\u001a[�\u001c�\\�[\u001d\u0002���\b\b\b\b\u0018\\��\\�\b\u0019�]\
 u0017����\u0018]\u0018K�]�Z]\u0019Y\u0002���\u0010\u001c\u001e]\u0019
 \\�\u000b�X\\�˘\\�[��[��\u0018\\�[��\u0019\u0019Y�\u001d\u0019\\�\u001
 7��]\u0017�\u001b��[��^\u0018�\\\u001d\u001a[ۊ\u0019\u0019^\u0017��\u001
@@ -2041,7 +2138,7 @@ Y[�\u000b��]\u0017�][�\u0019J\u001c�[X��\u000fH���\u0010U\
 
 💥 breaking: contract search refactoring (Sourcery refactored) ([`92ea5ba`](https://github.com/mraniki/dxsp/commit/92ea5badac903391305a4820615a0e70574aa030))
 
-* &#39;Refactored by Sourcery&#39; ([`e4d6eb9`](https://github.com/mraniki/dxsp/commit/e4d6eb94468c64ae33d88c3c651c371139c3450f))
+* 'Refactored by Sourcery' ([`e4d6eb9`](https://github.com/mraniki/dxsp/commit/e4d6eb94468c64ae33d88c3c651c371139c3450f))
 
 * Refactor contract_utils.py and add test cases for exception handling
 
@@ -2066,23 +2163,23 @@ e logging and provide flexibility in specifying the token address. The
 s
 pecific changes include:
 
-- Added a debug log statement for the &#39;result&#39; variable in the
+- Added a debug log statement for the 'result' variable in the
 ContractU
 tils class.
-- Commented out a debug log statement for &#39;search_results&#39; in the
+- Commented out a debug log statement for 'search_results' in the
 Contra
 ctUtils class.
-- Modified the &#39;get_token_abi&#39; method in the Token class to accept an
+- Modified the 'get_token_abi' method in the Token class to accept an
 op
-tional &#39;address&#39; parameter.
-- Updated the &#39;get_token_abi&#39; method in the Token class to use the
+tional 'address' parameter.
+- Updated the 'get_token_abi' method in the Token class to use the
 speci
-fied &#39;address&#39; if provided, or fallback to the default token address.
-- Modified the &#39;Token&#39; class initialization to use the updated
-&#39;get_toke
-n_abi&#39; method without specifying the token address.
+fied 'address' if provided, or fallback to the default token address.
+- Modified the 'Token' class initialization to use the updated
+'get_toke
+n_abi' method without specifying the token address.
 
-These changes aim to improve the code&#39;s readability, maintainability,
+These changes aim to improve the code's readability, maintainability,
 an
 d flexibility. ([`e463d18`](https://github.com/mraniki/dxsp/commit/e463d188eebf6ab99b17790b0b127e857d198430))
 
@@ -2100,18 +2197,18 @@ d flexibility. ([`e463d18`](https://github.com/mraniki/dxsp/commit/e463d188eebf6
 
 💥 breaking: contract search refactoring (Sourcery refactored) ([`ec7ee2c`](https://github.com/mraniki/dxsp/commit/ec7ee2c5b5c131759949196c372cb5948d42f7db))
 
-* &#39;Refactored by Sourcery&#39; ([`8015133`](https://github.com/mraniki/dxsp/commit/8015133cc4388adbcd6d69f1a6dcd6cc201b1ad6))
+* 'Refactored by Sourcery' ([`8015133`](https://github.com/mraniki/dxsp/commit/8015133cc4388adbcd6d69f1a6dcd6cc201b1ad6))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`1c18d55`](https://github.com/mraniki/dxsp/commit/1c18d55ea565d6319f43da21635b8c58c74fa63d))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`1c18d55`](https://github.com/mraniki/dxsp/commit/1c18d55ea565d6319f43da21635b8c58c74fa63d))
 
 * Fix contract address parameter in Uniswap and ZeroX protocols
 
 - Fix contract address parameter in Uniswap protocol
 - Fix contract address parameter in ZeroX protocol ([`03a1e3b`](https://github.com/mraniki/dxsp/commit/03a1e3b74e5bd7f20b9d8f772c5a78e588ddd631))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`ebcd96b`](https://github.com/mraniki/dxsp/commit/ebcd96b2b92529f55bf3131a4b69f20e712d4ac2))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`ebcd96b`](https://github.com/mraniki/dxsp/commit/ebcd96b2b92529f55bf3131a4b69f20e712d4ac2))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`5e05309`](https://github.com/mraniki/dxsp/commit/5e05309eb2adfff0d9f7e12b3546b0980167f488))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`5e05309`](https://github.com/mraniki/dxsp/commit/5e05309eb2adfff0d9f7e12b3546b0980167f488))
 
 * Merge pull request #465 from mraniki/renovate/web3-6.x
 
@@ -2133,7 +2230,7 @@ This commit removes unused code and comments in contract_utils.py. ([`34c1551`](
 
 💥 breaking: contract search refactoring (Sourcery refactored) ([`47823bb`](https://github.com/mraniki/dxsp/commit/47823bb6bdad3f39aa1be2edc047f5680a918b60))
 
-* &#39;Refactored by Sourcery&#39; ([`95c3708`](https://github.com/mraniki/dxsp/commit/95c37085b23d37511f8a7db4e168f2bba9ccad51))
+* 'Refactored by Sourcery' ([`95c3708`](https://github.com/mraniki/dxsp/commit/95c37085b23d37511f8a7db4e168f2bba9ccad51))
 
 ### Update
 
@@ -2202,6 +2299,7 @@ version. ([`da9acbe`](https://github.com/mraniki/dxsp/commit/da9acbebe52f35c9e32
 
 * 🔥 ([`0593df9`](https://github.com/mraniki/dxsp/commit/0593df9773a81223f6712585efbb7669dd30a8a6))
 
+
 ## v5.2.12 (2023-10-11)
 
 ### Other
@@ -2214,6 +2312,7 @@ version. ([`da9acbe`](https://github.com/mraniki/dxsp/commit/da9acbebe52f35c9e32
 
 * 👷 CI Change ([`664e1d6`](https://github.com/mraniki/dxsp/commit/664e1d64247cfddbb101602b7b517bcfb12b04e7))
 
+
 ## v5.2.11 (2023-10-11)
 
 ### Other
@@ -2224,7 +2323,7 @@ ci(Mergify): configuration update ([`4264a3b`](https://github.com/mraniki/dxsp/c
 
 * ci(Mergify): configuration update
 
-Signed-off-by: null &lt;null&gt; ([`cd967bb`](https://github.com/mraniki/dxsp/commit/cd967bbe011fcda8baaf2eed005ebbfb5262bfb7))
+Signed-off-by: null <null> ([`cd967bb`](https://github.com/mraniki/dxsp/commit/cd967bbe011fcda8baaf2eed005ebbfb5262bfb7))
 
 * Merge pull request #457 from mraniki/dev
 
@@ -2233,6 +2332,7 @@ Signed-off-by: null &lt;null&gt; ([`cd967bb`](https://github.com/mraniki/dxsp/co
 ### 🚑
 
 * 🚑 missed passing header in get ([`537d6cc`](https://github.com/mraniki/dxsp/commit/537d6ccc8e425648123df0a0433f9561434d8107))
+
 
 ## v5.2.10 (2023-10-11)
 
@@ -2245,6 +2345,7 @@ Signed-off-by: null &lt;null&gt; ([`cd967bb`](https://github.com/mraniki/dxsp/co
 ### 👷
 
 * 👷 CI Change ([`583c898`](https://github.com/mraniki/dxsp/commit/583c89850d210cafea108fa322a156cd40049776))
+
 
 ## v5.2.9 (2023-10-11)
 
@@ -2259,6 +2360,7 @@ Fix header quotes in DexZeroX class ([`1ada846`](https://github.com/mraniki/dxsp
 ### 👷
 
 * 👷 CI Change ([`1ff4d7f`](https://github.com/mraniki/dxsp/commit/1ff4d7fff1c352223d768f78452f7be4c6989153))
+
 
 ## v5.2.8 (2023-10-10)
 
@@ -2276,7 +2378,8 @@ Fix header quotes in DexZeroX class ([`1ada846`](https://github.com/mraniki/dxsp
 
 Update with mergify ([`1c913d2`](https://github.com/mraniki/dxsp/commit/1c913d2d641f8f2548ca6b2a8f66ebf83914761c))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`c28f992`](https://github.com/mraniki/dxsp/commit/c28f9922dd285adcd6211bba75712f3545a9f86b))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`c28f992`](https://github.com/mraniki/dxsp/commit/c28f9922dd285adcd6211bba75712f3545a9f86b))
+
 
 ## v5.2.7 (2023-10-10)
 
@@ -2325,6 +2428,7 @@ ures
 
 * 🔒 bandit ([`9b2c70b`](https://github.com/mraniki/dxsp/commit/9b2c70bbc2c4f563c491706bd00be4d1313c3cb7))
 
+
 ## v5.2.6 (2023-10-10)
 
 ### Other
@@ -2340,6 +2444,7 @@ ures
 ### 🔊
 
 * 🔊 adding zerox log for quote ([`c0b42c2`](https://github.com/mraniki/dxsp/commit/c0b42c2a19bcdfb455709cd5d64dc4f3a41f7664))
+
 
 ## v5.2.5 (2023-10-08)
 
@@ -2358,7 +2463,8 @@ Refactor DexSwap class in main.py ([`702e4b0`](https://github.com/mraniki/dxsp/c
 * Update test_unit.py assertions
 
 - Increase minimum numerical count to 10
-- Update expected result for &#34;:money:&#34; check ([`d4d894a`](https://github.com/mraniki/dxsp/commit/d4d894afcb5750dc6630237b6c392f8d647ebc44))
+- Update expected result for ":money:" check ([`d4d894a`](https://github.com/mraniki/dxsp/commit/d4d894afcb5750dc6630237b6c392f8d647ebc44))
+
 
 ## v5.2.4 (2023-10-08)
 
@@ -2371,6 +2477,7 @@ Refactor DexSwap class in main.py ([`702e4b0`](https://github.com/mraniki/dxsp/c
 * Merge pull request #448 from mraniki/dev
 
 :recycle: Refactor code for improved readability and debugging. ([`072e73a`](https://github.com/mraniki/dxsp/commit/072e73a42e3235ef85b563a7a2af8a0c7a476886))
+
 
 ## v5.2.3 (2023-10-07)
 
@@ -2396,11 +2503,12 @@ Fixes #123 ([`abacd94`](https://github.com/mraniki/dxsp/commit/abacd94584aae717f
 
 * Add rusty_rlp dependency ([`9d6ec20`](https://github.com/mraniki/dxsp/commit/9d6ec20f21428c6e89d1a55b9f8b9710ef54e338))
 
-* Merge branch &#39;main&#39; into dev ([`1d74123`](https://github.com/mraniki/dxsp/commit/1d741238fe4c28f93b85ef216aa237d86b8a501c))
+* Merge branch 'main' into dev ([`1d74123`](https://github.com/mraniki/dxsp/commit/1d741238fe4c28f93b85ef216aa237d86b8a501c))
 
 ### Update
 
 * Update Requirements ([`3302ab1`](https://github.com/mraniki/dxsp/commit/3302ab19d978a99c4f1e913135a78dc058775f06))
+
 
 ## v5.2.2 (2023-10-06)
 
@@ -2414,13 +2522,13 @@ Fixes #123 ([`abacd94`](https://github.com/mraniki/dxsp/commit/abacd94584aae717f
 
 🚨 linter ([`79ed2ff`](https://github.com/mraniki/dxsp/commit/79ed2fff0b9b49d8d3a241be67bd000044d1572c))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`ac52d49`](https://github.com/mraniki/dxsp/commit/ac52d49da0e1a573d38badfc1ad84bf04e8aec4a))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`ac52d49`](https://github.com/mraniki/dxsp/commit/ac52d49da0e1a573d38badfc1ad84bf04e8aec4a))
 
 * Merge pull request #446 from mraniki/sourcery/dev
 
 🚨 linter (Sourcery refactored) ([`73b7c66`](https://github.com/mraniki/dxsp/commit/73b7c6624c549e8e658ffaa46c49292a4269a048))
 
-* &#39;Refactored by Sourcery&#39; ([`5b4bd0e`](https://github.com/mraniki/dxsp/commit/5b4bd0e3421e5b3143a0abf23ffc413c7a2487e2))
+* 'Refactored by Sourcery' ([`5b4bd0e`](https://github.com/mraniki/dxsp/commit/5b4bd0e3421e5b3143a0abf23ffc413c7a2487e2))
 
 * Refactor test_unit.py to comment out print statements ([`665ad64`](https://github.com/mraniki/dxsp/commit/665ad64cf0c51df16bf63e5d2149628f3d2b87b7))
 
@@ -2428,7 +2536,7 @@ Fixes #123 ([`abacd94`](https://github.com/mraniki/dxsp/commit/abacd94584aae717f
 
 🚨 linter (Sourcery refactored) ([`f3629c6`](https://github.com/mraniki/dxsp/commit/f3629c6eee8092fcc5d859ec3d02462606882bf1))
 
-* &#39;Refactored by Sourcery&#39; ([`e0a59ad`](https://github.com/mraniki/dxsp/commit/e0a59ad3b636f7397cc01c36fe53b583f75f1363))
+* 'Refactored by Sourcery' ([`e0a59ad`](https://github.com/mraniki/dxsp/commit/e0a59ad3b636f7397cc01c36fe53b583f75f1363))
 
 * Fix protocol assertion in test_unit.py ([`970bec0`](https://github.com/mraniki/dxsp/commit/970bec04edb4da5ffbb4aefe5244549854ac23dc))
 
@@ -2456,6 +2564,7 @@ xKwenta class.
 
 * ✅ Unit Test ([`ca91d84`](https://github.com/mraniki/dxsp/commit/ca91d8474653dc680eea056a08ca9a6ecbb2d6cb))
 
+
 ## v5.2.1 (2023-10-05)
 
 ### :recycle:
@@ -2478,7 +2587,7 @@ xKwenta class.
 
 * Refactor test_get_quote in test_unit.py
 
-- Replace instrument &#34;UNI&#34; with &#34;BTC&#34;
+- Replace instrument "UNI" with "BTC"
 - Add AsyncMock for replace_instrument
 - Assert that replace_instrument was awaited ([`07c2582`](https://github.com/mraniki/dxsp/commit/07c25829c76ddd9251ec476f9882b0569205c0f5))
 
@@ -2526,6 +2635,7 @@ xKwenta class.
 
 * 🚨 ([`8eab670`](https://github.com/mraniki/dxsp/commit/8eab670704f3435e66c9506c31aae4ef24bf138b))
 
+
 ## v5.2.0 (2023-10-05)
 
 ### :ambulance:
@@ -2566,6 +2676,7 @@ xKwenta class.
 
 * 🚨 ([`c3e29e9`](https://github.com/mraniki/dxsp/commit/c3e29e9c11e7d05a6c9cec584dc77151e931a1ca))
 
+
 ## v5.1.6 (2023-10-05)
 
 ### :white_check_mark:
@@ -2585,6 +2696,7 @@ xKwenta class.
 ### 🥅
 
 * 🥅 ([`12b9ab7`](https://github.com/mraniki/dxsp/commit/12b9ab700fd50bf61355880a5128c678cc1330ea))
+
 
 ## v5.1.5 (2023-10-05)
 
@@ -2624,6 +2736,7 @@ Add support for .op.toml configuration file ([`65a676d`](https://github.com/mran
 
 * 🐛 ([`3fef341`](https://github.com/mraniki/dxsp/commit/3fef3410a97079692ab187d645366f4d9804b403))
 
+
 ## v5.1.4 (2023-10-04)
 
 ### :white_check_mark:
@@ -2642,7 +2755,7 @@ Add support for .op.toml configuration file ([`65a676d`](https://github.com/mran
 
 * Refactor modify_position method in DexKwenta class ([`3733ba0`](https://github.com/mraniki/dxsp/commit/3733ba0b1920b70a7f998772577028a62b79d1f7))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`150aea7`](https://github.com/mraniki/dxsp/commit/150aea7028a75f64f27ffcc535db52762c607000))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`150aea7`](https://github.com/mraniki/dxsp/commit/150aea7028a75f64f27ffcc535db52762c607000))
 
 * Refactor DexKwenta class in kwenta.py ([`66b1069`](https://github.com/mraniki/dxsp/commit/66b10698d16a5d19b44f86589ea954c2a6c663c4))
 
@@ -2687,6 +2800,7 @@ This commit addresses the above changes. ([`a87aa8b`](https://github.com/mraniki
 
 * 🔧 ([`493dd04`](https://github.com/mraniki/dxsp/commit/493dd04f79bab7604ef675aa46ff698f4d4f0e98))
 
+
 ## v5.1.3 (2023-10-01)
 
 ### Other
@@ -2698,6 +2812,7 @@ This commit addresses the above changes. ([`a87aa8b`](https://github.com/mraniki
 ### ♻️
 
 * ♻️ Cleanup and refactoring ([`056125a`](https://github.com/mraniki/dxsp/commit/056125a529a6da9209aca243eac0dbf5d76a45b5))
+
 
 ## v5.1.2 (2023-10-01)
 
@@ -2712,6 +2827,7 @@ Update README.md ([`d68341c`](https://github.com/mraniki/dxsp/commit/d68341c2c48
 * Update Requirements ([`7cbcbfc`](https://github.com/mraniki/dxsp/commit/7cbcbfce29836e1dd4ad12d879a326e22524f17f))
 
 * Update README.md ([`d399f36`](https://github.com/mraniki/dxsp/commit/d399f3627235a1fe00934dd2d8d885d9bdf554e9))
+
 
 ## v5.1.1 (2023-10-01)
 
@@ -2795,6 +2911,7 @@ Adding more Unit Test ([`4f55e1c`](https://github.com/mraniki/dxsp/commit/4f55e1
 
 * 🚨 ([`59e7008`](https://github.com/mraniki/dxsp/commit/59e70089370d95f37c3c8169e7b89fcafa76c3df))
 
+
 ## v5.1.0 (2023-09-30)
 
 ### :white_check_mark:
@@ -2827,6 +2944,7 @@ Adding more Unit Test ([`4f55e1c`](https://github.com/mraniki/dxsp/commit/4f55e1
 
 * 🔧 ([`e303a93`](https://github.com/mraniki/dxsp/commit/e303a93aa335b60bb85548bb47a7b799485a0adb))
 
+
 ## v5.0.7 (2023-09-27)
 
 ### Other
@@ -2838,6 +2956,7 @@ Adding more Unit Test ([`4f55e1c`](https://github.com/mraniki/dxsp/commit/4f55e1
 ### 🚨
 
 * 🚨 ([`679f6a3`](https://github.com/mraniki/dxsp/commit/679f6a38dd1874fd1d9dea889d9e03c4e9800f45))
+
 
 ## v5.0.6 (2023-09-27)
 
@@ -2851,6 +2970,7 @@ Adding more Unit Test ([`4f55e1c`](https://github.com/mraniki/dxsp/commit/4f55e1
 
 * 👷 CI Change ([`d6f67f8`](https://github.com/mraniki/dxsp/commit/d6f67f8aa99e130483af4f83fba37edda0513ad4))
 
+
 ## v5.0.5 (2023-09-23)
 
 ### Other
@@ -2862,6 +2982,7 @@ Adding more Unit Test ([`4f55e1c`](https://github.com/mraniki/dxsp/commit/4f55e1
 ### 🔊
 
 * 🔊 ([`bc37f94`](https://github.com/mraniki/dxsp/commit/bc37f943a335c77ba028bebc8135a7cf2cd07d6e))
+
 
 ## v5.0.4 (2023-09-23)
 
@@ -2878,6 +2999,7 @@ Adding more Unit Test ([`4f55e1c`](https://github.com/mraniki/dxsp/commit/4f55e1
 ### 🚨
 
 * 🚨 ([`c47d9e6`](https://github.com/mraniki/dxsp/commit/c47d9e63854aad15d5cbd0507cf536ec88de065f))
+
 
 ## v5.0.3 (2023-09-20)
 
@@ -2896,6 +3018,7 @@ Adding more Unit Test ([`4f55e1c`](https://github.com/mraniki/dxsp/commit/4f55e1
 ### 🚨
 
 * 🚨 ([`c295e24`](https://github.com/mraniki/dxsp/commit/c295e2427204cc1243d8a3f01f9ce8964064780c))
+
 
 ## v5.0.2 (2023-09-20)
 
@@ -2919,6 +3042,7 @@ Refactor trading asset address in DexSwap class ([`41e3066`](https://github.com/
 
 * 💬 ([`186e9b8`](https://github.com/mraniki/dxsp/commit/186e9b84917c2208246c6f861a0ffb835d71c156))
 
+
 ## v5.0.1 (2023-09-20)
 
 ### :art:
@@ -2930,6 +3054,7 @@ Refactor trading asset address in DexSwap class ([`41e3066`](https://github.com/
 * Merge pull request #419 from mraniki/dev
 
 :art: Refactor main.py to use f-strings for concatenation ([`65b3208`](https://github.com/mraniki/dxsp/commit/65b32081815c0b206de040b5bc8d41bf62b48658))
+
 
 ## v5.0.0 (2023-09-19)
 
@@ -2983,7 +3108,7 @@ Refactor trading asset address in DexSwap class ([`41e3066`](https://github.com/
 
 💥 breaking multi exchange support framework (Sourcery refactored) ([`eac3d2c`](https://github.com/mraniki/dxsp/commit/eac3d2c0517bd203f6a875e323eefa7292a97279))
 
-* &#39;Refactored by Sourcery&#39; ([`ffc3b98`](https://github.com/mraniki/dxsp/commit/ffc3b985966ba7f6bb662dc0fd5690fa57e1f1cc))
+* 'Refactored by Sourcery' ([`ffc3b98`](https://github.com/mraniki/dxsp/commit/ffc3b985966ba7f6bb662dc0fd5690fa57e1f1cc))
 
 * Refactor test_get_gas and test_get_gas_price ([`cc50557`](https://github.com/mraniki/dxsp/commit/cc50557a598616f1c5f27aa52fc907a0a8b4d6b2))
 
@@ -3011,11 +3136,11 @@ Refactor trading asset address in DexSwap class ([`41e3066`](https://github.com/
 
 * Update dxsp/utils/contract_utils.py
 
-Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@users.noreply.github.com&gt; ([`9e97314`](https://github.com/mraniki/dxsp/commit/9e973145032fc4ba6deed8dd02d8bb4055283ea6))
+Co-authored-by: code-review-doctor[bot] <72320148+code-review-doctor[bot]@users.noreply.github.com> ([`9e97314`](https://github.com/mraniki/dxsp/commit/9e973145032fc4ba6deed8dd02d8bb4055283ea6))
 
 * Update main.py
 
-Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@users.noreply.github.com&gt; ([`10cdeb9`](https://github.com/mraniki/dxsp/commit/10cdeb9f12a1053217804efb467556956ef06173))
+Co-authored-by: code-review-doctor[bot] <72320148+code-review-doctor[bot]@users.noreply.github.com> ([`10cdeb9`](https://github.com/mraniki/dxsp/commit/10cdeb9f12a1053217804efb467556956ef06173))
 
 * Update pyproject.toml and test_unit.py ([`608234b`](https://github.com/mraniki/dxsp/commit/608234b7b8ccd06d5674b18d62dc8fac794a79fb))
 
@@ -3193,6 +3318,7 @@ Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@use
 
 * 🚨 ([`ec31925`](https://github.com/mraniki/dxsp/commit/ec3192566f8f16bb4696eb3565368c2c948c8a74))
 
+
 ## v4.2.41 (2023-09-09)
 
 ### Other
@@ -3209,11 +3335,13 @@ Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@use
 
 * 👷 CI Change ([`d321ebb`](https://github.com/mraniki/dxsp/commit/d321ebb7a98895d0c2aacf1ee2949638deb41dca))
 
+
 ## v4.2.40 (2023-09-07)
 
 ### Update
 
 * Update README.md ([`4a42520`](https://github.com/mraniki/dxsp/commit/4a42520a3d0eee4001a2a495775887925152b8ce))
+
 
 ## v4.2.39 (2023-09-07)
 
@@ -3231,6 +3359,7 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 
 * Update pyproject.toml ([`bc3aa44`](https://github.com/mraniki/dxsp/commit/bc3aa4488d170e98200221797b8d086107e8b319))
 
+
 ## v4.2.38 (2023-09-07)
 
 ### Other
@@ -3247,6 +3376,7 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 
 * ⬆️ ([`fd989aa`](https://github.com/mraniki/dxsp/commit/fd989aaf2d54b7d5505dc2153994f5776ac2b29b))
 
+
 ## v4.2.37 (2023-09-03)
 
 ### Other
@@ -3258,6 +3388,7 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency ruff to ^0.0.287 ([`f8fcf97`](https://github.com/mraniki/dxsp/commit/f8fcf976a81812260d9c630f09399b6acfdeb3ff))
+
 
 ## v4.2.36 (2023-08-31)
 
@@ -3271,11 +3402,13 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 
 * ⬆️ 🛠️(deps): update dependency sphinx to v7.2.5 ([`318ecb8`](https://github.com/mraniki/dxsp/commit/318ecb867e84e544cb046bc7754d67654711e7fe))
 
+
 ## v4.2.35 (2023-08-30)
 
 ### Update
 
 * Update README.md ([`bf8ae52`](https://github.com/mraniki/dxsp/commit/bf8ae52f1cd59b61758717f656a5ffcfada86b4e))
+
 
 ## v4.2.34 (2023-08-30)
 
@@ -3292,6 +3425,7 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 ### 🥅
 
 * 🥅 Improve error message for invalid token ([`2f45f1b`](https://github.com/mraniki/dxsp/commit/2f45f1b63bf3145b11d870bd73f158f50c858efe))
+
 
 ## v4.2.33 (2023-08-28)
 
@@ -3311,6 +3445,7 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 
 * 📝 ([`59cb2e1`](https://github.com/mraniki/dxsp/commit/59cb2e1a458169a7c708c5f632677ce925e9cd38))
 
+
 ## v4.2.32 (2023-08-27)
 
 ### Other
@@ -3323,6 +3458,7 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 
 * ⬆️ 🛠️(deps): update dependency ruff to ^0.0.286 ([`8c81be5`](https://github.com/mraniki/dxsp/commit/8c81be503040492ab80d87850067dfce9e56bf4c))
 
+
 ## v4.2.31 (2023-08-24)
 
 ### Other
@@ -3334,6 +3470,7 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 ### ⬆️
 
 * ⬆️ 🛠️(deps): update dependency ruff to ^0.0.285 ([`6dc6be8`](https://github.com/mraniki/dxsp/commit/6dc6be80b100439ebb85ea8944817ab018796025))
+
 
 ## v4.2.30 (2023-08-24)
 
@@ -3353,6 +3490,7 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 
 * 🔥 cleanup ([`699c91f`](https://github.com/mraniki/dxsp/commit/699c91fda4c017b02818e6b59e8c15a2ff4ef6c6))
 
+
 ## v4.2.29 (2023-08-21)
 
 ### Other
@@ -3363,21 +3501,23 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 
 * :construction_worker_man:Flow.yml ([`7726137`](https://github.com/mraniki/dxsp/commit/7726137f42a85ea4be906d96faa9acea34f479ea))
 
-* Merge branch &#39;main&#39; into dev ([`1d9bf39`](https://github.com/mraniki/dxsp/commit/1d9bf3912122ebaf7aa54e2a158faafb5f91c33a))
+* Merge branch 'main' into dev ([`1d9bf39`](https://github.com/mraniki/dxsp/commit/1d9bf3912122ebaf7aa54e2a158faafb5f91c33a))
 
 ### Update
 
 * Update Requirements ([`1f5eb3c`](https://github.com/mraniki/dxsp/commit/1f5eb3ce444e989d834f3b4ed23469b8f566bde6))
 
+
 ## v4.2.28 (2023-08-20)
 
 ### Other
 
-* Merge branch &#39;main&#39; into dev ([`5be53c2`](https://github.com/mraniki/dxsp/commit/5be53c24a467beb05d68880cbf0c0a32ecc3cbfc))
+* Merge branch 'main' into dev ([`5be53c2`](https://github.com/mraniki/dxsp/commit/5be53c24a467beb05d68880cbf0c0a32ecc3cbfc))
 
 ### Update
 
 * Update renovate.json ([`2cad75a`](https://github.com/mraniki/dxsp/commit/2cad75a5fedfe8c6716291f6b51bb730a4d68a95))
+
 
 ## v4.2.27 (2023-08-20)
 
@@ -3387,11 +3527,12 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 
 ### Other
 
-* Merge branch &#39;main&#39; into dev ([`9cb28db`](https://github.com/mraniki/dxsp/commit/9cb28dbecaf94aa6ca270b0bfc9c427567e914ed))
+* Merge branch 'main' into dev ([`9cb28db`](https://github.com/mraniki/dxsp/commit/9cb28dbecaf94aa6ca270b0bfc9c427567e914ed))
 
 ### Update
 
 * Update pyproject.toml ([`8c07b6e`](https://github.com/mraniki/dxsp/commit/8c07b6e76c8321c99421886769444498f3f2739a))
+
 
 ## v4.2.26 (2023-08-18)
 
@@ -3409,6 +3550,7 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 
 * Update Requirements ([`d0564a0`](https://github.com/mraniki/dxsp/commit/d0564a0d96589b5acd3551434c854abdbe1f2db1))
 
+
 ## v4.2.25 (2023-08-12)
 
 ### :bug:
@@ -3420,6 +3562,7 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 * Merge pull request #386 from mraniki/dev
 
 :bug:typo in pyproject version variable ([`9d492c7`](https://github.com/mraniki/dxsp/commit/9d492c77d37a0101fcdf4f55bde3bc9780052aa6))
+
 
 ## v4.2.24 (2023-08-12)
 
@@ -3455,6 +3598,7 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 
 * ⚡ improve perf ([`49abc2e`](https://github.com/mraniki/dxsp/commit/49abc2e70c01dbd04ec8a43524a17cdf88fd6598))
 
+
 ## v4.2.23 (2023-08-11)
 
 ### Other
@@ -3466,6 +3610,7 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 ### ♻️
 
 * ♻️ 📝 Improve doc and refactor token search failure ([`33facc6`](https://github.com/mraniki/dxsp/commit/33facc6110b571b58599c5324348708cb53c1830))
+
 
 ## v4.2.22 (2023-08-11)
 
@@ -3479,6 +3624,7 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 
 * ⚡ improve perf ([`ac534f7`](https://github.com/mraniki/dxsp/commit/ac534f7f184088d345ab5068981a1b6918386da7))
 
+
 ## v4.2.21 (2023-08-11)
 
 ### Other
@@ -3487,7 +3633,7 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 
 📝 Improve logging and documentation ([`95cb746`](https://github.com/mraniki/dxsp/commit/95cb7464f8683ba2a453c77763cca8e8c738cd9c))
 
-* Merge branch &#39;main&#39; into dev ([`809b73e`](https://github.com/mraniki/dxsp/commit/809b73e5344c838dae9505cec42a4d4d83561bb9))
+* Merge branch 'main' into dev ([`809b73e`](https://github.com/mraniki/dxsp/commit/809b73e5344c838dae9505cec42a4d4d83561bb9))
 
 ### ⚡
 
@@ -3497,11 +3643,12 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 
 * 📝 Improve logging and documentation ([`10562d4`](https://github.com/mraniki/dxsp/commit/10562d4c1fd73dc314ec5c970f3639c83c060021))
 
+
 ## v4.2.20 (2023-08-11)
 
 ### Other
 
-* Merge branch &#39;main&#39; into dev ([`78fb4b2`](https://github.com/mraniki/dxsp/commit/78fb4b27fc9079cca31bdf4fc84d807a3e871866))
+* Merge branch 'main' into dev ([`78fb4b2`](https://github.com/mraniki/dxsp/commit/78fb4b27fc9079cca31bdf4fc84d807a3e871866))
 
 * Merge pull request #377 from mraniki/dev
 
@@ -3523,6 +3670,7 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 
 * 🚑 updated search_contract_address ([`bb0c3fc`](https://github.com/mraniki/dxsp/commit/bb0c3fce562b7af2c791fe27f9b649f82dbb7a37))
 
+
 ## v4.2.19 (2023-08-11)
 
 ### Other
@@ -3534,6 +3682,7 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 ### 🐛
 
 * 🐛 troubleshoot ([`392818d`](https://github.com/mraniki/dxsp/commit/392818dd0dc0400875f67635d88a8d94f96191f0))
+
 
 ## v4.2.18 (2023-08-11)
 
@@ -3547,6 +3696,7 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 
 :bug: ([`2e2d03f`](https://github.com/mraniki/dxsp/commit/2e2d03f5f00c6ad5fa9f1e277b5461d0d0ae12ed))
 
+
 ## v4.2.17 (2023-08-11)
 
 ### Other
@@ -3558,6 +3708,7 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 ### 🐛
 
 * 🐛 loguru missing ([`6da823f`](https://github.com/mraniki/dxsp/commit/6da823fafc65bf55179d22fdca06b24426b3902d))
+
 
 ## v4.2.16 (2023-08-11)
 
@@ -3577,6 +3728,7 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 
 * 🧐 Fix debug logging in main.py and uniswap.py ([`abedf5a`](https://github.com/mraniki/dxsp/commit/abedf5ab8a34c45ad4d60ea2d0afabd846b4869a))
 
+
 ## v4.2.15 (2023-08-10)
 
 ### :bug:
@@ -3589,25 +3741,26 @@ Update pyproject.toml ([`a453a55`](https://github.com/mraniki/dxsp/commit/a453a5
 
 🐛 exception handling ([`81077bc`](https://github.com/mraniki/dxsp/commit/81077bc0c46c0ff3bf216bdcd265fe9faed85147))
 
-* Merge branch &#39;main&#39; into dev ([`cbc2116`](https://github.com/mraniki/dxsp/commit/cbc21163c752325de374c8913f6f71fa24f85981))
+* Merge branch 'main' into dev ([`cbc2116`](https://github.com/mraniki/dxsp/commit/cbc21163c752325de374c8913f6f71fa24f85981))
 
 ### Update
 
 * Update Requirements ([`e5ac595`](https://github.com/mraniki/dxsp/commit/e5ac59564562029706f5477d68855e40c66ec523))
 
+
 ## v4.2.14 (2023-08-10)
 
 ### Other
 
-* Merge branch &#39;main&#39; into dev ([`590c8f2`](https://github.com/mraniki/dxsp/commit/590c8f292afadf3d30e2832e83f29b64a31c506a))
+* Merge branch 'main' into dev ([`590c8f2`](https://github.com/mraniki/dxsp/commit/590c8f292afadf3d30e2832e83f29b64a31c506a))
 
 * Merge pull request #371 from mraniki/dependabot/pip/ruff-gte-0.0.283-and-lt-0.0.285
 
-⬆️ Dep: Update ruff requirement from ^0.0.283 to &gt;=0.0.283,&lt;0.0.285 ([`1fbcb70`](https://github.com/mraniki/dxsp/commit/1fbcb7067c6cfbe07e91bbcb5395cd3aee620d2b))
+⬆️ Dep: Update ruff requirement from ^0.0.283 to >=0.0.283,<0.0.285 ([`1fbcb70`](https://github.com/mraniki/dxsp/commit/1fbcb7067c6cfbe07e91bbcb5395cd3aee620d2b))
 
-* Merge branch &#39;main&#39; into dependabot/pip/ruff-gte-0.0.283-and-lt-0.0.285 ([`71a3f49`](https://github.com/mraniki/dxsp/commit/71a3f49ecb291ee471d5cf35187e06b285ca8eac))
+* Merge branch 'main' into dependabot/pip/ruff-gte-0.0.283-and-lt-0.0.285 ([`71a3f49`](https://github.com/mraniki/dxsp/commit/71a3f49ecb291ee471d5cf35187e06b285ca8eac))
 
-* Merge branch &#39;main&#39; into dev ([`91515e3`](https://github.com/mraniki/dxsp/commit/91515e3295c149e1c55e7d15f0f09951fc76e28f))
+* Merge branch 'main' into dev ([`91515e3`](https://github.com/mraniki/dxsp/commit/91515e3295c149e1c55e7d15f0f09951fc76e28f))
 
 ### Update
 
@@ -3626,7 +3779,8 @@ updated-dependencies:
   dependency-type: direct:development
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`f6d5532`](https://github.com/mraniki/dxsp/commit/f6d5532af127dc8ac1aefce8a48066cca61f5541))
+Signed-off-by: dependabot[bot] <support@github.com> ([`f6d5532`](https://github.com/mraniki/dxsp/commit/f6d5532af127dc8ac1aefce8a48066cca61f5541))
+
 
 ## v4.2.13 (2023-08-10)
 
@@ -3636,7 +3790,7 @@ Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`f6d5532`](https://g
 
 ⬆️(deps): update dependency ruff to ^0.0.284 ([`eacfd2c`](https://github.com/mraniki/dxsp/commit/eacfd2ca383fdcd02910b59bfd80609db9e8cc20))
 
-* Merge branch &#39;main&#39; into dev ([`bf9509f`](https://github.com/mraniki/dxsp/commit/bf9509f96d5b30dc4446b248d6d70a9780522e9e))
+* Merge branch 'main' into dev ([`bf9509f`](https://github.com/mraniki/dxsp/commit/bf9509f96d5b30dc4446b248d6d70a9780522e9e))
 
 ### Update
 
@@ -3649,6 +3803,7 @@ Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`f6d5532`](https://g
 ### 👷
 
 * 👷 CI Change ([`87595fe`](https://github.com/mraniki/dxsp/commit/87595fe1edd1f2d0b3e7687ca3cd66b98834e428))
+
 
 ## v4.2.12 (2023-08-09)
 
@@ -3666,6 +3821,7 @@ Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`f6d5532`](https://g
 
 * ⬆️(deps): update dependency ruff to ^0.0.283 ([`011fe70`](https://github.com/mraniki/dxsp/commit/011fe70a0519264e6160e278cc137f7df5a0733b))
 
+
 ## v4.2.11 (2023-08-08)
 
 ### Other
@@ -3682,6 +3838,7 @@ Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`f6d5532`](https://g
 
 * 📝 🔧  settings documentation ([`661a7e4`](https://github.com/mraniki/dxsp/commit/661a7e4c777fd98363bf0d01de29f380069d00c4))
 
+
 ## v4.2.10 (2023-08-07)
 
 ### Other
@@ -3694,6 +3851,7 @@ Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`f6d5532`](https://g
 
 * 📝 conf update for intersphinx ([`13618cc`](https://github.com/mraniki/dxsp/commit/13618cc890d5dac931ded0b823a18c335061af5c))
 
+
 ## v4.2.9 (2023-08-07)
 
 ### Other
@@ -3702,7 +3860,8 @@ Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`f6d5532`](https://g
 
 💬 readme update ([`fb351cd`](https://github.com/mraniki/dxsp/commit/fb351cd252d7151ee823402ad76c21b7e0465a8c))
 
-* Merge branch &#39;main&#39; into dev ([`736dba0`](https://github.com/mraniki/dxsp/commit/736dba0625d5db0cdc7bf0ab0f60cd65274dd073))
+* Merge branch 'main' into dev ([`736dba0`](https://github.com/mraniki/dxsp/commit/736dba0625d5db0cdc7bf0ab0f60cd65274dd073))
+
 
 ## v4.2.8 (2023-08-07)
 
@@ -3720,6 +3879,7 @@ Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`f6d5532`](https://g
 
 * 📝 logo ([`ca8efcd`](https://github.com/mraniki/dxsp/commit/ca8efcdcc736b21633288e194fca2378cf2d384e))
 
+
 ## v4.2.7 (2023-08-07)
 
 ### Fix
@@ -3734,9 +3894,9 @@ Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`f6d5532`](https://g
 
 Update Requirements ([`a6986f8`](https://github.com/mraniki/dxsp/commit/a6986f8c0d90f914844ea6af7a01adc44dcebf79))
 
-* Merge branch &#39;main&#39; into dev ([`38cfab0`](https://github.com/mraniki/dxsp/commit/38cfab06dfcd5a264dc17f1a21ea66903463128c))
+* Merge branch 'main' into dev ([`38cfab0`](https://github.com/mraniki/dxsp/commit/38cfab06dfcd5a264dc17f1a21ea66903463128c))
 
-* Merge branch &#39;main&#39; into dev ([`dda1582`](https://github.com/mraniki/dxsp/commit/dda15821b0f02ea985db730106d5d0e3b53094e9))
+* Merge branch 'main' into dev ([`dda1582`](https://github.com/mraniki/dxsp/commit/dda15821b0f02ea985db730106d5d0e3b53094e9))
 
 * Merge pull request #362 from mraniki/dev
 
@@ -3760,6 +3920,7 @@ Update Requirements ([`a6986f8`](https://github.com/mraniki/dxsp/commit/a6986f8c
 
 * 📝  sphinx.ext.extlinks ([`5decd0f`](https://github.com/mraniki/dxsp/commit/5decd0f0cd7f3d076dc63db7dbc80e00944f22d4))
 
+
 ## v4.2.6 (2023-08-06)
 
 ### Other
@@ -3772,6 +3933,7 @@ Update Requirements ([`a6986f8`](https://github.com/mraniki/dxsp/commit/a6986f8c
 
 * 📝 intersphinx setup ([`9f4ac88`](https://github.com/mraniki/dxsp/commit/9f4ac88368ac9be3661b61c8e1ef76dda1454463))
 
+
 ## v4.2.5 (2023-08-06)
 
 ### Update
@@ -3781,6 +3943,7 @@ Update Requirements ([`a6986f8`](https://github.com/mraniki/dxsp/commit/a6986f8c
 * Update Requirements ([`f7a8e72`](https://github.com/mraniki/dxsp/commit/f7a8e726e1ca10d3f0fa96e35335b59aeb6660a3))
 
 * Update README.md ([`8eb506a`](https://github.com/mraniki/dxsp/commit/8eb506ae6d71430c59b9a5235e6153f09c4ca9b5))
+
 
 ## v4.2.4 (2023-08-04)
 
@@ -3801,6 +3964,7 @@ Update Requirements ([`a6986f8`](https://github.com/mraniki/dxsp/commit/a6986f8c
 ### 📝
 
 * 📝 RTD update ([`aa6a9a1`](https://github.com/mraniki/dxsp/commit/aa6a9a15474aaf0d10fa34e588d6363b534e5971))
+
 
 ## v4.2.3 (2023-08-03)
 
@@ -3828,6 +3992,7 @@ Update Requirements ([`a6986f8`](https://github.com/mraniki/dxsp/commit/a6986f8c
 
 * 🔧 config update ([`9aae8ad`](https://github.com/mraniki/dxsp/commit/9aae8ad31b400ab6d12a7d8e3881bbd22323637b))
 
+
 ## v4.2.2 (2023-07-25)
 
 ### Other
@@ -3840,11 +4005,13 @@ Update Requirements ([`a6986f8`](https://github.com/mraniki/dxsp/commit/a6986f8c
 
 * ✅ loguru pytest ([`094f075`](https://github.com/mraniki/dxsp/commit/094f07540c8876bd13160def44fed48795d79402))
 
+
 ## v4.2.1 (2023-07-24)
 
 ### Update
 
 * Update pyproject.toml ([`3678aca`](https://github.com/mraniki/dxsp/commit/3678aca2643b5e78dee26afc1c20c49ac896e703))
+
 
 ## v4.2.0 (2023-07-24)
 
@@ -3872,6 +4039,7 @@ Update Requirements ([`a6986f8`](https://github.com/mraniki/dxsp/commit/a6986f8c
 
 * 🥚 🔊 loguru implementation ([`2ad49ec`](https://github.com/mraniki/dxsp/commit/2ad49ec0392d577863484c0701c8d384808bda7e))
 
+
 ## v4.1.2 (2023-07-21)
 
 ### Other
@@ -3888,6 +4056,7 @@ Update Requirements ([`a6986f8`](https://github.com/mraniki/dxsp/commit/a6986f8c
 
 * ⬆️(deps): update dependency ruff to ^0.0.279 ([`d663460`](https://github.com/mraniki/dxsp/commit/d663460f9ede2d87ea828258a1edfd0e98e65355))
 
+
 ## v4.1.1 (2023-07-21)
 
 ### Other
@@ -3901,6 +4070,7 @@ Update Requirements ([`a6986f8`](https://github.com/mraniki/dxsp/commit/a6986f8c
 * Update pyproject.toml ([`ad39a48`](https://github.com/mraniki/dxsp/commit/ad39a483a298404f3ac6f361a261fdb7024cf8e0))
 
 * ⬆️ Update 👷Flow.yml ([`8bf32eb`](https://github.com/mraniki/dxsp/commit/8bf32ebc48d94bfa570a27d1651bf0e9c9a7bdcd))
+
 
 ## v4.1.0 (2023-07-20)
 
@@ -3917,6 +4087,7 @@ Update Requirements ([`a6986f8`](https://github.com/mraniki/dxsp/commit/a6986f8c
 ### 🥚
 
 * 🥚 adding command add module level ([`2f47acb`](https://github.com/mraniki/dxsp/commit/2f47acbb6d0f491f0fe23eb709076c4bfb21105a))
+
 
 ## v4.0.6 (2023-07-20)
 
@@ -3950,7 +4121,7 @@ Update Requirements ([`a6986f8`](https://github.com/mraniki/dxsp/commit/a6986f8c
 
 Merge ([`0af16c2`](https://github.com/mraniki/dxsp/commit/0af16c295cef110e67a62c73c3da8cc13458388e))
 
-* Merge branch &#39;main&#39; into dev ([`46c720d`](https://github.com/mraniki/dxsp/commit/46c720de8e4fe724df637bed76fefb02e95a0c3c))
+* Merge branch 'main' into dev ([`46c720d`](https://github.com/mraniki/dxsp/commit/46c720de8e4fe724df637bed76fefb02e95a0c3c))
 
 * Merge pull request #339 from mraniki/main
 
@@ -4066,6 +4237,7 @@ Merge ([`d2a742b`](https://github.com/mraniki/dxsp/commit/d2a742bdcac32d5075430d
 
 * 🚨 linter config ([`6d0a76d`](https://github.com/mraniki/dxsp/commit/6d0a76ddee7b704bf32b50e1f9212d7f968c7a1f))
 
+
 ## v4.0.5 (2023-07-16)
 
 ### Other
@@ -4074,7 +4246,8 @@ Merge ([`d2a742b`](https://github.com/mraniki/dxsp/commit/d2a742bdcac32d5075430d
 
 🐛 Refactor AccountUtils class for improved readability and performance ([`86aa0af`](https://github.com/mraniki/dxsp/commit/86aa0af972f46c22d3224483ee0192740b9a809d))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`efa4075`](https://github.com/mraniki/dxsp/commit/efa4075c42ac3da6bf7983d398c0df7048ffa78a))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`efa4075`](https://github.com/mraniki/dxsp/commit/efa4075c42ac3da6bf7983d398c0df7048ffa78a))
+
 
 ## v4.0.4 (2023-07-16)
 
@@ -4084,7 +4257,8 @@ Merge ([`d2a742b`](https://github.com/mraniki/dxsp/commit/d2a742bdcac32d5075430d
 
 :bug: Fix wallet address formatting in AccountUtils ([`a286f6c`](https://github.com/mraniki/dxsp/commit/a286f6c9b5944308e473f2a09b80a19d1defe3c1))
 
-* Merge branch &#39;main&#39; into dev ([`f48f801`](https://github.com/mraniki/dxsp/commit/f48f801721fee0cbb27734b7387c954945411af1))
+* Merge branch 'main' into dev ([`f48f801`](https://github.com/mraniki/dxsp/commit/f48f801721fee0cbb27734b7387c954945411af1))
+
 
 ## v4.0.3 (2023-07-16)
 
@@ -4096,7 +4270,7 @@ Merge ([`d2a742b`](https://github.com/mraniki/dxsp/commit/d2a742bdcac32d5075430d
 
 ### Other
 
-* Merge branch &#39;main&#39; into dev ([`b7850f2`](https://github.com/mraniki/dxsp/commit/b7850f2186366785e6384e2c995d974ddc61eaec))
+* Merge branch 'main' into dev ([`b7850f2`](https://github.com/mraniki/dxsp/commit/b7850f2186366785e6384e2c995d974ddc61eaec))
 
 * Merge pull request #322 from mraniki/renovate/python-semantic-release-8.x
 
@@ -4106,17 +4280,20 @@ Merge ([`d2a742b`](https://github.com/mraniki/dxsp/commit/d2a742bdcac32d5075430d
 
 * ⬆️(deps): update dependency python-semantic-release to v8 ([`5fa72ab`](https://github.com/mraniki/dxsp/commit/5fa72ab3e04e6f00a858247ffa8d3e11ea1a0536))
 
+
 ## v4.0.2 (2023-07-14)
 
 ### Update
 
 * Update README.md ([`de1a795`](https://github.com/mraniki/dxsp/commit/de1a7958d1be00bfb9fe7e85d67c169ff4750b75))
 
+
 ## v4.0.1 (2023-07-14)
 
 ### Update
 
 * Update README.md ([`822cc96`](https://github.com/mraniki/dxsp/commit/822cc96df0878782ca059b6dbf44bd451ccd32fa))
+
 
 ## v4.0.0 (2023-07-14)
 
@@ -4144,11 +4321,11 @@ Merge ([`d2a742b`](https://github.com/mraniki/dxsp/commit/d2a742bdcac32d5075430d
 
 💄 contract and account utils (Sourcery refactored) ([`2cbe1aa`](https://github.com/mraniki/dxsp/commit/2cbe1aa215c7ce90896076947bf87b013c8d930e))
 
-* &#39;Refactored by Sourcery&#39; ([`e93dd0d`](https://github.com/mraniki/dxsp/commit/e93dd0dc28803dfd72c99b04faf36e3dcf48ce5f))
+* 'Refactored by Sourcery' ([`e93dd0d`](https://github.com/mraniki/dxsp/commit/e93dd0dc28803dfd72c99b04faf36e3dcf48ce5f))
 
 * Merge pull request #320 from mraniki/sourcery/dev ([`5f1873c`](https://github.com/mraniki/dxsp/commit/5f1873c1fc3c003b1a7ebfc2e1f0ac472cb0fc19))
 
-* &#39;Refactored by Sourcery&#39; ([`a31f361`](https://github.com/mraniki/dxsp/commit/a31f36139634e2a8f13cc8c3ac156b4d5883edf7))
+* 'Refactored by Sourcery' ([`a31f361`](https://github.com/mraniki/dxsp/commit/a31f36139634e2a8f13cc8c3ac156b4d5883edf7))
 
 ### ♻️
 
@@ -4200,6 +4377,7 @@ Merge ([`d2a742b`](https://github.com/mraniki/dxsp/commit/d2a742bdcac32d5075430d
 
 * 🥚  contract utils for easier readibility and maintenance ([`198ed3d`](https://github.com/mraniki/dxsp/commit/198ed3d531a8edf74dd8bdb594d6808d579cebbc))
 
+
 ## v3.5.4 (2023-07-12)
 
 ### Other
@@ -4220,6 +4398,7 @@ Merge ([`d2a742b`](https://github.com/mraniki/dxsp/commit/d2a742bdcac32d5075430d
 
 * 🩹 Fix incase the trading asset balance amount 0.00XX ([`309b8fb`](https://github.com/mraniki/dxsp/commit/309b8fb3ad8ccc0ce490037acb6b6c960394f9c3))
 
+
 ## v3.5.3 (2023-07-12)
 
 ### Other
@@ -4231,6 +4410,7 @@ Merge ([`d2a742b`](https://github.com/mraniki/dxsp/commit/d2a742bdcac32d5075430d
 ### 🐛
 
 * 🐛 handle the division by zero error ([`6d88b4c`](https://github.com/mraniki/dxsp/commit/6d88b4cc73fd0e676d4223c620d77b719d4d30fd))
+
 
 ## v3.5.2 (2023-07-12)
 
@@ -4252,6 +4432,7 @@ Merge ([`d2a742b`](https://github.com/mraniki/dxsp/commit/d2a742bdcac32d5075430d
 
 * 🩹 added rouding for trading balance ([`cb8c245`](https://github.com/mraniki/dxsp/commit/cb8c245b25b23970fcec0538a16998ac0000358a))
 
+
 ## v3.5.1 (2023-07-11)
 
 ### Other
@@ -4265,6 +4446,7 @@ Merge ([`d2a742b`](https://github.com/mraniki/dxsp/commit/d2a742bdcac32d5075430d
 ### 🚨
 
 * 🚨 pos ([`b88a79d`](https://github.com/mraniki/dxsp/commit/b88a79d059477fed7629d96393f9c8b31400a67c))
+
 
 ## v3.5.0 (2023-07-11)
 
@@ -4282,7 +4464,8 @@ Merge ([`d2a742b`](https://github.com/mraniki/dxsp/commit/d2a742bdcac32d5075430d
 
 :sparkles: pnl report and transaction history method (Sourcery refactored) ([`26c2d13`](https://github.com/mraniki/dxsp/commit/26c2d1307da60a8f11c80b6eff886751bcbe6d76))
 
-* &#39;Refactored by Sourcery&#39; ([`238aec0`](https://github.com/mraniki/dxsp/commit/238aec0926040be78799e253a976c6e793764a30))
+* 'Refactored by Sourcery' ([`238aec0`](https://github.com/mraniki/dxsp/commit/238aec0926040be78799e253a976c6e793764a30))
+
 
 ## v3.4.0 (2023-07-11)
 
@@ -4326,6 +4509,7 @@ Merge ([`d2a742b`](https://github.com/mraniki/dxsp/commit/d2a742bdcac32d5075430d
 
 * 🥚 invalid token message as config on/off ([`a55f480`](https://github.com/mraniki/dxsp/commit/a55f4808e1757ae20c7721743e7ab1f997823ded))
 
+
 ## v3.3.2 (2023-07-10)
 
 ### Other
@@ -4342,6 +4526,7 @@ Merge ([`d2a742b`](https://github.com/mraniki/dxsp/commit/d2a742bdcac32d5075430d
 
 * 📝 Documentation structure ([`217aa32`](https://github.com/mraniki/dxsp/commit/217aa32d9d444dc01afab4cb55020b3e8ee8f8d6))
 
+
 ## v3.3.1 (2023-07-08)
 
 ### Other
@@ -4353,6 +4538,7 @@ Merge ([`d2a742b`](https://github.com/mraniki/dxsp/commit/d2a742bdcac32d5075430d
 ### ⬆️
 
 * ⬆️(deps): update dependency sphinx to v7 ([`ba431f7`](https://github.com/mraniki/dxsp/commit/ba431f781f7ee3300141255c8c53733e47049299))
+
 
 ## v3.3.0 (2023-07-08)
 
@@ -4394,7 +4580,7 @@ Merge ([`d2a742b`](https://github.com/mraniki/dxsp/commit/d2a742bdcac32d5075430d
 
 ⚗️ new function: check_transaction_status() (Sourcery refactored) ([`2e77224`](https://github.com/mraniki/dxsp/commit/2e772246b4f8a62ba6943e1b7a79ca82a29280ea))
 
-* &#39;Refactored by Sourcery&#39; ([`e0df975`](https://github.com/mraniki/dxsp/commit/e0df975af658cbe4a87274c6ef7b9c090aaea500))
+* 'Refactored by Sourcery' ([`e0df975`](https://github.com/mraniki/dxsp/commit/e0df975af658cbe4a87274c6ef7b9c090aaea500))
 
 * Merge pull request #304 from mraniki/main
 
@@ -4434,6 +4620,7 @@ Align ([`9fdaa16`](https://github.com/mraniki/dxsp/commit/9fdaa16c59869c87737a37
 
 * 🥚 new get_block_timestamp method in DexSwap class ([`181b6a1`](https://github.com/mraniki/dxsp/commit/181b6a18537a0e6d900d50623894886f08a31465))
 
+
 ## v3.2.0 (2023-07-03)
 
 ### :white_check_mark:
@@ -4454,7 +4641,7 @@ Align ([`9fdaa16`](https://github.com/mraniki/dxsp/commit/9fdaa16c59869c87737a37
 
 ✅ unit testing ([`469c55c`](https://github.com/mraniki/dxsp/commit/469c55cb011f540fb6858f5c92514b52af006d6e))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`6d18c22`](https://github.com/mraniki/dxsp/commit/6d18c22823e08e99c0b8276073be4af7a4f3303f))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`6d18c22`](https://github.com/mraniki/dxsp/commit/6d18c22823e08e99c0b8276073be4af7a4f3303f))
 
 ### ♻️
 
@@ -4510,6 +4697,7 @@ Align ([`9fdaa16`](https://github.com/mraniki/dxsp/commit/9fdaa16c59869c87737a37
 
 * 🚨 readme linter ([`a07eaee`](https://github.com/mraniki/dxsp/commit/a07eaee677a3c47c0e23814ee231f97ea7582131))
 
+
 ## v3.1.4 (2023-07-03)
 
 ### :bug:
@@ -4548,6 +4736,7 @@ Align ([`9fdaa16`](https://github.com/mraniki/dxsp/commit/9fdaa16c59869c87737a37
 
 * 🚑 uni quote ([`a7a8d6f`](https://github.com/mraniki/dxsp/commit/a7a8d6faa5e611e5de51e0f621ae0aabef167974))
 
+
 ## v3.1.3 (2023-07-02)
 
 ### Fix
@@ -4562,9 +4751,9 @@ Align ([`9fdaa16`](https://github.com/mraniki/dxsp/commit/9fdaa16c59869c87737a37
 
 ✅ unit test (Sourcery refactored) ([`ce0de87`](https://github.com/mraniki/dxsp/commit/ce0de87af5c48f98eb669a71d43d6335bf9900f3))
 
-* &#39;Refactored by Sourcery&#39; ([`7dd0f8f`](https://github.com/mraniki/dxsp/commit/7dd0f8f9181fa467600f9e5821a9e171b577bb90))
+* 'Refactored by Sourcery' ([`7dd0f8f`](https://github.com/mraniki/dxsp/commit/7dd0f8f9181fa467600f9e5821a9e171b577bb90))
 
-* Merge branch &#39;main&#39; into dev ([`89735c6`](https://github.com/mraniki/dxsp/commit/89735c6ecb6c9131c9d44059234e0fc401c47fcf))
+* Merge branch 'main' into dev ([`89735c6`](https://github.com/mraniki/dxsp/commit/89735c6ecb6c9131c9d44059234e0fc401c47fcf))
 
 ### ♻️
 
@@ -4581,6 +4770,7 @@ Align ([`9fdaa16`](https://github.com/mraniki/dxsp/commit/9fdaa16c59869c87737a37
 ### 🐛
 
 * 🐛 bug zerox ([`aac0a03`](https://github.com/mraniki/dxsp/commit/aac0a03f8dbe761545305b7e37b50a77fca1540d))
+
 
 ## v3.1.2 (2023-07-02)
 
@@ -4603,6 +4793,7 @@ Align ([`9fdaa16`](https://github.com/mraniki/dxsp/commit/9fdaa16c59869c87737a37
 ### 🔧
 
 * 🔧 config ([`1d50507`](https://github.com/mraniki/dxsp/commit/1d505073b0c2d45b93f67eb0c48c0b54c47bd938))
+
 
 ## v3.1.1 (2023-07-02)
 
@@ -4628,6 +4819,7 @@ Align ([`9fdaa16`](https://github.com/mraniki/dxsp/commit/9fdaa16c59869c87737a37
 
 ⚡ getinfo method ([`589192e`](https://github.com/mraniki/dxsp/commit/589192efa5f77111ae49173a985d2ff3ac26f8b2))
 
+
 ## v3.1.0 (2023-07-02)
 
 ### Other
@@ -4636,7 +4828,8 @@ Align ([`9fdaa16`](https://github.com/mraniki/dxsp/commit/9fdaa16c59869c87737a37
 
 🥚 exploring using uniswap-python for the uni class ([`c13c1d1`](https://github.com/mraniki/dxsp/commit/c13c1d1a960b66b9352ca90d45b3cd99dd5cfadb))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`d8eab01`](https://github.com/mraniki/dxsp/commit/d8eab01889a83586d28edab3fc62de2c2f1b0e14))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`d8eab01`](https://github.com/mraniki/dxsp/commit/d8eab01889a83586d28edab3fc62de2c2f1b0e14))
+
 
 ## v3.0.3 (2023-07-02)
 
@@ -4654,6 +4847,7 @@ Align ([`9fdaa16`](https://github.com/mraniki/dxsp/commit/9fdaa16c59869c87737a37
 
 * 🥚 using uniswap-python for the uni class ([`7fc6543`](https://github.com/mraniki/dxsp/commit/7fc6543275f120e185109d25f592ddb2b39ad01a))
 
+
 ## v3.0.2 (2023-07-01)
 
 ### Fix
@@ -4670,6 +4864,7 @@ Align ([`9fdaa16`](https://github.com/mraniki/dxsp/commit/9fdaa16c59869c87737a37
 
 * 🥅Refactor DexSwap class error handling ([`49235e0`](https://github.com/mraniki/dxsp/commit/49235e0434116270bd767e20207972104e41a58c))
 
+
 ## v3.0.1 (2023-07-01)
 
 ### Other
@@ -4678,7 +4873,8 @@ Align ([`9fdaa16`](https://github.com/mraniki/dxsp/commit/9fdaa16c59869c87737a37
 
 Merge and Minor fix ([`c8826e5`](https://github.com/mraniki/dxsp/commit/c8826e5055f131492788b15f92541ecc74a77d71))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`31225e0`](https://github.com/mraniki/dxsp/commit/31225e03140e936cdcd11cd6c3c422699222e29d))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`31225e0`](https://github.com/mraniki/dxsp/commit/31225e03140e936cdcd11cd6c3c422699222e29d))
+
 
 ## v3.0.0 (2023-07-01)
 
@@ -4800,22 +4996,22 @@ Merge and Minor fix ([`c8826e5`](https://github.com/mraniki/dxsp/commit/c8826e50
 
 🥚🦄 better structure for protocols (Sourcery refactored) ([`9c9b586`](https://github.com/mraniki/dxsp/commit/9c9b586dc002284c0f8dee3b44398c8bf902b406))
 
-* &#39;Refactored by Sourcery&#39; ([`d5b9e6d`](https://github.com/mraniki/dxsp/commit/d5b9e6dc1bf6a648f626250bb3c371542d3f3730))
+* 'Refactored by Sourcery' ([`d5b9e6d`](https://github.com/mraniki/dxsp/commit/d5b9e6dc1bf6a648f626250bb3c371542d3f3730))
 
 * Merge pull request #284 from mraniki/sourcery/dev
 
 🥚🦄 better structure for protocols (Sourcery refactored) ([`db325f0`](https://github.com/mraniki/dxsp/commit/db325f0723613f3d336a2cdd5c8129b39947b6c4))
 
-* &#39;Refactored by Sourcery&#39; ([`b3e19c9`](https://github.com/mraniki/dxsp/commit/b3e19c96fe01803a60a1f76979b9475dd3d63065))
+* 'Refactored by Sourcery' ([`b3e19c9`](https://github.com/mraniki/dxsp/commit/b3e19c96fe01803a60a1f76979b9475dd3d63065))
 
-* Merge ; commit &#39;1698c80bb18a1f45cf039b74df59d3e2350de4a1&#39;
+* Merge ; commit '1698c80bb18a1f45cf039b74df59d3e2350de4a1'
 
 Conflicts:
 	tests/test_protocol_uniswapV2.py ([`69103ba`](https://github.com/mraniki/dxsp/commit/69103ba707549220197d964e73e78ef85463e9e1))
 
 * Merge pull request #282 from mraniki/sourcery/dev ([`2548f03`](https://github.com/mraniki/dxsp/commit/2548f03969463ce9215690a4a3476df8f867e632))
 
-* &#39;Refactored by Sourcery&#39; ([`1738680`](https://github.com/mraniki/dxsp/commit/1738680450bb6e99ea2a1b218c34b263aed19962))
+* 'Refactored by Sourcery' ([`1738680`](https://github.com/mraniki/dxsp/commit/1738680450bb6e99ea2a1b218c34b263aed19962))
 
 * Refactor error handling and logging in main.py ([`f8b83ff`](https://github.com/mraniki/dxsp/commit/f8b83ff246734418507bbdefe1306a7fe20070d3))
 
@@ -4937,6 +5133,7 @@ Conflicts:
 
 * 🥚improve structure for protocol handling ([`db6c429`](https://github.com/mraniki/dxsp/commit/db6c4295bf8d8c68827028c85d98ba7eee7410de))
 
+
 ## v2.6.20 (2023-06-28)
 
 ### Other
@@ -4948,6 +5145,7 @@ Conflicts:
 ### ♻️
 
 * ♻️ refactor ([`aa41308`](https://github.com/mraniki/dxsp/commit/aa413082d1d6657b4f558652afb6582849812023))
+
 
 ## v2.6.19 (2023-06-28)
 
@@ -4977,6 +5175,7 @@ Conflicts:
 
 * 🧐 troubleshoot case ([`b6d33e6`](https://github.com/mraniki/dxsp/commit/b6d33e61cbdff9e6efb54086ec030a282b470671))
 
+
 ## v2.6.18 (2023-06-27)
 
 ### Other
@@ -5001,6 +5200,7 @@ Conflicts:
 
 * 🚨 confirmation linter ([`650aacc`](https://github.com/mraniki/dxsp/commit/650aacc0cea3d10dca4e11e2e69790facbd7568b))
 
+
 ## v2.6.17 (2023-06-27)
 
 ### :recycle:
@@ -5021,6 +5221,7 @@ update daily dependency updates for poetry ([`0dee3be`](https://github.com/mrani
 
 * update daily dependency updates for poetry ([`cf2578c`](https://github.com/mraniki/dxsp/commit/cf2578c93e568bbb69779eedbb98c0440081df7d))
 
+
 ## v2.6.16 (2023-06-25)
 
 ### Update
@@ -5030,6 +5231,7 @@ update daily dependency updates for poetry ([`0dee3be`](https://github.com/mrani
 * Update dependabot.yml ([`c9624d1`](https://github.com/mraniki/dxsp/commit/c9624d1b92906370e677f5444ee3e6c8f90dd10a))
 
 * Update 👷Flow.yml ([`9f0858f`](https://github.com/mraniki/dxsp/commit/9f0858f4d05e9aec8c5d843f0e754b9f37edd52d))
+
 
 ## v2.6.15 (2023-06-23)
 
@@ -5061,6 +5263,7 @@ update daily dependency updates for poetry ([`0dee3be`](https://github.com/mrani
 
 * 🚨 linter ([`f5f350c`](https://github.com/mraniki/dxsp/commit/f5f350c28404b3ced6acc48a8c918c80aad50f20))
 
+
 ## v2.6.14 (2023-06-23)
 
 ### :arrow_up:
@@ -5081,7 +5284,7 @@ update daily dependency updates for poetry ([`0dee3be`](https://github.com/mrani
 
 📝 doc ([`f268f6a`](https://github.com/mraniki/dxsp/commit/f268f6aaf481a9b9806187a40c921b3e47208f0e))
 
-* Merge branch &#39;main&#39; into dev ([`bf5b03d`](https://github.com/mraniki/dxsp/commit/bf5b03dacbfb9d139b3699f82e68fb427767a846))
+* Merge branch 'main' into dev ([`bf5b03d`](https://github.com/mraniki/dxsp/commit/bf5b03dacbfb9d139b3699f82e68fb427767a846))
 
 * Merge pull request #269 from mraniki/dev ([`44fc422`](https://github.com/mraniki/dxsp/commit/44fc4223dd1be3ef720f1ebc83f427bce221498e))
 
@@ -5096,6 +5299,7 @@ update daily dependency updates for poetry ([`0dee3be`](https://github.com/mrani
 ### 📝
 
 * 📝 doc ([`2f74f27`](https://github.com/mraniki/dxsp/commit/2f74f27fa0fd52aea01636c158798009acd644d3))
+
 
 ## v2.6.13 (2023-06-20)
 
@@ -5113,7 +5317,7 @@ update daily dependency updates for poetry ([`0dee3be`](https://github.com/mrani
 
 ✅ unit test and ♻️ refactor (Sourcery refactored) ([`94b6c47`](https://github.com/mraniki/dxsp/commit/94b6c4758a016d1003190360b31f51b4a8a92123))
 
-* &#39;Refactored by Sourcery&#39; ([`d6ead8b`](https://github.com/mraniki/dxsp/commit/d6ead8b86ab3c51ecd4f148b8cf623dc7eb018c2))
+* 'Refactored by Sourcery' ([`d6ead8b`](https://github.com/mraniki/dxsp/commit/d6ead8b86ab3c51ecd4f148b8cf623dc7eb018c2))
 
 ### ♻️
 
@@ -5141,6 +5345,7 @@ update daily dependency updates for poetry ([`0dee3be`](https://github.com/mrani
 
 * 🥅 catch error ([`4a483fb`](https://github.com/mraniki/dxsp/commit/4a483fb8145d0bdaaca84419a2b27d403b41e630))
 
+
 ## v2.6.12 (2023-06-17)
 
 ### Other
@@ -5156,6 +5361,7 @@ update daily dependency updates for poetry ([`0dee3be`](https://github.com/mrani
 ### 🩹
 
 * 🩹 non critical ([`c8817a8`](https://github.com/mraniki/dxsp/commit/c8817a8122ae656d43292759c9223c97a6e0964b))
+
 
 ## v2.6.11 (2023-06-15)
 
@@ -5175,6 +5381,7 @@ update daily dependency updates for poetry ([`0dee3be`](https://github.com/mrani
 
 * 🔧 config org ([`9b42e5a`](https://github.com/mraniki/dxsp/commit/9b42e5a267c787dac782b6881f8b59f0d907e508))
 
+
 ## v2.6.10 (2023-06-14)
 
 ### Other
@@ -5191,6 +5398,7 @@ update daily dependency updates for poetry ([`0dee3be`](https://github.com/mrani
 
 * 🐳 dockerignore ([`8a9310b`](https://github.com/mraniki/dxsp/commit/8a9310b94c3a87990956f12cdd542877057b903b))
 
+
 ## v2.6.9 (2023-06-11)
 
 ### Other
@@ -5205,7 +5413,7 @@ Python upgrade ([`d949e09`](https://github.com/mraniki/dxsp/commit/d949e0914b500
 
 Sourcery refactored main branch ([`60bb52b`](https://github.com/mraniki/dxsp/commit/60bb52be49e8a84f18a0550fed659a7338592f65))
 
-* &#39;Refactored by Sourcery&#39; ([`eafebb2`](https://github.com/mraniki/dxsp/commit/eafebb20c9b73ed7183d0e647930186ad7d64d10))
+* 'Refactored by Sourcery' ([`eafebb2`](https://github.com/mraniki/dxsp/commit/eafebb20c9b73ed7183d0e647930186ad7d64d10))
 
 ### Update
 
@@ -5218,6 +5426,7 @@ Sourcery refactored main branch ([`60bb52b`](https://github.com/mraniki/dxsp/com
 ### 🔧
 
 * 🔧 config ([`16ba63f`](https://github.com/mraniki/dxsp/commit/16ba63ff938d045894f95603e7c192771d4e9eec))
+
 
 ## v2.6.8 (2023-06-08)
 
@@ -5261,6 +5470,7 @@ Dev ([`a79a8ae`](https://github.com/mraniki/dxsp/commit/a79a8aebb90b6cb654c0d6bc
 
 * 👷 CI Change ([`6a928f0`](https://github.com/mraniki/dxsp/commit/6a928f0810ddfa6bf715ab79e0999c17e3368c98))
 
+
 ## v2.6.7 (2023-06-05)
 
 ### Other
@@ -5272,6 +5482,7 @@ Dev ([`a79a8ae`](https://github.com/mraniki/dxsp/commit/a79a8aebb90b6cb654c0d6bc
 ### ⬆️
 
 * ⬆️ dependencies ([`0184b0e`](https://github.com/mraniki/dxsp/commit/0184b0ead838a0780bab5cd4e5bc5e352e81ff33))
+
 
 ## v2.6.6 (2023-05-31)
 
@@ -5309,19 +5520,19 @@ Dev ([`a79a8ae`](https://github.com/mraniki/dxsp/commit/a79a8aebb90b6cb654c0d6bc
 
 * Update tests/test_unit.py
 
-Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@users.noreply.github.com&gt; ([`43aeab3`](https://github.com/mraniki/dxsp/commit/43aeab39c9be0de7fe7e612756e25c0a4c35c13a))
+Co-authored-by: code-review-doctor[bot] <72320148+code-review-doctor[bot]@users.noreply.github.com> ([`43aeab3`](https://github.com/mraniki/dxsp/commit/43aeab39c9be0de7fe7e612756e25c0a4c35c13a))
 
 * Update tests/test_unit.py
 
-Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@users.noreply.github.com&gt; ([`c63c6c4`](https://github.com/mraniki/dxsp/commit/c63c6c4621de6e00b5902974b8b249589c7e0d84))
+Co-authored-by: code-review-doctor[bot] <72320148+code-review-doctor[bot]@users.noreply.github.com> ([`c63c6c4`](https://github.com/mraniki/dxsp/commit/c63c6c4621de6e00b5902974b8b249589c7e0d84))
 
 * Update tests/test_unit.py
 
-Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@users.noreply.github.com&gt; ([`3a1880f`](https://github.com/mraniki/dxsp/commit/3a1880f13b2fd27961dd1ba2ac036c9fdf825d88))
+Co-authored-by: code-review-doctor[bot] <72320148+code-review-doctor[bot]@users.noreply.github.com> ([`3a1880f`](https://github.com/mraniki/dxsp/commit/3a1880f13b2fd27961dd1ba2ac036c9fdf825d88))
 
 * Update tests/test_unit.py
 
-Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@users.noreply.github.com&gt; ([`e905e32`](https://github.com/mraniki/dxsp/commit/e905e322f361dccba68518b2bfa71c8e34bda619))
+Co-authored-by: code-review-doctor[bot] <72320148+code-review-doctor[bot]@users.noreply.github.com> ([`e905e32`](https://github.com/mraniki/dxsp/commit/e905e322f361dccba68518b2bfa71c8e34bda619))
 
 ### ✅
 
@@ -5334,6 +5545,7 @@ Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@use
 * ✅ unit test ([`b6abfd6`](https://github.com/mraniki/dxsp/commit/b6abfd6a764a43c809b7e536611d0e5719faf5c0))
 
 * ✅ unit test ([`da64ae8`](https://github.com/mraniki/dxsp/commit/da64ae8441889bb1cc29b5f4d09a624e74164f07))
+
 
 ## v2.6.5 (2023-05-31)
 
@@ -5348,6 +5560,7 @@ Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@use
 ### 🥅
 
 * 🥅 catch error ([`38a3b6f`](https://github.com/mraniki/dxsp/commit/38a3b6f159c906117572e38ab48be14941b53325))
+
 
 ## v2.6.4 (2023-05-31)
 
@@ -5377,6 +5590,7 @@ Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@use
 
 * ✅ unit test ([`4d4a6aa`](https://github.com/mraniki/dxsp/commit/4d4a6aa859976f1600dcbdfdba4c174097433624))
 
+
 ## v2.6.3 (2023-05-30)
 
 ### Other
@@ -5392,6 +5606,7 @@ Refactor test_unit.py file with async/await syntax ([`d68f538`](https://github.c
 ### ✅
 
 * ✅ unit test ([`a8ec5fb`](https://github.com/mraniki/dxsp/commit/a8ec5fb0896a9cdd27f2ea77c9fe824135986508))
+
 
 ## v2.6.2 (2023-05-30)
 
@@ -5417,6 +5632,7 @@ Refactor test_unit.py file with async/await syntax ([`d68f538`](https://github.c
 
 * 🐛 bug ([`2ba45f1`](https://github.com/mraniki/dxsp/commit/2ba45f12175db63fa1f7144e5e5b43f106fac56f))
 
+
 ## v2.6.1 (2023-05-30)
 
 ### :white_check_mark:
@@ -5427,9 +5643,9 @@ Refactor test_unit.py file with async/await syntax ([`d68f538`](https://github.c
 
 * Merge pull request #246 from mraniki/dev ([`97171a7`](https://github.com/mraniki/dxsp/commit/97171a7ab0431fc8cfa099fec8ca257b1bdb72d4))
 
-* Merge branch &#39;main&#39; into dev ([`76db892`](https://github.com/mraniki/dxsp/commit/76db892b5675a42886fc525126be6c82c66b195b))
+* Merge branch 'main' into dev ([`76db892`](https://github.com/mraniki/dxsp/commit/76db892b5675a42886fc525126be6c82c66b195b))
 
-* Merge branch &#39;main&#39; into dev ([`d35f8c4`](https://github.com/mraniki/dxsp/commit/d35f8c4c1bcb8624531fccaf9771ba589146e431))
+* Merge branch 'main' into dev ([`d35f8c4`](https://github.com/mraniki/dxsp/commit/d35f8c4c1bcb8624531fccaf9771ba589146e431))
 
 * Add test for getting quote from Uniswap exchange. ([`f7b4825`](https://github.com/mraniki/dxsp/commit/f7b4825eaaa29ed58ac0128be019be20b2bae17b))
 
@@ -5452,6 +5668,7 @@ Refactor test_unit.py file with async/await syntax ([`d68f538`](https://github.c
 ### 🥅
 
 * 🥅 exception alignement ([`e57513d`](https://github.com/mraniki/dxsp/commit/e57513d70452ca1f17b57a8e2fb715475e2cd568))
+
 
 ## v2.6.0 (2023-05-28)
 
@@ -5493,6 +5710,7 @@ Merge pull request #241 from mraniki/dev ([`7e33860`](https://github.com/mraniki
 
 * 🥚 Add get_name method to DexSwap class ([`f853202`](https://github.com/mraniki/dxsp/commit/f8532020bdedf72f24e832e126df707e3b0b1bd6))
 
+
 ## v2.5.5 (2023-05-27)
 
 ### Other
@@ -5504,6 +5722,7 @@ Merge pull request #241 from mraniki/dev ([`7e33860`](https://github.com/mraniki
 ### ⚡
 
 * ⚡ improving code coverage ([`02b2413`](https://github.com/mraniki/dxsp/commit/02b2413c1300b672531c29a006c0fb1bf25fe362))
+
 
 ## v2.5.4 (2023-05-27)
 
@@ -5517,17 +5736,19 @@ Merge pull request #241 from mraniki/dev ([`7e33860`](https://github.com/mraniki
 
 * ⚡ improving code coverage ([`6617355`](https://github.com/mraniki/dxsp/commit/661735551a54963c8bf5f4747d89d0db9e38ea0d))
 
+
 ## v2.5.3 (2023-05-27)
 
 ### Fix
 
-* :wrench: Change envvar_prefix to &#34;TT&#34; in config.py. ([`402494e`](https://github.com/mraniki/dxsp/commit/402494eae9fd518c0aa1c2c00de775a2c47ad52a))
+* :wrench: Change envvar_prefix to "TT" in config.py. ([`402494e`](https://github.com/mraniki/dxsp/commit/402494eae9fd518c0aa1c2c00de775a2c47ad52a))
 
 ### Other
 
 * Merge pull request #238 from mraniki/dev
 
-:wrench: Change envvar_prefix to &#34;TT&#34; in config.py. ([`26d252f`](https://github.com/mraniki/dxsp/commit/26d252ff9d3be9a015dd743c5e4b4043d81f4d61))
+:wrench: Change envvar_prefix to "TT" in config.py. ([`26d252f`](https://github.com/mraniki/dxsp/commit/26d252ff9d3be9a015dd743c5e4b4043d81f4d61))
+
 
 ## v2.5.2 (2023-05-27)
 
@@ -5559,6 +5780,7 @@ Merge pull request #241 from mraniki/dev ([`7e33860`](https://github.com/mraniki
 
 * 🎨 code format ([`207c8b0`](https://github.com/mraniki/dxsp/commit/207c8b0ab57f12f158cf247a56cf53206939a14d))
 
+
 ## v2.5.1 (2023-05-26)
 
 ### :white_check_mark:
@@ -5577,6 +5799,7 @@ Merge pull request #241 from mraniki/dev ([`7e33860`](https://github.com/mraniki
 
 * :art: Update DexSwap account display ([`fd63ba9`](https://github.com/mraniki/dxsp/commit/fd63ba9fe98c52ab9879ea471b087dbf913fe60f))
 
+
 ## v2.5.0 (2023-05-26)
 
 ### Other
@@ -5589,6 +5812,7 @@ Merge pull request #241 from mraniki/dev ([`7e33860`](https://github.com/mraniki
 
 * 🥚 Add account to DexSwap class. ([`1e4c787`](https://github.com/mraniki/dxsp/commit/1e4c7879d651740b7c67d15b7414bd6c81835569))
 
+
 ## v2.4.1 (2023-05-25)
 
 ### Other
@@ -5600,6 +5824,7 @@ Merge pull request #241 from mraniki/dev ([`7e33860`](https://github.com/mraniki
 ### 🎨
 
 * 🎨 improve structure ([`49ae03e`](https://github.com/mraniki/dxsp/commit/49ae03e52146af3565ae4af4ba5fd6a9dd29e70e))
+
 
 ## v2.4.0 (2023-05-25)
 
@@ -5655,6 +5880,7 @@ Merge pull request #241 from mraniki/dev ([`7e33860`](https://github.com/mraniki
 
 * 🥅 better error for swap ([`ce8e3ee`](https://github.com/mraniki/dxsp/commit/ce8e3ee3030d5c0690d4ef634d092b47939118ae))
 
+
 ## v2.3.2 (2023-05-24)
 
 ### Other
@@ -5670,6 +5896,7 @@ Merge pull request #241 from mraniki/dev ([`7e33860`](https://github.com/mraniki
 ### 🐳
 
 * 🐳 dockerfile ([`002d897`](https://github.com/mraniki/dxsp/commit/002d89746a4de5706bd7322db7d621188112f688))
+
 
 ## v2.3.1 (2023-05-24)
 
@@ -5687,6 +5914,7 @@ Merge pull request #241 from mraniki/dev ([`7e33860`](https://github.com/mraniki
 
 * ✅ improve unit test and refactoring ([`76a8393`](https://github.com/mraniki/dxsp/commit/76a83938a640ea2e76c24cd70cabb4586344a6ec))
 
+
 ## v2.3.0 (2023-05-24)
 
 ### Other
@@ -5702,6 +5930,7 @@ Merge pull request #241 from mraniki/dev ([`7e33860`](https://github.com/mraniki
 ### 💄
 
 * 💄 improved search ([`8b9ea40`](https://github.com/mraniki/dxsp/commit/8b9ea400567daa0362d30753a3e0f056fa124482))
+
 
 ## v2.2.22 (2023-05-24)
 
@@ -5719,6 +5948,7 @@ Merge pull request #241 from mraniki/dev ([`7e33860`](https://github.com/mraniki
 
 * 🐳 dockerfile change ([`cafb2a6`](https://github.com/mraniki/dxsp/commit/cafb2a6eeb4c12e389e9d9c312c30da8206ca562))
 
+
 ## v2.2.21 (2023-05-23)
 
 ### Other
@@ -5733,6 +5963,7 @@ Merge pull request #241 from mraniki/dev ([`7e33860`](https://github.com/mraniki
 
 * 👷 CI change ([`b308f44`](https://github.com/mraniki/dxsp/commit/b308f445f55061c70e6b6281efe848da32da0216))
 
+
 ## v2.2.20 (2023-05-23)
 
 ### Other
@@ -5745,6 +5976,7 @@ Merge pull request #241 from mraniki/dev ([`7e33860`](https://github.com/mraniki
 
 * 👷 updated pyproject ([`f784628`](https://github.com/mraniki/dxsp/commit/f78462834c682fe05084aab8de17355a393073e8))
 
+
 ## v2.2.19 (2023-05-22)
 
 ### Other
@@ -5753,7 +5985,8 @@ Merge pull request #241 from mraniki/dev ([`7e33860`](https://github.com/mraniki
 
 🚨 linter check ([`5e0832f`](https://github.com/mraniki/dxsp/commit/5e0832fb5d59348a41943c72c9081422742a3988))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`33bc2d3`](https://github.com/mraniki/dxsp/commit/33bc2d3bf67ac47b2d4fa873fb2da71c1d7ab4ab))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`33bc2d3`](https://github.com/mraniki/dxsp/commit/33bc2d3bf67ac47b2d4fa873fb2da71c1d7ab4ab))
+
 
 ## v2.2.18 (2023-05-22)
 
@@ -5771,7 +6004,8 @@ Merge pull request #241 from mraniki/dev ([`7e33860`](https://github.com/mraniki
 
 Dev ([`83de11e`](https://github.com/mraniki/dxsp/commit/83de11e174f4951f0fca4c47f4c5e5dd7580efee))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`445310c`](https://github.com/mraniki/dxsp/commit/445310c28575d0a01b1288d58a59c7f1dd357446))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`445310c`](https://github.com/mraniki/dxsp/commit/445310c28575d0a01b1288d58a59c7f1dd357446))
+
 
 ## v2.2.17 (2023-05-22)
 
@@ -5792,6 +6026,7 @@ Dev ([`83de11e`](https://github.com/mraniki/dxsp/commit/83de11e174f4951f0fca4c47
 * Merge pull request #222 from mraniki/dev
 
 :art: test ([`0d2eb99`](https://github.com/mraniki/dxsp/commit/0d2eb992f3801ea05ff1efd9342eea1612188592))
+
 
 ## v2.2.16 (2023-05-22)
 
@@ -5829,6 +6064,7 @@ Dev ([`83de11e`](https://github.com/mraniki/dxsp/commit/83de11e174f4951f0fca4c47
 
 * 🔒 security ([`82774d8`](https://github.com/mraniki/dxsp/commit/82774d83af24f197e3d66777526d33e98062ad56))
 
+
 ## v2.2.15 (2023-05-18)
 
 ### :zap:
@@ -5841,6 +6077,7 @@ Dev ([`83de11e`](https://github.com/mraniki/dxsp/commit/83de11e174f4951f0fca4c47
 
 :zap:Added get_account_margin method to DexSwap class. ([`ebe3d84`](https://github.com/mraniki/dxsp/commit/ebe3d84b6a1a5f1f0d911f84844f0cec2befc380))
 
+
 ## v2.2.14 (2023-05-17)
 
 ### Other
@@ -5849,7 +6086,7 @@ Dev ([`83de11e`](https://github.com/mraniki/dxsp/commit/83de11e174f4951f0fca4c47
 
 🐛 test ([`cf5decf`](https://github.com/mraniki/dxsp/commit/cf5decf152eadc5ea9f24e8ada9f997358b531d5))
 
-* Merge branch &#39;main&#39; into dev ([`b1c8703`](https://github.com/mraniki/dxsp/commit/b1c8703807a4e06857000fef45931ba3ddeeb3b6))
+* Merge branch 'main' into dev ([`b1c8703`](https://github.com/mraniki/dxsp/commit/b1c8703807a4e06857000fef45931ba3ddeeb3b6))
 
 * Merge pull request #215 from mraniki/dev
 
@@ -5868,6 +6105,7 @@ Dev ([`0f6c63a`](https://github.com/mraniki/dxsp/commit/0f6c63aa5a8da84782513722
 * 🐛 test ([`594d847`](https://github.com/mraniki/dxsp/commit/594d847d97a9a00aa0839a14e9e6c6bf615be3fc))
 
 * 🐛test ([`1d79c58`](https://github.com/mraniki/dxsp/commit/1d79c5802fd28e0d07a44e51f0d38581cd3c6e37))
+
 
 ## v2.2.13 (2023-05-16)
 
@@ -5891,6 +6129,7 @@ Dev ([`0f6c63a`](https://github.com/mraniki/dxsp/commit/0f6c63aa5a8da84782513722
 
 * 💬 increasing test coverage ([`6dc4df5`](https://github.com/mraniki/dxsp/commit/6dc4df597fdb4ee8790751d38d04a4ced9324efa))
 
+
 ## v2.2.12 (2023-05-16)
 
 ### Other
@@ -5904,6 +6143,7 @@ Dev ([`0f6c63a`](https://github.com/mraniki/dxsp/commit/0f6c63aa5a8da84782513722
 * ⚡️ added 0x quote ([`2a36c2d`](https://github.com/mraniki/dxsp/commit/2a36c2dffbb73e86ea538ec0a443c665b351d7bb))
 
 * ⚡️ quote return ([`d596652`](https://github.com/mraniki/dxsp/commit/d59665279ee56ad272e7885576fd42b0d608b4c8))
+
 
 ## v2.2.11 (2023-05-15)
 
@@ -5925,6 +6165,7 @@ Dev ([`0f6c63a`](https://github.com/mraniki/dxsp/commit/0f6c63aa5a8da84782513722
 
 * 👽 remove 1inch support until api resolution ([`f751a1d`](https://github.com/mraniki/dxsp/commit/f751a1de0407e95e60d513f8b38a985f76482055))
 
+
 ## v2.2.10 (2023-05-15)
 
 ### Other
@@ -5936,6 +6177,7 @@ Dev ([`0f6c63a`](https://github.com/mraniki/dxsp/commit/0f6c63aa5a8da84782513722
 ### ⚡
 
 * ⚡️ slitgh quote improvement ([`162bb2b`](https://github.com/mraniki/dxsp/commit/162bb2bb7664d2b7cf1c08207c2f7279fec59231))
+
 
 ## v2.2.9 (2023-05-15)
 
@@ -5975,6 +6217,7 @@ Dev ([`0f96d3f`](https://github.com/mraniki/dxsp/commit/0f96d3ff2b447218bf121612
 
 * 🐛 quote uniswap ([`6e5c072`](https://github.com/mraniki/dxsp/commit/6e5c072357ef9bdd8ba4af22b440cac8f61a321b))
 
+
 ## v2.2.8 (2023-05-14)
 
 ### Other
@@ -5986,6 +6229,7 @@ Dev ([`0f96d3f`](https://github.com/mraniki/dxsp/commit/0f96d3ff2b447218bf121612
 ### ⚡
 
 * ⚡️ adding web3cli ([`b2c485f`](https://github.com/mraniki/dxsp/commit/b2c485f3f4174bfca0f5d14c2a67da05041eb0c8))
+
 
 ## v2.2.7 (2023-05-13)
 
@@ -5999,6 +6243,7 @@ Dev ([`0f96d3f`](https://github.com/mraniki/dxsp/commit/0f96d3ff2b447218bf121612
 
 * 🐛 in quote module ([`e7f4324`](https://github.com/mraniki/dxsp/commit/e7f4324558a617a43e299e39abd0f4ecad65897d))
 
+
 ## v2.2.6 (2023-05-13)
 
 ### Update
@@ -6006,6 +6251,7 @@ Dev ([`0f96d3f`](https://github.com/mraniki/dxsp/commit/0f96d3ff2b447218bf121612
 * ⚡️Update README.md ([`395922d`](https://github.com/mraniki/dxsp/commit/395922d836dbaa2cc9e7fd6a71b8c36347352c55))
 
 * Update README.md ([`88afd88`](https://github.com/mraniki/dxsp/commit/88afd889e4078eb340ab5c20b6c41b66fd1fe8f3))
+
 
 ## v2.2.5 (2023-05-13)
 
@@ -6019,6 +6265,7 @@ Dev ([`0f96d3f`](https://github.com/mraniki/dxsp/commit/0f96d3ff2b447218bf121612
 
 * ⚡️ added router_contract_addr in uniswap client ([`c591d06`](https://github.com/mraniki/dxsp/commit/c591d06ef57330337ed4c23b3fe57baa86ebad9a))
 
+
 ## v2.2.4 (2023-05-13)
 
 ### Other
@@ -6030,6 +6277,7 @@ Dev ([`0f96d3f`](https://github.com/mraniki/dxsp/commit/0f96d3ff2b447218bf121612
 ### 🐛
 
 * 🐛 slippage typo in uniswap function ([`78973c1`](https://github.com/mraniki/dxsp/commit/78973c1624e213fe330afe3ee7e0827d627a2313))
+
 
 ## v2.2.3 (2023-05-12)
 
@@ -6063,6 +6311,7 @@ Dev ([`0f96d3f`](https://github.com/mraniki/dxsp/commit/0f96d3ff2b447218bf121612
 
 * 🐛 correct quote uni ([`8206e12`](https://github.com/mraniki/dxsp/commit/8206e12910dc530d8c5caebf2bb2dd22011b0530))
 
+
 ## v2.2.2 (2023-05-10)
 
 ### Fix
@@ -6081,6 +6330,7 @@ fix get_sign ([`c7a2701`](https://github.com/mraniki/dxsp/commit/c7a2701498555c6
 
 * ⚡️ settings update ([`f39a47f`](https://github.com/mraniki/dxsp/commit/f39a47f94b3f9525cb784d4298eabe38eac7693a))
 
+
 ## v2.2.1 (2023-05-10)
 
 ### Other
@@ -6093,6 +6343,7 @@ fix get_sign ([`c7a2701`](https://github.com/mraniki/dxsp/commit/c7a2701498555c6
 
 * ⚡️ updated unit test ([`7872a19`](https://github.com/mraniki/dxsp/commit/7872a1913bdb10216062dfb040ad957116445e0b))
 
+
 ## v2.2.0 (2023-05-10)
 
 ### Other
@@ -6104,6 +6355,7 @@ fix get_sign ([`c7a2701`](https://github.com/mraniki/dxsp/commit/c7a2701498555c6
 ### ✨
 
 * ✨ added apollo basics ([`1afe435`](https://github.com/mraniki/dxsp/commit/1afe435f8608595297235353ea0b39814659ee16))
+
 
 ## v2.1.6 (2023-05-10)
 
@@ -6119,6 +6371,7 @@ fix get_sign ([`c7a2701`](https://github.com/mraniki/dxsp/commit/c7a2701498555c6
 
 * 🐛 old setting in get_approve_uniswap ([`4d09cb3`](https://github.com/mraniki/dxsp/commit/4d09cb38b491eb4bea9c09ff8a23c2d30b69cf66))
 
+
 ## v2.1.5 (2023-05-10)
 
 ### Other
@@ -6130,6 +6383,7 @@ fix get_sign ([`c7a2701`](https://github.com/mraniki/dxsp/commit/c7a2701498555c6
 ### ⚡
 
 * ⚡️ updated slippage settings to dex_slippage ([`9a00eb9`](https://github.com/mraniki/dxsp/commit/9a00eb947c12e99b2218b995345aeb81210c9c3a))
+
 
 ## v2.1.4 (2023-05-10)
 
@@ -6153,6 +6407,7 @@ fix get_sign ([`c7a2701`](https://github.com/mraniki/dxsp/commit/c7a2701498555c6
 
 * 🐛 remove sensitive ([`8bbb434`](https://github.com/mraniki/dxsp/commit/8bbb4346e624d8745b308eb80d96e535c037e7e9))
 
+
 ## v2.1.3 (2023-05-09)
 
 ### Other
@@ -6164,6 +6419,7 @@ fix get_sign ([`c7a2701`](https://github.com/mraniki/dxsp/commit/c7a2701498555c6
 ### Update
 
 * :zap:Update default_settings.toml and main.py files ([`4a32f28`](https://github.com/mraniki/dxsp/commit/4a32f28847a9a6363780a79452cc8ec88634b754))
+
 
 ## v2.1.2 (2023-05-09)
 
@@ -6177,6 +6433,7 @@ fix get_sign ([`c7a2701`](https://github.com/mraniki/dxsp/commit/c7a2701498555c6
 
 * 🐛 extra / ([`fb80c29`](https://github.com/mraniki/dxsp/commit/fb80c29a4c80ceace9ff23bc2541018ddcd49d07))
 
+
 ## v2.1.1 (2023-05-09)
 
 ### Other
@@ -6189,6 +6446,7 @@ fix get_sign ([`c7a2701`](https://github.com/mraniki/dxsp/commit/c7a2701498555c6
 
 * 🐛 self.chain_id ([`41ece41`](https://github.com/mraniki/dxsp/commit/41ece4105fcfb3dffc6efa97c45acf7534ed9a11))
 
+
 ## v2.1.0 (2023-05-09)
 
 ### Other
@@ -6197,11 +6455,12 @@ fix get_sign ([`c7a2701`](https://github.com/mraniki/dxsp/commit/c7a2701498555c6
 
 Dev ([`73200c4`](https://github.com/mraniki/dxsp/commit/73200c482ac97ffa97d73b0fc3aed2767a2b251f))
 
-* Merge branch &#39;main&#39; into dev ([`4a06ef5`](https://github.com/mraniki/dxsp/commit/4a06ef5ce1fe6d66ba5d575d88a2a01c0b54fd73))
+* Merge branch 'main' into dev ([`4a06ef5`](https://github.com/mraniki/dxsp/commit/4a06ef5ce1fe6d66ba5d575d88a2a01c0b54fd73))
 
 ### 🐛
 
 * 🐛 + str(settings.chain_id) ([`25301b7`](https://github.com/mraniki/dxsp/commit/25301b7851d331f5541d638c923b6ff056605e48))
+
 
 ## v2.0.29 (2023-05-09)
 
@@ -6211,7 +6470,7 @@ Dev ([`73200c4`](https://github.com/mraniki/dxsp/commit/73200c482ac97ffa97d73b0f
 
 💬 added debug info ([`945bef4`](https://github.com/mraniki/dxsp/commit/945bef4d178c079ca5ce76d09fe56b5733d946cb))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`5f7ff05`](https://github.com/mraniki/dxsp/commit/5f7ff05ffef56306012e0f5132425952955e388f))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`5f7ff05`](https://github.com/mraniki/dxsp/commit/5f7ff05ffef56306012e0f5132425952955e388f))
 
 ### ✨
 
@@ -6221,6 +6480,7 @@ Dev ([`73200c4`](https://github.com/mraniki/dxsp/commit/73200c482ac97ffa97d73b0f
 
 * 💬 added debug info ([`7fab0f5`](https://github.com/mraniki/dxsp/commit/7fab0f54a228728aa90ef46d67c0637ec5b145dd))
 
+
 ## v2.0.28 (2023-05-09)
 
 ### Other
@@ -6229,7 +6489,8 @@ Dev ([`73200c4`](https://github.com/mraniki/dxsp/commit/73200c482ac97ffa97d73b0f
 
 Dev ([`f1998b8`](https://github.com/mraniki/dxsp/commit/f1998b88bda99a6da34c116e3f099e303a4bd688))
 
-* Merge branch &#39;main&#39; into dev ([`e422df3`](https://github.com/mraniki/dxsp/commit/e422df38370cf01b381d4ae51fdd94d3dbc57eb0))
+* Merge branch 'main' into dev ([`e422df3`](https://github.com/mraniki/dxsp/commit/e422df38370cf01b381d4ae51fdd94d3dbc57eb0))
+
 
 ## v2.0.27 (2023-05-09)
 
@@ -6249,6 +6510,7 @@ Dev ([`f1998b8`](https://github.com/mraniki/dxsp/commit/f1998b88bda99a6da34c116e
 
 * :mag:Refactor logging in DexSwap class ([`9cd18af`](https://github.com/mraniki/dxsp/commit/9cd18af806093476f3f2c0532a0a577cd545c05d))
 
+
 ## v2.0.26 (2023-05-09)
 
 ### :bug:
@@ -6260,6 +6522,7 @@ Dev ([`f1998b8`](https://github.com/mraniki/dxsp/commit/f1998b88bda99a6da34c116e
 * Merge pull request #181 from mraniki/dev
 
 :bug: Fix headers in DexSwap class constructor ([`8fc5e9f`](https://github.com/mraniki/dxsp/commit/8fc5e9f2972c9561df881891bc3e61b5f3750546))
+
 
 ## v2.0.25 (2023-05-09)
 
@@ -6273,6 +6536,7 @@ Dev ([`f1998b8`](https://github.com/mraniki/dxsp/commit/f1998b88bda99a6da34c116e
 
 * 🐛 header passed as str instead of dict ([`11fb274`](https://github.com/mraniki/dxsp/commit/11fb274039830a66aa7ada3fd097bba146feef97))
 
+
 ## v2.0.24 (2023-05-09)
 
 ### Other
@@ -6284,6 +6548,7 @@ Dev ([`f1998b8`](https://github.com/mraniki/dxsp/commit/f1998b88bda99a6da34c116e
 ### ⚡
 
 * ⚡️ better handing for get ([`d41f791`](https://github.com/mraniki/dxsp/commit/d41f791ea0c168a6c3145e4af6ac3d97d864cf6e))
+
 
 ## v2.0.23 (2023-05-09)
 
@@ -6297,6 +6562,7 @@ Dev ([`f1998b8`](https://github.com/mraniki/dxsp/commit/f1998b88bda99a6da34c116e
 
 * 🐛 check ([`a34388c`](https://github.com/mraniki/dxsp/commit/a34388c5af3aec8d42502a8e0001735b4196d397))
 
+
 ## v2.0.22 (2023-05-09)
 
 ### Other
@@ -6308,6 +6574,7 @@ Dev ([`f1998b8`](https://github.com/mraniki/dxsp/commit/f1998b88bda99a6da34c116e
 ### 🐛
 
 * 🐛 get error ([`0d07e8c`](https://github.com/mraniki/dxsp/commit/0d07e8c2967ed8547eae2db69c93caa62bf1c151))
+
 
 ## v2.0.21 (2023-05-09)
 
@@ -6321,6 +6588,7 @@ Dev ([`f1998b8`](https://github.com/mraniki/dxsp/commit/f1998b88bda99a6da34c116e
 
 * 🐛 quote troubleshoot ([`00cd189`](https://github.com/mraniki/dxsp/commit/00cd1897ddc56b9bd20837dbcbb9dd0fe673e553))
 
+
 ## v2.0.20 (2023-05-09)
 
 ### Other
@@ -6329,7 +6597,8 @@ Dev ([`f1998b8`](https://github.com/mraniki/dxsp/commit/f1998b88bda99a6da34c116e
 
 Dev ([`a839635`](https://github.com/mraniki/dxsp/commit/a83963569e1d218f45298669ee1627fc6b5c62eb))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`8de5d68`](https://github.com/mraniki/dxsp/commit/8de5d68fce64ad35bf7ea53b5a0f981ca8d21152))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`8de5d68`](https://github.com/mraniki/dxsp/commit/8de5d68fce64ad35bf7ea53b5a0f981ca8d21152))
+
 
 ## v2.0.19 (2023-05-09)
 
@@ -6345,6 +6614,7 @@ Dev ([`a839635`](https://github.com/mraniki/dxsp/commit/a83963569e1d218f45298669
 
 :zap:Fix logger not printing response in DexSwap class method. ([`99aa24c`](https://github.com/mraniki/dxsp/commit/99aa24c1223ec1278db748a4edba8ac11e863eb6))
 
+
 ## v2.0.18 (2023-05-09)
 
 ### :zap:
@@ -6357,6 +6627,7 @@ Dev ([`a839635`](https://github.com/mraniki/dxsp/commit/a83963569e1d218f45298669
 
 :zap:Refactor logging and update token list in example.py. ([`845dd7b`](https://github.com/mraniki/dxsp/commit/845dd7bc333959d7ab1b0e1a2cdd10e29562c7ca))
 
+
 ## v2.0.17 (2023-05-09)
 
 ### Other
@@ -6367,6 +6638,7 @@ Dev ([`a839635`](https://github.com/mraniki/dxsp/commit/a83963569e1d218f45298669
 
 * :mag: header troubleshoot ([`2031ac8`](https://github.com/mraniki/dxsp/commit/2031ac8147163b50d8e5d3a27e7dcb76f68fc7ce))
 
+
 ## v2.0.16 (2023-05-08)
 
 ### Other
@@ -6375,7 +6647,8 @@ Dev ([`a839635`](https://github.com/mraniki/dxsp/commit/a83963569e1d218f45298669
 
 Dev ([`8fe6a12`](https://github.com/mraniki/dxsp/commit/8fe6a12896b250cc101cb663d600ad414fff4a9e))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`cf68c87`](https://github.com/mraniki/dxsp/commit/cf68c8736fc0b3e767c19cd7733cff51481d53ad))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`cf68c87`](https://github.com/mraniki/dxsp/commit/cf68c8736fc0b3e767c19cd7733cff51481d53ad))
+
 
 ## v2.0.15 (2023-05-08)
 
@@ -6397,6 +6670,7 @@ Dev ([`8fe6a12`](https://github.com/mraniki/dxsp/commit/8fe6a12896b250cc101cb663
 
 * 🔍 header troubleshoot ([`65e62dd`](https://github.com/mraniki/dxsp/commit/65e62dd905b4a30bbd36ef047504877524860805))
 
+
 ## v2.0.14 (2023-05-08)
 
 ### :bug:
@@ -6409,7 +6683,8 @@ Dev ([`8fe6a12`](https://github.com/mraniki/dxsp/commit/8fe6a12896b250cc101cb663
 
 🐛 Fix request import in DexSwap class. ([`8b1aa33`](https://github.com/mraniki/dxsp/commit/8b1aa33da5675a0b0c3a6c75fbd325221cc92ae0))
 
-* Merge branch &#39;main&#39; into dev ([`5897064`](https://github.com/mraniki/dxsp/commit/589706438e742ff5613b61c6ea8e4c82c949acfc))
+* Merge branch 'main' into dev ([`5897064`](https://github.com/mraniki/dxsp/commit/589706438e742ff5613b61c6ea8e4c82c949acfc))
+
 
 ## v2.0.13 (2023-05-08)
 
@@ -6427,6 +6702,7 @@ Dev ([`8fe6a12`](https://github.com/mraniki/dxsp/commit/8fe6a12896b250cc101cb663
 
 * :zap:Update logging level to DEBUG in example.py ([`3d43656`](https://github.com/mraniki/dxsp/commit/3d4365683f72de0d20be76ee52f2dd4b4f8c122d))
 
+
 ## v2.0.12 (2023-05-08)
 
 ### :zap:
@@ -6439,6 +6715,7 @@ Dev ([`8fe6a12`](https://github.com/mraniki/dxsp/commit/8fe6a12896b250cc101cb663
 
 :zap: Add logging for response in DexSwap class. ([`b3dd6df`](https://github.com/mraniki/dxsp/commit/b3dd6dfa8f723edd1030aef3435d39edfe337938))
 
+
 ## v2.0.11 (2023-05-08)
 
 ### Other
@@ -6448,6 +6725,7 @@ Dev ([`8fe6a12`](https://github.com/mraniki/dxsp/commit/8fe6a12896b250cc101cb663
 :mag: troubleshoot quote 1inch ([`5f2cc70`](https://github.com/mraniki/dxsp/commit/5f2cc7012e891b7cfc36b0f61a6644fb9547796e))
 
 * :mag: troubleshoot quote 1inch ([`b438f0e`](https://github.com/mraniki/dxsp/commit/b438f0ed883934edc0511ad5bbe4a321b918c77d))
+
 
 ## v2.0.10 (2023-05-08)
 
@@ -6460,6 +6738,7 @@ Dev ([`8fe6a12`](https://github.com/mraniki/dxsp/commit/8fe6a12896b250cc101cb663
 * Merge pull request #164 from mraniki/dev
 
 :ambulance: Fix async bug in get_token_contract method ([`d41e514`](https://github.com/mraniki/dxsp/commit/d41e5144f58a81fd55a9f80fc83f9a4c78c90ffb))
+
 
 ## v2.0.9 (2023-05-08)
 
@@ -6479,6 +6758,7 @@ Dev ([`8fe6a12`](https://github.com/mraniki/dxsp/commit/8fe6a12896b250cc101cb663
 
 * 🚑 error in trading_slippage ([`9dfeaee`](https://github.com/mraniki/dxsp/commit/9dfeaeefacc22eb08dd015850253642da8a61192))
 
+
 ## v2.0.8 (2023-05-08)
 
 ### Other
@@ -6490,6 +6770,7 @@ Dev ([`8fe6a12`](https://github.com/mraniki/dxsp/commit/8fe6a12896b250cc101cb663
 ### ⚡
 
 * ⚡️ settings update ([`3d8bc4e`](https://github.com/mraniki/dxsp/commit/3d8bc4e18372d54a6851ed4b3eef91c48a904fdf))
+
 
 ## v2.0.7 (2023-05-08)
 
@@ -6509,6 +6790,7 @@ Dev ([`8fe6a12`](https://github.com/mraniki/dxsp/commit/8fe6a12896b250cc101cb663
 
 * 🥅 added error handling in quote ([`31cceba`](https://github.com/mraniki/dxsp/commit/31cceba9f6036af45e5436ba9d651bf7132e02d3))
 
+
 ## v2.0.6 (2023-05-08)
 
 ### Other
@@ -6524,6 +6806,7 @@ Dev ([`8fe6a12`](https://github.com/mraniki/dxsp/commit/8fe6a12896b250cc101cb663
 ### 🥅
 
 * 🥅 Add tests for DexSwap class methods ([`432fa17`](https://github.com/mraniki/dxsp/commit/432fa17fc3587a6a5eb2939c2d29e6c7bb9183aa))
+
 
 ## v2.0.5 (2023-05-07)
 
@@ -6545,6 +6828,7 @@ Dev ([`8fe6a12`](https://github.com/mraniki/dxsp/commit/8fe6a12896b250cc101cb663
 
 * 🐛 router_instance ([`6bf6936`](https://github.com/mraniki/dxsp/commit/6bf69366550bc0a5af3e6a5f242b467d81015193))
 
+
 ## v2.0.4 (2023-05-07)
 
 ### Other
@@ -6556,6 +6840,7 @@ Dev ([`8fe6a12`](https://github.com/mraniki/dxsp/commit/8fe6a12896b250cc101cb663
 ### Update
 
 * :zap: Update pyproject.toml ([`f36d453`](https://github.com/mraniki/dxsp/commit/f36d453e3f01f6d2268f97fa915dbc32d1779d8c))
+
 
 ## v2.0.3 (2023-05-07)
 
@@ -6573,6 +6858,7 @@ Dev ([`8fe6a12`](https://github.com/mraniki/dxsp/commit/8fe6a12896b250cc101cb663
 
 * 🥅 unit testing expanded ([`6f84ed6`](https://github.com/mraniki/dxsp/commit/6f84ed6658d1a782e377c7c16888c4c47f09c1be))
 
+
 ## v2.0.2 (2023-05-07)
 
 ### Other
@@ -6581,7 +6867,8 @@ Dev ([`8fe6a12`](https://github.com/mraniki/dxsp/commit/8fe6a12896b250cc101cb663
 
 🐛 Fix chain_id setting in DexSwap class. ([`d296c21`](https://github.com/mraniki/dxsp/commit/d296c21af6693fe6f7f443709cf6693b8e415757))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`c6b97fa`](https://github.com/mraniki/dxsp/commit/c6b97fad479206d1eedbc724707509ccf6394cb2))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`c6b97fa`](https://github.com/mraniki/dxsp/commit/c6b97fad479206d1eedbc724707509ccf6394cb2))
+
 
 ## v2.0.1 (2023-05-07)
 
@@ -6598,6 +6885,7 @@ Dev ([`8fe6a12`](https://github.com/mraniki/dxsp/commit/8fe6a12896b250cc101cb663
 * Merge pull request #155 from mraniki/dev
 
 :zap:Refactor logging in DexSwap class and set chain_id from settings. ([`c9adfe8`](https://github.com/mraniki/dxsp/commit/c9adfe8583e23ab29181578085e1eed76a6141ab))
+
 
 ## v2.0.0 (2023-05-07)
 
@@ -6637,6 +6925,7 @@ Dev ([`8fe6a12`](https://github.com/mraniki/dxsp/commit/8fe6a12896b250cc101cb663
 
 * 💥 revamp and simplification to leverage on settings ([`f949890`](https://github.com/mraniki/dxsp/commit/f9498903b1b8e7a185ed15679aa0d4d8ce95f4ec))
 
+
 ## v1.9.14 (2023-05-07)
 
 ### Other
@@ -6653,6 +6942,7 @@ Unit test ([`d101bec`](https://github.com/mraniki/dxsp/commit/d101becf0665dda6f7
 
 * 🐛 bug in unit test ([`2883b26`](https://github.com/mraniki/dxsp/commit/2883b26193b4c5927675fce349f3cdd6bb9e71d9))
 
+
 ## v1.9.13 (2023-05-06)
 
 ### Other
@@ -6665,6 +6955,7 @@ Unit test ([`d101bec`](https://github.com/mraniki/dxsp/commit/d101becf0665dda6f7
 
 * ⚡️ added balance for trading quote ccy and formatted the get balance returned ([`6989b19`](https://github.com/mraniki/dxsp/commit/6989b1966e5d9ea462a31d7a60547429652dea59))
 
+
 ## v1.9.12 (2023-05-06)
 
 ### Other
@@ -6673,7 +6964,8 @@ Unit test ([`d101bec`](https://github.com/mraniki/dxsp/commit/d101becf0665dda6f7
 
 Dev ([`c7fa1c0`](https://github.com/mraniki/dxsp/commit/c7fa1c0f2d1d5c46eb60ca827adab1f6d221c4bf))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`db3e85a`](https://github.com/mraniki/dxsp/commit/db3e85ae966b6a926500806cce965e0711375ffa))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`db3e85a`](https://github.com/mraniki/dxsp/commit/db3e85ae966b6a926500806cce965e0711375ffa))
+
 
 ## v1.9.11 (2023-05-06)
 
@@ -6689,7 +6981,8 @@ Dev ([`c7fa1c0`](https://github.com/mraniki/dxsp/commit/c7fa1c0f2d1d5c46eb60ca82
 
 Dev ([`1f61dd1`](https://github.com/mraniki/dxsp/commit/1f61dd15daaaafd32cb90dcbd4c9423c31ab15b0))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`c9d1cc6`](https://github.com/mraniki/dxsp/commit/c9d1cc62951bf902423a23f89badca1a41002fed))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`c9d1cc6`](https://github.com/mraniki/dxsp/commit/c9d1cc62951bf902423a23f89badca1a41002fed))
+
 
 ## v1.9.10 (2023-05-06)
 
@@ -6707,6 +7000,7 @@ Dev ([`1f61dd1`](https://github.com/mraniki/dxsp/commit/1f61dd15daaaafd32cb90dcb
 
 :ambulance: typo ([`fad48e2`](https://github.com/mraniki/dxsp/commit/fad48e2643b13c14dcd41fd967cea98ff7b16fd6))
 
+
 ## v1.9.9 (2023-05-06)
 
 ### :zap:
@@ -6719,7 +7013,7 @@ Dev ([`1f61dd1`](https://github.com/mraniki/dxsp/commit/1f61dd15daaaafd32cb90dcb
 
 Dev ([`1af7846`](https://github.com/mraniki/dxsp/commit/1af7846e03db6cd48a81d5dd2b4706ec5452d373))
 
-* Merge ; commit &#39;ffc8f7e4281054fed1d942e2586eada0d46fb4d3&#39;
+* Merge ; commit 'ffc8f7e4281054fed1d942e2586eada0d46fb4d3'
 
 Conflicts:
 	dxsp/main.py ([`5186277`](https://github.com/mraniki/dxsp/commit/5186277695e903767e9ee4a0de43563cf6769cc2))
@@ -6729,6 +7023,7 @@ Conflicts:
 ### ⚡
 
 * ⚡️ lint ([`ffc8f7e`](https://github.com/mraniki/dxsp/commit/ffc8f7e4281054fed1d942e2586eada0d46fb4d3))
+
 
 ## v1.9.8 (2023-05-06)
 
@@ -6741,6 +7036,7 @@ Conflicts:
 * Merge pull request #147 from mraniki/dev
 
 :bug: fix defect for get account balance ([`c352850`](https://github.com/mraniki/dxsp/commit/c352850eccc50794a74187067940bda1d2dde7a1))
+
 
 ## v1.9.7 (2023-05-06)
 
@@ -6762,6 +7058,7 @@ Dev ([`0225b05`](https://github.com/mraniki/dxsp/commit/0225b0505055c1f53e131423
 
 * 🔥 remove amount_trading_option ([`f177efb`](https://github.com/mraniki/dxsp/commit/f177efb67a504e52cb1d1bef50e01156921daa52))
 
+
 ## v1.9.6 (2023-05-06)
 
 ### Other
@@ -6770,7 +7067,8 @@ Dev ([`0225b05`](https://github.com/mraniki/dxsp/commit/0225b0505055c1f53e131423
 
 Dev ([`a968f59`](https://github.com/mraniki/dxsp/commit/a968f598dff43d40665d04dcd8e2a70fd9741ba4))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`6f5bfa3`](https://github.com/mraniki/dxsp/commit/6f5bfa3a3ad1bc8bb1ce16083903fba4c54e02ea))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`6f5bfa3`](https://github.com/mraniki/dxsp/commit/6f5bfa3a3ad1bc8bb1ce16083903fba4c54e02ea))
+
 
 ## v1.9.5 (2023-05-06)
 
@@ -6788,6 +7086,7 @@ Dev ([`a968f59`](https://github.com/mraniki/dxsp/commit/a968f598dff43d40665d04dc
 
 * ⚡️ added trading_risk_amount as settings ([`d71b227`](https://github.com/mraniki/dxsp/commit/d71b227281c62d06d3d5a92c89a78db7db828531))
 
+
 ## v1.9.4 (2023-05-06)
 
 ### Other
@@ -6796,7 +7095,8 @@ Dev ([`a968f59`](https://github.com/mraniki/dxsp/commit/a968f598dff43d40665d04dc
 
 🥅unit test ([`d5863dc`](https://github.com/mraniki/dxsp/commit/d5863dc0f174901a23cbe94e5fae80ea9054abbb))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`790ffa0`](https://github.com/mraniki/dxsp/commit/790ffa00f798875edc2e8762bc2f51e64046b80f))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`790ffa0`](https://github.com/mraniki/dxsp/commit/790ffa00f798875edc2e8762bc2f51e64046b80f))
+
 
 ## v1.9.3 (2023-05-06)
 
@@ -6814,6 +7114,7 @@ Dev ([`a968f59`](https://github.com/mraniki/dxsp/commit/a968f598dff43d40665d04dc
 
 * 🥅Refactor settings.json and add chain_id test in test_unit.py ([`14fab78`](https://github.com/mraniki/dxsp/commit/14fab788ad5cbc3f19c4ba13cd3f2fc5391008c0))
 
+
 ## v1.9.2 (2023-05-06)
 
 ### Other
@@ -6825,6 +7126,7 @@ Dev ([`a968f59`](https://github.com/mraniki/dxsp/commit/a968f598dff43d40665d04dc
 ### Update
 
 * 🥅Update README.md with new badges ([`b928bfe`](https://github.com/mraniki/dxsp/commit/b928bfeb1b4cebb0da63a40e52778a1b5e60d1d5))
+
 
 ## v1.9.1 (2023-05-05)
 
@@ -6841,6 +7143,7 @@ Dev ([`a968f59`](https://github.com/mraniki/dxsp/commit/a968f598dff43d40665d04dc
 ### ⚡
 
 * ⚡️ init unit test ([`268fb4a`](https://github.com/mraniki/dxsp/commit/268fb4a38ef5eab3e9cc9fe849ed96f2a82bcaaa))
+
 
 ## v1.9.0 (2023-05-05)
 
@@ -6879,6 +7182,7 @@ Dev ([`a968f59`](https://github.com/mraniki/dxsp/commit/a968f598dff43d40665d04dc
 ### 🚑
 
 * 🚑 lint and simplification ([`aaead06`](https://github.com/mraniki/dxsp/commit/aaead0653945cd67b74c3566585cf567b28b7db6))
+
 
 ## v1.8.0 (2023-05-04)
 
@@ -6952,6 +7256,7 @@ Configure Renovate ([`13b56a3`](https://github.com/mraniki/dxsp/commit/13b56a3ca
 
 * 🐛 pytoml typo ([`e4a0860`](https://github.com/mraniki/dxsp/commit/e4a0860dc0589b5ebb31fd8972facfbd2524aea9))
 
+
 ## v1.7.1 (2023-05-03)
 
 ### Fix
@@ -6978,6 +7283,7 @@ Dev ([`4b03ea0`](https://github.com/mraniki/dxsp/commit/4b03ea026ba7c6d18b28210e
 
 * 🎨 minor format change ([`118c9c8`](https://github.com/mraniki/dxsp/commit/118c9c8924d3d1e1b05b0b2f72ba8ff4f29898ac))
 
+
 ## v1.7.0 (2023-05-03)
 
 ### Feat
@@ -7000,7 +7306,7 @@ Feat: multiple code refactor and restructuring ([`1d448e6`](https://github.com/m
 
 Dev ([`56124d0`](https://github.com/mraniki/dxsp/commit/56124d0dd9ba97648a64bda6e6ca3db85b3c3f22))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`aca77cb`](https://github.com/mraniki/dxsp/commit/aca77cbbbecff7cedb3968da620b56f858237ffa))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`aca77cb`](https://github.com/mraniki/dxsp/commit/aca77cbbbecff7cedb3968da620b56f858237ffa))
 
 ### ✨
 
@@ -7016,6 +7322,7 @@ Dev ([`56124d0`](https://github.com/mraniki/dxsp/commit/56124d0dd9ba97648a64bda6
 
 * 🥅 better error handling for the execute order ([`37fb751`](https://github.com/mraniki/dxsp/commit/37fb751168dfff4461a86025dd96b796277e462c))
 
+
 ## v1.6.2 (2023-05-02)
 
 ### Other
@@ -7026,7 +7333,8 @@ fix: example ([`0ef6e21`](https://github.com/mraniki/dxsp/commit/0ef6e211c93f417
 
 * Fix syntax error in example.py file. ([`0aec5f8`](https://github.com/mraniki/dxsp/commit/0aec5f8f514774bafc59f19f8873e4a70010c9b7))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`9365acf`](https://github.com/mraniki/dxsp/commit/9365acff456612669f0943f2ca9c084c7707e40f))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`9365acf`](https://github.com/mraniki/dxsp/commit/9365acff456612669f0943f2ca9c084c7707e40f))
+
 
 ## v1.6.1 (2023-05-02)
 
@@ -7040,7 +7348,8 @@ fix: example ([`0ef6e21`](https://github.com/mraniki/dxsp/commit/0ef6e211c93f417
 
 Fix: example ([`8301eaa`](https://github.com/mraniki/dxsp/commit/8301eaad2a356ef1f0b4e551b6e160c522ac61bf))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`6f6d1b9`](https://github.com/mraniki/dxsp/commit/6f6d1b93e9504df857ca829c2945594cfc00f93d))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`6f6d1b9`](https://github.com/mraniki/dxsp/commit/6f6d1b93e9504df857ca829c2945594cfc00f93d))
+
 
 ## v1.6.0 (2023-05-02)
 
@@ -7062,7 +7371,8 @@ feat: error handling for token balance ([`7c836fe`](https://github.com/mraniki/d
 
 fix: async bug ([`cfff835`](https://github.com/mraniki/dxsp/commit/cfff8350c61ec9c6aced112407f2b6d79bc61487))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`9984de2`](https://github.com/mraniki/dxsp/commit/9984de25ec5b96986715f45b4eb0488c23de35e6))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`9984de2`](https://github.com/mraniki/dxsp/commit/9984de25ec5b96986715f45b4eb0488c23de35e6))
+
 
 ## v1.5.4 (2023-05-01)
 
@@ -7082,7 +7392,8 @@ fix: code refactoring ([`2c86438`](https://github.com/mraniki/dxsp/commit/2c8643
 
 * Fix: async bug in DexSwap class. ([`d2b738b`](https://github.com/mraniki/dxsp/commit/d2b738b4079676250ef8d4caae8df6ead768e101))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`414f023`](https://github.com/mraniki/dxsp/commit/414f023eaa587aecef9443d0d0c77b211cdd4c7b))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`414f023`](https://github.com/mraniki/dxsp/commit/414f023eaa587aecef9443d0d0c77b211cdd4c7b))
+
 
 ## v1.5.3 (2023-05-01)
 
@@ -7106,6 +7417,7 @@ Fix: Direction removed by action ([`cb72d46`](https://github.com/mraniki/dxsp/co
 
 Fix ([`28a6106`](https://github.com/mraniki/dxsp/commit/28a6106a3f7823c8a52e6505ac234477a8aa81fa))
 
+
 ## v1.5.2 (2023-05-01)
 
 ### Fix
@@ -7121,6 +7433,7 @@ Fix ([`28a6106`](https://github.com/mraniki/dxsp/commit/28a6106a3f7823c8a52e6505
 Feat: unit test prep ([`1f3a6b1`](https://github.com/mraniki/dxsp/commit/1f3a6b1d28ae595c3a25fd1c3f7948d60ae46a9f))
 
 * Add initial unit test. ([`c6e7619`](https://github.com/mraniki/dxsp/commit/c6e76190d2aa3ef69e81bdf381c9719bebe4b95f))
+
 
 ## v1.5.1 (2023-04-30)
 
@@ -7140,7 +7453,8 @@ Dev ([`f3fff55`](https://github.com/mraniki/dxsp/commit/f3fff55f48d1b7b3b4a01496
 
 * Refactor logging statements in main.py file ([`710cb6c`](https://github.com/mraniki/dxsp/commit/710cb6cabae40ab8b71ffe9d1bf0a9ebcb847512))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`d8abb83`](https://github.com/mraniki/dxsp/commit/d8abb8318d9405890faac65ab2e56e1a63c6b351))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`d8abb83`](https://github.com/mraniki/dxsp/commit/d8abb8318d9405890faac65ab2e56e1a63c6b351))
+
 
 ## v1.5.0 (2023-04-30)
 
@@ -7154,7 +7468,8 @@ Dev ([`f3fff55`](https://github.com/mraniki/dxsp/commit/f3fff55f48d1b7b3b4a01496
 
 Dev ([`f4bf18d`](https://github.com/mraniki/dxsp/commit/f4bf18d6b700d5ceca7ac21be190e6d0ba2237ee))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`c1cdde4`](https://github.com/mraniki/dxsp/commit/c1cdde4749d212adb32e52cf828f6b01047482fe))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`c1cdde4`](https://github.com/mraniki/dxsp/commit/c1cdde4749d212adb32e52cf828f6b01047482fe))
+
 
 ## v1.4.4 (2023-04-30)
 
@@ -7174,6 +7489,7 @@ Dev ([`f4bf18d`](https://github.com/mraniki/dxsp/commit/f4bf18d6b700d5ceca7ac21b
 
 Dev ([`346848e`](https://github.com/mraniki/dxsp/commit/346848e9064015e393f698541ed2ae138a340cd1))
 
+
 ## v1.4.3 (2023-04-30)
 
 ### Fix
@@ -7186,13 +7502,14 @@ Dev ([`346848e`](https://github.com/mraniki/dxsp/commit/346848e9064015e393f69854
 
 Dev ([`404b31c`](https://github.com/mraniki/dxsp/commit/404b31c0082da5aab90cd1d04cda8c10d12c1103))
 
-* Merge branch &#39;dev&#39; of https://github.com/mraniki/dxsp into dev ([`5bd52cd`](https://github.com/mraniki/dxsp/commit/5bd52cd83a1b1e87d0cc711421d4735ff6660b19))
+* Merge branch 'dev' of https://github.com/mraniki/dxsp into dev ([`5bd52cd`](https://github.com/mraniki/dxsp/commit/5bd52cd83a1b1e87d0cc711421d4735ff6660b19))
 
 * Merge pull request #108 from mraniki/dev
 
 Dev ([`1923d57`](https://github.com/mraniki/dxsp/commit/1923d57ba66686f31be544dbaae9fe68e2d2b466))
 
-* Merge branch &#39;dev&#39; of https://github.com/mraniki/dxsp into dev ([`76796a9`](https://github.com/mraniki/dxsp/commit/76796a97b528ccd338c6516311648f9532c3463d))
+* Merge branch 'dev' of https://github.com/mraniki/dxsp into dev ([`76796a9`](https://github.com/mraniki/dxsp/commit/76796a97b528ccd338c6516311648f9532c3463d))
+
 
 ## v1.4.2 (2023-04-30)
 
@@ -7212,7 +7529,8 @@ Dev ([`1923d57`](https://github.com/mraniki/dxsp/commit/1923d57ba66686f31be544db
 
 Dev ([`909cb15`](https://github.com/mraniki/dxsp/commit/909cb15611d3cc657e86bdf8835aff049c9a1989))
 
-* Merge branch &#39;dev&#39; of https://github.com/mraniki/dxsp into dev ([`6646e4c`](https://github.com/mraniki/dxsp/commit/6646e4cf4a2e082e268c9458fcd010fd70e9b823))
+* Merge branch 'dev' of https://github.com/mraniki/dxsp into dev ([`6646e4c`](https://github.com/mraniki/dxsp/commit/6646e4cf4a2e082e268c9458fcd010fd70e9b823))
+
 
 ## v1.4.1 (2023-04-30)
 
@@ -7228,6 +7546,7 @@ Dev ([`909cb15`](https://github.com/mraniki/dxsp/commit/909cb15611d3cc657e86bdf8
 
 fix: refactoring ([`46427ab`](https://github.com/mraniki/dxsp/commit/46427abc408d5dfd9f1f1869e385b917ff482375))
 
+
 ## v1.4.0 (2023-04-30)
 
 ### Feat
@@ -7241,6 +7560,7 @@ fix: refactoring ([`46427ab`](https://github.com/mraniki/dxsp/commit/46427abc408
 * Merge pull request #105 from mraniki/dev
 
 Dev ([`cb39046`](https://github.com/mraniki/dxsp/commit/cb390468579f929752ac1390937cae5b07f6a3a2))
+
 
 ## v1.3.0 (2023-04-30)
 
@@ -7256,6 +7576,7 @@ Dev ([`16423a7`](https://github.com/mraniki/dxsp/commit/16423a79cf9f1e16ee763aa1
 
 * Remove unnecessary workflow_run triggers ([`5384e88`](https://github.com/mraniki/dxsp/commit/5384e882d88ab2a5b8d85965d78553121cd7b924))
 
+
 ## v1.2.15 (2023-04-27)
 
 ### Fix
@@ -7267,6 +7588,7 @@ Dev ([`16423a7`](https://github.com/mraniki/dxsp/commit/16423a79cf9f1e16ee763aa1
 * Merge pull request #103 from mraniki/dev
 
 fix: missing import ([`58105f5`](https://github.com/mraniki/dxsp/commit/58105f57f54b120009588b6b83692fc114d86416))
+
 
 ## v1.2.14 (2023-04-27)
 
@@ -7286,7 +7608,7 @@ updated-dependencies:
   update-type: version-update:semver-patch
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`3593d7c`](https://github.com/mraniki/dxsp/commit/3593d7cc89e5389534947987e3148d56fe82630f))
+Signed-off-by: dependabot[bot] <support@github.com> ([`3593d7c`](https://github.com/mraniki/dxsp/commit/3593d7cc89e5389534947987e3148d56fe82630f))
 
 ### Fix
 
@@ -7302,6 +7624,7 @@ fix: core reanmed to default_settings.toml ([`842c948`](https://github.com/mrani
 
 build(deps): bump relekang/python-semantic-release from 7.33.2 to 7.33.3 ([`273d595`](https://github.com/mraniki/dxsp/commit/273d595116a5dc49e4a4faf3fd2b330d7874207d))
 
+
 ## v1.2.13 (2023-04-27)
 
 ### Fix
@@ -7313,6 +7636,7 @@ build(deps): bump relekang/python-semantic-release from 7.33.2 to 7.33.3 ([`273d
 * Merge pull request #101 from mraniki/dev
 
 fix: dep ([`a507ee0`](https://github.com/mraniki/dxsp/commit/a507ee0440d5f94abcfce98338fee578894f895e))
+
 
 ## v1.2.12 (2023-04-24)
 
@@ -7348,6 +7672,7 @@ feature: added dynaconf support with core settings  and remove python… ([`44f3
 
 * Update main.py with version import ([`631f1df`](https://github.com/mraniki/dxsp/commit/631f1df2af28d6b188dd42d1d93b340a9506783b))
 
+
 ## v1.2.11 (2023-04-21)
 
 ### Fix
@@ -7361,6 +7686,7 @@ feature: added dynaconf support with core settings  and remove python… ([`44f3
 Dev ([`6786068`](https://github.com/mraniki/dxsp/commit/67860684c86fd6b75fb071670da51aaca8f600d7))
 
 * minor: remove python-dotenv dependency. added dynaconf support. created initial toml structure ([`39f2c87`](https://github.com/mraniki/dxsp/commit/39f2c87be28a355344880e085cb2ef2401579546))
+
 
 ## v1.2.10 (2023-04-21)
 
@@ -7380,7 +7706,7 @@ updated-dependencies:
   update-type: version-update:semver-patch
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`fa91721`](https://github.com/mraniki/dxsp/commit/fa9172193c065f95b1dce5bdca71fa96b2052311))
+Signed-off-by: dependabot[bot] <support@github.com> ([`fa91721`](https://github.com/mraniki/dxsp/commit/fa9172193c065f95b1dce5bdca71fa96b2052311))
 
 ### Fix
 
@@ -7410,6 +7736,7 @@ build(deps): bump actions/checkout from 3.5.0 to 3.5.2 ([`08101fe`](https://gith
 
 * Update pyproject.toml ([`cb07c14`](https://github.com/mraniki/dxsp/commit/cb07c14fe775f53b0482f0702e5e6dd2de7fec8f))
 
+
 ## v1.2.9 (2023-04-18)
 
 ### Fix
@@ -7422,7 +7749,8 @@ build(deps): bump actions/checkout from 3.5.0 to 3.5.2 ([`08101fe`](https://gith
 
 Dev ([`b74fa11`](https://github.com/mraniki/dxsp/commit/b74fa11dbe4b33ca50aeaea9b0c657bdd7b1211e))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`98375a3`](https://github.com/mraniki/dxsp/commit/98375a3fa114e1bb383e57ee337d1a25a7639d8e))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`98375a3`](https://github.com/mraniki/dxsp/commit/98375a3fa114e1bb383e57ee337d1a25a7639d8e))
+
 
 ## v1.2.8 (2023-04-17)
 
@@ -7438,7 +7766,8 @@ Dev ([`b74fa11`](https://github.com/mraniki/dxsp/commit/b74fa11dbe4b33ca50aeaea9
 
 Dev ([`bcf33db`](https://github.com/mraniki/dxsp/commit/bcf33db5b3359a92d42d5acbf2cef5a810aa1e67))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`282d9e1`](https://github.com/mraniki/dxsp/commit/282d9e18478bc5dd00e2669004fcf20d87b2625c))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`282d9e1`](https://github.com/mraniki/dxsp/commit/282d9e18478bc5dd00e2669004fcf20d87b2625c))
+
 
 ## v1.2.7 (2023-04-17)
 
@@ -7450,7 +7779,8 @@ Dev ([`f1c3f5a`](https://github.com/mraniki/dxsp/commit/f1c3f5a54e0de3db84d6cd30
 
 * Remove unused import and update logging in main.py ([`232ee4c`](https://github.com/mraniki/dxsp/commit/232ee4c0738330b680d5fef3b1116a2472b318df))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`e52292d`](https://github.com/mraniki/dxsp/commit/e52292d1382b5691cb4dc467a7bac3acb23229fe))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`e52292d`](https://github.com/mraniki/dxsp/commit/e52292d1382b5691cb4dc467a7bac3acb23229fe))
+
 
 ## v1.2.6 (2023-04-17)
 
@@ -7466,6 +7796,7 @@ Dev ([`f1c3f5a`](https://github.com/mraniki/dxsp/commit/f1c3f5a54e0de3db84d6cd30
 
 fix: missing self ([`aa37b38`](https://github.com/mraniki/dxsp/commit/aa37b38ceb971d5d15ad8df5c87fb3567d4492bc))
 
+
 ## v1.2.5 (2023-04-17)
 
 ### Fix
@@ -7477,6 +7808,7 @@ fix: missing self ([`aa37b38`](https://github.com/mraniki/dxsp/commit/aa37b38ceb
 * Merge pull request #89 from mraniki/dev
 
 fix: missing self ([`52176e3`](https://github.com/mraniki/dxsp/commit/52176e354b9fb775a922d7d0be1dcef3904109cf))
+
 
 ## v1.2.4 (2023-04-17)
 
@@ -7498,7 +7830,8 @@ Dev ([`4558506`](https://github.com/mraniki/dxsp/commit/4558506ea0a64925a7dc5a10
 
 * Update dxsp/main.py
 
-Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@users.noreply.github.com&gt; ([`f318c0a`](https://github.com/mraniki/dxsp/commit/f318c0a62fb6acf793e0921201ddb65866c081d7))
+Co-authored-by: code-review-doctor[bot] <72320148+code-review-doctor[bot]@users.noreply.github.com> ([`f318c0a`](https://github.com/mraniki/dxsp/commit/f318c0a62fb6acf793e0921201ddb65866c081d7))
+
 
 ## v1.2.3 (2023-04-17)
 
@@ -7511,6 +7844,7 @@ Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@use
 * Merge pull request #87 from mraniki/dev
 
 fix: added timestamp from block search instead of datetime lib ([`75848bf`](https://github.com/mraniki/dxsp/commit/75848bfd5c91f9aef6930debca7e1201520f4660))
+
 
 ## v1.2.2 (2023-04-17)
 
@@ -7526,6 +7860,7 @@ Dev ([`88ec2b5`](https://github.com/mraniki/dxsp/commit/88ec2b59ccfe60daa2e6bb5e
 
 * Fix: import structure ([`e2e7196`](https://github.com/mraniki/dxsp/commit/e2e7196dcd2667d85d162ff560feef89ffdde0ad))
 
+
 ## v1.2.1 (2023-04-16)
 
 ### Fix
@@ -7538,6 +7873,7 @@ Dev ([`88ec2b5`](https://github.com/mraniki/dxsp/commit/88ec2b59ccfe60daa2e6bb5e
 
 fix: logger typo ([`8d6a9fb`](https://github.com/mraniki/dxsp/commit/8d6a9fbea7c004cc0436154afbe05d3b4531c946))
 
+
 ## v1.2.0 (2023-04-16)
 
 ### Feat
@@ -7549,6 +7885,7 @@ fix: logger typo ([`8d6a9fb`](https://github.com/mraniki/dxsp/commit/8d6a9fbea7c
 * Merge pull request #84 from mraniki/dev
 
 feat: added latency capability and new functions for future extension ([`190be2c`](https://github.com/mraniki/dxsp/commit/190be2cf3d085e4b80c8e1fe4accf5a0350c4dcd))
+
 
 ## v1.1.0 (2023-04-16)
 
@@ -7568,7 +7905,7 @@ Dev ([`16d6424`](https://github.com/mraniki/dxsp/commit/16d64246cf1353ec9ea735c5
 
 Fix: example app ([`b4a8f19`](https://github.com/mraniki/dxsp/commit/b4a8f19fb2059e30a20a0e2ffb764b6a01a5ec45))
 
-* Merge branch &#39;main&#39; into dev ([`ea0bbbb`](https://github.com/mraniki/dxsp/commit/ea0bbbbeb0b5826d7827e91850a2c412dea26b2e))
+* Merge branch 'main' into dev ([`ea0bbbb`](https://github.com/mraniki/dxsp/commit/ea0bbbbeb0b5826d7827e91850a2c412dea26b2e))
 
 * Create semantic.yml ([`2e6b824`](https://github.com/mraniki/dxsp/commit/2e6b824d0f7035024c2847ff540380198dac9dea))
 
@@ -7582,9 +7919,10 @@ Fix: example app ([`b4a8f19`](https://github.com/mraniki/dxsp/commit/b4a8f19fb20
 
 * Update examples/example.py
 
-Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@users.noreply.github.com&gt; ([`03f139d`](https://github.com/mraniki/dxsp/commit/03f139d2ddc521a809fca8ba7bf8501a6aa38f16))
+Co-authored-by: code-review-doctor[bot] <72320148+code-review-doctor[bot]@users.noreply.github.com> ([`03f139d`](https://github.com/mraniki/dxsp/commit/03f139d2ddc521a809fca8ba7bf8501a6aa38f16))
 
 * Update README.md ([`ad3b978`](https://github.com/mraniki/dxsp/commit/ad3b9781892434706296f9f0a9e4a52269a2028c))
+
 
 ## v1.0.31 (2023-04-15)
 
@@ -7602,6 +7940,7 @@ Fix: example.py ([`db935db`](https://github.com/mraniki/dxsp/commit/db935db21a6f
 
 * Update example.py ([`26f7902`](https://github.com/mraniki/dxsp/commit/26f7902dc721df2f98247f10e82212ad486ddfcf))
 
+
 ## v1.0.30 (2023-04-14)
 
 ### Fix
@@ -7614,6 +7953,7 @@ Fix: example.py ([`db935db`](https://github.com/mraniki/dxsp/commit/db935db21a6f
 
 fix: Refactor example.py to use default host and port. ([`1c48e48`](https://github.com/mraniki/dxsp/commit/1c48e48c7b8669bdaf59673c941047e5e527e6ef))
 
+
 ## v1.0.29 (2023-04-14)
 
 ### Fix
@@ -7623,6 +7963,7 @@ fix: Refactor example.py to use default host and port. ([`1c48e48`](https://gith
 ### Update
 
 * Update Dockerfile ([`09bd90d`](https://github.com/mraniki/dxsp/commit/09bd90d8bf7aa770543fc6f235296e7d4edef437))
+
 
 ## v1.0.28 (2023-04-14)
 
@@ -7636,13 +7977,14 @@ fix: Refactor example.py to use default host and port. ([`1c48e48`](https://gith
 
 Dev ([`77001da`](https://github.com/mraniki/dxsp/commit/77001da06cfd2fb48849272e7b3d0d904c83f2cf))
 
-* Merge branch &#39;dev&#39; of https://github.com/mraniki/dxsp into dev ([`c959f93`](https://github.com/mraniki/dxsp/commit/c959f933c1db3c31b574d2aecb639140474e2474))
+* Merge branch 'dev' of https://github.com/mraniki/dxsp into dev ([`c959f93`](https://github.com/mraniki/dxsp/commit/c959f933c1db3c31b574d2aecb639140474e2474))
 
 ### Update
 
 * Update examples/example.py
 
-Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@users.noreply.github.com&gt; ([`9b00baa`](https://github.com/mraniki/dxsp/commit/9b00baae7376023559cf759ecf209e849c26ed53))
+Co-authored-by: code-review-doctor[bot] <72320148+code-review-doctor[bot]@users.noreply.github.com> ([`9b00baa`](https://github.com/mraniki/dxsp/commit/9b00baae7376023559cf759ecf209e849c26ed53))
+
 
 ## v1.0.27 (2023-04-14)
 
@@ -7658,7 +8000,7 @@ Co-authored-by: code-review-doctor[bot] &lt;72320148+code-review-doctor[bot]@use
 
 Fix: example ([`d672ebc`](https://github.com/mraniki/dxsp/commit/d672ebc24a94630d651af8ff731ac5a950112df2))
 
-* Merge branch &#39;dev&#39; of https://github.com/mraniki/dxsp into dev ([`14901e3`](https://github.com/mraniki/dxsp/commit/14901e364f988acd558c1e424db7ed72f211bb8c))
+* Merge branch 'dev' of https://github.com/mraniki/dxsp into dev ([`14901e3`](https://github.com/mraniki/dxsp/commit/14901e364f988acd558c1e424db7ed72f211bb8c))
 
 * Merge pull request #76 from mraniki/dev
 
@@ -7666,7 +8008,8 @@ Dev ([`cb951c0`](https://github.com/mraniki/dxsp/commit/cb951c058640d33f3ac3bfff
 
 * simplify example to review all blockchains. ([`4be3738`](https://github.com/mraniki/dxsp/commit/4be3738e4ea51d2cf3d2649099b39c23fd6affbf))
 
-* Merge branch &#39;dev&#39; of https://github.com/mraniki/dxsp into dev ([`0392443`](https://github.com/mraniki/dxsp/commit/0392443c156feedca0cfa80629987ffb913d08f5))
+* Merge branch 'dev' of https://github.com/mraniki/dxsp into dev ([`0392443`](https://github.com/mraniki/dxsp/commit/0392443c156feedca0cfa80629987ffb913d08f5))
+
 
 ## v1.0.26 (2023-04-14)
 
@@ -7682,7 +8025,8 @@ Dev ([`d58722d`](https://github.com/mraniki/dxsp/commit/d58722d436c87e553d01e48d
 
 * Fix: search_gecko_platform ([`b724b0f`](https://github.com/mraniki/dxsp/commit/b724b0fbff04b8af2f8a7e5155073b253ee5ddea))
 
-* Merge branch &#39;dev&#39; of https://github.com/mraniki/dxsp into dev ([`9c0e6da`](https://github.com/mraniki/dxsp/commit/9c0e6dabaa70c52a0e274f86d04139dae29ee733))
+* Merge branch 'dev' of https://github.com/mraniki/dxsp into dev ([`9c0e6da`](https://github.com/mraniki/dxsp/commit/9c0e6dabaa70c52a0e274f86d04139dae29ee733))
+
 
 ## v1.0.25 (2023-04-14)
 
@@ -7698,6 +8042,7 @@ fix: asset_out_contract ([`c5e0b5e`](https://github.com/mraniki/dxsp/commit/c5e0
 
 * minor: updated example to rotate across the chains support and added few symbol for automatic rotation testing ([`4056d48`](https://github.com/mraniki/dxsp/commit/4056d4822a96728cb776d3a78cf5f37d6aa5cb33))
 
+
 ## v1.0.24 (2023-04-14)
 
 ### Fix
@@ -7712,6 +8057,7 @@ fix: redeployment ([`435bef8`](https://github.com/mraniki/dxsp/commit/435bef896b
 
 * Fix:  main.py ([`d3f37df`](https://github.com/mraniki/dxsp/commit/d3f37dff54113111eb05cbef19ac61c2889708a5))
 
+
 ## v1.0.23 (2023-04-14)
 
 ### Other
@@ -7720,7 +8066,8 @@ fix: redeployment ([`435bef8`](https://github.com/mraniki/dxsp/commit/435bef896b
 
 Dev ([`8a9883b`](https://github.com/mraniki/dxsp/commit/8a9883ba1fb8fc0cbc21d7270bc23684129028d3))
 
-* Merge branch &#39;dev&#39; of https://github.com/mraniki/dxsp into dev ([`a0b6bcf`](https://github.com/mraniki/dxsp/commit/a0b6bcfdb4fb4a1a5be26bbfb9472e667ac37f49))
+* Merge branch 'dev' of https://github.com/mraniki/dxsp into dev ([`a0b6bcf`](https://github.com/mraniki/dxsp/commit/a0b6bcfdb4fb4a1a5be26bbfb9472e667ac37f49))
+
 
 ## v1.0.22 (2023-04-14)
 
@@ -7736,7 +8083,7 @@ Dev ([`8a9883b`](https://github.com/mraniki/dxsp/commit/8a9883ba1fb8fc0cbc21d727
 
 Dev ([`fc53c03`](https://github.com/mraniki/dxsp/commit/fc53c0339f2aa714af98c71db661db25e98abc11))
 
-* Merge branch &#39;dev&#39; of https://github.com/mraniki/dxsp into dev ([`8a741b7`](https://github.com/mraniki/dxsp/commit/8a741b743292bb121cdbec4ba71301f6f4efc548))
+* Merge branch 'dev' of https://github.com/mraniki/dxsp into dev ([`8a741b7`](https://github.com/mraniki/dxsp/commit/8a741b743292bb121cdbec4ba71301f6f4efc548))
 
 * Merge pull request #70 from mraniki/dev
 
@@ -7748,13 +8095,14 @@ Dev ([`a52bdc1`](https://github.com/mraniki/dxsp/commit/a52bdc1d8db3e45cd238fa05
 
 minor: update quote with decimales support for any base symbol and ad… (Sourcery refactored) ([`0d96e01`](https://github.com/mraniki/dxsp/commit/0d96e01f86b61e9e8140c4492a66691a70a67fb1))
 
-* &#39;Refactored by Sourcery&#39; ([`090a017`](https://github.com/mraniki/dxsp/commit/090a0178fea8c9d7db624e8f21cedd2e4ad69565))
+* 'Refactored by Sourcery' ([`090a017`](https://github.com/mraniki/dxsp/commit/090a0178fea8c9d7db624e8f21cedd2e4ad69565))
 
 * Merge pull request #68 from mraniki/dev
 
 minor: update quote with decimales support for any base symbol and ad… ([`425227a`](https://github.com/mraniki/dxsp/commit/425227ae0977990b80049135cbd0d2e06cc3ff04))
 
 * minor: update quote with decimales support for any base symbol and added healthchecks.io in example ([`4751b7c`](https://github.com/mraniki/dxsp/commit/4751b7cb772e71fd5dcf98eea33ba521a3b8c317))
+
 
 ## v1.0.21 (2023-04-14)
 
@@ -7764,7 +8112,7 @@ minor: update quote with decimales support for any base symbol and ad… ([`4252
 
 Dev ([`ef34c17`](https://github.com/mraniki/dxsp/commit/ef34c178affad6d221bbb4ddca8437c88480549d))
 
-* Merge branch &#39;dev&#39; of https://github.com/mraniki/dxsp into dev ([`9873004`](https://github.com/mraniki/dxsp/commit/9873004d4a7898926d413218681d0801c2baf41d))
+* Merge branch 'dev' of https://github.com/mraniki/dxsp into dev ([`9873004`](https://github.com/mraniki/dxsp/commit/9873004d4a7898926d413218681d0801c2baf41d))
 
 ### Update
 
@@ -7773,6 +8121,7 @@ Dev ([`ef34c17`](https://github.com/mraniki/dxsp/commit/ef34c178affad6d221bbb4dd
 * Update README.md ([`4bc9227`](https://github.com/mraniki/dxsp/commit/4bc92278d8b6756b75caf1e8ef4b2fb86c41e165))
 
 * Update README.md ([`ab8d079`](https://github.com/mraniki/dxsp/commit/ab8d0794d01576d99172569519efe1730ad4ab96))
+
 
 ## v1.0.20 (2023-04-14)
 
@@ -7788,6 +8137,7 @@ Dev ([`ef34c17`](https://github.com/mraniki/dxsp/commit/ef34c178affad6d221bbb4dd
 
 fix: gecko and contract ([`1d5cb11`](https://github.com/mraniki/dxsp/commit/1d5cb113ad320cb586ec5f80eda26a5768ac7d0b))
 
+
 ## v1.0.19 (2023-04-13)
 
 ### Fix
@@ -7800,6 +8150,7 @@ fix: gecko and contract ([`1d5cb11`](https://github.com/mraniki/dxsp/commit/1d5c
 
 fix: gecko ([`67f7f15`](https://github.com/mraniki/dxsp/commit/67f7f15a16887606c86c0775744e540cfac30ee3))
 
+
 ## v1.0.18 (2023-04-13)
 
 ### Other
@@ -7808,7 +8159,8 @@ fix: gecko ([`67f7f15`](https://github.com/mraniki/dxsp/commit/67f7f15a16887606c
 
 Dev ([`84fb9ff`](https://github.com/mraniki/dxsp/commit/84fb9ff47510f26b984220332b772f8ad9f5bf10))
 
-* Merge branch &#39;dev&#39; of https://github.com/mraniki/dxsp into dev ([`13c77be`](https://github.com/mraniki/dxsp/commit/13c77bedd3da6a3f2f0f04944154eb5ab9bc537b))
+* Merge branch 'dev' of https://github.com/mraniki/dxsp into dev ([`13c77be`](https://github.com/mraniki/dxsp/commit/13c77bedd3da6a3f2f0f04944154eb5ab9bc537b))
+
 
 ## v1.0.17 (2023-04-13)
 
@@ -7822,13 +8174,14 @@ Dev ([`84fb9ff`](https://github.com/mraniki/dxsp/commit/84fb9ff47510f26b98422033
 
 Dev ([`844a542`](https://github.com/mraniki/dxsp/commit/844a542cdaa46052ce76b8ac62fa631334e8ad3b))
 
-* Merge branch &#39;dev&#39; of https://github.com/mraniki/dxsp into dev ([`6cb022c`](https://github.com/mraniki/dxsp/commit/6cb022c34e0f6abc302b1220e731ad82b2872b9c))
+* Merge branch 'dev' of https://github.com/mraniki/dxsp into dev ([`6cb022c`](https://github.com/mraniki/dxsp/commit/6cb022c34e0f6abc302b1220e731ad82b2872b9c))
 
 * Merge pull request #59 from mraniki/dev
 
 Dev ([`0ed129b`](https://github.com/mraniki/dxsp/commit/0ed129b51f210b8d2805616850195c3bbbe10940))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`f34a1f3`](https://github.com/mraniki/dxsp/commit/f34a1f3439bd01f35c905b090a6f44b9fd395750))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`f34a1f3`](https://github.com/mraniki/dxsp/commit/f34a1f3439bd01f35c905b090a6f44b9fd395750))
+
 
 ## v1.0.16 (2023-04-13)
 
@@ -7856,6 +8209,7 @@ fix: Update README.md ([`5d35fbb`](https://github.com/mraniki/dxsp/commit/5d35fb
 
 * Update README.md ([`2a56414`](https://github.com/mraniki/dxsp/commit/2a564140615f52e984a3772cc8b3d1a33cd15302))
 
+
 ## v1.0.15 (2023-04-13)
 
 ### Fix
@@ -7872,6 +8226,7 @@ Dev ([`b36e32f`](https://github.com/mraniki/dxsp/commit/b36e32fe7408af11ce9cdf42
 
 Align ([`b1a228d`](https://github.com/mraniki/dxsp/commit/b1a228d235bb634b76c36da50e063293fe179c96))
 
+
 ## v1.0.14 (2023-04-13)
 
 ### Fix
@@ -7885,6 +8240,7 @@ Align ([`b1a228d`](https://github.com/mraniki/dxsp/commit/b1a228d235bb634b76c36d
 * Merge pull request #53 from mraniki/dev
 
 fix: logger update and workflow tweak ([`9ac9fb3`](https://github.com/mraniki/dxsp/commit/9ac9fb3d408156249b932d2d5dbb2c6716e91980))
+
 
 ## v1.0.13 (2023-04-13)
 
@@ -7908,6 +8264,7 @@ fix: updated with full logging for each DexSwap functions ([`3b0774a`](https://g
 
 * Update 🧹BranchCleanUp.yml ([`be2e050`](https://github.com/mraniki/dxsp/commit/be2e0500308784db7f838cf9c4858d8be906a574))
 
+
 ## v1.0.12 (2023-04-13)
 
 ### Other
@@ -7915,6 +8272,7 @@ fix: updated with full logging for each DexSwap functions ([`3b0774a`](https://g
 * Merge pull request #47 from mraniki/dev
 
 fix: logger ([`ea557f4`](https://github.com/mraniki/dxsp/commit/ea557f449c7b69832099e7d06872dfc1b976149c))
+
 
 ## v1.0.11 (2023-04-13)
 
@@ -7924,6 +8282,7 @@ fix: logger ([`ea557f4`](https://github.com/mraniki/dxsp/commit/ea557f449c7b6983
 
 fix: logger ([`f0df825`](https://github.com/mraniki/dxsp/commit/f0df8256f13a5ceddbf11b3082ddd56bc9bd0c67))
 
+
 ## v1.0.10 (2023-04-13)
 
 ### Other
@@ -7931,6 +8290,7 @@ fix: logger ([`f0df825`](https://github.com/mraniki/dxsp/commit/f0df8256f13a5ced
 * Merge pull request #44 from mraniki/dev
 
 fix: import error ([`d46e163`](https://github.com/mraniki/dxsp/commit/d46e1634fa650318304e3a9029fda1368e83929f))
+
 
 ## v1.0.9 (2023-04-13)
 
@@ -7956,6 +8316,7 @@ Dev ([`1b31363`](https://github.com/mraniki/dxsp/commit/1b3136311113b9ad154a6f81
 
 Align ([`63ca048`](https://github.com/mraniki/dxsp/commit/63ca048214b45a9c90c6bc0a941f8ab6d33fd384))
 
+
 ## v1.0.8 (2023-04-13)
 
 ### Fix
@@ -7973,6 +8334,7 @@ Dev ([`6333227`](https://github.com/mraniki/dxsp/commit/63332276c686f6f2be95affe
 * Merge pull request #39 from mraniki/main
 
 Align ([`c728ac0`](https://github.com/mraniki/dxsp/commit/c728ac0b185a7bb64359280da6f0cc2249747c1c))
+
 
 ## v1.0.7 (2023-04-13)
 
@@ -7994,11 +8356,13 @@ Align ([`ed617ab`](https://github.com/mraniki/dxsp/commit/ed617ab7721e19bf406d49
 
 * Update example.py ([`0a2bdab`](https://github.com/mraniki/dxsp/commit/0a2bdab137b4d09797ade6092d59576149ef0f85))
 
+
 ## v1.0.6 (2023-04-13)
 
 ### Fix
 
 * fix: import 1 ([`ccf0171`](https://github.com/mraniki/dxsp/commit/ccf0171bcf831770d9e653c8e71b1506bb5f7f01))
+
 
 ## v1.0.5 (2023-04-13)
 
@@ -8012,6 +8376,7 @@ Align ([`ed617ab`](https://github.com/mraniki/dxsp/commit/ed617ab7721e19bf406d49
 
 fix: chain import ([`d57a730`](https://github.com/mraniki/dxsp/commit/d57a730f60abda170e9939ed36e514de307c0819))
 
+
 ## v1.0.4 (2023-04-13)
 
 ### Fix
@@ -8024,7 +8389,7 @@ fix: chain import ([`d57a730`](https://github.com/mraniki/dxsp/commit/d57a730f60
 
 Dev ([`f56ebc4`](https://github.com/mraniki/dxsp/commit/f56ebc42c1ed292f32d7820503be0fd6ff914fb0))
 
-* Merge branch &#39;dev&#39; of https://github.com/mraniki/dxsp into dev ([`066d95d`](https://github.com/mraniki/dxsp/commit/066d95d4dbe4403ac83c3df258c73524c91444d7))
+* Merge branch 'dev' of https://github.com/mraniki/dxsp into dev ([`066d95d`](https://github.com/mraniki/dxsp/commit/066d95d4dbe4403ac83c3df258c73524c91444d7))
 
 * Merge pull request #27 from mraniki/dev
 
@@ -8034,9 +8399,10 @@ Dev ([`3c57094`](https://github.com/mraniki/dxsp/commit/3c57094e40043c94ce7aa7de
 
 Dev (Sourcery refactored) ([`94d7c94`](https://github.com/mraniki/dxsp/commit/94d7c94b6f77b6e396079a2fa7030a2375e954c5))
 
-* &#39;Refactored by Sourcery&#39; ([`861df60`](https://github.com/mraniki/dxsp/commit/861df601f71d68ca8a40549da75c30d398a64228))
+* 'Refactored by Sourcery' ([`861df60`](https://github.com/mraniki/dxsp/commit/861df601f71d68ca8a40549da75c30d398a64228))
 
-* Merge branch &#39;main&#39; into dev ([`eb94c43`](https://github.com/mraniki/dxsp/commit/eb94c43edb0264dc4e77e0eb2feda1fc550c6119))
+* Merge branch 'main' into dev ([`eb94c43`](https://github.com/mraniki/dxsp/commit/eb94c43edb0264dc4e77e0eb2feda1fc550c6119))
+
 
 ## v1.0.3 (2023-04-13)
 
@@ -8046,9 +8412,10 @@ Dev (Sourcery refactored) ([`94d7c94`](https://github.com/mraniki/dxsp/commit/94
 
 Fix: workflows and updated DexSwap object arguments ([`ecb01a5`](https://github.com/mraniki/dxsp/commit/ecb01a5fe7d0838b26e4fef6b0af5f303b98adef))
 
-* Merge branch &#39;dev&#39; of https://github.com/mraniki/dxsp into dev ([`a4ab449`](https://github.com/mraniki/dxsp/commit/a4ab449e5929556cef29304982e6ee4ddd31e3e1))
+* Merge branch 'dev' of https://github.com/mraniki/dxsp into dev ([`a4ab449`](https://github.com/mraniki/dxsp/commit/a4ab449e5929556cef29304982e6ee4ddd31e3e1))
 
-* Merge branch &#39;main&#39; into dev ([`aae758c`](https://github.com/mraniki/dxsp/commit/aae758c5f2b44728be7c030b6350d946743e2b5b))
+* Merge branch 'main' into dev ([`aae758c`](https://github.com/mraniki/dxsp/commit/aae758c5f2b44728be7c030b6350d946743e2b5b))
+
 
 ## v1.0.2 (2023-04-13)
 
@@ -8058,7 +8425,8 @@ Fix: workflows and updated DexSwap object arguments ([`ecb01a5`](https://github.
 
 fix: initial workflow verification ([`33374e5`](https://github.com/mraniki/dxsp/commit/33374e5d4bcc9d17c210f5bfb12716084ccc5c67))
 
-* Merge branch &#39;main&#39; of git@github.com:mraniki/dxsp.git ([`dfcadc9`](https://github.com/mraniki/dxsp/commit/dfcadc972fa31d2f3bd9d3dace5299ef5d79a27c))
+* Merge branch 'main' of git@github.com:mraniki/dxsp.git ([`dfcadc9`](https://github.com/mraniki/dxsp/commit/dfcadc972fa31d2f3bd9d3dace5299ef5d79a27c))
+
 
 ## v1.0.1 (2023-04-12)
 
@@ -8084,7 +8452,7 @@ Dev ([`0541903`](https://github.com/mraniki/dxsp/commit/0541903ba9151f8e85755bb5
 
 Dev ([`6790206`](https://github.com/mraniki/dxsp/commit/6790206d697f7984536819f04149f8fe0560a1fe))
 
-* Merge branch &#39;dev&#39; of git@github.com:mraniki/dxsp.git ([`17dce9a`](https://github.com/mraniki/dxsp/commit/17dce9ae5105bb23565a2240395bc3ef5998b8fd))
+* Merge branch 'dev' of git@github.com:mraniki/dxsp.git ([`17dce9a`](https://github.com/mraniki/dxsp/commit/17dce9ae5105bb23565a2240395bc3ef5998b8fd))
 
 * Merge pull request #22 from mraniki/main
 
@@ -8095,6 +8463,7 @@ Align ([`044184d`](https://github.com/mraniki/dxsp/commit/044184dc95dac94b4e8c26
 * Update PyPI token in build.yml. ([`96a9bb1`](https://github.com/mraniki/dxsp/commit/96a9bb162fe7b8cc395173a38f21c48001c5f677))
 
 * Update version to 1.0.0 in pyproject.toml ([`c135c92`](https://github.com/mraniki/dxsp/commit/c135c92db83f9cbd7c200d79ac5eb202072e0bea))
+
 
 ## v1.0.0 (2023-04-12)
 
@@ -8126,9 +8495,9 @@ Dev ([`87659ca`](https://github.com/mraniki/dxsp/commit/87659ca758f6bf32446daf06
 
 * version 0 ([`2efacb4`](https://github.com/mraniki/dxsp/commit/2efacb4e568e3b9e9c2ece1fe2b697d0f6da2dc0))
 
-* Merge branch &#39;main&#39; into dev ([`8418b55`](https://github.com/mraniki/dxsp/commit/8418b55165ce64a0c736f427f023f2b2383f2aeb))
+* Merge branch 'main' into dev ([`8418b55`](https://github.com/mraniki/dxsp/commit/8418b55165ce64a0c736f427f023f2b2383f2aeb))
 
-* Merge branch &#39;main&#39; of git@github.com:mraniki/dxsp.git ([`67b5a2f`](https://github.com/mraniki/dxsp/commit/67b5a2f04a36eb3b91b9a14b29696383998a11ad))
+* Merge branch 'main' of git@github.com:mraniki/dxsp.git ([`67b5a2f`](https://github.com/mraniki/dxsp/commit/67b5a2f04a36eb3b91b9a14b29696383998a11ad))
 
 * Merge pull request #16 from mraniki/dev
 
@@ -8158,9 +8527,9 @@ Dev ([`878d8a3`](https://github.com/mraniki/dxsp/commit/878d8a38e29568e0e753c95f
 
 Dev (Sourcery refactored) ([`d403ffe`](https://github.com/mraniki/dxsp/commit/d403ffe442ea14c27a89d102a1a41cead1415dbf))
 
-* &#39;Refactored by Sourcery&#39; ([`7a3ca95`](https://github.com/mraniki/dxsp/commit/7a3ca956ee43f829520b3cda10960e0d05d1656c))
+* 'Refactored by Sourcery' ([`7a3ca95`](https://github.com/mraniki/dxsp/commit/7a3ca956ee43f829520b3cda10960e0d05d1656c))
 
-* Merge branch &#39;dev&#39; of https://github.com/mraniki/dxsp into dev ([`2f23246`](https://github.com/mraniki/dxsp/commit/2f23246b870704eab0cc40874cb059c8a40ba83c))
+* Merge branch 'dev' of https://github.com/mraniki/dxsp into dev ([`2f23246`](https://github.com/mraniki/dxsp/commit/2f23246b870704eab0cc40874cb059c8a40ba83c))
 
 * Merge pull request #11 from mraniki/main
 
@@ -8185,6 +8554,7 @@ Merge pull request #10 from mraniki/dev ([`b4342f9`](https://github.com/mraniki/
 * Update pyproject.toml with new python-dotenv version. ([`340922c`](https://github.com/mraniki/dxsp/commit/340922cde4e06b9b435e575f452fa6d4871e9a64))
 
 * Update python-doten version in pyproject.toml ([`ece55e9`](https://github.com/mraniki/dxsp/commit/ece55e9a1f27e0b1909ddf1040675814d03b3843))
+
 
 ## v0.1.0 (2023-04-12)
 
@@ -8234,7 +8604,7 @@ Circleci project setup ([`9e7974c`](https://github.com/mraniki/dxsp/commit/9e797
 
 * Add emojify workflow for pull requests. ([`8ad21fa`](https://github.com/mraniki/dxsp/commit/8ad21fa49aa2f4524dfdd72f0d913acef861ad92))
 
-* Merge branch &#39;main&#39; of https://github.com/mraniki/dxsp ([`7b5797f`](https://github.com/mraniki/dxsp/commit/7b5797f32e91fa8b132e209a53b5265ad6598817))
+* Merge branch 'main' of https://github.com/mraniki/dxsp ([`7b5797f`](https://github.com/mraniki/dxsp/commit/7b5797f32e91fa8b132e209a53b5265ad6598817))
 
 * workflow ([`88b02ff`](https://github.com/mraniki/dxsp/commit/88b02fff1f1e1d1d82d19a979728c77ff6aa0d84))
 
@@ -8242,7 +8612,7 @@ Circleci project setup ([`9e7974c`](https://github.com/mraniki/dxsp/commit/9e797
 
 * Create 🧰draft_release.yml ([`53e6972`](https://github.com/mraniki/dxsp/commit/53e69723b5db2fd5a9386d0d77e678e12cda456c))
 
-* Merge branch &#39;main&#39; of https://github.com/mraniki/dxsp ([`dcee219`](https://github.com/mraniki/dxsp/commit/dcee219931eec5ae29f1eeb703189c1c780c5e64))
+* Merge branch 'main' of https://github.com/mraniki/dxsp ([`dcee219`](https://github.com/mraniki/dxsp/commit/dcee219931eec5ae29f1eeb703189c1c780c5e64))
 
 * Create 🧼CodeCheck.yml ([`cf56d90`](https://github.com/mraniki/dxsp/commit/cf56d902eb2d32335a8df6dfe2ec5d43a3788fe4))
 
@@ -8260,7 +8630,7 @@ Circleci project setup ([`9e7974c`](https://github.com/mraniki/dxsp/commit/9e797
 
 Sourcery refactored main branch ([`15aa9cd`](https://github.com/mraniki/dxsp/commit/15aa9cd137b783cbd7e4692592b70178c4661a76))
 
-* &#39;Refactored by Sourcery&#39; ([`dba26fc`](https://github.com/mraniki/dxsp/commit/dba26fcb6fdf25807ab25fcb5374616270af6cb0))
+* 'Refactored by Sourcery' ([`dba26fc`](https://github.com/mraniki/dxsp/commit/dba26fcb6fdf25807ab25fcb5374616270af6cb0))
 
 * Refactor Python publish workflow file ([`79f4dc1`](https://github.com/mraniki/dxsp/commit/79f4dc123e34c46e2b5e5842362e6da273228087))
 
@@ -8300,11 +8670,11 @@ Sourcery refactored main branch ([`15aa9cd`](https://github.com/mraniki/dxsp/com
 
 * 35 ([`be611ee`](https://github.com/mraniki/dxsp/commit/be611ee054b0eaefe556cae61c8d304b2f34aea5))
 
-* Merge branch &#39;main&#39; of https://github.com/mraniki/dxsp ([`f7d612b`](https://github.com/mraniki/dxsp/commit/f7d612bb53274d575d1e70cf7b276cec795c8e6f))
+* Merge branch 'main' of https://github.com/mraniki/dxsp ([`f7d612b`](https://github.com/mraniki/dxsp/commit/f7d612bb53274d575d1e70cf7b276cec795c8e6f))
 
 * Add support for 2 swap protocol modes (#1 and #2) ([`d10a0ba`](https://github.com/mraniki/dxsp/commit/d10a0ba085eb32c08a84b8f8b10e3f8985beebd3))
 
-* can&#39;t multiply sequence by non-int of type &#39;float&#39; ([`16a06b4`](https://github.com/mraniki/dxsp/commit/16a06b4e29c6309d8f30116f7377034257a14d2d))
+* can't multiply sequence by non-int of type 'float' ([`16a06b4`](https://github.com/mraniki/dxsp/commit/16a06b4e29c6309d8f30116f7377034257a14d2d))
 
 * 32 ([`1b1c611`](https://github.com/mraniki/dxsp/commit/1b1c611d9d0a999e2d7400de49dc85ae62420538))
 
@@ -8408,17 +8778,17 @@ Sourcery refactored main branch ([`15aa9cd`](https://github.com/mraniki/dxsp/com
 
 * swaportunity ([`2539483`](https://github.com/mraniki/dxsp/commit/2539483027003c4cf7244084ab81cae6bed6907f))
 
-* Changed project name to &#34;defiswaphelper&#34; in pyproject.toml. ([`fa6c3cb`](https://github.com/mraniki/dxsp/commit/fa6c3cbe97dc8250171a6228ccfe5efb1d31483a))
+* Changed project name to "defiswaphelper" in pyproject.toml. ([`fa6c3cb`](https://github.com/mraniki/dxsp/commit/fa6c3cbe97dc8250171a6228ccfe5efb1d31483a))
 
 * Remove definitely/__init__.py and definitely/assets/chainIds.json ([`79439e2`](https://github.com/mraniki/dxsp/commit/79439e2671a1318e215e39a9c56c1bcb834e8ec6))
 
 * test2 ([`15a2f5a`](https://github.com/mraniki/dxsp/commit/15a2f5a46f13156f25cee19101a3be8d177abd8b))
 
-* Merge branch &#39;main&#39; of https://github.com/mraniki/definitely ([`698f503`](https://github.com/mraniki/dxsp/commit/698f503190ada4df01421cc707c9bb5439ec090c))
+* Merge branch 'main' of https://github.com/mraniki/definitely ([`698f503`](https://github.com/mraniki/dxsp/commit/698f503190ada4df01421cc707c9bb5439ec090c))
 
 * Remove unused imports and update DexSwap constructor ([`5260f96`](https://github.com/mraniki/dxsp/commit/5260f96dcb47d40d267967c5ebfb086bc6c15c75))
 
-* Merge branch &#39;main&#39; of git@github.com:mraniki/definitely.git ([`01be4a4`](https://github.com/mraniki/dxsp/commit/01be4a4e87c9f897df5d5a3d8563808f9a945a8d))
+* Merge branch 'main' of git@github.com:mraniki/definitely.git ([`01be4a4`](https://github.com/mraniki/dxsp/commit/01be4a4e87c9f897df5d5a3d8563808f9a945a8d))
 
 * Merge pull request #2 from mraniki/dependabot/github_actions/actions/setup-python-4
 
@@ -8437,7 +8807,7 @@ updated-dependencies:
   update-type: version-update:semver-major
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`9e50eab`](https://github.com/mraniki/dxsp/commit/9e50eab79738830379f21423aa48c2d577684c95))
+Signed-off-by: dependabot[bot] <support@github.com> ([`9e50eab`](https://github.com/mraniki/dxsp/commit/9e50eab79738830379f21423aa48c2d577684c95))
 
 * Merge pull request #1 from mraniki/dependabot/github_actions/actions/checkout-3
 
@@ -8457,7 +8827,7 @@ updated-dependencies:
   update-type: version-update:semver-major
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`c8210c4`](https://github.com/mraniki/dxsp/commit/c8210c449c236283cebe1c39f2beba46f7b0913d))
+Signed-off-by: dependabot[bot] <support@github.com> ([`c8210c4`](https://github.com/mraniki/dxsp/commit/c8210c449c236283cebe1c39f2beba46f7b0913d))
 
 * Add push and pull_request events to Python publish workflow ([`490c115`](https://github.com/mraniki/dxsp/commit/490c1157e46aa17f0206de620c85ac9572c0e0e8))
 
