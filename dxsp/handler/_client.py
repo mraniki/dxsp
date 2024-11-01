@@ -80,7 +80,7 @@ class DexClient:
         logger.debug(f"Setting up: {self.name}")
 
         self.protocol = get("library") or get("protocol") or "uniswap"
-        self.protocol_version = get("protocol_version", 2)
+        self.protocol_version = get("library_version") or get("protocol_version") or 2
         self.api_endpoint = get("api_endpoint", None)
         self.api_key = get("api_key", None)
         self.rpc = get("rpc", None)

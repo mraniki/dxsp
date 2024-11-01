@@ -38,11 +38,11 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 
 [default.dex.template]
 enabled=true
+library = "" # uniswap or 0x
+library_version = 2 # your library version
 wallet_address = ""
 private_key = ""
 rpc = "" # https://chainlist.org for rpc url example
-protocol = "" # uniswap or 0x
-protocol_version = 2 # your protocol version | used for uniswap
 api_endpoint = "" # your api endpoint | used for 0x
 api_key = "" # your api key | used for 0x
 router_contract_addr = "" # your router contract address | used for uniswap
@@ -81,11 +81,11 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 # # uniswap v2 protocol type and router uniswap
 # [default.dex.eth]
 # enabled=true
+# library = "uniswap"
+# library_version = 2
 # wallet_address = "0x1234567890123456789012345678901234567890"
 # private_key = "0xdeadbeef88"
 # rpc = "https://rpc.ankr.com/eth"
-# protocol = "uniswap"
-# protocol_version = 2
 # api_endpoint = ''
 # api_key = ""
 # router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
@@ -121,11 +121,11 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 # # uniswap v2 protocol type and router pancakeswap on BSC chain 56
 # [default.dex.bsc]
 # enabled=true
+# library = "uniswap"
+# library_version = 2
 # wallet_address = "0x1234567890123456789012345678901234567890"
 # private_key = "0xdeadbeef88"
 # rpc = "https://rpc.ankr.com/bsc"
-# protocol = "uniswap"
-# protocol_version = 2
 # api_endpoint = ''
 # api_key = ""
 # router_contract_addr = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
@@ -160,11 +160,11 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 # # ZeroX 0x protocol type on polygon chain 137
 # [default.dex.polygon]
 # enabled=true
+# library = "0x"
+# library_version = 4
 # wallet_address = "0x1234567890123456789012345678901234567890"
 # private_key = "0xdeadbeef88"
 # rpc = "https://rpc.ankr.com/polygon"
-# protocol = "0x"
-# protocol_version = 4
 # api_endpoint = "https://polygon.api.0x.org/"
 # api_key = ""
 # router_contract_addr = "0xdef1c0ded9bec7f1a1670819833240f027b25eff"
@@ -199,11 +199,11 @@ token_personal_list = "https://raw.githubusercontent.com/mraniki/tokenlist/main/
 # # kwenta protocol type on OPTIMISM chain 10
 # [default.dex.opt]
 # enabled=false
+# library = "kwenta"
+# library_version = 2
 # wallet_address = "0x1234567890123456789012345678901234567890"
 # private_key = "0xdeadbeef88"
 # rpc = "https://optimism.llamarpc.com"
-# protocol = "kwenta"
-# protocol_version = 2
 # api_endpoint = ""
 # api_key = ""
 # router_contract_addr = "0xa062aE8A9c5e11aaA026fc2670B0D65cCc8B2858"

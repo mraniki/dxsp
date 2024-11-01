@@ -7,7 +7,7 @@ from loguru import logger
 
 from dxsp.utils.utils import fetch_url
 
-from .client import DexClient
+from ._client import DexClient
 
 
 class ZeroxHandler(DexClient):
