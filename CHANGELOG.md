@@ -1,6 +1,27 @@
 # CHANGELOG
 
 
+## v11.1.0 (2024-11-01)
+
+### :lipstick:
+
+* :lipstick:Update default_settings.toml with library options ([`c31035c`](https://github.com/mraniki/dxsp/commit/c31035c0ad1e78bbd59c416b9e4b40ebf47148d4))
+
+### Other
+
+* Merge pull request #744 from mraniki/dev
+
+♻️ refactor client structure ([`84a4908`](https://github.com/mraniki/dxsp/commit/84a49086bd0f0f107d6cc2e9888f255deb1b7b05))
+
+### ♻️
+
+* ♻️ refactor client structure ([`cffcdbb`](https://github.com/mraniki/dxsp/commit/cffcdbb00af854316fd36703faa4b390a8a7a671))
+
+### 🔥
+
+* 🔥 black ([`45d3415`](https://github.com/mraniki/dxsp/commit/45d34156ed3fc2cf346ebeb397cb38d4ab5b9f11))
+
+
 ## v11.0.11 (2024-10-25)
 
 ### Other
