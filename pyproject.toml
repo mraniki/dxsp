@@ -63,7 +63,7 @@ quote-style = "double"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.0"
-pytest-cov = "^5.0.0"
+pytest-cov = ">=5,<7"
 pytest-asyncio = "^0.23.0"
 pytest-mock = "^3.11.1"
 pytest-loguru = "^0.4.0"
