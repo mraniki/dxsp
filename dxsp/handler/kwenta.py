@@ -6,7 +6,7 @@ Kwenta 🧮
 from kwenta import Kwenta
 from loguru import logger
 
-from .client import DexClient
+from ._client import DexClient
 
 
 class KwentaHandler(DexClient):

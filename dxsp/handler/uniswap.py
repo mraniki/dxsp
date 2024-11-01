@@ -5,7 +5,7 @@ uniswap  🦄
 from loguru import logger
 from uniswap import Uniswap
 
-from .client import DexClient
+from ._client import DexClient
 
 
 class UniswapHandler(DexClient):
