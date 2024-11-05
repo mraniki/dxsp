@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v11.1.1 (2024-11-05)
+
+### Other
+
+* Merge pull request #746 from mraniki/dev
+
+⬆️ 🤖 - You will attract cultured and artistic people to your home ([`53a4975`](https://github.com/mraniki/dxsp/commit/53a49753d7a813c5dddd4d11b90ed21708d4840c))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency pre-commit to v4 ([`a70d325`](https://github.com/mraniki/dxsp/commit/a70d325993f26d796c94b498c4b572dab50d0f20))
+
+
 ## v11.1.0 (2024-11-01)
 
 ### :lipstick:
