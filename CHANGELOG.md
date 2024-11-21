@@ -1,6 +1,29 @@
 # CHANGELOG
 
 
+## v11.1.2 (2024-11-21)
+
+### Other
+
+* Merge pull request #751 from mraniki/dev
+
+⬆️ 🤖 - Fine day for friends ([`0972805`](https://github.com/mraniki/dxsp/commit/097280506c5123c9049c7ad3e6060f38c4207595))
+
+* Merge pull request #748 from mraniki/dev
+
+⬆️ 🤖 - Tell the truth or trumpbut get the trick ([`88b2915`](https://github.com/mraniki/dxsp/commit/88b291565dfc376a7aec98e6ad664680edb4a595))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency sphinx-hoverxref to v1.4.2 (#749)
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com> ([`d1ac38f`](https://github.com/mraniki/dxsp/commit/d1ac38f62dfd4ba37abfc17f7e282e0e012239ea))
+
+* ⬆️ 🛠️(deps): update dependency pycoingecko to v3.2.0 (#747)
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com> ([`bf2f512`](https://github.com/mraniki/dxsp/commit/bf2f512bffdc83ecfa862f82e3c0e902c7c07884))
+
+
 ## v11.1.1 (2024-11-05)
 
 ### Other
