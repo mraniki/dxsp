@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v11.1.3 (2024-11-23)
+
+### Other
+
+* Merge pull request #753 from mraniki/dev
+
+⬆️ 🤖 - Whenever you find that you are on the side of the majority it is time ([`039d61c`](https://github.com/mraniki/dxsp/commit/039d61c64f44843185fdfc70a61809c4e1449a7a))
+
+### ⬆️
+
+* ⬆️ 🛠️(deps): update dependency ruff to ^0.8.0 ([`0e9ab9d`](https://github.com/mraniki/dxsp/commit/0e9ab9df0052ef2f7677d9d3f68c4e1127104654))
+
+
 ## v11.1.2 (2024-11-21)
 
 ### Other
