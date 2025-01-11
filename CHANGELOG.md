@@ -1,6 +1,26 @@
 # CHANGELOG
 
 
+## v11.1.6 (2025-01-11)
+
+### Other
+
+- Merge pull request #761 from mraniki/dev
+  ([`83d4960`](https://github.com/mraniki/dxsp/commit/83d496030a672ccb391c6c419173f60da6c0189a))
+
+⬆️ 🤖 - You will be given a post of trust and responsibility
+
+### Update
+
+- Update dependabot configuration file format
+  ([`1dccd00`](https://github.com/mraniki/dxsp/commit/1dccd007fedeb1f7dff2cfb615f1f20e666f457c))
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency ruff to ^0.9.0
+  ([`80dd712`](https://github.com/mraniki/dxsp/commit/80dd7123857e25798f55eaa9c076b0d1c5a2609d))
+
+
 ## v11.1.5 (2024-12-18)
 
 ### Other
