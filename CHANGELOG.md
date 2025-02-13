@@ -1,6 +1,24 @@
 # CHANGELOG
 
 
+## v11.1.7 (2025-02-13)
+
+### Other
+
+- Merge pull request #769 from mraniki/dev
+  ([`2492f05`](https://github.com/mraniki/dxsp/commit/2492f050d92160bc5bb1850bed95f5ab5ea25f60))
+
+⬆️ 🤖 - You should emulate your heros but dont carry it too far Especially
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency myst_parser to v4.0.1
+  ([#768](https://github.com/mraniki/dxsp/pull/768),
+  [`3503961`](https://github.com/mraniki/dxsp/commit/35039616965d98a62faae4b49a1143f43fe65d4f))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v11.1.6 (2025-01-11)
 
 ### Other
@@ -379,11 +397,6 @@ Dev
 - :white_check_mark: Unit Test
   ([`ab9c192`](https://github.com/mraniki/dxsp/commit/ab9c192fd9dd686df7ec0bd78a3c7cdb8aebe41d))
 
-### Fix
-
-- Refactor client_fixture function in test_unit_client file
-  ([`10f46fa`](https://github.com/mraniki/dxsp/commit/10f46fa1142789b8ec4f6faf20e1d218cb1e0524))
-
 ### Other
 
 - Add new test for resolving token symbol with BSC network.
@@ -401,6 +414,9 @@ Dev
   ([`5904692`](https://github.com/mraniki/dxsp/commit/590469296fd47e5fadb5316c6cd1dae198de57a1))
 
 💥 Refactoring (ContractUtils, AccountUtils and new TokenUtils)
+
+- Refactor client_fixture function in test_unit_client file
+  ([`10f46fa`](https://github.com/mraniki/dxsp/commit/10f46fa1142789b8ec4f6faf20e1d218cb1e0524))
 
 - Refactor resolve_token function for BSC client.
   ([`d2cbc50`](https://github.com/mraniki/dxsp/commit/d2cbc508f86eefaf58933e6eeb8491a950199b42))
@@ -2531,6 +2547,9 @@ Update README.md
 
 ### Other
 
+- :construction_worker_man:update gitIgnoredAuthors in renovate.json
+  ([`31dd879`](https://github.com/mraniki/dxsp/commit/31dd87964c47de28b30f9f5e41d848ebf79cde85))
+
 - Add test case for get_swap function
   ([`5382084`](https://github.com/mraniki/dxsp/commit/5382084f3d0f992dcd4443202a36f3fe64dd8d58))
 
@@ -2548,11 +2567,6 @@ Update README.md
 - Refactored the Kwenta integration in `dxsp/protocols/kwenta.py` to use a fixed network ID of 10. -
   Added error handling in case of any exceptions during the Kwenta integ ration. - Updated the unit
   test in `tests/test_unit_dexswap.py` to reflect the c hanges.
-
-### Update
-
-- :construction_worker_man:update gitIgnoredAuthors in renovate.json
-  ([`31dd879`](https://github.com/mraniki/dxsp/commit/31dd87964c47de28b30f9f5e41d848ebf79cde85))
 
 
 ## v6.0.0 (2023-10-13)
@@ -2580,11 +2594,6 @@ Update README.md
 
 - :white_check_mark: Unit Test :recycle:
   ([`ab776b4`](https://github.com/mraniki/dxsp/commit/ab776b41db543e5a791a7fd729b24f9599f2ac04))
-
-### Fix
-
-- Refactor unit tests and fixtures in test_unit.py
-  ([`6b55baf`](https://github.com/mraniki/dxsp/commit/6b55baf433ed2189b36b2de3f2b688278654ce55))
 
 ### Other
 
@@ -2760,6 +2769,9 @@ These changes aim to improve the code's readability, maintainability, an d flexi
   ([`43d335f`](https://github.com/mraniki/dxsp/commit/43d335fa0841833145c450a23e3753d32591cebc))
 
 - Change buy_token from UNI to WBTC - Remove unnecessary whitespace
+
+- Refactor unit tests and fixtures in test_unit.py
+  ([`6b55baf`](https://github.com/mraniki/dxsp/commit/6b55baf433ed2189b36b2de3f2b688278654ce55))
 
 ### Update
 
@@ -3798,11 +3810,6 @@ Refactor trading asset address in DexSwap class
 - :white_check_mark: Unit Test
   ([`d460f9b`](https://github.com/mraniki/dxsp/commit/d460f9b81f9cf05df0615d9b0fc17b5160b5a56a))
 
-### Fix
-
-- Refactor DexTrader and DexClient fixtures in test_unit.py
-  ([`4d23072`](https://github.com/mraniki/dxsp/commit/4d230724f36fb85d92931457e8dbaa0dc8915522))
-
 ### Other
 
 - 'refactored by Sourcery'
@@ -3832,6 +3839,9 @@ Refactor trading asset address in DexSwap class
 
 - Refactor code and update unit test
   ([`7feb134`](https://github.com/mraniki/dxsp/commit/7feb1349b887c6c58bde4d1ef1548c7f47248b65))
+
+- Refactor DexTrader and DexClient fixtures in test_unit.py
+  ([`4d23072`](https://github.com/mraniki/dxsp/commit/4d230724f36fb85d92931457e8dbaa0dc8915522))
 
 - Refactor DexTrader class constructor
   ([`5e0c6ed`](https://github.com/mraniki/dxsp/commit/5e0c6ed0e2676bf2ca4b77ddf3e7038105be1a2c))
@@ -4646,7 +4656,7 @@ Signed-off-by: dependabot[bot] <support@github.com>
 
 ### ⬆️
 
-- ⬆️(deps): update dependency ruff to ^0.0.284
+- **deps**: ⬆️(deps): update dependency ruff to ^0.0.284
   ([`ed20482`](https://github.com/mraniki/dxsp/commit/ed2048226698ece51e3c90bd83984e0d0e35af87))
 
 ### 👷
@@ -4671,7 +4681,7 @@ Signed-off-by: dependabot[bot] <support@github.com>
 
 ### ⬆️
 
-- ⬆️(deps): update dependency ruff to ^0.0.283
+- **deps**: ⬆️(deps): update dependency ruff to ^0.0.283
   ([`011fe70`](https://github.com/mraniki/dxsp/commit/011fe70a0519264e6160e278cc137f7df5a0733b))
 
 
@@ -4926,7 +4936,7 @@ Update Requirements
 
 ### ⬆️
 
-- ⬆️(deps): update dependency ruff to ^0.0.280
+- **deps**: ⬆️(deps): update dependency ruff to ^0.0.280
   ([`3c459bf`](https://github.com/mraniki/dxsp/commit/3c459bf24aa38ed44407519f952276d2d5a21da5))
 
 ### 🥚
@@ -4951,7 +4961,7 @@ Update Requirements
 
 ### ⬆️
 
-- ⬆️(deps): update dependency ruff to ^0.0.279
+- **deps**: ⬆️(deps): update dependency ruff to ^0.0.279
   ([`d663460`](https://github.com/mraniki/dxsp/commit/d663460f9ede2d87ea828258a1edfd0e98e65355))
 
 
@@ -5136,10 +5146,10 @@ Merge
 - ⬆️ 👷 CI Change
   ([`e7c3a56`](https://github.com/mraniki/dxsp/commit/e7c3a56e4dc04ee2e17f6b9d977b13606cbbbd5e))
 
-- ⬆️(deps): update dependency parsimonious to v0.10.0
+- **deps**: ⬆️(deps): update dependency parsimonious to v0.10.0
   ([`ceac117`](https://github.com/mraniki/dxsp/commit/ceac1170af6d666d81bf552c878d79f686787070))
 
-- ⬆️(deps): update dependency parsimonious to v0.10.0
+- **deps**: ⬆️(deps): update dependency parsimonious to v0.10.0
   ([`a0178d9`](https://github.com/mraniki/dxsp/commit/a0178d9f4f85998ef9787be18d3a6f89bbfdb5da))
 
 ### 👷
@@ -5238,7 +5248,7 @@ Merge
 
 ### ⬆️
 
-- ⬆️(deps): update dependency python-semantic-release to v8
+- **deps**: ⬆️(deps): update dependency python-semantic-release to v8
   ([`5fa72ab`](https://github.com/mraniki/dxsp/commit/5fa72ab3e04e6f00a858247ffa8d3e11ea1a0536))
 
 
@@ -5561,7 +5571,7 @@ Merge
 
 ### ⬆️
 
-- ⬆️(deps): update dependency sphinx to v7
+- **deps**: ⬆️(deps): update dependency sphinx to v7
   ([`ba431f7`](https://github.com/mraniki/dxsp/commit/ba431f781f7ee3300141255c8c53733e47049299))
 
 
@@ -9328,7 +9338,12 @@ fix: missing import
 
 ## v1.2.14 (2023-04-27)
 
-### Bump
+### Fix
+
+- Fix: core reanmed to default_settings.toml
+  ([`233edca`](https://github.com/mraniki/dxsp/commit/233edca222209034eb497dfff578e69459aa81c3))
+
+### Other
 
 - Build(deps): bump relekang/python-semantic-release from 7.33.2 to 7.33.3
   ([`3593d7c`](https://github.com/mraniki/dxsp/commit/3593d7cc89e5389534947987e3148d56fe82630f))
@@ -9347,13 +9362,6 @@ update-type: version-update:semver-patch
 ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
-
-### Fix
-
-- Fix: core reanmed to default_settings.toml
-  ([`233edca`](https://github.com/mraniki/dxsp/commit/233edca222209034eb497dfff578e69459aa81c3))
-
-### Other
 
 - Merge pull request #100 from
   mraniki/dependabot/github_actions/relekang/python-semantic-release-7.33.3
@@ -9446,24 +9454,6 @@ Dev
 
 ## v1.2.10 (2023-04-21)
 
-### Bump
-
-- Build(deps): bump actions/checkout from 3.5.0 to 3.5.2
-  ([`fa91721`](https://github.com/mraniki/dxsp/commit/fa9172193c065f95b1dce5bdca71fa96b2052311))
-
-Bumps [actions/checkout](https://github.com/actions/checkout) from 3.5.0 to 3.5.2. - [Release
-  notes](https://github.com/actions/checkout/releases) -
-  [Changelog](https://github.com/actions/checkout/blob/main/CHANGELOG.md) -
-  [Commits](https://github.com/actions/checkout/compare/v3.5.0...v3.5.2)
-
---- updated-dependencies: - dependency-name: actions/checkout dependency-type: direct:production
-
-update-type: version-update:semver-patch
-
-...
-
-Signed-off-by: dependabot[bot] <support@github.com>
-
 ### Fix
 
 - Fix: Add Ethereum chain data and web3client to dependencies
@@ -9482,6 +9472,22 @@ Signed-off-by: dependabot[bot] <support@github.com>
   ([`5e66bf7`](https://github.com/mraniki/dxsp/commit/5e66bf76bfa0ce36c9817655102f7bd6a26e24af))
 
 ### Other
+
+- Build(deps): bump actions/checkout from 3.5.0 to 3.5.2
+  ([`fa91721`](https://github.com/mraniki/dxsp/commit/fa9172193c065f95b1dce5bdca71fa96b2052311))
+
+Bumps [actions/checkout](https://github.com/actions/checkout) from 3.5.0 to 3.5.2. - [Release
+  notes](https://github.com/actions/checkout/releases) -
+  [Changelog](https://github.com/actions/checkout/blob/main/CHANGELOG.md) -
+  [Commits](https://github.com/actions/checkout/compare/v3.5.0...v3.5.2)
+
+--- updated-dependencies: - dependency-name: actions/checkout dependency-type: direct:production
+
+update-type: version-update:semver-patch
+
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
 
 - Fix: version in toml file
   ([`f4de8ca`](https://github.com/mraniki/dxsp/commit/f4de8caf8189557a1fd77b1f7252f5f497f4fc14))
@@ -10513,29 +10519,6 @@ Update build workflow to exclude poetry installation.
 
 ## v0.1.0 (2023-04-12)
 
-### Fix
-
-- Added additional chains and fix protocol type typo
-  ([`2957ca4`](https://github.com/mraniki/dxsp/commit/2957ca47d0e65c1751bff8645dfc07a6c4482de9))
-
-- Async fix for get call
-  ([`95c0d7b`](https://github.com/mraniki/dxsp/commit/95c0d7b0d58131fa68b58a634bda97f6af4f68ea))
-
-- Get_chain_by_id fix
-  ([`0689dca`](https://github.com/mraniki/dxsp/commit/0689dca6dc907050c59b5a57f0a7b46c708b6028))
-
-- Get_contract_address fix
-  ([`91fc3b2`](https://github.com/mraniki/dxsp/commit/91fc3b23eb9f7f33946335f64b371cf246b6f0eb))
-
-- Retrieve_url_json fix in toekn search
-  ([`f1a65f0`](https://github.com/mraniki/dxsp/commit/f1a65f075dffaac3b7b92f023a967fde6755afeb))
-
-- Self.chain_id fix for token search
-  ([`06a6d95`](https://github.com/mraniki/dxsp/commit/06a6d9523712dd080ec29dca976326cf794b1c62))
-
-- Version fix
-  ([`528d2ef`](https://github.com/mraniki/dxsp/commit/528d2ef4dbc2a1fd8b21bf0a474db6633c9a2e70))
-
 ### Other
 
 - 'refactored by Sourcery'
@@ -10600,6 +10583,9 @@ Update build workflow to exclude poetry installation.
 - Add web3 and coingecko badges, update DexSwap usage and attributes
   ([`516e59f`](https://github.com/mraniki/dxsp/commit/516e59fc093c8c1c0cd7ab9579c0bcf3557be1c3))
 
+- Added additional chains and fix protocol type typo
+  ([`2957ca4`](https://github.com/mraniki/dxsp/commit/2957ca47d0e65c1751bff8645dfc07a6c4482de9))
+
 - Added block_explorer_api
   ([`ac30916`](https://github.com/mraniki/dxsp/commit/ac309163cf8dc70ed44b5ef44ef72b72f0e990ac))
 
@@ -10629,6 +10615,9 @@ Update build workflow to exclude poetry installation.
 
 - Additional update
   ([`6fb8522`](https://github.com/mraniki/dxsp/commit/6fb852228a79776c66e8dd17e75c8b4661b0b86d))
+
+- Async fix for get call
+  ([`95c0d7b`](https://github.com/mraniki/dxsp/commit/95c0d7b0d58131fa68b58a634bda97f6af4f68ea))
 
 - Bump actions/checkout from 2 to 3
   ([`c8210c4`](https://github.com/mraniki/dxsp/commit/c8210c449c236283cebe1c39f2beba46f7b0913d))
@@ -10699,6 +10688,12 @@ Signed-off-by: dependabot[bot] <support@github.com>
 
 - Dxsp folder
   ([`b7b3f55`](https://github.com/mraniki/dxsp/commit/b7b3f558f15e98ae4c660c8994e671300d2580a2))
+
+- Get_chain_by_id fix
+  ([`0689dca`](https://github.com/mraniki/dxsp/commit/0689dca6dc907050c59b5a57f0a7b46c708b6028))
+
+- Get_contract_address fix
+  ([`91fc3b2`](https://github.com/mraniki/dxsp/commit/91fc3b23eb9f7f33946335f64b371cf246b6f0eb))
 
 - Import typo
   ([`ee065d6`](https://github.com/mraniki/dxsp/commit/ee065d6dd25d08675684e0e57a5ab2fe095e1024))
@@ -10790,11 +10785,17 @@ Alignement
 - Repo renaming to dxsp
   ([`fc5105e`](https://github.com/mraniki/dxsp/commit/fc5105edb32d8bc7894ce981fa4e144e5ae00e66))
 
+- Retrieve_url_json fix in toekn search
+  ([`f1a65f0`](https://github.com/mraniki/dxsp/commit/f1a65f075dffaac3b7b92f023a967fde6755afeb))
+
 - Router codification
   ([`d02b731`](https://github.com/mraniki/dxsp/commit/d02b7314f920bd5587d06f7bd017a7c42d5665ea))
 
 - Self
   ([`4229fde`](https://github.com/mraniki/dxsp/commit/4229fded373b006a56cc9f2ea003f3b43d1c266f))
+
+- Self.chain_id fix for token search
+  ([`06a6d95`](https://github.com/mraniki/dxsp/commit/06a6d9523712dd080ec29dca976326cf794b1c62))
 
 - Self.protocol typo
   ([`d8c8fd9`](https://github.com/mraniki/dxsp/commit/d8c8fd9d1b5f29eb299d926907e7907db9f4b8a2))
@@ -10879,6 +10880,9 @@ Alignement
 
 - Version 18
   ([`d044c34`](https://github.com/mraniki/dxsp/commit/d044c3442db114f52079fdf18adee7350400342f))
+
+- Version fix
+  ([`528d2ef`](https://github.com/mraniki/dxsp/commit/528d2ef4dbc2a1fd8b21bf0a474db6633c9a2e70))
 
 - Workflow
   ([`88b02ff`](https://github.com/mraniki/dxsp/commit/88b02fff1f1e1d1d82d19a979728c77ff6aa0d84))
