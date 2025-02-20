@@ -1,6 +1,23 @@
 # CHANGELOG
 
 
+## v11.1.8 (2025-02-20)
+
+### Other
+
+- Merge pull request #771 from mraniki/dev
+  ([`dff3054`](https://github.com/mraniki/dxsp/commit/dff30547de21c7e7de680db3f9f572b2aded61c8))
+
+⬆️ 🤖 - Q	Why did the chicken cross the road
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency web3 to v6.20.4 ([#770](https://github.com/mraniki/dxsp/pull/770),
+  [`10c7d95`](https://github.com/mraniki/dxsp/commit/10c7d95b75e9b161f56255e27740b89a57049ecb))
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+
+
 ## v11.1.7 (2025-02-13)
 
 ### Other
