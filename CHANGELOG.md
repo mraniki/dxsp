@@ -1,6 +1,29 @@
 # CHANGELOG
 
 
+## v11.1.9 (2025-03-14)
+
+### Other
+
+- Merge pull request #775 from mraniki/dev
+  ([`12b218a`](https://github.com/mraniki/dxsp/commit/12b218aed786837ddb548e11a4220792daf42777))
+
+⬆️ 🤖 - You are wise witty and wonderful but you spend too much time reading
+
+- Merge pull request #776 from mraniki/renovate/ruff-0.x
+  ([`9b3b0b2`](https://github.com/mraniki/dxsp/commit/9b3b0b22327d98a07eacbd9e61e766026cac18bf))
+
+⬆️ 🛠️(deps): update dependency ruff to ^0.11.0
+
+### ⬆️
+
+- ⬆️ 🛠️(deps): update dependency ruff to ^0.10.0
+  ([`471fafb`](https://github.com/mraniki/dxsp/commit/471fafb67a547066ec3c58318455a8101c2ba3ee))
+
+- ⬆️ 🛠️(deps): update dependency ruff to ^0.11.0
+  ([`999f9b1`](https://github.com/mraniki/dxsp/commit/999f9b19912c15ca6f56e8297416df7bb7a87f2f))
+
+
 ## v11.1.8 (2025-02-20)
 
 ### Other
@@ -2132,9 +2155,7 @@ Updates the requirements on [web3](https://github.com/ethereum/web3.py) to permi
   [Changelog](https://github.com/ethereum/web3.py/blob/main/docs/releases.rst) -
   [Commits](https://github.com/ethereum/web3.py/compare/v6.11.0...v6.11.1)
 
---- updated-dependencies: - dependency-name: web3 dependency-type: direct:production
-
-...
+--- updated-dependencies: - dependency-name: web3 dependency-type: direct:production ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -4626,9 +4647,7 @@ Updates the requirements on [ruff](https://github.com/astral-sh/ruff) to permit 
   [Changelog](https://github.com/astral-sh/ruff/blob/main/BREAKING_CHANGES.md) -
   [Commits](https://github.com/astral-sh/ruff/compare/v0.0.283...v0.0.284)
 
---- updated-dependencies: - dependency-name: ruff dependency-type: direct:development
-
-...
+--- updated-dependencies: - dependency-name: ruff dependency-type: direct:development ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -9374,9 +9393,7 @@ Bumps [relekang/python-semantic-release](https://github.com/relekang/python-sema
 --- updated-dependencies: - dependency-name: relekang/python-semantic-release dependency-type:
   direct:production
 
-update-type: version-update:semver-patch
-
-...
+update-type: version-update:semver-patch ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -9500,9 +9517,7 @@ Bumps [actions/checkout](https://github.com/actions/checkout) from 3.5.0 to 3.5.
 
 --- updated-dependencies: - dependency-name: actions/checkout dependency-type: direct:production
 
-update-type: version-update:semver-patch
-
-...
+update-type: version-update:semver-patch ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -10646,9 +10661,7 @@ Bumps [actions/checkout](https://github.com/actions/checkout) from 2 to 3. - [Re
 
 --- updated-dependencies: - dependency-name: actions/checkout dependency-type: direct:production
 
-update-type: version-update:semver-major
-
-...
+update-type: version-update:semver-major ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -10661,9 +10674,7 @@ Bumps [actions/setup-python](https://github.com/actions/setup-python) from 2 to 
 
 --- updated-dependencies: - dependency-name: actions/setup-python dependency-type: direct:production
 
-update-type: version-update:semver-major
-
-...
+update-type: version-update:semver-major ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
