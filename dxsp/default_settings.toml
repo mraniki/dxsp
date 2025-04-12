@@ -64,6 +64,12 @@ rotki_report_endpoint= "http://localhost:5042/api/v1/reports/1"
 # Header to use for retrieving urls content below
 headers = {User-Agent= 'Mozilla/5.0'}
 
+# Follower Mode Settings
+follow_wallet = false
+follow_wallet_address = ""
+# NEW: List of function names to trigger copy trades
+follow_wallet_functions = ["swapExactTokensForTokens"]
+
 # DEX ABI to use in case you have no explorer setup
 abi_url = "https://raw.githubusercontent.com/Uniswap/interface/44c355c7f0f8ab5bdb3e0790560e84e59f5666f7/src/abis/erc20.json"
 
