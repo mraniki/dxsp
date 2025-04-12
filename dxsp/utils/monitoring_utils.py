@@ -76,7 +76,6 @@ class WalletMonitor:
                 else:
                     # No new blocks
                     logger.trace("No new blocks detected.")
-                    pass
 
             except Exception as e:
                 logger.error(f"Error in monitoring loop: {e}. Retrying after interval.")
