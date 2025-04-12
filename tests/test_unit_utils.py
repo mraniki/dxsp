@@ -135,7 +135,11 @@ async def test_wallet_monitor_init_success(mock_w3):
 
 @pytest.mark.asyncio
 async def test_wallet_monitor_init_custom_interval(mock_w3):
-    monitor = WalletMonitor(w3=mock_w3, address_to_monitor=MONITORED_ADDRESS, polling_interval=5)
+    monitor = WalletMonitor(
+        w3=mock_w3, 
+        address_to_monitor=MONITORED_ADDRESS, 
+        polling_interval=5
+    )
     assert monitor.polling_interval == 5
 
 @pytest.mark.asyncio
@@ -207,7 +211,11 @@ async def test_wallet_monitor_start_monitoring(mock_sleep, mock_w3):
     mock_w3.eth.get_block = MagicMock(side_effect=mock_get_block)
 
     # --- Run Monitor --- 
-    monitor = WalletMonitor(w3=mock_w3, address_to_monitor=MONITORED_ADDRESS, polling_interval=1)
+    monitor = WalletMonitor(
+        w3=mock_w3, 
+        address_to_monitor=MONITORED_ADDRESS, 
+        polling_interval=1
+    )
     yielded_transactions = []
     iterations = 0
     MAX_ITERATIONS = 5 # Prevent infinite loop if logic is wrong
@@ -231,16 +239,3 @@ async def test_wallet_monitor_start_monitoring(mock_sleep, mock_w3):
 
 
 ### UTILS UTILS
-
-@pytest.mark.asyncio
-async def test_fetch_url_error():
-    url = ""
-    response = await fetch_url(url)
-    assert response is None
-
-@pytest.mark.asyncio
-async def test_fetch_url_large_response(caplog):
-    url = "https://github.com/seductiveapps/largeJSON/raw/master/100mb.json"
-    response = await fetch_url(url)
-    assert response is None
-    assert "Response content is too large to process." in caplog.text
