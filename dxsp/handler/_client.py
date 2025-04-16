@@ -9,14 +9,13 @@ from datetime import datetime, timedelta
 import aiohttp
 from loguru import logger
 from web3 import Web3
-from web3.types import TxData
 
 # from web3.exceptions import Web3Exception
 from web3.gas_strategies.time_based import medium_gas_price_strategy
 from web3.middleware import geth_poa_middleware
+from web3.types import TxData
 
 from dxsp.utils import AccountUtils, ContractUtils, WalletMonitor
-
 
 
 class DexClient:
@@ -50,6 +49,7 @@ class DexClient:
 
     """
 
+
     def __init__(self, **kwargs):
         """
         Initializes the DexClient object.
@@ -78,7 +78,8 @@ class DexClient:
                 - rotki_report_endpoint (str): The Rotki report endpoint.
                 - follow_wallet (bool): Enable wallet monitoring (default: False).
                 - follow_wallet_address (str): Wallet address to monitor.
-                - follow_wallet_functions (list[str]): List of function names to copy (default: ["swapExactTokensForTokens"])
+                - follow_wallet_functions (list[str]): Function names to copy
+                (default: ["swapExactTokensForTokens"])
 
         Returns:
             None
@@ -118,7 +119,9 @@ class DexClient:
         self.rotki_report_endpoint = get("rotki_report_endpoint", None)
         self.follow_wallet = get("follow_wallet", False)
         self.follow_wallet_address = get("follow_wallet_address", None)
-        self.follow_wallet_functions = get("follow_wallet_functions", ["swapExactTokensForTokens"])
+        self.follow_wallet_functions = get(
+            "follow_wallet_functions", ["swapExactTokensForTokens"]
+        )
 
         self.client = None
         self.chain = None
@@ -171,8 +174,13 @@ class DexClient:
                         w3=self.w3,
                         address_to_monitor=self.follow_wallet_address
                     )
-                    logger.info(f"Wallet monitoring activated for {self.follow_wallet_address} on chain {self.chain}")
-                    self._monitor_task = asyncio.create_task(self._run_monitoring_loop())
+                    logger.info(
+                        f"Wallet monitoring activated for {self.follow_wallet_address} "
+                        f"on chain {self.chain}"
+                    )
+                    self._monitor_task = asyncio.create_task(
+                        self._run_monitoring_loop()
+                    )
                     logger.info("Wallet monitoring loop started.")
                 except ValueError as e:
                     logger.warning(f"Could not initialize WalletMonitor: {e}")
@@ -181,10 +189,16 @@ class DexClient:
                     logger.error(f"Unexpected error initializing WalletMonitor: {e}")
                     self.wallet_monitor = None
             elif not self.w3:
-                logger.warning("Wallet monitoring enabled, but RPC connection failed (w3 is None). Monitoring disabled.")
+                logger.warning(
+                    "Wallet monitoring enabled, but RPC connection failed "
+                    "(w3 is None). Monitoring disabled."
+                )
                 self.wallet_monitor = None
             else:
-                logger.warning("Wallet monitoring enabled, but 'follow_wallet_address' is not set. Monitoring disabled.")
+                logger.warning(
+                    "follow_wallet_address is not set."
+                    "Monitoring disabled."
+                )
                 self.wallet_monitor = None
         else:
             self.wallet_monitor = None
@@ -192,7 +206,9 @@ class DexClient:
     async def _run_monitoring_loop(self):
         logger.info("Entering monitoring loop...")
         if not self.wallet_monitor:
-            logger.error("Attempted to run monitoring loop, but WalletMonitor is not initialized.")
+            logger.error(
+                "Attempted to run WalletMonitor loop, but not initialized."
+            )
             return
 
         try:
@@ -201,7 +217,9 @@ class DexClient:
                 try:
                     asyncio.create_task(self._handle_monitored_transaction(tx))
                 except Exception as handler_ex:
-                    logger.error(f"Error scheduling handler for tx {tx.hash.hex()}: {handler_ex}")
+                    logger.error(
+                        f"Error scheduling handler for tx {tx.hash.hex()}: {handler_ex}"
+                    )
         except Exception as loop_ex:
             logger.error(f"Exception in monitoring loop: {loop_ex}")
             # Consider restart logic or specific error handling here
@@ -214,25 +232,38 @@ class DexClient:
 
         # Step 1: Filter by target contract
         if not self.router_contract_addr or not tx.to:
-             logger.debug(f"[{tx_hash}] No router address or tx.to. Skipping.")
-             return
+            logger.debug(f"[{tx_hash}] No router address or tx.to. Skipping.")
+            return
         if Web3.to_checksum_address(tx.to) != self.router_contract_addr:
-            logger.debug(f"[{tx_hash}] Transaction is not for this client's router ({self.router_contract_addr}). Skipping.")
+            logger.debug(
+                f"[{tx_hash}] Transaction is not for this client's router "
+                f"({self.router_contract_addr}). Skipping."
+            )
             return
 
         # Step 2 & 3: Get Router ABI and Decode Input
         try:
-            router_helper = await self.contract_utils.get_data(contract_address=self.router_contract_addr)
+            router_helper = await self.contract_utils.get_data(
+                contract_address=self.router_contract_addr
+            )
             if not router_helper or not router_helper.abi:
-                logger.error(f"[{tx_hash}] Could not fetch ABI for router {self.router_contract_addr}. Cannot decode.")
+                logger.error(
+                    f"[{tx_hash}] Could not fetch ABI for router "
+                    f"{self.router_contract_addr}. Cannot decode."
+                )
                 return
-            
-            router_contract = self.w3.eth.contract(address=self.router_contract_addr, abi=router_helper.abi)
+
+            router_contract = self.w3.eth.contract(
+                address=self.router_contract_addr, abi=router_helper.abi
+            )
             func_obj, func_params = router_contract.decode_function_input(tx.input)
             logger.debug(f"[{tx_hash}] Decoded function: {func_obj.fn_name}")
 
         except ValueError as decode_error: # If input doesn't match ABI
-            logger.debug(f"[{tx_hash}] Could not decode input data: {decode_error}. Likely not a target function call.")
+            logger.debug(
+                f"[{tx_hash}] Could not decode input data: {decode_error}. "
+                f"Likely not a target function call."
+            )
             return
         except Exception as e:
             logger.error(f"[{tx_hash}] Error getting ABI or decoding input: {e}")
@@ -246,37 +277,62 @@ class DexClient:
             try:
                 path = func_params.get('path')
                 if not path or len(path) < 2:
-                    logger.warning(f"[{tx_hash}] Invalid or missing 'path' parameter in {func_obj.fn_name}: {path}")
+                    logger.warning(
+                        f"[{tx_hash}] Invalid or missing 'path' parameter in "
+                        f"{func_obj.fn_name}: {path}"
+                    )
                     return
-                
+
                 sell_token_address = path[0]
                 buy_token_address = path[-1]
-                logger.info(f"[{tx_hash}] Identified target function {func_obj.fn_name}: Sell {sell_token_address} -> Buy {buy_token_address}")
+                logger.info(
+                    f"[{tx_hash}] Identified target function {func_obj.fn_name}: "
+                    f"Sell {sell_token_address} -> Buy {buy_token_address}"
+                )
 
             except KeyError as param_error:
-                logger.warning(f"[{tx_hash}] Missing expected parameters (like 'path') in {func_obj.fn_name}: {param_error}")
+                logger.warning(
+                    f"[{tx_hash}] Missing expected parameters (like 'path') "
+                    f"in {func_obj.fn_name}: {param_error}"
+                )
                 return
         else:
-            logger.debug(f"[{tx_hash}] Function {func_obj.fn_name} not in configured list {self.follow_wallet_functions}. Skipping.")
+            logger.debug(
+                f"[{tx_hash}] Function {func_obj.fn_name} not in configured list "
+                f"{self.follow_wallet_functions}. Skipping."
+            )
             return
 
         # Step 6 & 7: Get Token Symbols and Prepare Arguments
         try:
-            sell_token_obj = await self.contract_utils.get_data(contract_address=sell_token_address)
-            buy_token_obj = await self.contract_utils.get_data(contract_address=buy_token_address)
+            sell_token_obj = await self.contract_utils.get_data(
+                contract_address=sell_token_address
+            )
+            buy_token_obj = await self.contract_utils.get_data(
+                contract_address=buy_token_address
+            )
 
             if not sell_token_obj or not sell_token_obj.symbol:
-                logger.error(f"[{tx_hash}] Could not get symbol for sell token {sell_token_address}")
+                logger.error(
+                    f"[{tx_hash}] Could not get symbol for sell token "
+                    f"{sell_token_address}"
+                )
                 return
             if not buy_token_obj or not buy_token_obj.symbol:
-                logger.error(f"[{tx_hash}] Could not get symbol for buy token {buy_token_address}")
+                logger.error(
+                    f"[{tx_hash}] Could not get symbol for buy token "
+                    f"{buy_token_address}"
+                )
                 return
-            
+
             sell_symbol = sell_token_obj.symbol
             buy_symbol = buy_token_obj.symbol
             quantity = self.trading_risk_amount # Use configured risk amount
 
-            logger.info(f"[{tx_hash}] Preparing copy trade: SELL {quantity} (risk amount) of {sell_symbol} for {buy_symbol}")
+            logger.info(
+                f"[{tx_hash}] Preparing copy trade: SELL {quantity} (risk amount) "
+                f"of {sell_symbol} for {buy_symbol}"
+            )
 
         except Exception as data_error:
             logger.error(f"[{tx_hash}] Error getting token data for swap: {data_error}")
@@ -284,7 +340,8 @@ class DexClient:
 
         # Step 8: Execute Swap via existing get_swap method
         try:
-            # TODO: Optimize: Consider modifying get_swap to accept sell_token_obj and buy_token_obj directly
+            # TODO: Optimize: Consider modifying get_swap to accept
+            #       sell_token_obj and buy_token_obj directly
             #       to avoid redundant symbol lookups within get_swap.
             logger.info(f"[{tx_hash}] Executing copy trade via self.get_swap...")
             swap_result = await self.get_swap(
@@ -295,7 +352,10 @@ class DexClient:
             logger.info(f"[{tx_hash}] Copy trade result: {swap_result}")
 
         except Exception as swap_error:
-            logger.error(f"[{tx_hash}] Error executing copy trade for {sell_symbol}->{buy_symbol}: {swap_error}")
+            logger.error(
+                f"[{tx_hash}] Error copy trade for {sell_symbol}->{buy_symbol}: "
+                f"{swap_error}"
+            )
 
     async def resolve_token(self, **kwargs):
         """
@@ -496,10 +556,10 @@ class DexClient:
         Retrieves the trading asset balance for the current account.
 
         :return: A dictionary containing the trading asset balance.
-                 The dictionary has the following keys:
-                 - 'asset': The asset symbol.
-                 - 'free': The free balance of the asset.
-                 - 'locked': The locked balance of the asset.
+                The dictionary has the following keys:
+                - 'asset': The asset symbol.
+                - 'free': The free balance of the asset.
+                - 'locked': The locked balance of the asset.
         """
         return await self.account.get_trading_asset_balance()
 
