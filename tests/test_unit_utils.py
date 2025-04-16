@@ -2,16 +2,13 @@
  DEXclient Unit Test
 """
 
-import asyncio
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import MagicMock
 
 import pytest
 from web3 import Web3
-from web3.datastructures import AttributeDict
 
 from dxsp import DexSwap
 from dxsp.config import settings
-from dxsp.utils.monitoring_utils import WalletMonitor
 from dxsp.utils.utils import fetch_url
 
 
@@ -136,50 +133,50 @@ async def test_fetch_url_large_response(caplog):
 # @pytest.mark.asyncio
 # async def test_wallet_monitor_init_custom_interval(mock_w3):
 #     monitor = WalletMonitor(
-#         w3=mock_w3, 
-#         address_to_monitor=MONITORED_ADDRESS, 
+#         w3=mock_w3,
+#         address_to_monitor=MONITORED_ADDRESS,
 #         polling_interval=5
 #     )
 #     assert monitor.polling_interval == 5
 
 # @pytest.mark.asyncio
 # async def test_wallet_monitor_init_invalid_address(mock_w3):
-#     with pytest.raises(ValueError, match="Invalid Ethereum address format"): 
+#     with pytest.raises(ValueError, match="Invalid Ethereum address format"):
 #         WalletMonitor(w3=mock_w3, address_to_monitor="invalid-address")
 
 # @pytest.mark.asyncio
 # async def test_wallet_monitor_init_disconnected_w3(mock_w3):
 #     mock_w3.is_connected.return_value = False
-#     with pytest.raises(ValueError, match="Invalid Web3 instance provided"): 
+#     with pytest.raises(ValueError, match="Invalid Web3 instance provided"):
 #         WalletMonitor(w3=mock_w3, address_to_monitor=MONITORED_ADDRESS)
 
 # # Test the start_monitoring generator
 # @pytest.mark.asyncio
 # @patch("asyncio.sleep", return_value=None) # Mock sleep to avoid delays
 # async def test_wallet_monitor_start_monitoring(mock_sleep, mock_w3):
-#     # --- Setup Mock Transactions and Blocks --- 
+#     # --- Setup Mock Transactions and Blocks ---
 #     tx1_data = {
-#         'hash': b'\x01'*32, 
-#         'from': MONITORED_ADDRESS, 
-#         'to': OTHER_ADDRESS, 
-#         'input': '0x', 
+#         'hash': b'\x01'*32,
+#         'from': MONITORED_ADDRESS,
+#         'to': OTHER_ADDRESS,
+#         'input': '0x',
 #         'value': 100
 #     }
 #     tx2_data = {
-#         'hash': b'\x02'*32, 
+#         'hash': b'\x02'*32,
 #         'from': OTHER_ADDRESS, # Different sender
-#         'to': MONITORED_ADDRESS, 
-#         'input': '0x', 
+#         'to': MONITORED_ADDRESS,
+#         'input': '0x',
 #         'value': 200
 #     }
 #     tx3_data = {
-#         'hash': b'\x03'*32, 
+#         'hash': b'\x03'*32,
 #         'from': MONITORED_ADDRESS, # Monitored sender again
-#         'to': OTHER_ADDRESS, 
-#         'input': '0xabc', 
+#         'to': OTHER_ADDRESS,
+#         'input': '0xabc',
 #         'value': 300
 #     }
-    
+
 #     # Use AttributeDict to mimic web3 transaction structure
 #     tx1 = AttributeDict(tx1_data)
 #     tx2 = AttributeDict(tx2_data)
@@ -193,11 +190,11 @@ async def test_fetch_url_large_response(caplog):
 #     block102 = AttributeDict(block102_data)
 #     block103 = AttributeDict(block103_data)
 
-#     # --- Configure Mock Web3 --- 
+#     # --- Configure Mock Web3 ---
 #     # Simulate block number increase
 #     block_num_sequence = [100, 101, 102, 103, 103] # Stays at 103 after last block
 #     mock_w3.eth.block_number = MagicMock(side_effect=block_num_sequence)
-    
+
 #     # Mock get_block responses
 #     def mock_get_block(block_identifier, full_transactions=False):
 #         if block_identifier == 101 and full_transactions:
@@ -207,13 +204,13 @@ async def test_fetch_url_large_response(caplog):
 #         if block_identifier == 103 and full_transactions:
 #             return block103
 #         return None # Should not happen in this test
-    
+
 #     mock_w3.eth.get_block = MagicMock(side_effect=mock_get_block)
 
-#     # --- Run Monitor --- 
+#     # --- Run Monitor ---
 #     monitor = WalletMonitor(
-#         w3=mock_w3, 
-#         address_to_monitor=MONITORED_ADDRESS, 
+#         w3=mock_w3,
+#         address_to_monitor=MONITORED_ADDRESS,
 #         polling_interval=1
 #     )
 #     yielded_transactions = []
@@ -223,10 +220,10 @@ async def test_fetch_url_large_response(caplog):
 #     async for tx in monitor.start_monitoring():
 #         yielded_transactions.append(tx)
 #         iterations += 1
-#         if iterations >= MAX_ITERATIONS: 
+#         if iterations >= MAX_ITERATIONS:
 #             break
-            
-#     # --- Assertions --- 
+
+#     # --- Assertions ---
 #     assert len(yielded_transactions) == 2 # tx1 and tx3 should be yielded
 #     assert yielded_transactions[0]['hash'] == tx1['hash']
 #     assert yielded_transactions[1]['hash'] == tx3['hash']
