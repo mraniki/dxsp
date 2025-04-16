@@ -20,7 +20,7 @@ from dxsp.utils import AccountUtils, ContractUtils, WalletMonitor
 
 class DexClient:
     """
-    Base DexClient Class
+    Base DexClient Class for handler base
 
     Args:
         **kwargs:
