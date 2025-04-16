@@ -142,6 +142,7 @@ class DexClient:
                 logger.error(f"Invalid RPC URL or response: {e}")
                 self.w3 = None
 
+
         if self.w3 and self.wallet_address:
             self.chain = self.w3.net.version
             self.account_number = f"{self.chain} - {str(self.wallet_address)[-8:]}"
