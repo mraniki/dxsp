@@ -79,7 +79,7 @@ class DexClient:
                 - follow_wallet (bool): Enable wallet monitoring (default: False).
                 - follow_wallet_address (str): Wallet address to monitor.
                 - follow_wallet_functions (list[str]): Function names to copy
-                (default: ["swapExactTokensForTokens"])
+                (default: swapExactTokensForTokens)
 
         Returns:
             None
