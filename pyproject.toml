@@ -55,11 +55,13 @@ select = [
 
 #ignore = ["E401","F401","F811"]
 fixable = ["ALL"]
+line-length = 80
 
 [tool.ruff.format]
 # Like Black, use double quotes for strings.
 quote-style = "double"
-
+indent-style = "tab"
+docstring-code-format = true
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.0"
