@@ -44,6 +44,7 @@ exclude = [
   ".github/*",
   "docs/*",
 ]
+line-length = 80
 
 [tool.ruff.lint]
 select = [
@@ -55,7 +56,7 @@ select = [
 
 #ignore = ["E401","F401","F811"]
 fixable = ["ALL"]
-line-length = 80
+
 
 [tool.ruff.format]
 # Like Black, use double quotes for strings.
