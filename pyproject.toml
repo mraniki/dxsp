@@ -44,7 +44,7 @@ exclude = [
   ".github/*",
   "docs/*",
 ]
-line-length = 80
+line-length = 100
 
 [tool.ruff.lint]
 select = [
