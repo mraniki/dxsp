@@ -138,10 +138,8 @@ class DexClient:
                     f"Chain {self.w3.net.version} - {int(self.w3.net.version, 16)}"
                 )
             except Exception as e:
-                # This block catches all other exceptions
                 logger.error(f"Invalid RPC URL or response: {e}")
                 self.w3 = None
-
 
         if self.w3 and self.wallet_address:
             self.chain = self.w3.net.version
