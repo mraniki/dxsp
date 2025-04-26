@@ -103,25 +103,28 @@ class ZeroxHandler(DexClient):
             response = await fetch_url(base_url, params=params, headers=headers)
             logger.debug("0x v2 get_quote response: {}", response)
 
-            if response:
-                # Check for v2 specific fields or potential error structure
-                if "guaranteedPrice" in response: # Assuming v1 field name persists
-                    return float(response["guaranteedPrice"])
-                # Check for v2 error structure (example, might need adjustment)
-                elif "issues" in response or "validationErrors" in response:
-                    logger.warning(f"0x API returned issues/errors: {response}")
-                    # Extract a meaningful error message if possible
-                    reason = response.get("validationErrors", [{}])[0].get("reason", "Validation Error")
-                    return f"⚠️ 0x Error: {reason}"
-                # Fallback for unknown successful response structure
-                elif response.get("price"): # A common field in quotes
-                    logger.info("Using 'price' field as fallback quote.")
-                    return float(response["price"])
-                else:
-                     logger.warning(f"Unknown 0x response structure: {response}")
-                     return "⚠️ Unknown 0x response"
-            else:
-                 return None # fetch_url likely returned None due to e.g., 403
+            if not response:
+                return None # fetch_url likely returned None due to e.g., 403
+
+            # Check for v2 specific fields or potential error structure
+            if "guaranteedPrice" in response: # Assuming v1 field name persists
+                return float(response["guaranteedPrice"])
+            
+            # Check for v2 error structure (example, might need adjustment)
+            if "issues" in response or "validationErrors" in response:
+                logger.warning(f"0x API returned issues/errors: {response}")
+                # Extract a meaningful error message if possible
+                reason = response.get("validationErrors", [{}])[0].get("reason", "Validation Error")
+                return f"⚠️ 0x Error: {reason}"
+            
+            # Fallback for unknown successful response structure
+            if response.get("price"): # A common field in quotes
+                logger.info("Using 'price' field as fallback quote.")
+                return float(response["price"])
+
+            # If none of the above conditions matched
+            logger.warning(f"Unknown 0x response structure: {response}")
+            return "⚠️ Unknown 0x response"
 
         except Exception as error:
             logger.exception(f"0x get_quote failed: {error}") # Use logger.exception for stack trace
