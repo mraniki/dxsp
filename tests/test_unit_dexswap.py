@@ -86,7 +86,7 @@ async def test_dextrader(dex):
         assert callable(dx.get_account_pnl)
         if dx.protocol == "zerox":
             assert dx.api_key is not None
-            assert dx.api_endpoint is not None
+            # assert dx.api_endpoint is not None # Obsolete for v2
 
 
 @pytest.mark.asyncio
