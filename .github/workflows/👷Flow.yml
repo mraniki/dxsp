@@ -25,10 +25,11 @@ jobs:
       - name: 🪵 Debug Checkout
         run: |
           echo "Running in: $(pwd)"
-          echo "Commit SHA: ${{ github.sha }}"
+          echo "Commit SHA Checked Out: $(git rev-parse HEAD)"
+          echo "Target PR Head SHA: ${{ github.event.pull_request.head.sha }}"
           echo "Ref: ${{ github.ref }}"
           echo "Listing files:"
-          ls -la
+          ls -la ./dxsp/handler/
           echo "Git log:"
           git log -n 5
 
@@ -43,9 +44,16 @@ jobs:
           pip install ruff
           # pip install pre-commit # Add if needed
 
+      - name: 👀 Verify File Content
+        run: |
+          echo "--- Start of dxsp/handler/_client.py ---"
+          head -n 20 dxsp/handler/_client.py || echo "File not found or head failed"
+          echo "--- End of dxsp/handler/_client.py ---"
+
       - name: 🚨 Lint
         run: |
-          ruff check --fix .
+          echo "Running ruff from $(pwd)"
+          ruff check --fix --no-cache .
 
   test:
     # needs: [lint]
