@@ -8,63 +8,16 @@ on:
   merge_group:
  
 jobs:
-  # lint:
-  #   uses: mraniki/coding_toolset/.github/workflows/🦺Lint.yml@main
-  #   secrets: inherit
-
-  lint_direct:
-    name: 🦺 Lint Direct
-    runs-on: ubuntu-latest
-    steps:
-      - name: 📥 Checkout Code
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: 0
-
-      - name: 🪵 Debug Checkout
-        run: |
-          echo "Running in: $(pwd)"
-          echo "Commit SHA Checked Out: $(git rev-parse HEAD)"
-          echo "Target PR Head SHA: ${{ github.event.pull_request.head.sha }}"
-          echo "Ref: ${{ github.ref }}"
-          echo "Listing files:"
-          ls -la ./dxsp/handler/
-          echo "Git log:"
-          git log -n 5
-
-      - name: 🐍 Set up Python
-        id: setup-python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: 🛠️ Install dependencies
-        run: |
-          pip install ruff
-          # pip install pre-commit # Add if needed
-
-      - name: 👀 Verify Full File Content
-        run: |
-          echo "--- Start of dxsp/handler/_client.py ---"
-          cat dxsp/handler/_client.py || echo "File not found or cat failed"
-          echo "--- End of dxsp/handler/_client.py ---"
-
-      - name: 🚨 Lint
-        run: |
-          echo "Running ruff from $(pwd)"
-          # Target the specific file first as a test
-          ruff check --fix --no-cache ./dxsp/handler/_client.py && echo "Lint passed on specific file" || \
-            (echo "Lint failed on specific file, trying '.'"; ruff check --fix --no-cache . )
+  lint:
+    uses: mraniki/coding_toolset/.github/workflows/🦺Lint.yml@main
+    secrets: inherit
 
   test:
-    # needs: [lint]
-    needs: [lint_direct]
+    needs: [lint]
     uses: mraniki/coding_toolset/.github/workflows/🧪Test.yml@main
     secrets: inherit
   build:
-    # needs: [lint]
-    needs: [lint_direct]
+    needs: [lint]
     uses: mraniki/coding_toolset/.github/workflows/🐍Build.yml@main
     secrets: inherit
   release:
