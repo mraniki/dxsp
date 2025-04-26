@@ -133,10 +133,11 @@ async def test_get_quotes(dex):
     get_quote = AsyncMock()
     result = await dex.get_quotes(symbol="WBTC")
     assert result is not None
+    assert isinstance(result, str)
     assert get_quote.awaited
-    assert ("eth" in result) or ("pol" in result)
-    numerical_count = len([char for char in result if char.isdigit()])
-    assert numerical_count >= 9
+    assert ("eth" in result)
+    assert ("bsc" in result)
+    assert ("pol" in result)
 
 
 @pytest.mark.asyncio
