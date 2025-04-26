@@ -38,23 +38,26 @@ class ZeroxHandler(DexClient):
         amount=1,
     ):
         """
-        Retrieves a quote for a token swap.
+        Retrieves a quote for a token swap using 0x API v2.
 
         Args:
             buy_address (str): The address of the token to be bought.
+            buy_symbol (str): The symbol of the token to be bought.
             sell_address (str): The address of the token to be sold.
+            sell_symbol (str): The symbol of the token to be sold.
             amount (int, optional): The amount of tokens to be sold. Defaults to 1.
 
         Returns:
-            float: The guaranteed price for the token swap.
+            float: The guaranteed price for the token swap, or None/error message.
         """
         try:
             logger.debug(
-                "0x get_quote {} {} {} {}",
+                "0x v2 get_quote - buy: {}/{} sell: {}/{} amount: {}",
                 buy_address,
                 buy_symbol,
                 sell_address,
                 sell_symbol,
+                amount,
             )
             # Resolve buy_token
             buy_token = await self.resolve_token(
@@ -68,25 +71,60 @@ class ZeroxHandler(DexClient):
                 address_or_symbol=sell_address or sell_symbol
             )
             if not buy_token or not sell_token:
+                logger.error("Buy or sell token not resolved.")
                 return "⚠️ Buy or sell token not found"
+
+            if not self.chain:
+                logger.error("Chain ID (self.chain) is not available.")
+                return "⚠️ Chain ID not configured"
+
             amount_wei = amount * (10 ** (sell_token.decimals))
+            base_url = "https://api.0x.org/swap/permit2/quote" # V2 endpoint
+            params = {
+                "chainId": self.chain,
+                "buyToken": buy_token.address,
+                "sellToken": sell_token.address,
+                "sellAmount": str(amount_wei), # API expects string
+            }
+            # Add taker address if available
+            if self.wallet_address:
+                params["taker"] = self.wallet_address
 
-            url = (
-                f"{self.api_endpoint}/swap/v1/quote"
-                f"?buyToken={buy_token.address}&sellToken={sell_token.address}&sellAmount={amount_wei}"
-            )
-            logger.debug("0x get_quote url {}", url)
+            # Construct URL with parameters (requests library handles encoding)
+            # We pass params dict to fetch_url instead of embedding in URL string
+            logger.debug(f"0x v2 get_quote URL: {base_url} PARAMS: {params}")
 
-            headers = {"0x-api-key": self.api_key}
-            response = await fetch_url(url, params=None, headers=headers)
-            logger.debug("0x get_quote response {}", response)
+            headers = {
+                "0x-api-key": self.api_key,
+                "0x-version": "v2" # Required V2 header
+            }
+
+            # Use fetch_url with params argument
+            response = await fetch_url(base_url, params=params, headers=headers)
+            logger.debug("0x v2 get_quote response: {}", response)
+
             if response:
-                if "guaranteedPrice" in response:
+                # Check for v2 specific fields or potential error structure
+                if "guaranteedPrice" in response: # Assuming v1 field name persists
                     return float(response["guaranteedPrice"])
-                elif "code" in response and "reason" in response:
-                    return response["code"], response["reason"]
+                # Check for v2 error structure (example, might need adjustment)
+                elif "issues" in response or "validationErrors" in response:
+                    logger.warning(f"0x API returned issues/errors: {response}")
+                    # Extract a meaningful error message if possible
+                    reason = response.get("validationErrors", [{}])[0].get("reason", "Validation Error")
+                    return f"⚠️ 0x Error: {reason}"
+                # Fallback for unknown successful response structure
+                elif response.get("price"): # A common field in quotes
+                    logger.info("Using 'price' field as fallback quote.")
+                    return float(response["price"])
+                else:
+                     logger.warning(f"Unknown 0x response structure: {response}")
+                     return "⚠️ Unknown 0x response"
+            else:
+                 return None # fetch_url likely returned None due to e.g., 403
+
         except Exception as error:
-            logger.error("Quote failed {}", error)
+            logger.exception(f"0x get_quote failed: {error}") # Use logger.exception for stack trace
             return f"⚠️ {error}"
 
     async def make_swap(self, buy_address, sell_address, amount):
