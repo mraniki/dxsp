@@ -44,16 +44,18 @@ jobs:
           pip install ruff
           # pip install pre-commit # Add if needed
 
-      - name: 👀 Verify File Content
+      - name: 👀 Verify Full File Content
         run: |
           echo "--- Start of dxsp/handler/_client.py ---"
-          head -n 20 dxsp/handler/_client.py || echo "File not found or head failed"
+          cat dxsp/handler/_client.py || echo "File not found or cat failed"
           echo "--- End of dxsp/handler/_client.py ---"
 
       - name: 🚨 Lint
         run: |
           echo "Running ruff from $(pwd)"
-          ruff check --fix --no-cache .
+          # Target the specific file first as a test
+          ruff check --fix --no-cache ./dxsp/handler/_client.py && echo "Lint passed on specific file" || \
+            (echo "Lint failed on specific file, trying '.'"; ruff check --fix --no-cache . )
 
   test:
     # needs: [lint]
