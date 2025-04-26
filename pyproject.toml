@@ -93,7 +93,6 @@ omit = [
     "*/config.py"
 ]
 
-
 [tool.bandit]
 exclude_dirs = ["tests","docs"]
 skips = ["B101","B104"]
