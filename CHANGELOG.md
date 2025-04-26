@@ -1,6 +1,21 @@
 # CHANGELOG
 
 
+## v12.0.1 (2025-04-26)
+
+### Other
+
+- Merge pull request #782 from mraniki/dev
+  ([`c83d69a`](https://github.com/mraniki/dxsp/commit/c83d69a7fa26a2aa90daaad73309a66800283193))
+
+🎨 build(deps): update pyproject.toml
+
+### 🎨
+
+- 🎨 build(deps): update pyproject.toml
+  ([`c721c94`](https://github.com/mraniki/dxsp/commit/c721c945715defca947568ddfd9e81f983bfe692))
+
+
 ## v12.0.0 (2025-04-26)
 
 ### :rotating_light:
