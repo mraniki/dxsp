@@ -1,6 +1,116 @@
 # CHANGELOG
 
 
+## v12.0.0 (2025-04-26)
+
+### :rotating_light:
+
+- :rotating_light:
+  ([`5e039f6`](https://github.com/mraniki/dxsp/commit/5e039f6a3f78989b35fe33da01111483432308b2))
+
+- :rotating_light:
+  ([`fbdfd7d`](https://github.com/mraniki/dxsp/commit/fbdfd7db053105a0ae30598240c167eb64eb5775))
+
+- :rotating_light:
+  ([`91a4759`](https://github.com/mraniki/dxsp/commit/91a475906373461c07c7653d44d458e178a705ec))
+
+- :rotating_light:
+  ([`3724e3d`](https://github.com/mraniki/dxsp/commit/3724e3d690734d68f86404d8f1f970307f30626b))
+
+- :rotating_light:
+  ([`c948c3d`](https://github.com/mraniki/dxsp/commit/c948c3d8c95a0ecb8e154e475f7bf9073965686a))
+
+### Other
+
+- Build(deps): update pyproject.toml
+  ([`87a804a`](https://github.com/mraniki/dxsp/commit/87a804adbef9831e5776bb6554fe89abeb2506d3))
+
+- Build(deps): update 👷Flow.yml and pyproject.toml
+  ([`2842256`](https://github.com/mraniki/dxsp/commit/28422561deef2031c75315b209fbaf92d95ed937))
+
+- Chore: Trigger CI
+  ([`e23a1e2`](https://github.com/mraniki/dxsp/commit/e23a1e2d327ff856e9b602a4b4124359a46d98e4))
+
+- Ci: update 👷Flow.yml
+  ([`0ca9b88`](https://github.com/mraniki/dxsp/commit/0ca9b88d4886d8892ed2d0dc444c39a641a8a64f))
+
+- Ci: update 👷Flow.yml
+  ([`4bcd4ba`](https://github.com/mraniki/dxsp/commit/4bcd4ba696d8c53337dc01dde94ed84bd2db9d55))
+
+- Merge pull request #780 from mraniki/dev
+  ([`2f0cc21`](https://github.com/mraniki/dxsp/commit/2f0cc213719ddb944778e333e457418d84f5f6c7))
+
+✨ wallet monitor feature for copy trading
+
+- Test: update test_unit_client.py and test_unit_dexswap.py
+  ([`ae0f76d`](https://github.com/mraniki/dxsp/commit/ae0f76da2eec9a9cfe1a8ec8463fce5d7da59749))
+
+- Trigger CI
+  ([`fed2d00`](https://github.com/mraniki/dxsp/commit/fed2d007f89e7af35baf434bc5792794b684511e))
+
+- Trigger CI after force push
+  ([`ecc4cd3`](https://github.com/mraniki/dxsp/commit/ecc4cd3240bd78267102cc73a7c9368f6c1937ca))
+
+- Update _client.py
+  ([`2d7e24e`](https://github.com/mraniki/dxsp/commit/2d7e24eb62955877f59171d91929408e23bae885))
+
+- Update _client.py
+  ([`7b0b9a8`](https://github.com/mraniki/dxsp/commit/7b0b9a8343221497274c38ac3d91b9e2a276fb40))
+
+### ♻️
+
+- ♻️  ([`3d67853`](https://github.com/mraniki/dxsp/commit/3d6785396b1dc1e1c9dda251f46cb4dd2fd14284))
+
+### ✅
+
+- ✅ Unit Test
+  ([`46900f7`](https://github.com/mraniki/dxsp/commit/46900f7e8160a195a7f0ca6ba5bd0193f0387293))
+
+- ✅ Unit Test update zerox.py and test_unit_dexswap.py
+  ([`b3905a0`](https://github.com/mraniki/dxsp/commit/b3905a005f2f8b5d85ef84f58691d841806f8552))
+
+### ✨
+
+- ✨ wallet monitor feature for copy trading
+  ([`d84a03a`](https://github.com/mraniki/dxsp/commit/d84a03ae54ae5a4edef03dbd48d38ce918c7b517))
+
+### ⬆️
+
+- ⬆️ ci: update 👷Flow.yml
+  ([`b2df107`](https://github.com/mraniki/dxsp/commit/b2df10718fb40f7214273d48e360ecea4d76e4fe))
+
+### 👷
+
+- 👷 CI Change
+  ([`83ff234`](https://github.com/mraniki/dxsp/commit/83ff2342ec90961ea8d153ab184d520d2b530e44))
+
+- 👷 CI Change
+  ([`faaacb0`](https://github.com/mraniki/dxsp/commit/faaacb0bfbbce5758fb435e29176b5bc39e4079c))
+
+- 👷 CI Change 🚨
+  ([`83a22a2`](https://github.com/mraniki/dxsp/commit/83a22a2d5242f3d5ba5252c443f0e8529bb81638))
+
+### 💥
+
+- 💥 breaking: upgrade 0x API to v2
+  ([`1110d49`](https://github.com/mraniki/dxsp/commit/1110d490b76d4c67de2d2dd49b890993a3fdd437))
+
+### 🚨
+
+- 🚨  ([`a3274df`](https://github.com/mraniki/dxsp/commit/a3274df52f50ad2ab40dc145c4a60340987fb97f))
+
+- 🚨  ([`e8bd267`](https://github.com/mraniki/dxsp/commit/e8bd267125523ad4c8b3ccd873f5cdaa70dbe81a))
+
+- 🚨  ([`03a51eb`](https://github.com/mraniki/dxsp/commit/03a51eb208d1f0b04e574a53f14c8001d167a3b2))
+
+- 🚨  ([`811d524`](https://github.com/mraniki/dxsp/commit/811d524c561603f962e04133a6b1dc35c376f7e9))
+
+- 🚨  ([`d0efbc0`](https://github.com/mraniki/dxsp/commit/d0efbc06aa653ef888959cd2b44195c866af6558))
+
+- 🚨 linter fix
+  ([`b19bbc3`](https://github.com/mraniki/dxsp/commit/b19bbc35c2ef93bcb82bf9f6f055200928e5a5a7))
+
+
 ## v11.1.9 (2025-03-14)
 
 ### Other
