@@ -23,7 +23,31 @@ class DexClient:
     Base DexClient Class for handler base
 
     Args:
-        **kwargs:
+        **kwargs: Keyword arguments containing the following:
+            - name (str): The name of the client.
+            - protocol (str): The protocol to use (default: "uniswap").
+            - protocol_version (int): The version of the protocol (default: 2).
+            - api_endpoint (str): The API endpoint.
+            - api_key (str): The API key.
+            - rpc (str): The RPC URL.
+            - w3 (Web3): The Web3 instance.
+            - router_contract_addr (str): The router contract address.
+            - factory_contract_addr (str): The factory contract address.
+            - trading_asset_address (str): The trading asset address.
+            - trading_risk_percentage (float): The trading risk percentage.
+            - trading_asset_separator (str): The trading asset separator.
+            - trading_risk_amount (float): The trading risk amount.
+            - trading_slippage (float): The trading slippage.
+            - trading_amount_threshold (float): The trading amount threshold.
+            - block_explorer_url (str): The block explorer URL.
+            - block_explorer_api (str): The block explorer API.
+            - mapping (dict): The mapping.
+            - is_pnl_active (bool): Indicates if PnL is active (default: False).
+            - rotki_report_endpoint (str): The Rotki report endpoint.
+            - follow_wallet (bool): Enable wallet monitoring (default: False).
+            - follow_wallet_address (str): Wallet address to monitor.
+            - follow_wallet_functions (list[str]): Function names to copy
+              (default: ["swapExactTokensForTokens"])
 
     Returns:
         None
@@ -79,7 +103,7 @@ class DexClient:
                 - follow_wallet (bool): Enable wallet monitoring (default: False).
                 - follow_wallet_address (str): Wallet address to monitor.
                 - follow_wallet_functions (list[str]): Function names to copy
-                (default: swapExactTokensForTokens)
+                  (default: ["swapExactTokensForTokens"])
 
         Returns:
             None
