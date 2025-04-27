@@ -2,57 +2,29 @@ name: 👷Flow
 
 on:
   push:
-    branches: ["main", "dev"]
+    branches: ["main"]
   pull_request:
   workflow_dispatch:
   merge_group:
- 
+
 jobs:
-  # lint:
-  #   uses: mraniki/coding_toolset/.github/workflows/🦺Lint.yml@main
-  #   secrets: inherit
-
-  lint_direct:
-    name: 🦺 Lint Direct (dxsp specific)
-    runs-on: ubuntu-latest
-    steps:
-      - name: 📥 Checkout Code
-        uses: actions/checkout@v4
-        with:
-          # Check out the specific commit associated with the PR head or push
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
-          fetch-depth: 0 # Fetch full history
-
-      - name: 🐍 Set up Python
-        id: setup-python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-          
-      - name: 🛠️ Install Ruff
-        run: |
-          pip install ruff # Install latest or specific version if needed
-
-      - name: 🚨 Lint Specific File
-        run: |
-          echo "Linting specific file: ./dxsp/handler/_client.py"
-          ruff check --fix --no-cache ./dxsp/handler/_client.py
-          echo "Linting specific file finished."
-          # Optionally, add 'ruff check --fix --no-cache .' here if the specific file passes
-          # to check the rest of the project.
-
+  lint:
+    # uses: mraniki/coding_toolset/.github/workflows/🦺Lint.yml@main
+    uses: mraniki/coding_toolset/.github/workflows/UVLint.yml@main
+    secrets: inherit
   test:
-    # needs: [lint]
-    needs: [lint_direct]
-    uses: mraniki/coding_toolset/.github/workflows/🧪Test.yml@main
+    needs: [lint]
+    # uses: mraniki/coding_toolset/.github/workflows/🧪Test.yml@main
+    uses: mraniki/coding_toolset/.github/workflows/UVTest.yml@main
     secrets: inherit
   build:
-    # needs: [lint]
-    needs: [lint_direct]
-    uses: mraniki/coding_toolset/.github/workflows/🐍Build.yml@main
+    needs: [lint]
+    # uses: mraniki/coding_toolset/.github/workflows/🐍Build.yml@main
+    uses: mraniki/coding_toolset/.github/workflows/UVBuild.yml@main
     secrets: inherit
   release:
     needs: [build, test]
-    uses: mraniki/coding_toolset/.github/workflows/📦Release.yml@main
+    # uses: mraniki/coding_toolset/.github/workflows/📦Release.yml@main
+    uses: mraniki/coding_toolset/.github/workflows/UVRelease.yml@main # Use UV-specific release workflow
     secrets: inherit
 
