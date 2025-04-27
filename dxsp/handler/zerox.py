@@ -111,7 +111,7 @@ class ZeroxHandler(DexClient):
             if price:
                  # Log issues but still return the price
                 if "issues" in response or "validationErrors" in response:
-                    logger.warning(f"0x API returned issues/errors but price is available: {response}")
+                    logger.warning(f"0x API issues/errors present but price available: {response}")
                 return float(price)
 
             # If no price found, *then* report issues/errors
