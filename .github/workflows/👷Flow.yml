@@ -12,6 +12,7 @@ jobs:
     # uses: mraniki/coding_toolset/.github/workflows/🦺Lint.yml@main
     uses: mraniki/coding_toolset/.github/workflows/UVLint.yml@main
     secrets: inherit
+
   test:
     needs: [lint]
     # uses: mraniki/coding_toolset/.github/workflows/🧪Test.yml@main
