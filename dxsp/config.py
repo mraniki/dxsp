@@ -12,7 +12,8 @@ DEFAULT_SETTINGS_PATH = os.path.join(ROOT, "default_settings.toml")
 
 # --- Start Modification ---
 # Check for the application's config directory via environment variable
-APP_CONFIG_DIR = os.environ.get("TT_CONFIG_DIR") # e.g., /app or ./ if run locally from tt root
+# e.g., /app or ./ if run locally from tt root
+APP_CONFIG_DIR = os.environ.get("TT_CONFIG_DIR")
 
 # Construct paths to app/user config files if the directory is specified
 talky_settings_path = None
@@ -28,7 +29,10 @@ if APP_CONFIG_DIR and os.path.isdir(APP_CONFIG_DIR):
     secrets_path = os.path.join(APP_CONFIG_DIR, ".secrets.toml")
     op_path = os.path.join(APP_CONFIG_DIR, ".op.toml") # If this lib also reads this
 else:
-    print(f"DXSP Config: TT_CONFIG_DIR not set or invalid ('{APP_CONFIG_DIR}'). Relying on library defaults.")
+    print(
+        f"DXSP Config: TT_CONFIG_DIR not set or invalid "
+        f"('{APP_CONFIG_DIR}'). Relying on library defaults."
+    )
 
 # Build the settings_files list dynamically
 # Order: Library Default < TT Default < User Settings < User Secrets
@@ -36,7 +40,10 @@ settings_files = []
 if os.path.exists(DEFAULT_SETTINGS_PATH):
     settings_files.append(DEFAULT_SETTINGS_PATH)
 else:
-    print(f"DXSP Config: Warning - Library default not found at {DEFAULT_SETTINGS_PATH}")
+    print(
+        f"DXSP Config: Warning - Library default not found "
+        f"at {DEFAULT_SETTINGS_PATH}"
+    )
 
 if talky_settings_path and os.path.exists(talky_settings_path):
     settings_files.append(talky_settings_path)
