@@ -73,7 +73,6 @@ class DexClient:
 
     """
 
-
     def __init__(self, **kwargs):
         """
         Initializes the DexClient object.
@@ -143,9 +142,7 @@ class DexClient:
         self.rotki_report_endpoint = get("rotki_report_endpoint", None)
         self.follow_wallet = get("follow_wallet", False)
         self.follow_wallet_address = get("follow_wallet_address", None)
-        self.follow_wallet_functions = get(
-            "follow_wallet_functions", ["swapExactTokensForTokens"]
-        )
+        self.follow_wallet_functions = get("follow_wallet_functions", ["swapExactTokensForTokens"])
 
         self.client = None
         self.chain = None
@@ -158,9 +155,7 @@ class DexClient:
                 self.w3 = Web3(Web3.HTTPProvider(self.rpc))
                 self.w3.middleware_onion.inject(geth_poa_middleware, layer=0)
                 self.w3.eth.set_gas_price_strategy(medium_gas_price_strategy)
-                logger.debug(
-                    f"Chain {self.w3.net.version} - {int(self.w3.net.version, 16)}"
-                )
+                logger.debug(f"Chain {self.w3.net.version} - {int(self.w3.net.version, 16)}")
             except Exception as e:
                 logger.error(f"Invalid RPC URL or response: {e}")
                 self.w3 = None
@@ -194,16 +189,13 @@ class DexClient:
             if self.w3 and self.follow_wallet_address:
                 try:
                     self.wallet_monitor = WalletMonitor(
-                        w3=self.w3,
-                        address_to_monitor=self.follow_wallet_address
+                        w3=self.w3, address_to_monitor=self.follow_wallet_address
                     )
                     logger.info(
                         f"Wallet monitoring activated for {self.follow_wallet_address} "
                         f"on chain {self.chain}"
                     )
-                    self._monitor_task = asyncio.create_task(
-                        self._run_monitoring_loop()
-                    )
+                    self._monitor_task = asyncio.create_task(self._run_monitoring_loop())
                     logger.info("Wallet monitoring loop started.")
                 except ValueError as e:
                     logger.warning(f"Could not initialize WalletMonitor: {e}")
@@ -218,10 +210,7 @@ class DexClient:
                 )
                 self.wallet_monitor = None
             else:
-                logger.warning(
-                    "follow_wallet_address is not set."
-                    "Monitoring disabled."
-                )
+                logger.warning("follow_wallet_address is not set.Monitoring disabled.")
                 self.wallet_monitor = None
         else:
             self.wallet_monitor = None
@@ -229,9 +218,7 @@ class DexClient:
     async def _run_monitoring_loop(self):
         logger.info("Entering monitoring loop...")
         if not self.wallet_monitor:
-            logger.error(
-                "Attempted to run WalletMonitor loop, but not initialized."
-            )
+            logger.error("Attempted to run WalletMonitor loop, but not initialized.")
             return
 
         try:
@@ -240,9 +227,7 @@ class DexClient:
                 try:
                     asyncio.create_task(self._handle_monitored_transaction(tx))
                 except Exception as handler_ex:
-                    logger.error(
-                        f"Error scheduling handler for tx {tx.hash.hex()}: {handler_ex}"
-                    )
+                    logger.error(f"Error scheduling handler for tx {tx.hash.hex()}: {handler_ex}")
         except Exception as loop_ex:
             logger.error(f"Exception in monitoring loop: {loop_ex}")
             # Consider restart logic or specific error handling here
@@ -282,7 +267,7 @@ class DexClient:
             func_obj, func_params = router_contract.decode_function_input(tx.input)
             logger.debug(f"[{tx_hash}] Decoded function: {func_obj.fn_name}")
 
-        except ValueError as decode_error: # If input doesn't match ABI
+        except ValueError as decode_error:  # If input doesn't match ABI
             logger.debug(
                 f"[{tx_hash}] Could not decode input data: {decode_error}. "
                 f"Likely not a target function call."
@@ -298,7 +283,7 @@ class DexClient:
             # Assuming UniswapV2/PancakeSwap style path parameter for now
             # TODO: Add more robust parameter extraction for different functions
             try:
-                path = func_params.get('path')
+                path = func_params.get("path")
                 if not path or len(path) < 2:
                     logger.warning(
                         f"[{tx_hash}] Invalid or missing 'path' parameter in "
@@ -328,29 +313,21 @@ class DexClient:
 
         # Step 6 & 7: Get Token Symbols and Prepare Arguments
         try:
-            sell_token_obj = await self.contract_utils.get_data(
-                contract_address=sell_token_address
-            )
-            buy_token_obj = await self.contract_utils.get_data(
-                contract_address=buy_token_address
-            )
+            sell_token_obj = await self.contract_utils.get_data(contract_address=sell_token_address)
+            buy_token_obj = await self.contract_utils.get_data(contract_address=buy_token_address)
 
             if not sell_token_obj or not sell_token_obj.symbol:
                 logger.error(
-                    f"[{tx_hash}] Could not get symbol for sell token "
-                    f"{sell_token_address}"
+                    f"[{tx_hash}] Could not get symbol for sell token {sell_token_address}"
                 )
                 return
             if not buy_token_obj or not buy_token_obj.symbol:
-                logger.error(
-                    f"[{tx_hash}] Could not get symbol for buy token "
-                    f"{buy_token_address}"
-                )
+                logger.error(f"[{tx_hash}] Could not get symbol for buy token {buy_token_address}")
                 return
 
             sell_symbol = sell_token_obj.symbol
             buy_symbol = buy_token_obj.symbol
-            quantity = self.trading_risk_amount # Use configured risk amount
+            quantity = self.trading_risk_amount  # Use configured risk amount
 
             logger.info(
                 f"[{tx_hash}] Preparing copy trade: SELL {quantity} (risk amount) "
@@ -368,16 +345,13 @@ class DexClient:
             #       to avoid redundant symbol lookups within get_swap.
             logger.info(f"[{tx_hash}] Executing copy trade via self.get_swap...")
             swap_result = await self.get_swap(
-                sell_token=sell_symbol,
-                buy_token=buy_symbol,
-                quantity=quantity
+                sell_token=sell_symbol, buy_token=buy_symbol, quantity=quantity
             )
             logger.info(f"[{tx_hash}] Copy trade result: {swap_result}")
 
         except Exception as swap_error:
             logger.error(
-                f"[{tx_hash}] Error copy trade for {sell_symbol}->{buy_symbol}: "
-                f"{swap_error}"
+                f"[{tx_hash}] Error copy trade for {sell_symbol}->{buy_symbol}: {swap_error}"
             )
 
     async def resolve_token(self, **kwargs):
@@ -397,9 +371,7 @@ class DexClient:
         try:
             (identifier,) = kwargs.values()
         except ValueError as e:
-            raise ValueError(
-                "Token identification must be an address or a symbol"
-            ) from e
+            raise ValueError("Token identification must be an address or a symbol") from e
 
         # Determine if the input is an address or a symbol
         # Assuming addresses start with '0x'
@@ -442,9 +414,7 @@ class DexClient:
         logger.debug("Instrument symbol changed {}", instrument)
         return instrument
 
-    async def get_order_amount(
-        self, sell_token, wallet_address, quantity, is_percentage=True
-    ):
+    async def get_order_amount(self, sell_token, wallet_address, quantity, is_percentage=True):
         """
         Calculate the order amount based on the sell token,
         wallet address, quantity, and whether it is a percentage.
@@ -472,10 +442,7 @@ class DexClient:
             logger.debug("Risk percentage {}", risk_percentage)
             amount = balance * decimal.Decimal(risk_percentage)
             logger.debug("Amount {}", amount)
-            if (
-                isinstance(amount, decimal.Decimal)
-                and amount > self.trading_amount_threshold
-            ):
+            if isinstance(amount, decimal.Decimal) and amount > self.trading_amount_threshold:
                 logger.debug("Amount {}", amount)
                 return amount
 
@@ -534,9 +501,7 @@ class DexClient:
             )
             logger.debug("order amount {}", order_amount)
 
-            order = await self.make_swap(
-                sell_token.address, buy_token.address, order_amount
-            )
+            order = await self.make_swap(sell_token.address, buy_token.address, order_amount)
 
             if not order:
                 logger.error("swap order not executed")
@@ -551,9 +516,7 @@ class DexClient:
             if receipt["status"] != 1:
                 logger.error("receipt failed")
 
-            return await self.contract_utils.get_confirmation(
-                receipt["transactionHash"]
-            )
+            return await self.contract_utils.get_confirmation(receipt["transactionHash"])
 
         except Exception as error:
             logger.debug(error)
@@ -653,9 +616,7 @@ class DexClient:
         params = {"period": period} if period else {}
 
         async with aiohttp.ClientSession() as session:
-            async with session.get(
-                self.rotki_report_endpoint, params=params
-            ) as response:
+            async with session.get(self.rotki_report_endpoint, params=params) as response:
                 if response.status != 200:
                     logger.error(f"Received non-200 status code: {response.status}")
                     return 0

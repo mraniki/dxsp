@@ -87,7 +87,6 @@ fixable = ["ALL"]
 [tool.ruff.format]
 # Like Black, use double quotes for strings.
 quote-style = "double"
-indent-style = "tab"
 docstring-code-format = true
 
 [tool.pytest.ini_options]
