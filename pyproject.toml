@@ -59,8 +59,10 @@ docs = [
   "sphinx_design~=0.6",
 ]
 
-[tool.setuptools]
-packages = ["dxsp"]
+[tool.setuptools.packages.find]
+where = ["."] 
+include = ["dxsp*"] 
+exclude = ["tests*", "docs*", "examples*"]
 
 
 [tool.ruff]
