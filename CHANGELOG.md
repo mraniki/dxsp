@@ -1,6 +1,62 @@
 # CHANGELOG
 
 
+## v13.0.0 (2025-04-30)
+
+### Other
+
+- Build(deps): update zerox.py, pyproject.toml and test_unit_client.py update zerox.py and
+  test_unit_client.py
+  ([`1a52706`](https://github.com/mraniki/dxsp/commit/1a52706a55c721e97393e5f89c91a00f3158c511))
+
+- Ci: update 👷Flow.yml
+  ([`bb1b714`](https://github.com/mraniki/dxsp/commit/bb1b714924ed383b811da73e7a6822f73213f522))
+
+- Merge pull request #783 from mraniki/dev
+  ([`52df10d`](https://github.com/mraniki/dxsp/commit/52df10ddfa22cc0b3912771c120c8dff59148aa6))
+
+💥 breaking: conversion to uv
+
+- Update _client.py
+  ([`3796140`](https://github.com/mraniki/dxsp/commit/3796140729e1eac3ca76b7029ca4c0520e159245))
+
+- Update _client.py
+  ([`cf76c66`](https://github.com/mraniki/dxsp/commit/cf76c665e2319b69efd5617b086ae87c3d12f81d))
+
+- Update config.py
+  ([`8b65153`](https://github.com/mraniki/dxsp/commit/8b6515395f6d77e0fd6670460442f58197939601))
+
+- Update config.py
+  ([`407bc5b`](https://github.com/mraniki/dxsp/commit/407bc5b0c322584c15b5868188e527afdda517c9))
+
+- Update main.py 🔧
+  ([`31ca029`](https://github.com/mraniki/dxsp/commit/31ca0299f94e6c4435385d1cfdf1c03cbabeb195))
+
+### 💥
+
+- 💥 breaking update config.py
+  ([`b1c6613`](https://github.com/mraniki/dxsp/commit/b1c661397670994ee823b1fb6b65a401030eeb4e))
+
+- 💥 breaking: conversion to uv
+  ([`b4f3db4`](https://github.com/mraniki/dxsp/commit/b4f3db47c0c0e9dc653c997176cf00b60fcf69f3))
+
+### 🚑
+
+- 🚑 build(deps): update pyproject.toml
+  ([`d6f7494`](https://github.com/mraniki/dxsp/commit/d6f7494cf4770aa0fae4c9492d7ca73be55426e8))
+
+### 🚨
+
+- 🚨 build(deps): update _client.py and pyproject.toml
+  ([`4d866ef`](https://github.com/mraniki/dxsp/commit/4d866ef20cf2b2e75052057be9a2aacb67e8c9bf))
+
+- 🚨 chore: delete _client.py
+  ([`c8a87c0`](https://github.com/mraniki/dxsp/commit/c8a87c02dc1be2514cdf00dc7f55f69263068a01))
+
+- 🚨 update _client.py and zerox.py
+  ([`649e584`](https://github.com/mraniki/dxsp/commit/649e58455dea28c060dd9a2efc76b0ea57bfcc27))
+
+
 ## v12.0.1 (2025-04-26)
 
 ### Other
