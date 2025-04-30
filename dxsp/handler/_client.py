@@ -487,7 +487,8 @@ class DexClient:
         Returns:
             NotImplemented: This method is not yet implemented.
         """
-        pass
+        # Method not implemented yet
+        # pass # Removed unnecessary pass
 
     async def get_swap(
         self, sell_token: str | None = None, buy_token: str | None = None,
@@ -520,13 +521,13 @@ class DexClient:
                 self.trading_risk_percentage if is_percentage else self.trading_risk_amount
             )
             if trade_quantity is None:
-                 # Fallback if neither percentage nor amount is set
-                 logger.warning(
-                     "Neither trading_risk_percentage nor trading_risk_amount is set. "
-                     "Defaulting to quantity=1 as percentage."
-                 )
-                 trade_quantity = decimal.Decimal(1)
-                 is_percentage = True
+                # Fallback if neither percentage nor amount is set
+                logger.warning(
+                    "Neither trading_risk_percentage nor trading_risk_amount is set. "
+                    "Defaulting to quantity=1 as percentage."
+                )
+                trade_quantity = decimal.Decimal(1)
+                is_percentage = True
             else:
                 trade_quantity = decimal.Decimal(trade_quantity)
 
@@ -615,8 +616,8 @@ class DexClient:
             return confirmation
 
         except ValueError as ve:
-             logger.error(f"Value error during swap: {ve}")
-             return f"⚠️ {str(ve)}"
+            logger.error(f"Value error during swap: {ve}")
+            return f"⚠️ {str(ve)}"
         except Exception as error:
             # Use exception for stack trace
             logger.exception(f"Unexpected error during swap: {error}")
