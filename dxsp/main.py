@@ -69,7 +69,8 @@ class DexSwap:
         # Use .get() for safer access to the nested table
         dex_config_table = settings.get('dex', {})
         if not dex_config_table:
-             logger.warning("No 'dex' configuration table found in settings.")
+            logger.warning("No 'dex' configuration table found in settings.")
+            return
         # Create a client for each client in the retrieved table
         for name, client_config in dex_config_table.items():
             if (
