@@ -61,14 +61,14 @@ class ZeroxHandler(DexClient):
             )
             # Resolve buy_token
             buy_token = await self.resolve_token(
-                address_or_symbol=buy_address
+                identifier=buy_address
                 or buy_symbol
                 or self.trading_asset_address
             )
 
             # Resolve sell_token
             sell_token = await self.resolve_token(
-                address_or_symbol=sell_address or sell_symbol
+                identifier=sell_address or sell_symbol
             )
             if not buy_token or not sell_token:
                 logger.error("Buy or sell token not resolved.")

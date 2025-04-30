@@ -42,25 +42,25 @@ def client_zero_x_fixture(dex):
 @pytest.mark.asyncio
 async def test_resolve_token_address(dex_client):
     result = await dex_client.resolve_token(
-        address="0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
+        identifier="0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
     )
     assert result.symbol == "WBTC"
 
 
 # @pytest.mark.asyncio
 # async def test_resolve_token_symbol(dex_client):
-#     result = await dex_client.resolve_token(symbol="LINK")
+#     result = await dex_client.resolve_token(identifier="LINK")
 #     assert result.address == "0x514910771AF9Ca656af840dff83E8264EcF986CA"
 
 @pytest.mark.asyncio
 async def test_resolve_token_symbol(dex_client_bsc):
-    result = await dex_client_bsc.resolve_token(symbol="TON")
+    result = await dex_client_bsc.resolve_token(identifier="TON")
     assert result.address == "0x76A797A59Ba2C17726896976B7B3747BfD1d220f"
 
 
 @pytest.mark.asyncio
 async def test_resolve_token(dex_client):
-    result = await dex_client.resolve_token(symbol="PEPE")
+    result = await dex_client.resolve_token(identifier="PEPE")
     assert result.address == "0x6982508145454Ce325dDbE47a25d4ec3d2311933"
     assert result.decimals == 18
     # assert result.get_contract_function is not None
@@ -69,7 +69,7 @@ async def test_resolve_token(dex_client):
 
 @pytest.mark.asyncio
 async def test_resolve_token_error(dex_client):
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError, match="missing 1 required positional argument: 'identifier'"):
         await dex_client.resolve_token()
 
 
