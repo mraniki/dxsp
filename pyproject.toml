@@ -1,41 +1,68 @@
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
 
-[tool.poetry]
+[project]
 name = "dxsp"
 version = "12.0.1"
 description = "DXSP (DeX SwaP), A defi swap helper package. Swap made easy."
-authors = ["mraniki <8766259+mraniki@users.noreply.github.com>"]
-license = "MIT License"
+authors = [
+  { name = "mraniki", email = "8766259+mraniki@users.noreply.github.com" },
+]
+license = "MIT"
 readme = "README.md"
-packages = [
-    {include = "dxsp"}
+keywords = ["dex", "swap", "crypto", "exchange", "defi"]
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+  "dynaconf>=3.2.0",
+  "loguru>=0.6.0",
+  "pycoingecko==3.2.0",
+  "requests>=2.31.0",
+  "web3==6.20.4",
+  "uniswap-python==0.7.1",
+  "kwenta==1.2.0",
 ]
 
-
-
-[tool.poetry.urls]
+[project.urls]
+"Homepage" = "https://github.com/mraniki/dxsp"
 "Changelog" =  "https://github.com/mraniki/dxsp/blob/dev/CHANGELOG.rst"
 "Support" =  "https://github.com/mraniki/dxsp/discussions"
 "Issues" =  "https://github.com/mraniki/dxsp/issues"
 
 
-[tool.poetry.dependencies]
-python = "^3.10"
-dynaconf = ">=3.2.0"
-loguru = ">=0.6.0"
-pycoingecko = "3.2.0"
-requests = "^2.31.0"
-web3 = "6.20.4"
-uniswap-python = "0.7.1"
-kwenta = "1.2.0"
+[project.optional-dependencies]
+dev = [
+  "python-semantic-release>=8.0.8",
+  "ruff~=0.11",
+  "pre-commit~=4.0",
+]
+test = [
+  "pytest~=8.2",
+  "pytest-cov~=6.0",
+  "pytest-asyncio~=0.25",
+  "pytest-mock~=3.11",
+  "pytest-loguru~=0.4",
+  "eth_tester~=0.9.0b2",
+]
+docs = [
+  "sphinx==7.4.7",
+  "pydata-sphinx-theme==0.16.1",
+  "sphinx-hoverxref==1.4.2",
+  "sphinx_copybutton==0.5.2",
+  "myst_parser==4.0.1",
+  "sphinx_design~=0.6",
+]
 
-
-[tool.poetry.group.dev.dependencies]
-python-semantic-release = ">=8.0.8"
-ruff = "^0.11.0"
-pre-commit = "^4.0.0"
+[tool.setuptools.packages.find]
+where = ["."] 
+include = ["dxsp*"] 
+exclude = ["tests*", "docs*", "examples*"]
 
 
 [tool.ruff]
@@ -47,9 +74,9 @@ line-length = 100
 
 [tool.ruff.lint]
 select = [
-  "E",  # pycodestyle
-  "F",  # pyflakes
-  "I",  # isort
+  "E",
+  "F",
+  "I",
   "W"
 ]
 
@@ -62,17 +89,7 @@ fixable = ["ALL"]
 [tool.ruff.format]
 # Like Black, use double quotes for strings.
 quote-style = "double"
-indent-style = "tab"
 docstring-code-format = true
-
-[tool.poetry.group.test.dependencies]
-pytest = "^8.2"
-pytest-cov = "^6.0.0"
-pytest-asyncio = "^0.25.0"
-pytest-mock = "^3.11.1"
-pytest-loguru = "^0.4.0"
-eth_tester = "^0.9.0b2"
-# eth-tester = "^0.12.0b1"
 
 [tool.pytest.ini_options]
 pythonpath = "."
@@ -85,6 +102,7 @@ addopts = """
 --show-capture=stderr
 """
 asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
 
 [tool.coverage.run]
 omit = [
@@ -100,26 +118,14 @@ skips = ["B101","B104"]
 
 
 
-[tool.poetry.group.docs]
-optional = true
-
-[tool.poetry.group.docs.dependencies]
-sphinx = "7.4.7"
-pydata-sphinx-theme = "0.16.1"
-sphinx-hoverxref = "1.4.2"
-sphinx_copybutton = "0.5.2"
-myst_parser = "4.0.1"
-sphinx_design = "^0.6.0"
-
 [tool.semantic_release]
 tag_format = "v{version}"
 commit_parser = "emoji"
-build_command = "pip install poetry && poetry build"
 version_variables = [
     "dxsp/__init__.py:__version__",
 ]
 version_toml = [
-   "pyproject.toml:tool.poetry.version",
+   "pyproject.toml:project.version",
 ]
 
 [tool.semantic_release.commit_parser_options]
