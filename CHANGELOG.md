@@ -1,6 +1,20 @@
 # CHANGELOG
 
 
+## v13.0.1 (2025-05-01)
+
+### Other
+
+- Merge pull request #786 from mraniki/dev
+  ([`70f0f03`](https://github.com/mraniki/dxsp/commit/70f0f0355057f07d53b7d15579a345d6ae374e39))
+
+⬆️ 🤖 - To be or not to be
+
+### 🚨
+
+- 🚨  ([`8ec2882`](https://github.com/mraniki/dxsp/commit/8ec28824296c9d7a6080ca5ccafd2fd3e1ae7883))
+
+
 ## v13.0.0 (2025-04-30)
 
 ### Other
